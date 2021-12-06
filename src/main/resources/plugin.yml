@@ -1,0 +1,12 @@
+name: Dragonhunt
+version: ${project.version}
+main: com.tharox.dragonhunt.Main
+api-version: 1.18
+authors: [ Tharox ]
+description: Dragonhunt by Tharox
+
+commands:
+  date:
+    description: Shows the current date.
+  shop:
+    description: Opens the shop.

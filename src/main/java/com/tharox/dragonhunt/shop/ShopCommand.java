@@ -1,0 +1,33 @@
+package com.tharox.dragonhunt.shop;
+
+import com.tharox.dragonhunt.Main;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+public class ShopCommand implements CommandExecutor {
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        Player player;
+
+        if (sender instanceof Player) {
+            player = (Player) sender;
+        } else return true;
+
+        if(Main.getInstance().getTimer().getTime() < 120) {
+            player.sendMessage(ChatColor.RED + "The shop is available after 2 minutes.");
+            return true;
+        }
+
+        if(player.getWorld().getName().equals("world_nether")) {
+            player.sendMessage(ChatColor.RED + "The shop is not accessible in the nether.");
+            return true;
+        }
+
+        player.openInventory(ShopInventory.menu);
+        return false;
+    }
+}

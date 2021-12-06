@@ -1,0 +1,426 @@
+#SHOP
+#names needed for shopItemCost and db
+#menu item: no cost!
+menu:
+  0:
+    material: ENCHANTED_BOOK
+    amount: 1
+    name: "&e&l» Enchanting"
+  1:
+    material: ENCHANTED_GOLDEN_APPLE
+    amount: 1
+    name: "&d&l» Food, Potions & Arrows"
+  2:
+    material: TNT
+    amount: 1
+    name: "&a&l» Blocks & Redstone"
+enchanting:
+  0:
+    material: IRON_SWORD
+    amount: 1
+    enchantments:
+      SHARPNESS: 1
+    name: "&f&l» Sword Enchantments"
+  1:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      SHARPNESS: 1
+    cost: 100
+    name: "Sharpness Book"
+  2:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      KNOCKBACK: 1
+    cost: 75
+    name: "Knockback Book"
+  3:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      FIRE_ASPECT: 1
+    cost: 125
+    name: "Fire Aspect Book"
+  4:
+    material: BOW
+    amount: 1
+    enchantments:
+      POWER: 1
+    name: "&e&l» Bow Enchantments"
+  5:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      POWER: 1
+    cost: 100
+    name: "Power Book"
+  6:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      PUNCH: 1
+    cost: 75
+    name: "Punch Book"
+  7:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      FLAME: 1
+    cost: 125
+    name: "Flame Book"
+  8:
+    material: AIR
+    amount: 1
+  9:
+    material: CROSSBOW
+    amount: 1
+    enchantments:
+      PIERCING: 1
+    name: "&c&l» Crossbow Enchantments"
+  10:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      PIERCING: 1
+    cost: 50
+    name: "Piercing Book"
+  11:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      MULTISHOT: 1
+    cost: 100
+    name: "Multishot Book"
+  12:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      QUICK_CHARGE: 1
+    cost: 75
+    name: "Quick Charge Book"
+  13:
+    material: DIAMOND_PICKAXE
+    amount: 1
+    enchantments:
+      EFFICIENCY: 1
+    name: "&b&l» Tool Enchantments"
+  14:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      EFFICIENCY: 1
+    cost: 50
+    name: "Efficiency Book"
+  15:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      UNBREAKING: 1
+    cost: 50
+    name: "Unbreaking Book"
+  16:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      FORTUNE: 1
+    cost: 75
+    name: "Fortune Book"
+  17:
+    material: EXPERIENCE_BOTTLE
+    amount: 8
+    cost: 50
+    name: "Experience Bottle"
+  18:
+    material: GOLDEN_CHESTPLATE
+    amount: 1
+    enchantments:
+      PROTECTION: 1
+    name: "&6&l» Armor Enchantments"
+  19:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      PROTECTION: 1
+    cost: 75
+    name: "Protection Book"
+  20:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      THORNS: 1
+    cost: 50
+    name: "Thorns Book"
+  21:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      FEATHER_FALLING: 1
+    cost: 100
+    name: "Feather Falling Book"
+  22:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      DEPTH_STRIDER: 1
+    cost: 100
+    name: "Depth Strider Book"
+  23:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      RESPIRATION: 1
+    cost: 75
+    name: "Respiration Book"
+  24:
+    material: ENCHANTED_BOOK
+    amount: 1
+    enchantments:
+      AQUA_AFFINITY: 1
+    cost: 50
+    name: "Aqua Affinity Book"
+  25:
+    material: ANVIL
+    cost: 100
+    amount: 1
+    name: "Anvil"
+foodPotionsArrows:
+  0:
+    material: COOKED_CHICKEN
+    amount: 6
+    cost: 20
+    name: "Cooked Chicken"
+  1:
+    material: GOLDEN_CARROT
+    amount: 3
+    cost: 40
+    name: "Golden Carrot"
+  2:
+    material: GOLDEN_APPLE
+    amount: 1
+    cost: 75
+    name: "Golden Apple"
+  3:
+    material: SPLASH_POTION
+    amount: 2
+    cost: 70
+    effects:
+      HUNGER: 0,300
+    color: 0x587653
+    name: "Hunger Splash Potion"
+  4:
+    material: SPLASH_POTION
+    amount: 2
+    cost: 90
+    effects:
+      SLOW_DIGGING: 0,300
+    color: 0x4a4217
+    name: "Mining Fatigue Splash Potion"
+  5:
+    material: SPLASH_POTION
+    amount: 2
+    cost: 80
+    effects:
+      SLOW: 0,300
+    color: 0x5a6c81
+    name: "Slowness Splash Potion"
+  6:
+    material: SPLASH_POTION
+    amount: 2
+    cost: 100
+    effects:
+      WEAKNESS: 0,300
+    color: 0x484d48
+    name: "Weakness Splash Potion"
+  7:
+    material: SPLASH_POTION
+    amount: 2
+    cost: 80
+    effects:
+      BLINDNESS: 0,300
+    color: 0x000000
+    name: "Blindness Splash Potion"
+  8:
+    material: SPLASH_POTION
+    amount: 2
+    cost: 90
+    effects:
+      POISON: 0,300
+    color: 0x4e9331
+    name: "Poison Splash Potion"
+  9:
+    material: POTION
+    amount: 1
+    cost: 80
+    effects:
+      SPEED: 1,600
+    color: 0x7cafc6
+    name: "Speed Potion"
+  10:
+    material: POTION
+    amount: 1
+    cost: 70
+    effects:
+      JUMP: 0,600
+    color: 0x00FFFF
+    name: "Jump Boost Potion"
+  11:
+    material: SPLASH_POTION
+    amount: 1
+    cost: 80
+    effects:
+      REGENERATION: 0,300
+    color: 0xcd5cab
+    name: "Regeneration Splash Potion"
+  12:
+    material: POTION
+    amount: 1
+    cost: 70
+    effects:
+      HEAL: 1,0
+    color: 0xf82423
+    name: "Instant Healing Potion"
+  13:
+    material: POTION
+    amount: 1
+    cost: 80
+    effects:
+      FAST_DIGGING: 4,600
+    color: 0xd9c043
+    name: "Haste Potion"
+  14:
+    material: POTION
+    amount: 1
+    cost: 70
+    effects:
+      SLOW_FALLING: 0,300
+    color: 0xFFFFFF
+    name: "Slow Falling Potion"
+  15:
+    material: SPLASH_POTION
+    amount: 1
+    cost: 80
+    effects:
+      FIRE_RESISTANCE: 0,600
+    color: 0xe49a3a
+    name: "Fire Resistance Splash Potion"
+  16:
+    material: AIR
+    amount: 1
+  17:
+    material: AIR
+    amount: 1
+  18:
+    material: ARROW
+    amount: 8
+    cost: 40
+    name: "Arrow"
+  19:
+    material: TIPPED_ARROW
+    amount: 8
+    cost: 60
+    effects:
+      HUNGER: 0,80
+    color: 0x587653
+    name: "Hunger Arrow (00:04)"
+  20:
+    material: TIPPED_ARROW
+    amount: 8
+    cost: 80
+    effects:
+      SLOW_DIGGING: 0,80
+    color: 0x4a4217
+    name: "Mining Fatigue Arrow (00:04)"
+  21:
+    material: TIPPED_ARROW
+    amount: 8
+    cost: 70
+    effects:
+      SLOW: 0,80
+    color: 0x5a6c81
+    name: "Slowness Arrow (00:04)"
+  22:
+    material: TIPPED_ARROW
+    amount: 8
+    cost: 90
+    effects:
+      WEAKNESS: 0,80
+    color: 0x484d48
+    name: "Weakness Arrow (00:04)"
+  23:
+    material: TIPPED_ARROW
+    amount: 8
+    cost: 70
+    effects:
+      BLINDNESS: 0,80
+    color: 0x000000
+    name: "Blindness Arrow (00:04)"
+  24:
+    material: TIPPED_ARROW
+    amount: 8
+    cost: 80
+    effects:
+      POISON: 0,80
+    color: 0x4e9331
+    name: "Poison Arrow (00:04)"
+  25:
+    material: SPECTRAL_ARROW
+    amount: 8
+    cost: 60
+    name: "Spectral Arrow"
+blocksRedstone:
+  0:
+    material: OAK_PLANKS
+    cost: 25
+    amount: 4
+    name: "Oak Planks"
+  1:
+    material: LIGHT_BLUE_CARPET
+    cost: 25
+    amount: 4
+    name: "Marker"
+  2:
+    material: SHULKER_BOX
+    cost: 100
+    amount: 1
+    name: "Shulker Box"
+  3:
+    material: SLIME_BLOCK
+    cost: 75
+    amount: 1
+    name: "Slime Block"
+  4:
+    material: AIR
+    amount: 1
+  5:
+    material: AIR
+    amount: 1
+  6:
+    material: AIR
+    amount: 1
+  7:
+    material: AIR
+    amount: 1
+  8:
+    material: AIR
+    amount: 1
+  9:
+    material: REDSTONE
+    cost: 50
+    amount: 8
+    name: "Redstone"
+  10:
+    material: COBWEB
+    cost: 80
+    amount: 3
+    name: "Cobweb"
+  11:
+    material: TNT
+    cost: 110
+    amount: 3
+    name: "TNT"
+  12:
+    material: PISTON
+    cost: 60
+    amount: 1
+    name: "Piston"

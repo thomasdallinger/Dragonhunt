@@ -4,7 +4,6 @@ import com.tharox.dragonhunt.Main;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.TNTPrimed;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -20,8 +19,9 @@ public class Trapcrafter extends ChargeKit {
             ChatColor.WHITE.toString() + ChatColor.ITALIC + "Explosion incoming! \n" +
                     ChatColor.WHITE + "On activation, 3 layers of " + ChatColor.RED + "TNT "
                     + ChatColor.WHITE + "will spawn around you.\n" +
-                    ChatColor.WHITE + "You will not be able to move or get damage for the entire ability duration.\n" +
-                    ChatColor.WHITE + "Be careful, you don't want to explode yourself.\n" +
+                    ChatColor.WHITE + "You will not be able to move or get damage\n " +
+                    ChatColor.WHITE + "for the entire ability duration.\n" +
+                    ChatColor.WHITE + "Be aware that your enemies now where you make an explosion.\n" +
                     ChatColor.LIGHT_PURPLE + "Charge Time: " + chargeTime + " seconds\n" +
                     ChatColor.LIGHT_PURPLE + "Duration: " + duration +  " seconds\n" +
                     ChatColor.RED + "Cooldown: " + cooldown +  " seconds\n";
@@ -35,7 +35,7 @@ public class Trapcrafter extends ChargeKit {
     public void executeAbility() {
         for(Player p : Bukkit.getOnlinePlayers()) {
             p.sendMessage(Main.getPrefix() + ChatColor.YELLOW + player.getName() + ChatColor.WHITE + " uses "
-                    + ChatColor.RED.toString() + ChatColor.BOLD + "Explosion" + ChatColor.WHITE + "at "
+                    + ChatColor.RED.toString() + ChatColor.BOLD + "Explosion " + ChatColor.WHITE + "at "
                     + ChatColor.GOLD + "[" + player.getWorld().getName() + ", x: " + (int) player.getLocation().getX()
                     + ", y: " + (int) player.getLocation().getZ() + ", z: " + (int) player.getLocation().getY() + "]");
         }

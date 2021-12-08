@@ -128,7 +128,7 @@ enchanting:
     name: "Fortune Book"
   17:
     material: EXPERIENCE_BOTTLE
-    amount: 8
+    amount: 4
     cost: 50
     name: "Experience Bottle"
   18:

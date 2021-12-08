@@ -94,6 +94,7 @@ public final class Main extends JavaPlugin {
         pluginManager.registerEvents(new PlayerConsumeListener(), this);
         pluginManager.registerEvents(new EntityDamageListener(), this);
         pluginManager.registerEvents(new AdvancementListener(), this);
+        pluginManager.registerEvents(new EntityDropListener(), this);
         pluginManager.registerEvents(tracker, this);
     }
 

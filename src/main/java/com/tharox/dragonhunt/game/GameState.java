@@ -16,8 +16,8 @@ public class GameState {
 
     public static World nether = Bukkit.getServer().getWorlds().get(1);
     public static List<Location> dungeonLocations = Arrays.asList(
-            new Location(nether, -61.5, 91, -38.5, (float) -156.6, (float) 5.0),
-            new Location(nether, -61.5, 91, -38.5, (float) -156.6, (float) 5.0)
+            new Location(nether, -61.5, 87, -38.5, (float) -156.6, (float) 5.0),
+            new Location(nether, -61.5, 87, -38.5, (float) -156.6, (float) 5.0)
     );
     public static Location dungeonLocation;
     //Location of the nether portal in the overworld

@@ -61,8 +61,8 @@ public class DimensionListener implements Listener {
                     event.setSearchRadius(0);
                     event.setCancelled(true);
                 } else {
-                    event.setTo(GameState.overworldLocation.get(player));
-                    event.setCanCreatePortal(true); //if overworld portal gets destroyed //TODO: check if worked
+                    event.setCancelled(true);
+                    player.teleport(GameState.overworldLocation.get(player));
                 }
             }
         }

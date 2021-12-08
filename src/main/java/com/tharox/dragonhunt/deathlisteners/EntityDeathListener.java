@@ -25,11 +25,11 @@ public class EntityDeathListener implements Listener {
                 new GameEnd(killer);
             }
 
-            if(mob instanceof Monster) {
+            if (mob instanceof Monster) {
                 Points.addPoints(killer, points);
             }
 
-            if(mob instanceof Animals) {
+            if (mob instanceof Animals) {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_PORKCHOP, 2));
             }
         }
@@ -41,7 +41,8 @@ public class EntityDeathListener implements Listener {
         switch (mob.getName()) {
             case "Creeper":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.GUNPOWDER, 4));
-                if (chance == 1) mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.TNT, 1));
+                if (chance == 1)
+                    mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.TNT, 1));
                 break;
             case "Skeleton":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.ARROW, 4));
@@ -51,29 +52,20 @@ public class EntityDeathListener implements Listener {
                 break;
             case "Zombie":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.GOLD_INGOT, 2));
-                if (chance == 1) mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.APPLE, 1));
+                if (chance == 1)
+                    mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.APPLE, 1));
                 break;
             case "Spider":
             case "Cave Spider":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.STRING, 3));
-                if (chance == 1) mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COBWEB, 3));
+                if (chance == 1)
+                    mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COBWEB, 3));
                 break;
             case "Enderman":
-                if (killer != null) {
-                    if (killer.getInventory().firstEmpty() == -1) { //Inventory full
-                        mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.ENDER_PEARL, 2));
-                    } else {
-                        killer.getInventory().setItem(killer.getInventory().firstEmpty(), new ItemStack(Material.ENDER_PEARL, 2));
-                    }
-                }
+                setInventoryItem(killer, mob, new ItemStack(Material.ENDER_PEARL, 2));
+                break;
             case "Blaze":
-                if (killer != null) {
-                    if (killer.getInventory().firstEmpty() == -1) { //Inventory full
-                        mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.BLAZE_ROD, 1));
-                    } else {
-                        killer.getInventory().setItem(killer.getInventory().firstEmpty(), new ItemStack(Material.BLAZE_ROD, 1));
-                    }
-                }
+                setInventoryItem(killer, mob, new ItemStack(Material.BLAZE_ROD, 1));
                 break;
             default:
                 break;
@@ -88,6 +80,16 @@ public class EntityDeathListener implements Listener {
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.FEATHER, 2));
         } else if (mob.getName().equals("Iron Golem")) {
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 4));
+        }
+    }
+
+    private void setInventoryItem(Player killer, Entity mob, ItemStack item) {
+        if (killer != null) {
+            if (killer.getInventory().firstEmpty() == -1) { //Inventory full
+                mob.getWorld().dropItemNaturally(mob.getLocation(), item);
+            } else {
+                killer.getInventory().setItem(killer.getInventory().firstEmpty(), item);
+            }
         }
     }
 }

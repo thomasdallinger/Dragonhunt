@@ -12,6 +12,7 @@ import com.tharox.dragonhunt.playerlisteners.AdvancementListener;
 import com.tharox.dragonhunt.playerlisteners.EntityDamageListener;
 import com.tharox.dragonhunt.playerlisteners.InventoryListener;
 import com.tharox.dragonhunt.playerlisteners.PlayerConsumeListener;
+import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
 import com.tharox.dragonhunt.shop.ShopCommand;
 import com.tharox.dragonhunt.shop.ShopInventory;
 import com.tharox.dragonhunt.shop.ShopListener;
@@ -46,6 +47,7 @@ public final class Main extends JavaPlugin {
 
         timer = new Timer(false, 0);
         scoreboardCountdown = new Countdown(false, 180);
+        ResetScoreboardCountdown.countdownHitsZero(Main.getInstance().getScoreboardCountdown());
         tracker = new Tracker();
 
         listenerRegistration();

@@ -44,26 +44,20 @@ public class Scoreboard extends ScoreboardBuilder {
         new BukkitRunnable() {
             @Override
             public void run() {
-                int points = 100;
 
                 if (!Main.getInstance().getTimer().isRunning()) { //Game hasn't started yet
                     gameNotStarted();
                     return;
                 }
 
-                if (countdown.getTime() == 0) {
-                    countdown.setTime(180);
-                    Points.addPoints(player, points);
-                }
-
+                setScore(ChatColor.GOLD.toString() + ChatColor.BOLD + "1vs1", 10);
                 setScore(ChatColor.WHITE + "Players: " + ChatColor.YELLOW + Bukkit.getOnlinePlayers().size(), 8);
-                setScore(ChatColor.WHITE + "Kills: " + ChatColor.YELLOW + "?", 6);
-                setScore(ChatColor.WHITE + "Deaths: " + ChatColor.RED + "?", 5);
+                setScore(ChatColor.WHITE + "Kills: " + ChatColor.YELLOW + "", 6);
+                setScore(ChatColor.WHITE + "Deaths: " + ChatColor.RED + "", 5);
                 setScore(ChatColor.WHITE + "Points: " + ChatColor.AQUA.toString() + Points.getPoints(player), 3);
                 setScore(ChatColor.WHITE + "Next Points in:", 1);
                 setScore(ChatColor.YELLOW + countdownFormat(countdown), 0);
                 //TODO: use db for kills, deaths
-                setScore(ChatColor.GOLD.toString() + ChatColor.BOLD + "1vs1", 10);
 
             }
         }.runTaskTimer(Main.getInstance(), 20, 20);

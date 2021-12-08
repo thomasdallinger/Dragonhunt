@@ -38,8 +38,6 @@ public class VehicleListener implements Listener {
             int points = 200;
             if (player.getWorld().getName().equals("world"))
                 Points.addPoints(player, points);
-            else
-                Points.addPoints(player, 2 * points);
         }
     }
 

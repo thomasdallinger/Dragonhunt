@@ -186,8 +186,8 @@ enchanting:
     name: "Anvil"
 foodPotionsArrows:
   0:
-    material: COOKED_CHICKEN
-    amount: 6
+    material: COOKED_PORKCHOP
+    amount: 3
     cost: 20
     name: "Cooked Chicken"
   1:

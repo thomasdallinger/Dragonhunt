@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.deathlisteners;
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.points.Points;
 import org.bukkit.Material;
+import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.Player;
@@ -17,7 +18,7 @@ public class EntityDeathListener implements Listener {
     public void onMobKill(EntityDeathEvent event) {
         Player killer = event.getEntity().getKiller();
         Entity mob = event.getEntity();
-        int points = 20;
+        int points = 5;
 
         if (killer != null) {
             if (event.getEntity().getName().equals("Ender Dragon")) {
@@ -27,12 +28,11 @@ public class EntityDeathListener implements Listener {
             if(mob instanceof Monster) {
                 Points.addPoints(killer, points);
             }
-        }
 
-        ItemStack chicken = new ItemStack(Material.COOKED_CHICKEN, 2);
-        ItemStack wool = new ItemStack(Material.WHITE_WOOL, 2);
-        ItemStack feather = new ItemStack(Material.FEATHER, 2);
-        ItemStack leather = new ItemStack(Material.LEATHER, 1);
+            if(mob instanceof Animals) {
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_PORKCHOP, 1));
+            }
+        }
 
         event.getDrops().clear();
 
@@ -45,6 +45,7 @@ public class EntityDeathListener implements Listener {
                 break;
             case "Skeleton":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.ARROW, 4));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.BONE, 2));
                 if (chance == 1)
                     mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.CROSSBOW, 1));
                 break;
@@ -78,16 +79,13 @@ public class EntityDeathListener implements Listener {
                 break;
         }
 
-        if (mob.getName().equals("Cow") || mob.getName().equals("Pig") || mob.getName().equals("Rabbit")
-                || mob.getName().equals("Cod") || mob.getName().equals("Salmon") || mob.getName().equals("Hoglin")) {
-            mob.getWorld().dropItemNaturally(mob.getLocation(), chicken);
-            mob.getWorld().dropItemNaturally(mob.getLocation(), leather);
+        //Extra Drops
+        if (mob.getName().equals("Hoglin")) {
+            mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_PORKCHOP, 2));
         } else if (mob.getName().equals("Sheep")) {
-            mob.getWorld().dropItemNaturally(mob.getLocation(), chicken);
-            mob.getWorld().dropItemNaturally(mob.getLocation(), wool);
+            mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.WHITE_WOOL, 2));
         } else if (mob.getName().equals("Chicken")) {
-            mob.getWorld().dropItemNaturally(mob.getLocation(), chicken);
-            mob.getWorld().dropItemNaturally(mob.getLocation(), feather);
+            mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.FEATHER, 2));
         }
     }
 }

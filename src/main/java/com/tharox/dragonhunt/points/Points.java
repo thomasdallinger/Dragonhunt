@@ -25,9 +25,9 @@ public class Points {
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
 
         if(player.getWorld().getName().equals("world"))
-            player.sendTitle("", ChatColor.AQUA + "+" + pointsToAdd + " Points", 5, 10, 5);
+            player.sendTitle(ChatColor.AQUA + "+", ChatColor.AQUA.toString() + pointsToAdd + " Points", 5, 10, 5);
         else
-            player.sendTitle("", ChatColor.LIGHT_PURPLE + "+" + pointsToAdd + " Points", 5, 10, 5);
+            player.sendTitle(ChatColor.LIGHT_PURPLE + "+", ChatColor.LIGHT_PURPLE.toString() + pointsToAdd + " Points", 5, 10, 5);
     }
 
     public static void removePoints(Player player, int pointsToRemove) {

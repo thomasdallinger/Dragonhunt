@@ -38,8 +38,6 @@ public class GameStart {
         Location loc = GameState.dungeonLocations.get(rnd);
         Bukkit.getPluginManager().registerEvents(new DimensionListener(loc), Main.getInstance());
         GameState.dungeonLocation = loc;
-
-        new EnderChestSpawner().run();
     }
 
     private void configureOverworld() {

@@ -30,7 +30,7 @@ public class EntityDeathListener implements Listener {
             }
 
             if(mob instanceof Animals) {
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_PORKCHOP, 1));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_PORKCHOP, 2));
             }
         }
 

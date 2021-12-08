@@ -82,8 +82,8 @@ public class BlockBreakListener implements Listener {
     private void changeDrops(Block block) {
         HashMap<Material, ItemStack> materials = new HashMap<>();
         materials.put(Material.COAL, new ItemStack(Material.TORCH, 4));
-        materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 1));
-        materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 1));
+        materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
+        materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 2));
         materials.put(Material.LAPIS_LAZULI, new ItemStack(Material.EXPERIENCE_BOTTLE, 2));
         materials.put(Material.GRAVEL, new ItemStack(Material.FLINT));
 

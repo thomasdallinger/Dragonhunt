@@ -86,6 +86,8 @@ public class EntityDeathListener implements Listener {
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.WHITE_WOOL, 2));
         } else if (mob.getName().equals("Chicken")) {
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.FEATHER, 2));
+        } else if (mob.getName().equals("Iron Golem")) {
+            mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 4));
         }
     }
 }

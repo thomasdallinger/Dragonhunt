@@ -40,8 +40,11 @@ public class PlayerDeathListener implements Listener {
 
         Points.removePoints(player, points);
 
+        points += 100;
         if (killer != null) {
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
+            killer.sendMessage(ChatColor.AQUA + "You received " + ChatColor.DARK_AQUA + points + ChatColor.AQUA + " Points by killing "
+                    + ChatColor.DARK_AQUA + player.getName() + ChatColor.AQUA + ".");
 
             Points.addPoints(killer, points);
         }

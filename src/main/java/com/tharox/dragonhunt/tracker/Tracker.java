@@ -18,10 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.bukkit.Bukkit.getServer;
@@ -80,7 +77,14 @@ public class Tracker implements Listener {
                 playerTracksPlayer.put(player, allOtherPlayers.get(index));
                 playerTracksIndex.replace(player, index);
 
-                player.sendMessage(ChatColor.WHITE + "Now Tracking: " + ChatColor.RED + playerTracksPlayer.get(player).getName());
+                player.sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + playerTracksPlayer.get(player).getName().toUpperCase()
+                        + ChatColor.WHITE + " is now being tracked.");
+            }
+        }
+
+        if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
+            if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + player.getName() + "'s Tracker")) {
+                player.performCommand("shop");
             }
         }
     }
@@ -92,43 +96,45 @@ public class Tracker implements Listener {
 
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
 
+        String trackedPlayerName = "";
         int distance;
 
         if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + player.getName() + "'s Tracker")) {
             try {
                 //only works in the overworld
                 if (!player.getWorld().getName().equals("world")) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "No signal in nether/end.."));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD
+                            + "NO SIGNAL"));
                     return;
                 }
 
                 //less than 2 minutes played
                 if (Main.getInstance().getTimer().getTime() < 120) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "Waiting for signal.."));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD
+                            + "WAITING FOR SIGNAL"));
                     return;
                 }
 
                 if (trackedPlayer == null) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + "Tracking no player.."));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN.toString() + ChatColor.BOLD
+                            + "RIGHT-CLICK " + ChatColor.WHITE + "to track a player"));
                     return;
                 }
 
+                trackedPlayerName = ChatColor.GOLD.toString() + ChatColor.BOLD + trackedPlayer.getName().toUpperCase() + ChatColor.DARK_GRAY + " » ";
                 distance = (int) player.getLocation().distance(trackedPlayer.getLocation());
 
                 if (distance < 150) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + trackedPlayer.getName()
-                            + ChatColor.DARK_GRAY + " » " + ChatColor.RED + "<150 Blocks away"));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedPlayerName + ChatColor.RED + "<150 Blocks away"));
                 } else {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + trackedPlayer.getName()
-                            + ChatColor.DARK_GRAY + " » " + ChatColor.WHITE + distance + " Blocks away"));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedPlayerName + ChatColor.WHITE + distance + " Blocks away"));
                 }
 
                 //SET TARGET
                 player.setCompassTarget(trackedPlayer.getLocation());
 
             } catch (IllegalArgumentException ex) {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED + trackedPlayer.getName()
-                        + ChatColor.DARK_GRAY + " » " + ChatColor.RED + "Different Dimension"));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedPlayerName + ChatColor.RED + "Different Dimension"));
             }
         }
     }
@@ -152,6 +158,9 @@ public class Tracker implements Listener {
         if (meta == null) return null;
 
         meta.setDisplayName(ChatColor.GOLD + player.getName() + "'s Tracker");
+        meta.setLore(Arrays.asList(
+                ChatColor.WHITE + "Left Click: " + ChatColor.YELLOW + "open shop",
+                ChatColor.WHITE + "Right Click: " + ChatColor.YELLOW + "switch tracked player"));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 

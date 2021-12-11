@@ -79,13 +79,15 @@ public class BlockBreakListener implements Listener {
         ItemStack hand = player.getInventory().getItemInMainHand();
         ItemMeta meta = hand.getItemMeta();
         if (meta instanceof Damageable) {
-            ((Damageable) meta).setDamage(((Damageable) meta).getDamage() + 1);
+            if(hand.getType().getMaxDurability() > 0) {
+                ((Damageable) meta).setDamage(((Damageable) meta).getDamage() + 1);
 
-            //avoid negative durability
-            if(((Damageable) meta).getDamage() > hand.getType().getMaxDurability()) {
-                player.getInventory().removeItem(hand);
-                player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1, 1);
-                return;
+                //avoid negative durability
+                if(((Damageable) meta).getDamage() > hand.getType().getMaxDurability()) {
+                    player.getInventory().removeItem(hand);
+                    player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1, 1);
+                    return;
+                }
             }
         }
         hand.setItemMeta(meta);

@@ -25,4 +25,23 @@ public class GameState {
     public static HashMap<Player, Location> overworldLocation = new HashMap<>();
 
     public static HashMap<Player, ItemStack[]> itemsToKeepOnDeath = new HashMap<>();
+
+    /**
+     * Used in EntityDeathListener, ShopListener.
+     * @param player player who is supposed to get the item
+     * @param item item the player should get
+     */
+    public static boolean sameItemAlreadyInInventory(Player player, ItemStack item) {
+        for (ItemStack invetoryItem : player.getInventory()) {
+            if(invetoryItem != null && invetoryItem.getItemMeta() != null) {
+                if ((invetoryItem.getType() == item.getType()) && !invetoryItem.getItemMeta().getDisplayName().contains("Kit Ability")) {
+                    if (invetoryItem.getMaxStackSize() >= (invetoryItem.getAmount() + item.getAmount())) {
+                        player.getInventory().addItem(item);
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
 }

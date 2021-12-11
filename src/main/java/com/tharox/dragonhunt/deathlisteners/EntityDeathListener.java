@@ -1,12 +1,10 @@
 package com.tharox.dragonhunt.deathlisteners;
 
 import com.tharox.dragonhunt.game.GameEnd;
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.points.Points;
 import org.bukkit.Material;
-import org.bukkit.entity.Animals;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -85,10 +83,12 @@ public class EntityDeathListener implements Listener {
 
     private void setInventoryItem(Player killer, Entity mob, ItemStack item) {
         if (killer != null) {
+            if(GameState.sameItemAlreadyInInventory(killer, item)) return;
+
             if (killer.getInventory().firstEmpty() == -1) { //Inventory full
                 mob.getWorld().dropItemNaturally(mob.getLocation(), item);
             } else {
-                killer.getInventory().setItem(killer.getInventory().firstEmpty(), item);
+                killer.getInventory().addItem(item);
             }
         }
     }

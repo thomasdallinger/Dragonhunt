@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.blocks;
 
+import com.tharox.dragonhunt.Main;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -13,6 +14,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,6 +26,7 @@ public class BlockBreakListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
+        final int[] blocksDestroyed = {10};
 
         //Deny Block Breaking in the nether
         if (player.getWorld().getName().equals("world_nether")) {
@@ -36,16 +39,24 @@ public class BlockBreakListener implements Listener {
         }
 
         //Destroy Trees
-        if (destroyTree(block)) {
-            player.playSound(player.getLocation(), Sound.BLOCK_WOOD_BREAK, 1, 1);
+        if (destroyTree(block, player)) {
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.playSound(player.getLocation(), Sound.BLOCK_WOOD_BREAK, 1, 1);
+                    blocksDestroyed[0]--;
+                    if(blocksDestroyed[0] == 0) {
+                        this.cancel();
+                    }
+                }
+            }.runTaskTimer(Main.getInstance(), 0, 2);
+
             event.setCancelled(true);
             return;
         }
 
         setDamageToUsedTool(player);
-
         changeDrops(block);
-
         givePlayerXP(player);
     }
 
@@ -65,10 +76,17 @@ public class BlockBreakListener implements Listener {
      * @param player person who broke the block
      */
     private void setDamageToUsedTool(Player player) {
-        ItemStack hand = player.getItemInHand();
+        ItemStack hand = player.getInventory().getItemInMainHand();
         ItemMeta meta = hand.getItemMeta();
         if (meta instanceof Damageable) {
-            ((Damageable) meta).setDamage(hand.getDurability() + 1);
+            ((Damageable) meta).setDamage(((Damageable) meta).getDamage() + 1);
+
+            //avoid negative durability
+            if(((Damageable) meta).getDamage() > hand.getType().getMaxDurability()) {
+                player.getInventory().removeItem(hand);
+                player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1, 1);
+                return;
+            }
         }
         hand.setItemMeta(meta);
     }
@@ -107,17 +125,25 @@ public class BlockBreakListener implements Listener {
         }
     }
 
-    private boolean destroyTree(Block block) {
-        if (block.getType() != Material.ACACIA_LOG && block.getType() != Material.BIRCH_LOG && block.getType() != Material.DARK_OAK_LOG
-                && block.getType() != Material.JUNGLE_LOG && block.getType() != Material.OAK_LOG && block.getType() != Material.SPRUCE_LOG
-                && block.getType() != Material.CRIMSON_STEM && block.getType() != Material.WARPED_STEM) return false;
+    private boolean destroyTree(Block block, Player player) {
+        List<Material> woods = new ArrayList<>();
+        woods.add(Material.ACACIA_LOG);
+        woods.add(Material.BIRCH_LOG);
+        woods.add(Material.DARK_OAK_LOG);
+        woods.add(Material.JUNGLE_LOG);
+        woods.add(Material.OAK_LOG);
+        woods.add(Material.SPRUCE_LOG);
+        woods.add(Material.CRIMSON_STEM);
+        woods.add(Material.WARPED_STEM);
+
+        if(!woods.contains(block.getType())) return false;
 
         Location loc = block.getLocation();
-
         block.getDrops().clear();
         block.setType(Material.AIR);
-
         block.getWorld().dropItemNaturally(loc, new ItemStack(Material.OAK_LOG));
+
+        setDamageToUsedTool(player);
 
         ArrayList<Block> locations = new ArrayList<>();
 
@@ -128,7 +154,7 @@ public class BlockBreakListener implements Listener {
 
         for (Block nextBlock :
                 locations) {
-            destroyTree(nextBlock);
+            destroyTree(nextBlock, player);
         }
 
         return true;

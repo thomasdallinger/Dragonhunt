@@ -109,15 +109,15 @@ enchanting:
     material: ENCHANTED_BOOK
     amount: 1
     enchantments:
-      EFFICIENCY: 1
-    cost: 50
+      EFFICIENCY: 2
+    cost: 80
     name: "Efficiency Book"
   15:
     material: ENCHANTED_BOOK
     amount: 1
     enchantments:
-      UNBREAKING: 1
-    cost: 50
+      UNBREAKING: 2
+    cost: 80
     name: "Unbreaking Book"
   16:
     material: ENCHANTED_BOOK
@@ -155,22 +155,22 @@ enchanting:
     material: ENCHANTED_BOOK
     amount: 1
     enchantments:
-      FEATHER_FALLING: 1
-    cost: 100
+      FEATHER_FALLING: 2
+    cost: 120
     name: "Feather Falling Book"
   22:
     material: ENCHANTED_BOOK
     amount: 1
     enchantments:
-      DEPTH_STRIDER: 1
-    cost: 100
+      DEPTH_STRIDER: 2
+    cost: 120
     name: "Depth Strider Book"
   23:
     material: ENCHANTED_BOOK
     amount: 1
     enchantments:
-      RESPIRATION: 1
-    cost: 75
+      RESPIRATION: 2
+    cost: 95
     name: "Respiration Book"
   24:
     material: ENCHANTED_BOOK
@@ -207,7 +207,7 @@ foodPotionsArrows:
     effects:
       HUNGER: 0,300
     color: 0x587653
-    name: "Hunger Splash Potion"
+    name: "Hunger Potion"
   4:
     material: SPLASH_POTION
     amount: 2
@@ -215,7 +215,7 @@ foodPotionsArrows:
     effects:
       SLOW_DIGGING: 0,300
     color: 0x4a4217
-    name: "Mining Fatigue Splash Potion"
+    name: "Mining Fatigue Potion"
   5:
     material: SPLASH_POTION
     amount: 2
@@ -223,7 +223,7 @@ foodPotionsArrows:
     effects:
       SLOW: 0,300
     color: 0x5a6c81
-    name: "Slowness Splash Potion"
+    name: "Slowness Potion"
   6:
     material: SPLASH_POTION
     amount: 2
@@ -231,7 +231,7 @@ foodPotionsArrows:
     effects:
       WEAKNESS: 0,300
     color: 0x484d48
-    name: "Weakness Splash Potion"
+    name: "Weakness Potion"
   7:
     material: SPLASH_POTION
     amount: 2
@@ -239,7 +239,7 @@ foodPotionsArrows:
     effects:
       BLINDNESS: 0,300
     color: 0x000000
-    name: "Blindness Splash Potion"
+    name: "Blindness Potion"
   8:
     material: SPLASH_POTION
     amount: 2
@@ -247,35 +247,35 @@ foodPotionsArrows:
     effects:
       POISON: 0,300
     color: 0x4e9331
-    name: "Poison Splash Potion"
+    name: "Poison Potion"
   9:
-    material: POTION
-    amount: 1
-    cost: 80
+    material: SPLASH_POTION
+    amount: 2
+    cost: 90
     effects:
       SPEED: 1,600
     color: 0x7cafc6
     name: "Speed Potion"
   10:
-    material: POTION
-    amount: 1
-    cost: 70
+    material: SPLASH_POTION
+    amount: 2
+    cost: 80
     effects:
-      JUMP: 0,600
+      JUMP: 1,600
     color: 0x00FFFF
     name: "Jump Boost Potion"
   11:
-    material: SPLASH_POTION
+    material: POTION
     amount: 1
     cost: 80
     effects:
-      REGENERATION: 0,300
+      REGENERATION: 1,200
     color: 0xcd5cab
-    name: "Regeneration Splash Potion"
+    name: "Regeneration Potion"
   12:
-    material: POTION
-    amount: 1
-    cost: 70
+    material: SPLASH_POTION
+    amount: 2
+    cost: 90
     effects:
       HEAL: 1,0
     color: 0xf82423
@@ -303,7 +303,7 @@ foodPotionsArrows:
     effects:
       FIRE_RESISTANCE: 0,600
     color: 0xe49a3a
-    name: "Fire Resistance Splash Potion"
+    name: "Fire Resistance Potion"
   16:
     material: AIR
     amount: 1

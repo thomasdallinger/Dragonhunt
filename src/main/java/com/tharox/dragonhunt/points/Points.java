@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 
 /**
- * Used for: PlayerInteractListener, VehicleListener, EntityDeathListener, PlayerDeathListener, GameStart, ShopListener, Scoreboard
+ * Used for: PlayerInteractListener, VehicleListener, EntityDeathListener, PlayerDeathListener, GameStart, ShopListener, ResetScoreboardCountdown
  */
 public class Points {
     private static final HashMap<Player, Integer> points = new HashMap<>();

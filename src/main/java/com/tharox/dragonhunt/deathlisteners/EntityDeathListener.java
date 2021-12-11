@@ -16,7 +16,7 @@ public class EntityDeathListener implements Listener {
     public void onMobKill(EntityDeathEvent event) {
         Player killer = event.getEntity().getKiller();
         Entity mob = event.getEntity();
-        int points = 5;
+        int points = 20;
 
         if (killer != null) {
             if (event.getEntity().getName().equals("Ender Dragon")) {
@@ -73,7 +73,7 @@ public class EntityDeathListener implements Listener {
         if (mob.getName().equals("Hoglin")) {
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_PORKCHOP, 2));
         } else if (mob.getName().equals("Sheep")) {
-            mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.WHITE_WOOL, 2));
+            mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.STRING, 8));
         } else if (mob.getName().equals("Chicken")) {
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.FEATHER, 2));
         } else if (mob.getName().equals("Iron Golem")) {

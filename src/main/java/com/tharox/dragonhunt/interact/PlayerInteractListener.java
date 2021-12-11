@@ -39,7 +39,7 @@ public class PlayerInteractListener implements Listener {
                     event.setCancelled(true);
                     block.setType(Material.AIR);
 
-                    int points = 200;
+                    int points = 150;
                     Points.addPoints(player, points);
 
                     return;

@@ -35,7 +35,7 @@ public class VehicleListener implements Listener {
             mc.getInventory().addItem(new ItemStack(Material.GOLDEN_APPLE));
             entity.remove();
 
-            int points = 200;
+            int points = 150;
             Points.addPoints(player, points);
         }
     }

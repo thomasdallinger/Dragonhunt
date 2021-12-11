@@ -9,7 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class ResetScoreboardCountdown {
 
-    public static int points = 100;
+    public static int points = 75;
 
     /**
      * resets the scoreboard countdown and gives points to all players once the countdown hits zero

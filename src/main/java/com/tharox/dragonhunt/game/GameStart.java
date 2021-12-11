@@ -10,12 +10,11 @@ import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class GameStart {
     Countdown startCountdown;
@@ -71,10 +70,11 @@ public class GameStart {
             player.setLevel(0);   //resets Number
             player.getInventory().clear();
 
-            //give each player a tracker
             player.getInventory().setItem(7, Main.getInstance().getTracker().givePlayerTracker(player));
-            //give each player a elytra
             player.getInventory().setChestplate(new ItemStack(Material.ELYTRA));
+            player.getInventory().setItem(0, addItem(new ItemStack(Material.GOLDEN_AXE)));
+            player.getInventory().setItem(1, addItem(new ItemStack(Material.GOLDEN_PICKAXE)));
+            player.getInventory().setItemInOffHand(addItem(new ItemStack(Material.SHIELD)));
 
             Points.setPoints(player, 0);
 
@@ -82,6 +82,24 @@ public class GameStart {
             Main.getInstance().getTracker().playerTracksPlayer.put(player, null);
             Main.getInstance().getTracker().playerTracksIndex.put(player, 0);
         }
+    }
+
+    /**
+     * @param item ItemStack to be modified and returned
+     * @return ItemStack to be added to the players inventory
+     */
+    private ItemStack addItem(ItemStack item) {
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return null;
+
+        if (item.getType() == Material.SHIELD) {
+            meta.addEnchant(Enchantment.DURABILITY, 2, true);
+        } else {
+            meta.addEnchant(Enchantment.DIG_SPEED, 2, true);
+        }
+
+        item.setItemMeta(meta);
+        return item;
     }
 
     /**
@@ -129,6 +147,7 @@ public class GameStart {
     /**
      * Executed after the timer starts.
      * 30s BossBar
+     *
      * @param time time of the countdown
      */
     public void onElytraCountdown(int time) {
@@ -136,13 +155,13 @@ public class GameStart {
         bossBar.setProgress(time / 31D);
         bossBar.setVisible(true);
 
-        if(elytraCountdown.getTime() == 0) {
+        if (elytraCountdown.getTime() == 0) {
             world.setGameRule(GameRule.FALL_DAMAGE, true);
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
 
-            if(elytraCountdown.getTime() == 30) {
+            if (elytraCountdown.getTime() == 30) {
                 bossBar.addPlayer(player);
             }
 

@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -21,6 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BlockBreakListener implements Listener {
+
+    protected static List<Material> woods = new ArrayList<>();
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
@@ -61,16 +62,6 @@ public class BlockBreakListener implements Listener {
     }
 
     /**
-     * Chests should not get exploded by entities.
-     */
-    @EventHandler
-    public void onExplode(EntityExplodeEvent event) {
-        List<Block> blocks = event.blockList();
-
-        blocks.removeIf(block -> block.getType() == Material.CHEST);
-    }
-
-    /**
      * Sets 1 damage to the players used tool to break the block.
      *
      * @param player person who broke the block
@@ -99,7 +90,7 @@ public class BlockBreakListener implements Listener {
      *
      * @param block block destroyed by the player
      */
-    private void changeDrops(Block block) {
+    protected static void changeDrops(Block block) {
         HashMap<Material, ItemStack> materials = new HashMap<>();
         materials.put(Material.COAL, new ItemStack(Material.TORCH, 4));
         materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
@@ -128,7 +119,6 @@ public class BlockBreakListener implements Listener {
     }
 
     private boolean destroyTree(Block block, Player player) {
-        List<Material> woods = new ArrayList<>();
         woods.add(Material.ACACIA_LOG);
         woods.add(Material.BIRCH_LOG);
         woods.add(Material.DARK_OAK_LOG);

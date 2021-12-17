@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt;
 
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
+import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
 import com.tharox.dragonhunt.commands.DateCommand;
 import com.tharox.dragonhunt.deathlisteners.EntityDeathListener;
@@ -86,6 +87,7 @@ public final class Main extends JavaPlugin {
         pluginManager.registerEvents(new ChatListener(), this);
         pluginManager.registerEvents(new ShopListener(), this);
         pluginManager.registerEvents(new BlockBreakListener(), this);
+        pluginManager.registerEvents(new BlockExplodeListener(), this);
         pluginManager.registerEvents(new BlockPlaceListener(), this);
         pluginManager.registerEvents(new PlayerInteractListener(), this);
         pluginManager.registerEvents(new VehicleListener(), this);

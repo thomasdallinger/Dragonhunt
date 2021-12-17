@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.dimensions.DimensionListener;
 import com.tharox.dragonhunt.kits.KitInventory;
 import com.tharox.dragonhunt.points.Points;
+import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import org.bukkit.*;
@@ -77,6 +78,8 @@ public class GameStart {
             player.getInventory().setItemInOffHand(addItem(new ItemStack(Material.SHIELD)));
 
             Points.setPoints(player, 0);
+            Spectate.spectatesLeft.put(player, 3);
+            Spectate.spectateCooldown.put(player, timer.getTime() + 180);
 
             //set default tracker values
             Main.getInstance().getTracker().playerTracksPlayer.put(player, null);

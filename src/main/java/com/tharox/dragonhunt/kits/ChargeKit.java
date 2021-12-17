@@ -5,6 +5,7 @@ import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -145,6 +146,7 @@ public abstract class ChargeKit extends Kit {
         ItemStack item = player.getInventory().getItemInMainHand();
 
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
+        if(player.getGameMode().equals(GameMode.SPECTATOR)) return;
 
         int timeLeft;
         List<String> charge = new ArrayList<>();

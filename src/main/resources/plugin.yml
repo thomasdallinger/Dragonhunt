@@ -10,3 +10,5 @@ commands:
     description: Shows the current date.
   shop:
     description: Opens the shop.
+  spec:
+    description: Spectate ability.

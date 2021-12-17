@@ -5,6 +5,7 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -95,6 +96,7 @@ public class Tracker implements Listener {
         Player trackedPlayer = playerTracksPlayer.get(player);
 
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
+        if(player.getGameMode().equals(GameMode.SPECTATOR)) return;
 
         String trackedPlayerName = "";
         int distance;

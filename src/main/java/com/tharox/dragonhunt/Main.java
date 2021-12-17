@@ -17,6 +17,7 @@ import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
 import com.tharox.dragonhunt.shop.ShopCommand;
 import com.tharox.dragonhunt.shop.ShopInventory;
 import com.tharox.dragonhunt.shop.ShopListener;
+import com.tharox.dragonhunt.spectate.SpectateCommand;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import com.tharox.dragonhunt.tracker.Tracker;
@@ -105,5 +106,6 @@ public final class Main extends JavaPlugin {
     private void commandRegistration() {
         getCommand("date").setExecutor(new DateCommand());
         getCommand("shop").setExecutor(new ShopCommand());
+        getCommand("spec").setExecutor(new SpectateCommand());
     }
 }

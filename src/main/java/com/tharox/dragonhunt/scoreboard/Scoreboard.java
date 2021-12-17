@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.points.Points;
+import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -54,6 +55,7 @@ public class Scoreboard extends ScoreboardBuilder {
                 setScore(ChatColor.WHITE + "Players: " + ChatColor.YELLOW + Bukkit.getOnlinePlayers().size(), 8);
                 setScore(ChatColor.WHITE + "Kills: " + ChatColor.YELLOW + "", 6);
                 setScore(ChatColor.WHITE + "Deaths: " + ChatColor.RED + "", 5);
+                setScore(ChatColor.WHITE + "Spectates left: " + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
                 setScore(ChatColor.WHITE + "Points: " + ChatColor.AQUA.toString() + Points.getPoints(player), 3);
                 setScore(ChatColor.WHITE + "Next Points in:", 1);
                 setScore(ChatColor.YELLOW + countdownFormat(countdown), 0);

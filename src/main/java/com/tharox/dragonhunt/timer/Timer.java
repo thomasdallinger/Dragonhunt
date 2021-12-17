@@ -6,6 +6,7 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -49,6 +50,8 @@ public class Timer {
                 if(item.getItemMeta().getDisplayName().equals((ChatColor.GOLD + player.getName() + "'s Tracker"))
                         || item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Kit Ability " + player.getName())) continue;
             }
+
+            if(player.getGameMode().equals(GameMode.SPECTATOR)) continue;
 
             String hours = "";
             String minutes = "";

@@ -52,6 +52,7 @@ public class DimensionListener implements Listener {
             event.setCanCreatePortal(false);
 
             if(worldFrom.getName().equals("world")) {
+                player.setBedSpawnLocation(player.getLocation(), true);
                 GameState.overworldLocation.put(player, player.getLocation());
                 event.setTo(GameState.dungeonLocation);
             }

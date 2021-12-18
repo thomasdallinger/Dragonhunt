@@ -17,8 +17,6 @@ import org.bukkit.potion.PotionEffectType;
 
 public class PlayerDeathListener implements Listener {
 
-    boolean wasInNether = false;
-
     /**
      * The player always keeps:
      * - hotbar (9 items, including tracker and kit ability items)
@@ -74,19 +72,12 @@ public class PlayerDeathListener implements Listener {
                 + ", " + (int) player.getLocation().getY()
                 + ", " + (int) player.getLocation().getZ()
                 + ", " + player.getWorld().getName());
-
-        wasInNether = player.getWorld().getName().equals("world_nether");
     }
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
             Player player = event.getPlayer();
-
-            if (wasInNether) {
-                player.teleport(GameState.dungeonLocation);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 9));
-            }
 
             player.getInventory().setContents(GameState.itemsToKeepOnDeath.get(player));
 

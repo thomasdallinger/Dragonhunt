@@ -22,11 +22,6 @@ public class ShopCommand implements CommandExecutor {
             return true;
         }
 
-        if(player.getWorld().getName().equals("world_nether")) {
-            player.sendMessage(ChatColor.RED + "The shop is not accessible in the nether.");
-            return true;
-        }
-
         player.openInventory(ShopInventory.menu);
         return false;
     }

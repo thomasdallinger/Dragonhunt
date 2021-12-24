@@ -15,7 +15,7 @@ import org.bukkit.inventory.EquipmentSlot;
 public class PlayerInteractListener implements Listener {
 
     @EventHandler
-    public void onInventoryClick(PlayerInteractEvent event) {
+    public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         Block block = event.getClickedBlock();
 
@@ -23,11 +23,11 @@ public class PlayerInteractListener implements Listener {
         if (e == null)
             return;
 
-        if(player.getWorld().getName().equals("world_nether")) { //Not able to throw enderpearls in the nether
-            if(player.getInventory().getItemInMainHand().getType().equals(Material.ENDER_PEARL) || player.getInventory().getItemInOffHand().getType().equals(Material.ENDER_PEARL)) {
+        if (player.getWorld().getName().equals("world_nether")) { //Not able to throw enderpearls in the nether
+            if (player.getInventory().getItemInMainHand().getType().equals(Material.ENDER_PEARL) || player.getInventory().getItemInOffHand().getType().equals(Material.ENDER_PEARL)) {
                 event.setCancelled(true);
             }
-            if(player.getInventory().getItemInMainHand().getType().equals(Material.SPLASH_POTION)) {
+            if (player.getInventory().getItemInMainHand().getType().equals(Material.SPLASH_POTION)) {
                 event.setCancelled(true);
             }
         }

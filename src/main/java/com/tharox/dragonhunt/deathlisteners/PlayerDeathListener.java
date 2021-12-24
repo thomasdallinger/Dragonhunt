@@ -59,8 +59,7 @@ public class PlayerDeathListener implements Listener {
 
         ItemStack chestplate = player.getInventory().getChestplate();
         if (chestplate != null && chestplate.getType() == Material.ELYTRA) {
-            player.getInventory().remove(chestplate);
-            player.getWorld().dropItemNaturally(player.getLocation(), chestplate);
+            player.getInventory().setChestplate(new ItemStack(Material.AIR));
         }
 
         event.setDroppedExp(0);

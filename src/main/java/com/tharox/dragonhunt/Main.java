@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.blocks.BlockPlaceListener;
 import com.tharox.dragonhunt.commands.DateCommand;
 import com.tharox.dragonhunt.deathlisteners.EntityDeathListener;
 import com.tharox.dragonhunt.deathlisteners.PlayerDeathListener;
+import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.interact.PlayerInteractListener;
 import com.tharox.dragonhunt.kits.KitListener;
 import com.tharox.dragonhunt.listeners.*;
@@ -24,8 +25,12 @@ import com.tharox.dragonhunt.tracker.Tracker;
 import com.tharox.dragonhunt.vehicles.VehicleListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public final class Main extends JavaPlugin {
 
@@ -79,6 +84,24 @@ public final class Main extends JavaPlugin {
         return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "Dragon"
                 + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "Hunt" + ChatColor.DARK_GRAY + "] "
                 + ChatColor.WHITE;
+    }
+
+    public static void elytraInInventory() {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for(Player player : Bukkit.getOnlinePlayers()) {
+                    for(ItemStack item : player.getInventory()) {
+                        if(item != null && item.getItemMeta() != null) {
+                            if(item.getType() == Material.ELYTRA && !item.getItemMeta().getDisplayName().contains("Kit Ability")) {
+                                player.getInventory().remove(item);
+                                player.getInventory().setChestplate(item);
+                            }
+                        }
+                    }
+                }
+            }
+        }.runTaskTimer(Main.getInstance(), 20, 20);
     }
 
     private void listenerRegistration() {

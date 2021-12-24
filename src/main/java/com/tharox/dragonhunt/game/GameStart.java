@@ -109,6 +109,7 @@ public class GameStart {
         if (startCountdown.getTime() == 0) {
             timer.setRunning(true);
             scoreboardCountdown.setRunning(true);
+            Main.elytraInInventory();
 
             elytraCountdown = new Countdown(true, 30, this::onElytraCountdown);
             overworld.setGameRule(GameRule.FALL_DAMAGE, false);

@@ -15,6 +15,7 @@ public class InventoryListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         ItemStack item;
+
         if (event.getAction().name().contains("HOTBAR") && event.getHotbarButton() != -1) {
             item = event.getView().getBottomInventory().getItem(event.getHotbarButton());
         } else {
@@ -48,13 +49,18 @@ public class InventoryListener implements Listener {
 
     @EventHandler
     public void onItemDrop(PlayerDropItemEvent event) {
+        ItemStack item = event.getItemDrop().getItemStack();
 
-        if (event.getItemDrop().getItemStack().getItemMeta() == null) return;
+        if (item.getItemMeta() == null) return;
 
-        String displayName = event.getItemDrop().getItemStack().getItemMeta().getDisplayName();
+        String displayName = item.getItemMeta().getDisplayName();
 
         if (displayName.contains(ChatColor.LIGHT_PURPLE + "Kit Ability") || displayName.contains(ChatColor.GOLD + event.getPlayer().getName() + "'s Tracker"))
             event.setCancelled(true);
+
+        if(item.getType() == Material.ELYTRA) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler

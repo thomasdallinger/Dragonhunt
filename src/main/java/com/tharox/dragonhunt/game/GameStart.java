@@ -30,7 +30,6 @@ public class GameStart {
         startCountdown = new Countdown(true, 30, this::onCountdown);
 
         configureOverworld();
-        configureNether();
         configurePlayer();
 
         //randomly choose one nether dungeon location
@@ -46,17 +45,8 @@ public class GameStart {
         world.setTime(0);
         WorldBorder worldBorder = world.getWorldBorder();
         worldBorder.setCenter(new Location(world, 0, 0, 0));
-        worldBorder.setSize(4000);
+        worldBorder.setSize(10000);
         worldBorder.setDamageAmount(0);
-    }
-
-    //TODO: remove method?
-    private void configureNether() {
-        World nether = Bukkit.getServer().getWorlds().get(1); //1 = Nether
-        WorldBorder netherBorder = nether.getWorldBorder();
-        netherBorder.setCenter(new Location(nether, 0, 0, 0));
-        netherBorder.setSize(2500);
-        netherBorder.setDamageAmount(0);
     }
 
     private void configurePlayer() {

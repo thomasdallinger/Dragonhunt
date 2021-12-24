@@ -18,13 +18,16 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
 public class GameStart {
+    Timer timer = Main.getInstance().getTimer();
     Countdown startCountdown;
     Countdown elytraCountdown;
-    KitInventory kitInventory = new KitInventory();
-    Timer timer = Main.getInstance().getTimer();
     Countdown scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
-    World world = Bukkit.getServer().getWorld("world");
+    KitInventory kitInventory = new KitInventory();
     BossBar bossBar;
+    World overworld = Bukkit.getServer().getWorld("world");
+    Location startLocation = new Location(overworld, 0, 150, 0);
+    Location highestBlock;
+    Location higherStartLocation = new Location(startLocation.getWorld(), startLocation.getX(), startLocation.getY() + 40, startLocation.getZ());
 
     public GameStart() {
         startCountdown = new Countdown(true, 30, this::onCountdown);
@@ -40,11 +43,11 @@ public class GameStart {
     }
 
     private void configureOverworld() {
-        World world = Bukkit.getServer().getWorlds().get(0); //0 = Overworld
-        world.setDifficulty(Difficulty.NORMAL);
-        world.setTime(0);
-        WorldBorder worldBorder = world.getWorldBorder();
-        worldBorder.setCenter(new Location(world, 0, 0, 0));
+        overworld.setDifficulty(Difficulty.NORMAL);
+        overworld.setTime(0);
+        highestBlock = overworld.getHighestBlockAt(0, 0).getLocation();
+        WorldBorder worldBorder = overworld.getWorldBorder();
+        worldBorder.setCenter(new Location(overworld, 0, 0, 0));
         worldBorder.setSize(10000);
         worldBorder.setDamageAmount(0);
     }
@@ -101,14 +104,14 @@ public class GameStart {
      * @param time time of the countdown
      */
     public void onCountdown(int time) {
-        if (world == null) return;
+        if (overworld == null) return;
 
         if (startCountdown.getTime() == 0) {
             timer.setRunning(true);
             scoreboardCountdown.setRunning(true);
 
             elytraCountdown = new Countdown(true, 30, this::onElytraCountdown);
-            world.setGameRule(GameRule.FALL_DAMAGE, false);
+            overworld.setGameRule(GameRule.FALL_DAMAGE, false);
             bossBar = Bukkit.createBossBar(ChatColor.GREEN + "Fall damage active/Elytra gone in: " + elytraCountdown.getTime(),
                     BarColor.GREEN, BarStyle.SEGMENTED_10);
         }
@@ -129,8 +132,12 @@ public class GameStart {
             }
 
             if (startCountdown.getTime() == 0) {
-                player.teleport(new Location(player.getWorld(), 0, 150, 0));
-                //player.setBedSpawnLocation(new Location(player.getWorld(), 0, player.getWorld().getHighestBlockYAt(0, 0), 0));
+                if(startLocation.getY() - highestBlock.getY() <= 40) {
+                    player.teleport(higherStartLocation);
+                } else {
+                    player.teleport(startLocation);
+                }
+
                 player.setGameMode(GameMode.SURVIVAL);
                 player.sendMessage(Main.getPrefix() + ChatColor.GOLD + "Good Luck!");
             }
@@ -149,7 +156,7 @@ public class GameStart {
         bossBar.setVisible(true);
 
         if (elytraCountdown.getTime() == 0) {
-            world.setGameRule(GameRule.FALL_DAMAGE, true);
+            overworld.setGameRule(GameRule.FALL_DAMAGE, true);
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {

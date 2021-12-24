@@ -43,6 +43,10 @@ public class Spectate {
         Spectate.spectateCooldown.put(player, timer.getTime() + 180);
         player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 1, 1);
 
+        for(Player p : Bukkit.getOnlinePlayers()) {
+            p.sendMessage(Main.getPrefix() + ChatColor.GOLD + ChatColor.BOLD + player.getName().toUpperCase() + ChatColor.YELLOW + " uses a Spectator Token.");
+        }
+
         new BukkitRunnable() {
 
             @Override

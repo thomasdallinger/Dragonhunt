@@ -20,11 +20,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public abstract class ChargeKit extends Kit {
 
     boolean moved;
+    boolean charging;
     Timer timer = Main.getInstance().getTimer();
     int chargingFor = getChargeTime();
     int cooldownEnds;
@@ -57,7 +60,7 @@ public abstract class ChargeKit extends Kit {
                 //not able to equip / place
                 event.setCancelled(true);
 
-                if(p.getWorld().getName().equals("world_nether")) {
+                if (p.getWorld().getName().equals("world_nether")) {
                     p.sendMessage(ChatColor.RED + "You can't use your kit ability in the nether!");
                     return;
                 }
@@ -70,7 +73,7 @@ public abstract class ChargeKit extends Kit {
                 }
 
                 //Check if the Player is already charging the Ability
-                if (getChargeTime() > chargingFor) {
+                if (charging) {
                     player.sendMessage(ChatColor.RED + "Already charging...");
                     player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
                     return;
@@ -78,8 +81,9 @@ public abstract class ChargeKit extends Kit {
 
                 chargingFor = getChargeTime();
                 moved = false;
+                charging = true;
 
-                if(chargingFor == 0) {
+                if (chargingFor == 0) {
                     setCooldownEnds();
                     executeAbility();
                     return;
@@ -94,6 +98,8 @@ public abstract class ChargeKit extends Kit {
     public void onMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         if (!p.equals(player)) return;
+
+        if (chargingFor >= getChargeTime()) return;
 
         if (e.getFrom().getZ() != e.getTo().getZ() && e.getFrom().getX() != e.getTo().getX()) {
             moved = true;
@@ -110,10 +116,11 @@ public abstract class ChargeKit extends Kit {
 
                 if (moved) {
                     moved = false;
-                    player.sendMessage(ChatColor.RED + "Don't move!");
+                    player.sendMessage(ChatColor.RED + "Charging cancelled. Don't move!");
 
                     //reset charging
                     chargingFor = getChargeTime();
+                    charging = false;
 
                     //cancel charging
                     this.cancel();
@@ -124,6 +131,7 @@ public abstract class ChargeKit extends Kit {
 
                     //reset charging
                     chargingFor = getChargeTime();
+                    charging = false;
 
                     executeAbility();
                     this.cancel();
@@ -146,14 +154,15 @@ public abstract class ChargeKit extends Kit {
         ItemStack item = player.getInventory().getItemInMainHand();
 
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
-        if(player.getGameMode().equals(GameMode.SPECTATOR)) return;
+        if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
 
         int timeLeft;
         List<String> charge = new ArrayList<>();
+        String chargeString;
 
         if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Kit Ability " + player.getName())) {
             //Check if in nether
-            if(player.getWorld().getName().equals("world_nether")) {
+            if (player.getWorld().getName().equals("world_nether")) {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD
                         + "NOT USABLE IN NETHER"));
                 return;
@@ -168,17 +177,20 @@ public abstract class ChargeKit extends Kit {
             }
 
             //Check if Charging
-            if (getChargeTime() > chargingFor) {
-
+            if (charging) {
+                charge.add(ChatColor.LIGHT_PURPLE + "■");
                 for (int charges = 1; charges < getChargeTime(); charges++) {
-                    if(charges <= getChargeTime()-chargingFor)
-                    charge.add(ChatColor.YELLOW + "■");
+                    if (charges <= getChargeTime() - chargingFor)
+                        charge.add(ChatColor.LIGHT_PURPLE + "■");
                     else
-                        charge.add(ChatColor.GRAY + "■");
+                        charge.add(ChatColor.WHITE + "■");
                 }
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.YELLOW + charge.toString().replaceAll(",", "")));
+
+                chargeString = charge.toString();
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "CHARGING: "
+                        +  chargeString.substring(1, chargeString.length() - 1).replaceAll(",", "")));
             } else {
-                if(timer.getTime() % 2 == 0)
+                if (timer.getTime() % 2 == 0)
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString() + ChatColor.BOLD + "ABILITY READY"));
                 else
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.WHITE.toString() + ChatColor.BOLD + "ABILITY READY"));
@@ -218,17 +230,18 @@ public abstract class ChargeKit extends Kit {
     protected void runKitAbility(int ticks, int duration, CustomKitAbilityExecutor executor, EverySecondKitAbilityExecutor everySecondExecutor) {
         new BukkitRunnable() {
             double durationLeft = duration;
+
             @Override
             public void run() {
 
-                if(everySecondExecutor != null) {
+                if (everySecondExecutor != null) {
                     everySecondExecutor.executeEverySecond();
                 }
 
-                durationLeft = durationLeft - (double) ticks/20;
+                durationLeft = durationLeft - (double) ticks / 20;
 
                 if (durationLeft <= 0) {
-                    if(executor != null) {
+                    if (executor != null) {
                         executor.execute();
                     }
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);

@@ -240,7 +240,7 @@ public abstract class ChargeKit extends Kit {
 
                 durationLeft = durationLeft - (double) ticks / 20;
 
-                if (durationLeft <= 0) {
+                if (durationLeft <= 0 || player.getWorld().getName().equals("world_nether")) {
                     if (executor != null) {
                         executor.execute();
                     }

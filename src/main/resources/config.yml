@@ -189,7 +189,7 @@ foodPotionsArrows:
     material: COOKED_PORKCHOP
     amount: 3
     cost: 20
-    name: "Cooked Chicken"
+    name: "Cooked Porkchop"
   1:
     material: GOLDEN_CARROT
     amount: 3

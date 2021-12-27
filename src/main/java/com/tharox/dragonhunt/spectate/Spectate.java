@@ -68,7 +68,7 @@ public class Spectate {
     }
 
     private void spectateDurationLeft(Player player) {
-        final int[] duration = {10};
+        final int[] duration = {15};
 
         new BukkitRunnable() {
 

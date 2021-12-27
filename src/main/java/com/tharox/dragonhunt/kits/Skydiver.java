@@ -13,8 +13,8 @@ import org.bukkit.potion.PotionEffectType;
 @DragonhuntKit
 public class Skydiver extends ChargeKit {
 
-    static int chargeTime = 10;
-    static int duration = 20;
+    static int chargeTime = 7;
+    static int duration = 25;
     static int cooldown = 180;
 
     public static final String title = ChatColor.AQUA + "Skydiver";

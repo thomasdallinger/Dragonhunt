@@ -67,7 +67,6 @@ public class GameStart {
             player.getInventory().setItem(1, addItem(new ItemStack(Material.GOLDEN_PICKAXE)));
             player.getInventory().setItemInOffHand(addItem(new ItemStack(Material.SHIELD)));
 
-            Points.setPoints(player, 0);
             Spectate.spectatesLeft.put(player, 3);
             Spectate.spectateCooldown.put(player, timer.getTime() + 180);
 

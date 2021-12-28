@@ -54,6 +54,7 @@ public class Platformer extends ChargeKit {
 
     public void setBlocksBelowPlayer(Player player) {
         Location playerLocation = player.getLocation();
+        Location offsetLocation;
 
         for(int offsetY = -1; offsetY != 3; offsetY++){
 
@@ -62,11 +63,13 @@ public class Platformer extends ChargeKit {
                 material = Material.SMOOTH_SANDSTONE;
             for(int offsetX = -1; offsetX != 3; offsetX++){
                 for(int offsetZ = -1; offsetZ != 3; offsetZ++){
-                    new Location(playerLocation.getWorld(),
+                    offsetLocation = new Location(playerLocation.getWorld(),
                             playerLocation.getX() + offsetX,
                             playerLocation.getY() + offsetY,
-                            playerLocation.getZ() + offsetZ)
-                            .getBlock().setType(material);
+                            playerLocation.getZ() + offsetZ);
+                    if(offsetLocation.getBlock().getType() != Material.OBSIDIAN && offsetLocation.getBlock().getType() != Material.END_PORTAL_FRAME) {
+                        offsetLocation.getBlock().setType(material);
+                    }
                 }
             }
         }

@@ -161,8 +161,8 @@ public class Tracker implements Listener {
 
         meta.setDisplayName(ChatColor.GOLD + player.getName() + "'s Tracker");
         meta.setLore(Arrays.asList(
-                ChatColor.WHITE + "Left Click: " + ChatColor.YELLOW + "open shop",
-                ChatColor.WHITE + "Right Click: " + ChatColor.YELLOW + "switch tracked player"));
+                ChatColor.WHITE + "Left-Click: " + ChatColor.YELLOW + "Open shop (/shop)",
+                ChatColor.WHITE + "Right-Click: " + ChatColor.YELLOW + "Switch tracked player"));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 

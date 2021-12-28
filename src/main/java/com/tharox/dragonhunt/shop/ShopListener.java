@@ -1,5 +1,7 @@
 package com.tharox.dragonhunt.shop;
 
+import com.tharox.dragonhunt.db.DatabaseExecutor;
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.points.Points;
 import org.bukkit.ChatColor;
@@ -10,6 +12,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.sql.Statement;
 
 public class ShopListener implements Listener {
 
@@ -24,16 +28,16 @@ public class ShopListener implements Listener {
         if (item == null) return;
         if (item.getItemMeta() == null) return;
 
-        String name = item.getItemMeta().getDisplayName();
+        String itemName = item.getItemMeta().getDisplayName();
 
         //Inventory is shop menu
         if (event.getView().getTitle().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Shop Menu")) {
-            menuNavigation(player, name);
+            menuNavigation(player, itemName);
             return;
         }
 
         //item is sub-category
-        if (name.contains("»")) {
+        if (itemName.contains("»")) {
             return;
         }
 
@@ -51,7 +55,7 @@ public class ShopListener implements Listener {
         }
 
         //Back to menu functionality
-        if (name.equals(ChatColor.RED + "Back to menu")) {
+        if (itemName.equals(ChatColor.RED + "Back to menu")) {
             player.closeInventory();
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             player.openInventory(ShopInventory.menu);
@@ -59,7 +63,7 @@ public class ShopListener implements Listener {
         }
 
         //normal item
-        if (Points.getPoints(player) < ShopInventory.ShopItemCost.get(name)) {
+        if (Points.getPoints(player) < ShopInventory.ShopItemCost.get(itemName)) {
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
             player.closeInventory();
             player.sendMessage(ChatColor.RED + "You don't have enough points!");
@@ -77,8 +81,10 @@ public class ShopListener implements Listener {
             player.getInventory().addItem(item);
         }
 
+        addShopAccess(player, itemName);
+
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        Points.removePoints(player, ShopInventory.ShopItemCost.get(name));
+        Points.removePoints(player, ShopInventory.ShopItemCost.get(itemName));
     }
 
     private void menuNavigation(Player player, String name) {
@@ -92,5 +98,18 @@ public class ShopListener implements Listener {
         } else if (name.contains("Blocks")) {
             player.openInventory(ShopInventory.blocksRedstone);
         }
+    }
+
+    private void addShopAccess(Player player, String itemName) {
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "INSERT INTO ShopAccess (GameID, Player, item, pointsBefore, cost, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + itemName + "', '"
+                    + Points.getPoints(player) + "', '" + ShopInventory.ShopItemCost.get(itemName)
+                    + "', '" + DbValues.getTimestamp() + "')";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
     }
 }

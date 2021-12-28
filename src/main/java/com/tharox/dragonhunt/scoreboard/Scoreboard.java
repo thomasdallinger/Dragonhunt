@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.points.Points;
 import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
@@ -46,27 +47,26 @@ public class Scoreboard extends ScoreboardBuilder {
             @Override
             public void run() {
 
-                if (!Main.getInstance().getTimer().isRunning()) { //Game hasn't started yet
+                if (!Main.getInstance().getTimer().isRunning() && Points.getPoints(player) == 0) { //Game hasn't started yet
                     gameNotStarted();
                     return;
                 }
 
                 setScore(ChatColor.GOLD.toString() + ChatColor.BOLD + "1vs1", 10);
                 setScore(ChatColor.WHITE + "Players: " + ChatColor.YELLOW + Bukkit.getOnlinePlayers().size(), 8);
-                setScore(ChatColor.WHITE + "Kills: " + ChatColor.YELLOW + "", 6);
-                setScore(ChatColor.WHITE + "Deaths: " + ChatColor.RED + "", 5);
+                setScore(ChatColor.WHITE + "Kills: " + ChatColor.YELLOW + DbValues.getKills(player, true), 6);
+                setScore(ChatColor.WHITE + "Deaths: " + ChatColor.RED + DbValues.getKills(player, false), 5);
                 setScore(ChatColor.WHITE + "Spectates left: " + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
                 setScore(ChatColor.WHITE + "Points: " + ChatColor.AQUA.toString() + Points.getPoints(player), 3);
                 setScore(ChatColor.WHITE + "Next Points in:", 1);
                 setScore(ChatColor.YELLOW + countdownFormat(countdown), 0);
-                //TODO: use db for kills, deaths
 
             }
         }.runTaskTimer(Main.getInstance(), 20, 20);
     }
 
     /**
-     * Executed when the game hasn't started (timer is not running)
+     * Executed when the game hasn't started (timer not running, players have 0 points)
      */
     private void gameNotStarted() {
         setScore(ChatColor.WHITE + "Players: " + ChatColor.YELLOW + Bukkit.getOnlinePlayers().size(), 8);

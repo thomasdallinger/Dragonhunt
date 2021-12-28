@@ -24,7 +24,7 @@ public class EntityDeathListener implements Listener {
             }
 
             if (mob instanceof Monster) {
-                Points.addPoints(killer, points);
+                Points.addPoints(killer, points, "mob");
             }
 
             if (mob instanceof Animals) {

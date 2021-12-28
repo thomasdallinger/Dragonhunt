@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.timer;
 
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.Main;
 import net.md_5.bungee.api.ChatMessageType;
@@ -53,22 +54,9 @@ public class Timer {
 
             if(player.getGameMode().equals(GameMode.SPECTATOR)) continue;
 
-            String hours = "";
-            String minutes = "";
-            String seconds = "";
-            if (getTime() / 3600 < 10)
-                hours = "0";
-            hours += getTime() / 3600;
-            if ((getTime() / 60) % 60 < 10)
-                minutes = "0";
-            minutes += (getTime() / 60) % 60;
-            if (getTime() % 60 < 10)
-                seconds = "0";
-            seconds += getTime() % 60;
-
             if(isRunning()) {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString() +
-                        ChatColor.BOLD + hours + ":" + minutes + ":" + seconds));
+                        ChatColor.BOLD + DbValues.getTimestamp()));
                 continue;
             }
 

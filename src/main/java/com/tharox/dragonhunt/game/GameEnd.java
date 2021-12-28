@@ -1,49 +1,134 @@
 package com.tharox.dragonhunt.game;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.db.DatabaseExecutor;
+import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.spectate.Spectate;
+import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.scheduler.BukkitRunnable;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.sql.Statement;
 
 public class GameEnd {
 
     Player winner;
     Timer timer = Main.getInstance().getTimer();
+    Timer scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
 
     /**
      * no winner - time ran out
      */
     public GameEnd() {
-        timer.setRunning(false);
-
-        setGamemodeToSpectator();
+        configureGameEnd();
     }
 
     public GameEnd(Player winner) {
         this.winner = winner;
-        timer.setRunning(false);
-
-        setGamemodeToSpectator();
+        configureGameEnd();
     }
 
-    private void setGamemodeToSpectator() {
+    private void configureGameEnd() {
+        timer.setRunning(false);
+        scoreboardCountdown.setRunning(false);
+        updateGame();
+
         for (Player player : Bukkit.getOnlinePlayers()) {
-            player.sendMessage(Main.getPrefix() + ChatColor.GOLD + "The game is over!");
+            player.sendMessage(Main.getPrefix() + ChatColor.RED + ChatColor.BOLD + "GAME OVER.");
 
             player.setGameMode(GameMode.SPECTATOR);
             player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 1);
 
-            if(player == winner) {
-                player.sendTitle(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "YOU WON", ChatColor.GREEN + "You defeated the Enderdragon", 10, 90, 20);
+            if (player == winner) {
+                player.sendTitle(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "YOU WON", ChatColor.GREEN
+                        + "You defeated the Enderdragon", 10, 90, 20);
+                addHasWon(player, true);
             } else {
-                player.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "YOU LOST", ChatColor.RED + "Try again next time", 10, 90, 20);
+                player.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "YOU LOST", ChatColor.RED
+                        + "Try again next time", 10, 90, 20);
+                addHasWon(player, false);
             }
 
-            //TODO: Time played message
+            if(winner != null) {
+                player.sendMessage(Main.getPrefix() + ChatColor.GOLD + ChatColor.BOLD + winner.getName().toUpperCase() + " has won the Dragonhunt!");
+            }
+
+            player.sendMessage(Main.getPrefix() + ChatColor.YELLOW + ChatColor.BOLD + "TIME PLAYED: " + ChatColor.WHITE
+                    + DbValues.getTimestamp());
             //TODO: Game Stats messages?
+            serverStopsCountdown(player);
         }
+    }
+
+    private void updateGame() {
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "UPDATE Game SET duration = '" + DbValues.getTimestamp()
+                    + "', dungeonLocation = '" + DbValues.locationToString(GameState.dungeonLocation)
+                    + "' WHERE id = '" + DbValues.getGameID() + "'";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
+    }
+
+    private void addHasWon(Player player, boolean hasWon) {
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query;
+
+            if (hasWon) {
+                query = "UPDATE Plays SET hasWon = true " +
+                        "WHERE GameID = '" + DbValues.getGameID() + "' AND Player = '" + player.getName() + "'";
+            } else {
+                query = "UPDATE Plays SET hasWon = false " +
+                        "WHERE GameID = '" + DbValues.getGameID() + "' AND Player = '" + player.getName() + "'";
+            }
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
+    }
+
+    private void serverStopsCountdown(Player player) {
+        final int[] duration = {90};
+
+        new BukkitRunnable() {
+
+            @Override
+            public void run() {
+                if (duration[0] <= 0) {
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+
+                    ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                    out.writeUTF("Connect");
+                    out.writeUTF("lobby");
+                    player.sendPluginMessage(Main.getInstance(), "BungeeCord", out.toByteArray());
+
+                    DbValues.updateServerStatus();
+                    Bukkit.getServer().shutdown();
+                }
+
+                if (duration[0] <= 10) {
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+                }
+
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD
+                        + "BACK TO LOBBY IN " + duration[0] + " SECONDS"));
+                duration[0]--;
+            }
+
+        }.runTaskTimer(Main.getInstance(), 20, 20);
     }
 }

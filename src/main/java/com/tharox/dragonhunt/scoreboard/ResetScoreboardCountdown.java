@@ -23,7 +23,7 @@ public class ResetScoreboardCountdown {
                     countdown.setTime(180);
 
                     for(Player player : Bukkit.getOnlinePlayers()) {
-                        Points.addPoints(player, points);
+                        Points.addPoints(player, points, "survival");
                     }
                 }
             }

@@ -1,6 +1,8 @@
 package com.tharox.dragonhunt.kits;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.db.DatabaseExecutor;
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.timer.Timer;
 import org.bukkit.Bukkit;
@@ -20,6 +22,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Set;
 
@@ -77,6 +80,8 @@ public class KitListener implements Listener {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         player.sendMessage(ChatColor.WHITE + "You have picked the " + name + ChatColor.WHITE + " Kit!");
         player.closeInventory();
+
+        addKit(player, name);
     }
 
     @EventHandler
@@ -102,5 +107,16 @@ public class KitListener implements Listener {
         item.setItemMeta(meta);
 
         player.getInventory().setItem(8, item);
+    }
+
+    private void addKit(Player player, String name) {
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "UPDATE Plays SET kit = '" + name.substring(2) + "' " +
+                    "WHERE GameID = '" + DbValues.getGameID() + "' AND Player = '" + player.getName() + "'";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
     }
 }

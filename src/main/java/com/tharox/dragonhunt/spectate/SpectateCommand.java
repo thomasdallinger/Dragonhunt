@@ -1,10 +1,16 @@
 package com.tharox.dragonhunt.spectate;
 
+import com.tharox.dragonhunt.db.DatabaseExecutor;
+import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.points.Points;
+import com.tharox.dragonhunt.shop.ShopInventory;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.sql.Statement;
 
 public class SpectateCommand implements CommandExecutor {
     @Override
@@ -24,6 +30,15 @@ public class SpectateCommand implements CommandExecutor {
             player.sendMessage(ChatColor.RED + "You have no spectates left.");
             return true;
         }
+
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "INSERT INTO Spectate (GameID, Player, dimension, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + player.getWorld().getName() + "', '" + DbValues.getTimestamp() + "')";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
 
         new Spectate(player);
         return false;

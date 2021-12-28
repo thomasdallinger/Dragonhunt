@@ -4,12 +4,15 @@ import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
 import com.tharox.dragonhunt.commands.DateCommand;
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.deathlisteners.EntityDeathListener;
 import com.tharox.dragonhunt.deathlisteners.PlayerDeathListener;
-import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.interact.PlayerInteractListener;
 import com.tharox.dragonhunt.kits.KitListener;
-import com.tharox.dragonhunt.listeners.*;
+import com.tharox.dragonhunt.listeners.ChatListener;
+import com.tharox.dragonhunt.listeners.EntityDropListener;
+import com.tharox.dragonhunt.listeners.JoinListener;
+import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.playerlisteners.AdvancementListener;
 import com.tharox.dragonhunt.playerlisteners.EntityDamageListener;
 import com.tharox.dragonhunt.playerlisteners.InventoryListener;
@@ -30,9 +33,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public final class Main extends JavaPlugin {
+public final class Main extends JavaPlugin implements PluginMessageListener {
 
     private static Main instance;
 
@@ -51,7 +55,10 @@ public final class Main extends JavaPlugin {
         new ShopInventory(getConfig());
 
         Bukkit.getLogger().fine("Plugin activated");
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 
+        DbValues.getPlayersAllowedToPlay();
         timer = new Timer(false, 0);
         scoreboardCountdown = new Countdown(false, 180);
         ResetScoreboardCountdown.countdownHitsZero(Main.getInstance().getScoreboardCountdown());
@@ -70,12 +77,17 @@ public final class Main extends JavaPlugin {
         return instance;
     }
 
+    @Override
+    public void onPluginMessageReceived(String channel, Player player, byte[] message) {}
+
     public Timer getTimer() {
         return timer;
     }
+
     public Countdown getScoreboardCountdown() {
         return scoreboardCountdown;
     }
+
     public Tracker getTracker() {
         return tracker;
     }
@@ -90,10 +102,10 @@ public final class Main extends JavaPlugin {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for(Player player : Bukkit.getOnlinePlayers()) {
-                    for(ItemStack item : player.getInventory()) {
-                        if(item != null && item.getItemMeta() != null) {
-                            if(item.getType() == Material.ELYTRA && !item.getItemMeta().getDisplayName().contains("Kit Ability")) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    for (ItemStack item : player.getInventory()) {
+                        if (item != null && item.getItemMeta() != null) {
+                            if (item.getType() == Material.ELYTRA && !item.getItemMeta().getDisplayName().contains("Kit Ability")) {
                                 player.getInventory().remove(item);
                                 player.getInventory().setChestplate(item);
                             }

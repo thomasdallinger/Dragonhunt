@@ -1,6 +1,8 @@
 package com.tharox.dragonhunt.kits;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.db.DatabaseExecutor;
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -20,6 +22,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -85,6 +88,7 @@ public abstract class ChargeKit extends Kit {
 
                 if (chargingFor == 0) {
                     setCooldownEnds();
+                    addKitAbilityUsage();
                     executeAbility();
                     return;
                 }
@@ -133,6 +137,7 @@ public abstract class ChargeKit extends Kit {
                     chargingFor = getChargeTime();
                     charging = false;
 
+                    addKitAbilityUsage();
                     executeAbility();
                     this.cancel();
                 }
@@ -258,5 +263,16 @@ public abstract class ChargeKit extends Kit {
                 }
             }
         }.runTaskTimer(Main.getInstance(), ticks, ticks);
+    }
+
+    private void addKitAbilityUsage() {
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "INSERT INTO KitAbility (GameID, Player, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + DbValues.getTimestamp() + "')";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
     }
 }

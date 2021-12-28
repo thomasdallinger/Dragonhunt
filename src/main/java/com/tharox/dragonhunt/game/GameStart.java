@@ -55,9 +55,6 @@ public class GameStart {
     private void configurePlayer() {
         for (Player player : Bukkit.getOnlinePlayers()) {
 
-            player.teleport(new Location(Bukkit.getServer().getWorlds().get(0), 0, 15000, 0));
-            player.setGameMode(GameMode.SPECTATOR);
-
             for (PotionEffect effect : player.getActivePotionEffects()) player.removePotionEffect(effect.getType());
             player.setFoodLevel(20);
             player.setExp(0);     //resets Bar

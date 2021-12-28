@@ -1,6 +1,8 @@
 package com.tharox.dragonhunt.deathlisteners;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.db.DatabaseExecutor;
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.points.Points;
 import org.bukkit.Bukkit;
@@ -14,6 +16,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+
+import java.sql.Statement;
 
 public class PlayerDeathListener implements Listener {
 
@@ -35,6 +39,7 @@ public class PlayerDeathListener implements Listener {
         Player killer = event.getEntity().getKiller();
 
         int points = Points.getPoints(player) / 2;
+        addPlayerDeath(player, event.getDeathMessage(), points);
 
         Points.removePoints(player, points);
 
@@ -44,7 +49,9 @@ public class PlayerDeathListener implements Listener {
             killer.sendMessage(ChatColor.AQUA + "You received " + ChatColor.DARK_AQUA + points + ChatColor.AQUA + " Points by killing "
                     + ChatColor.DARK_AQUA + player.getName() + ChatColor.AQUA + ".");
 
-            Points.addPoints(killer, points);
+            Points.addPoints(killer, points, "player");
+
+            addPlayerKill(killer, player);
         }
 
         ItemStack itemToRemove;
@@ -67,10 +74,7 @@ public class PlayerDeathListener implements Listener {
 
         GameState.itemsToKeepOnDeath.put(player, player.getInventory().getContents());
 
-        player.sendMessage(ChatColor.GRAY + "You died at " + ChatColor.GOLD + ChatColor.BOLD + (int) player.getLocation().getX()
-                + ", " + (int) player.getLocation().getY()
-                + ", " + (int) player.getLocation().getZ()
-                + ", " + player.getWorld().getName());
+        player.sendMessage(ChatColor.GRAY + "You died at " + ChatColor.GOLD + ChatColor.BOLD + DbValues.locationToString(player.getLocation()));
     }
 
     @EventHandler
@@ -85,5 +89,29 @@ public class PlayerDeathListener implements Listener {
                     + ChatColor.RED + " Points left.");
 
         }, 5L);
+    }
+
+    private void addPlayerDeath(Player player, String deathmessage, int points) {
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "INSERT INTO Deaths (GameID, Player, deathmessage, pointsLost, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + deathmessage
+                    + "', '" + points + "', '" + DbValues.getTimestamp() + "')";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
+    }
+
+    private void addPlayerKill(Player killer, Player killed) {
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "INSERT INTO Kills (GameID, Killer, Killed, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + killer.getName() + "', '" + killed.getName()
+                    + "', '" + DbValues.getTimestamp() + "')";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
     }
 }

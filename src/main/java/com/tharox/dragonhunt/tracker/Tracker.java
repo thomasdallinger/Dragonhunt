@@ -109,8 +109,7 @@ public class Tracker implements Listener {
                     return;
                 }
 
-                //less than 2 minutes played
-                if (Main.getInstance().getTimer().getTime() < 120) {
+                if (Main.getInstance().getTimer().getTime() < 60) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD
                             + "WAITING FOR SIGNAL"));
                     return;

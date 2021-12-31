@@ -82,9 +82,8 @@ public class DbValues {
     }
 
     /**
-     *
      * @param player
-     * @param kills if true: returns amount of kills, if false: returns amount of deaths
+     * @param kills  if true: returns amount of kills, if false: returns amount of deaths
      * @return
      */
     public static int getKills(Player player, boolean kills) {
@@ -92,7 +91,7 @@ public class DbValues {
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "";
-            if(kills) {
+            if (kills) {
                 query = "SELECT COUNT(*) FROM Kills WHERE GameID = '" + getGameID() + "' " +
                         "AND Killer = '" + player.getName() + "'";
             } else {
@@ -132,6 +131,24 @@ public class DbValues {
         seconds += timer.getTime() % 60;
 
         return hours + ":" + minutes + ":" + seconds;
+    }
+
+    public static String getCurrentWorld(Player player) {
+        String currentWorld = "Unknown";
+
+        switch (player.getWorld().getName()) {
+            case "world":
+                currentWorld = "Overworld";
+                break;
+            case "world_nether":
+                currentWorld = "Nether";
+                break;
+            case "world_the_end":
+                currentWorld = "End";
+                break;
+        }
+
+        return currentWorld;
     }
 
     public static String locationToString(Location location) {

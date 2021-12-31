@@ -1,12 +1,10 @@
 package com.tharox.dragonhunt.tracker;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,6 +14,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -58,12 +57,6 @@ public class Tracker implements Listener {
         if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + player.getName() + "'s Tracker")) {
 
-                //only works in the overworld
-                if (!player.getWorld().getName().equals("world")) {
-                    player.sendMessage(ChatColor.RED + "Tracker disabled in nether & end.");
-                    return;
-                }
-
                 if (Main.getInstance().getTimer().getTime() < 60) {
                     player.sendMessage(ChatColor.RED + "Tracker disabled for the first minute.");
                     return;
@@ -95,19 +88,13 @@ public class Tracker implements Listener {
         Player trackedPlayer = playerTracksPlayer.get(player);
 
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
-        if(player.getGameMode().equals(GameMode.SPECTATOR)) return;
+        if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
 
         String trackedPlayerName = "";
         int distance;
 
         if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + player.getName() + "'s Tracker")) {
             try {
-                //only works in the overworld
-                if (!player.getWorld().getName().equals("world")) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD
-                            + "NO SIGNAL"));
-                    return;
-                }
 
                 if (Main.getInstance().getTimer().getTime() < 60) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD
@@ -124,17 +111,34 @@ public class Tracker implements Listener {
                 trackedPlayerName = ChatColor.GOLD.toString() + ChatColor.BOLD + trackedPlayer.getName().toUpperCase() + ChatColor.DARK_GRAY + " » ";
                 distance = (int) player.getLocation().distance(trackedPlayer.getLocation());
 
-                if (distance < 100) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedPlayerName + ChatColor.RED + "<100 Blocks away"));
+                if (distance < 100 && player.getWorld().getName().equals("world")) {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedPlayerName
+                            + ChatColor.RED + "<100 Blocks away"));
                 } else {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedPlayerName + ChatColor.WHITE + distance + " Blocks away"));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedPlayerName
+                            + ChatColor.WHITE + distance + " Blocks away"));
                 }
 
                 //SET TARGET
-                player.setCompassTarget(trackedPlayer.getLocation());
+                if (player.getWorld().getEnvironment() != World.Environment.NORMAL) {
+                    CompassMeta meta = (CompassMeta) player.getInventory().getItemInMainHand().getItemMeta();
+
+                    if (meta != null) {
+                        meta.setLodestone(trackedPlayer.getLocation());
+                        meta.setLodestoneTracked(false); //no real lodestone present at that location
+                        player.getInventory().getItemInMainHand().setItemMeta(meta);
+                    }
+
+                } else {
+                    player.setCompassTarget(trackedPlayer.getLocation());
+                }
 
             } catch (IllegalArgumentException ex) {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedPlayerName + ChatColor.RED + "Different Dimension"));
+                if (trackedPlayer != null) {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedPlayerName
+                            + ChatColor.RED + "Different Dimension: "
+                            + ChatColor.RED + ChatColor.BOLD + DbValues.getCurrentWorld(trackedPlayer).toUpperCase()));
+                }
             }
         }
     }

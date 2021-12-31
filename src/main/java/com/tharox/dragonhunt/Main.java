@@ -60,7 +60,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
         DbValues.getPlayersAllowedToPlay();
         timer = new Timer(false, 0);
-        scoreboardCountdown = new Countdown(false, 180);
+        scoreboardCountdown = new Countdown(false, 120);
         ResetScoreboardCountdown.countdownHitsZero(Main.getInstance().getScoreboardCountdown());
         tracker = new Tracker();
 

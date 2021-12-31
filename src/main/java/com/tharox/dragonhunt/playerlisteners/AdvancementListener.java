@@ -39,9 +39,6 @@ public class AdvancementListener implements Listener {
             case "minecraft:nether/nether/distract_piglin":
                 completed = "Piglin Trading";
                 break;
-            case "minecraft:story/follow_ender_eye":
-                completed = "Enter Stronhold";
-                break;
             case "minecraft:story/story/enter_the_end":
                 completed = "Enter End";
                 break;

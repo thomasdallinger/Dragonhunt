@@ -3,7 +3,6 @@ package com.tharox.dragonhunt.game;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.dimensions.DimensionListener;
 import com.tharox.dragonhunt.kits.KitInventory;
-import com.tharox.dragonhunt.points.Points;
 import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
@@ -48,7 +47,7 @@ public class GameStart {
         highestBlock = overworld.getHighestBlockAt(0, 0).getLocation();
         WorldBorder worldBorder = overworld.getWorldBorder();
         worldBorder.setCenter(new Location(overworld, 0, 0, 0));
-        worldBorder.setSize(10000);
+        worldBorder.setSize(1000);
         worldBorder.setDamageAmount(0);
     }
 

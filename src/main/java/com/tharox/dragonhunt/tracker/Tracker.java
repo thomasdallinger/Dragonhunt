@@ -64,9 +64,8 @@ public class Tracker implements Listener {
                     return;
                 }
 
-                //less than 2 minutes played
-                if (Main.getInstance().getTimer().getTime() < 120) {
-                    player.sendMessage(ChatColor.RED + "Tracker disabled for the first 2 minutes.");
+                if (Main.getInstance().getTimer().getTime() < 60) {
+                    player.sendMessage(ChatColor.RED + "Tracker disabled for the first minute.");
                     return;
                 }
 
@@ -126,8 +125,8 @@ public class Tracker implements Listener {
                 trackedPlayerName = ChatColor.GOLD.toString() + ChatColor.BOLD + trackedPlayer.getName().toUpperCase() + ChatColor.DARK_GRAY + " » ";
                 distance = (int) player.getLocation().distance(trackedPlayer.getLocation());
 
-                if (distance < 150) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedPlayerName + ChatColor.RED + "<150 Blocks away"));
+                if (distance < 100) {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedPlayerName + ChatColor.RED + "<100 Blocks away"));
                 } else {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedPlayerName + ChatColor.WHITE + distance + " Blocks away"));
                 }

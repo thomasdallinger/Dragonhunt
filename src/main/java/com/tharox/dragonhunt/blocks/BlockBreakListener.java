@@ -31,7 +31,7 @@ public class BlockBreakListener implements Listener {
 
         //Deny Block Breaking in the nether
         if (player.getWorld().getName().equals("world_nether")) {
-            if (block.getType() != Material.FIRE) {
+            if (block.getType() != Material.FIRE && block.getType() != Material.DEEPSLATE_LAPIS_ORE) {
                 event.setCancelled(true);
                 player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
                 player.sendMessage(ChatColor.RED + "You can't break blocks in the nether!");

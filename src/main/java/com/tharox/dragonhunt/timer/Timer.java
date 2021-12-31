@@ -79,8 +79,8 @@ public class Timer {
 
                 setTime(getTime() + 1);
 
-                //once the timer hits 2h the game will end and nobody won
-                if(getTime() == 7200) {
+                //once the timer hits 1h 30min the game will end and nobody won
+                if(getTime() == 5400) {
                     new GameEnd();
                     setRunning(false);
                 }

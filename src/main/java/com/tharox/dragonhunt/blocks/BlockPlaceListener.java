@@ -17,10 +17,21 @@ public class BlockPlaceListener implements Listener {
         Block block = event.getBlock();
 
         if(player.getWorld().getName().equals("world_nether")) {
-            event.setCancelled(true);
-            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
-            player.sendMessage(ChatColor.RED + "You can't place blocks in the nether!");
-            return;
+            if (block.getType() != Material.END_PORTAL_FRAME) {
+                event.setCancelled(true);
+                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
+                player.sendMessage(ChatColor.RED + "You can't place blocks in the nether!");
+                return;
+            }
+        }
+
+        if(player.getWorld().getName().equals("world_the_end")) {
+            if(block.getType() == Material.WHITE_BED) {
+                event.setCancelled(true);
+                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
+                player.sendMessage(ChatColor.RED + "You can't place beds in the end!");
+                return;
+            }
         }
 
         if(block.getType() == Material.BREWING_STAND || block.getType() == Material.ENCHANTING_TABLE

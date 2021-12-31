@@ -9,7 +9,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class ResetScoreboardCountdown {
 
-    public static int points = 75;
+    public static int points = 50;
 
     /**
      * resets the scoreboard countdown and gives points to all players once the countdown hits zero
@@ -20,7 +20,7 @@ public class ResetScoreboardCountdown {
             public void run() {
 
                 if (countdown.getTime() == 0) {
-                    countdown.setTime(180);
+                    countdown.setTime(120);
 
                     for(Player player : Bukkit.getOnlinePlayers()) {
                         Points.addPoints(player, points, "survival");

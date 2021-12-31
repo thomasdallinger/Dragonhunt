@@ -66,7 +66,8 @@ public class ShopListener implements Listener {
         if (Points.getPoints(player) < ShopInventory.ShopItemCost.get(itemName)) {
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
             player.closeInventory();
-            player.sendMessage(ChatColor.RED + "You don't have enough points!");
+            player.sendMessage(ChatColor.RED + "You don't have enough points! Need "
+                    + (ShopInventory.ShopItemCost.get(itemName) - Points.getPoints(player)) + " more.");
             return;
         }
 

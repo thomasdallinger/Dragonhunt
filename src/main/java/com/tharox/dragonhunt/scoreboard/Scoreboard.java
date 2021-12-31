@@ -58,7 +58,7 @@ public class Scoreboard extends ScoreboardBuilder {
                 setScore(ChatColor.WHITE + "Deaths: " + ChatColor.RED + DbValues.getKills(player, false), 5);
                 setScore(ChatColor.WHITE + "Spectates left: " + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
                 setScore(ChatColor.WHITE + "Points: " + ChatColor.AQUA.toString() + Points.getPoints(player), 3);
-                setScore(ChatColor.WHITE + "Next Points in:", 1);
+                setScore(ChatColor.WHITE.toString() + (ResetScoreboardCountdown.totalSeconds / 120) + ". Points in:", 1);
                 setScore(ChatColor.YELLOW + countdownFormat(countdown), 0);
 
             }

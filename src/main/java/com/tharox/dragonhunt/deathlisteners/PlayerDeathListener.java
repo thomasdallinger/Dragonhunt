@@ -26,7 +26,7 @@ public class PlayerDeathListener implements Listener {
      * - hotbar (9 items, including tracker and kit ability items)
      * - offhand (1 item)
      * - armor (4 items, 3 items if the player had an elytra)
-     * - all XP
+     * - XP (level only)
      * <p>
      * The player always looses:
      * - half of his points the player had at the time of dying
@@ -70,6 +70,7 @@ public class PlayerDeathListener implements Listener {
         }
 
         event.setDroppedExp(0);
+        event.setNewLevel(player.getLevel());
         event.getDrops().clear();
 
         GameState.itemsToKeepOnDeath.put(player, player.getInventory().getContents());

@@ -94,9 +94,10 @@ public class PlayerDeathListener implements Listener {
 
     private void addPlayerDeath(Player player, String deathmessage, int points) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "INSERT INTO Deaths (GameID, Player, deathmessage, pointsLost, timestamp) " +
+            String query = "INSERT INTO Deaths (GameID, Player, deathmessage, pointsLost, dimension, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + deathmessage
-                    + "', '" + points + "', '" + DbValues.getTimestamp() + "')";
+                    + "', '" + points + "', '" + DbValues.getCurrentWorld(player)
+                    + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();
             stmt.execute(query);

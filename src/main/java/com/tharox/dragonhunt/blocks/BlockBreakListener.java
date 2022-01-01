@@ -27,11 +27,16 @@ public class BlockBreakListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
+        List<Material> netherOres = new ArrayList<>();
         final int[] blocksDestroyed = {10};
+
+        netherOres.add(Material.DEEPSLATE_LAPIS_ORE);
+        netherOres.add(Material.DEEPSLATE_IRON_ORE);
+        netherOres.add(Material.DEEPSLATE_GOLD_ORE);
 
         //Deny Block Breaking in the nether
         if (player.getWorld().getName().equals("world_nether")) {
-            if (block.getType() != Material.FIRE && block.getType() != Material.DEEPSLATE_LAPIS_ORE) {
+            if (block.getType() != Material.FIRE && !netherOres.contains(block.getType())) {
                 event.setCancelled(true);
                 player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
                 player.sendMessage(ChatColor.RED + "You can't break blocks in the nether!");

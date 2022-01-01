@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.blocks.BlockPlaceListener;
 import com.tharox.dragonhunt.commands.DateCommand;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.entities.EntityDeathListener;
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.players.*;
 import com.tharox.dragonhunt.entities.CreatureSpawnListener;
 import com.tharox.dragonhunt.kits.KitListener;
@@ -62,6 +63,8 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
         listenerRegistration();
         commandRegistration();
+
+        stopServerIn();
     }
 
     @Override
@@ -71,6 +74,29 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
     public static Main getInstance() {
         return instance;
+    }
+
+    /**
+     * If one or more of the players, who is/are supposed to join the game,
+     * are not joining the players on the server will get moved back to the lobby after 60 seconds.
+     * The time starts once the plugin gets enabled.
+     */
+    private void stopServerIn() {
+        new BukkitRunnable() {
+            int timeLeft = 60;
+            @Override
+            public void run() {
+                timeLeft--;
+
+                if(timeLeft == 0) {
+                    GameState.movePlayersToLobby();
+                }
+
+                if(DbValues.playersAllowedToPlay.size() == 0) {
+                    this.cancel();
+                }
+            }
+        }.runTaskTimer(Main.getInstance(), 20, 20);
     }
 
     @Override

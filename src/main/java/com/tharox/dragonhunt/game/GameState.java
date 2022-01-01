@@ -1,8 +1,13 @@
 package com.tharox.dragonhunt.game;
 
+import com.google.common.io.ByteArrayDataOutput;
+import com.google.common.io.ByteStreams;
+import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.kits.Kit;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -45,5 +50,19 @@ public class GameState {
             }
         }
         return false;
+    }
+
+    public static void movePlayersToLobby() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+
+            ByteArrayDataOutput out = ByteStreams.newDataOutput();
+            out.writeUTF("Connect");
+            out.writeUTF("lobby");
+            player.sendPluginMessage(Main.getInstance(), "BungeeCord", out.toByteArray());
+        }
+
+        DbValues.updateServerStatus();
+        Bukkit.getServer().shutdown();
     }
 }

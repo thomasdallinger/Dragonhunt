@@ -106,17 +106,7 @@ public class GameEnd {
             @Override
             public void run() {
                 if (duration[0] <= 0) {
-                    for (Player player : Bukkit.getOnlinePlayers()) {
-                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-
-                        ByteArrayDataOutput out = ByteStreams.newDataOutput();
-                        out.writeUTF("Connect");
-                        out.writeUTF("lobby");
-                        player.sendPluginMessage(Main.getInstance(), "BungeeCord", out.toByteArray());
-                    }
-
-                    DbValues.updateServerStatus();
-                    Bukkit.getServer().shutdown();
+                    GameState.movePlayersToLobby();
                 }
 
                 if (duration[0] <= 10) {

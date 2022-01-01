@@ -34,7 +34,7 @@ public class JoinListener implements Listener {
     }
 
     private void checkIfPlayerAllowedToPlay(Player player) {
-        if(!DbValues.playersAllowedToPlay.contains(player.getName())) {
+        if (!DbValues.playersAllowedToPlay.contains(player.getName())) {
             ByteArrayDataOutput out = ByteStreams.newDataOutput();
             out.writeUTF("Connect");
             out.writeUTF("lobby");
@@ -45,7 +45,11 @@ public class JoinListener implements Listener {
 
         DbValues.playersAllowedToPlay.remove(player.getName());
 
-        if(DbValues.playersAllowedToPlay.size() == 0) {
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            online.sendMessage(ChatColor.RED + "Need " + DbValues.playersAllowedToPlay.size() + " more players to start.");
+        }
+
+        if (DbValues.playersAllowedToPlay.size() == 0) {
             new GameStart();
         }
     }

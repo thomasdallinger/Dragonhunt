@@ -6,18 +6,13 @@ import com.tharox.dragonhunt.blocks.BlockPlaceListener;
 import com.tharox.dragonhunt.commands.DateCommand;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.entities.EntityDeathListener;
-import com.tharox.dragonhunt.players.PlayerDeathListener;
+import com.tharox.dragonhunt.players.*;
 import com.tharox.dragonhunt.entities.CreatureSpawnListener;
-import com.tharox.dragonhunt.players.PlayerInteractListener;
 import com.tharox.dragonhunt.kits.KitListener;
 import com.tharox.dragonhunt.listeners.ChatListener;
 import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
-import com.tharox.dragonhunt.players.AdvancementListener;
-import com.tharox.dragonhunt.players.PlayerDamageListener;
-import com.tharox.dragonhunt.players.PlayerInventoryListener;
-import com.tharox.dragonhunt.players.PlayerConsumeListener;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
 import com.tharox.dragonhunt.shop.ShopCommand;
 import com.tharox.dragonhunt.shop.ShopInventory;
@@ -122,21 +117,27 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new JoinListener(), this);
         pluginManager.registerEvents(new QuitListener(), this);
         pluginManager.registerEvents(new ChatListener(), this);
+
+        pluginManager.registerEvents(new VehicleListener(), this);
         pluginManager.registerEvents(new ShopListener(), this);
+        pluginManager.registerEvents(new KitListener(), this);
+
         pluginManager.registerEvents(new BlockBreakListener(), this);
         pluginManager.registerEvents(new BlockExplodeListener(), this);
         pluginManager.registerEvents(new BlockPlaceListener(), this);
-        pluginManager.registerEvents(new PlayerInteractListener(), this);
-        pluginManager.registerEvents(new VehicleListener(), this);
+
+        pluginManager.registerEvents(new CreatureSpawnListener(), this);
         pluginManager.registerEvents(new EntityDeathListener(), this);
-        pluginManager.registerEvents(new PlayerDeathListener(), this);
-        pluginManager.registerEvents(new KitListener(), this);
-        pluginManager.registerEvents(new PlayerInventoryListener(), this);
+        pluginManager.registerEvents(new EntityDropListener(), this);
+
+        pluginManager.registerEvents(new AdvancementListener(), this);
         pluginManager.registerEvents(new PlayerConsumeListener(), this);
         pluginManager.registerEvents(new PlayerDamageListener(), this);
-        pluginManager.registerEvents(new AdvancementListener(), this);
-        pluginManager.registerEvents(new EntityDropListener(), this);
-        pluginManager.registerEvents(new CreatureSpawnListener(), this);
+        pluginManager.registerEvents(new PlayerDeathListener(), this);
+        pluginManager.registerEvents(new PlayerInteractListener(), this);
+        pluginManager.registerEvents(new PlayerInventoryListener(), this);
+        pluginManager.registerEvents(new PlayerRespawnListener(), this);
+
         pluginManager.registerEvents(tracker, this);
     }
 

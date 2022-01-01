@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,7 +12,8 @@ public class PlayerConsumeListener implements Listener {
     public void onConsume(PlayerItemConsumeEvent event) {
         Player player = event.getPlayer();
 
-        if (player.getWorld().getName().equals("world_nether") && event.getItem().getType() == Material.POTION) {
+        if ((player.getWorld().getName().equals("world_nether") && event.getItem().getType() == Material.POTION) &&
+                !GameState.minOnePlayerInEnd) {
             event.setCancelled(true);
         }
     }

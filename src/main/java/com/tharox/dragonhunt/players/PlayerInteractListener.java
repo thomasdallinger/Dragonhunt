@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 
 public class PlayerInteractListener implements Listener {
 
@@ -38,7 +39,8 @@ public class PlayerInteractListener implements Listener {
             }
         }
 
-        if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+        if (e.equals(EquipmentSlot.HAND) &&
+                (event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
 
             if (block != null) {
                 if (block.getType() == Material.ENDER_CHEST) {

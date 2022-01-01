@@ -5,8 +5,6 @@ import com.google.common.io.ByteStreams;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.spectate.Spectate;
-import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -17,8 +15,6 @@ import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.sql.Statement;
 
 public class GameEnd {
@@ -36,14 +32,28 @@ public class GameEnd {
 
     public GameEnd(Player winner) {
         this.winner = winner;
+
+        timer.setRunning(false);
+        scoreboardCountdown.setRunning(false);
+
+        updateGame();
         configureGameEnd();
+        serverStopsCountdown();
+    }
+
+    private void updateGame() {
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "UPDATE Game SET duration = '" + DbValues.getTimestamp()
+                    + "', dungeonLocation = '" + DbValues.locationToString(GameState.dungeonLocation)
+                    + "' WHERE id = '" + DbValues.getGameID() + "'";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
     }
 
     private void configureGameEnd() {
-        timer.setRunning(false);
-        scoreboardCountdown.setRunning(false);
-        updateGame();
-
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.sendMessage(Main.getPrefix() + ChatColor.RED + ChatColor.BOLD + "GAME OVER.");
 
@@ -60,27 +70,14 @@ public class GameEnd {
                 addHasWon(player, false);
             }
 
-            if(winner != null) {
+            if (winner != null) {
                 player.sendMessage(Main.getPrefix() + ChatColor.GOLD + ChatColor.BOLD + winner.getName().toUpperCase() + " has won the Dragonhunt!");
             }
 
             player.sendMessage(Main.getPrefix() + ChatColor.YELLOW + ChatColor.BOLD + "TIME PLAYED: " + ChatColor.WHITE
                     + DbValues.getTimestamp());
             //TODO: Game Stats messages?
-            serverStopsCountdown(player);
         }
-    }
-
-    private void updateGame() {
-        DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "UPDATE Game SET duration = '" + DbValues.getTimestamp()
-                    + "', dungeonLocation = '" + DbValues.locationToString(GameState.dungeonLocation)
-                    + "' WHERE id = '" + DbValues.getGameID() + "'";
-
-            Statement stmt = con.createStatement();
-            stmt.execute(query);
-            stmt.close();
-        });
     }
 
     private void addHasWon(Player player, boolean hasWon) {
@@ -101,7 +98,7 @@ public class GameEnd {
         });
     }
 
-    private void serverStopsCountdown(Player player) {
+    private void serverStopsCountdown() {
         final int[] duration = {90};
 
         new BukkitRunnable() {
@@ -109,23 +106,29 @@ public class GameEnd {
             @Override
             public void run() {
                 if (duration[0] <= 0) {
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 
-                    ByteArrayDataOutput out = ByteStreams.newDataOutput();
-                    out.writeUTF("Connect");
-                    out.writeUTF("lobby");
-                    player.sendPluginMessage(Main.getInstance(), "BungeeCord", out.toByteArray());
+                        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                        out.writeUTF("Connect");
+                        out.writeUTF("lobby");
+                        player.sendPluginMessage(Main.getInstance(), "BungeeCord", out.toByteArray());
+                    }
 
                     DbValues.updateServerStatus();
                     Bukkit.getServer().shutdown();
                 }
 
                 if (duration[0] <= 10) {
-                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+                    }
                 }
 
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD
-                        + "BACK TO LOBBY IN " + duration[0] + " SECONDS"));
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD
+                            + "BACK TO LOBBY IN " + duration[0] + " SECONDS"));
+                }
                 duration[0]--;
             }
 

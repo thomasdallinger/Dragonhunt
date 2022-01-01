@@ -2,8 +2,6 @@ package com.tharox.dragonhunt.spectate;
 
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.points.Points;
-import com.tharox.dragonhunt.shop.ShopInventory;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -33,7 +31,7 @@ public class SpectateCommand implements CommandExecutor {
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO Spectate (GameID, Player, dimension, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + player.getWorld().getName() + "', '" + DbValues.getTimestamp() + "')";
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + DbValues.getCurrentWorld(player) + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();
             stmt.execute(query);

@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.points.Points;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -23,8 +24,13 @@ public class PlayerInteractListener implements Listener {
         if (e == null)
             return;
 
-        if (player.getWorld().getName().equals("world_nether")) { //Not able to throw enderpearls in the nether
-            if (player.getInventory().getItemInMainHand().getType().equals(Material.ENDER_PEARL) || player.getInventory().getItemInOffHand().getType().equals(Material.ENDER_PEARL)) {
+        /*
+          Players are not able to throw enderpearls or splash potions in the nether until at least one player
+          has reached the end dimension.
+        */
+        if (player.getWorld().getName().equals("world_nether") && !GameState.minOnePlayerInEnd) {
+            if (player.getInventory().getItemInMainHand().getType().equals(Material.ENDER_PEARL)
+                    || player.getInventory().getItemInOffHand().getType().equals(Material.ENDER_PEARL)) {
                 event.setCancelled(true);
             }
             if (player.getInventory().getItemInMainHand().getType().equals(Material.SPLASH_POTION)) {

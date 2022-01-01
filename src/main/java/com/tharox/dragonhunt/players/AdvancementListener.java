@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -41,6 +42,7 @@ public class AdvancementListener implements Listener {
                 break;
             case "minecraft:story/enter_the_end":
                 completed = "Enter End";
+                GameState.minOnePlayerInEnd = true;
                 break;
         }
 

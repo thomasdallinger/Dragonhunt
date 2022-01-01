@@ -26,6 +26,8 @@ public class GameState {
 
     public static HashMap<Player, ItemStack[]> itemsToKeepOnDeath = new HashMap<>();
 
+    public static boolean minOnePlayerInEnd = false;
+
     /**
      * Used in EntityDeathListener, ShopListener.
      * @param player player who is supposed to get the item

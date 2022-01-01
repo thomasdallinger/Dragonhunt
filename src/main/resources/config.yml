@@ -53,21 +53,21 @@ enchanting:
     amount: 1
     enchantments:
       POWER: 1
-    cost: 100
+    cost: 75
     name: "Power Book"
   6:
     material: ENCHANTED_BOOK
     amount: 1
     enchantments:
       PUNCH: 1
-    cost: 75
+    cost: 125
     name: "Punch Book"
   7:
     material: ENCHANTED_BOOK
     amount: 1
     enchantments:
       FLAME: 1
-    cost: 125
+    cost: 200
     name: "Flame Book"
   8:
     material: AIR
@@ -83,21 +83,21 @@ enchanting:
     amount: 1
     enchantments:
       PIERCING: 1
-    cost: 50
+    cost: 30
     name: "Piercing Book"
   11:
     material: ENCHANTED_BOOK
     amount: 1
     enchantments:
       MULTISHOT: 1
-    cost: 100
+    cost: 70
     name: "Multishot Book"
   12:
     material: ENCHANTED_BOOK
     amount: 1
     enchantments:
       QUICK_CHARGE: 1
-    cost: 75
+    cost: 50
     name: "Quick Charge Book"
   13:
     material: DIAMOND_PICKAXE
@@ -181,7 +181,7 @@ enchanting:
     name: "Aqua Affinity Book"
   25:
     material: ANVIL
-    cost: 100
+    cost: 200
     amount: 1
     name: "Anvil"
 foodPotionsArrows:
@@ -381,7 +381,7 @@ blocksRedstone:
     name: "Marker"
   2:
     material: SHULKER_BOX
-    cost: 100
+    cost: 300
     amount: 1
     name: "Shulker Box"
   3:

@@ -1,18 +1,15 @@
-package com.tharox.dragonhunt.deathlisteners;
+package com.tharox.dragonhunt.players;
 
-import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.points.Points;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -76,20 +73,6 @@ public class PlayerDeathListener implements Listener {
         GameState.itemsToKeepOnDeath.put(player, player.getInventory().getContents());
 
         player.sendMessage(ChatColor.GRAY + "You died at " + ChatColor.GOLD + ChatColor.BOLD + DbValues.locationToString(player.getLocation()));
-    }
-
-    @EventHandler
-    public void onRespawn(PlayerRespawnEvent event) {
-        Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
-            Player player = event.getPlayer();
-
-            player.getInventory().setContents(GameState.itemsToKeepOnDeath.get(player));
-
-            player.sendMessage(ChatColor.GOLD + "You respawned with your Hotbar, Offhand and Armor Items.");
-            player.sendMessage(ChatColor.RED + "You now have " + ChatColor.DARK_RED + Points.getPoints(player)
-                    + ChatColor.RED + " Points left.");
-
-        }, 5L);
     }
 
     private void addPlayerDeath(Player player, String deathmessage, int points) {

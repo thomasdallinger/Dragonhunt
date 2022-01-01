@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.interact;
+package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.points.Points;
 import org.bukkit.ChatColor;

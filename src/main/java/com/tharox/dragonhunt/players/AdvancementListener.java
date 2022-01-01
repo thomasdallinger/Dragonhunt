@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.playerlisteners;
+package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;

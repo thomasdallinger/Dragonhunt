@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.playerlisteners;
+package com.tharox.dragonhunt.players;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -10,7 +10,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class InventoryListener implements Listener {
+public class PlayerInventoryListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {

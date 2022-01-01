@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.deathlisteners;
+package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;

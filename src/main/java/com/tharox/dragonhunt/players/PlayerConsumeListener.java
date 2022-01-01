@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.playerlisteners;
+package com.tharox.dragonhunt.players;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

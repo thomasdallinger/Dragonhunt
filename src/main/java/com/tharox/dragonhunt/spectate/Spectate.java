@@ -33,11 +33,6 @@ public class Spectate {
         effects.add(new PotionEffect(PotionEffectType.SLOW_DIGGING, 40, 9));
         effects.add(new PotionEffect(PotionEffectType.JUMP, 40, -9));
 
-        if (Spectate.spectateCooldown.get(player) > timer.getTime()) {
-            player.sendMessage(ChatColor.RED + "Your spectate is on cooldown for: " + (Spectate.spectateCooldown.get(player) - timer.getTime()) + " seconds");
-            return;
-        }
-
         spectatesLeft.put(player, spectatesLeft.get(player) - 1);
         spectateLocation.put(player, player.getLocation());
         Spectate.spectateCooldown.put(player, timer.getTime() + 180);

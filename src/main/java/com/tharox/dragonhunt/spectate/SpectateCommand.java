@@ -1,7 +1,9 @@
 package com.tharox.dragonhunt.spectate;
 
+import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.timer.Timer;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,6 +16,7 @@ public class SpectateCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player;
+        Timer timer = Main.getInstance().getTimer();
 
         if (sender instanceof Player) {
             player = (Player) sender;
@@ -26,6 +29,11 @@ public class SpectateCommand implements CommandExecutor {
 
         if (Spectate.spectatesLeft.get(player) == 0) {
             player.sendMessage(ChatColor.RED + "You have no spectates left.");
+            return true;
+        }
+
+        if (Spectate.spectateCooldown.get(player) > timer.getTime()) {
+            player.sendMessage(ChatColor.RED + "Your spectate is on cooldown for: " + (Spectate.spectateCooldown.get(player) - timer.getTime()) + " seconds");
             return true;
         }
 

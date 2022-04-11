@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.blocks;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -9,6 +8,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public class BlockExplodeListener implements Listener {
 
@@ -18,11 +18,10 @@ public class BlockExplodeListener implements Listener {
     @EventHandler
     public void onExplode(EntityExplodeEvent event) {
         List<Block> blocks = event.blockList();
-
-        blocks.removeIf(block -> block.getType() == Material.CHEST);
-        blocks.removeIf(block -> block.getType() == Material.REDSTONE_ORE);
-        blocks.removeIf(block -> block.getType() == Material.EMERALD_ORE);
-        blocks.removeIf(block -> block.getType() == Material.LAPIS_ORE);
+        Stream.of(Material.CHEST, Material.EMERALD_ORE,
+                Material.DEEPSLATE_EMERALD_ORE, Material.LAPIS_ORE,
+                Material.DEEPSLATE_LAPIS_ORE, Material.REDSTONE_ORE,
+                Material.DEEPSLATE_REDSTONE_ORE).forEach(material -> blocks.removeIf(block -> block.getType() == material));
 
         for (Block block : blocks) {
             if (BlockBreakListener.woods.contains(block.getType())) {

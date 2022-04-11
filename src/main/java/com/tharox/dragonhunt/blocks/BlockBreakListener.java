@@ -22,7 +22,10 @@ import java.util.List;
 
 public class BlockBreakListener implements Listener {
 
-    protected static List<Material> woods = new ArrayList<>();
+    protected static List<Material> woods = List.of(Material.ACACIA_LOG, Material.BIRCH_LOG,
+            Material.DARK_OAK_LOG, Material.JUNGLE_LOG,
+            Material.OAK_LOG, Material.SPRUCE_LOG,
+            Material.CRIMSON_STEM, Material.WARPED_STEM);
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
@@ -128,15 +131,6 @@ public class BlockBreakListener implements Listener {
     }
 
     private boolean destroyTree(Block block, Player player) {
-        woods.add(Material.ACACIA_LOG);
-        woods.add(Material.BIRCH_LOG);
-        woods.add(Material.DARK_OAK_LOG);
-        woods.add(Material.JUNGLE_LOG);
-        woods.add(Material.OAK_LOG);
-        woods.add(Material.SPRUCE_LOG);
-        woods.add(Material.CRIMSON_STEM);
-        woods.add(Material.WARPED_STEM);
-
         if(!woods.contains(block.getType())) return false;
 
         Location loc = block.getLocation();

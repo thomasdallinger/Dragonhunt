@@ -13,7 +13,8 @@ import java.util.stream.Stream;
 public class BlockExplodeListener implements Listener {
 
     /**
-     * Chests should not get exploded by entities (Creepers, TNT, ...).
+     * Chests, ores that shouldn't drop their default materials
+     * and all wood types should not get exploded by entities (Creepers, TNT, ...).
      */
     @EventHandler
     public void onExplode(EntityExplodeEvent event) {
@@ -24,12 +25,9 @@ public class BlockExplodeListener implements Listener {
                 Material.DEEPSLATE_REDSTONE_ORE, Material.COPPER_ORE,
                 Material.DEEPSLATE_COPPER_ORE).forEach(material -> blocks.removeIf(block -> block.getType() == material));
 
+        BlockBreakListener.woods.forEach(woodType -> blocks.removeIf(currentBlock -> currentBlock.getType() == woodType));
+
         for (Block block : blocks) {
-            if (BlockBreakListener.woods.contains(block.getType())) {
-                block.getDrops().clear();
-                block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.OAK_LOG));
-                continue;
-            }
             BlockBreakListener.changeDrops(block);
         }
     }

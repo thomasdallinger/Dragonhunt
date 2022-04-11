@@ -36,7 +36,7 @@ public class BlockPlaceListener implements Listener {
 
         if(block.getType() == Material.BREWING_STAND || block.getType() == Material.ENCHANTING_TABLE
                 || block.getType() == Material.ENDER_CHEST || block.getType() == Material.CHEST
-                || block.getType() == Material.CHEST_MINECART) {
+                || block.getType() == Material.CHEST_MINECART || block.getType() == Material.ANVIL) {
             event.setCancelled(true);
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
             player.sendMessage(ChatColor.RED + "You are not allowed to place this block!");

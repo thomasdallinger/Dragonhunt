@@ -53,19 +53,15 @@ public class PlayerInteractListener implements Listener {
                     return;
                 }
 
-                if (block.getType() == Material.CHEST) {
+                if (block.getType() == Material.CHEST || block.getType() == Material.CHEST_MINECART) {
                     event.setCancelled(true);
                     block.setType(Material.ENDER_CHEST);
                     return;
                 }
 
-                if (block.getType() == Material.CHEST_MINECART) {
-                    event.setCancelled(true);
-                    block.setType(Material.ENDER_CHEST);
-                    return;
-                }
-
-                if (block.getType() == Material.ENCHANTING_TABLE || block.getType() == Material.BREWING_STAND) {
+                if (block.getType() == Material.ENCHANTING_TABLE
+                        || block.getType() == Material.BREWING_STAND
+                        || block.getType() == Material.ANVIL) {
                     event.setCancelled(true);
                     player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
                     player.sendMessage(ChatColor.RED + "You are not allowed to use this block!");

@@ -20,6 +20,9 @@ public class BlockExplodeListener implements Listener {
         List<Block> blocks = event.blockList();
 
         blocks.removeIf(block -> block.getType() == Material.CHEST);
+        blocks.removeIf(block -> block.getType() == Material.REDSTONE_ORE);
+        blocks.removeIf(block -> block.getType() == Material.EMERALD_ORE);
+        blocks.removeIf(block -> block.getType() == Material.LAPIS_ORE);
 
         for (Block block : blocks) {
             if (BlockBreakListener.woods.contains(block.getType())) {

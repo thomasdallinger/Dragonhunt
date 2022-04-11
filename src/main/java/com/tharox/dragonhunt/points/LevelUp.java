@@ -10,6 +10,6 @@ public class LevelUp implements Listener {
     @EventHandler
     public void onLevelChange(PlayerLevelChangeEvent event) {
         Player player = event.getPlayer();
-        GearPoints.addPoints(player, event.getNewLevel());
+        GearPoints.addPoints(player, 1);
     }
 }

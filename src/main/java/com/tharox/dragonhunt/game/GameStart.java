@@ -66,9 +66,6 @@ public class GameStart {
             player.getInventory().setItem(7, Main.getInstance().getTracker().givePlayerTracker(player));
             new Grappler(player);
             player.getInventory().setChestplate(new ItemStack(Material.ELYTRA));
-            player.getInventory().setItem(0, addItem(new ItemStack(Material.GOLDEN_AXE)));
-            player.getInventory().setItem(1, addItem(new ItemStack(Material.GOLDEN_PICKAXE)));
-            player.getInventory().setItemInOffHand(addItem(new ItemStack(Material.SHIELD)));
 
             Spectate.spectatesLeft.put(player, 3);
             Spectate.spectateCooldown.put(player, timer.getTime() + 180);
@@ -105,24 +102,6 @@ public class GameStart {
             FoodUpgrade.FoodSource.put(player, 1);
             FoodUpgrade.FoodAmount.put(player, 1);
         }
-    }
-
-    /**
-     * @param item ItemStack to be modified and returned
-     * @return ItemStack to be added to the players inventory
-     */
-    private ItemStack addItem(ItemStack item) {
-        ItemMeta meta = item.getItemMeta();
-        if (meta == null) return null;
-
-        if (item.getType() == Material.SHIELD) {
-            meta.addEnchant(Enchantment.DURABILITY, 2, true);
-        } else {
-            meta.addEnchant(Enchantment.DIG_SPEED, 2, true);
-        }
-
-        item.setItemMeta(meta);
-        return item;
     }
 
     /**

@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.gear;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.points.Points;
+import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -62,10 +62,10 @@ public class GearUpgradeListener implements Listener {
         }
 
         //Not enough points to purchase Upgrade level
-        if (Points.getPoints(player) < GearUpgradeInventory.upgradeCost.get(itemName)) {
+        if (GearPoints.getPoints(player) < GearUpgradeInventory.upgradeCost.get(itemName)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(ChatColor.RED + "You don't have enough points! Need "
-                    + (GearUpgradeInventory.upgradeCost.get(itemName) - Points.getPoints(player)) + " more.");
+                    + (GearUpgradeInventory.upgradeCost.get(itemName) - GearPoints.getPoints(player)) + " more.");
             return;
         }
 
@@ -109,7 +109,7 @@ public class GearUpgradeListener implements Listener {
      */
     private void purchaseUpgrade(Player player, String itemName, String inventory) {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        Points.removePoints(player, GearUpgradeInventory.upgradeCost.get(itemName));
+        GearPoints.removePoints(player, GearUpgradeInventory.upgradeCost.get(itemName));
 
         menuNavigation(player, inventory);
     }
@@ -137,7 +137,7 @@ public class GearUpgradeListener implements Listener {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO ShopAccess (GameID, Player, item, pointsBefore, cost, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + itemName + "', '"
-                    + Points.getPoints(player) + "', '" + GearUpgradeInventory.upgradeCost.get(itemName)
+                    + GearPoints.getPoints(player) + "', '" + GearUpgradeInventory.upgradeCost.get(itemName)
                     + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();

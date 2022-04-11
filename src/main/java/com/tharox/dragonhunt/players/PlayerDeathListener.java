@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.points.Points;
+import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -35,19 +35,13 @@ public class PlayerDeathListener implements Listener {
         Player player = event.getEntity();
         Player killer = event.getEntity().getKiller();
 
-        int points = Points.getPoints(player) / 2;
+        //TODO: change DB implementation
+        int points = GearPoints.getPoints(player) / 2;
         addPlayerDeath(player, event.getDeathMessage(), points);
 
-        Points.removePoints(player, points);
-
-        points += 100;
         if (killer != null) {
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
-            killer.sendMessage(ChatColor.AQUA + "You received " + ChatColor.DARK_AQUA + points + ChatColor.AQUA + " Points by killing "
-                    + ChatColor.DARK_AQUA + player.getName() + ChatColor.AQUA + ".");
-
-            Points.addPoints(killer, points, "player");
-
+            killer.giveExp(GearPoints.playerXP);
             addPlayerKill(killer, player);
         }
 
@@ -67,7 +61,8 @@ public class PlayerDeathListener implements Listener {
         }
 
         event.setDroppedExp(0);
-        event.setNewLevel(player.getLevel());
+        event.setKeepLevel(true);
+        player.setExp(0); //reset XP progress towards the next level
         event.getDrops().clear();
 
         GameState.itemsToKeepOnDeath.put(player, player.getInventory().getContents());

@@ -2,7 +2,7 @@ package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.points.Points;
+import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -16,7 +16,8 @@ public class EntityDeathListener implements Listener {
     public void onMobKill(EntityDeathEvent event) {
         Player killer = event.getEntity().getKiller();
         Entity mob = event.getEntity();
-        int points = 20;
+
+        if(mob instanceof Player) return;
 
         if (killer != null) {
             if (event.getEntity().getName().equals("Ender Dragon")) {
@@ -24,14 +25,16 @@ public class EntityDeathListener implements Listener {
             }
 
             if (mob instanceof Monster) {
-                Points.addPoints(killer, points, "mob");
+                killer.giveExp(GearPoints.monsterXP);
             }
 
             if (mob instanceof Animals) {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.food.get(killer));
+                killer.giveExp(GearPoints.animalXP);
             }
         }
 
+        event.setDroppedExp(0); //no natural XP orbs
         event.getDrops().clear();
 
         int chance = (int) (Math.random() * 8 + 1);

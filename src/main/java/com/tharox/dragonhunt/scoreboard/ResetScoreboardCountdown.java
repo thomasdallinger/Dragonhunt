@@ -1,15 +1,13 @@
 package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.points.Points;
+import com.tharox.dragonhunt.points.GearPoints;
 import com.tharox.dragonhunt.timer.Countdown;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class ResetScoreboardCountdown {
-
-    public static int points = 50;
     public static int totalSeconds = 120;
 
     /**
@@ -25,7 +23,7 @@ public class ResetScoreboardCountdown {
                     totalSeconds += 120;
 
                     for(Player player : Bukkit.getOnlinePlayers()) {
-                        Points.addPoints(player, points, "survival");
+                        //GearPoints.addPoints(player, 1);
                     }
                 }
             }

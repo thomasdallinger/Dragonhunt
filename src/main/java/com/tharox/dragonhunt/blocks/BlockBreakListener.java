@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.blocks;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -63,7 +64,7 @@ public class BlockBreakListener implements Listener {
 
         setDamageToUsedTool(player);
         changeDrops(block);
-        givePlayerXP(player);
+        givePlayerXP(block, player);
     }
 
     /**
@@ -100,11 +101,9 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.COAL, new ItemStack(Material.TORCH, 4));
         materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
         materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 2));
-        materials.put(Material.LAPIS_LAZULI, new ItemStack(Material.EXPERIENCE_BOTTLE, 2));
         materials.put(Material.GRAVEL, new ItemStack(Material.FLINT));
 
         for (ItemStack item : block.getDrops()) {
-
             if (materials.containsKey(item.getType())) {
                 block.getDrops().clear();
                 block.setType(Material.AIR);
@@ -114,12 +113,16 @@ public class BlockBreakListener implements Listener {
         }
     }
 
-    private void givePlayerXP(Player player) {
-        if (player.getExp() + (float) 0.025 > 1) {
-            player.setLevel(player.getLevel() + 1);
-            player.setExp(0);
-        } else {
-            player.setExp(player.getExp() + (float) 0.025);
+    protected void givePlayerXP(Block block, Player player) {
+        for (ItemStack item : block.getDrops()) {
+            if (item.getType() == Material.LAPIS_LAZULI
+                    || item.getType() == Material.EMERALD
+                    || item.getType() == Material.REDSTONE) {
+                block.getDrops().clear();
+                block.setType(Material.AIR);
+
+                player.giveExp(GearPoints.oreXP);
+            }
         }
     }
 

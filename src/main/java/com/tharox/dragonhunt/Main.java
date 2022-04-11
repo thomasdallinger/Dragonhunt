@@ -14,6 +14,7 @@ import com.tharox.dragonhunt.listeners.ChatListener;
 import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
+import com.tharox.dragonhunt.points.LevelUp;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
 import com.tharox.dragonhunt.gear.GearCommand;
 import com.tharox.dragonhunt.gear.GearUpgradeListener;
@@ -144,6 +145,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
         pluginManager.registerEvents(new GrappleListener(), this);
 
+        pluginManager.registerEvents(new LevelUp(), this);
         pluginManager.registerEvents(new GearUpgradeListener(), this);
 
         pluginManager.registerEvents(new BlockBreakListener(), this);

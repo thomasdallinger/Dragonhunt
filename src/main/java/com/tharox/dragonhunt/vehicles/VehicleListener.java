@@ -1,9 +1,7 @@
 package com.tharox.dragonhunt.vehicles;
 
-import com.tharox.dragonhunt.points.Points;
-import org.bukkit.ChatColor;
+import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -24,7 +22,6 @@ public class VehicleListener implements Listener {
      */
     @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
-        Player player = event.getPlayer();
         Entity entity = event.getRightClicked();
 
         if (entity.getType() == EntityType.MINECART_CHEST) {
@@ -32,11 +29,10 @@ public class VehicleListener implements Listener {
 
             StorageMinecart mc = ((StorageMinecart) entity);
             mc.getInventory().clear();
-            mc.getInventory().addItem(new ItemStack(Material.GOLDEN_APPLE));
+            mc.getInventory().addItem(
+                    new ItemStack(Material.IRON_INGOT, 8),
+                    new ItemStack(Material.GOLD_INGOT, 6));
             entity.remove();
-
-            int points = 150;
-            Points.addPoints(player, points, "chest");
         }
     }
 

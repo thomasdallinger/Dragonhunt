@@ -2,7 +2,7 @@ package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.points.Points;
+import com.tharox.dragonhunt.points.GearPoints;
 import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
 import org.bukkit.Bukkit;
@@ -47,7 +47,7 @@ public class Scoreboard extends ScoreboardBuilder {
             @Override
             public void run() {
 
-                if (!Main.getInstance().getTimer().isRunning() && Points.getPoints(player) == 0) { //Game hasn't started yet
+                if (!Main.getInstance().getTimer().isRunning() && GearPoints.getPoints(player) == 0) { //Game hasn't started yet
                     gameNotStarted();
                     return;
                 }
@@ -57,8 +57,8 @@ public class Scoreboard extends ScoreboardBuilder {
                 setScore(ChatColor.WHITE + "Kills: " + ChatColor.YELLOW + DbValues.getKills(player, true), 6);
                 setScore(ChatColor.WHITE + "Deaths: " + ChatColor.RED + DbValues.getKills(player, false), 5);
                 setScore(ChatColor.WHITE + "Spectates left: " + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
-                setScore(ChatColor.WHITE + "Points: " + ChatColor.AQUA.toString() + Points.getPoints(player), 3);
-                setScore(ChatColor.WHITE.toString() + (ResetScoreboardCountdown.totalSeconds / 120) + ". Points in:", 1);
+                setScore(ChatColor.WHITE + "Gear Points: " + ChatColor.LIGHT_PURPLE.toString() + GearPoints.getPoints(player), 3);
+                setScore(ChatColor.WHITE.toString() + (ResetScoreboardCountdown.totalSeconds / 120) + ". Gear Point in:", 1);
                 setScore(ChatColor.YELLOW + countdownFormat(countdown), 0);
 
             }

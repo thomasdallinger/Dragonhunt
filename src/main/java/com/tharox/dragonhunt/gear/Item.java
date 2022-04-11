@@ -1,6 +1,6 @@
 package com.tharox.dragonhunt.gear;
 
-import com.tharox.dragonhunt.points.Points;
+import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -112,12 +112,12 @@ public class Item {
         }
 
         if (cost != 0) {
-            if (Points.getPoints(player) >= cost) {
+            if (GearPoints.getPoints(player) >= cost) {
                 if (NAME != null && itemMeta.getDisplayName().contains("LOCKED")) {
                     itemMeta.setLore(Arrays.asList(
                             ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                             "",
-                            ChatColor.LIGHT_PURPLE.toString() + Points.getPoints(player) +
+                            ChatColor.LIGHT_PURPLE.toString() + GearPoints.getPoints(player) +
                                     ChatColor.WHITE + " / " + cost + " Points",
                             ChatColor.DARK_RED + "Purchase previous levels first!"
                     ));
@@ -125,7 +125,7 @@ public class Item {
                     itemMeta.setLore(Arrays.asList(
                             ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                             "",
-                            ChatColor.LIGHT_PURPLE.toString() + Points.getPoints(player) +
+                            ChatColor.LIGHT_PURPLE.toString() + GearPoints.getPoints(player) +
                                     ChatColor.WHITE + " / " + cost + " Points",
                             ChatColor.GOLD + "Click to buy!"
                     ));
@@ -134,9 +134,9 @@ public class Item {
                 itemMeta.setLore(Arrays.asList(
                         ChatColor.RED.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        ChatColor.DARK_RED.toString() + Points.getPoints(player) +
+                        ChatColor.DARK_RED.toString() + GearPoints.getPoints(player) +
                                 ChatColor.WHITE + " / " + cost + " Points",
-                        ChatColor.RED.toString() + (cost - Points.getPoints(player)) + " Points missing!"
+                        ChatColor.RED.toString() + (cost - GearPoints.getPoints(player)) + " Points missing!"
                 ));
             }
         }

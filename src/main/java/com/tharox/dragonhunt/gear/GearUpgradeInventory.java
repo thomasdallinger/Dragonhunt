@@ -1,6 +1,6 @@
 package com.tharox.dragonhunt.gear;
 
-import com.tharox.dragonhunt.points.Points;
+import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -51,7 +51,7 @@ public class GearUpgradeInventory {
         Inventory inv;
         if(!category.equals("menu")) {
             inv = Bukkit.createInventory(null, 27, ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "GEAR UPGRADES "
-                    + ChatColor.LIGHT_PURPLE + Points.getPoints(player) + " Points");
+                    + ChatColor.LIGHT_PURPLE + GearPoints.getPoints(player) + " Points");
             addBackToMenuItem(inv);
         } else {
             inv = Bukkit.createInventory(null, 27, ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "GEAR UPGRADES MENU");

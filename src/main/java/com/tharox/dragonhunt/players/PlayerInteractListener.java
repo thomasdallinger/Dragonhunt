@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.points.Points;
+import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -12,7 +12,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
-import org.bukkit.inventory.ItemStack;
 
 public class PlayerInteractListener implements Listener {
 
@@ -47,9 +46,7 @@ public class PlayerInteractListener implements Listener {
                     event.setCancelled(true);
                     block.setType(Material.AIR);
 
-                    int points = 150;
-                    Points.addPoints(player, points, "chest");
-
+                    player.giveExp(GearPoints.enderchestXP);
                     return;
                 }
 

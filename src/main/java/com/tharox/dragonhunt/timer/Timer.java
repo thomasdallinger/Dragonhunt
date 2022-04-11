@@ -44,13 +44,11 @@ public class Timer {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
 
-            //If the player has his Tracker or his Kit Ability in his main hand, the time wont get displayed
+            //If the player has his Tracker in his main hand, the time wont get displayed
             ItemStack item = player.getInventory().getItemInMainHand();
 
-            if(item.getItemMeta() != null) {
-                if(item.getItemMeta().getDisplayName().equals((ChatColor.GOLD + player.getName() + "'s Tracker"))
-                        || item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Kit Ability " + player.getName())) continue;
-            }
+            if(item.getItemMeta() != null)
+                if(item.getItemMeta().getDisplayName().equals((ChatColor.GOLD + player.getName() + "'s Tracker"))) continue;
 
             if(player.getGameMode().equals(GameMode.SPECTATOR)) continue;
 

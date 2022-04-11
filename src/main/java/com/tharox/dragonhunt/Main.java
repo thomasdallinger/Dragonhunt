@@ -7,12 +7,9 @@ import com.tharox.dragonhunt.commands.DateCommand;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.entities.EntityDeathListener;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.kitupgrades.KitUpgradeCommand;
-import com.tharox.dragonhunt.kitupgrades.KitUpgradeInteract;
-import com.tharox.dragonhunt.kitupgrades.KitUpgradeListener;
+import com.tharox.dragonhunt.grappler.GrappleListener;
 import com.tharox.dragonhunt.players.*;
 import com.tharox.dragonhunt.entities.CreatureSpawnListener;
-import com.tharox.dragonhunt.kits.KitListener;
 import com.tharox.dragonhunt.listeners.ChatListener;
 import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
@@ -128,7 +125,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     for (ItemStack item : player.getInventory()) {
                         if (item != null && item.getItemMeta() != null) {
-                            if (item.getType() == Material.ELYTRA && !item.getItemMeta().getDisplayName().contains("Kit Ability")) {
+                            if (item.getType() == Material.ELYTRA) {
                                 player.getInventory().remove(item);
                                 player.getInventory().setChestplate(item);
                             }
@@ -145,12 +142,10 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new QuitListener(), this);
         pluginManager.registerEvents(new ChatListener(), this);
 
+        pluginManager.registerEvents(new GrappleListener(), this);
+
         pluginManager.registerEvents(new VehicleListener(), this);
         pluginManager.registerEvents(new ShopListener(), this);
-        pluginManager.registerEvents(new KitListener(), this);
-        //TODO: new Listeners
-        pluginManager.registerEvents(new KitUpgradeListener(), this);
-        pluginManager.registerEvents(new KitUpgradeInteract(), this);
 
         pluginManager.registerEvents(new BlockBreakListener(), this);
         pluginManager.registerEvents(new BlockExplodeListener(), this);
@@ -175,6 +170,5 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         getCommand("date").setExecutor(new DateCommand());
         getCommand("shop").setExecutor(new ShopCommand());
         getCommand("spec").setExecutor(new SpectateCommand());
-        getCommand("kit").setExecutor(new KitUpgradeCommand());
     }
 }

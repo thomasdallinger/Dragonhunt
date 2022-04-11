@@ -23,7 +23,7 @@ public class PlayerInventoryListener implements Listener {
             item = event.getCurrentItem();
         }
 
-        //Tracker = 7, Kit ability = 8, Arrows = 17
+        //Tracker = 7, Grappler = 8, Arrows = 17
         if (event.getHotbarButton() == 7 || event.getHotbarButton() == 8 || event.getHotbarButton() == 17) {
             event.setCancelled(true);
             return;
@@ -56,8 +56,9 @@ public class PlayerInventoryListener implements Listener {
 
         String displayName = item.getItemMeta().getDisplayName();
 
-        if (displayName.contains(ChatColor.LIGHT_PURPLE + "Kit Ability") || displayName.contains(ChatColor.GOLD + event.getPlayer().getName() + "'s Tracker")
-            || displayName.contains(ChatColor.YELLOW + "Generated Arrow"))
+        if (displayName.contains(ChatColor.GOLD + event.getPlayer().getName() + "'s Tracker")
+                || displayName.contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")
+                || displayName.contains(ChatColor.YELLOW + "Generated Arrow"))
             event.setCancelled(true);
 
         if(item.getType() == Material.ELYTRA) {
@@ -73,7 +74,8 @@ public class PlayerInventoryListener implements Listener {
         if (offHandItem.getItemMeta() == null) return;
 
         String displayName = offHandItem.getItemMeta().getDisplayName();
-        if (displayName.contains(ChatColor.LIGHT_PURPLE + "Kit Ability") || displayName.contains(ChatColor.GOLD + event.getPlayer().getName() + "'s Tracker")) {
+        if (displayName.contains(ChatColor.GOLD + event.getPlayer().getName() + "'s Tracker")
+                || displayName.contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")) {
             event.setCancelled(true);
         }
     }

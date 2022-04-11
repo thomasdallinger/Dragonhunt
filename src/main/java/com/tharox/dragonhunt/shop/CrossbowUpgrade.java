@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.shop;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -42,6 +43,9 @@ public class CrossbowUpgrade extends EnchantmentUpgrade {
         for (ItemStack item : player.getInventory()) {
             if (item != null) {
                 if (item.getType().equals(Material.CROSSBOW)) {
+                    if(item.getItemMeta() != null
+                            && item.getItemMeta().getDisplayName().equals(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")
+                            && enchantment.equals(Enchantment.MULTISHOT)) return;
                     item.addEnchantment(enchantment, level);
                 }
             }

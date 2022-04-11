@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.shop;
 
-import com.tharox.dragonhunt.kitupgrades.KitUpgrades;
 import com.tharox.dragonhunt.points.Points;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -96,14 +95,6 @@ public class Item {
                 itemStack = checkIfUnlocked(itemStack, FoodUpgrade.FoodSource.get(player));
             else if (NAME.contains("Food Amount"))
                 itemStack = checkIfUnlocked(itemStack, FoodUpgrade.FoodAmount.get(player));
-            else if (NAME.contains("Speed Boost"))
-                itemStack = checkIfUnlocked(itemStack, KitUpgrades.PlatformerUpgrade.get(player));
-            else if (NAME.contains("Reduce Cooldown"))
-                itemStack = checkIfUnlocked(itemStack, KitUpgrades.Cooldown.get(player));
-            else if (NAME.contains("Quick Charge"))
-                itemStack = checkIfUnlocked(itemStack, KitUpgrades.Charge.get(player));
-            else if (NAME.contains("Increase Duration"))
-                itemStack = checkIfUnlocked(itemStack, KitUpgrades.Duration.get(player));
         }
 
         if (itemStack == null) return null;

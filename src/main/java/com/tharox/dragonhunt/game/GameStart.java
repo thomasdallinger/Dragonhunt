@@ -3,9 +3,7 @@ package com.tharox.dragonhunt.game;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.dimensions.DimensionListener;
-import com.tharox.dragonhunt.kits.KitInventory;
-import com.tharox.dragonhunt.kits.Platformer;
-import com.tharox.dragonhunt.kitupgrades.KitUpgrades;
+import com.tharox.dragonhunt.grappler.Grappler;
 import com.tharox.dragonhunt.shop.*;
 import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
@@ -25,7 +23,6 @@ public class GameStart {
     Countdown startCountdown;
     Countdown elytraCountdown;
     Countdown scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
-    KitInventory kitInventory = new KitInventory();
     BossBar bossBar;
     World overworld = Bukkit.getServer().getWorld("world");
     Location startLocation = new Location(overworld, 0, 150, 0);
@@ -44,14 +41,6 @@ public class GameStart {
         Location loc = GameState.dungeonLocations.get(rnd);
         Bukkit.getPluginManager().registerEvents(new DimensionListener(loc), Main.getInstance());
         GameState.dungeonLocation = loc;
-
-        //TODO: remove later
-        for(Player player : Bukkit.getOnlinePlayers()) {
-            Platformer.chargeTime.put(player, Platformer.defaultChargeTime);
-            Platformer.duration.put(player, Platformer.defaultDuration);
-            Platformer.cooldown.put(player, Platformer.defaultCooldown);
-            Platformer.amplifier.put(player, Platformer.defaultAmplifier);
-        }
     }
 
     private void configureOverworld() {
@@ -69,11 +58,13 @@ public class GameStart {
 
             for (PotionEffect effect : player.getActivePotionEffects()) player.removePotionEffect(effect.getType());
             player.setFoodLevel(20);
+            player.setSaturation(4); //players shouldn't loose hunger points instantly
             player.setExp(0);     //resets Bar
             player.setLevel(0);   //resets Number
             player.getInventory().clear();
 
             player.getInventory().setItem(7, Main.getInstance().getTracker().givePlayerTracker(player));
+            new Grappler(player);
             player.getInventory().setChestplate(new ItemStack(Material.ELYTRA));
             player.getInventory().setItem(0, addItem(new ItemStack(Material.GOLDEN_AXE)));
             player.getInventory().setItem(1, addItem(new ItemStack(Material.GOLDEN_PICKAXE)));
@@ -113,10 +104,6 @@ public class GameStart {
             ArmorUpgrade.AquaAffinity.put(player, 1);
             FoodUpgrade.FoodSource.put(player, 1);
             FoodUpgrade.FoodAmount.put(player, 1);
-            KitUpgrades.PlatformerUpgrade.put(player, 1);
-            KitUpgrades.Cooldown.put(player, 1);
-            KitUpgrades.Charge.put(player, 1);
-            KitUpgrades.Duration.put(player, 1);
         }
     }
 
@@ -167,10 +154,6 @@ public class GameStart {
             }
 
             player.sendTitle(ChatColor.GOLD.toString() + ChatColor.BOLD + startCountdown.getTime(), "", 10, 20, 10);
-
-            if (startCountdown.getTime() == 20) {
-                player.openInventory(kitInventory.kits);
-            }
 
             if (startCountdown.getTime() == 0) {
                 if(startLocation.getY() - highestBlock.getY() <= 40) {

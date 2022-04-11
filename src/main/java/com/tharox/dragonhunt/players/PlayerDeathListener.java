@@ -20,7 +20,7 @@ public class PlayerDeathListener implements Listener {
 
     /**
      * The player always keeps:
-     * - hotbar (9 items, including tracker and kit ability items)
+     * - hotbar (9 items, including tracker and grappler)
      * - offhand (1 item)
      * - armor (4 items, 3 items if the player had an elytra)
      * - XP (level only)

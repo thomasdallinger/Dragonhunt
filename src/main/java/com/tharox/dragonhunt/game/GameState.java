@@ -3,8 +3,6 @@ package com.tharox.dragonhunt.game;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.kits.Kit;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
@@ -17,8 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GameState {
-    public static HashMap<Player, Kit> kit = new HashMap<>();
-
     public static World nether = Bukkit.getServer().getWorlds().get(1);
     public static List<Location> dungeonLocations = Arrays.asList(
             new Location(nether, -61.5, 87, -38.5, (float) -156.6, (float) 5.0),
@@ -41,10 +37,10 @@ public class GameState {
      * @param item item the player should get
      */
     public static boolean sameItemAlreadyInInventory(Player player, ItemStack item) {
-        for (ItemStack invetoryItem : player.getInventory()) {
-            if(invetoryItem != null && invetoryItem.getItemMeta() != null) {
-                if ((invetoryItem.getType() == item.getType()) && !invetoryItem.getItemMeta().getDisplayName().contains("Kit Ability")) {
-                    if (invetoryItem.getMaxStackSize() >= (invetoryItem.getAmount() + item.getAmount())) {
+        for (ItemStack inventoryItem : player.getInventory()) {
+            if(inventoryItem != null && inventoryItem.getItemMeta() != null) {
+                if ((inventoryItem.getType() == item.getType())) {
+                    if (inventoryItem.getMaxStackSize() >= (inventoryItem.getAmount() + item.getAmount())) {
                         player.getInventory().addItem(item);
                         return true;
                     }

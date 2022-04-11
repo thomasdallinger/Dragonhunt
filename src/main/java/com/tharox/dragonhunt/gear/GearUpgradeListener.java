@@ -98,6 +98,12 @@ public class GearUpgradeListener implements Listener {
         } else if (itemName.contains("Food Source") || itemName.contains("Food Amount")) {
             new FoodUpgrade(player, itemName, item.getAmount());
             purchaseUpgrade(player, itemName, "Food");
+        } else if (itemName.contains("Smelted Resource") || itemName.contains("Resource Amount")) {
+            new ResourceUpgrade(player, itemName, item.getAmount());
+            purchaseUpgrade(player, itemName, "Resource");
+        } else if (itemName.contains("More XP")) {
+            new XPUpgrade(player);
+            purchaseUpgrade(player, itemName, "XP");
         }
 
         addGearUpgradeAccess(player, itemName);
@@ -131,6 +137,10 @@ public class GearUpgradeListener implements Listener {
             player.openInventory(gearUpgradeInventory.armor);
         else if (name.contains("Food"))
             player.openInventory(gearUpgradeInventory.food);
+        else if (name.contains("Resource"))
+            player.openInventory(gearUpgradeInventory.resource);
+        else if (name.contains("XP"))
+            player.openInventory(gearUpgradeInventory.xp);
     }
 
     private void addGearUpgradeAccess(Player player, String itemName) {

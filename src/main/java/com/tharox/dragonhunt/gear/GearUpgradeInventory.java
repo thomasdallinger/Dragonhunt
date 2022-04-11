@@ -19,7 +19,7 @@ import java.util.List;
 
 public class GearUpgradeInventory {
 
-    public Inventory menu, weapon, bow, crossbow, arrow, tool, armor, food;
+    public Inventory menu, weapon, bow, crossbow, arrow, tool, armor, food, resource, xp;
     public static final HashMap<String, Integer> upgradeCost = new HashMap<>();
 
     public GearUpgradeInventory(FileConfiguration config, Player player) {
@@ -31,6 +31,8 @@ public class GearUpgradeInventory {
         tool = createInventory(config, "tool", player);
         armor = createInventory(config, "armor", player);
         food = createInventory(config, "food", player);
+        resource = createInventory(config, "resource", player);
+        xp = createInventory(config, "xp", player);
     }
 
     private Inventory createInventory(FileConfiguration config, String category, Player player) {

@@ -95,6 +95,12 @@ public class Item {
                 itemStack = checkIfUnlocked(itemStack, FoodUpgrade.FoodSource.get(player));
             else if (NAME.contains("Food Amount"))
                 itemStack = checkIfUnlocked(itemStack, FoodUpgrade.FoodAmount.get(player));
+            else if (NAME.contains("Smelted Resource"))
+                itemStack = checkIfUnlocked(itemStack, ResourceUpgrade.SmeltedResource.get(player));
+            else if (NAME.contains("Resource Amount"))
+                itemStack = checkIfUnlocked(itemStack, ResourceUpgrade.ResourceAmount.get(player));
+            else if (NAME.contains("More XP"))
+                itemStack = checkIfUnlocked(itemStack, XPUpgrade.MoreXP.get(player));
         }
 
         if (itemStack == null) return null;
@@ -137,7 +143,7 @@ public class Item {
                         "",
                         ChatColor.DARK_RED.toString() + GearPoints.getPoints(player) +
                                 ChatColor.WHITE + " / " + cost + " Points",
-                        ChatColor.RED.toString() + (cost - GearPoints.getPoints(player)) + " Points missing!"
+                        ChatColor.RED.toString() + (cost - GearPoints.getPoints(player)) + " Point(s) missing!"
                 ));
             }
         }

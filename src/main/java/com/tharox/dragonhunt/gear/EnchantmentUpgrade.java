@@ -6,5 +6,6 @@ import org.bukkit.entity.Player;
 public abstract class EnchantmentUpgrade {
     public Player player;
     public int level;
+
     public abstract void enchantGear(Enchantment enchantment);
 }

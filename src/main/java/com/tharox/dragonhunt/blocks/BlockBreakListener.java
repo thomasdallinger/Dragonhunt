@@ -1,6 +1,8 @@
 package com.tharox.dragonhunt.blocks;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.gear.XPUpgrade;
 import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -66,8 +68,7 @@ public class BlockBreakListener implements Listener {
         }
 
         setDamageToUsedTool(player);
-        changeDrops(block);
-        givePlayerXP(block, player);
+        changeDrops(block, player);
     }
 
     /**
@@ -98,14 +99,13 @@ public class BlockBreakListener implements Listener {
      * If it is not one of the blocks it will just drop the item normally.
      *
      * @param block block destroyed by the player
+     * @param player player that destroyed the specific block
      */
-    protected static void changeDrops(Block block) {
+    protected void changeDrops(Block block, Player player) {
         HashMap<Material, ItemStack> materials = new HashMap<>();
-        materials.put(Material.COAL, new ItemStack(Material.TORCH, 4));
-        materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
-        materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 2));
-        materials.put(Material.RAW_COPPER, new ItemStack(Material.GOLD_INGOT, 1));
-        materials.put(Material.GRAVEL, new ItemStack(Material.FLINT));
+        materials.put(Material.RAW_IRON, GameState.resources.get(player).get(0));
+        materials.put(Material.RAW_GOLD, GameState.resources.get(player).get(1));
+        materials.put(Material.RAW_COPPER, GameState.resources.get(player).get(1));
 
         for (ItemStack item : block.getDrops()) {
             if (materials.containsKey(item.getType())) {
@@ -114,18 +114,14 @@ public class BlockBreakListener implements Listener {
 
                 block.getWorld().dropItemNaturally(block.getLocation(), materials.get(item.getType()));
             }
-        }
-    }
 
-    protected void givePlayerXP(Block block, Player player) {
-        for (ItemStack item : block.getDrops()) {
             if (item.getType() == Material.LAPIS_LAZULI
                     || item.getType() == Material.EMERALD
                     || item.getType() == Material.REDSTONE) {
                 block.getDrops().clear();
                 block.setType(Material.AIR);
 
-                player.giveExp(GearPoints.oreXP);
+                player.giveExp(GearPoints.oreXP + XPUpgrade.MoreXP.get(player) - 1);
             }
         }
     }

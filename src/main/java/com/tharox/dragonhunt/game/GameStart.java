@@ -18,6 +18,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
+import java.util.List;
+
 public class GameStart {
     Timer timer = Main.getInstance().getTimer();
     Countdown startCountdown;
@@ -70,6 +72,9 @@ public class GameStart {
             Spectate.spectatesLeft.put(player, 3);
             Spectate.spectateCooldown.put(player, timer.getTime() + 180);
             GameState.food.put(player, new ItemStack(Material.RABBIT));
+            GameState.resources.put(player, List.of(
+                    new ItemStack(Material.RAW_IRON),
+                    new ItemStack(Material.RAW_GOLD)));
 
             //set default tracker values
             Main.getInstance().getTracker().playerTracksPlayer.put(player, null);
@@ -101,6 +106,9 @@ public class GameStart {
             ArmorUpgrade.AquaAffinity.put(player, 1);
             FoodUpgrade.FoodSource.put(player, 1);
             FoodUpgrade.FoodAmount.put(player, 1);
+            ResourceUpgrade.SmeltedResource.put(player, 1);
+            ResourceUpgrade.ResourceAmount.put(player, 1);
+            XPUpgrade.MoreXP.put(player, 1);
         }
     }
 

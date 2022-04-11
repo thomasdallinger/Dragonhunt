@@ -30,6 +30,7 @@ public class GameState {
     public static boolean minOnePlayerInEnd = false;
 
     public static HashMap<Player, ItemStack> food = new HashMap<>();
+    public static HashMap<Player, List<ItemStack>> resources = new HashMap<>();
 
     /**
      * Used in EntityDeathListener.

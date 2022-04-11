@@ -23,12 +23,10 @@ public class BlockExplodeListener implements Listener {
                 Material.DEEPSLATE_EMERALD_ORE, Material.LAPIS_ORE,
                 Material.DEEPSLATE_LAPIS_ORE, Material.REDSTONE_ORE,
                 Material.DEEPSLATE_REDSTONE_ORE, Material.COPPER_ORE,
-                Material.DEEPSLATE_COPPER_ORE).forEach(material -> blocks.removeIf(block -> block.getType() == material));
+                Material.DEEPSLATE_COPPER_ORE, Material.IRON_ORE,
+                Material.DEEPSLATE_IRON_ORE, Material.GOLD_ORE,
+                Material.DEEPSLATE_GOLD_ORE).forEach(material -> blocks.removeIf(block -> block.getType() == material));
 
         BlockBreakListener.woods.forEach(woodType -> blocks.removeIf(currentBlock -> currentBlock.getType() == woodType));
-
-        for (Block block : blocks) {
-            BlockBreakListener.changeDrops(block);
-        }
     }
 }

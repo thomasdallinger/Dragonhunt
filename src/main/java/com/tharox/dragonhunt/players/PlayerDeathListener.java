@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.gear.XPUpgrade;
 import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -41,7 +42,7 @@ public class PlayerDeathListener implements Listener {
 
         if (killer != null) {
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
-            killer.giveExp(GearPoints.playerXP);
+            killer.giveExp(GearPoints.playerXP + XPUpgrade.MoreXP.get(killer) - 1);
             addPlayerKill(killer, player);
         }
 

@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.gear.XPUpgrade;
 import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.Material;
 import org.bukkit.entity.*;
@@ -25,12 +26,12 @@ public class EntityDeathListener implements Listener {
             }
 
             if (mob instanceof Monster) {
-                killer.giveExp(GearPoints.monsterXP);
+                killer.giveExp(GearPoints.monsterXP + XPUpgrade.MoreXP.get(killer) - 1);
             }
 
             if (mob instanceof Animals) {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.food.get(killer));
-                killer.giveExp(GearPoints.animalXP);
+                killer.giveExp(GearPoints.animalXP + XPUpgrade.MoreXP.get(killer) - 1);
             }
         }
 
@@ -52,7 +53,7 @@ public class EntityDeathListener implements Listener {
                     mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.CROSSBOW, 1));
                 break;
             case "Zombie":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.GOLD_INGOT, 2));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.resources.get(killer).get(1));
                 if (chance == 1)
                     mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.APPLE, 1));
                 break;

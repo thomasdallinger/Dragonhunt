@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 /**
  * Used for/in: LevelUp, PlayerInteractListener, BlockBreakListener, EntityDeathListener, PlayerDeathListener, GameStart, GearUpgradeListener, ResetScoreboardCountdown
+ * Coal ores award natural XP (0-2 xp points), which cannot be upgraded using XP Upgrades.
  */
 public class GearPoints {
     public static int enderchestXP = 15; //PlayerInteractListener

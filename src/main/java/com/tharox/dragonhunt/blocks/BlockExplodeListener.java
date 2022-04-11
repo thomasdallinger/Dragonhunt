@@ -21,7 +21,8 @@ public class BlockExplodeListener implements Listener {
         Stream.of(Material.CHEST, Material.EMERALD_ORE,
                 Material.DEEPSLATE_EMERALD_ORE, Material.LAPIS_ORE,
                 Material.DEEPSLATE_LAPIS_ORE, Material.REDSTONE_ORE,
-                Material.DEEPSLATE_REDSTONE_ORE).forEach(material -> blocks.removeIf(block -> block.getType() == material));
+                Material.DEEPSLATE_REDSTONE_ORE, Material.COPPER_ORE,
+                Material.DEEPSLATE_COPPER_ORE).forEach(material -> blocks.removeIf(block -> block.getType() == material));
 
         for (Block block : blocks) {
             if (BlockBreakListener.woods.contains(block.getType())) {

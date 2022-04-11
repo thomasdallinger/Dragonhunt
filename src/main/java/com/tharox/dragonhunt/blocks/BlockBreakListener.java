@@ -101,6 +101,7 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.COAL, new ItemStack(Material.TORCH, 4));
         materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
         materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 2));
+        materials.put(Material.RAW_COPPER, new ItemStack(Material.GOLD_INGOT, 1));
         materials.put(Material.GRAVEL, new ItemStack(Material.FLINT));
 
         for (ItemStack item : block.getDrops()) {

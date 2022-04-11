@@ -4,7 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.dimensions.DimensionListener;
 import com.tharox.dragonhunt.grappler.Grappler;
-import com.tharox.dragonhunt.shop.*;
+import com.tharox.dragonhunt.gear.*;
 import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;

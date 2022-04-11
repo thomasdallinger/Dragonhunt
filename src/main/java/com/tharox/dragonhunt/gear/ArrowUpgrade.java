@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.shop;
+package com.tharox.dragonhunt.gear;
 
 import org.bukkit.entity.Player;
 

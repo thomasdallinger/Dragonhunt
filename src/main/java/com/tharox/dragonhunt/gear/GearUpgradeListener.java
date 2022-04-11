@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.shop;
+package com.tharox.dragonhunt.gear;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
@@ -15,12 +15,12 @@ import org.bukkit.inventory.ItemStack;
 
 import java.sql.Statement;
 
-public class ShopListener implements Listener {
+public class GearUpgradeListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        ShopInventory shopInventory = new ShopInventory(Main.getInstance().getConfig(), player);
+        GearUpgradeInventory gearUpgradeInventory = new GearUpgradeInventory(Main.getInstance().getConfig(), player);
 
         if (!event.getView().getTitle().contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "GEAR UPGRADES"))
             return;
@@ -46,8 +46,8 @@ public class ShopListener implements Listener {
             return;
         }
 
-        //event.getInventory() ... top inventory = shop
-        //if the clicked inventory is not the shop then cancel the event
+        //event.getInventory() ... top inventory = gear upgrades
+        //if the clicked inventory is not the gear upgrades inventory, cancel the event
         if (event.getClickedInventory() != event.getInventory()) {
             event.setCancelled(true);
             return;
@@ -57,15 +57,15 @@ public class ShopListener implements Listener {
         if (itemName.equals(ChatColor.RED + "Back to menu")) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASEDRUM, 1, 1);
             player.closeInventory();
-            player.openInventory(shopInventory.menu);
+            player.openInventory(gearUpgradeInventory.menu);
             return;
         }
 
         //Not enough points to purchase Upgrade level
-        if (Points.getPoints(player) < ShopInventory.ShopItemCost.get(itemName)) {
+        if (Points.getPoints(player) < GearUpgradeInventory.upgradeCost.get(itemName)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(ChatColor.RED + "You don't have enough points! Need "
-                    + (ShopInventory.ShopItemCost.get(itemName) - Points.getPoints(player)) + " more.");
+                    + (GearUpgradeInventory.upgradeCost.get(itemName) - Points.getPoints(player)) + " more.");
             return;
         }
 
@@ -100,7 +100,7 @@ public class ShopListener implements Listener {
             purchaseUpgrade(player, itemName, "Food");
         }
 
-        addShopAccess(player, itemName);
+        addGearUpgradeAccess(player, itemName);
     }
 
     /**
@@ -109,35 +109,35 @@ public class ShopListener implements Listener {
      */
     private void purchaseUpgrade(Player player, String itemName, String inventory) {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        Points.removePoints(player, ShopInventory.ShopItemCost.get(itemName));
+        Points.removePoints(player, GearUpgradeInventory.upgradeCost.get(itemName));
 
         menuNavigation(player, inventory);
     }
 
     private void menuNavigation(Player player, String name) {
-        ShopInventory shopInventory = new ShopInventory(Main.getInstance().getConfig(), player);
+        GearUpgradeInventory gearUpgradeInventory = new GearUpgradeInventory(Main.getInstance().getConfig(), player);
 
         if (name.contains("Weapon"))
-            player.openInventory(shopInventory.weapon);
+            player.openInventory(gearUpgradeInventory.weapon);
         else if (name.contains("Bow"))
-            player.openInventory(shopInventory.bow);
+            player.openInventory(gearUpgradeInventory.bow);
         else if (name.contains("Crossbow"))
-            player.openInventory(shopInventory.crossbow);
+            player.openInventory(gearUpgradeInventory.crossbow);
         else if (name.contains("Arrow"))
-            player.openInventory(shopInventory.arrow);
+            player.openInventory(gearUpgradeInventory.arrow);
         else if (name.contains("Tool"))
-            player.openInventory(shopInventory.tool);
+            player.openInventory(gearUpgradeInventory.tool);
         else if (name.contains("Armor"))
-            player.openInventory(shopInventory.armor);
+            player.openInventory(gearUpgradeInventory.armor);
         else if (name.contains("Food"))
-            player.openInventory(shopInventory.food);
+            player.openInventory(gearUpgradeInventory.food);
     }
 
-    private void addShopAccess(Player player, String itemName) {
+    private void addGearUpgradeAccess(Player player, String itemName) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO ShopAccess (GameID, Player, item, pointsBefore, cost, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + itemName + "', '"
-                    + Points.getPoints(player) + "', '" + ShopInventory.ShopItemCost.get(itemName)
+                    + Points.getPoints(player) + "', '" + GearUpgradeInventory.upgradeCost.get(itemName)
                     + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();

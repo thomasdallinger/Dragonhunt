@@ -32,7 +32,7 @@ public class GameState {
     public static HashMap<Player, ItemStack> food = new HashMap<>();
 
     /**
-     * Used in EntityDeathListener, ShopListener.
+     * Used in EntityDeathListener.
      * @param player player who is supposed to get the item
      * @param item item the player should get
      */

@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.shop;
+package com.tharox.dragonhunt.gear;
 
 import com.tharox.dragonhunt.points.Points;
 import org.bukkit.Bukkit;
@@ -17,12 +17,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ShopInventory {
+public class GearUpgradeInventory {
 
     public Inventory menu, weapon, bow, crossbow, arrow, tool, armor, food;
-    public static final HashMap<String, Integer> ShopItemCost = new HashMap<>();
+    public static final HashMap<String, Integer> upgradeCost = new HashMap<>();
 
-    public ShopInventory(FileConfiguration config, Player player) {
+    public GearUpgradeInventory(FileConfiguration config, Player player) {
         menu = createInventory(config, "menu", player);
         weapon = createInventory(config, "weapon", player);
         bow = createInventory(config, "bow", player);
@@ -62,7 +62,7 @@ public class ShopInventory {
             inv.setItem(item.getSlot(), itemStack);
 
             if (item.cost != 0) { //if it has no cost it also isn't air -> air has no displayname
-                ShopItemCost.put(itemStack.getItemMeta().getDisplayName(), item.cost); //save the cost of the item
+                upgradeCost.put(itemStack.getItemMeta().getDisplayName(), item.cost); //save the cost of the item
             }
         }
 

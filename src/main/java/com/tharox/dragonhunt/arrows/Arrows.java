@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.arrows;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.shop.ArrowUpgrade;
+import com.tharox.dragonhunt.gear.ArrowUpgrade;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;

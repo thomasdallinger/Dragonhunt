@@ -15,8 +15,8 @@ import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
-import com.tharox.dragonhunt.shop.ShopCommand;
-import com.tharox.dragonhunt.shop.ShopListener;
+import com.tharox.dragonhunt.gear.GearCommand;
+import com.tharox.dragonhunt.gear.GearUpgradeListener;
 import com.tharox.dragonhunt.spectate.SpectateCommand;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
@@ -144,13 +144,13 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
         pluginManager.registerEvents(new GrappleListener(), this);
 
-        pluginManager.registerEvents(new VehicleListener(), this);
-        pluginManager.registerEvents(new ShopListener(), this);
+        pluginManager.registerEvents(new GearUpgradeListener(), this);
 
         pluginManager.registerEvents(new BlockBreakListener(), this);
         pluginManager.registerEvents(new BlockExplodeListener(), this);
         pluginManager.registerEvents(new BlockPlaceListener(), this);
 
+        pluginManager.registerEvents(new VehicleListener(), this);
         pluginManager.registerEvents(new CreatureSpawnListener(), this);
         pluginManager.registerEvents(new EntityDeathListener(), this);
         pluginManager.registerEvents(new EntityDropListener(), this);
@@ -168,7 +168,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
     private void commandRegistration() {
         getCommand("date").setExecutor(new DateCommand());
-        getCommand("shop").setExecutor(new ShopCommand());
+        getCommand("gear").setExecutor(new GearCommand());
         getCommand("spec").setExecutor(new SpectateCommand());
     }
 }

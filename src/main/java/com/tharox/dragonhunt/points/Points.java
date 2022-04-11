@@ -2,7 +2,6 @@ package com.tharox.dragonhunt.points;
 
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.shop.ShopInventory;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -12,7 +11,7 @@ import java.sql.Statement;
 import java.util.HashMap;
 
 /**
- * Used for: PlayerInteractListener, VehicleListener, EntityDeathListener, PlayerDeathListener, GameStart, ShopListener, ResetScoreboardCountdown
+ * Used for: PlayerInteractListener, VehicleListener, EntityDeathListener, PlayerDeathListener, GameStart, GearUpgradeListener, ResetScoreboardCountdown
  */
 public class Points {
     private static final HashMap<Player, Integer> points = new HashMap<>();

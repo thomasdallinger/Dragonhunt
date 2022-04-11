@@ -77,7 +77,7 @@ public class Tracker implements Listener {
 
         if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + player.getName() + "'s Tracker")) {
-                player.performCommand("shop");
+                player.performCommand("gear");
             }
         }
     }
@@ -163,7 +163,7 @@ public class Tracker implements Listener {
 
         meta.setDisplayName(ChatColor.GOLD + player.getName() + "'s Tracker");
         meta.setLore(Arrays.asList(
-                ChatColor.WHITE + "Left-Click: " + ChatColor.YELLOW + "Open shop (/shop)",
+                ChatColor.WHITE + "Left-Click: " + ChatColor.YELLOW + "Open gear upgrades (/gear)",
                 ChatColor.WHITE + "Right-Click: " + ChatColor.YELLOW + "Switch tracked player"));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

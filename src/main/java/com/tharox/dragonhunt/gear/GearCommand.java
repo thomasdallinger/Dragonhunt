@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.shop;
+package com.tharox.dragonhunt.gear;
 
 import com.tharox.dragonhunt.Main;
 import org.bukkit.ChatColor;
@@ -7,7 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class ShopCommand implements CommandExecutor {
+public class GearCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player;
@@ -17,12 +17,12 @@ public class ShopCommand implements CommandExecutor {
         } else return true;
 
         if(Main.getInstance().getTimer().getTime() < 120) {
-            player.sendMessage(ChatColor.RED + "The shop is available after 2 minutes.");
+            player.sendMessage(ChatColor.RED + "Gear Upgrades are available after 2 minutes.");
             return true;
         }
 
-        ShopInventory shopInventory = new ShopInventory(Main.getInstance().getConfig(), player);
-        player.openInventory(shopInventory.menu);
+        GearUpgradeInventory gearUpgradeInventory = new GearUpgradeInventory(Main.getInstance().getConfig(), player);
+        player.openInventory(gearUpgradeInventory.menu);
         return false;
     }
 }

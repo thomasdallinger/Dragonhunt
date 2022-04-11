@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.shop;
+package com.tharox.dragonhunt.gear;
 
 import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.Material;

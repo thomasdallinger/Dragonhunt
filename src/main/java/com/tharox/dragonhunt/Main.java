@@ -158,7 +158,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new EntityDropListener(), this);
 
         pluginManager.registerEvents(new AdvancementListener(), this);
-        pluginManager.registerEvents(new PlayerConsumeListener(), this);
         pluginManager.registerEvents(new PlayerDamageListener(), this);
         pluginManager.registerEvents(new PlayerDeathListener(), this);
         pluginManager.registerEvents(new PlayerInteractListener(), this);

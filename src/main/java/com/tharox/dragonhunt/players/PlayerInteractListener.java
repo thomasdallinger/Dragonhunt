@@ -25,15 +25,12 @@ public class PlayerInteractListener implements Listener {
             return;
 
         /*
-          Players are not able to throw enderpearls or splash potions in the nether until at least one player
+          Players are not able to throw enderpearls in the nether until at least one player
           has reached the end dimension.
         */
         if (player.getWorld().getName().equals("world_nether") && !GameState.minOnePlayerInEnd) {
             if (player.getInventory().getItemInMainHand().getType().equals(Material.ENDER_PEARL)
                     || player.getInventory().getItemInOffHand().getType().equals(Material.ENDER_PEARL)) {
-                event.setCancelled(true);
-            }
-            if (player.getInventory().getItemInMainHand().getType().equals(Material.SPLASH_POTION)) {
                 event.setCancelled(true);
             }
         }

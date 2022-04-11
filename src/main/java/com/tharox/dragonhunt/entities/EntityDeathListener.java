@@ -56,6 +56,9 @@ public class EntityDeathListener implements Listener {
                 if (chance == 1)
                     mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.APPLE, 1));
                 break;
+            case "Witch":
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.APPLE, 1));
+                break;
             case "Spider":
             case "Cave Spider":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.STRING, 3));

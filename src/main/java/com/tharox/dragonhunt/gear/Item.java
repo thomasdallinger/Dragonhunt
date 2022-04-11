@@ -103,6 +103,7 @@ public class Item {
 
         itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+        itemMeta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 
         if (NAME != null && NAME.contains("»") && LORE != null) {
             itemMeta.setLore(Arrays.asList(

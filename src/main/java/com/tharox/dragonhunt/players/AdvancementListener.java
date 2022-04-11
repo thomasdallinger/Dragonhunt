@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
+import org.bukkit.Bukkit;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,11 +22,12 @@ public class AdvancementListener implements Listener {
         Advancement adv = event.getAdvancement();
         String completed = "";
 
-        if (adv.getKey().toString().equals("minecraft:story/find_fortress") || adv.getKey().toString().equals("minecraft:story/find_bastion")) {
+        /*if (adv.getKey().toString().equals("minecraft:story/find_fortress") || adv.getKey().toString().equals("minecraft:story/find_bastion")) {
             for(String c: adv.getCriteria()) {
+                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "advancement revoke " + event.getPlayer().getName() + " only " + event.getAdvancement().getKey().getKey());
                 player.getAdvancementProgress(adv).revokeCriteria(c);
             }
-        }
+        }*/
 
         switch (adv.getKey().toString()) {
             case "minecraft:story/smelt_iron":

@@ -1,34 +1,25 @@
 package com.tharox.dragonhunt.shop;
 
+import com.tharox.dragonhunt.kitupgrades.KitUpgrades;
+import com.tharox.dragonhunt.points.Points;
 import org.bukkit.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Item {
-    private final Material material;
-    private final int amount;
-    protected int cost;
-    private final String name;
-
-    private final Map<Enchantment, Integer> enchantmentToLevelMap = new HashMap<>();
-
-    private final Map<PotionEffectType, Integer> effectToAmplifier = new HashMap<>();
-    private int duration = 1200;
-    private Color color = Color.RED;
+    private final Material MATERIAL;
+    private final int AMOUNT;
+    private final int SLOT;
+    public int cost;
+    private final String NAME;
+    private final String LORE;
 
     public Item(ConfigurationSection section) {
         Material material;
@@ -42,124 +33,152 @@ public class Item {
         //default values
         cost = 0;
 
-        this.material = material;
-        this.amount = section.getInt("amount");
+        this.MATERIAL = material;
+        this.AMOUNT = section.getInt("amount");
+        this.SLOT = section.getInt("slot");
         this.cost = section.getInt("cost");
-        this.name = section.getString("name");
-
-        ConfigurationSection enchantmentsSection = section.getConfigurationSection("enchantments");
-
-        if (enchantmentsSection != null) {
-            for (String enchantmentKey : enchantmentsSection.getKeys(false)) {
-                Enchantment enchantment = Enchantment.getByKey(
-                        NamespacedKey.minecraft(
-                                enchantmentKey.toLowerCase()
-                        )
-                );
-
-                if (enchantment != null) {
-                    int level = enchantmentsSection.getInt(enchantmentKey);
-                    enchantmentToLevelMap.put(enchantment, level);
-                }
-            }
-        }
-
-        ConfigurationSection effectsSection = section.getConfigurationSection("effects");
-
-        if (effectsSection != null) {
-            for (String effectKey : effectsSection.getKeys(false)) {
-                PotionEffectType effect = PotionEffectType.getByName(effectKey.toLowerCase());
-
-                if (effect != null) {
-                    String[] effectValues = effectsSection.getString(effectKey).split(",");
-                    int amplifier = Integer.parseInt(effectValues[0]);
-                    effectToAmplifier.put(effect, amplifier);
-
-                    this.duration = Integer.parseInt(effectValues[1]);
-                }
-            }
-            this.color = Color.fromRGB(section.getInt("color"));
-        }
+        this.NAME = section.getString("name");
+        this.LORE = section.getString("lore");
     }
 
-    public ItemStack createItem() {
-        ItemStack itemStack = new ItemStack(material, amount);
+    /**
+     * @return index of where the item is supposed to be placed in the inventory
+     */
+    public int getSlot() {
+        return SLOT;
+    }
 
-        //potionMeta
-        if (itemStack.getType() == Material.POTION || itemStack.getType() == Material.SPLASH_POTION ||
-                itemStack.getType() == Material.LINGERING_POTION || itemStack.getType() == Material.TIPPED_ARROW) {
+    public ItemStack createItem(Player player) {
+        ItemStack itemStack = new ItemStack(MATERIAL, AMOUNT);
 
-            PotionMeta potionMeta = (PotionMeta) itemStack.getItemMeta();
-            if (potionMeta == null) return null;
-
-            for (Map.Entry<PotionEffectType, Integer> effectEntry : effectToAmplifier.entrySet()) {
-                potionMeta.addCustomEffect(new PotionEffect(
-                                effectEntry.getKey(),
-                                duration,
-                                effectEntry.getValue()),
-                        true
-                );
-            }
-
-            potionMeta.setColor(color);
-
-            itemStack.setItemMeta(addNameAndCost(potionMeta));
-
-        //enchantmentStorageMeta
-        } else if (itemStack.getType() == Material.ENCHANTED_BOOK) {
-            EnchantmentStorageMeta enchantmentStorageMeta = (EnchantmentStorageMeta) itemStack.getItemMeta();
-            if (enchantmentStorageMeta == null) return null;
-
-            for (Map.Entry<Enchantment, Integer> enchantEntry : enchantmentToLevelMap.entrySet()) {
-                enchantmentStorageMeta.addStoredEnchant(
-                        enchantEntry.getKey(),
-                        enchantEntry.getValue(),
-                        true
-                );
-            }
-
-            itemStack.setItemMeta(addNameAndCost(enchantmentStorageMeta));
-
-        //itemMeta
-        } else {
-            if(name != null && name.contains("Blocks & Redstone")) {
-                itemStack.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-            }
-
-            ItemMeta itemMeta = itemStack.getItemMeta();
-            if (itemMeta == null) return null;
-
-            for (Map.Entry<Enchantment, Integer> enchantEntry : enchantmentToLevelMap.entrySet()) {
-                itemMeta.addEnchant(
-                        enchantEntry.getKey(),
-                        enchantEntry.getValue(),
-                        true
-                );
-            }
-
-            itemStack.setItemMeta(addNameAndCost(itemMeta));
+        if (NAME != null) {
+            if (NAME.contains("»"))
+                itemStack = setEnchantmentAndName(itemStack);
+            else if (NAME.contains("Sharpness"))
+                itemStack = checkIfUnlocked(itemStack, WeaponUpgrade.Sharpness.get(player));
+            else if (NAME.contains("Knockback"))
+                itemStack = checkIfUnlocked(itemStack, WeaponUpgrade.Knockback.get(player));
+            else if (NAME.contains("Fire Aspect"))
+                itemStack = checkIfUnlocked(itemStack, WeaponUpgrade.FireAspect.get(player));
+            else if (NAME.contains("Power"))
+                itemStack = checkIfUnlocked(itemStack, BowUpgrade.Power.get(player));
+            else if (NAME.contains("Punch"))
+                itemStack = checkIfUnlocked(itemStack, BowUpgrade.Punch.get(player));
+            else if (NAME.contains("Flame"))
+                itemStack = checkIfUnlocked(itemStack, BowUpgrade.Flame.get(player));
+            else if (NAME.contains("Piercing"))
+                itemStack = checkIfUnlocked(itemStack, CrossbowUpgrade.Piercing.get(player));
+            else if (NAME.contains("Multishot"))
+                itemStack = checkIfUnlocked(itemStack, CrossbowUpgrade.Multishot.get(player));
+            else if (NAME.contains("Quick Charge"))
+                itemStack = checkIfUnlocked(itemStack, CrossbowUpgrade.QuickCharge.get(player));
+            else if (NAME.contains("More Arrows"))
+                itemStack = checkIfUnlocked(itemStack, ArrowUpgrade.MoreArrows.get(player));
+            else if (NAME.contains("Effect Arrows"))
+                itemStack = checkIfUnlocked(itemStack, ArrowUpgrade.EffectArrows.get(player));
+            else if (NAME.contains("Efficiency"))
+                itemStack = checkIfUnlocked(itemStack, ToolUpgrade.Efficiency.get(player));
+            else if (NAME.contains("Unbreaking"))
+                itemStack = checkIfUnlocked(itemStack, ToolUpgrade.Unbreaking.get(player));
+            else if (NAME.contains("Protection"))
+                itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.Protection.get(player));
+            else if (NAME.contains("Thorns"))
+                itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.Thorns.get(player));
+            else if (NAME.contains("Feather Falling"))
+                itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.FeatherFalling.get(player));
+            else if (NAME.contains("Depth Strider"))
+                itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.DepthStrider.get(player));
+            else if (NAME.contains("Respiration"))
+                itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.Respiration.get(player));
+            else if (NAME.contains("Aqua Affinity"))
+                itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.AquaAffinity.get(player));
+            else if (NAME.contains("Food Source"))
+                itemStack = checkIfUnlocked(itemStack, FoodUpgrade.FoodSource.get(player));
+            else if (NAME.contains("Food Amount"))
+                itemStack = checkIfUnlocked(itemStack, FoodUpgrade.FoodAmount.get(player));
+            else if (NAME.contains("Speed Boost"))
+                itemStack = checkIfUnlocked(itemStack, KitUpgrades.PlatformerUpgrade.get(player));
+            else if (NAME.contains("Reduce Cooldown"))
+                itemStack = checkIfUnlocked(itemStack, KitUpgrades.Cooldown.get(player));
+            else if (NAME.contains("Quick Charge"))
+                itemStack = checkIfUnlocked(itemStack, KitUpgrades.Charge.get(player));
+            else if (NAME.contains("Increase Duration"))
+                itemStack = checkIfUnlocked(itemStack, KitUpgrades.Duration.get(player));
         }
+
+        if (itemStack == null) return null;
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta == null) return null;
+
+        itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        itemMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+
+        if (NAME != null && NAME.contains("»") && LORE != null) {
+            itemMeta.setLore(Arrays.asList(
+                    ChatColor.YELLOW + ChatColor.ITALIC.toString() + LORE.substring(0, 34),
+                    ChatColor.YELLOW + ChatColor.ITALIC.toString() + LORE.substring(35)
+            ));
+        }
+
+        if (cost != 0) {
+            if (Points.getPoints(player) >= cost) {
+                if (NAME != null && itemMeta.getDisplayName().contains("LOCKED")) {
+                    itemMeta.setLore(Arrays.asList(
+                            ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
+                            "",
+                            ChatColor.LIGHT_PURPLE.toString() + Points.getPoints(player) +
+                                    ChatColor.WHITE + " / " + cost + " Points",
+                            ChatColor.DARK_RED + "Purchase previous levels first!"
+                    ));
+                } else {
+                    itemMeta.setLore(Arrays.asList(
+                            ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
+                            "",
+                            ChatColor.LIGHT_PURPLE.toString() + Points.getPoints(player) +
+                                    ChatColor.WHITE + " / " + cost + " Points",
+                            ChatColor.GOLD + "Click to buy!"
+                    ));
+                }
+            } else {
+                itemMeta.setLore(Arrays.asList(
+                        ChatColor.RED.toString() + ChatColor.ITALIC + LORE,
+                        "",
+                        ChatColor.DARK_RED.toString() + Points.getPoints(player) +
+                                ChatColor.WHITE + " / " + cost + " Points",
+                        ChatColor.RED.toString() + (cost - Points.getPoints(player)) + " Points missing!"
+                ));
+            }
+        }
+
+        itemStack.setItemMeta(itemMeta);
 
         return itemStack;
     }
 
-    public ItemMeta addNameAndCost(ItemMeta meta) {
-        if (name != null) {
-            meta.setDisplayName(
-                    ChatColor.translateAlternateColorCodes('&', name)
-            );
+    private ItemStack checkIfUnlocked(ItemStack itemStack, int level) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta == null) return null;
 
-            if(name.contains("»")) {
-                meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-            }
+        if (AMOUNT <= level) {
+            return (setEnchantmentAndName(itemStack));
+        } else {
+            itemMeta.setDisplayName(ChatColor.DARK_RED.toString() + ChatColor.BOLD + NAME +
+                    ChatColor.RED + ChatColor.ITALIC + " LOCKED");
+            itemStack.setItemMeta(itemMeta);
+            return itemStack;
         }
+    }
 
-        if (cost != 0) {
-            meta.setLore(Arrays.asList(
-                    ChatColor.GRAY + "Cost: " + ChatColor.YELLOW + cost + " Points",
-                    ""));
-        }
-        return meta;
+    private ItemStack setEnchantmentAndName(ItemStack itemStack) {
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta == null) return null;
+
+        itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        itemMeta.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD
+                + ChatColor.translateAlternateColorCodes('&', NAME));
+
+        itemStack.setItemMeta(itemMeta);
+
+        return itemStack;
     }
 }

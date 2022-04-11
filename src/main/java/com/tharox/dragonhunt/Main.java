@@ -7,6 +7,9 @@ import com.tharox.dragonhunt.commands.DateCommand;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.entities.EntityDeathListener;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kitupgrades.KitUpgradeCommand;
+import com.tharox.dragonhunt.kitupgrades.KitUpgradeInteract;
+import com.tharox.dragonhunt.kitupgrades.KitUpgradeListener;
 import com.tharox.dragonhunt.players.*;
 import com.tharox.dragonhunt.entities.CreatureSpawnListener;
 import com.tharox.dragonhunt.kits.KitListener;
@@ -16,7 +19,6 @@ import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
 import com.tharox.dragonhunt.shop.ShopCommand;
-import com.tharox.dragonhunt.shop.ShopInventory;
 import com.tharox.dragonhunt.shop.ShopListener;
 import com.tharox.dragonhunt.spectate.SpectateCommand;
 import com.tharox.dragonhunt.timer.Countdown;
@@ -49,7 +51,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     @Override
     public void onEnable() {
         saveDefaultConfig(); //config.yml
-        new ShopInventory(getConfig());
 
         Bukkit.getLogger().fine("Plugin activated");
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
@@ -147,6 +148,9 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new VehicleListener(), this);
         pluginManager.registerEvents(new ShopListener(), this);
         pluginManager.registerEvents(new KitListener(), this);
+        //TODO: new Listeners
+        pluginManager.registerEvents(new KitUpgradeListener(), this);
+        pluginManager.registerEvents(new KitUpgradeInteract(), this);
 
         pluginManager.registerEvents(new BlockBreakListener(), this);
         pluginManager.registerEvents(new BlockExplodeListener(), this);
@@ -171,5 +175,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         getCommand("date").setExecutor(new DateCommand());
         getCommand("shop").setExecutor(new ShopCommand());
         getCommand("spec").setExecutor(new SpectateCommand());
+        getCommand("kit").setExecutor(new KitUpgradeCommand());
     }
 }

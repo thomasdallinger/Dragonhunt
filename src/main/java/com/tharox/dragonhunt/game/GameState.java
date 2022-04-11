@@ -33,6 +33,8 @@ public class GameState {
 
     public static boolean minOnePlayerInEnd = false;
 
+    public static HashMap<Player, ItemStack> food = new HashMap<>();
+
     /**
      * Used in EntityDeathListener, ShopListener.
      * @param player player who is supposed to get the item
@@ -62,7 +64,7 @@ public class GameState {
             player.sendPluginMessage(Main.getInstance(), "BungeeCord", out.toByteArray());
         }
 
-        DbValues.updateServerStatus();
+        //DbValues.updateServerStatus();
         Bukkit.getServer().shutdown();
     }
 }

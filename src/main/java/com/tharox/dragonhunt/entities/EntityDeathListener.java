@@ -28,7 +28,7 @@ public class EntityDeathListener implements Listener {
             }
 
             if (mob instanceof Animals) {
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_PORKCHOP, 2));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.food.get(killer));
             }
         }
 
@@ -71,7 +71,7 @@ public class EntityDeathListener implements Listener {
 
         //Extra Drops
         if (mob.getName().equals("Hoglin")) {
-            mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_PORKCHOP, 2));
+            mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.food.get(killer));
         } else if (mob.getName().equals("Sheep")) {
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.STRING, 8));
         } else if (mob.getName().equals("Chicken")) {

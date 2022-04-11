@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 public class ShopCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
         Player player;
 
         if (sender instanceof Player) {
@@ -22,7 +21,8 @@ public class ShopCommand implements CommandExecutor {
             return true;
         }
 
-        player.openInventory(ShopInventory.menu);
+        ShopInventory shopInventory = new ShopInventory(Main.getInstance().getConfig(), player);
+        player.openInventory(shopInventory.menu);
         return false;
     }
 }

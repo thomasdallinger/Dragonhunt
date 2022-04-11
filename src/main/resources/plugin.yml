@@ -12,3 +12,5 @@ commands:
     description: Opens the shop.
   spec:
     description: Spectate ability.
+  kit:
+    description: Opens kit upgrades.

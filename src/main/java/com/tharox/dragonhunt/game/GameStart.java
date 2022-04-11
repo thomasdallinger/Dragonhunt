@@ -1,8 +1,12 @@
 package com.tharox.dragonhunt.game;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.dimensions.DimensionListener;
 import com.tharox.dragonhunt.kits.KitInventory;
+import com.tharox.dragonhunt.kits.Platformer;
+import com.tharox.dragonhunt.kitupgrades.KitUpgrades;
+import com.tharox.dragonhunt.shop.*;
 import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
@@ -33,12 +37,21 @@ public class GameStart {
 
         configureOverworld();
         configurePlayer();
+        upgradeRegistration();
 
         //randomly choose one nether dungeon location
         int rnd = (int) (Math.random() * 1 + 1);
         Location loc = GameState.dungeonLocations.get(rnd);
         Bukkit.getPluginManager().registerEvents(new DimensionListener(loc), Main.getInstance());
         GameState.dungeonLocation = loc;
+
+        //TODO: remove later
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            Platformer.chargeTime.put(player, Platformer.defaultChargeTime);
+            Platformer.duration.put(player, Platformer.defaultDuration);
+            Platformer.cooldown.put(player, Platformer.defaultCooldown);
+            Platformer.amplifier.put(player, Platformer.defaultAmplifier);
+        }
     }
 
     private void configureOverworld() {
@@ -68,10 +81,42 @@ public class GameStart {
 
             Spectate.spectatesLeft.put(player, 3);
             Spectate.spectateCooldown.put(player, timer.getTime() + 180);
+            GameState.food.put(player, new ItemStack(Material.RABBIT));
 
             //set default tracker values
             Main.getInstance().getTracker().playerTracksPlayer.put(player, null);
             Main.getInstance().getTracker().playerTracksIndex.put(player, 0);
+        }
+    }
+
+    //set all upgrades to 1 so the first level of each upgrade can be purchased
+    private void upgradeRegistration() {
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            WeaponUpgrade.Sharpness.put(player, 1);
+            WeaponUpgrade.Knockback.put(player, 1);
+            WeaponUpgrade.FireAspect.put(player, 1);
+            BowUpgrade.Power.put(player, 1);
+            BowUpgrade.Punch.put(player, 1);
+            BowUpgrade.Flame.put(player, 1);
+            CrossbowUpgrade.Piercing.put(player, 1);
+            CrossbowUpgrade.Multishot.put(player, 1);
+            CrossbowUpgrade.QuickCharge.put(player, 1);
+            ArrowUpgrade.MoreArrows.put(player, 1);
+            ArrowUpgrade.EffectArrows.put(player, 1);
+            ToolUpgrade.Efficiency.put(player, 1);
+            ToolUpgrade.Unbreaking.put(player, 1);
+            ArmorUpgrade.Protection.put(player, 1);
+            ArmorUpgrade.Thorns.put(player, 1);
+            ArmorUpgrade.FeatherFalling.put(player, 1);
+            ArmorUpgrade.DepthStrider.put(player, 1);
+            ArmorUpgrade.Respiration.put(player, 1);
+            ArmorUpgrade.AquaAffinity.put(player, 1);
+            FoodUpgrade.FoodSource.put(player, 1);
+            FoodUpgrade.FoodAmount.put(player, 1);
+            KitUpgrades.PlatformerUpgrade.put(player, 1);
+            KitUpgrades.Cooldown.put(player, 1);
+            KitUpgrades.Charge.put(player, 1);
+            KitUpgrades.Duration.put(player, 1);
         }
     }
 
@@ -169,6 +214,7 @@ public class GameStart {
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);
                 player.getInventory().setChestplate(new ItemStack(Material.AIR));
+                new Arrows(); //start arrow generation
             }
         }
     }

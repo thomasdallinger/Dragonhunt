@@ -1,426 +1,500 @@
 #SHOP
-#names needed for shopItemCost and db
 #menu item: no cost!
+#slot: 0-26
 menu:
-  0:
-    material: ENCHANTED_BOOK
-    amount: 1
-    name: "&e&l» Enchanting"
-  1:
-    material: ENCHANTED_GOLDEN_APPLE
-    amount: 1
-    name: "&d&l» Food, Potions & Arrows"
-  2:
-    material: TNT
-    amount: 1
-    name: "&a&l» Blocks & Redstone"
-enchanting:
   0:
     material: IRON_SWORD
     amount: 1
-    enchantments:
-      SHARPNESS: 1
-    name: "&f&l» Sword Enchantments"
+    slot: 10
+    name: "&l» Weapon Upgrades"
+    lore: "Adds enchantments to ALL SWORDS    and AXES in your inventory."
+   #lore: "1234567890123456789012345678901234567890
   1:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      SHARPNESS: 1
-    cost: 100
-    name: "Sharpness Book"
-  2:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      KNOCKBACK: 1
-    cost: 75
-    name: "Knockback Book"
-  3:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      FIRE_ASPECT: 1
-    cost: 125
-    name: "Fire Aspect Book"
-  4:
     material: BOW
     amount: 1
-    enchantments:
-      POWER: 1
-    name: "&e&l» Bow Enchantments"
-  5:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      POWER: 1
-    cost: 75
-    name: "Power Book"
-  6:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      PUNCH: 1
-    cost: 125
-    name: "Punch Book"
-  7:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      FLAME: 1
-    cost: 200
-    name: "Flame Book"
-  8:
-    material: AIR
-    amount: 1
-  9:
+    slot: 11
+    name: "&l» Bow Upgrades"
+    lore: "Adds enchantments to ALL BOWS      in your inventory."
+  2:
     material: CROSSBOW
     amount: 1
-    enchantments:
-      PIERCING: 1
-    name: "&c&l» Crossbow Enchantments"
-  10:
-    material: ENCHANTED_BOOK
+    slot: 12
+    name: "&l» Crossbow Upgrades"
+    lore: "Adds enchantments to ALL CROSSBOWS in your inventory."
+  3:
+    material: ARROW
     amount: 1
-    enchantments:
-      PIERCING: 1
-    cost: 30
-    name: "Piercing Book"
-  11:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      MULTISHOT: 1
-    cost: 70
-    name: "Multishot Book"
-  12:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      QUICK_CHARGE: 1
-    cost: 50
-    name: "Quick Charge Book"
-  13:
+    slot: 13
+    name: "&l» Arrow Upgrades"
+    lore: "Increases ARROW GAIN RATE and      allows you to obtain EFFECT ARROWS."
+  4:
     material: DIAMOND_PICKAXE
     amount: 1
-    enchantments:
-      EFFICIENCY: 1
-    name: "&b&l» Tool Enchantments"
-  14:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      EFFICIENCY: 2
-    cost: 80
-    name: "Efficiency Book"
-  15:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      UNBREAKING: 2
-    cost: 80
-    name: "Unbreaking Book"
-  16:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      FORTUNE: 1
-    cost: 75
-    name: "Fortune Book"
-  17:
-    material: EXPERIENCE_BOTTLE
-    amount: 4
-    cost: 50
-    name: "Experience Bottle"
-  18:
+    slot: 14
+    name: "&l» Tool Upgrades"
+    lore: "Adds enchantments to ALL AXES      and PICKAXES in your inventory."
+  5:
     material: GOLDEN_CHESTPLATE
     amount: 1
-    enchantments:
-      PROTECTION: 1
-    name: "&6&l» Armor Enchantments"
-  19:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      PROTECTION: 1
-    cost: 75
-    name: "Protection Book"
-  20:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      THORNS: 1
-    cost: 50
-    name: "Thorns Book"
-  21:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      FEATHER_FALLING: 2
-    cost: 120
-    name: "Feather Falling Book"
-  22:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      DEPTH_STRIDER: 2
-    cost: 120
-    name: "Depth Strider Book"
-  23:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      RESPIRATION: 2
-    cost: 95
-    name: "Respiration Book"
-  24:
-    material: ENCHANTED_BOOK
-    amount: 1
-    enchantments:
-      AQUA_AFFINITY: 1
-    cost: 50
-    name: "Aqua Affinity Book"
-  25:
-    material: ANVIL
-    cost: 200
-    amount: 1
-    name: "Anvil"
-foodPotionsArrows:
-  0:
-    material: COOKED_PORKCHOP
-    amount: 3
-    cost: 20
-    name: "Cooked Porkchop"
-  1:
-    material: GOLDEN_CARROT
-    amount: 3
-    cost: 40
-    name: "Golden Carrot"
-  2:
-    material: GOLDEN_APPLE
-    amount: 1
-    cost: 75
-    name: "Golden Apple"
-  3:
-    material: SPLASH_POTION
-    amount: 2
-    cost: 70
-    effects:
-      HUNGER: 0,300
-    color: 0x587653
-    name: "Hunger Potion"
-  4:
-    material: SPLASH_POTION
-    amount: 2
-    cost: 90
-    effects:
-      SLOW_DIGGING: 0,300
-    color: 0x4a4217
-    name: "Mining Fatigue Potion"
-  5:
-    material: SPLASH_POTION
-    amount: 2
-    cost: 80
-    effects:
-      SLOW: 0,300
-    color: 0x5a6c81
-    name: "Slowness Potion"
+    slot: 15
+    name: "&l» Armor Upgrades"
+    lore: "Adds enchantments to ALL           ARMOR PIECES in your armor slots."
   6:
-    material: SPLASH_POTION
-    amount: 2
-    cost: 100
-    effects:
-      WEAKNESS: 0,300
-    color: 0x484d48
-    name: "Weakness Potion"
-  7:
-    material: SPLASH_POTION
-    amount: 2
-    cost: 80
-    effects:
-      BLINDNESS: 0,300
-    color: 0x000000
-    name: "Blindness Potion"
-  8:
-    material: SPLASH_POTION
-    amount: 2
-    cost: 90
-    effects:
-      POISON: 0,300
-    color: 0x4e9331
-    name: "Poison Potion"
-  9:
-    material: SPLASH_POTION
-    amount: 2
-    cost: 90
-    effects:
-      SPEED: 1,600
-    color: 0x7cafc6
-    name: "Speed Potion"
-  10:
-    material: SPLASH_POTION
-    amount: 2
-    cost: 80
-    effects:
-      JUMP: 1,600
-    color: 0x00FFFF
-    name: "Jump Boost Potion"
-  11:
-    material: POTION
+    material: COOKED_BEEF
     amount: 1
-    cost: 80
-    effects:
-      REGENERATION: 1,200
-    color: 0xcd5cab
-    name: "Regeneration Potion"
-  12:
-    material: SPLASH_POTION
+    slot: 16
+    name: "&l» Food Upgrades"
+    lore: "Upgrade to better FOOD SOURCES     and receive DOUBLE or TRIPLE FOOD from Entities."
+weapon:
+  0:
+    material: IRON_SWORD
+    amount: 1
+    slot: 2
+    name: "Sharpness I"
+    cost: 1
+    lore: "Adds 1 attack damage."
+  1:
+    material: IRON_SWORD
     amount: 2
-    cost: 90
-    effects:
-      HEAL: 1,0
-    color: 0xf82423
-    name: "Instant Healing Potion"
-  13:
-    material: POTION
+    slot: 11
+    name: "Sharpness II"
+    cost: 2
+    lore: "Adds 1.5 attack damage."
+  2:
+    material: IRON_SWORD
+    amount: 3
+    slot: 20
+    name: "Sharpness III"
+    cost: 3
+    lore: "Adds 2 attack damage."
+  3:
+    material: RABBIT_FOOT
     amount: 1
-    cost: 80
-    effects:
-      FAST_DIGGING: 4,600
-    color: 0xd9c043
-    name: "Haste Potion"
-  14:
-    material: POTION
+    slot: 4
+    name: "Knockback I"
+    cost: 1
+    lore: "Increases return speed by 0.05."
+  4:
+    material: RABBIT_FOOT
+    amount: 2
+    slot: 13
+    name: "Knockback II"
+    cost: 2
+    lore: "Increases return speed by 0.1."
+  5:
+    material: FLINT_AND_STEEL
     amount: 1
-    cost: 70
-    effects:
-      SLOW_FALLING: 0,300
-    color: 0xFFFFFF
-    name: "Slow Falling Potion"
-  15:
-    material: SPLASH_POTION
+    slot: 6
+    name: "Fire Aspect I"
+    cost: 3
+    lore: "Sets entities on fire for 4 seconds."
+  6:
+    material: FLINT_AND_STEEL
+    amount: 2
+    slot: 15
+    name: "Fire Aspect II"
+    cost: 6
+    lore: "Sets entities on fire for 8 seconds."
+bow:
+  0:
+    material: BOW
     amount: 1
-    cost: 80
-    effects:
-      FIRE_RESISTANCE: 0,600
-    color: 0xe49a3a
-    name: "Fire Resistance Potion"
-  16:
-    material: AIR
+    slot: 2
+    name: "Power I"
+    cost: 1
+    lore: "Increases arrow damage by 1."
+  1:
+    material: BOW
+    amount: 2
+    slot: 11
+    name: "Power II"
+    cost: 2
+    lore: "Increases arrow damage by 1.5."
+  2:
+    material: BOW
+    amount: 3
+    slot: 20
+    name: "Power III"
+    cost: 3
+    lore: "Increases arrow damage by 2."
+  3:
+    material: RABBIT_FOOT
     amount: 1
-  17:
-    material: AIR
+    slot: 4
+    name: "Punch I"
+    cost: 2
+    lore: "Adds 0.6 knockback strength to arrows."
+  4:
+    material: RABBIT_FOOT
+    amount: 2
+    slot: 13
+    name: "Punch II"
+    cost: 4
+    lore: "Adds 1.2 knockback strength to arrows."
+  5:
+    material: FIRE_CHARGE
     amount: 1
-  18:
-    material: ARROW
-    amount: 8
-    cost: 40
-    name: "Arrow"
-  19:
-    material: TIPPED_ARROW
-    amount: 8
-    cost: 60
-    effects:
-      HUNGER: 0,80
-    color: 0x587653
-    name: "Hunger Arrow (00:04)"
-  20:
-    material: TIPPED_ARROW
-    amount: 8
-    cost: 80
-    effects:
-      SLOW_DIGGING: 0,80
-    color: 0x4a4217
-    name: "Mining Fatigue Arrow (00:04)"
-  21:
-    material: TIPPED_ARROW
-    amount: 8
-    cost: 70
-    effects:
-      SLOW: 0,80
-    color: 0x5a6c81
-    name: "Slowness Arrow (00:04)"
-  22:
-    material: TIPPED_ARROW
-    amount: 8
-    cost: 90
-    effects:
-      WEAKNESS: 0,80
-    color: 0x484d48
-    name: "Weakness Arrow (00:04)"
-  23:
-    material: TIPPED_ARROW
-    amount: 8
-    cost: 70
-    effects:
-      BLINDNESS: 0,80
-    color: 0x000000
-    name: "Blindness Arrow (00:04)"
-  24:
-    material: TIPPED_ARROW
-    amount: 8
-    cost: 80
-    effects:
-      POISON: 0,80
-    color: 0x4e9331
-    name: "Poison Arrow (00:04)"
-  25:
+    slot: 6
+    name: "Flame"
+    cost: 3
+    lore: "Arrows set the target on fire."
+crossbow:
+  0:
+    material: CROSSBOW
+    amount: 1
+    slot: 2
+    name: "Piercing I"
+    cost: 1
+    lore: "Arrows pass through multiple entities."
+  1:
+    material: CROSSBOW
+    amount: 2
+    slot: 11
+    name: "Piercing II"
+    cost: 2
+    lore: "Arrows pass through multiple entities."
+  2:
+    material: CROSSBOW
+    amount: 3
+    slot: 20
+    name: "Piercing III"
+    cost: 3
+    lore: "Arrows pass through multiple entities."
+  3:
     material: SPECTRAL_ARROW
-    amount: 8
-    cost: 60
-    name: "Spectral Arrow"
-blocksRedstone:
-  0:
-    material: OAK_PLANKS
-    cost: 25
-    amount: 4
-    name: "Oak Planks"
-  1:
-    material: LIGHT_BLUE_CARPET
-    cost: 25
-    amount: 4
-    name: "Marker"
-  2:
-    material: SHULKER_BOX
-    cost: 300
     amount: 1
-    name: "Shulker Box"
-  3:
-    material: SLIME_BLOCK
-    cost: 75
-    amount: 1
-    name: "Slime Block"
+    slot: 4
+    name: "Multishot"
+    cost: 2
+    lore: "Shoot 3 arrows in a spread at the cost of one."
   4:
-    material: AIR
+    material: ARROW
     amount: 1
+    slot: 6
+    name: "Quick Charge I"
+    cost: 1
+    lore: "Reduces draw time by 0.25 seconds."
   5:
-    material: AIR
+    material: ARROW
+    amount: 2
+    slot: 15
+    name: "Quick Charge II"
+    cost: 2
+    lore: "Reduces draw time by 0.5 seconds."
+arrow:
+  0:
+    material: ARROW
     amount: 1
+    slot: 3
+    name: "More Arrows I"
+    cost: 1
+    lore: "Receive 2 Arrows every 10 seconds."
+  1:
+    material: ARROW
+    amount: 2
+    slot: 12
+    name: "More Arrows II"
+    cost: 2
+    lore: "Receive 3 arrows every 10 seconds."
+  2:
+    material: ARROW
+    amount: 3
+    slot: 21
+    name: "More Arrows III"
+    cost: 3
+    lore: "Receive 4 arrows every 10 seconds."
+  3:
+    material: TIPPED_ARROW
+    amount: 1
+    slot: 5
+    name: "Effect Arrows I"
+    cost: 1
+    lore: "Receive SLOWNESS arrows every 10 seconds."
+  4:
+    material: TIPPED_ARROW
+    amount: 2
+    slot: 14
+    name: "Effect Arrows II"
+    cost: 2
+    lore: "Receive BLINDNESS arrows every 10 seconds."
+  5:
+    material: TIPPED_ARROW
+    amount: 3
+    slot: 23
+    name: "Effect Arrows III"
+    cost: 3
+    lore: "Receive POISON arrows every 10 seconds."
+tool:
+  0:
+    material: GOLDEN_PICKAXE
+    amount: 1
+    slot: 3
+    name: "Efficiency I"
+    cost: 1
+    lore: "Increases mine speed by 2."
+  1:
+    material: GOLDEN_PICKAXE
+    amount: 2
+    slot: 12
+    name: "Efficiency II"
+    cost: 2
+    lore: "Increases mine speed by 5."
+  2:
+    material: GOLDEN_PICKAXE
+    amount: 3
+    slot: 21
+    name: "Efficiency III"
+    cost: 3
+    lore: "Increases mine speed by 10."
+  3:
+    material: DIAMOND_PICKAXE
+    amount: 1
+    slot: 5
+    name: "Unbreaking I"
+    cost: 1
+    lore: "Items have a 1 in 2 chance to take damage."
+  4:
+    material: DIAMOND_PICKAXE
+    amount: 2
+    slot: 14
+    name: "Unbreaking II"
+    cost: 2
+    lore: "Items have a 1 in 3 chance to take damage."
+  5:
+    material: DIAMOND_PICKAXE
+    amount: 3
+    slot: 23
+    name: "Unbreaking III"
+    cost: 3
+    lore: "Items have a 1 in 4 chance to take damage."
+armor:
+  0:
+    material: GOLDEN_CHESTPLATE
+    amount: 1
+    slot: 1
+    name: "Protection I"
+    cost: 1
+    lore: "4% damage reduction for each armor piece."
+  1:
+    material: GOLDEN_CHESTPLATE
+    amount: 2
+    slot: 10
+    name: "Protection II"
+    cost: 2
+    lore: "8% damage reduction for each armor piece."
+  2:
+    material: GOLDEN_CHESTPLATE
+    amount: 3
+    slot: 19
+    name: "Protection III"
+    cost: 3
+    lore: "12% damage reduction for each armor piece."
+  3:
+    material: POINTED_DRIPSTONE
+    amount: 1
+    slot: 2
+    name: "Thorns I"
+    cost: 1
+    lore: "Reflects damage at the cost of durability. Chance: 15%"
+  4:
+    material: POINTED_DRIPSTONE
+    amount: 2
+    slot: 11
+    name: "Thorns II"
+    cost: 2
+    lore: "Reflects damage at the cost of durability. Chance: 30%"
+  5:
+    material: DIAMOND_BOOTS
+    amount: 1
+    slot: 3
+    name: "Feather Falling I"
+    cost: 1
+    lore: "Reduces fall damage by 12%."
   6:
-    material: AIR
-    amount: 1
+    material: DIAMOND_BOOTS
+    amount: 2
+    slot: 12
+    name: "Feather Falling II"
+    cost: 2
+    lore: "Reduces fall damage by 24%."
   7:
-    material: AIR
-    amount: 1
+    material: DIAMOND_BOOTS
+    amount: 3
+    slot: 21
+    name: "Feather Falling III"
+    cost: 3
+    lore: "Reduces fall damage by 36%."
   8:
-    material: AIR
+    material: LEATHER_BOOTS
     amount: 1
+    slot: 4
+    name: "Depth Strider I"
+    cost: 1
+    lore: "Increases underwater movement speed."
   9:
-    material: REDSTONE
-    cost: 50
-    amount: 8
-    name: "Redstone"
+    material: LEATHER_BOOTS
+    amount: 2
+    slot: 13
+    name: "Depth Strider II"
+    cost: 2
+    lore: "Increases underwater movement speed."
   10:
-    material: COBWEB
-    cost: 80
+    material: LEATHER_BOOTS
     amount: 3
-    name: "Cobweb"
+    slot: 22
+    name: "Depth Strider III"
+    cost: 3
+    lore: "Swim as fast as walking on land."
   11:
-    material: TNT
-    cost: 110
-    amount: 3
-    name: "TNT"
-  12:
-    material: PISTON
-    cost: 60
+    material: NETHERITE_HELMET
     amount: 1
-    name: "Piston"
+    slot: 5
+    name: "Respiration I"
+    cost: 1
+    lore: "Causes a 50% chance no to decrease air level."
+
+  12:
+    material: NETHERITE_HELMET
+    amount: 2
+    slot: 14
+    name: "Respiration II"
+    cost: 2
+    lore: "Causes a 66.7% chance no to decrease air level."
+  13:
+    material: NETHERITE_HELMET
+    amount: 3
+    slot: 23
+    name: "Respiration III"
+    cost: 3
+    lore: "Causes a 75% chance no to decrease air level."
+  14:
+    material: TURTLE_HELMET
+    amount: 1
+    slot: 6
+    name: "Aqua Affinity"
+    cost: 1
+    lore: "Increases underwater mining speed."
+food:
+  0:
+    material: COOKED_RABBIT
+    amount: 1
+    slot: 3
+    name: "Food Source I"
+    cost: 1
+    lore: "5 food points, 6 saturation restored"
+  1:
+    material: COOKED_MUTTON
+    amount: 2
+    slot: 12
+    name: "Food Source II"
+    cost: 2
+    lore: "6 food points, 9.6 saturation restored"
+  2:
+    material: COOKED_BEEF
+    amount: 3
+    slot: 21
+    name: "Food Source III"
+    cost: 3
+    lore: "8 food points, 12.8 saturation restored"
+  3:
+    material: COOKED_BEEF
+    amount: 1
+    slot: 5
+    name: "Food Amount I"
+    cost: 2
+    lore: "Double food from all sources."
+  4:
+    material: COOKED_BEEF
+    amount: 2
+    slot: 14
+    name: "Food Amount II"
+    cost: 3
+    lore: "Triple food from all sources."
+platformer:
+  0:
+    material: SMOOTH_SANDSTONE
+    amount: 1
+    slot: 2
+    name: "Speed Boost I"
+    cost: 1
+    lore: "Adds speed 2 to your ability."
+  1:
+    material: SMOOTH_SANDSTONE
+    amount: 2
+    slot: 11
+    name: "Speed Boost II"
+    cost: 1
+    lore: "Adds speed 3 to your ability."
+  2:
+    material: SMOOTH_SANDSTONE
+    amount: 3
+    slot: 20
+    name: "Speed Boost III"
+    cost: 1
+    lore: "Adds speed 4 to your ability."
+cooldown:
+  0:
+    material: PACKED_ICE
+    amount: 1
+    slot: 5
+    name: "Reduce Cooldown I"
+    cost: 1
+    lore: "Reduces kit ability cooldown by 5 seconds."
+  1:
+    material: PACKED_ICE
+    amount: 2
+    slot: 14
+    name: "Reduce Cooldown II"
+    cost: 1
+    lore: "Reduces kit ability cooldown by 10 seconds."
+  2:
+    material: PACKED_ICE
+    amount: 3
+    slot: 23
+    name: "Reduce Cooldown III"
+    cost: 1
+    lore: "Reduces kit ability cooldown by 20 seconds."
+quickcharge:
+  0:
+    material: REPEATER
+    amount: 1
+    slot: 6
+    name: "Quick Charge I"
+    cost: 1
+    lore: "Reduces charge time by 1 second."
+  1:
+    material: REPEATER
+    amount: 2
+    slot: 15
+    name: "Quick Charge II"
+    cost: 1
+    lore: "Reduces charge time by 2 seconds."
+  2:
+    material: REPEATER
+    amount: 3
+    slot: 24
+    name: "Quick Charge III"
+    cost: 1
+    lore: "Reduces charge time by 3 seconds."
+duration:
+  0:
+    material: CLOCK
+    amount: 1
+    slot: 7
+    name: "Increase Duration I"
+    cost: 1
+    lore: "Increases ability duration by 1 second."
+  1:
+    material: CLOCK
+    amount: 2
+    slot: 16
+    name: "Increase Duration II"
+    cost: 1
+    lore: "Increases ability duration by 2 seconds."
+  2:
+    material: CLOCK
+    amount: 3
+    slot: 25
+    name: "Increase Duration III"
+    cost: 1
+    lore: "Increases ability duration by 3 seconds."

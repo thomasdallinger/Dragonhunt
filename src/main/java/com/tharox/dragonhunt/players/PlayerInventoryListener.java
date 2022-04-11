@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -22,7 +23,8 @@ public class PlayerInventoryListener implements Listener {
             item = event.getCurrentItem();
         }
 
-        if (event.getHotbarButton() == 7 || event.getHotbarButton() == 8) {
+        //Tracker = 7, Kit ability = 8, Arrows = 17
+        if (event.getHotbarButton() == 7 || event.getHotbarButton() == 8 || event.getHotbarButton() == 17) {
             event.setCancelled(true);
             return;
         }
@@ -33,8 +35,7 @@ public class PlayerInventoryListener implements Listener {
         if (item == null) return;
         if (item.getItemMeta() == null) return;
 
-        //Tracker or Kit ability
-        if (event.getSlot() == 7 || event.getSlot() == 8) {
+        if (event.getSlot() == 7 || event.getSlot() == 8 || event.getSlot() == 17) {
             event.setCancelled(true);
             return;
         }
@@ -55,7 +56,8 @@ public class PlayerInventoryListener implements Listener {
 
         String displayName = item.getItemMeta().getDisplayName();
 
-        if (displayName.contains(ChatColor.LIGHT_PURPLE + "Kit Ability") || displayName.contains(ChatColor.GOLD + event.getPlayer().getName() + "'s Tracker"))
+        if (displayName.contains(ChatColor.LIGHT_PURPLE + "Kit Ability") || displayName.contains(ChatColor.GOLD + event.getPlayer().getName() + "'s Tracker")
+            || displayName.contains(ChatColor.YELLOW + "Generated Arrow"))
             event.setCancelled(true);
 
         if(item.getType() == Material.ELYTRA) {
@@ -64,7 +66,7 @@ public class PlayerInventoryListener implements Listener {
     }
 
     @EventHandler
-    public void onItemDrop(PlayerSwapHandItemsEvent event) {
+    public void onItemSwap(PlayerSwapHandItemsEvent event) {
         ItemStack offHandItem = event.getOffHandItem();
 
         if (offHandItem == null) return;

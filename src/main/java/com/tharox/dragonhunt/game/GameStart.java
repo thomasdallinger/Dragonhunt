@@ -30,7 +30,7 @@ public class GameStart {
     Location higherStartLocation = new Location(startLocation.getWorld(), startLocation.getX(), startLocation.getY() + 40, startLocation.getZ());
 
     public GameStart() {
-        startCountdown = new Countdown(true, 30, this::onCountdown);
+        startCountdown = new Countdown(true, 20, this::onCountdown);
 
         configureOverworld();
         configurePlayer();
@@ -132,7 +132,15 @@ public class GameStart {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
             }
 
-            player.sendTitle(ChatColor.GOLD.toString() + ChatColor.BOLD + startCountdown.getTime(), "", 10, 20, 10);
+            if(startCountdown.getTime() > 5)
+                player.sendTitle(ChatColor.GOLD.toString() + ChatColor.BOLD + startCountdown.getTime(),
+                        "", 0, 20, 0);
+            else if (startCountdown.getTime() <= 5 && startCountdown.getTime() > 0)
+                player.sendTitle(ChatColor.RED.toString() + ChatColor.BOLD + startCountdown.getTime(),
+                        "", 0, 20, 0);
+            else
+                player.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "GO",
+                        "", 0, 20, 0);
 
             if (startCountdown.getTime() == 0) {
                 if(startLocation.getY() - highestBlock.getY() <= 40) {

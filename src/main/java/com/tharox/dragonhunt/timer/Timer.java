@@ -91,7 +91,7 @@ public class Timer {
                     setRunning(false);
                 }
             }
-        }.runTaskTimer(Main.getInstance(), 0, 20);
+        }.runTaskTimer(Main.getInstance(), 40, 20);
     }
 
     private void showdownCountdown() {

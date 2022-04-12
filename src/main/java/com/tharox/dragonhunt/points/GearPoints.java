@@ -7,7 +7,8 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 
 /**
- * Used for/in: LevelUp, PlayerInteractListener, BlockBreakListener, EntityDeathListener, PlayerDeathListener, GameStart, GearUpgradeListener, ResetScoreboardCountdown
+ * Used for/in: LevelUp, PlayerInteractListener, BlockBreakListener, EntityDeathListener, PlayerDeathListener, GameStart, GearUpgradeListener
+ * Gear Points of each player are displayed in the Scoreboard.
  * Coal ores award natural XP (0-2 xp points), which cannot be upgraded using XP Upgrades.
  */
 public class GearPoints {

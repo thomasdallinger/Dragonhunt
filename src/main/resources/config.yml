@@ -63,21 +63,21 @@ weapon:
     amount: 1
     slot: 2
     name: "Sharpness I"
-    cost: 1
+    cost: 2
     lore: "Adds 1 attack damage."
   1:
     material: IRON_SWORD
     amount: 2
     slot: 11
     name: "Sharpness II"
-    cost: 2
+    cost: 3
     lore: "Adds 1.5 attack damage."
   2:
     material: IRON_SWORD
     amount: 3
     slot: 20
     name: "Sharpness III"
-    cost: 3
+    cost: 4
     lore: "Adds 2 attack damage."
   3:
     material: RABBIT_FOOT
@@ -105,7 +105,7 @@ weapon:
     amount: 2
     slot: 15
     name: "Fire Aspect II"
-    cost: 6
+    cost: 4
     lore: "Sets entities on fire for 8 seconds."
 bow:
   0:
@@ -113,21 +113,21 @@ bow:
     amount: 1
     slot: 2
     name: "Power I"
-    cost: 1
+    cost: 2
     lore: "Increases arrow damage by 1."
   1:
     material: BOW
     amount: 2
     slot: 11
     name: "Power II"
-    cost: 2
+    cost: 3
     lore: "Increases arrow damage by 1.5."
   2:
     material: BOW
     amount: 3
     slot: 20
     name: "Power III"
-    cost: 3
+    cost: 4
     lore: "Increases arrow damage by 2."
   3:
     material: RABBIT_FOOT
@@ -141,7 +141,7 @@ bow:
     amount: 2
     slot: 13
     name: "Punch II"
-    cost: 4
+    cost: 3
     lore: "Adds 1.2 knockback strength to arrows."
   5:
     material: FIRE_CHARGE
@@ -285,21 +285,21 @@ armor:
     amount: 1
     slot: 1
     name: "Protection I"
-    cost: 1
+    cost: 2
     lore: "4% damage reduction for each armor piece."
   1:
     material: GOLDEN_CHESTPLATE
     amount: 2
     slot: 10
     name: "Protection II"
-    cost: 2
+    cost: 3
     lore: "8% damage reduction for each armor piece."
   2:
     material: GOLDEN_CHESTPLATE
     amount: 3
     slot: 19
     name: "Protection III"
-    cost: 3
+    cost: 4
     lore: "12% damage reduction for each armor piece."
   3:
     material: POINTED_DRIPSTONE
@@ -413,14 +413,14 @@ food:
     amount: 1
     slot: 5
     name: "Food Amount I"
-    cost: 2
+    cost: 1
     lore: "Double food from all sources."
   4:
     material: COOKED_BEEF
     amount: 2
     slot: 14
     name: "Food Amount II"
-    cost: 3
+    cost: 2
     lore: "Triple food from all sources."
 resource:
   0:
@@ -435,7 +435,7 @@ resource:
     amount: 2
     slot: 12
     name: "Smelted Resource II"
-    cost: 1
+    cost: 2
     lore: "Smelted gold from gold ores, copper ores & zombies."
   3:
     material: DIAMOND
@@ -449,7 +449,7 @@ resource:
     amount: 2
     slot: 14
     name: "Resource Amount II"
-    cost: 1
+    cost: 2
     lore: "Triple resources from gold, iron, copper ores & zombies."
 xp:
   0:
@@ -464,12 +464,12 @@ xp:
     amount: 2
     slot: 13
     name: "More XP II"
-    cost: 1
+    cost: 2
     lore: "2 more XP points from all sources."
   2:
     material: EXPERIENCE_BOTTLE
     amount: 3
     slot: 22
     name: "More XP III"
-    cost: 1
+    cost: 3
     lore: "3 more XP points from all sources."

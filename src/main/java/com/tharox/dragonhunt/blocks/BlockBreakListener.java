@@ -24,7 +24,9 @@ import java.util.List;
 
 public class BlockBreakListener implements Listener {
 
-    protected static List<Material> woods = List.of(Material.ACACIA_LOG, Material.BIRCH_LOG,
+    // a list of all wood types currently in the game
+    protected static List<Material> woods = List.of(
+            Material.ACACIA_LOG, Material.BIRCH_LOG,
             Material.DARK_OAK_LOG, Material.JUNGLE_LOG,
             Material.OAK_LOG, Material.SPRUCE_LOG,
             Material.CRIMSON_STEM, Material.WARPED_STEM);
@@ -33,14 +35,17 @@ public class BlockBreakListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
-        List<Material> netherOres = new ArrayList<>();
+
+        // ores, which can be mined in the NETHER
+        List<Material> netherOres = List.of(
+                Material.DEEPSLATE_LAPIS_ORE,
+                Material.DEEPSLATE_IRON_ORE,
+                Material.DEEPSLATE_GOLD_ORE);
+
+        // play the break wood sound for the amount of blocks destroyed
         final int[] blocksDestroyed = {10};
 
-        netherOres.add(Material.DEEPSLATE_LAPIS_ORE);
-        netherOres.add(Material.DEEPSLATE_IRON_ORE);
-        netherOres.add(Material.DEEPSLATE_GOLD_ORE);
-
-        //Deny Block Breaking in the nether
+        // deny block breaking in the NETHER except for certain materials
         if (player.getWorld().getName().equals("world_nether")) {
             if (block.getType() != Material.FIRE && !netherOres.contains(block.getType())) {
                 event.setCancelled(true);
@@ -57,7 +62,7 @@ public class BlockBreakListener implements Listener {
                 public void run() {
                     player.playSound(player.getLocation(), Sound.BLOCK_WOOD_BREAK, 1, 1);
                     blocksDestroyed[0]--;
-                    if(blocksDestroyed[0] == 0) {
+                    if (blocksDestroyed[0] == 0) {
                         this.cancel();
                     }
                 }
@@ -80,11 +85,11 @@ public class BlockBreakListener implements Listener {
         ItemStack hand = player.getInventory().getItemInMainHand();
         ItemMeta meta = hand.getItemMeta();
         if (meta instanceof Damageable) {
-            if(hand.getType().getMaxDurability() > 0) {
+            if (hand.getType().getMaxDurability() > 0) {
                 ((Damageable) meta).setDamage(((Damageable) meta).getDamage() + 1);
 
                 //avoid negative durability
-                if(((Damageable) meta).getDamage() > hand.getType().getMaxDurability()) {
+                if (((Damageable) meta).getDamage() > hand.getType().getMaxDurability()) {
                     player.getInventory().removeItem(hand);
                     player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1, 1);
                     return;
@@ -95,18 +100,21 @@ public class BlockBreakListener implements Listener {
     }
 
     /**
-     * Changes the block drops of certain drops to a new ItemStack.
-     * If it is not one of the blocks it will just drop the item normally.
+     * Changes the drops of certain blocks to a different ItemStack.
+     * If the block has drops, which are not affected by any changes, they will drop unchanged.
      *
-     * @param block block destroyed by the player
+     * @param block  block destroyed by the player
      * @param player player that destroyed the specific block
      */
     protected void changeDrops(Block block, Player player) {
+        // a HashMap with the old drops as materials and new drops as ItemStacks
+        // the new drops can be upgraded using RESOURCE UPGRADES
         HashMap<Material, ItemStack> materials = new HashMap<>();
         materials.put(Material.RAW_IRON, GameState.resources.get(player).get(0));
         materials.put(Material.RAW_GOLD, GameState.resources.get(player).get(1));
         materials.put(Material.RAW_COPPER, GameState.resources.get(player).get(1));
 
+        // loop through all drops and check if they have to be changed
         for (ItemStack item : block.getDrops()) {
             if (materials.containsKey(item.getType())) {
                 block.getDrops().clear();
@@ -115,6 +123,8 @@ public class BlockBreakListener implements Listener {
                 block.getWorld().dropItemNaturally(block.getLocation(), materials.get(item.getType()));
             }
 
+            // instead of dropping LAPIS, EMERALDS or REDSTONE, give the player a certain amount of XP
+            // the XP given can be upgraded using XP UPGRADES
             if (item.getType() == Material.LAPIS_LAZULI
                     || item.getType() == Material.EMERALD
                     || item.getType() == Material.REDSTONE) {
@@ -127,22 +137,28 @@ public class BlockBreakListener implements Listener {
         }
     }
 
+    /**
+     * When mining one block of wood, this function tries to find nearby wood block.
+     * If it finds one, this process starts from the beginning.
+     *
+     * @param block block that has been destroyed by the player
+     * @param player player who destroyed the block
+     * @return true if it was successful, false if the destroyed block isn't a wood type
+     */
     private boolean destroyTree(Block block, Player player) {
-        if(!woods.contains(block.getType())) return false;
+        if (!woods.contains(block.getType())) return false;
 
-        Location loc = block.getLocation();
+        Location location = block.getLocation();
         block.getDrops().clear();
         block.setType(Material.AIR);
-        block.getWorld().dropItemNaturally(loc, new ItemStack(Material.OAK_LOG));
-
-        setDamageToUsedTool(player);
+        block.getWorld().dropItemNaturally(location, new ItemStack(Material.OAK_LOG));
 
         ArrayList<Block> locations = new ArrayList<>();
 
         for (int x = -1; x <= 1; x++)
             for (int z = -1; z <= 1; z++)
                 for (int y = 0; y <= 1; y++)
-                    locations.add(new Location(loc.getWorld(), loc.getX() + x, loc.getY() + y, loc.getZ() + z).getBlock());
+                    locations.add(new Location(location.getWorld(), location.getX() + x, location.getY() + y, location.getZ() + z).getBlock());
 
         for (Block nextBlock :
                 locations) {

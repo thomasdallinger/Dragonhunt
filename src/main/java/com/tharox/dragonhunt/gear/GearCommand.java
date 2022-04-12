@@ -16,11 +16,6 @@ public class GearCommand implements CommandExecutor {
             player = (Player) sender;
         } else return true;
 
-        if(Main.getInstance().getTimer().getTime() < 120) {
-            player.sendMessage(ChatColor.RED + "Gear Upgrades are available after 2 minutes.");
-            return true;
-        }
-
         GearUpgradeInventory gearUpgradeInventory = new GearUpgradeInventory(Main.getInstance().getConfig(), player);
         player.openInventory(gearUpgradeInventory.menu);
         return false;

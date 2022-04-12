@@ -53,7 +53,7 @@ public class GearUpgradeInventory {
         Inventory inv;
         if(!category.equals("menu")) {
             inv = Bukkit.createInventory(null, 27, ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "GEAR UPGRADES "
-                    + ChatColor.LIGHT_PURPLE + GearPoints.getPoints(player) + " Points");
+                    + ChatColor.LIGHT_PURPLE + GearPoints.getPoints(player) + " Point(s)");
             addBackToMenuItem(inv);
         } else {
             inv = Bukkit.createInventory(null, 27, ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "GEAR UPGRADES MENU");

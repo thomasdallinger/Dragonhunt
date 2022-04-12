@@ -45,6 +45,6 @@ public class Countdown extends Timer {
 
                 setTime(getTime() - 1);
             }
-        }.runTaskTimer(Main.getInstance(), 20, 20); //20 Ticks = 1 Second
+        }.runTaskTimer(Main.getInstance(), 0, 20); //20 Ticks = 1 Second
     }
 }

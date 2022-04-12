@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.vehicles;
 
 import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -23,9 +24,11 @@ public class VehicleListener implements Listener {
     @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {
         Entity entity = event.getRightClicked();
+        Player player = event.getPlayer();
 
         if (entity.getType() == EntityType.MINECART_CHEST) {
             event.setCancelled(true);
+            player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
 
             StorageMinecart mc = ((StorageMinecart) entity);
             mc.getInventory().clear();
@@ -35,7 +38,6 @@ public class VehicleListener implements Listener {
             entity.remove();
         }
     }
-
 
     @EventHandler
     public void onVehicleCreate(VehicleCreateEvent event) {

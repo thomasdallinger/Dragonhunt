@@ -122,6 +122,7 @@ public class BlockBreakListener implements Listener {
                 block.setType(Material.AIR);
 
                 player.giveExp(GearPoints.oreXP + XPUpgrade.MoreXP.get(player) - 1);
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             }
         }
     }

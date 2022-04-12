@@ -25,8 +25,8 @@ public class JoinListener implements Listener {
         player.teleport(new Location(Bukkit.getServer().getWorld("world"), 0, 15000, 0));
         player.setGameMode(GameMode.SPECTATOR);
 
-        player.sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + "Welcome to DragonHunt!");
-        event.setJoinMessage(Main.getPrefix() + ChatColor.YELLOW + player.getName() + ChatColor.WHITE + " has joined the Server.");
+        player.sendMessage(ChatColor.YELLOW.toString() + ChatColor.ITALIC + "Welcome to Dragonhunt!");
+        event.setJoinMessage(Main.getPrefix() + ChatColor.GREEN + player.getName() + ChatColor.WHITE + " has joined.");
 
         GearPoints.setPoints(player, 0);
         new Scoreboard(player);
@@ -45,12 +45,13 @@ public class JoinListener implements Listener {
 
         DbValues.playersAllowedToPlay.remove(player.getName());
 
-        for (Player online : Bukkit.getOnlinePlayers()) {
-            online.sendMessage(ChatColor.RED + "Need " + DbValues.playersAllowedToPlay.size() + " more players to start.");
-        }
-
         if (DbValues.playersAllowedToPlay.size() == 0) {
             new GameStart();
+            return;
+        }
+        //message will not appear if the game starts
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            online.sendMessage(ChatColor.RED + "Need " + DbValues.playersAllowedToPlay.size() + " more players to start.");
         }
     }
 }

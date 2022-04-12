@@ -5,9 +5,7 @@ import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.Main;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.GameMode;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -48,47 +46,59 @@ public class Timer {
             ItemStack item = player.getInventory().getItemInMainHand();
 
             if(item.getItemMeta() != null)
-                if(item.getItemMeta().getDisplayName().equals((ChatColor.GOLD + player.getName() + "'s Tracker"))) continue;
+                if(item.getItemMeta().getDisplayName().equals((ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker"))) continue;
 
             if(player.getGameMode().equals(GameMode.SPECTATOR)) continue;
 
-            if(isRunning()) {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString() +
-                        ChatColor.BOLD + DbValues.getTimestamp()));
-                continue;
-            }
-
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED +
-                    "Game starting soon"));
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString() +
+                    ChatColor.BOLD + DbValues.getTimestamp()));
         }
-
     }
 
     protected void run() {
         new BukkitRunnable() {
             @Override
             public void run() {
-
-                sendActionBar();
-
                 if(!isRunning()) {
                     return;
                 }
 
                 setTime(getTime() + 1);
+                sendActionBar();
+
+                if(getTime() >= 2390 && getTime() < 2400)
+                    showdownCountdown();
 
                 if(getTime() % 600 == 0) {
                     for(Player player : Bukkit.getOnlinePlayers()) {
-                        player.sendMessage(Main.getPrefix() + ChatColor.YELLOW + (3600 - getTime()) / 60 + " minutes left.");
+                        if (getTime() < 2400)
+                            player.sendMessage(Main.getPrefix() + ChatColor.RED + "All Players will be teleported to the END in " + ChatColor.DARK_RED
+                                    + (2400 - getTime()) / 60 + ChatColor.RED +  " minutes.");
+                        else if (getTime() == 2400) {
+                            World end = Bukkit.getWorld("world_the_end");
+                            player.teleport(new Location(end, 30, end.getHighestBlockYAt(30, 0), 0));
+                            player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 1, 1);
+                            player.sendTitle(ChatColor.AQUA + " ", ChatColor.DARK_RED.toString() + ChatColor.BOLD + "SHOWDOWN", 5, 100, 5);
+                            player.sendMessage(Main.getPrefix() + ChatColor.RED + "The game will end in " +
+                                    ChatColor.DARK_RED + "10" + ChatColor.RED +  " minutes.");
+                        }
                     }
                 }
-                //once the timer hits 1h the game will end and nobody won
-                if(getTime() == 3600) {
+
+                //once the timer hits 50 minutes, the game will end and nobody won
+                if(getTime() == 3000) {
                     new GameEnd();
                     setRunning(false);
                 }
-
             }
-        }.runTaskTimer(Main.getInstance(), 20, 20);
+        }.runTaskTimer(Main.getInstance(), 0, 20);
+    }
+
+    private void showdownCountdown() {
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+            player.sendMessage(Main.getPrefix() + ChatColor.RED + "Final showdown in "
+                    + ChatColor.DARK_RED + (2400 - getTime()) + ChatColor.RED + " seconds.");
+        }
     }
 }

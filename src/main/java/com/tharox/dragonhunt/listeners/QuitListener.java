@@ -14,7 +14,7 @@ public class QuitListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        event.setQuitMessage(Main.getPrefix() + ChatColor.YELLOW + player.getName() + ChatColor.WHITE + " has left the Server.");
+        event.setQuitMessage(Main.getPrefix() + ChatColor.RED + player.getName() + ChatColor.WHITE + " has left.");
 
         if (Bukkit.getOnlinePlayers().size() == 1) {
             DbValues.updateServerStatus();

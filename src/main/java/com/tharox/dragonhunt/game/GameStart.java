@@ -3,8 +3,8 @@ package com.tharox.dragonhunt.game;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.dimensions.DimensionListener;
-import com.tharox.dragonhunt.grappler.Grappler;
 import com.tharox.dragonhunt.gear.*;
+import com.tharox.dragonhunt.grappler.Grappler;
 import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
@@ -12,10 +12,8 @@ import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.List;
@@ -84,7 +82,7 @@ public class GameStart {
 
     //set all upgrades to 1 so the first level of each upgrade can be purchased
     private void upgradeRegistration() {
-        for(Player player : Bukkit.getOnlinePlayers()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             WeaponUpgrade.Sharpness.put(player, 1);
             WeaponUpgrade.Knockback.put(player, 1);
             WeaponUpgrade.FireAspect.put(player, 1);
@@ -127,8 +125,8 @@ public class GameStart {
 
             elytraCountdown = new Countdown(true, 30, this::onElytraCountdown);
             overworld.setGameRule(GameRule.FALL_DAMAGE, false);
-            bossBar = Bukkit.createBossBar(ChatColor.GREEN + "Fall damage active/Elytra gone in: " + elytraCountdown.getTime(),
-                    BarColor.GREEN, BarStyle.SEGMENTED_10);
+            bossBar = Bukkit.createBossBar(ChatColor.GREEN + "Elytra removed in " + ChatColor.DARK_GREEN
+                    + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.GREEN + " seconds", BarColor.GREEN, BarStyle.SEGMENTED_10);
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -140,7 +138,7 @@ public class GameStart {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
             }
 
-            if(startCountdown.getTime() > 5)
+            if (startCountdown.getTime() > 5)
                 player.sendTitle(ChatColor.GOLD.toString() + ChatColor.BOLD + startCountdown.getTime(),
                         "", 0, 20, 0);
             else if (startCountdown.getTime() <= 5 && startCountdown.getTime() > 0)
@@ -151,14 +149,15 @@ public class GameStart {
                         "", 0, 20, 0);
 
             if (startCountdown.getTime() == 0) {
-                if(startLocation.getY() - highestBlock.getY() <= 40) {
+                if (startLocation.getY() - highestBlock.getY() <= 40) {
                     player.teleport(higherStartLocation);
                 } else {
                     player.teleport(startLocation);
                 }
 
                 player.setGameMode(GameMode.SURVIVAL);
-                player.sendMessage(Main.getPrefix() + ChatColor.GOLD + "Good Luck!");
+                player.sendMessage(Main.getPrefix() + ChatColor.GOLD + "Whoever kills the Enderdragon wins.");
+                player.sendMessage(Main.getPrefix() + ChatColor.RED + "Fall damage is disabled!");
             }
         }
     }
@@ -170,7 +169,8 @@ public class GameStart {
      * @param time time of the countdown
      */
     public void onElytraCountdown(int time) {
-        bossBar.setTitle(ChatColor.GREEN + "Fall damage active/Elytra gone in: " + elytraCountdown.getTime());
+        bossBar.setTitle(ChatColor.GREEN + "Elytra removed in " + ChatColor.DARK_GREEN
+                + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.GREEN + " seconds");
         bossBar.setProgress(time / 31D);
         bossBar.setVisible(true);
 
@@ -186,9 +186,12 @@ public class GameStart {
 
             if (elytraCountdown.getTime() <= 5 && elytraCountdown.getTime() > 0) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+                player.sendMessage(Main.getPrefix() + ChatColor.YELLOW + "Elytra removed in "
+                        + ChatColor.GOLD + elytraCountdown.getTime() + ChatColor.YELLOW + " seconds.");
             }
 
             if (elytraCountdown.getTime() == 0) {
+                player.sendMessage(Main.getPrefix() + ChatColor.GREEN + "Fall damage is enabled!");
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);
                 player.getInventory().setChestplate(new ItemStack(Material.AIR));

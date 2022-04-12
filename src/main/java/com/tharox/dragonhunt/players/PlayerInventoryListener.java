@@ -56,7 +56,7 @@ public class PlayerInventoryListener implements Listener {
 
         String displayName = item.getItemMeta().getDisplayName();
 
-        if (displayName.contains(ChatColor.GOLD + event.getPlayer().getName() + "'s Tracker")
+        if (displayName.contains(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")
                 || displayName.contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")
                 || displayName.contains(ChatColor.YELLOW + "Generated Arrow"))
             event.setCancelled(true);
@@ -74,7 +74,7 @@ public class PlayerInventoryListener implements Listener {
         if (offHandItem.getItemMeta() == null) return;
 
         String displayName = offHandItem.getItemMeta().getDisplayName();
-        if (displayName.contains(ChatColor.GOLD + event.getPlayer().getName() + "'s Tracker")
+        if (displayName.contains(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")
                 || displayName.contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")) {
             event.setCancelled(true);
         }

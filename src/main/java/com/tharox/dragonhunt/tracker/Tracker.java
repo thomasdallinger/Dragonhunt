@@ -55,7 +55,7 @@ public class Tracker implements Listener {
         List<Player> allOtherPlayers = playerList.stream().filter(o -> !(o.getName().equals(player.getName()))).collect(Collectors.toList());
 
         if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + player.getName() + "'s Tracker")) {
+            if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
 
                 if (Main.getInstance().getTimer().getTime() < 60) {
                     player.sendMessage(ChatColor.RED + "Tracker disabled for the first minute.");
@@ -76,7 +76,7 @@ public class Tracker implements Listener {
         }
 
         if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + player.getName() + "'s Tracker")) {
+            if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
                 player.performCommand("gear");
             }
         }
@@ -93,11 +93,11 @@ public class Tracker implements Listener {
         String trackedPlayerName = "";
         int distance;
 
-        if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD + player.getName() + "'s Tracker")) {
+        if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
             try {
 
                 if (Main.getInstance().getTimer().getTime() < 60) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED.toString() + ChatColor.BOLD
                             + "WAITING FOR SIGNAL"));
                     return;
                 }
@@ -161,10 +161,13 @@ public class Tracker implements Listener {
         ItemMeta meta = tracker.getItemMeta();
         if (meta == null) return null;
 
-        meta.setDisplayName(ChatColor.GOLD + player.getName() + "'s Tracker");
+        meta.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker");
         meta.setLore(Arrays.asList(
-                ChatColor.WHITE + "Left-Click: " + ChatColor.YELLOW + "Open gear upgrades (/gear)",
-                ChatColor.WHITE + "Right-Click: " + ChatColor.YELLOW + "Switch tracked player"));
+                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "Displays the distance towards other players.",
+                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "The compass needle points to the",
+                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "tracked player's location",
+                ChatColor.WHITE + "Left-Click: " + ChatColor.GREEN + "Open Gear Upgrades (/gear)",
+                ChatColor.WHITE + "Right-Click: " + ChatColor.GREEN + "Switch Tracked Player"));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 

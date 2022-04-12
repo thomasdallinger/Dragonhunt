@@ -15,7 +15,7 @@ public class Scoreboard extends ScoreboardBuilder {
     private int socialId;
 
     public Scoreboard(Player player) {
-        super(player, ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Dragon" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "Hunt");
+        super(player, ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "DRAGON" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "HUNT");
         socialId = 0;
 
         run(player, Main.getInstance().getScoreboardCountdown());

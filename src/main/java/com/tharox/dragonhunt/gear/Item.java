@@ -125,7 +125,7 @@ public class Item {
                             ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                             "",
                             ChatColor.LIGHT_PURPLE.toString() + GearPoints.getPoints(player) +
-                                    ChatColor.WHITE + " / " + cost + " Points",
+                                    ChatColor.WHITE + " / " + cost + " Gear Points",
                             ChatColor.DARK_RED + "Purchase previous levels first!"
                     ));
                 } else {
@@ -133,7 +133,7 @@ public class Item {
                             ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                             "",
                             ChatColor.LIGHT_PURPLE.toString() + GearPoints.getPoints(player) +
-                                    ChatColor.WHITE + " / " + cost + " Points",
+                                    ChatColor.WHITE + " / " + cost + " Gear Points",
                             ChatColor.GOLD + "Click to buy!"
                     ));
                 }
@@ -142,8 +142,8 @@ public class Item {
                         ChatColor.RED.toString() + ChatColor.ITALIC + LORE,
                         "",
                         ChatColor.DARK_RED.toString() + GearPoints.getPoints(player) +
-                                ChatColor.WHITE + " / " + cost + " Points",
-                        ChatColor.RED.toString() + (cost - GearPoints.getPoints(player)) + " Point(s) missing!"
+                                ChatColor.WHITE + " / " + cost + " Gear Points",
+                        ChatColor.RED.toString() + (cost - GearPoints.getPoints(player)) + " Gear Point(s) missing!"
                 ));
             }
         }

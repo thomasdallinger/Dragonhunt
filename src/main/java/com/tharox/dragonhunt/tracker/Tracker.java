@@ -166,6 +166,7 @@ public class Tracker implements Listener {
                 ChatColor.YELLOW.toString() + ChatColor.ITALIC + "Displays the distance towards other players.",
                 ChatColor.YELLOW.toString() + ChatColor.ITALIC + "The compass needle points to the",
                 ChatColor.YELLOW.toString() + ChatColor.ITALIC + "tracked player's location",
+                "",
                 ChatColor.WHITE + "Left-Click: " + ChatColor.GREEN + "Open Gear Upgrades (/gear)",
                 ChatColor.WHITE + "Right-Click: " + ChatColor.GREEN + "Switch Tracked Player"));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);

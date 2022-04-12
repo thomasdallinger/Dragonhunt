@@ -43,6 +43,9 @@ public class GameStart {
         GameState.dungeonLocation = loc;
     }
 
+    /**
+     * Sets different parameters for the OVERWORLD such as difficulty, daytime and the world border.
+     */
     private void configureOverworld() {
         overworld.setDifficulty(Difficulty.NORMAL);
         overworld.setTime(0);
@@ -53,34 +56,50 @@ public class GameStart {
         worldBorder.setDamageAmount(0);
     }
 
+    /**
+     * Sets different parameters for each PLAYER.
+     */
     private void configurePlayer() {
         for (Player player : Bukkit.getOnlinePlayers()) {
+            // removes all active potion effects players may have
+            for (PotionEffect effect : player.getActivePotionEffects())
+                player.removePotionEffect(effect.getType());
 
-            for (PotionEffect effect : player.getActivePotionEffects()) player.removePotionEffect(effect.getType());
+            // resets food values and XP levels
             player.setFoodLevel(20);
             player.setSaturation(4); //players shouldn't loose hunger points instantly
             player.setExp(0);     //resets Bar
             player.setLevel(0);   //resets Number
+
+            // clears the player's inventory
             player.getInventory().clear();
 
+            // adds the TRACKER, ELYTRA and GRAPPLER to the player's inventory
             player.getInventory().setItem(7, Main.getInstance().getTracker().givePlayerTracker(player));
-            new Grappler(player);
             player.getInventory().setChestplate(new ItemStack(Material.ELYTRA));
+            new Grappler(player);
 
+            // give the player 3 SPECTATE TOKENS which can be used throughout the game
             Spectate.spectatesLeft.put(player, 3);
             Spectate.spectateCooldown.put(player, timer.getTime() + 180);
+
+            // every player starts with the base items for food and resources
+            // these can be upgraded using FOOD or RESOURCE UPGRADES respectively
             GameState.food.put(player, new ItemStack(Material.RABBIT));
             GameState.resources.put(player, List.of(
                     new ItemStack(Material.RAW_IRON),
                     new ItemStack(Material.RAW_GOLD)));
 
-            //set default tracker values
+            // set default TRACKER values, nobody is tracked when the player receives the TRACKER
             Main.getInstance().getTracker().playerTracksPlayer.put(player, null);
             Main.getInstance().getTracker().playerTracksIndex.put(player, 0);
         }
     }
 
-    //set all upgrades to 1 so the first level of each upgrade can be purchased
+    /**
+     * Sets the access level of all available GEAR UPGRADES to 1.
+     * This means that each level 1 GEAR UPGRADE can be purchased from the GEAR UPGRADE inventory (/gear).
+     */
     private void upgradeRegistration() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             WeaponUpgrade.Sharpness.put(player, 1);
@@ -111,13 +130,14 @@ public class GameStart {
     }
 
     /**
-     * Executed each second (see Countdown.java)
+     * Countdown which is executed each second (see Countdown.java).
      *
      * @param time time of the countdown
      */
     public void onCountdown(int time) {
         if (overworld == null) return;
 
+        // once the countdown hits zero, start the TIMER and SCOREBOARD COUNTDOWN
         if (startCountdown.getTime() == 0) {
             timer.setRunning(true);
             scoreboardCountdown.setRunning(true);

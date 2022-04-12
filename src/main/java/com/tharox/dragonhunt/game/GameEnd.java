@@ -16,13 +16,12 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.sql.Statement;
 
 public class GameEnd {
-
     Player winner;
     Timer timer = Main.getInstance().getTimer();
     Timer scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
 
     /**
-     * no winner - time ran out
+     * Used when there is no winner, which means that the time ran out.
      */
     public GameEnd() {
         configureGameEnd();
@@ -31,6 +30,7 @@ public class GameEnd {
     public GameEnd(Player winner) {
         this.winner = winner;
 
+        // TIMER and SCOREBOARD COUNTDOWN are no longer running after the game ends
         timer.setRunning(false);
         scoreboardCountdown.setRunning(false);
 
@@ -39,6 +39,9 @@ public class GameEnd {
         serverStopsCountdown();
     }
 
+    /**
+     * Adds certain values to the database, which usually cannot be added before the game ended.
+     */
     private void updateGame() {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "UPDATE Game SET duration = '" + DbValues.getTimestamp()
@@ -51,6 +54,11 @@ public class GameEnd {
         });
     }
 
+    /**
+     * All players will see a message and a title on their screen which vary depending on if they won or lost.
+     * Players will be in SPECTATOR GAMEMODE.
+     * The total time played will be displayed, too.
+     */
     private void configureGameEnd() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.sendMessage(Main.getPrefix() + ChatColor.RED + ChatColor.BOLD + "GAME OVER.");
@@ -78,6 +86,11 @@ public class GameEnd {
         }
     }
 
+    /**
+     * Adds certain values to the database, which cannot be added before the game ended.
+     * @param player player who played the game
+     * @param hasWon whether this player has won or not
+     */
     private void addWinnerAndXPLevel(Player player, boolean hasWon) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query;
@@ -96,6 +109,10 @@ public class GameEnd {
         });
     }
 
+    /**
+     * The server stops 90 seconds after the game has ended.
+     * All players will be moved to the lobby after 90 seconds, if they don't leave before.
+     */
     private void serverStopsCountdown() {
         final int[] duration = {90};
 

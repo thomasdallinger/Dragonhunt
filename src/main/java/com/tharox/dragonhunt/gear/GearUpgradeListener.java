@@ -30,13 +30,13 @@ public class GearUpgradeListener implements Listener {
         if (item == null) return;
         if (item.getItemMeta() == null) return;
 
-        String itemName = item.getItemMeta().getDisplayName();
+        String upgradeName = item.getItemMeta().getDisplayName();
 
         //Inventory is Gear Upgrade Menu
         if (event.getView().getTitle().contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "GEAR UPGRADES MENU")) {
             player.closeInventory();
             player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
-            menuNavigation(player, itemName);
+            menuNavigation(player, upgradeName);
             return;
         }
 
@@ -54,7 +54,7 @@ public class GearUpgradeListener implements Listener {
         }
 
         //Back to menu functionality
-        if (itemName.equals(ChatColor.RED + "Back to menu")) {
+        if (upgradeName.equals(ChatColor.RED + "Back to menu")) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASEDRUM, 1, 1);
             player.closeInventory();
             player.openInventory(gearUpgradeInventory.menu);
@@ -62,60 +62,60 @@ public class GearUpgradeListener implements Listener {
         }
 
         //Not enough points to purchase Upgrade level
-        if (GearPoints.getPoints(player) < GearUpgradeInventory.upgradeCost.get(itemName)) {
+        if (GearPoints.getPoints(player) < GearUpgradeInventory.upgradeCost.get(upgradeName)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(ChatColor.RED + "You don't have enough points! Need "
-                    + (GearUpgradeInventory.upgradeCost.get(itemName) - GearPoints.getPoints(player)) + " more.");
+                    + (GearUpgradeInventory.upgradeCost.get(upgradeName) - GearPoints.getPoints(player)) + " more.");
             return;
         }
 
         //Upgrade level not unlocked
-        if (itemName.contains("LOCKED")) {
+        if (upgradeName.contains("LOCKED")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(ChatColor.RED + "Purchase the previous level to unlock this one!");
             return;
         }
 
-        if (itemName.contains("Sharpness") || itemName.contains("Knockback") || itemName.contains("Fire Aspect")) {
-            new WeaponUpgrade(player, itemName, item.getAmount());
-            purchaseUpgrade(player, itemName, "Weapon");
-        } else if (itemName.contains("Power") || itemName.contains("Punch") || itemName.contains("Flame")) {
-            new BowUpgrade(player, itemName, item.getAmount());
-            purchaseUpgrade(player, itemName, "Bow");
-        } else if (itemName.contains("Piercing") || itemName.contains("Multishot") || itemName.contains("Quick Charge")) {
-            new CrossbowUpgrade(player, itemName, item.getAmount());
-            purchaseUpgrade(player, itemName, "Crossbow");
-        } else if (itemName.contains("More Arrows") || itemName.contains("Effect Arrows")) {
-            new ArrowUpgrade(player, itemName);
-            purchaseUpgrade(player, itemName, "Arrow");
-        } else if (itemName.contains("Efficiency") || itemName.contains("Unbreaking")) {
-            new ToolUpgrade(player, itemName, item.getAmount());
-            purchaseUpgrade(player, itemName, "Tool");
-        } else if (itemName.contains("Protection") || itemName.contains("Thorns") || itemName.contains("Feather Falling")
-                || itemName.contains("Depth Strider") || itemName.contains("Respiration") || itemName.contains("Aqua Affinity")) {
-            new ArmorUpgrade(player, itemName, item.getAmount());
-            purchaseUpgrade(player, itemName, "Armor");
-        } else if (itemName.contains("Food Source") || itemName.contains("Food Amount")) {
-            new FoodUpgrade(player, itemName, item.getAmount());
-            purchaseUpgrade(player, itemName, "Food");
-        } else if (itemName.contains("Smelted Resource") || itemName.contains("Resource Amount")) {
-            new ResourceUpgrade(player, itemName, item.getAmount());
-            purchaseUpgrade(player, itemName, "Resource");
-        } else if (itemName.contains("More XP")) {
+        if (upgradeName.contains("Sharpness") || upgradeName.contains("Knockback") || upgradeName.contains("Fire Aspect")) {
+            new WeaponUpgrade(player, upgradeName, item.getAmount());
+            purchaseUpgrade(player, upgradeName, "Weapon");
+        } else if (upgradeName.contains("Power") || upgradeName.contains("Punch") || upgradeName.contains("Flame")) {
+            new BowUpgrade(player, upgradeName, item.getAmount());
+            purchaseUpgrade(player, upgradeName, "Bow");
+        } else if (upgradeName.contains("Piercing") || upgradeName.contains("Multishot") || upgradeName.contains("Quick Charge")) {
+            new CrossbowUpgrade(player, upgradeName, item.getAmount());
+            purchaseUpgrade(player, upgradeName, "Crossbow");
+        } else if (upgradeName.contains("More Arrows") || upgradeName.contains("Effect Arrows")) {
+            new ArrowUpgrade(player, upgradeName);
+            purchaseUpgrade(player, upgradeName, "Arrow");
+        } else if (upgradeName.contains("Efficiency") || upgradeName.contains("Unbreaking")) {
+            new ToolUpgrade(player, upgradeName, item.getAmount());
+            purchaseUpgrade(player, upgradeName, "Tool");
+        } else if (upgradeName.contains("Protection") || upgradeName.contains("Thorns") || upgradeName.contains("Feather Falling")
+                || upgradeName.contains("Depth Strider") || upgradeName.contains("Respiration") || upgradeName.contains("Aqua Affinity")) {
+            new ArmorUpgrade(player, upgradeName, item.getAmount());
+            purchaseUpgrade(player, upgradeName, "Armor");
+        } else if (upgradeName.contains("Food Source") || upgradeName.contains("Food Amount")) {
+            new FoodUpgrade(player, upgradeName, item.getAmount());
+            purchaseUpgrade(player, upgradeName, "Food");
+        } else if (upgradeName.contains("Smelted Resource") || upgradeName.contains("Resource Amount")) {
+            new ResourceUpgrade(player, upgradeName, item.getAmount());
+            purchaseUpgrade(player, upgradeName, "Resource");
+        } else if (upgradeName.contains("More XP")) {
             new XPUpgrade(player);
-            purchaseUpgrade(player, itemName, "XP");
+            purchaseUpgrade(player, upgradeName, "XP");
         }
 
-        addGearUpgradeAccess(player, itemName);
+        addGearUpgradeAccess(player, upgradeName);
     }
 
     /**
      * @param player    player that purchased an upgrade
      * @param inventory inventory to open (refresh after a short delay)
      */
-    private void purchaseUpgrade(Player player, String itemName, String inventory) {
+    private void purchaseUpgrade(Player player, String upgradeName, String inventory) {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        GearPoints.removePoints(player, GearUpgradeInventory.upgradeCost.get(itemName));
+        GearPoints.removePoints(player, GearUpgradeInventory.upgradeCost.get(upgradeName));
 
         menuNavigation(player, inventory);
     }
@@ -143,11 +143,11 @@ public class GearUpgradeListener implements Listener {
             player.openInventory(gearUpgradeInventory.xp);
     }
 
-    private void addGearUpgradeAccess(Player player, String itemName) {
+    private void addGearUpgradeAccess(Player player, String upgradeName) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "INSERT INTO ShopAccess (GameID, Player, item, pointsBefore, cost, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + itemName + "', '"
-                    + GearPoints.getPoints(player) + "', '" + GearUpgradeInventory.upgradeCost.get(itemName)
+            String query = "INSERT INTO GearAccess (GameID, Player, upgrade, pointsBefore, cost, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + upgradeName.substring(4) + "', '"
+                    + GearPoints.getPoints(player) + "', '" + GearUpgradeInventory.upgradeCost.get(upgradeName)
                     + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();

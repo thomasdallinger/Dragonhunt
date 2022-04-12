@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.points;
 
 import org.bukkit.ChatColor;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -32,14 +31,11 @@ public class GearPoints {
         gearPoints.put(player, gearPoints.get(player) + pointsToAdd);
         player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "+" + pointsToAdd
                 + ChatColor.LIGHT_PURPLE + " Gear Point");
-
-        //TODO: new DB implementation
     }
 
     public static void removePoints(Player player, int pointsToRemove) {
         gearPoints.put(player, gearPoints.get(player) - pointsToRemove);
-
-        player.sendMessage(ChatColor.WHITE + "Points left: " + ChatColor.GOLD
-                + GearPoints.getPoints(player) + ChatColor.RED + " (-" + pointsToRemove + ")");
+        player.sendMessage(ChatColor.RED.toString() + ChatColor.BOLD + "-" + pointsToRemove
+                + ChatColor.RED + " Gear Point(s)");
     }
 }

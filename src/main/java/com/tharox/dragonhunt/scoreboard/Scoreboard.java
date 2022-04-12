@@ -10,6 +10,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Scoreboard extends ScoreboardBuilder {
 
     private int socialId;
@@ -23,7 +26,11 @@ public class Scoreboard extends ScoreboardBuilder {
 
     @Override
     public void createScoreboard() {
-        setScore(ChatColor.DARK_GRAY + "---------------", 11);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yy");
+        LocalDateTime now = LocalDateTime.now();
+
+        setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
+                + DbValues.getServerID() + "]", 11);
         setScore(ChatColor.WHITE + "Starting soon!", 10);
         setScore("", 9);
         setScore("", 8);

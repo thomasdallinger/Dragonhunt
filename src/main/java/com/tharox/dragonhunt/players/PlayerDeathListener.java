@@ -38,8 +38,7 @@ public class PlayerDeathListener implements Listener {
         Player killer = event.getEntity().getKiller();
 
         //TODO: change DB implementation
-        int points = GearPoints.getPoints(player) / 2;
-        addPlayerDeath(player, event.getDeathMessage(), points);
+        addPlayerDeath(player, event.getDeathMessage());
 
         if (killer != null) {
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
@@ -73,11 +72,11 @@ public class PlayerDeathListener implements Listener {
         player.sendMessage(ChatColor.GRAY + "You died at " + ChatColor.GOLD + ChatColor.BOLD + DbValues.locationToString(player.getLocation()));
     }
 
-    private void addPlayerDeath(Player player, String deathmessage, int points) {
+    private void addPlayerDeath(Player player, String deathmessage) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "INSERT INTO Deaths (GameID, Player, deathmessage, pointsLost, dimension, timestamp) " +
+            String query = "INSERT INTO Deaths (GameID, Player, deathmessage, dimension, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + deathmessage
-                    + "', '" + points + "', '" + DbValues.getCurrentWorld(player)
+                    + "', '" + DbValues.getCurrentWorld(player)
                     + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();

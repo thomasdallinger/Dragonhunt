@@ -1,7 +1,5 @@
 package com.tharox.dragonhunt.game;
 
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
@@ -63,11 +61,11 @@ public class GameEnd {
             if (player == winner) {
                 player.sendTitle(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "YOU WON", ChatColor.GREEN
                         + "You defeated the Enderdragon", 10, 90, 20);
-                addHasWon(player, true);
+                addWinnerAndXPLevel(player, true);
             } else {
                 player.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "YOU LOST", ChatColor.RED
                         + "Try again next time", 10, 90, 20);
-                addHasWon(player, false);
+                addWinnerAndXPLevel(player, false);
             }
 
             if (winner != null) {
@@ -80,15 +78,15 @@ public class GameEnd {
         }
     }
 
-    private void addHasWon(Player player, boolean hasWon) {
+    private void addWinnerAndXPLevel(Player player, boolean hasWon) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query;
 
             if (hasWon) {
-                query = "UPDATE Plays SET hasWon = true " +
+                query = "UPDATE Plays SET hasWon = true, XPLevel = '" + player.getLevel() + "'" +
                         "WHERE GameID = '" + DbValues.getGameID() + "' AND Player = '" + player.getName() + "'";
             } else {
-                query = "UPDATE Plays SET hasWon = false " +
+                query = "UPDATE Plays SET hasWon = false, XPLevel = '" + player.getLevel() + "'" +
                         "WHERE GameID = '" + DbValues.getGameID() + "' AND Player = '" + player.getName() + "'";
             }
 

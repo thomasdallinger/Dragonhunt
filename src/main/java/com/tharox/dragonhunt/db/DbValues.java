@@ -117,12 +117,8 @@ public class DbValues {
 
     public static String getTimestamp() {
         Timer timer = Main.getInstance().getTimer();
-        String hours = "";
         String minutes = "";
         String seconds = "";
-        if (timer.getTime() / 3600 < 10)
-            hours = "0";
-        hours += timer.getTime() / 3600;
         if ((timer.getTime() / 60) % 60 < 10)
             minutes = "0";
         minutes += (timer.getTime() / 60) % 60;
@@ -130,7 +126,7 @@ public class DbValues {
             seconds = "0";
         seconds += timer.getTime() % 60;
 
-        return hours + ":" + minutes + ":" + seconds;
+        return  minutes + ":" + seconds;
     }
 
     public static String getCurrentWorld(Player player) {

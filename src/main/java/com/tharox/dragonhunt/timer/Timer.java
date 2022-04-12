@@ -77,8 +77,13 @@ public class Timer {
 
                 setTime(getTime() + 1);
 
-                //once the timer hits 1h 30min the game will end and nobody won
-                if(getTime() == 5400) {
+                if(getTime() % 600 == 0) {
+                    for(Player player : Bukkit.getOnlinePlayers()) {
+                        player.sendMessage(Main.getPrefix() + ChatColor.YELLOW + (3600 - getTime()) / 60 + " minutes left.");
+                    }
+                }
+                //once the timer hits 1h the game will end and nobody won
+                if(getTime() == 3600) {
                     new GameEnd();
                     setRunning(false);
                 }

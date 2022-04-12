@@ -29,9 +29,8 @@ public class GearPoints {
 
     public static void addPoints(Player player, int pointsToAdd) {
         gearPoints.put(player, gearPoints.get(player) + pointsToAdd);
-        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
-        player.sendTitle(ChatColor.AQUA + " ", ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "+"
-                + pointsToAdd + ChatColor.LIGHT_PURPLE + " Gear point(s)", 5, 20, 5);
+        player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "+" + pointsToAdd
+                + ChatColor.LIGHT_PURPLE + " Gear Point");
 
         //TODO: new DB implementation
     }

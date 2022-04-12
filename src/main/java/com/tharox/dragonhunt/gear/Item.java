@@ -172,8 +172,7 @@ public class Item {
         if (itemMeta == null) return null;
 
         itemMeta.addEnchant(Enchantment.DURABILITY, 1, true);
-        itemMeta.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD
-                + ChatColor.translateAlternateColorCodes('&', NAME));
+        itemMeta.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD + NAME);
 
         itemStack.setItemMeta(itemMeta);
 

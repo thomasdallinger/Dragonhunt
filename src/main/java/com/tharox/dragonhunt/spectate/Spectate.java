@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.spectate;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
@@ -15,31 +14,30 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Spectate {
-
     public static HashMap<Player, Integer> spectatesLeft = new HashMap<>();
-    public static HashMap<Player, Integer> spectateCooldown = new HashMap<>();
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
-    Timer timer = Main.getInstance().getTimer();
+    public static HashMap<Player, Boolean> commandUsable = new HashMap<>();
 
     public Spectate(Player player) {
         activateSpectate(player);
     }
 
     private void activateSpectate(Player player) {
-        final int[] countdown = {5};
+        final int[] countdown = {4};
         List<PotionEffect> effects = new ArrayList();
         effects.add(new PotionEffect(PotionEffectType.SLOW, 40, 9));
         effects.add(new PotionEffect(PotionEffectType.BLINDNESS, 40, 9));
         effects.add(new PotionEffect(PotionEffectType.SLOW_DIGGING, 40, 9));
         effects.add(new PotionEffect(PotionEffectType.JUMP, 40, -9));
 
+        commandUsable.put(player, false);
         spectatesLeft.put(player, spectatesLeft.get(player) - 1);
         spectateLocation.put(player, player.getLocation());
-        Spectate.spectateCooldown.put(player, timer.getTime() + 180);
         player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 1, 1);
 
         for(Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage(Main.getPrefix() + ChatColor.GOLD + ChatColor.BOLD + player.getName().toUpperCase() + ChatColor.YELLOW + " uses a Spectator Token.");
+            p.sendMessage(Main.getPrefix() + ChatColor.GOLD + ChatColor.BOLD + player.getName().toUpperCase()
+                    + ChatColor.YELLOW + " uses a Spectate Token.");
         }
 
         new BukkitRunnable() {
@@ -54,7 +52,8 @@ public class Spectate {
                 }
 
                 player.spawnParticle(Particle.PORTAL, player.getLocation(), 50);
-                player.sendMessage(ChatColor.GOLD + "Spectate starts in " + countdown[0] + " ...");
+                player.sendMessage(ChatColor.YELLOW + "Spectate starts in " + ChatColor.GOLD + countdown[0]
+                        + ChatColor.YELLOW + " seconds.");
                 player.addPotionEffects(effects);
                 countdown[0]--;
             }
@@ -73,11 +72,12 @@ public class Spectate {
                     player.teleport(Spectate.spectateLocation.get(player));
                     player.setGameMode(GameMode.SURVIVAL);
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+                    commandUsable.put(player, true);
                     cancel();
                 }
 
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString() + ChatColor.BOLD
-                        + duration[0] + " SECONDS LEFT"));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString()
+                        + ChatColor.BOLD + duration[0] + ChatColor.YELLOW + ChatColor.BOLD + " SECONDS LEFT"));
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
                 duration[0]--;
             }

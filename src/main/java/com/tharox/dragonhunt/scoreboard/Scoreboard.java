@@ -63,7 +63,7 @@ public class Scoreboard extends ScoreboardBuilder {
                 setScore(ChatColor.WHITE + "Players: " + ChatColor.DARK_GREEN + Bukkit.getOnlinePlayers().size(), 8);
                 setScore(ChatColor.WHITE + "Kills: " + ChatColor.GREEN + DbValues.getKills(player, true), 7);
                 setScore(ChatColor.WHITE + "Deaths: " + ChatColor.GREEN + DbValues.getKills(player, false), 6);
-                setScore(ChatColor.WHITE + "Spectates left: " + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
+                setScore(ChatColor.WHITE + "Spectate Tokens: " + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
                 setScore(ChatColor.WHITE + "Gear Points: " + ChatColor.LIGHT_PURPLE.toString() + GearPoints.getPoints(player), 3);
                 setScore(ChatColor.WHITE + "Enderchests in:", 1);
                 setScore(ChatColor.AQUA + countdownFormat(countdown), 0);

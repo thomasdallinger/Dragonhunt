@@ -81,7 +81,8 @@ public class GameStart {
 
             // give the player 3 SPECTATE TOKENS which can be used throughout the game
             Spectate.spectatesLeft.put(player, 3);
-            Spectate.spectateCooldown.put(player, timer.getTime() + 180);
+            // HashMap which prevents players from executing the command multiple times without a delay
+            Spectate.commandUsable.put(player, true);
 
             // every player starts with the base items for food and resources
             // these can be upgraded using FOOD or RESOURCE UPGRADES respectively
@@ -212,6 +213,8 @@ public class GameStart {
 
             if (elytraCountdown.getTime() == 0) {
                 player.sendMessage(Main.getPrefix() + ChatColor.GREEN + "Fall damage is enabled!");
+                player.sendMessage(Main.getPrefix() + ChatColor.GOLD + "Spectates (/spec) " +
+                        ChatColor.YELLOW + "are now usable.");
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);
                 player.getInventory().setChestplate(new ItemStack(Material.AIR));

@@ -23,23 +23,30 @@ public class SpectateCommand implements CommandExecutor {
         } else return true;
 
         if (player.getWorld().getName().equals("world_nether")) {
-            player.sendMessage(ChatColor.RED + "The spectate ability is not usable in the nether.");
+            player.sendMessage(ChatColor.RED + "Spectate Tokens can't be used in the Nether.");
             return true;
         }
 
         if (Spectate.spectatesLeft.get(player) == 0) {
-            player.sendMessage(ChatColor.RED + "You have no spectates left.");
+            player.sendMessage(ChatColor.RED + "You have no Spectate Tokens left.");
             return true;
         }
 
-        if (Spectate.spectateCooldown.get(player) > timer.getTime()) {
-            player.sendMessage(ChatColor.RED + "Your spectate is on cooldown for: " + (Spectate.spectateCooldown.get(player) - timer.getTime()) + " seconds");
+        if (timer.getTime() < 31) {
+            player.sendMessage(ChatColor.RED + "Spectate Tokens are usable in " +
+                    ChatColor.DARK_RED + (31 - timer.getTime()) + ChatColor.RED + " seconds.");
+            return true;
+        }
+
+        if(!Spectate.commandUsable.get(player)) {
+            player.sendMessage(ChatColor.RED + "You are currently using a Spectate Token.");
             return true;
         }
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO Spectate (GameID, Player, dimension, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + DbValues.getCurrentWorld(player) + "', '" + DbValues.getTimestamp() + "')";
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" +
+                    DbValues.getCurrentWorld(player) + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();
             stmt.execute(query);

@@ -12,15 +12,17 @@ import java.util.List;
 
 public class DbValues {
 
+    // a list containing all players that have queued up to play the game
     public static List<String> playersAllowedToPlay = new ArrayList<>();
 
+    /**
+     * Add all players who are allowed to join the server to a list.
+     */
     public static void getPlayersAllowedToPlay() {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "SELECT Player FROM Plays WHERE GameID = '" + getGameID() + "'";
-
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-
             int columns = rs.getMetaData().getColumnCount();
 
             while (rs.next()) {
@@ -31,6 +33,9 @@ public class DbValues {
         });
     }
 
+    /**
+     *
+     */
     public static int getGameID() {
         final int[] id = {0};
 

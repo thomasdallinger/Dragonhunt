@@ -36,7 +36,7 @@ public class GameStart {
         configurePlayer();
         upgradeRegistration();
 
-        //randomly choose one nether dungeon location
+        // randomly choose one NETHER DUNGEON location
         int rnd = (int) (Math.random() * 1 + 1);
         Location loc = GameState.dungeonLocations.get(rnd);
         Bukkit.getPluginManager().registerEvents(new DimensionListener(loc), Main.getInstance());

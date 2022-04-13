@@ -21,7 +21,7 @@ public class GameState {
     public static World nether = Bukkit.getServer().getWorlds().get(1);
     public static List<Location> dungeonLocations = Arrays.asList(
             new Location(nether, -61.5, 87, -38.5, (float) -156.6, (float) 5.0),
-            new Location(nether, -61.5, 87, -38.5, (float) -156.6, (float) 5.0)
+            new Location(nether, -280.5, 76, -136.5, (float) 89.0, (float) -0.6)
     );
 
     // location of the chosen NETHER DUNGEON

@@ -65,7 +65,7 @@ public class Scoreboard extends ScoreboardBuilder {
                 setScore(ChatColor.WHITE + "Deaths: " + ChatColor.GREEN + DbValues.getKills(player, false), 6);
                 setScore(ChatColor.WHITE + "Spectate Tokens: " + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
                 setScore(ChatColor.WHITE + "Gear Points: " + ChatColor.LIGHT_PURPLE.toString() + GearPoints.getPoints(player), 3);
-                setScore(ChatColor.WHITE + "Enderchests in:", 1);
+                setScore(ChatColor.WHITE + "Free Gear Point:", 1);
                 setScore(ChatColor.AQUA + countdownFormat(countdown), 0);
 
             }

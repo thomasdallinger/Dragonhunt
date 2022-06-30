@@ -30,26 +30,35 @@ public class JoinListener implements Listener {
 
         GearPoints.setPoints(player, 0);
         new Scoreboard(player);
-        checkIfPlayerAllowedToPlay(player);
+
+        DbValues.getPlayersAllowedToPlay();
+        checkIfGameCanStart();
     }
 
-    private void checkIfPlayerAllowedToPlay(Player player) {
-        if (!DbValues.playersAllowedToPlay.contains(player.getName())) {
-            ByteArrayDataOutput out = ByteStreams.newDataOutput();
-            out.writeUTF("Connect");
-            out.writeUTF("lobby");
+    private void checkIfGameCanStart() {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            // if a player joining is not allowed to play, send the player back to the lobby
+            if (!DbValues.playersAllowedToPlay.contains(player.getName())) {
+                ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                out.writeUTF("Connect");
+                out.writeUTF("lobby");
 
-            player.sendPluginMessage(Main.getInstance(), "BungeeCord", out.toByteArray());
-            return;
+                player.sendPluginMessage(Main.getInstance(), "BungeeCord", out.toByteArray());
+                return;
+            }
+
+            // if the player is allowed to play, remove the player from the list
+            DbValues.playersAllowedToPlay.remove(player.getName());
+
+            // if there are no more playerNames in the list, start the game
+            if (DbValues.playersAllowedToPlay.size() == 0) {
+                new GameStart();
+                return;
+            }
         }
 
-        DbValues.playersAllowedToPlay.remove(player.getName());
-
-        if (DbValues.playersAllowedToPlay.size() == 0) {
-            new GameStart();
-            return;
-        }
-        //message will not appear if the game starts
+        // if there are more players in the playersAllowedToPlay list, send a message to all players on the server
+        // telling them how many more players are needed
         for (Player online : Bukkit.getOnlinePlayers()) {
             online.sendMessage(ChatColor.RED + "Need " + DbValues.playersAllowedToPlay.size() + " more players to start.");
         }

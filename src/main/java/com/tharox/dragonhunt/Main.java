@@ -54,7 +54,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 
-        DbValues.getPlayersAllowedToPlay();
         timer = new Timer(false, 0);
         scoreboardCountdown = new Countdown(false, 300);
         ResetScoreboardCountdown.countdownHitsZero(Main.getInstance().getScoreboardCountdown());

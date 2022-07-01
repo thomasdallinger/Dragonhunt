@@ -22,11 +22,14 @@ public class DimensionListener implements Listener {
         this.loc = loc;
     }
 
+    /**
+     * Give players Resistance 10 when entering the NETHER or END so they can't be damaged for the first 5 seconds.
+     */
     @EventHandler
     public void onWorldChange(PlayerChangedWorldEvent event) {
         Player player = event.getPlayer();
 
-        if(player.getWorld().getName().equals("world_nether")) {
+        if(player.getWorld().getName().equals("world_nether") || player.getWorld().getName().equals("world_the_end")) {
             for (PotionEffect effect : player.getActivePotionEffects()) player.removePotionEffect(effect.getType());
             player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 9));
         }

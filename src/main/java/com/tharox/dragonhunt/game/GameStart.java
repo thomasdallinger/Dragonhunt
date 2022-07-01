@@ -77,7 +77,6 @@ public class GameStart extends GameConfiguration {
         // once the countdown hits zero, start the TIMER and SCOREBOARD COUNTDOWN
         if (startCountdown.getTime() == 0) {
             timer.setRunning(true);
-            timer.setTime(2385);
             scoreboardCountdown.setRunning(true);
             Main.elytraInInventory();
 

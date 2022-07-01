@@ -4,10 +4,7 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DbValues;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -20,6 +17,9 @@ public class GameState {
 
     // location of the END spawn platform (always has the same coordinates)
     public static Location endPlatform = new Location(Bukkit.getWorld("world_the_end"), 100, 50, 0);
+
+    // counts the trees destroyed by each player (used to drop apples not randomly)
+    public static HashMap<Player, Integer> treesDestroyed = new HashMap<>();
 
     // all items a player keeps on death stored in a HashMap
     public static HashMap<Player, ItemStack[]> itemsToKeepOnDeath = new HashMap<>();
@@ -40,6 +40,8 @@ public class GameState {
         if(!didNotFit.isEmpty()) {
             player.getWorld().dropItemNaturally(player.getLocation(), didNotFit.get(0));
             // index 0 = max. only 1 item in the HashMap
+            player.sendMessage(ChatColor.RED + "Inventory full! Item dropped...");
+            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
         }
     }
 

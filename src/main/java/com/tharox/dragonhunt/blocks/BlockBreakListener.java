@@ -37,7 +37,7 @@ public class BlockBreakListener implements Listener {
         Block block = event.getBlock();
 
         // prevent players from breaking obsidian close to the NETHER portal inside the NETHER
-        if(GameState.firstNetherEntry != null && player.getWorld().getName().equals("world_nether")) {
+        if (GameState.firstNetherEntry != null && player.getWorld().getName().equals("world_nether")) {
             if ((int) player.getLocation().distance(GameState.firstNetherEntry) < 15 &&
                     block.getType() == Material.OBSIDIAN) {
                 event.setCancelled(true);
@@ -64,6 +64,18 @@ public class BlockBreakListener implements Listener {
             }.runTaskTimer(Main.getInstance(), 0, 2);
 
             event.setCancelled(true);
+
+            if (GameState.treesDestroyed.containsKey(player))
+                GameState.treesDestroyed.put(player, GameState.treesDestroyed.get(player) + 1);
+            else
+                GameState.treesDestroyed.put(player, 1); // first tree destroyed
+
+            if (GameState.treesDestroyed.get(player) % 6 == 0) // every sixth tree drops an apple
+                GameState.putItemInInventory(player, new ItemStack(Material.APPLE));
+
+            if (GameState.treesDestroyed.get(player) % 12 == 0) // every twelfth tree drops a golden apple
+                GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE));
+
             return;
         }
 
@@ -136,18 +148,20 @@ public class BlockBreakListener implements Listener {
      * When mining one block of wood, this function tries to find nearby wood block.
      * If it finds one, this process starts from the beginning.
      *
-     * @param block block that has been destroyed by the player
+     * @param block  block that has been destroyed by the player
      * @param player player who destroyed the block
      * @return true if it was successful, false if the destroyed block isn't a wood type
      */
     private boolean destroyTree(Block block, Player player) {
         if (!woods.contains(block.getType())) return false;
 
-        Location location = block.getLocation();
         block.getDrops().clear();
         block.setType(Material.AIR);
         GameState.putItemInInventory(player, new ItemStack(Material.OAK_LOG));
 
+        setDamageToUsedTool(player); // costs 1 durability for each block of wood mined
+
+        Location location = block.getLocation();
         ArrayList<Block> locations = new ArrayList<>();
 
         for (int x = -1; x <= 1; x++)

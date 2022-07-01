@@ -40,7 +40,7 @@ public class DimensionListener implements Listener {
      * If it is the entry portal, don't search for a available portal.
      * If it is the exit portal, teleport the player to the portal in the OVERWORLD where he came from.
      */
-    @EventHandler
+    /*@EventHandler
     public void onPortal(PlayerPortalEvent event) {
         Player player = event.getPlayer();
         Location locFrom = event.getFrom();
@@ -67,5 +67,5 @@ public class DimensionListener implements Listener {
                 }
             }
         }
-    }
+    }*/
 }

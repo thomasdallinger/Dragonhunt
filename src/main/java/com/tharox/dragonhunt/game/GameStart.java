@@ -35,12 +35,6 @@ public class GameStart {
         configureOverworld();
         configurePlayer();
         upgradeRegistration();
-
-        // randomly choose one NETHER DUNGEON location
-        int rnd = (int) (Math.random() * 1 + 1);
-        Location loc = GameState.dungeonLocations.get(rnd);
-        Bukkit.getPluginManager().registerEvents(new DimensionListener(loc), Main.getInstance());
-        GameState.dungeonLocation = loc;
     }
 
     /**

@@ -25,7 +25,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.3.1</version>
                 <configuration>
-                    <outputDirectory>C:\Users\Thomas\Desktop\MCDH\Test-Servers\DH-Server\plugins</outputDirectory>
+                    <outputDirectory>D:\Dragonhunt\03 Servers\DH-Server\plugins</outputDirectory>
                 </configuration>
             </plugin>
             <plugin>

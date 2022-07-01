@@ -16,17 +16,6 @@ public class BlockPlaceListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        // prevent players from placing blocks in the NETHER
-        // EYES OF ENDER can be placed into END PORTAL FRAMES to open up the END PORTAL
-        if (player.getWorld().getName().equals("world_nether")) {
-            if (block.getType() != Material.END_PORTAL_FRAME) {
-                event.setCancelled(true);
-                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
-                player.sendMessage(ChatColor.RED + "You can't place blocks in the nether!");
-                return;
-            }
-        }
-
         // prevent players from placing beds in the END
         // this only considers WHITE BEDS, since all sheeps drop strings which can be crafted to WHITE WOOL
         if (player.getWorld().getName().equals("world_the_end")) {

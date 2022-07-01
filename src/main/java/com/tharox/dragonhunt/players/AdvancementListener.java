@@ -44,7 +44,6 @@ public class AdvancementListener implements Listener {
                 break;
             case "minecraft:story/enter_the_end":
                 completed = "Enter End";
-                GameState.minOnePlayerInEnd = true;
                 break;
         }
 

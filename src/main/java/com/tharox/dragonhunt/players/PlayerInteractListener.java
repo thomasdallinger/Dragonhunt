@@ -25,17 +25,6 @@ public class PlayerInteractListener implements Listener {
         if (e == null)
             return;
 
-        /*
-          Players are not able to throw enderpearls in the nether until at least one player
-          has reached the end dimension.
-        */
-        if (player.getWorld().getName().equals("world_nether") && !GameState.minOnePlayerInEnd) {
-            if (player.getInventory().getItemInMainHand().getType().equals(Material.ENDER_PEARL)
-                    || player.getInventory().getItemInOffHand().getType().equals(Material.ENDER_PEARL)) {
-                event.setCancelled(true);
-            }
-        }
-
         if (e.equals(EquipmentSlot.HAND) &&
                 (event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
 

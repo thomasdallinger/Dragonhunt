@@ -14,12 +14,12 @@ public class PlayerDamageListener implements Listener {
         Entity entity = event.getEntity();
         World world = entity.getWorld();
 
-        if(entity instanceof Player) {
+       /* if(entity instanceof Player) {
             if(world.getName().equals("world_nether")) {
                 if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
                     event.setCancelled(true);
                 }
             }
-        }
+        }*/
     }
 }

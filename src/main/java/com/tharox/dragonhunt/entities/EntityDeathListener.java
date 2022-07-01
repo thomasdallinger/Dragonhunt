@@ -76,12 +76,6 @@ public class EntityDeathListener implements Listener {
                 break;
             case "Blaze":
                 setInventoryItem(killer, mob, new ItemStack(Material.BLAZE_ROD, 1));
-                // if the NETHER DUNGEON is the fortress, Blazes drop ENDER PEARLS on top of BLAZE RODS,
-                // since there are no Endermans in this dungeon
-                if(GameState.dungeonLocation.equals(new Location(
-                        Bukkit.getServer().getWorlds().get(1), -280.5, 76, -136.5, (float) 89.0, (float) -0.6))) {
-                    setInventoryItem(killer, mob, new ItemStack(Material.ENDER_PEARL, 2));
-                }
                 break;
             default:
                 break;

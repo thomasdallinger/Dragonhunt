@@ -36,26 +36,10 @@ public class BlockBreakListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        // ores, which can be mined in the NETHER
-        List<Material> netherOres = List.of(
-                Material.DEEPSLATE_LAPIS_ORE,
-                Material.DEEPSLATE_IRON_ORE,
-                Material.DEEPSLATE_GOLD_ORE);
-
         // play the break wood sound for the amount of blocks destroyed
         final int[] blocksDestroyed = {10};
 
-        // deny block breaking in the NETHER except for certain materials
-        if (player.getWorld().getName().equals("world_nether")) {
-            if (block.getType() != Material.FIRE && !netherOres.contains(block.getType())) {
-                event.setCancelled(true);
-                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
-                player.sendMessage(ChatColor.RED + "You can't break blocks in the nether!");
-                return;
-            }
-        }
-
-        //Destroy Trees
+        // destroy trees
         if (destroyTree(block, player)) {
             new BukkitRunnable() {
                 @Override
@@ -88,7 +72,7 @@ public class BlockBreakListener implements Listener {
             if (hand.getType().getMaxDurability() > 0) {
                 ((Damageable) meta).setDamage(((Damageable) meta).getDamage() + 1);
 
-                //avoid negative durability
+                // avoid negative durability
                 if (((Damageable) meta).getDamage() > hand.getType().getMaxDurability()) {
                     player.getInventory().removeItem(hand);
                     player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1, 1);

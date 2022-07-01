@@ -28,7 +28,6 @@ public class GrappleListener implements Listener {
             if (meta == null) return;
 
             if (!meta.getDisplayName().equals(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")) return;
-            if (player.getWorld().getName().equals("world_nether") && !GameState.minOnePlayerInEnd) return;
 
             arrow.setVelocity(arrow.getVelocity().multiply(2D));
 

@@ -91,9 +91,12 @@ public class GameConfiguration {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
-        if (item.getType() == Material.SHIELD) {
+        if (item.getType() == Material.SHIELD) { // making the shield unbreakable while looking enchanted
+            meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.setUnbreakable(true);
+            meta.setDisplayName(ChatColor.AQUA.toString() + ChatColor.BOLD + "Shield");
             meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
 
         item.setItemMeta(meta);

@@ -22,11 +22,6 @@ public class SpectateCommand implements CommandExecutor {
             player = (Player) sender;
         } else return true;
 
-        if (player.getWorld().getName().equals("world_nether")) {
-            player.sendMessage(ChatColor.RED + "Spectate Tokens can't be used in the Nether.");
-            return true;
-        }
-
         if (Spectate.spectatesLeft.get(player) == 0) {
             player.sendMessage(ChatColor.RED + "You have no Spectate Tokens left.");
             return true;

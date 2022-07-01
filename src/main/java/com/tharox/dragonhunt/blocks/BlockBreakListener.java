@@ -146,13 +146,13 @@ public class BlockBreakListener implements Listener {
         Location location = block.getLocation();
         block.getDrops().clear();
         block.setType(Material.AIR);
-        block.getWorld().dropItemNaturally(location, new ItemStack(Material.OAK_LOG));
+        GameState.putItemInInventory(player, new ItemStack(Material.OAK_LOG));
 
         ArrayList<Block> locations = new ArrayList<>();
 
         for (int x = -1; x <= 1; x++)
             for (int z = -1; z <= 1; z++)
-                for (int y = 0; y <= 1; y++)
+                for (int y = -1; y <= 1; y++)
                     locations.add(new Location(location.getWorld(), location.getX() + x, location.getY() + y, location.getZ() + z).getBlock());
 
         for (Block nextBlock :

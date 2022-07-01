@@ -16,17 +16,6 @@ public class BlockPlaceListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        // prevent players from placing beds in the END
-        // this only considers WHITE BEDS, since all sheeps drop strings which can be crafted to WHITE WOOL
-        if (player.getWorld().getName().equals("world_the_end")) {
-            if (block.getType() == Material.WHITE_BED) {
-                event.setCancelled(true);
-                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
-                player.sendMessage(ChatColor.RED + "You can't place beds in the end!");
-                return;
-            }
-        }
-
         // prevent players from placing certain blocks in ANY dimension
         if (block.getType() == Material.BREWING_STAND || block.getType() == Material.ENCHANTING_TABLE
                 || block.getType() == Material.ENDER_CHEST || block.getType() == Material.CHEST

@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DbValues;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -28,23 +29,18 @@ public class GameState {
     public static HashMap<Player, List<ItemStack>> resources = new HashMap<>();
 
     /**
-     * Used in EntityDeathListener.
+     * Used in LevelUp.
      *
      * @param player player who is supposed to get the item
      * @param item   item the player should get
      */
-    public static boolean sameItemAlreadyInInventory(Player player, ItemStack item) {
-        for (ItemStack inventoryItem : player.getInventory()) {
-            if (inventoryItem != null && inventoryItem.getItemMeta() != null) {
-                if ((inventoryItem.getType() == item.getType())) {
-                    if (inventoryItem.getMaxStackSize() >= (inventoryItem.getAmount() + item.getAmount())) {
-                        player.getInventory().addItem(item);
-                        return true;
-                    }
-                }
-            }
+    public static void putItemInInventory(Player player, ItemStack item) {
+        HashMap<Integer, ItemStack> didNotFit = player.getInventory().addItem(item);
+
+        if(!didNotFit.isEmpty()) {
+            player.getWorld().dropItemNaturally(player.getLocation(), didNotFit.get(0));
+            // index 0 = max. only 1 item in the HashMap
         }
-        return false;
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.points;
 
+import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -25,10 +26,7 @@ public class LevelUp implements Listener {
         if(event.getNewLevel() % 5 == 0) {
             player.sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + "+1"
                     + ChatColor.GOLD + " Golden Apple");
-            HashMap<Integer, ItemStack> didNotFit = player.getInventory().addItem(new ItemStack(Material.GOLDEN_APPLE));
-            if(!didNotFit.isEmpty()) {
-                player.getWorld().dropItemNaturally(player.getLocation(), didNotFit.get(0)); //index 0 = max. only 1 item in the hashmap
-            }
+            GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE));
         }
     }
 }

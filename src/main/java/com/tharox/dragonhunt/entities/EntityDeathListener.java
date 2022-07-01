@@ -72,10 +72,10 @@ public class EntityDeathListener implements Listener {
                     mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COBWEB, 3));
                 break;
             case "Enderman":
-                setInventoryItem(killer, mob, new ItemStack(Material.ENDER_PEARL, 2));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.ENDER_PEARL, 2));
                 break;
             case "Blaze":
-                setInventoryItem(killer, mob, new ItemStack(Material.BLAZE_ROD, 1));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.BLAZE_ROD, 1));
                 break;
             default:
                 break;
@@ -90,18 +90,6 @@ public class EntityDeathListener implements Listener {
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.FEATHER, 2));
         } else if (mob.getName().equals("Iron Golem")) {
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 4));
-        }
-    }
-
-    private void setInventoryItem(Player killer, Entity mob, ItemStack item) {
-        if (killer != null) {
-            if(GameState.sameItemAlreadyInInventory(killer, item)) return;
-
-            if (killer.getInventory().firstEmpty() == -1) { //Inventory full
-                mob.getWorld().dropItemNaturally(mob.getLocation(), item);
-            } else {
-                killer.getInventory().addItem(item);
-            }
         }
     }
 }

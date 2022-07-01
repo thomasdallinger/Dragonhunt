@@ -14,11 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GameState {
-    // location of the first player entering the NETHER
-    public static Location firstNetherEntry;
+    // location of the first player entering the NETHER (null as long as no player enters the NETHER)
+    public static Location firstNetherEntry = null;
 
-    // location of the nether portal in the OVERWORLD, saved before a player heads into the NETHER
-    public static HashMap<Player, Location> overworldLocation = new HashMap<>();
+    // location of the END spawn platform (always has the same coordinates)
+    public static Location endPlatform = new Location(Bukkit.getWorld("world_the_end"), 100, 50, 0);
 
     // all items a player keeps on death stored in a HashMap
     public static HashMap<Player, ItemStack[]> itemsToKeepOnDeath = new HashMap<>();

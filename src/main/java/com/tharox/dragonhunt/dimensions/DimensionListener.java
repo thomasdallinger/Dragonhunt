@@ -1,13 +1,10 @@
 package com.tharox.dragonhunt.dimensions;
 
 import com.tharox.dragonhunt.game.GameState;
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
@@ -15,60 +12,42 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class DimensionListener implements Listener {
-
-    private final Location loc;
-
-    public DimensionListener(Location loc) {
-        this.loc = loc;
-    }
-
     /**
-     * Give players Resistance 10 when entering the NETHER or END so they can't be damaged for the first 5 seconds.
+     * Give players Resistance 10 when changing worlds so they can't be damaged for the first 5 seconds.
      */
     @EventHandler
     public void onWorldChange(PlayerChangedWorldEvent event) {
         Player player = event.getPlayer();
 
-        if(player.getWorld().getName().equals("world_nether") || player.getWorld().getName().equals("world_the_end")) {
-            for (PotionEffect effect : player.getActivePotionEffects()) player.removePotionEffect(effect.getType());
-            player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 9));
-        }
+        for (PotionEffect effect : player.getActivePotionEffects())
+            player.removePotionEffect(effect.getType());
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 9));
     }
 
     /**
      * Only affects nether portals.
-     * If the player is in the NETHER after the event, teleport him to the selected dungeon entry portal.
-     * If the player wants to go from the NETHER to the OVERWORLD by going through a portal
-     * check if it's the dungeons entry portal or exit portal.
-     * If it is the entry portal, don't search for a available portal.
-     * If it is the exit portal, teleport the player to the portal in the OVERWORLD where he came from.
+     * <p>
+     * Once the first player has reached the NETHER, all other players will be teleported to that
+     * NETHER portal when entering the NETHER.
+     * Players can exit the NETHER by either using that portal or a different one.
+     * <p>
+     * Note: Portals will only be created inside world borders.
      */
-    /*@EventHandler
+    @EventHandler
     public void onPortal(PlayerPortalEvent event) {
-        Player player = event.getPlayer();
-        Location locFrom = event.getFrom();
         World worldFrom = event.getFrom().getWorld();
+        Player player = event.getPlayer();
+        if (worldFrom == null) return;
 
-        if(worldFrom == null) return;
+        if (GameState.firstNetherEntry == null) return; // no player has reached the NETHER before
 
-        if(event.getCause() == PlayerTeleportEvent.TeleportCause.NETHER_PORTAL) {
-            event.setCanCreatePortal(false);
-
-            if(worldFrom.getName().equals("world")) {
-                player.setBedSpawnLocation(player.getLocation(), true);
-                GameState.overworldLocation.put(player, player.getLocation());
-                event.setTo(GameState.dungeonLocation);
-            }
-
-            if(worldFrom.getName().equals("world_nether")) {
-                if(locFrom.distance(GameState.dungeonLocation) < 3) {
-                    event.setSearchRadius(0);
-                    event.setCancelled(true);
-                } else {
-                    event.setCancelled(true);
-                    player.teleport(GameState.overworldLocation.get(player));
-                }
+        if (event.getCause() == PlayerTeleportEvent.TeleportCause.NETHER_PORTAL) {
+            if (worldFrom.getName().equals("world")) {
+                event.setCanCreatePortal(false);
+                event.setTo(GameState.firstNetherEntry);
+                //event.setCancelled(true);
+                //player.teleport(GameState.firstNetherEntry);
             }
         }
-    }*/
+    }
 }

@@ -5,6 +5,7 @@ import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
 import com.tharox.dragonhunt.commands.DateCommand;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.dimensions.DimensionListener;
 import com.tharox.dragonhunt.entities.EntityDeathListener;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.grappler.GrappleListener;
@@ -151,12 +152,15 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new BlockExplodeListener(), this);
         pluginManager.registerEvents(new BlockPlaceListener(), this);
 
+        pluginManager.registerEvents(new DimensionListener(), this);
+
         pluginManager.registerEvents(new VehicleListener(), this);
         pluginManager.registerEvents(new CreatureSpawnListener(), this);
         pluginManager.registerEvents(new EntityDeathListener(), this);
         pluginManager.registerEvents(new EntityDropListener(), this);
 
         pluginManager.registerEvents(new AdvancementListener(), this);
+        pluginManager.registerEvents(new BukketEmptyListener(), this);
         pluginManager.registerEvents(new PlayerDamageListener(), this);
         pluginManager.registerEvents(new PlayerDeathListener(), this);
         pluginManager.registerEvents(new PlayerInteractListener(), this);

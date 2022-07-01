@@ -36,6 +36,17 @@ public class BlockBreakListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
+        // prevent players from breaking obsidian close to the NETHER portal inside the NETHER
+        if(GameState.firstNetherEntry != null && player.getWorld().getName().equals("world_nether")) {
+            if ((int) player.getLocation().distance(GameState.firstNetherEntry) < 15 &&
+                    block.getType() == Material.OBSIDIAN) {
+                event.setCancelled(true);
+                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
+                player.sendMessage(ChatColor.RED +
+                        "You are not allowed to break obsidian close to this nether portal!");
+            }
+        }
+
         // play the break wood sound for the amount of blocks destroyed
         final int[] blocksDestroyed = {10};
 

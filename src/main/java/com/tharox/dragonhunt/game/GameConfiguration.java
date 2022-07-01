@@ -4,8 +4,11 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.grappler.Grappler;
 import com.tharox.dragonhunt.spectate.Spectate;
 import org.bukkit.*;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.List;
@@ -54,9 +57,12 @@ public class GameConfiguration {
             // clears the player's inventory
             player.getInventory().clear();
 
-            // adds the TRACKER, ELYTRA and GRAPPLER to the player's inventory
+            // adds the TRACKER, ELYTRA, START-EQUIPMENT and GRAPPLER to the player's inventory
             player.getInventory().setItem(7, Main.getInstance().getTracker().givePlayerTracker(player));
             player.getInventory().setChestplate(new ItemStack(Material.ELYTRA));
+            player.getInventory().setItem(0, new ItemStack(Material.IRON_AXE));
+            player.getInventory().setItem(1, new ItemStack(Material.IRON_PICKAXE));
+            player.getInventory().setItemInOffHand(addItem(new ItemStack(Material.SHIELD)));
             new Grappler(player);
 
             // give the player 3 SPECTATE TOKENS which can be used throughout the game
@@ -75,5 +81,22 @@ public class GameConfiguration {
             Main.getInstance().getTracker().playerTracksPlayer.put(player, null);
             Main.getInstance().getTracker().playerTracksIndex.put(player, 0);
         }
+    }
+
+    /**
+     * @param item ItemStack to be modified and returned
+     * @return ItemStack to be added to the players inventory
+     */
+    private ItemStack addItem(ItemStack item) {
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return null;
+
+        if (item.getType() == Material.SHIELD) {
+            meta.setUnbreakable(true);
+            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+        }
+
+        item.setItemMeta(meta);
+        return item;
     }
 }

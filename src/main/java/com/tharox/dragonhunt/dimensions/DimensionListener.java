@@ -36,17 +36,14 @@ public class DimensionListener implements Listener {
     @EventHandler
     public void onPortal(PlayerPortalEvent event) {
         World worldFrom = event.getFrom().getWorld();
-        Player player = event.getPlayer();
-        if (worldFrom == null) return;
 
+        if (worldFrom == null) return;
         if (GameState.firstNetherEntry == null) return; // no player has reached the NETHER before
 
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.NETHER_PORTAL) {
             if (worldFrom.getName().equals("world")) {
                 event.setCanCreatePortal(false);
                 event.setTo(GameState.firstNetherEntry);
-                //event.setCancelled(true);
-                //player.teleport(GameState.firstNetherEntry);
             }
         }
     }

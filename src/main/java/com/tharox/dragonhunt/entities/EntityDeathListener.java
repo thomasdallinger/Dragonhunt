@@ -1,9 +1,11 @@
 package com.tharox.dragonhunt.entities;
 
+import com.tharox.dragonhunt.db.DbConfig;
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.gear.XPUpgrade;
 import com.tharox.dragonhunt.points.GearPoints;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.*;
@@ -47,9 +49,9 @@ public class EntityDeathListener implements Listener {
                 break;
             case "Skeleton":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.ARROW, 4));
-                ItemStack crossbow = new ItemStack(Material.CROSSBOW);
-                mob.getWorld().dropItemNaturally(mob.getLocation(), dealDamageToItem(crossbow));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.CROSSBOW));
                 break;
+            case "Piglin":
             case "Zombie":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.resources.get(killer).get(1));
                 break;
@@ -67,12 +69,7 @@ public class EntityDeathListener implements Listener {
             case "Blaze":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.BLAZE_ROD, 1));
                 break;
-            case "Piglin":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.resources.get(killer).get(1));
-                break;
             case "Piglin Brute":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.NETHERITE_INGOT));
-                break;
             case "Wither Skeleton":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.NETHERITE_INGOT));
                 break;
@@ -90,22 +87,5 @@ public class EntityDeathListener implements Listener {
         } else if (mob.getName().equals("Iron Golem")) {
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 5));
         }
-    }
-
-    /**
-     * Deals damage to a damageable item.
-     * @param item to deal damage to
-     * @return the damaged item
-     */
-    public ItemStack dealDamageToItem(ItemStack item) {
-        ItemMeta meta = item.getItemMeta();
-
-        if (meta instanceof Damageable) {
-            Damageable itemdmg = (Damageable) meta;
-            itemdmg.damage(100);
-            item.setItemMeta((ItemMeta) itemdmg);
-        }
-
-        return item;
     }
 }

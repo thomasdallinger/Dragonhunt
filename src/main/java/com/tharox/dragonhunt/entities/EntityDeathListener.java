@@ -1,19 +1,19 @@
 package com.tharox.dragonhunt.entities;
 
-import com.tharox.dragonhunt.db.DbConfig;
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.gear.XPUpgrade;
 import com.tharox.dragonhunt.points.GearPoints;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Animals;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Monster;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
 public class EntityDeathListener implements Listener {
 

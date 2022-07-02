@@ -32,7 +32,7 @@ public class GearPoints {
     public static void addPoints(Player player, int pointsToAdd) {
         gearPoints.put(player, gearPoints.get(player) + pointsToAdd);
         player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "+" + pointsToAdd
-                + ChatColor.LIGHT_PURPLE + " Gear Point");
+                + ChatColor.LIGHT_PURPLE + " Gear Point(s)");
     }
 
     public static void removePoints(Player player, int pointsToRemove) {

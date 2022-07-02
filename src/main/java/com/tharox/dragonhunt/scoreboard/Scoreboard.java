@@ -45,29 +45,27 @@ public class Scoreboard extends ScoreboardBuilder {
     }
 
     @Override
-    public void update() {
+    public void update(Player player, Countdown countdown) {
+        if (!Main.getInstance().getTimer().isRunning() && GearPoints.getPoints(player) == 0) { //Game hasn't started yet
+            gameNotStarted();
+            return;
+        }
 
+        setScore(ChatColor.GOLD.toString() + ChatColor.BOLD + "1vs1", 10);
+        setScore(ChatColor.WHITE + "Players: " + ChatColor.DARK_GREEN + Bukkit.getOnlinePlayers().size(), 8);
+        setScore(ChatColor.WHITE + "Kills: " + ChatColor.GREEN + DbValues.getKills(player, true), 7);
+        setScore(ChatColor.WHITE + "Deaths: " + ChatColor.GREEN + DbValues.getKills(player, false), 6);
+        setScore(ChatColor.WHITE + "Spectate Tokens: " + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
+        setScore(ChatColor.WHITE + "Gear Points: " + ChatColor.LIGHT_PURPLE.toString() + GearPoints.getPoints(player), 3);
+        setScore(ChatColor.WHITE + "Free XP in:", 1);
+        setScore(ChatColor.AQUA + countdownFormat(countdown), 0);
     }
 
     private void run(Player player, Countdown countdown) {
         new BukkitRunnable() {
             @Override
             public void run() {
-
-                if (!Main.getInstance().getTimer().isRunning() && GearPoints.getPoints(player) == 0) { //Game hasn't started yet
-                    gameNotStarted();
-                    return;
-                }
-
-                setScore(ChatColor.GOLD.toString() + ChatColor.BOLD + "1vs1", 10);
-                setScore(ChatColor.WHITE + "Players: " + ChatColor.DARK_GREEN + Bukkit.getOnlinePlayers().size(), 8);
-                setScore(ChatColor.WHITE + "Kills: " + ChatColor.GREEN + DbValues.getKills(player, true), 7);
-                setScore(ChatColor.WHITE + "Deaths: " + ChatColor.GREEN + DbValues.getKills(player, false), 6);
-                setScore(ChatColor.WHITE + "Spectate Tokens: " + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
-                setScore(ChatColor.WHITE + "Gear Points: " + ChatColor.LIGHT_PURPLE.toString() + GearPoints.getPoints(player), 3);
-                setScore(ChatColor.WHITE + "Free XP in:", 1);
-                setScore(ChatColor.AQUA + countdownFormat(countdown), 0);
-
+                update(player, countdown);
             }
         }.runTaskTimer(Main.getInstance(), 0, 20);
     }

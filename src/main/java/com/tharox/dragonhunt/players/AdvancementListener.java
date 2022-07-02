@@ -3,6 +3,10 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.gear.XPUpgrade;
+import com.tharox.dragonhunt.points.GearPoints;
+import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,46 +19,57 @@ import java.sql.Statement;
  * Don't display the advancement for finding a fortress or a bastion when walking through a nether dungeon.
  */
 public class AdvancementListener implements Listener {
+
     @EventHandler
     public void onAdvancement(PlayerAdvancementDoneEvent event) {
         Player player = event.getPlayer();
-        Advancement adv = event.getAdvancement();
-        String completed = "";
+        Advancement advancementValue = event.getAdvancement();
+        String advancementName = "";
 
-        /*if (adv.getKey().toString().equals("minecraft:story/find_fortress") || adv.getKey().toString().equals("minecraft:story/find_bastion")) {
-            for(String c: adv.getCriteria()) {
-                Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "advancement revoke " + event.getPlayer().getName() + " only " + event.getAdvancement().getKey().getKey());
-                player.getAdvancementProgress(adv).revokeCriteria(c);
-            }
-        }*/
-
-        switch (adv.getKey().toString()) {
+        switch (advancementValue.getKey().toString()) {
             case "minecraft:story/smelt_iron":
-                completed = "Gather Iron";
+                advancementName = "Gather Iron";
                 break;
             case "minecraft:story/mine_diamond":
-                completed = "Acquire Diamonds";
+                advancementName = "Acquire Diamonds";
                 break;
             case "minecraft:story/enter_the_nether":
-                completed = "Enter Nether";
-                if (GameState.firstNetherEntry == null) GameState.firstNetherEntry = player.getLocation();
+                advancementName = "Enter Nether";
+                if (GameState.firstNetherEntry == null) {
+                    GameState.firstNetherEntry = player.getLocation();
+                    addBonusXP(player, "Nether");
+                }
                 break;
             case "minecraft:nether/distract_piglin":
-                completed = "Piglin Trading";
+                advancementName = "Piglin Trading";
                 break;
             case "minecraft:story/enter_the_end":
-                completed = "Enter End";
+                advancementName = "Enter End";
+                if (!GameState.playersReachedEnd) {
+                    GameState.playersReachedEnd = true;
+                    addBonusXP(player, "End");
+                }
                 break;
         }
 
-        if (completed.equals("")) {
+        if (advancementName.equals("")) {
             return;
         }
 
-        String finalCompleted = completed;
+        addAdvancement(player, advancementName);
+    }
+
+    public void addBonusXP(Player player, String dimension) {
+        player.giveExp(GearPoints.enderchestXP + XPUpgrade.MoreXP.get(player) - 1);
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+        player.sendMessage(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + "BONUS XP: "
+                + ChatColor.AQUA + "First in " + dimension);
+    }
+
+    public void addAdvancement(Player player, String advancement) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO Advancements (GameID, Player, advancement, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + finalCompleted +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + advancement +
                     "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();

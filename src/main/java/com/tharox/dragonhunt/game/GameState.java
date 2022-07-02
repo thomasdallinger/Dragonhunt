@@ -15,6 +15,9 @@ public class GameState {
     // location of the first player entering the NETHER (null as long as no player enters the NETHER)
     public static Location firstNetherEntry = null;
 
+    // whether the players have reached the END dimension or not (set to true once the first player is in the END)
+    public static boolean playersReachedEnd = false;
+
     // location of the END spawn platform (always has the same coordinates)
     public static Location endPlatform = new Location(Bukkit.getWorld("world_the_end"), 100, 50, 0);
 

@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.scoreboard;
 
+import com.tharox.dragonhunt.timer.Countdown;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.DisplaySlot;
@@ -17,13 +18,13 @@ public abstract class ScoreboardBuilder {
     public ScoreboardBuilder(Player player, String displayName) {
         this.player = player;
 
-        if(player.getScoreboard().equals(Bukkit.getScoreboardManager().getMainScoreboard())) {
+        if (player.getScoreboard().equals(Bukkit.getScoreboardManager().getMainScoreboard())) {
             player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
         }
 
         this.scoreboard = player.getScoreboard();
 
-        if(this.scoreboard.getObjective("display") != null) {
+        if (this.scoreboard.getObjective("display") != null) {
             this.scoreboard.getObjective("display").unregister();
         }
 
@@ -35,7 +36,7 @@ public abstract class ScoreboardBuilder {
 
     public abstract void createScoreboard();
 
-    public abstract void update();
+    public abstract void update(Player player, Countdown countdown);
 
     public void setDisplayName(String displayName) {
         this.objective.setDisplayName(displayName);
@@ -44,7 +45,7 @@ public abstract class ScoreboardBuilder {
     public void setScore(String content, int score) {
         Team team = getTeamByScore(score);
 
-        if(team == null) {
+        if (team == null) {
             return;
         }
 
@@ -57,8 +58,8 @@ public abstract class ScoreboardBuilder {
     }
 
     private EntryName getEntryNameByScore(int score) {
-        for(EntryName name : EntryName.values()) {
-            if(score == name.getEntry()) {
+        for (EntryName name : EntryName.values()) {
+            if (score == name.getEntry()) {
                 return name;
             }
         }
@@ -69,13 +70,13 @@ public abstract class ScoreboardBuilder {
     private Team getTeamByScore(int score) {
         EntryName name = getEntryNameByScore(score);
 
-        if(name == null) {
+        if (name == null) {
             return null;
         }
 
         Team team = scoreboard.getEntryTeam(name.getEntryName());
 
-        if(team != null) {
+        if (team != null) {
             return team;
         }
 
@@ -88,11 +89,11 @@ public abstract class ScoreboardBuilder {
     private void showScore(int score) {
         EntryName name = getEntryNameByScore(score);
 
-        if(name == null) {
+        if (name == null) {
             return;
         }
 
-        if(objective.getScore(name.getEntryName()).isScoreSet()) {
+        if (objective.getScore(name.getEntryName()).isScoreSet()) {
             return;
         }
 
@@ -102,11 +103,11 @@ public abstract class ScoreboardBuilder {
     private void hideScore(int score) {
         EntryName name = getEntryNameByScore(score);
 
-        if(name == null) {
+        if (name == null) {
             return;
         }
 
-        if(!objective.getScore(name.getEntryName()).isScoreSet()) {
+        if (!objective.getScore(name.getEntryName()).isScoreSet()) {
             return;
         }
 

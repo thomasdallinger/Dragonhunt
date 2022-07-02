@@ -41,7 +41,7 @@ public class SpectateCommand implements CommandExecutor {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO Spectate (GameID, Player, dimension, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" +
-                    DbValues.getCurrentWorld(player) + "', '" + DbValues.getTimestamp() + "')";
+                    DbValues.getCurrentWorld(player.getLocation()) + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();
             stmt.execute(query);

@@ -58,7 +58,7 @@ public class GameConfiguration {
             player.getInventory().clear();
 
             // adds the TRACKER, ELYTRA, START-EQUIPMENT and GRAPPLER to the player's inventory
-            player.getInventory().setItem(7, Main.getInstance().getTracker().givePlayerTracker(player));
+            player.getInventory().setItem(7, Main.getInstance().getTracker().givePlayerTracker());
             player.getInventory().setChestplate(new ItemStack(Material.ELYTRA));
             player.getInventory().setItem(0, new ItemStack(Material.IRON_AXE));
             player.getInventory().setItem(1, new ItemStack(Material.IRON_PICKAXE));
@@ -78,7 +78,7 @@ public class GameConfiguration {
                     new ItemStack(Material.RAW_GOLD)));
 
             // set default TRACKER values, nobody is tracked when the player receives the TRACKER
-            Main.getInstance().getTracker().playerTracksPlayer.put(player, null);
+            Main.getInstance().getTracker().playerTracksStructure.put(player, null);
             Main.getInstance().getTracker().playerTracksIndex.put(player, 0);
         }
     }

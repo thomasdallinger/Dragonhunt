@@ -134,10 +134,10 @@ public class DbValues {
         return  minutes + ":" + seconds;
     }
 
-    public static String getCurrentWorld(Player player) {
+    public static String getCurrentWorld(Location location) {
         String currentWorld = "Unknown";
 
-        switch (player.getWorld().getName()) {
+        switch (location.getWorld().getName()) {
             case "world":
                 currentWorld = "Overworld";
                 break;

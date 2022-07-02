@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.tracker;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
@@ -110,6 +111,7 @@ public class Tracker implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         String trackedStructure = playerTracksStructure.get(player);
         Location trackedLocation = playerTracksLocation.get(player);
+        Timer timer = Main.getInstance().getTimer();
 
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
@@ -120,9 +122,11 @@ public class Tracker implements Listener {
         if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
             try {
 
-                if (Main.getInstance().getTimer().getTime() < 60) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED.toString() + ChatColor.BOLD
-                            + "WAITING FOR SIGNAL"));
+                if (timer.getTime() < 30) {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
+                            ChatColor.RED.toString() + ChatColor.BOLD + "UNAVAILABLE FOR "
+                            + ChatColor.DARK_RED + ChatColor.BOLD + (30 - timer.getTime())
+                            + ChatColor.RED + ChatColor.BOLD + " SECONDS"));
                     return;
                 }
 

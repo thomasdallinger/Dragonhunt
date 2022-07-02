@@ -33,9 +33,7 @@ public class Grappler implements Listener {
                 ChatColor.LIGHT_PURPLE.toString() + ChatColor.ITALIC + "Be aware of fall damage.",
                 "",
                 ChatColor.WHITE + "Maximum arrow distance: " + ChatColor.RED +  "20 blocks",
-                ChatColor.YELLOW + "Buy CROSSBOW UPGRADES to enchant.",
-                ChatColor.DARK_RED + "Grappler functionality is disabled in the",
-                ChatColor.DARK_RED + "Nether until 1 player reaches the End."));
+                ChatColor.YELLOW + "Buy CROSSBOW UPGRADES to enchant."));
         item.setItemMeta(meta);
 
         return item;

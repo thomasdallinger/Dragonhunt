@@ -1,13 +1,12 @@
-package com.tharox.dragonhunt.gear;
+package com.tharox.dragonhunt.upgradeMenu;
 
 import com.tharox.dragonhunt.Main;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class GearCommand implements CommandExecutor {
+public class UpgradeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player;
@@ -16,8 +15,8 @@ public class GearCommand implements CommandExecutor {
             player = (Player) sender;
         } else return true;
 
-        GearUpgradeInventory gearUpgradeInventory = new GearUpgradeInventory(Main.getInstance().getConfig(), player);
-        player.openInventory(gearUpgradeInventory.menu);
+        UpgradeInventory upgradeInventory = new UpgradeInventory(Main.getInstance().getConfig(), player);
+        player.openInventory(upgradeInventory.menu);
         return false;
     }
 }

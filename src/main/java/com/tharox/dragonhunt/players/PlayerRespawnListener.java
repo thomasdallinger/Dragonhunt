@@ -2,7 +2,6 @@ package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.points.GearPoints;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

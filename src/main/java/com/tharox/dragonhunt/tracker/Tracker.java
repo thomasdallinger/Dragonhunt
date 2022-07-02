@@ -102,7 +102,7 @@ public class Tracker implements Listener {
 
         if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
-                player.performCommand("gear");
+                player.performCommand("upgrades");
             }
         }
     }
@@ -194,7 +194,7 @@ public class Tracker implements Listener {
                 ChatColor.YELLOW.toString() + ChatColor.ITALIC + "The compass needle points to the",
                 ChatColor.YELLOW.toString() + ChatColor.ITALIC + "tracked structure location.",
                 "",
-                ChatColor.WHITE + "Left-Click: " + ChatColor.GREEN + "Open Gear Upgrades (/gear)",
+                ChatColor.WHITE + "Left-Click: " + ChatColor.GREEN + "Open Upgrades menu (/upgrades)",
                 ChatColor.WHITE + "Right-Click: " + ChatColor.GREEN + "Switch tracked structure"));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

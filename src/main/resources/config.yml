@@ -1,6 +1,6 @@
-#GEAR UPGRADES
-#menu item: no cost!
-#slot: 0-26
+# UPGRADES
+# menu item: no cost!
+# slot: 0-26
 menu:
   0:
     material: IRON_SWORD

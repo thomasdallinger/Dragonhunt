@@ -2,7 +2,7 @@ package com.tharox.dragonhunt.game;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
-import com.tharox.dragonhunt.gear.*;
+import com.tharox.dragonhunt.upgrades.*;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import org.bukkit.*;
@@ -34,8 +34,8 @@ public class GameStart extends GameConfiguration {
     }
 
     /**
-     * Sets the access level of all available GEAR UPGRADES to 1.
-     * This means that each level 1 GEAR UPGRADE can be purchased from the GEAR UPGRADE inventory (/gear).
+     * Sets the access level of all available UPGRADES to 1.
+     * This means that each level 1 UPGRADE can be purchased from the UPGRADE inventory (/upgrades).
      */
     private void upgradeRegistration() {
         for (Player player : Bukkit.getOnlinePlayers()) {

@@ -1,9 +1,10 @@
-package com.tharox.dragonhunt.gear;
+package com.tharox.dragonhunt.upgradeMenu;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.points.GearPoints;
+import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.upgrades.*;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -15,14 +16,14 @@ import org.bukkit.inventory.ItemStack;
 
 import java.sql.Statement;
 
-public class GearUpgradeListener implements Listener {
+public class UpgradeListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        GearUpgradeInventory gearUpgradeInventory = new GearUpgradeInventory(Main.getInstance().getConfig(), player);
+        UpgradeInventory upgradeInventory = new UpgradeInventory(Main.getInstance().getConfig(), player);
 
-        if (!event.getView().getTitle().contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "GEAR UPGRADES"))
+        if (!event.getView().getTitle().contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "UPGRADES"))
             return;
         event.setCancelled(true);
 
@@ -32,44 +33,44 @@ public class GearUpgradeListener implements Listener {
 
         String upgradeName = item.getItemMeta().getDisplayName();
 
-        //Inventory is Gear Upgrade Menu
-        if (event.getView().getTitle().contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "GEAR UPGRADES MENU")) {
+        // inventory is Upgrade Menu
+        if (event.getView().getTitle().contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "UPGRADES MENU")) {
             player.closeInventory();
             player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
             menuNavigation(player, upgradeName);
             return;
         }
 
-        //TODO: seems to be not needed
-        //item is air (placeholder)
+        // TODO: seems to be not needed
+        // item is air (placeholder)
         if (item.getType() == Material.AIR) {
             return;
         }
 
-        //event.getInventory() ... top inventory = gear upgrades
-        //if the clicked inventory is not the gear upgrades inventory, cancel the event
+        // event.getInventory() ... top inventory = upgrades
+        // if the clicked inventory is not the upgrades inventory, cancel the event
         if (event.getClickedInventory() != event.getInventory()) {
             event.setCancelled(true);
             return;
         }
 
-        //Back to menu functionality
+        // back to menu functionality
         if (upgradeName.equals(ChatColor.RED + "Back to menu")) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASEDRUM, 1, 1);
             player.closeInventory();
-            player.openInventory(gearUpgradeInventory.menu);
+            player.openInventory(upgradeInventory.menu);
             return;
         }
 
-        //Not enough points to purchase Upgrade level
-        if (GearPoints.getPoints(player) < GearUpgradeInventory.upgradeCost.get(upgradeName)) {
+        // not enough points to purchase Upgrade level
+        if (UpgradePoints.getPoints(player) < UpgradeInventory.upgradeCost.get(upgradeName)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(ChatColor.RED + "You don't have enough points! Need "
-                    + (GearUpgradeInventory.upgradeCost.get(upgradeName) - GearPoints.getPoints(player)) + " more.");
+                    + (UpgradeInventory.upgradeCost.get(upgradeName) - UpgradePoints.getPoints(player)) + " more.");
             return;
         }
 
-        //Upgrade level not unlocked
+        // upgrade level not unlocked
         if (upgradeName.contains("LOCKED")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(ChatColor.RED + "Purchase the previous level to unlock this one!");
@@ -106,7 +107,7 @@ public class GearUpgradeListener implements Listener {
             purchaseUpgrade(player, upgradeName, "XP");
         }
 
-        addGearUpgradeAccess(player, upgradeName);
+        addUpgradeAccess(player, upgradeName);
     }
 
     /**
@@ -115,39 +116,39 @@ public class GearUpgradeListener implements Listener {
      */
     private void purchaseUpgrade(Player player, String upgradeName, String inventory) {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        GearPoints.removePoints(player, GearUpgradeInventory.upgradeCost.get(upgradeName));
+        UpgradePoints.removePoints(player, UpgradeInventory.upgradeCost.get(upgradeName));
 
         menuNavigation(player, inventory);
     }
 
     private void menuNavigation(Player player, String name) {
-        GearUpgradeInventory gearUpgradeInventory = new GearUpgradeInventory(Main.getInstance().getConfig(), player);
+        UpgradeInventory upgradeInventory = new UpgradeInventory(Main.getInstance().getConfig(), player);
 
         if (name.contains("Weapon"))
-            player.openInventory(gearUpgradeInventory.weapon);
+            player.openInventory(upgradeInventory.weapon);
         else if (name.contains("Bow"))
-            player.openInventory(gearUpgradeInventory.bow);
+            player.openInventory(upgradeInventory.bow);
         else if (name.contains("Crossbow"))
-            player.openInventory(gearUpgradeInventory.crossbow);
+            player.openInventory(upgradeInventory.crossbow);
         else if (name.contains("Arrow"))
-            player.openInventory(gearUpgradeInventory.arrow);
+            player.openInventory(upgradeInventory.arrow);
         else if (name.contains("Tool"))
-            player.openInventory(gearUpgradeInventory.tool);
+            player.openInventory(upgradeInventory.tool);
         else if (name.contains("Armor"))
-            player.openInventory(gearUpgradeInventory.armor);
+            player.openInventory(upgradeInventory.armor);
         else if (name.contains("Food"))
-            player.openInventory(gearUpgradeInventory.food);
+            player.openInventory(upgradeInventory.food);
         else if (name.contains("Resource"))
-            player.openInventory(gearUpgradeInventory.resource);
+            player.openInventory(upgradeInventory.resource);
         else if (name.contains("XP"))
-            player.openInventory(gearUpgradeInventory.xp);
+            player.openInventory(upgradeInventory.xp);
     }
 
-    private void addGearUpgradeAccess(Player player, String upgradeName) {
+    private void addUpgradeAccess(Player player, String upgradeName) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO GearAccess (GameID, Player, upgrade, pointsBefore, cost, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + upgradeName.substring(4) + "', '"
-                    + GearPoints.getPoints(player) + "', '" + GearUpgradeInventory.upgradeCost.get(upgradeName)
+                    + UpgradePoints.getPoints(player) + "', '" + UpgradeInventory.upgradeCost.get(upgradeName)
                     + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();

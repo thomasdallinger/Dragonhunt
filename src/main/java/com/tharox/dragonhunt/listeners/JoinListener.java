@@ -5,7 +5,7 @@ import com.google.common.io.ByteStreams;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameStart;
-import com.tharox.dragonhunt.points.GearPoints;
+import com.tharox.dragonhunt.points.UpgradePoints;
 import com.tharox.dragonhunt.scoreboard.Scoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -28,7 +28,7 @@ public class JoinListener implements Listener {
         player.sendMessage(ChatColor.YELLOW.toString() + ChatColor.ITALIC + "Welcome to Dragonhunt!");
         event.setJoinMessage(Main.getPrefix() + ChatColor.GREEN + player.getName() + ChatColor.WHITE + " has joined.");
 
-        GearPoints.setPoints(player, 0);
+        UpgradePoints.setPoints(player, 0);
         new Scoreboard(player);
 
         DbValues.getPlayersAllowedToPlay();

@@ -1,6 +1,6 @@
-package com.tharox.dragonhunt.gear;
+package com.tharox.dragonhunt.upgrades;
 
-import com.tharox.dragonhunt.points.GearPoints;
+import com.tharox.dragonhunt.points.UpgradePoints;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -119,21 +119,21 @@ public class Item {
         }
 
         if (cost != 0) {
-            if (GearPoints.getPoints(player) >= cost) {
+            if (UpgradePoints.getPoints(player) >= cost) {
                 if (NAME != null && itemMeta.getDisplayName().contains("LOCKED")) {
                     itemMeta.setLore(Arrays.asList(
                             ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                             "",
-                            ChatColor.LIGHT_PURPLE.toString() + GearPoints.getPoints(player) +
-                                    ChatColor.WHITE + " / " + cost + " Gear Points",
+                            ChatColor.LIGHT_PURPLE.toString() + UpgradePoints.getPoints(player) +
+                                    ChatColor.WHITE + " / " + cost + " Upgrade Points",
                             ChatColor.DARK_RED + "Purchase previous levels first!"
                     ));
                 } else {
                     itemMeta.setLore(Arrays.asList(
                             ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                             "",
-                            ChatColor.LIGHT_PURPLE.toString() + GearPoints.getPoints(player) +
-                                    ChatColor.WHITE + " / " + cost + " Gear Points",
+                            ChatColor.LIGHT_PURPLE.toString() + UpgradePoints.getPoints(player) +
+                                    ChatColor.WHITE + " / " + cost + " Upgrade Points",
                             ChatColor.GOLD + "Click to buy!"
                     ));
                 }
@@ -141,9 +141,9 @@ public class Item {
                 itemMeta.setLore(Arrays.asList(
                         ChatColor.RED.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        ChatColor.DARK_RED.toString() + GearPoints.getPoints(player) +
-                                ChatColor.WHITE + " / " + cost + " Gear Points",
-                        ChatColor.RED.toString() + (cost - GearPoints.getPoints(player)) + " Gear Point(s) missing!"
+                        ChatColor.DARK_RED.toString() + UpgradePoints.getPoints(player) +
+                                ChatColor.WHITE + " / " + cost + " Upgrade Points",
+                        ChatColor.RED.toString() + (cost - UpgradePoints.getPoints(player)) + " Upgrade Point(s) missing!"
                 ));
             }
         }

@@ -2,7 +2,7 @@ package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.points.GearPoints;
+import com.tharox.dragonhunt.points.UpgradePoints;
 import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
 import org.bukkit.Bukkit;
@@ -46,7 +46,7 @@ public class Scoreboard extends ScoreboardBuilder {
 
     @Override
     public void update(Player player, Countdown countdown) {
-        if (!Main.getInstance().getTimer().isRunning() && GearPoints.getPoints(player) == 0) { //Game hasn't started yet
+        if (!Main.getInstance().getTimer().isRunning() && UpgradePoints.getPoints(player) == 0) { //Game hasn't started yet
             gameNotStarted();
             return;
         }
@@ -56,7 +56,7 @@ public class Scoreboard extends ScoreboardBuilder {
         setScore(ChatColor.WHITE + "Kills: " + ChatColor.GREEN + DbValues.getKills(player, true), 7);
         setScore(ChatColor.WHITE + "Deaths: " + ChatColor.GREEN + DbValues.getKills(player, false), 6);
         setScore(ChatColor.WHITE + "Spectate Tokens: " + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
-        setScore(ChatColor.WHITE + "Gear Points: " + ChatColor.LIGHT_PURPLE.toString() + GearPoints.getPoints(player), 3);
+        setScore(ChatColor.WHITE + "Upgrade Points: " + ChatColor.LIGHT_PURPLE.toString() + UpgradePoints.getPoints(player), 3);
         setScore(ChatColor.WHITE + "Free XP in:", 1);
         setScore(ChatColor.AQUA + countdownFormat(countdown), 0);
     }

@@ -1,8 +1,7 @@
 package com.tharox.dragonhunt.players;
 
-import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.gear.XPUpgrade;
-import com.tharox.dragonhunt.points.GearPoints;
+import com.tharox.dragonhunt.upgrades.XPUpgrade;
+import com.tharox.dragonhunt.points.UpgradePoints;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -33,7 +32,7 @@ public class PlayerInteractListener implements Listener {
                     event.setCancelled(true);
                     block.setType(Material.AIR);
 
-                    player.giveExp(GearPoints.enderchestXP + XPUpgrade.MoreXP.get(player) - 1);
+                    player.giveExp(UpgradePoints.enderchestXP + XPUpgrade.MoreXP.get(player) - 1);
                     player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                     return;
                 }

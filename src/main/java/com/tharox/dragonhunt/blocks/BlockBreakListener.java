@@ -2,8 +2,8 @@ package com.tharox.dragonhunt.blocks;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.gear.XPUpgrade;
-import com.tharox.dragonhunt.points.GearPoints;
+import com.tharox.dragonhunt.upgrades.XPUpgrade;
+import com.tharox.dragonhunt.points.UpgradePoints;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -140,7 +140,7 @@ public class BlockBreakListener implements Listener {
                 block.getDrops().clear();
                 block.setType(Material.AIR);
 
-                player.giveExp(GearPoints.oreXP + XPUpgrade.MoreXP.get(player) - 1);
+                player.giveExp(UpgradePoints.oreXP + XPUpgrade.MoreXP.get(player) - 1);
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             }
         }

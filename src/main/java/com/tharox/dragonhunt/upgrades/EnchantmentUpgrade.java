@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.gear;
+package com.tharox.dragonhunt.upgrades;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;

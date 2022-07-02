@@ -17,8 +17,8 @@ import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.points.LevelUp;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
-import com.tharox.dragonhunt.gear.GearCommand;
-import com.tharox.dragonhunt.gear.GearUpgradeListener;
+import com.tharox.dragonhunt.upgradeMenu.UpgradeCommand;
+import com.tharox.dragonhunt.upgradeMenu.UpgradeListener;
 import com.tharox.dragonhunt.spectate.SpectateCommand;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
@@ -146,7 +146,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new GrappleListener(), this);
 
         pluginManager.registerEvents(new LevelUp(), this);
-        pluginManager.registerEvents(new GearUpgradeListener(), this);
+        pluginManager.registerEvents(new UpgradeListener(), this);
 
         pluginManager.registerEvents(new BlockBreakListener(), this);
         pluginManager.registerEvents(new BlockExplodeListener(), this);
@@ -172,7 +172,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
     private void commandRegistration() {
         getCommand("date").setExecutor(new DateCommand());
-        getCommand("gear").setExecutor(new GearCommand());
+        getCommand("upgrades").setExecutor(new UpgradeCommand());
         getCommand("spec").setExecutor(new SpectateCommand());
     }
 }

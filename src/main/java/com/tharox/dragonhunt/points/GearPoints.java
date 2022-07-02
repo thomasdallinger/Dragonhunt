@@ -12,6 +12,7 @@ import java.util.HashMap;
  * Coal ores award natural XP (0-2 xp points), which cannot be upgraded using XP Upgrades.
  */
 public class GearPoints {
+    // the amount of XP given to the player can be upgraded using XP UPGRADES (excludes coal ore)
     public static int enderchestXP = 12; // PlayerInteractListener, ResetScoreboardCountdown
     public static int playerXP = 10; // PlayerDeathListener
     public static int oreXP = 3; // BlockBreakListener

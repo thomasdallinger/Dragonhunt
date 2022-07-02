@@ -122,7 +122,6 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.RAW_COPPER, GameState.resources.get(player).get(1));
         materials.put(Material.GOLD_NUGGET, GameState.resources.get(player).get(1)); // Nether Gold Ore
         materials.put(Material.GILDED_BLACKSTONE, GameState.resources.get(player).get(1));
-        materials.put(Material.QUARTZ, GameState.resources.get(player).get(0)); // Quartz Block
 
         // loop through all drops and check if they have to be changed
         for (ItemStack item : block.getDrops()) {
@@ -133,11 +132,11 @@ public class BlockBreakListener implements Listener {
                 block.getWorld().dropItemNaturally(block.getLocation(), materials.get(item.getType()));
             }
 
-            // instead of dropping LAPIS, EMERALDS or REDSTONE, give the player a certain amount of XP
-            // the XP given can be upgraded using XP UPGRADES
+            // instead of dropping LAPIS, EMERALDS, REDSTONE or QUARTZ give the player a certain amount of XP
             if (item.getType() == Material.LAPIS_LAZULI
                     || item.getType() == Material.EMERALD
-                    || item.getType() == Material.REDSTONE) {
+                    || item.getType() == Material.REDSTONE
+                    || item.getType() == Material.QUARTZ) {
                 block.getDrops().clear();
                 block.setType(Material.AIR);
 

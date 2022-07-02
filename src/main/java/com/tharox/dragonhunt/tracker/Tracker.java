@@ -76,8 +76,8 @@ public class Tracker implements Listener {
         if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
 
-                if (Main.getInstance().getTimer().getTime() < 60) {
-                    player.sendMessage(ChatColor.RED + "Tracker disabled for the first minute.");
+                if (Main.getInstance().getTimer().getTime() < 30) {
+                    player.sendMessage(ChatColor.RED + "Tracker currently disabled.");
                     return;
                 }
 

@@ -26,11 +26,8 @@ public class PlayerDeathListener implements Listener {
      * - offhand (1 item)
      * - armor (4 items, 3 items if the player had an elytra)
      * - XP (level only)
-     * <p>
-     * The player always looses:
-     * - half of his points the player had at the time of dying
-     * <p>
-     * If the player had been in the nether, the player respawns in the nether.
+     *
+     * The killer gets a certain amount of XP.
      */
     @EventHandler
     public void onPlayerKill(PlayerDeathEvent event) {
@@ -64,12 +61,14 @@ public class PlayerDeathListener implements Listener {
 
         event.setDroppedExp(0);
         event.setKeepLevel(true);
-        player.setExp(0); //reset XP progress towards the next level
+        player.setExp(0); // reset XP progress towards the next level
         event.getDrops().clear();
 
         GameState.itemsToKeepOnDeath.put(player, player.getInventory().getContents());
 
-        player.sendMessage(ChatColor.GRAY + "You died at " + ChatColor.GOLD + ChatColor.BOLD + DbValues.locationToString(player.getLocation()));
+        player.sendMessage(ChatColor.YELLOW.toString() + ChatColor.ITALIC + "You died at "
+                + ChatColor.YELLOW.toString() + ChatColor.ITALIC + ChatColor.BOLD
+                + DbValues.locationToString(player.getLocation()));
     }
 
     private void addPlayerDeath(Player player, String deathmessage) {

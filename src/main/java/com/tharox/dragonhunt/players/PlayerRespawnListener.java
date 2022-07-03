@@ -18,7 +18,9 @@ public class PlayerRespawnListener implements Listener {
 
             player.getInventory().setContents(GameState.itemsToKeepOnDeath.get(player));
 
-            player.sendMessage(ChatColor.GOLD + "You respawned with your Hotbar, Offhand and Armor Items.");
+            player.sendMessage(ChatColor.GREEN + "Respawned with "
+                    + ChatColor.DARK_GREEN + ChatColor.BOLD + "HOTBAR, ARMOR & OFFHAND"
+                    + ChatColor.GREEN + " items...");
         }, 5L);
     }
 }

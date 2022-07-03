@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
 import com.tharox.dragonhunt.commands.DateCommand;
+import com.tharox.dragonhunt.crafting.CustomRecipes;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.dimensions.DimensionListener;
 import com.tharox.dragonhunt.entities.EntityDeathListener;
@@ -59,6 +60,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         scoreboardCountdown = new Countdown(false, 300);
         ResetScoreboardCountdown.countdownHitsZero(Main.getInstance().getScoreboardCountdown());
         tracker = new Tracker();
+        new CustomRecipes(); // adds all custom recipes to the game
 
         listenerRegistration();
         commandRegistration();

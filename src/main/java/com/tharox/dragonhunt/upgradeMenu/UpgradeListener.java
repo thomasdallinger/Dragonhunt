@@ -89,7 +89,7 @@ public class UpgradeListener implements Listener {
         } else if (upgradeName.contains("More Arrows") || upgradeName.contains("Effect Arrows")) {
             new ArrowUpgrade(player, upgradeName);
             purchaseUpgrade(player, upgradeName, "Arrow");
-        } else if (upgradeName.contains("Efficiency") || upgradeName.contains("Unbreaking")) {
+        } else if (upgradeName.contains("Efficiency") || upgradeName.contains("Unbreakable")) {
             new ToolUpgrade(player, upgradeName, item.getAmount());
             purchaseUpgrade(player, upgradeName, "Tool");
         } else if (upgradeName.contains("Protection") || upgradeName.contains("Thorns") || upgradeName.contains("Feather Falling")

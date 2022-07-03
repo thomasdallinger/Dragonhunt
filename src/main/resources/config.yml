@@ -259,26 +259,12 @@ tool:
     cost: 3
     lore: "Increases mine speed by 10."
   3:
-    material: DIAMOND_PICKAXE
+    material: NETHERITE_PICKAXE
     amount: 1
     slot: 5
-    name: "Unbreaking I"
-    cost: 1
-    lore: "Items have a 1 in 2 chance to take damage."
-  4:
-    material: DIAMOND_PICKAXE
-    amount: 2
-    slot: 14
-    name: "Unbreaking II"
-    cost: 2
-    lore: "Items have a 1 in 3 chance to take damage."
-  5:
-    material: DIAMOND_PICKAXE
-    amount: 3
-    slot: 23
-    name: "Unbreaking III"
-    cost: 3
-    lore: "Items have a 1 in 4 chance to take damage."
+    name: "Unbreakable"
+    cost: 4
+    lore: "Axes and pickaxes take no damage."
 armor:
   0:
     material: GOLDEN_CHESTPLATE

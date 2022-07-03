@@ -51,7 +51,7 @@ public class GameStart extends GameConfiguration {
             ArrowUpgrade.MoreArrows.put(player, 1);
             ArrowUpgrade.EffectArrows.put(player, 1);
             ToolUpgrade.Efficiency.put(player, 1);
-            ToolUpgrade.Unbreaking.put(player, 1);
+            ToolUpgrade.Unbreakable.put(player, 1);
             ArmorUpgrade.Protection.put(player, 1);
             ArmorUpgrade.Thorns.put(player, 1);
             ArmorUpgrade.FeatherFalling.put(player, 1);

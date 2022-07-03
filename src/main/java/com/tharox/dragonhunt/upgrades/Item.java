@@ -77,8 +77,8 @@ public class Item {
                 itemStack = checkIfUnlocked(itemStack, ArrowUpgrade.EffectArrows.get(player));
             else if (NAME.contains("Efficiency"))
                 itemStack = checkIfUnlocked(itemStack, ToolUpgrade.Efficiency.get(player));
-            else if (NAME.contains("Unbreaking"))
-                itemStack = checkIfUnlocked(itemStack, ToolUpgrade.Unbreaking.get(player));
+            else if (NAME.contains("Unbreakable"))
+                itemStack = checkIfUnlocked(itemStack, ToolUpgrade.Unbreakable.get(player));
             else if (NAME.contains("Protection"))
                 itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.Protection.get(player));
             else if (NAME.contains("Thorns"))

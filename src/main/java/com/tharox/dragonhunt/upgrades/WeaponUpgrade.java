@@ -6,11 +6,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class WeaponUpgrade extends EnchantmentUpgrade {
     public static HashMap<Player, Integer> Sharpness = new HashMap<>();
     public static HashMap<Player, Integer> Knockback = new HashMap<>();
     public static HashMap<Player, Integer> FireAspect = new HashMap<>();
+
+    // a list of all weapons affected by the Weapon Upgrades
+    protected static List<Material> weapons = List.of(
+            Material.WOODEN_SWORD, Material.STONE_SWORD,
+            Material.GOLDEN_SWORD, Material.IRON_SWORD,
+            Material.DIAMOND_SWORD, Material.NETHERITE_SWORD,
+            Material.WOODEN_AXE, Material.STONE_AXE,
+            Material.GOLDEN_AXE, Material.IRON_AXE,
+            Material.DIAMOND_AXE, Material.NETHERITE_AXE);
 
     public WeaponUpgrade(Player player, String enchantment, int level) {
         this.player = player;
@@ -40,15 +50,8 @@ public class WeaponUpgrade extends EnchantmentUpgrade {
     @Override
     public void enchantGear(Enchantment enchantment) {
         for (ItemStack item : player.getInventory()) {
-            if (item != null) {
-                if (item.getType().equals(Material.WOODEN_SWORD) || item.getType().equals(Material.STONE_SWORD)
-                        || item.getType().equals(Material.GOLDEN_SWORD) || item.getType().equals(Material.IRON_SWORD)
-                        || item.getType().equals(Material.DIAMOND_SWORD) || item.getType().equals(Material.NETHERITE_SWORD)
-                        || item.getType().equals(Material.WOODEN_AXE) || item.getType().equals(Material.STONE_AXE)
-                        || item.getType().equals(Material.GOLDEN_AXE) || item.getType().equals(Material.IRON_AXE)
-                        || item.getType().equals(Material.DIAMOND_AXE) || item.getType().equals(Material.NETHERITE_AXE)) {
-                    item.addUnsafeEnchantment(enchantment, level);
-                }
+            if (item != null && weapons.contains(item.getType())) {
+                item.addUnsafeEnchantment(enchantment, level);
             }
         }
     }

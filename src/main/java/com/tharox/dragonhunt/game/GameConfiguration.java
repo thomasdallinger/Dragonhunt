@@ -95,7 +95,6 @@ public class GameConfiguration {
             meta.addEnchant(Enchantment.DURABILITY, 1, true);
             meta.setUnbreakable(true);
             meta.setDisplayName(ChatColor.AQUA.toString() + ChatColor.BOLD + "Shield");
-            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
             meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         }
 

@@ -21,7 +21,7 @@ public class LevelUp implements Listener {
         player.sendTitle(ChatColor.AQUA + " ", ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "LEVEL "
                 + level, 5, 60, 5);
         player.sendMessage(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "LEVEL UP REWARDS:");
-        UpgradePoints.addPoints(player, level); // 2 points for level 2, 3 for lvl 3, 4 for lvl 4, ...
+        UpgradePoints.addPoints(player, 1);
 
         if (level % 5 == 0) {
             player.sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + "+1"

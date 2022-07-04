@@ -34,7 +34,8 @@ public class PositionCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 0) { // print all positions
+        // print all positions
+        if (args.length == 0) {
             player.sendMessage(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "YOUR POSITIONS:");
 
             if (positions.containsKey(player)) { // list of all created positions
@@ -47,18 +48,31 @@ public class PositionCommand implements CommandExecutor {
                 player.sendMessage(ChatColor.GREEN.toString()
                         + ChatColor.ITALIC + "Use /pos [name] to add a position.");
             }
-        } else { // add a position
-            if (!positions.containsKey(player)) { // first position
-                positions.put(player, args[0] + "%" + DbValues.locationToString(player.getLocation()));
-                // NOTE: % is just a split character
-            } else { // another position
-                positions.put(player, positions.get(player) + ";"
-                        + args[0] + "%" + DbValues.locationToString(player.getLocation()));
+
+            return true;
+        }
+
+        // add a position
+        if (args[0].length() > 20) {
+            player.sendMessage(ChatColor.RED + "Position name too long (max. length: 20 characters).");
+            return true;
+        }
+
+        if (!positions.containsKey(player)) { // first position
+            positions.put(player, args[0] + "%" + DbValues.locationToString(player.getLocation()));
+            // NOTE: % is just a split character
+        } else { // another position
+            if (positions.get(player).length() > 500) {
+                player.sendMessage(ChatColor.RED + "You have exceeded the positions limit.");
+                return true;
             }
 
-            player.sendMessage(ChatColor.GREEN + "Position "
-                    + ChatColor.DARK_GREEN + args[0] + ChatColor.GREEN + " added.");
+            positions.put(player, positions.get(player) + ";"
+                    + args[0] + "%" + DbValues.locationToString(player.getLocation()));
         }
+
+        player.sendMessage(ChatColor.GREEN + "Position "
+                + ChatColor.DARK_GREEN + args[0] + ChatColor.GREEN + " added.");
 
         return false;
     }

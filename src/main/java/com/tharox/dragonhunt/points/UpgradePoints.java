@@ -7,14 +7,15 @@ import java.util.HashMap;
 
 /**
  * Used for/in: LevelUp, PlayerInteractListener, BlockBreakListener, EntityDeathListener, PlayerDeathListener,
- * GameStart, UpgradeListener, ResetScoreboardCountdown
+ * GameStart, UpgradeListener, ResetScoreboardCountdown, AdvancementListener, VehicleListener
  * Upgrade Points of each player are displayed in the Scoreboard.
  * Coal ores award natural XP (0-2 xp points), which cannot be upgraded using XP Upgrades.
  */
 public class UpgradePoints {
     // the amount of XP given to the player can be upgraded using XP UPGRADES (excludes coal ore)
-    public static int enderchestXP = 12; // PlayerInteractListener, ResetScoreboardCountdown
-    public static int playerXP = 10; // PlayerDeathListener
+    public static int bonusXP = 9; // XP that players would not normally receive
+    // from Enderchests, Minecarts, Scoreboard countdown, Advancements (Nether & End entry)
+    public static int playerXP = 11; // PlayerDeathListener
     public static int oreXP = 3; // BlockBreakListener
     public static int animalXP = 1; // EntityDeathListener
     public static int monsterXP = 4; // EntityDeathListener

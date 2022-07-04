@@ -60,7 +60,7 @@ public class AdvancementListener implements Listener {
     }
 
     public void addBonusXP(Player player, String dimension) {
-        player.giveExp(UpgradePoints.enderchestXP + XPUpgrade.MoreXP.get(player) - 1);
+        player.giveExp(UpgradePoints.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         player.sendMessage(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + "BONUS XP: "
                 + ChatColor.AQUA + "First in " + dimension);

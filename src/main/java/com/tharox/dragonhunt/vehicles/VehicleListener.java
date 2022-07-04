@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.vehicles;
 
-import org.bukkit.Material;
+import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -12,7 +13,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.vehicle.VehicleCreateEvent;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class VehicleListener implements Listener {
 
@@ -27,13 +27,11 @@ public class VehicleListener implements Listener {
 
         if (entity.getType() == EntityType.MINECART_CHEST) {
             event.setCancelled(true);
-            player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
+            player.giveExp(UpgradePoints.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
+            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
             StorageMinecart mc = ((StorageMinecart) entity);
             mc.getInventory().clear();
-            mc.getInventory().addItem(
-                    new ItemStack(Material.IRON_INGOT, 8),
-                    new ItemStack(Material.GOLD_INGOT, 6));
             entity.remove();
         }
     }

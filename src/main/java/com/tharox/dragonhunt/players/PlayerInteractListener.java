@@ -32,7 +32,7 @@ public class PlayerInteractListener implements Listener {
                     event.setCancelled(true);
                     block.setType(Material.AIR);
 
-                    player.giveExp(UpgradePoints.enderchestXP + XPUpgrade.MoreXP.get(player) - 1);
+                    player.giveExp(UpgradePoints.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
                     player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                     return;
                 }

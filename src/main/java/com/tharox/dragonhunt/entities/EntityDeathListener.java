@@ -53,7 +53,8 @@ public class EntityDeathListener implements Listener {
                 break;
             case "Piglin":
             case "Zombie":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.resources.get(killer).get(1));
+                if(GameState.resources.get(killer).get(1) != null)
+                    mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.resources.get(killer).get(1));
                 break;
             case "Witch":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.DIAMOND, 2));
@@ -79,7 +80,8 @@ public class EntityDeathListener implements Listener {
 
         // Extra Drops (on top of normal drops)
         if (mob.getName().equals("Hoglin")) { // drops double food
-            mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.food.get(killer));
+            if(GameState.food.get(killer) != null)
+                mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.food.get(killer));
         } else if (mob.getName().equals("Sheep")) {
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.STRING, 8));
         } else if (mob.getName().equals("Chicken")) {

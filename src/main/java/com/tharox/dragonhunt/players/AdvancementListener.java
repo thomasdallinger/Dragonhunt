@@ -3,10 +3,9 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import com.tharox.dragonhunt.points.UpgradePoints;
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
+import com.tharox.dragonhunt.upgrades.XPUpgrade;
+import org.bukkit.*;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,9 +14,6 @@ import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
 import java.sql.Statement;
 
-/**
- * Don't display the advancement for finding a fortress or a bastion when walking through a nether dungeon.
- */
 public class AdvancementListener implements Listener {
 
     @EventHandler
@@ -38,10 +34,17 @@ public class AdvancementListener implements Listener {
                 if (GameState.firstNetherEntry == null) {
                     GameState.firstNetherEntry = player.getLocation();
                     addBonusXP(player, "Nether");
+                    GameState.distanceScore = getDistanceScore(player);
                 }
                 break;
             case "minecraft:nether/distract_piglin":
                 advancementName = "Piglin Trading";
+                break;
+            case "minecraft:nether/find_fortress":
+                advancementName = "Fortress";
+                break;
+            case "minecraft:nether/find_bastion":
+                advancementName = "Bastion";
                 break;
             case "minecraft:story/enter_the_end":
                 advancementName = "Enter End";
@@ -64,6 +67,27 @@ public class AdvancementListener implements Listener {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         player.sendMessage(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + "BONUS XP: "
                 + ChatColor.AQUA + "First in " + dimension);
+    }
+
+    /**
+     * Calculates the distance score using the nearest Fortress and Bastion locations.
+     * @param player first player to enter the Nether
+     * @return the distance score (the lower, the better the NETHER spawn)
+     */
+    public int getDistanceScore(Player player) {
+        World world = player.getWorld();
+        Location fortress = world.locateNearestStructure(
+                player.getLocation(), StructureType.NETHER_FORTRESS, 32, false);
+        Location bastion = world.locateNearestStructure(
+                player.getLocation(), StructureType.BASTION_REMNANT, 32, false);
+        int fortressDistance = 0, bastionDistance = 0;
+
+        if (fortress != null)
+            fortressDistance = (int) player.getLocation().distance(fortress);
+        if (bastion != null)
+            bastionDistance = (int) player.getLocation().distance(bastion);
+
+        return fortressDistance + bastionDistance;
     }
 
     public void addAdvancement(Player player, String advancement) {

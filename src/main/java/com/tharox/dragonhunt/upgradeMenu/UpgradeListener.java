@@ -146,7 +146,7 @@ public class UpgradeListener implements Listener {
 
     private void addUpgradeAccess(Player player, String upgradeName) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "INSERT INTO GearAccess (GameID, Player, upgrade, pointsBefore, cost, timestamp) " +
+            String query = "INSERT INTO UpgradeAccess (GameID, Player, upgrade, pointsBefore, cost, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + upgradeName.substring(4) + "', '"
                     + UpgradePoints.getPoints(player) + "', '" + UpgradeInventory.upgradeCost.get(upgradeName)
                     + "', '" + DbValues.getTimestamp() + "')";

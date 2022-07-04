@@ -17,8 +17,8 @@ import org.bukkit.event.vehicle.VehicleDestroyEvent;
 public class VehicleListener implements Listener {
 
     /**
-     * Remove all items from the minecarts inventory and put a golden apple into it.
-     * Then remove the minecart, which drops the inventory.
+     * Remove all items from the minecarts inventory. When a player clicks a minecart it disappears.
+     * The player receives XP from clicking on the minecart.
      */
     @EventHandler
     public void onPlayerInteractEntity(PlayerInteractEntityEvent event) {

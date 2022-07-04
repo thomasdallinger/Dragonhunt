@@ -45,7 +45,7 @@ public class GameEnd {
     private void updateGame() {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "UPDATE Game SET duration = '" + DbValues.getTimestamp()
-                    + "', dungeonLocation = X'" + "' WHERE id = '" + DbValues.getGameID() + "'";
+                    + "', distanceScore = '" + GameState.distanceScore + "' WHERE id = '" + DbValues.getGameID() + "'";
 
             Statement stmt = con.createStatement();
             stmt.execute(query);

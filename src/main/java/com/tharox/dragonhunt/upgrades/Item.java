@@ -116,33 +116,46 @@ public class Item {
             ));
         }
 
-        if (cost != 0) {
-            if (UpgradePoints.getPoints(player) >= cost) {
-                if (NAME != null && itemMeta.getDisplayName().contains("LOCKED")) {
-                    itemMeta.setLore(Arrays.asList(
-                            ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
-                            "",
-                            ChatColor.LIGHT_PURPLE.toString() + UpgradePoints.getPoints(player) +
-                                    ChatColor.WHITE + " / " + cost + " Upgrade Points",
-                            ChatColor.DARK_RED + "Purchase previous levels first!"
-                    ));
-                } else {
-                    itemMeta.setLore(Arrays.asList(
-                            ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
-                            "",
-                            ChatColor.LIGHT_PURPLE.toString() + UpgradePoints.getPoints(player) +
-                                    ChatColor.WHITE + " / " + cost + " Upgrade Points",
-                            ChatColor.GOLD + "Click to buy!"
-                    ));
-                }
-            } else {
+        while (cost != 0) { // not looping while
+            // player can't acquire the upgrade yet
+            if (NAME != null && itemMeta.getDisplayName().contains("UNLOCKED")) {
+                itemMeta.setLore(Arrays.asList(
+                        ChatColor.GREEN.toString() + ChatColor.ITALIC + LORE,
+                        "",
+                        ChatColor.WHITE.toString() + cost + " Upgrade Points",
+                        ChatColor.GREEN + "Unlocked!"
+                ));
+                break;
+            // player has already bought the upgrade
+            } else if (NAME != null && itemMeta.getDisplayName().contains("LOCKED")) {
                 itemMeta.setLore(Arrays.asList(
                         ChatColor.RED.toString() + ChatColor.ITALIC + LORE,
+                        "",
+                        ChatColor.WHITE.toString() + cost + " Upgrade Points",
+                        ChatColor.DARK_RED + "Purchase previous levels first!"
+                ));
+                break;
+            }
+            // player has enough upgrade points to buy the upgrade
+            if (UpgradePoints.getPoints(player) >= cost) {
+                itemMeta.setLore(Arrays.asList(
+                        ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
+                        "",
+                        ChatColor.LIGHT_PURPLE.toString() + UpgradePoints.getPoints(player) +
+                                ChatColor.WHITE + " / " + cost + " Upgrade Points",
+                        ChatColor.GOLD + "Click to buy!"
+                ));
+                break;
+            // player needs more upgrade points to buy the upgrade
+            } else {
+                itemMeta.setLore(Arrays.asList(
+                        ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                         "",
                         ChatColor.DARK_RED.toString() + UpgradePoints.getPoints(player) +
                                 ChatColor.WHITE + " / " + cost + " Upgrade Points",
                         ChatColor.RED.toString() + (cost - UpgradePoints.getPoints(player)) + " Upgrade Point(s) missing!"
                 ));
+                break;
             }
         }
 
@@ -155,8 +168,13 @@ public class Item {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta == null) return null;
 
-        if (AMOUNT <= level) {
+        if (AMOUNT == level) { // <=
             return (setEnchantmentAndName(itemStack));
+        } else if (AMOUNT < level) {
+            itemMeta.setDisplayName(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + NAME +
+                    ChatColor.GREEN + ChatColor.ITALIC + " UNLOCKED");
+            itemStack.setItemMeta(itemMeta);
+            return itemStack;
         } else {
             itemMeta.setDisplayName(ChatColor.DARK_RED.toString() + ChatColor.BOLD + NAME +
                     ChatColor.RED + ChatColor.ITALIC + " LOCKED");

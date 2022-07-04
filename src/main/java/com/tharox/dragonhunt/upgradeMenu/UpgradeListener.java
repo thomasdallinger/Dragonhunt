@@ -62,11 +62,18 @@ public class UpgradeListener implements Listener {
             return;
         }
 
-        // not enough points to purchase Upgrade level
+        // not enough points to purchase upgrade level
         if (UpgradePoints.getPoints(player) < UpgradeInventory.upgradeCost.get(upgradeName)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(ChatColor.RED + "You don't have enough points! Need "
                     + (UpgradeInventory.upgradeCost.get(upgradeName) - UpgradePoints.getPoints(player)) + " more.");
+            return;
+        }
+
+        // upgrade already bought
+        if (upgradeName.contains("UNLOCKED")) {
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+            player.sendMessage(ChatColor.RED + "You have already bought this upgrade!");
             return;
         }
 
@@ -99,7 +106,7 @@ public class UpgradeListener implements Listener {
         } else if (upgradeName.contains("Food Source") || upgradeName.contains("Food Amount")) {
             new FoodUpgrade(player, upgradeName, item.getAmount());
             purchaseUpgrade(player, upgradeName, "Food");
-        } else if (upgradeName.contains("Smelted Resource") || upgradeName.contains("Resource Amount")) {
+        } else if (upgradeName.contains("Resource Amount")) {
             new ResourceUpgrade(player, upgradeName, item.getAmount());
             purchaseUpgrade(player, upgradeName, "Resource");
         } else if (upgradeName.contains("More XP")) {

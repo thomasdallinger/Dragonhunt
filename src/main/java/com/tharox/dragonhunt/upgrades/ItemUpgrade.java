@@ -14,7 +14,7 @@ public class ItemUpgrade {
             if (item != null) {
                 if (item.getType().equals(oldItem)) {
                     amount = item.getAmount();
-                    item.setType(newItem); //resets item data -> amount needs to set again
+                    item.setType(newItem); // resets item data -> amount needs to be set again
                     item.setAmount(amount);
                 }
             }

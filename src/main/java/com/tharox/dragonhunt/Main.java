@@ -17,6 +17,7 @@ import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.players.*;
 import com.tharox.dragonhunt.points.LevelUp;
+import com.tharox.dragonhunt.positions.PositionCommand;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
 import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.spectate.SpectateCommand;
@@ -196,5 +197,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         getCommand("date").setExecutor(new DateCommand());
         getCommand("upgrades").setExecutor(new UpgradeCommand());
         getCommand("spec").setExecutor(new SpectateCommand());
+        getCommand("pos").setExecutor(new PositionCommand());
     }
 }

@@ -12,3 +12,5 @@ commands:
     description: Opens the upgrades menu.
   spec:
     description: Spectate ability.
+  pos:
+    description: Add a position or get a list of all created positions.

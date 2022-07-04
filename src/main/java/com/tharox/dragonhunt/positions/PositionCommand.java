@@ -1,0 +1,65 @@
+package com.tharox.dragonhunt.positions;
+
+import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.timer.Timer;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import java.util.HashMap;
+
+public class PositionCommand implements CommandExecutor {
+    public HashMap<Player, String> positions = new HashMap<>();
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        Player player;
+        Timer timer = Main.getInstance().getTimer();
+
+        if (sender instanceof Player) {
+            player = (Player) sender;
+        } else return true;
+
+        if (timer.getTime() == 0) { // the Timer is set to time 0 in the onEnable method in Main
+            player.sendMessage(ChatColor.RED + "Positions can be created once the game starts.");
+            return true;
+        }
+
+        if (args.length > 1) {
+            player.sendMessage(ChatColor.GREEN.toString()
+                    + ChatColor.ITALIC + "Use /pos [name] to add a position.");
+            return true;
+        }
+
+        if (args.length == 0) { // print all positions
+            player.sendMessage(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "YOUR POSITIONS:");
+
+            if (positions.containsKey(player)) { // list of all created positions
+                for (String position : positions.get(player).split(";")) {
+                    String[] nameAndLocation = position.split("%");
+                    player.sendMessage(ChatColor.DARK_GREEN + nameAndLocation[0] + ": "
+                            + ChatColor.GREEN + nameAndLocation[1]);
+                }
+            } else { // no positions where created
+                player.sendMessage(ChatColor.GREEN.toString()
+                        + ChatColor.ITALIC + "Use /pos [name] to add a position.");
+            }
+        } else { // add a position
+            if (!positions.containsKey(player)) { // first position
+                positions.put(player, args[0] + "%" + DbValues.locationToString(player.getLocation()));
+                // NOTE: % is just a split character
+            } else { // another position
+                positions.put(player, positions.get(player) + ";"
+                        + args[0] + "%" + DbValues.locationToString(player.getLocation()));
+            }
+
+            player.sendMessage(ChatColor.GREEN + "Position "
+                    + ChatColor.DARK_GREEN + args[0] + ChatColor.GREEN + " added.");
+        }
+
+        return false;
+    }
+}

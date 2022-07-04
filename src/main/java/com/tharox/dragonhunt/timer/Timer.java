@@ -69,6 +69,7 @@ public class Timer {
 
                 setTime(getTime() + 1);
                 sendActionBar();
+                Main.getInstance().getTablistManager().setAllPlayerTeams();
 
                 if (getTime() >= 2390 && getTime() < 2400)
                     showdownCountdown();

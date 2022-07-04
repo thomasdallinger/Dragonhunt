@@ -30,6 +30,7 @@ public class JoinListener implements Listener {
 
         UpgradePoints.setPoints(player, 0);
         new Scoreboard(player);
+        Main.getInstance().getTablistManager().setPlayerList(player);
 
         DbValues.getPlayersAllowedToPlay();
         checkIfGameCanStart();

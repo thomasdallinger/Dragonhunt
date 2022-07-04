@@ -7,23 +7,25 @@ import com.tharox.dragonhunt.commands.DateCommand;
 import com.tharox.dragonhunt.crafting.CustomRecipes;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.dimensions.DimensionListener;
+import com.tharox.dragonhunt.entities.CreatureSpawnListener;
 import com.tharox.dragonhunt.entities.EntityDeathListener;
+import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.grappler.GrappleListener;
-import com.tharox.dragonhunt.players.*;
-import com.tharox.dragonhunt.entities.CreatureSpawnListener;
 import com.tharox.dragonhunt.listeners.ChatListener;
-import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
+import com.tharox.dragonhunt.players.*;
 import com.tharox.dragonhunt.points.LevelUp;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
-import com.tharox.dragonhunt.upgradeMenu.UpgradeCommand;
-import com.tharox.dragonhunt.upgradeMenu.UpgradeListener;
+import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.spectate.SpectateCommand;
+import com.tharox.dragonhunt.tablist.TablistManager;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import com.tharox.dragonhunt.tracker.Tracker;
+import com.tharox.dragonhunt.upgradeMenu.UpgradeCommand;
+import com.tharox.dragonhunt.upgradeMenu.UpgradeListener;
 import com.tharox.dragonhunt.vehicles.VehicleListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -40,8 +42,9 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     private static Main instance;
 
     public Timer timer;
-    public Countdown scoreboardCountdown; //single countdown for all player scoreboards - started in GameStart, used in Scoreboard
-    public Tracker tracker; //single tracker for all players
+    public Countdown scoreboardCountdown; // single countdown for all player scoreboards (started in GameStart)
+    public Tracker tracker; // single tracker for all players
+    private TablistManager tablistManager;
 
     @Override
     public void onLoad() {
@@ -60,6 +63,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         scoreboardCountdown = new Countdown(false, 300);
         ResetScoreboardCountdown.countdownHitsZero(Main.getInstance().getScoreboardCountdown());
         tracker = new Tracker();
+        tablistManager = new TablistManager();
         new CustomRecipes(); // adds all custom recipes to the game
 
         listenerRegistration();
@@ -85,15 +89,16 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     private void stopServerIn() {
         new BukkitRunnable() {
             int timeLeft = 60;
+
             @Override
             public void run() {
                 timeLeft--;
 
-                if(timeLeft == 0) {
+                if (timeLeft == 0) {
                     GameState.movePlayersToLobby();
                 }
 
-                if(DbValues.playersAllowedToPlay.size() == 0) {
+                if (DbValues.playersAllowedToPlay.size() == 0) {
                     this.cancel();
                 }
             }
@@ -101,7 +106,8 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     }
 
     @Override
-    public void onPluginMessageReceived(String channel, Player player, byte[] message) {}
+    public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+    }
 
     public Timer getTimer() {
         return timer;
@@ -115,10 +121,24 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         return tracker;
     }
 
+    public TablistManager getTablistManager() {
+        return tablistManager;
+    }
+
     public static String getPrefix() {
         return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "DRAGON"
                 + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "HUNT" + ChatColor.DARK_GRAY + "] "
                 + ChatColor.WHITE;
+    }
+
+    public static String getNamePrefix(Player player) {
+        return ChatColor.DARK_GRAY + "["
+                + ChatColor.GREEN.toString() + DbValues.getKills(player, true)
+                + ChatColor.DARK_GRAY + " | "
+                + ChatColor.GOLD + Spectate.spectatesLeft.get(player)
+                + ChatColor.DARK_GRAY + " | "
+                + ChatColor.LIGHT_PURPLE + player.getLevel()
+                + ChatColor.DARK_GRAY + "] ";
     }
 
     public static void elytraInInventory() {

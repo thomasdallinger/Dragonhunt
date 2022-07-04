@@ -16,11 +16,8 @@ public class ToolUpgrade extends EnchantmentUpgrade {
 
     // a list of all tools affected by the Tool Upgrades
     protected static List<Material> tools = List.of(
-            Material.WOODEN_PICKAXE, Material.STONE_PICKAXE,
-            Material.GOLDEN_PICKAXE, Material.IRON_PICKAXE,
-            Material.DIAMOND_PICKAXE, Material.NETHERITE_PICKAXE,
-            Material.WOODEN_AXE, Material.STONE_AXE,
-            Material.GOLDEN_AXE, Material.IRON_AXE,
+            Material.IRON_PICKAXE, Material.DIAMOND_PICKAXE,
+            Material.NETHERITE_PICKAXE, Material.IRON_AXE,
             Material.DIAMOND_AXE, Material.NETHERITE_AXE);
 
     public ToolUpgrade(Player player, String enchantment, int level) {

@@ -15,11 +15,8 @@ public class WeaponUpgrade extends EnchantmentUpgrade {
 
     // a list of all weapons affected by the Weapon Upgrades
     protected static List<Material> weapons = List.of(
-            Material.WOODEN_SWORD, Material.STONE_SWORD,
-            Material.GOLDEN_SWORD, Material.IRON_SWORD,
-            Material.DIAMOND_SWORD, Material.NETHERITE_SWORD,
-            Material.WOODEN_AXE, Material.STONE_AXE,
-            Material.GOLDEN_AXE, Material.IRON_AXE,
+            Material.IRON_SWORD, Material.DIAMOND_SWORD,
+            Material.NETHERITE_SWORD, Material.IRON_AXE,
             Material.DIAMOND_AXE, Material.NETHERITE_AXE);
 
     public WeaponUpgrade(Player player, String enchantment, int level) {

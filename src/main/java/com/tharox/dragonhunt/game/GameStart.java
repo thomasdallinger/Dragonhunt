@@ -60,7 +60,6 @@ public class GameStart extends GameConfiguration {
             ArmorUpgrade.AquaAffinity.put(player, 1);
             FoodUpgrade.FoodSource.put(player, 1);
             FoodUpgrade.FoodAmount.put(player, 1);
-            ResourceUpgrade.SmeltedResource.put(player, 1);
             ResourceUpgrade.ResourceAmount.put(player, 1);
             XPUpgrade.MoreXP.put(player, 1);
         }

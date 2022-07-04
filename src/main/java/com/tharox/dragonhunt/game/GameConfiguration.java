@@ -72,10 +72,10 @@ public class GameConfiguration {
 
             // every player starts with the base items for food and resources
             // these can be upgraded using FOOD or RESOURCE UPGRADES respectively
-            GameState.food.put(player, new ItemStack(Material.RABBIT));
+            GameState.food.put(player, new ItemStack(Material.COOKED_RABBIT));
             GameState.resources.put(player, List.of(
-                    new ItemStack(Material.RAW_IRON),
-                    new ItemStack(Material.RAW_GOLD),
+                    new ItemStack(Material.IRON_INGOT),
+                    new ItemStack(Material.GOLD_INGOT),
                     new ItemStack(Material.DIAMOND)));
 
             // set default TRACKER values, nobody is tracked when the player receives the TRACKER

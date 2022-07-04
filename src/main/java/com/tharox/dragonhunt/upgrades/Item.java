@@ -95,8 +95,6 @@ public class Item {
                 itemStack = checkIfUnlocked(itemStack, FoodUpgrade.FoodSource.get(player));
             else if (NAME.contains("Food Amount"))
                 itemStack = checkIfUnlocked(itemStack, FoodUpgrade.FoodAmount.get(player));
-            else if (NAME.contains("Smelted Resource"))
-                itemStack = checkIfUnlocked(itemStack, ResourceUpgrade.SmeltedResource.get(player));
             else if (NAME.contains("Resource Amount"))
                 itemStack = checkIfUnlocked(itemStack, ResourceUpgrade.ResourceAmount.get(player));
             else if (NAME.contains("More XP"))

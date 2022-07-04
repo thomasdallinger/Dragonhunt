@@ -17,7 +17,7 @@ public class UpgradePoints {
     // from Enderchests, Minecarts, Scoreboard countdown, Advancements (Nether & End entry)
     public static int playerXP = 11; // PlayerDeathListener
     public static int oreXP = 3; // BlockBreakListener
-    public static int animalXP = 1; // EntityDeathListener
+    public static int animalXP = 2; // EntityDeathListener
     public static int monsterXP = 4; // EntityDeathListener
 
     private static final HashMap<Player, Integer> upgradePoints = new HashMap<>();

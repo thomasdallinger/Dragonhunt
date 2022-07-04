@@ -15,10 +15,10 @@ public class FoodUpgrade extends ItemUpgrade {
         this.player = player;
         this.level = level;
 
-        //if food source: 4 -> 4 means access to purchase level 3
+        // if food source: 4 -> 4 means access to purchase level 3
         if (upgrade.contains("Food Source")) {
-            ItemStack base = new ItemStack(Material.RABBIT);
-            ItemStack level1 = new ItemStack(Material.COOKED_RABBIT, GameState.food.get(player).getAmount());
+            ItemStack base = new ItemStack(Material.COOKED_RABBIT);
+            ItemStack level1 = new ItemStack(Material.COOKED_CHICKEN, GameState.food.get(player).getAmount());
             ItemStack level2 = new ItemStack(Material.COOKED_MUTTON, GameState.food.get(player).getAmount());
             ItemStack level3 = new ItemStack(Material.COOKED_BEEF, GameState.food.get(player).getAmount());
 
@@ -40,7 +40,7 @@ public class FoodUpgrade extends ItemUpgrade {
             if (FoodSource.get(player) <= 3)
                 FoodSource.put(player, FoodSource.get(player) + 1);
         } else if (upgrade.contains("Food Amount")) {
-            //level 1 = double food, level 2 = triple food
+            // level 1 = double food, level 2 = triple food
             GameState.food.put(player, new ItemStack(GameState.food.get(player).getType(), level + 1));
 
             if (FoodAmount.get(player) <= 2)

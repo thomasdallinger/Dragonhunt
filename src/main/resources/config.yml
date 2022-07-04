@@ -46,11 +46,11 @@ menu:
     name: "» Food Upgrades"
     lore: "Upgrade to better FOOD SOURCES     and receive DOUBLE or TRIPLE FOOD from Entities."
   7:
-    material: RAW_IRON
+    material: IRON_INGOT
     amount: 1
     slot: 16
     name: "» Resource Upgrades"
-    lore: "Obtain INSTANT-SMELTED ORES and    DOUBLE or TRIPLE the amount you get."
+    lore: "Obtain DOUBLE, TRIPLE and even     QUADRUPLE resources."
   8:
     material: EXPERIENCE_BOTTLE
     amount: 1
@@ -350,7 +350,6 @@ armor:
     name: "Respiration I"
     cost: 1
     lore: "Causes a 50% chance no to decrease air level."
-
   12:
     material: NETHERITE_HELMET
     amount: 2
@@ -374,12 +373,12 @@ armor:
     lore: "Increases underwater mining speed."
 food:
   0:
-    material: COOKED_RABBIT
+    material: COOKED_CHICKEN
     amount: 1
     slot: 3
     name: "Food Source I"
     cost: 1
-    lore: "5 food points, 6 saturation restored"
+    lore: "6 food points, 7.2 saturation restored"
   1:
     material: COOKED_MUTTON
     amount: 2
@@ -410,33 +409,26 @@ food:
     lore: "Triple food from all sources."
 resource:
   0:
-    material: GOLD_INGOT
-    amount: 1
-    slot: 3
-    name: "Smelted Resource I"
-    cost: 1
-    lore: "Smelted iron from iron ores."
-  1:
-    material: GOLD_INGOT
-    amount: 2
-    slot: 12
-    name: "Smelted Resource II"
-    cost: 2
-    lore: "Smelted gold from gold/copper ores, zombies & piglins."
-  3:
     material: DIAMOND
     amount: 1
-    slot: 5
+    slot: 4
     name: "Resource Amount I"
     cost: 1
     lore: "Double iron, gold & diamonds."
-  4:
+  1:
     material: DIAMOND
     amount: 2
-    slot: 14
+    slot: 13
     name: "Resource Amount II"
     cost: 2
     lore: "Triple iron, gold & diamonds."
+  2:
+    material: DIAMOND
+    amount: 3
+    slot: 22
+    name: "Resource Amount III"
+    cost: 3
+    lore: "Quadruple iron, gold & diamonds."
 xp:
   0:
     material: EXPERIENCE_BOTTLE

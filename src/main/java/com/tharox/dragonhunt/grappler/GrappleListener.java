@@ -36,7 +36,6 @@ public class GrappleListener implements Listener {
                 public void run() {
                     if (arrow.getLocation().distance(player.getLocation()) > 20) {
                         arrow.remove();
-                        player.sendMessage(ChatColor.RED + "Too far away!");
                         this.cancel();
                     }
 
@@ -75,7 +74,7 @@ public class GrappleListener implements Listener {
         double covered = 0;
 
         for (; covered < distance; p1.add(vector)) {
-            Particle.DustOptions dustOptions = new Particle.DustOptions(Color.YELLOW, 1);
+            Particle.DustOptions dustOptions = new Particle.DustOptions(Color.FUCHSIA, 2);
             world.spawnParticle(Particle.REDSTONE, p1.getX(), p1.getY(), p1.getZ(), 1, dustOptions);
             covered += space;
         }

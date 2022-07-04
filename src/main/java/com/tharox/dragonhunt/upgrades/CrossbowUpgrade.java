@@ -41,13 +41,10 @@ public class CrossbowUpgrade extends EnchantmentUpgrade {
     @Override
     public void enchantGear(Enchantment enchantment) {
         for (ItemStack item : player.getInventory()) {
-            if (item != null) {
-                if (item.getType().equals(Material.CROSSBOW)) {
-                    if(item.getItemMeta() != null
-                            && item.getItemMeta().getDisplayName().equals(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")
-                            && enchantment.equals(Enchantment.MULTISHOT)) return;
-                    item.addEnchantment(enchantment, level);
-                }
+            if (item != null && item.getType().equals(Material.CROSSBOW)) {
+                if (item.getItemMeta() != null && item.getItemMeta().getDisplayName().equals(
+                        ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")) continue;
+                item.addEnchantment(enchantment, level);
             }
         }
     }

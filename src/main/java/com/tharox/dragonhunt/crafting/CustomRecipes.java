@@ -17,9 +17,15 @@ public class CustomRecipes {
         changePickaxeRecipe(new ItemStack(Material.IRON_PICKAXE), "wood_pickaxe", Material.OAK_PLANKS);
         changePickaxeRecipe(new ItemStack(Material.IRON_PICKAXE), "gold_pickaxe", Material.GOLD_INGOT);
         changePickaxeRecipe(new ItemStack(Material.IRON_PICKAXE), "stone_pickaxe", Material.COBBLESTONE);
+
         changeAxeRecipe(new ItemStack(Material.IRON_AXE), "gold_axe", Material.OAK_PLANKS);
         changeAxeRecipe(new ItemStack(Material.IRON_AXE), "wood_axe", Material.GOLD_INGOT);
         changeAxeRecipe(new ItemStack(Material.IRON_AXE), "stone_axe", Material.COBBLESTONE);
+
+        changeSwordRecipe(new ItemStack(Material.IRON_SWORD), "wood_sword", Material.OAK_PLANKS);
+        changeSwordRecipe(new ItemStack(Material.IRON_SWORD), "gold_sword", Material.GOLD_INGOT);
+        changeSwordRecipe(new ItemStack(Material.IRON_SWORD), "stone_sword", Material.COBBLESTONE);
+
         changeShieldRecipe();
     }
 
@@ -54,12 +60,29 @@ public class CustomRecipes {
      *
      * @param item     item which players get from crafting the recipe
      * @param keyName  used to identify this recipe
-     * @param resource resource needed to craft this pickaxe
+     * @param resource resource needed to craft this axe
      */
     private void changeAxeRecipe(ItemStack item, String keyName, Material resource) {
         NamespacedKey key = new NamespacedKey(Main.getInstance(), keyName);
         ShapedRecipe recipe = new ShapedRecipe(key, item);
         recipe.shape(" RR", " SR", " S ");
+        recipe.setIngredient('R', resource);
+        recipe.setIngredient('S', Material.STICK);
+
+        Bukkit.addRecipe(recipe);
+    }
+
+    /**
+     * Updates an existing bukkit sword recipe.
+     *
+     * @param item     item which players get from crafting the recipe
+     * @param keyName  used to identify this recipe
+     * @param resource resource needed to craft this sword
+     */
+    private void changeSwordRecipe(ItemStack item, String keyName, Material resource) {
+        NamespacedKey key = new NamespacedKey(Main.getInstance(), keyName);
+        ShapedRecipe recipe = new ShapedRecipe(key, item);
+        recipe.shape("R", "R", "S");
         recipe.setIngredient('R', resource);
         recipe.setIngredient('S', Material.STICK);
 
@@ -74,7 +97,7 @@ public class CustomRecipes {
 
         // Change item properties and save the changes.
         ItemMeta meta = item.getItemMeta();
-        if(meta == null) return;
+        if (meta == null) return;
         meta.addEnchant(Enchantment.DURABILITY, 1, true);
         meta.setUnbreakable(true);
         meta.setDisplayName(ChatColor.AQUA.toString() + ChatColor.BOLD + "Shield");

@@ -21,13 +21,15 @@ public class ResourceUpgrade extends ItemUpgrade {
                 case 1:
                     GameState.resources.put(player, List.of(
                             new ItemStack(Material.IRON_INGOT, GameState.resources.get(player).get(0).getAmount()),
-                            new ItemStack(Material.RAW_GOLD, GameState.resources.get(player).get(1).getAmount())));
+                            new ItemStack(Material.RAW_GOLD, GameState.resources.get(player).get(1).getAmount()),
+                            new ItemStack(Material.DIAMOND, GameState.resources.get(player).get(2).getAmount())));
                     replaceItem(Material.RAW_IRON, Material.IRON_INGOT);
                     break;
                 case 2:
                     GameState.resources.put(player, List.of(
                             new ItemStack(Material.IRON_INGOT, GameState.resources.get(player).get(0).getAmount()),
-                            new ItemStack(Material.GOLD_INGOT, GameState.resources.get(player).get(1).getAmount())));
+                            new ItemStack(Material.GOLD_INGOT, GameState.resources.get(player).get(1).getAmount()),
+                            new ItemStack(Material.DIAMOND, GameState.resources.get(player).get(2).getAmount())));
                     replaceItem(Material.RAW_GOLD, Material.GOLD_INGOT);
                     break;
             }
@@ -38,7 +40,8 @@ public class ResourceUpgrade extends ItemUpgrade {
             //level 1 = double resources, level 2 = triple resources
             GameState.resources.put(player, List.of(
                     new ItemStack(GameState.resources.get(player).get(0).getType(), level + 1),
-                    new ItemStack(GameState.resources.get(player).get(1).getType(), level + 1)));
+                    new ItemStack(GameState.resources.get(player).get(1).getType(), level + 1),
+                    new ItemStack(GameState.resources.get(player).get(2).getType(), level + 1)));
 
             if (ResourceAmount.get(player) <= 2)
                 ResourceAmount.put(player, ResourceAmount.get(player) + 1);

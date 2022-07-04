@@ -122,6 +122,7 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.RAW_COPPER, GameState.resources.get(player).get(1));
         materials.put(Material.GOLD_NUGGET, GameState.resources.get(player).get(1)); // Nether Gold Ore
         materials.put(Material.GILDED_BLACKSTONE, GameState.resources.get(player).get(1));
+        materials.put(Material.DIAMOND, GameState.resources.get(player).get(2));
 
         // loop through all drops and check if they have to be changed
         for (ItemStack item : block.getDrops()) {

@@ -75,7 +75,8 @@ public class GameConfiguration {
             GameState.food.put(player, new ItemStack(Material.RABBIT));
             GameState.resources.put(player, List.of(
                     new ItemStack(Material.RAW_IRON),
-                    new ItemStack(Material.RAW_GOLD)));
+                    new ItemStack(Material.RAW_GOLD),
+                    new ItemStack(Material.DIAMOND)));
 
             // set default TRACKER values, nobody is tracked when the player receives the TRACKER
             Main.getInstance().getTracker().playerTracksStructure.put(player, null);

@@ -267,110 +267,61 @@ tool:
     lore: "Axes and pickaxes take no damage."
 armor:
   0:
-    material: GOLDEN_CHESTPLATE
+    material: IRON_CHESTPLATE
     amount: 1
-    slot: 1
+    slot: 2
     name: "Protection I"
     cost: 2
     lore: "4% damage reduction for each armor piece."
   1:
-    material: GOLDEN_CHESTPLATE
+    material: IRON_CHESTPLATE
     amount: 2
-    slot: 10
+    slot: 11
     name: "Protection II"
     cost: 3
     lore: "8% damage reduction for each armor piece."
   2:
-    material: GOLDEN_CHESTPLATE
+    material: IRON_CHESTPLATE
     amount: 3
-    slot: 19
+    slot: 20
     name: "Protection III"
     cost: 4
     lore: "12% damage reduction for each armor piece."
   3:
     material: POINTED_DRIPSTONE
     amount: 1
-    slot: 2
+    slot: 4
     name: "Thorns I"
     cost: 1
     lore: "Reflects damage at the cost of durability. Chance: 15%"
   4:
     material: POINTED_DRIPSTONE
     amount: 2
-    slot: 11
+    slot: 13
     name: "Thorns II"
     cost: 2
     lore: "Reflects damage at the cost of durability. Chance: 30%"
   5:
     material: DIAMOND_BOOTS
     amount: 1
-    slot: 3
+    slot: 6
     name: "Feather Falling I"
     cost: 1
     lore: "Reduces fall damage by 12%."
   6:
     material: DIAMOND_BOOTS
     amount: 2
-    slot: 12
+    slot: 15
     name: "Feather Falling II"
     cost: 2
     lore: "Reduces fall damage by 24%."
   7:
     material: DIAMOND_BOOTS
     amount: 3
-    slot: 21
+    slot: 24
     name: "Feather Falling III"
     cost: 3
     lore: "Reduces fall damage by 36%."
-  8:
-    material: LEATHER_BOOTS
-    amount: 1
-    slot: 4
-    name: "Depth Strider I"
-    cost: 1
-    lore: "Increases underwater movement speed."
-  9:
-    material: LEATHER_BOOTS
-    amount: 2
-    slot: 13
-    name: "Depth Strider II"
-    cost: 2
-    lore: "Increases underwater movement speed."
-  10:
-    material: LEATHER_BOOTS
-    amount: 3
-    slot: 22
-    name: "Depth Strider III"
-    cost: 3
-    lore: "Swim as fast as walking on land."
-  11:
-    material: NETHERITE_HELMET
-    amount: 1
-    slot: 5
-    name: "Respiration I"
-    cost: 1
-    lore: "Causes a 50% chance no to decrease air level."
-  12:
-    material: NETHERITE_HELMET
-    amount: 2
-    slot: 14
-    name: "Respiration II"
-    cost: 2
-    lore: "Causes a 66.7% chance no to decrease air level."
-  13:
-    material: NETHERITE_HELMET
-    amount: 3
-    slot: 23
-    name: "Respiration III"
-    cost: 3
-    lore: "Causes a 75% chance no to decrease air level."
-  14:
-    material: TURTLE_HELMET
-    amount: 1
-    slot: 6
-    name: "Aqua Affinity"
-    cost: 1
-    lore: "Increases underwater mining speed."
 food:
   0:
     material: COOKED_CHICKEN

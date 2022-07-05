@@ -84,24 +84,51 @@ public class UpgradeListener implements Listener {
             return;
         }
 
-        if (upgradeName.contains("Sharpness") || upgradeName.contains("Knockback") || upgradeName.contains("Fire Aspect")) {
-            new WeaponUpgrade(player, upgradeName, item.getAmount());
+        // upgrade can be purchased - raise the level by 1
+        if (upgradeName.contains("Sharpness")) {
+            EnchantmentUpgrades.Sharpness.put(player, EnchantmentUpgrades.Sharpness.get(player) + 1);
             purchaseUpgrade(player, upgradeName, "Weapon");
-        } else if (upgradeName.contains("Power") || upgradeName.contains("Punch") || upgradeName.contains("Flame")) {
-            new BowUpgrade(player, upgradeName, item.getAmount());
+        } else if (upgradeName.contains("Knockback")) {
+            EnchantmentUpgrades.Knockback.put(player, EnchantmentUpgrades.Knockback.get(player) + 1);
+            purchaseUpgrade(player, upgradeName, "Weapon");
+        } else if (upgradeName.contains("Fire Aspect")) {
+            EnchantmentUpgrades.FireAspect.put(player, EnchantmentUpgrades.FireAspect.get(player) + 1);
+            purchaseUpgrade(player, upgradeName, "Weapon");
+        } else if (upgradeName.contains("Power")) {
+            EnchantmentUpgrades.Power.put(player, EnchantmentUpgrades.Power.get(player) + 1);
             purchaseUpgrade(player, upgradeName, "Bow");
-        } else if (upgradeName.contains("Piercing") || upgradeName.contains("Multishot") || upgradeName.contains("Quick Charge")) {
-            new CrossbowUpgrade(player, upgradeName, item.getAmount());
+        } else if (upgradeName.contains("Punch")) {
+            EnchantmentUpgrades.Punch.put(player, EnchantmentUpgrades.Punch.get(player) + 1);
+            purchaseUpgrade(player, upgradeName, "Bow");
+        } else if (upgradeName.contains("Flame")) {
+            EnchantmentUpgrades.Flame.put(player, EnchantmentUpgrades.Flame.get(player) + 1);
+            purchaseUpgrade(player, upgradeName, "Bow");
+        } else if (upgradeName.contains("Piercing")) {
+            EnchantmentUpgrades.Piercing.put(player, EnchantmentUpgrades.Piercing.get(player) + 1);
+            purchaseUpgrade(player, upgradeName, "Crossbow");
+        } else if (upgradeName.contains("Multishot")) {
+            EnchantmentUpgrades.Multishot.put(player, EnchantmentUpgrades.Multishot.get(player) + 1);
+            purchaseUpgrade(player, upgradeName, "Crossbow");
+        } else if (upgradeName.contains("Quick Charge")) {
+            EnchantmentUpgrades.QuickCharge.put(player, EnchantmentUpgrades.QuickCharge.get(player) + 1);
             purchaseUpgrade(player, upgradeName, "Crossbow");
         } else if (upgradeName.contains("More Arrows") || upgradeName.contains("Effect Arrows")) {
             new ArrowUpgrade(player, upgradeName);
             purchaseUpgrade(player, upgradeName, "Arrow");
-        } else if (upgradeName.contains("Efficiency") || upgradeName.contains("Unbreakable")) {
-            new ToolUpgrade(player, upgradeName, item.getAmount());
+        } else if (upgradeName.contains("Efficiency")) {
+            EnchantmentUpgrades.Efficiency.put(player, EnchantmentUpgrades.Efficiency.get(player) + 1);
             purchaseUpgrade(player, upgradeName, "Tool");
-        } else if (upgradeName.contains("Protection") || upgradeName.contains("Thorns") || upgradeName.contains("Feather Falling")
-                || upgradeName.contains("Depth Strider") || upgradeName.contains("Respiration") || upgradeName.contains("Aqua Affinity")) {
-            new ArmorUpgrade(player, upgradeName, item.getAmount());
+        } else if (upgradeName.contains("Unbreakable")) {
+            EnchantmentUpgrades.Unbreakable.put(player, EnchantmentUpgrades.Unbreakable.get(player) + 1);
+            purchaseUpgrade(player, upgradeName, "Tool");
+        } else if (upgradeName.contains("Protection")) {
+            EnchantmentUpgrades.Protection.put(player, EnchantmentUpgrades.Protection.get(player) + 1);
+            purchaseUpgrade(player, upgradeName, "Armor");
+        } else if (upgradeName.contains("Thorns")) {
+            EnchantmentUpgrades.Thorns.put(player, EnchantmentUpgrades.Thorns.get(player) + 1);
+            purchaseUpgrade(player, upgradeName, "Armor");
+        } else if (upgradeName.contains("Feather Falling")) {
+            EnchantmentUpgrades.FeatherFalling.put(player, EnchantmentUpgrades.FeatherFalling.get(player) + 1);
             purchaseUpgrade(player, upgradeName, "Armor");
         } else if (upgradeName.contains("Food Source") || upgradeName.contains("Food Amount")) {
             new FoodUpgrade(player, upgradeName, item.getAmount());

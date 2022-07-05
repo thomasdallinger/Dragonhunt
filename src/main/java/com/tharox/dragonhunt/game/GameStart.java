@@ -39,30 +39,37 @@ public class GameStart extends GameConfiguration {
      */
     private void upgradeRegistration() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            WeaponUpgrade.Sharpness.put(player, 1);
-            WeaponUpgrade.Knockback.put(player, 1);
-            WeaponUpgrade.FireAspect.put(player, 1);
-            BowUpgrade.Power.put(player, 1);
-            BowUpgrade.Punch.put(player, 1);
-            BowUpgrade.Flame.put(player, 1);
-            CrossbowUpgrade.Piercing.put(player, 1);
-            CrossbowUpgrade.Multishot.put(player, 1);
-            CrossbowUpgrade.QuickCharge.put(player, 1);
+            // Weapon
+            EnchantmentUpgrades.Sharpness.put(player, 1);
+            EnchantmentUpgrades.Knockback.put(player, 1);
+            EnchantmentUpgrades.FireAspect.put(player, 1);
+            // Bow
+            EnchantmentUpgrades.Power.put(player, 1);
+            EnchantmentUpgrades.Punch.put(player, 1);
+            EnchantmentUpgrades.Flame.put(player, 1);
+            // Crossbow
+            EnchantmentUpgrades.Piercing.put(player, 1);
+            EnchantmentUpgrades.Multishot.put(player, 1);
+            EnchantmentUpgrades.QuickCharge.put(player, 1);
+            // Tool
+            EnchantmentUpgrades.Efficiency.put(player, 1);
+            EnchantmentUpgrades.Unbreakable.put(player, 1);
+            // Armor
+            EnchantmentUpgrades.Protection.put(player, 1);
+            EnchantmentUpgrades.Thorns.put(player, 1);
+            EnchantmentUpgrades.FeatherFalling.put(player, 1);
+
+            // Non-enchantment upgrades
             ArrowUpgrade.MoreArrows.put(player, 1);
             ArrowUpgrade.EffectArrows.put(player, 1);
-            ToolUpgrade.Efficiency.put(player, 1);
-            ToolUpgrade.Unbreakable.put(player, 1);
-            ArmorUpgrade.Protection.put(player, 1);
-            ArmorUpgrade.Thorns.put(player, 1);
-            ArmorUpgrade.FeatherFalling.put(player, 1);
-            ArmorUpgrade.DepthStrider.put(player, 1);
-            ArmorUpgrade.Respiration.put(player, 1);
-            ArmorUpgrade.AquaAffinity.put(player, 1);
             FoodUpgrade.FoodSource.put(player, 1);
             FoodUpgrade.FoodAmount.put(player, 1);
             ResourceUpgrade.ResourceAmount.put(player, 1);
             XPUpgrade.MoreXP.put(player, 1);
         }
+
+        new EnchantmentUpgrades(); // start the runnable
+        // checks if each player has purchased enchantment upgrades and enchants items based on the upgrade level
     }
 
     /**

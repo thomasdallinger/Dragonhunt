@@ -54,43 +54,37 @@ public class Item {
             if (NAME.contains("»"))
                 itemStack = setEnchantmentAndName(itemStack);
             else if (NAME.contains("Sharpness"))
-                itemStack = checkIfUnlocked(itemStack, WeaponUpgrade.Sharpness.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Sharpness.get(player));
             else if (NAME.contains("Knockback"))
-                itemStack = checkIfUnlocked(itemStack, WeaponUpgrade.Knockback.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Knockback.get(player));
             else if (NAME.contains("Fire Aspect"))
-                itemStack = checkIfUnlocked(itemStack, WeaponUpgrade.FireAspect.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.FireAspect.get(player));
             else if (NAME.contains("Power"))
-                itemStack = checkIfUnlocked(itemStack, BowUpgrade.Power.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Power.get(player));
             else if (NAME.contains("Punch"))
-                itemStack = checkIfUnlocked(itemStack, BowUpgrade.Punch.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Punch.get(player));
             else if (NAME.contains("Flame"))
-                itemStack = checkIfUnlocked(itemStack, BowUpgrade.Flame.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Flame.get(player));
             else if (NAME.contains("Piercing"))
-                itemStack = checkIfUnlocked(itemStack, CrossbowUpgrade.Piercing.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Piercing.get(player));
             else if (NAME.contains("Multishot"))
-                itemStack = checkIfUnlocked(itemStack, CrossbowUpgrade.Multishot.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Multishot.get(player));
             else if (NAME.contains("Quick Charge"))
-                itemStack = checkIfUnlocked(itemStack, CrossbowUpgrade.QuickCharge.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.QuickCharge.get(player));
             else if (NAME.contains("More Arrows"))
                 itemStack = checkIfUnlocked(itemStack, ArrowUpgrade.MoreArrows.get(player));
             else if (NAME.contains("Effect Arrows"))
                 itemStack = checkIfUnlocked(itemStack, ArrowUpgrade.EffectArrows.get(player));
             else if (NAME.contains("Efficiency"))
-                itemStack = checkIfUnlocked(itemStack, ToolUpgrade.Efficiency.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Efficiency.get(player));
             else if (NAME.contains("Unbreakable"))
-                itemStack = checkIfUnlocked(itemStack, ToolUpgrade.Unbreakable.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Unbreakable.get(player));
             else if (NAME.contains("Protection"))
-                itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.Protection.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Protection.get(player));
             else if (NAME.contains("Thorns"))
-                itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.Thorns.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Thorns.get(player));
             else if (NAME.contains("Feather Falling"))
-                itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.FeatherFalling.get(player));
-            else if (NAME.contains("Depth Strider"))
-                itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.DepthStrider.get(player));
-            else if (NAME.contains("Respiration"))
-                itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.Respiration.get(player));
-            else if (NAME.contains("Aqua Affinity"))
-                itemStack = checkIfUnlocked(itemStack, ArmorUpgrade.AquaAffinity.get(player));
+                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.FeatherFalling.get(player));
             else if (NAME.contains("Food Source"))
                 itemStack = checkIfUnlocked(itemStack, FoodUpgrade.FoodSource.get(player));
             else if (NAME.contains("Food Amount"))
@@ -126,6 +120,7 @@ public class Item {
                         ChatColor.GREEN + "Unlocked!"
                 ));
                 break;
+
             // player has already bought the upgrade
             } else if (NAME != null && itemMeta.getDisplayName().contains("LOCKED")) {
                 itemMeta.setLore(Arrays.asList(
@@ -136,6 +131,7 @@ public class Item {
                 ));
                 break;
             }
+
             // player has enough upgrade points to buy the upgrade
             if (UpgradePoints.getPoints(player) >= cost) {
                 itemMeta.setLore(Arrays.asList(
@@ -146,6 +142,7 @@ public class Item {
                         ChatColor.GOLD + "Click to buy!"
                 ));
                 break;
+
             // player needs more upgrade points to buy the upgrade
             } else {
                 itemMeta.setLore(Arrays.asList(
@@ -168,13 +165,18 @@ public class Item {
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta == null) return null;
 
-        if (AMOUNT == level) { // <=
+        // item is purchasable
+        if (AMOUNT == level) {
             return (setEnchantmentAndName(itemStack));
+
+        // item has already been purchased
         } else if (AMOUNT < level) {
             itemMeta.setDisplayName(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + NAME +
                     ChatColor.GREEN + ChatColor.ITALIC + " UNLOCKED");
             itemStack.setItemMeta(itemMeta);
             return itemStack;
+
+        // item can't be purchased yet
         } else {
             itemMeta.setDisplayName(ChatColor.DARK_RED.toString() + ChatColor.BOLD + NAME +
                     ChatColor.RED + ChatColor.ITALIC + " LOCKED");

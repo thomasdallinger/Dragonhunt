@@ -33,7 +33,7 @@ public class UpgradePoints {
     public static void addPoints(Player player, int pointsToAdd) {
         upgradePoints.put(player, upgradePoints.get(player) + pointsToAdd);
         player.sendMessage(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "+" + pointsToAdd
-                + ChatColor.LIGHT_PURPLE + " Upgrade Point");
+                + ChatColor.LIGHT_PURPLE + " Upgrade Point(s)");
     }
 
     public static void removePoints(Player player, int pointsToRemove) {

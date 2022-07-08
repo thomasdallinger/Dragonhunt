@@ -22,7 +22,9 @@ public class QuitListener implements Listener {
         }
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage(ChatColor.RED.toString() + (Bukkit.getOnlinePlayers().size() - 1) + " players remaining.");
+            p.sendMessage(Main.getPrefix() + ChatColor.DARK_RED + ChatColor.BOLD
+                    + (Bukkit.getOnlinePlayers().size() - 1) + ChatColor.RED + " players remaining.");
+            // - 1 because the player that left is still included in the OnlinePlayers list at that time
         }
     }
 }

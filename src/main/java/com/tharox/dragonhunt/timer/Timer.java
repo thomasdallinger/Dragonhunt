@@ -82,7 +82,6 @@ public class Timer {
                                     + ChatColor.DARK_RED + "Speed II" + ChatColor.RED + " in "
                                     + ChatColor.DARK_RED + (2400 - getTime()) / 60 + ChatColor.RED + " minutes.");
                         else if (getTime() == 2400) {
-                            World end = Bukkit.getWorld("world_the_end");
                             player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 1);
                             player.getWorld().strikeLightningEffect(player.getLocation());
 

@@ -4,7 +4,10 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DbValues;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -43,7 +46,7 @@ public class GameState {
     public static void putItemInInventory(Player player, ItemStack item) {
         HashMap<Integer, ItemStack> didNotFit = player.getInventory().addItem(item);
 
-        if(!didNotFit.isEmpty()) {
+        if (!didNotFit.isEmpty()) {
             player.getWorld().dropItemNaturally(player.getLocation(), didNotFit.get(0));
             // index 0 = max. only 1 item in the HashMap
             player.sendMessage(ChatColor.RED + "Inventory full! Item dropped...");

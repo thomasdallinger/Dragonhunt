@@ -3,8 +3,8 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -26,7 +26,7 @@ public class PlayerDeathListener implements Listener {
      * - offhand (1 item)
      * - armor (4 items, 3 items if the player had an elytra)
      * - XP (level only)
-     *
+     * <p>
      * The killer gets a certain amount of XP.
      */
     @EventHandler

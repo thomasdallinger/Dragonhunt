@@ -87,6 +87,7 @@ public class GameEnd {
 
     /**
      * Adds certain values to the database, which cannot be added before the game ended.
+     *
      * @param player player who played the game
      * @param hasWon whether this player has won or not
      */

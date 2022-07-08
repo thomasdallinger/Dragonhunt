@@ -1,9 +1,9 @@
 package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import com.tharox.dragonhunt.points.UpgradePoints;
 import com.tharox.dragonhunt.timer.Countdown;
+import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

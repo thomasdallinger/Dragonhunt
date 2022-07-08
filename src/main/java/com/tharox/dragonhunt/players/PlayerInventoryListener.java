@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.players;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -23,7 +22,7 @@ public class PlayerInventoryListener implements Listener {
             item = event.getCurrentItem();
         }
 
-        //Tracker = 7, Grappler = 8, Arrows = 17
+        // Tracker = 7, Grappler = 8, Arrows = 17
         if (event.getHotbarButton() == 7 || event.getHotbarButton() == 8 || event.getHotbarButton() == 17) {
             event.setCancelled(true);
             return;
@@ -40,7 +39,7 @@ public class PlayerInventoryListener implements Listener {
             return;
         }
 
-        //Elytra
+        // Elytra
         if (item.getType().equals(Material.ELYTRA)) {
             if (event.getSlot() == 38) {
                 event.setCancelled(true);
@@ -76,6 +75,7 @@ public class PlayerInventoryListener implements Listener {
         String displayName = offHandItem.getItemMeta().getDisplayName();
         if (displayName.contains(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")
                 || displayName.contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")) {
+            // Generated Arrows can't be swapped: not in the hotbar, no checking needed
             event.setCancelled(true);
         }
     }

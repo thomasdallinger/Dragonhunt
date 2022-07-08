@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.entities;
 
-import org.bukkit.entity.Ghast;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;

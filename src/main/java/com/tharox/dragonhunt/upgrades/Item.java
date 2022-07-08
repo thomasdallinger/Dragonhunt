@@ -119,9 +119,7 @@ public class Item {
                         ChatColor.WHITE.toString() + cost + " Upgrade Points",
                         ChatColor.GREEN + "Unlocked!"
                 ));
-                break;
-
-            // player has already bought the upgrade
+                break; // player has already bought the upgrade
             } else if (NAME != null && itemMeta.getDisplayName().contains("LOCKED")) {
                 itemMeta.setLore(Arrays.asList(
                         ChatColor.RED.toString() + ChatColor.ITALIC + LORE,
@@ -142,9 +140,7 @@ public class Item {
                         ChatColor.GOLD + "Click to buy!"
                 ));
                 break;
-
-            // player needs more upgrade points to buy the upgrade
-            } else {
+            } else { // player needs more upgrade points to buy the upgrade
                 itemMeta.setLore(Arrays.asList(
                         ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                         "",
@@ -169,14 +165,14 @@ public class Item {
         if (AMOUNT == level) {
             return (setEnchantmentAndName(itemStack));
 
-        // item has already been purchased
+            // item has already been purchased
         } else if (AMOUNT < level) {
             itemMeta.setDisplayName(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + NAME +
                     ChatColor.GREEN + ChatColor.ITALIC + " UNLOCKED");
             itemStack.setItemMeta(itemMeta);
             return itemStack;
 
-        // item can't be purchased yet
+            // item can't be purchased yet
         } else {
             itemMeta.setDisplayName(ChatColor.DARK_RED.toString() + ChatColor.BOLD + NAME +
                     ChatColor.RED + ChatColor.ITALIC + " LOCKED");

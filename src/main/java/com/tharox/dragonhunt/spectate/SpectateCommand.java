@@ -33,7 +33,7 @@ public class SpectateCommand implements CommandExecutor {
             return true;
         }
 
-        if(!Spectate.commandUsable.get(player)) {
+        if (!Spectate.commandUsable.get(player)) {
             player.sendMessage(ChatColor.RED + "You are currently using a Spectate Token.");
             return true;
         }

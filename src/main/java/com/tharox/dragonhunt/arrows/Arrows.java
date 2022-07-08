@@ -62,7 +62,7 @@ public class Arrows {
                             generatedArrows = createArrow(amount);
                         }
                         if (generatedArrows != null)
-                            if(arrowStack != null && (arrowStack.getType() == Material.ARROW || arrowStack.getType() == Material.TIPPED_ARROW))
+                            if (arrowStack != null && (arrowStack.getType() == Material.ARROW || arrowStack.getType() == Material.TIPPED_ARROW))
                                 replaceCurrentArrowStack(arrowStack, generatedArrows, player);
                             else
                                 //replaceCurrentStack -> currently not arrows or tipped arrows

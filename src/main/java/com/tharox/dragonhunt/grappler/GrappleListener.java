@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.grappler;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.game.GameState;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
 import org.bukkit.entity.Arrow;

@@ -71,6 +71,7 @@ public class AdvancementListener implements Listener {
 
     /**
      * Calculates the distance score using the nearest Fortress and Bastion locations.
+     *
      * @param player first player to enter the Nether
      * @return the distance score (the lower, the better the NETHER spawn)
      */

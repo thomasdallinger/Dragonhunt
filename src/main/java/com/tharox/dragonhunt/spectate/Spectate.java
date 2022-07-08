@@ -35,7 +35,7 @@ public class Spectate {
         spectateLocation.put(player, player.getLocation());
         player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 1, 1);
 
-        for(Player p : Bukkit.getOnlinePlayers()) {
+        for (Player p : Bukkit.getOnlinePlayers()) {
             p.sendMessage(Main.getPrefix() + ChatColor.GOLD + ChatColor.BOLD + player.getName().toUpperCase()
                     + ChatColor.YELLOW + " uses a Spectate Token.");
         }

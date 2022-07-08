@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.players;
 
-import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;

@@ -2,9 +2,9 @@ package com.tharox.dragonhunt.game;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
-import com.tharox.dragonhunt.upgrades.*;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
+import com.tharox.dragonhunt.upgrades.*;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;

@@ -2,7 +2,10 @@ package com.tharox.dragonhunt.db;
 
 import org.bukkit.Bukkit;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public class DbConfig {

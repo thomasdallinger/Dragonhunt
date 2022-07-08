@@ -131,33 +131,30 @@ public class DbValues {
             seconds = "0";
         seconds += timer.getTime() % 60;
 
-        return  minutes + ":" + seconds;
+        return minutes + ":" + seconds;
     }
 
     public static String getCurrentWorld(Location location) {
         String currentWorld = "Unknown";
 
-        switch (location.getWorld().getName()) {
-            case "world":
-                currentWorld = "Overworld";
-                break;
-            case "world_nether":
-                currentWorld = "Nether";
-                break;
-            case "world_the_end":
-                currentWorld = "End";
-                break;
+        if (location.getWorld() != null) {
+            switch (location.getWorld().getName()) {
+                case "world":
+                    currentWorld = "Overworld";
+                    break;
+                case "world_nether":
+                    currentWorld = "Nether";
+                    break;
+                case "world_the_end":
+                    currentWorld = "End";
+                    break;
+            }
         }
 
         return currentWorld;
     }
 
     public static String locationToString(Location location) {
-        String world = "unknown_world";
-        if (location.getWorld() != null) {
-            world = location.getWorld().getName();
-        }
-
-        return world + ", x: " + (int) location.getX() + ", y: " + (int) location.getY() + ", z: " + (int) location.getZ();
+        return getCurrentWorld(location) + ", x: " + (int) location.getX() + ", y: " + (int) location.getY() + ", z: " + (int) location.getZ();
     }
 }

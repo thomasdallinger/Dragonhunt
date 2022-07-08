@@ -20,7 +20,7 @@ menu:
     amount: 1
     slot: 11
     name: "» Crossbow Upgrades"
-    lore: "Adds enchantments to ALL CROSSBOWS in your inventory."
+    lore: "Adds enchantments to ALL CROSSBOWS in your inventory (excludes Grappler)."
   3:
     material: ARROW
     amount: 1
@@ -70,14 +70,14 @@ weapon:
     amount: 2
     slot: 11
     name: "Sharpness II"
-    cost: 3
+    cost: 1
     lore: "Adds 1.5 attack damage."
   2:
     material: IRON_SWORD
     amount: 3
     slot: 20
     name: "Sharpness III"
-    cost: 4
+    cost: 1
     lore: "Adds 2 attack damage."
   3:
     material: RABBIT_FOOT
@@ -91,21 +91,21 @@ weapon:
     amount: 2
     slot: 13
     name: "Knockback II"
-    cost: 2
+    cost: 1
     lore: "Increases return speed by 0.1."
   5:
     material: FLINT_AND_STEEL
     amount: 1
     slot: 6
     name: "Fire Aspect I"
-    cost: 3
+    cost: 2
     lore: "Sets entities on fire for 4 seconds."
   6:
     material: FLINT_AND_STEEL
     amount: 2
     slot: 15
     name: "Fire Aspect II"
-    cost: 4
+    cost: 2
     lore: "Sets entities on fire for 8 seconds."
 bow:
   0:
@@ -120,14 +120,14 @@ bow:
     amount: 2
     slot: 11
     name: "Power II"
-    cost: 3
+    cost: 1
     lore: "Increases arrow damage by 1.5."
   2:
     material: BOW
     amount: 3
     slot: 20
     name: "Power III"
-    cost: 4
+    cost: 1
     lore: "Increases arrow damage by 2."
   3:
     material: RABBIT_FOOT
@@ -141,7 +141,7 @@ bow:
     amount: 2
     slot: 13
     name: "Punch II"
-    cost: 3
+    cost: 2
     lore: "Adds 1.2 knockback strength to arrows."
   5:
     material: FIRE_CHARGE
@@ -163,14 +163,14 @@ crossbow:
     amount: 2
     slot: 11
     name: "Piercing II"
-    cost: 2
+    cost: 1
     lore: "Arrows pass through multiple entities."
   2:
     material: CROSSBOW
     amount: 3
     slot: 20
     name: "Piercing III"
-    cost: 3
+    cost: 1
     lore: "Arrows pass through multiple entities."
   3:
     material: SPECTRAL_ARROW
@@ -191,7 +191,7 @@ crossbow:
     amount: 2
     slot: 15
     name: "Quick Charge II"
-    cost: 2
+    cost: 1
     lore: "Reduces draw time by 0.5 seconds."
 arrow:
   0:
@@ -206,14 +206,14 @@ arrow:
     amount: 2
     slot: 12
     name: "More Arrows II"
-    cost: 2
+    cost: 1
     lore: "Receive 3 arrows every 10 seconds."
   2:
     material: ARROW
     amount: 3
     slot: 21
     name: "More Arrows III"
-    cost: 3
+    cost: 1
     lore: "Receive 4 arrows every 10 seconds."
   3:
     material: TIPPED_ARROW
@@ -227,14 +227,14 @@ arrow:
     amount: 2
     slot: 14
     name: "Effect Arrows II"
-    cost: 2
+    cost: 1
     lore: "Receive BLINDNESS arrows every 10 seconds."
   5:
     material: TIPPED_ARROW
     amount: 3
     slot: 23
     name: "Effect Arrows III"
-    cost: 3
+    cost: 1
     lore: "Receive POISON arrows every 10 seconds."
 tool:
   0:
@@ -249,43 +249,43 @@ tool:
     amount: 2
     slot: 12
     name: "Efficiency II"
-    cost: 2
+    cost: 1
     lore: "Increases mine speed by 5."
   2:
     material: GOLDEN_PICKAXE
     amount: 3
     slot: 21
     name: "Efficiency III"
-    cost: 3
+    cost: 2
     lore: "Increases mine speed by 10."
   3:
     material: NETHERITE_PICKAXE
     amount: 1
     slot: 5
     name: "Unbreakable"
-    cost: 4
-    lore: "Axes and pickaxes take no damage."
+    cost: 3
+    lore: "Axes and Pickaxes take no damage."
 armor:
   0:
     material: IRON_CHESTPLATE
     amount: 1
     slot: 2
     name: "Protection I"
-    cost: 2
+    cost: 1
     lore: "4% damage reduction for each armor piece."
   1:
     material: IRON_CHESTPLATE
     amount: 2
     slot: 11
     name: "Protection II"
-    cost: 3
+    cost: 1
     lore: "8% damage reduction for each armor piece."
   2:
     material: IRON_CHESTPLATE
     amount: 3
     slot: 20
     name: "Protection III"
-    cost: 4
+    cost: 1
     lore: "12% damage reduction for each armor piece."
   3:
     material: POINTED_DRIPSTONE
@@ -299,7 +299,7 @@ armor:
     amount: 2
     slot: 13
     name: "Thorns II"
-    cost: 2
+    cost: 1
     lore: "Reflects damage at the cost of durability. Chance: 30%"
   5:
     material: DIAMOND_BOOTS
@@ -313,14 +313,14 @@ armor:
     amount: 2
     slot: 15
     name: "Feather Falling II"
-    cost: 2
+    cost: 1
     lore: "Reduces fall damage by 24%."
   7:
     material: DIAMOND_BOOTS
     amount: 3
     slot: 24
     name: "Feather Falling III"
-    cost: 3
+    cost: 1
     lore: "Reduces fall damage by 36%."
 food:
   0:
@@ -335,14 +335,14 @@ food:
     amount: 2
     slot: 12
     name: "Food Source II"
-    cost: 2
+    cost: 1
     lore: "6 food points, 9.6 saturation restored"
   2:
     material: COOKED_BEEF
     amount: 3
     slot: 21
     name: "Food Source III"
-    cost: 3
+    cost: 2
     lore: "8 food points, 12.8 saturation restored"
   3:
     material: COOKED_BEEF
@@ -356,7 +356,7 @@ food:
     amount: 2
     slot: 14
     name: "Food Amount II"
-    cost: 2
+    cost: 1
     lore: "Triple food from all sources."
 resource:
   0:
@@ -371,14 +371,14 @@ resource:
     amount: 2
     slot: 13
     name: "Resource Amount II"
-    cost: 2
+    cost: 1
     lore: "Triple iron, gold & diamonds."
   2:
     material: DIAMOND
     amount: 3
     slot: 22
     name: "Resource Amount III"
-    cost: 3
+    cost: 1
     lore: "Quadruple iron, gold & diamonds."
 xp:
   0:
@@ -386,19 +386,19 @@ xp:
     amount: 1
     slot: 4
     name: "More XP I"
-    cost: 1
-    lore: "1 more XP point from all sources."
+    cost: 2
+    lore: "+1 XP point from all sources."
   1:
     material: EXPERIENCE_BOTTLE
     amount: 2
     slot: 13
     name: "More XP II"
-    cost: 2
-    lore: "2 more XP points from all sources."
+    cost: 1
+    lore: "+2 XP points from all sources."
   2:
     material: EXPERIENCE_BOTTLE
     amount: 3
     slot: 22
     name: "More XP III"
-    cost: 3
-    lore: "3 more XP points from all sources."
+    cost: 1
+    lore: "+3 XP points from all sources."

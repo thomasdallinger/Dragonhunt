@@ -2,14 +2,11 @@ package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.entity.Animals;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Monster;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -33,7 +30,7 @@ public class EntityDeathListener implements Listener {
                 killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             }
 
-            if (mob instanceof Animals) {
+            if (mob instanceof Animals || mob instanceof WaterMob) {
                 if (GameState.food.containsKey(killer)) // first values added in GameConfiguration
                     mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.food.get(killer));
                 killer.giveExp(UpgradePoints.animalXP + XPUpgrade.MoreXP.get(killer) - 1);

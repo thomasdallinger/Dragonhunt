@@ -9,8 +9,8 @@ public class CreatureSpawnListener implements Listener {
 
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent event) {
-        if (event.getEntity() instanceof Ghast) {
+        /*if (event.getEntity() instanceof Ghast) {
             event.setCancelled(true);
-        }
+        }*/
     }
 }

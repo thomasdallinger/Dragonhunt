@@ -34,7 +34,8 @@ public class EntityDeathListener implements Listener {
             }
 
             if (mob instanceof Animals) {
-                mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.food.get(killer));
+                if (GameState.food.containsKey(killer)) // first values added in GameConfiguration
+                    mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.food.get(killer));
                 killer.giveExp(UpgradePoints.animalXP + XPUpgrade.MoreXP.get(killer) - 1);
                 killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             }
@@ -53,8 +54,7 @@ public class EntityDeathListener implements Listener {
                 break;
             case "Piglin":
             case "Zombie":
-                if(GameState.resources.get(killer).get(1) != null)
-                    mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.resources.get(killer).get(1));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.GOLD_INGOT, 2));
                 break;
             case "Witch":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.DIAMOND, 2));
@@ -74,20 +74,18 @@ public class EntityDeathListener implements Listener {
             case "Wither Skeleton":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.NETHERITE_INGOT));
                 break;
+            case "Iron Golem":
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 5));
+                break;
             default:
                 break;
         }
 
-        // Extra Drops (on top of normal drops)
-        if (mob.getName().equals("Hoglin")) { // drops double food
-            if(GameState.food.get(killer) != null)
-                mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.food.get(killer));
-        } else if (mob.getName().equals("Sheep")) {
+        // Extra Drops (on top of food drops)
+        if (mob.getName().equals("Sheep")) { // for crafting beds, bows
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.STRING, 8));
-        } else if (mob.getName().equals("Chicken")) {
+        } else if (mob.getName().equals("Chicken")) { // for crafting arrows
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.FEATHER, 2));
-        } else if (mob.getName().equals("Iron Golem")) {
-            mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 5));
         }
     }
 }

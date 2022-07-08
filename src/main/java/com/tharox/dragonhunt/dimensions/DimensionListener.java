@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class DimensionListener implements Listener {
     /**
-     * Give players Resistance 10 when changing worlds so they can't be damaged for the first 5 seconds.
+     * Give players Resistance 10 when changing worlds so they can't be damaged for the first 7 seconds.
      */
     @EventHandler
     public void onWorldChange(PlayerChangedWorldEvent event) {
@@ -21,7 +21,7 @@ public class DimensionListener implements Listener {
 
         for (PotionEffect effect : player.getActivePotionEffects())
             player.removePotionEffect(effect.getType());
-        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 100, 9));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 9));
     }
 
     /**

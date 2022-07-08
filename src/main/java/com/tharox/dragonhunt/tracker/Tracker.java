@@ -125,8 +125,14 @@ public class Tracker implements Listener {
                 if (timer.getTime() < 30) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
                             ChatColor.RED.toString() + ChatColor.BOLD + "UNAVAILABLE FOR "
-                            + ChatColor.DARK_RED + ChatColor.BOLD + (30 - timer.getTime())
-                            + ChatColor.RED + ChatColor.BOLD + " SECONDS"));
+                                    + ChatColor.DARK_RED + ChatColor.BOLD + (30 - timer.getTime())
+                                    + ChatColor.RED + ChatColor.BOLD + " SECONDS"));
+                    return;
+                }
+
+                if (player.getWorld().getName().equals("world_the_end")) {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
+                            ChatColor.RED.toString() + ChatColor.BOLD + "DISABLED IN THE END"));
                     return;
                 }
 

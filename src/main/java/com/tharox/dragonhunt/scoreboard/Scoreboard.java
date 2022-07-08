@@ -12,14 +12,30 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Scoreboard extends ScoreboardBuilder {
 
     private int socialId;
+    private ArrayList<String> funMessages = new ArrayList<>();
+    private String message = "";
 
     public Scoreboard(Player player) {
         super(player, ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "DRAGON" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "HUNT");
         socialId = 0;
+
+        funMessages.add("Repairing Grappler");
+        funMessages.add("Locating Player Skill");
+        funMessages.add("Mining Dirt");
+        funMessages.add("Respawning Zombies");
+        funMessages.add("Eating Apples");
+        funMessages.add("Creating Memes");
+        funMessages.add("Blowing up worlds");
+        funMessages.add("Loosing to Creepers");
+        funMessages.add("Dragon not Perching");
+        funMessages.add("Calculating Skill Level");
+        funMessages.add("Dying to Piglin Brutes");
 
         run(player, Main.getInstance().getScoreboardCountdown());
     }
@@ -31,7 +47,7 @@ public class Scoreboard extends ScoreboardBuilder {
 
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
                 + DbValues.getServerID() + "]", 11);
-        setScore(ChatColor.WHITE + "Starting soon!", 10);
+        setScore(ChatColor.GOLD.toString() + ChatColor.BOLD + "1vs1", 10);
         setScore("", 9);
         setScore("", 8);
         setScore("", 7);
@@ -46,17 +62,22 @@ public class Scoreboard extends ScoreboardBuilder {
 
     @Override
     public void update(Player player, Countdown countdown) {
-        if (!Main.getInstance().getTimer().isRunning() && UpgradePoints.getPoints(player) == 0) { //Game hasn't started yet
+        if (!Main.getInstance().getTimer().isRunning()
+                && UpgradePoints.getPoints(player) == 0) { //Game hasn't started yet
             gameNotStarted();
             return;
         }
 
-        setScore(ChatColor.GOLD.toString() + ChatColor.BOLD + "1vs1", 10);
-        setScore(ChatColor.WHITE + "Players: " + ChatColor.DARK_GREEN + Bukkit.getOnlinePlayers().size(), 8);
-        setScore(ChatColor.WHITE + "Kills: " + ChatColor.GREEN + DbValues.getKills(player, true), 7);
-        setScore(ChatColor.WHITE + "Deaths: " + ChatColor.GREEN + DbValues.getKills(player, false), 6);
-        setScore(ChatColor.WHITE + "Spectate Tokens: " + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
-        setScore(ChatColor.WHITE + "Upgrade Points: " + ChatColor.LIGHT_PURPLE.toString() + UpgradePoints.getPoints(player), 3);
+        setScore(ChatColor.WHITE + "Players: "
+                + ChatColor.DARK_GREEN + Bukkit.getOnlinePlayers().size(), 8);
+        setScore(ChatColor.WHITE + "Kills: "
+                + ChatColor.GREEN + DbValues.getKills(player, true), 7);
+        setScore(ChatColor.WHITE + "Deaths: "
+                + ChatColor.GREEN + DbValues.getKills(player, false), 6);
+        setScore(ChatColor.WHITE + "Spectate Tokens: "
+                + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
+        setScore(ChatColor.WHITE + "Upgrade Points: "
+                + ChatColor.LIGHT_PURPLE.toString() + UpgradePoints.getPoints(player), 3);
         setScore(ChatColor.WHITE + "Free XP in:", 1);
         setScore(ChatColor.AQUA + countdownFormat(countdown), 0);
     }
@@ -74,22 +95,38 @@ public class Scoreboard extends ScoreboardBuilder {
      * Executed when the game hasn't started (timer not running, players have 0 points)
      */
     private void gameNotStarted() {
-        setScore(ChatColor.WHITE + "Players: " + ChatColor.YELLOW + Bukkit.getOnlinePlayers().size(), 8);
+        if (socialId == 0) {
+            Random rand = new Random();
+            int random = rand.nextInt(10); // generates random value from 0-9
+            message = funMessages.get(random);
+        }
+
+        setScore(ChatColor.WHITE + "Players: " + ChatColor.DARK_GREEN
+                + Bukkit.getOnlinePlayers().size(), 8);
+        setScore("Starting soon!", 6);
+        setScore("                                ", 4);
+
+
         switch (socialId) {
             case 0:
-                setScore(ChatColor.YELLOW + "Waiting.", 6);
+                setScore(ChatColor.YELLOW.toString() + ChatColor.ITALIC + message + ".", 3);
                 break;
             case 1:
-                setScore(ChatColor.YELLOW + "Waiting..", 6);
+                setScore(ChatColor.YELLOW.toString() + ChatColor.ITALIC + message + "..", 3);
                 break;
             case 2:
-                setScore(ChatColor.YELLOW + "Waiting...", 6);
+                setScore(ChatColor.YELLOW.toString() + ChatColor.ITALIC + message + "...", 3);
+                break;
+            case 3:
+                setScore(ChatColor.YELLOW.toString() + ChatColor.ITALIC + message + "....", 3);
                 break;
         }
 
+        // Skill Level: implement average points in this round (from DB player table)
+
         socialId++;
 
-        if (socialId >= 3) {
+        if (socialId >= 4) {
             socialId = 0;
         }
     }

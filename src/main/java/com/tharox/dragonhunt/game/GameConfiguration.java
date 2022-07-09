@@ -57,11 +57,9 @@ public class GameConfiguration {
             // clears the player's inventory
             player.getInventory().clear();
 
-            // adds the TRACKER, ELYTRA, START-EQUIPMENT and GRAPPLER to the player's inventory
+            // adds the TRACKER, ELYTRA, START-EQUIPMENT (Shield) and GRAPPLER to the player's inventory
             player.getInventory().setItem(7, Main.getInstance().getTracker().givePlayerTracker());
             player.getInventory().setChestplate(new ItemStack(Material.ELYTRA));
-            player.getInventory().setItem(0, new ItemStack(Material.IRON_AXE));
-            player.getInventory().setItem(1, new ItemStack(Material.IRON_PICKAXE));
             player.getInventory().setItemInOffHand(addItem(new ItemStack(Material.SHIELD)));
             new Grappler(player);
 

@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.entities;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Arrow;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,16 +12,19 @@ import org.bukkit.projectiles.ProjectileSource;
 
 public class EntityDamageListener implements Listener {
 
+    /**
+     * Grappler can't do damage.
+     */
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
-        Arrow arrow;
+        AbstractArrow arrow; // includes normal Arrows, Tipped Arrows and Spectral Arrows
         ProjectileSource shooter;
         Player player;
         ItemStack itemInMainHand; // Grappler can never be in a players Offhand
 
-        if (damager instanceof Arrow) {
-            arrow = (Arrow) damager;
+        if (damager instanceof AbstractArrow) {
+            arrow = (AbstractArrow) damager;
             shooter = arrow.getShooter();
         } else return;
 

@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.grappler;
 import com.tharox.dragonhunt.Main;
 import org.apache.commons.lang.Validate;
 import org.bukkit.*;
-import org.bukkit.entity.Arrow;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,7 +19,8 @@ public class GrappleListener implements Listener {
     public void grappleEvent(EntityShootBowEvent event) {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            Arrow arrow = (Arrow) event.getProjectile();
+            // AbstractArrow includes normal Arrows, Tipped Arrows and Spectral Arrows
+            AbstractArrow arrow = (AbstractArrow) event.getProjectile();
             ItemStack bow = event.getBow();
             if (bow == null) return;
 

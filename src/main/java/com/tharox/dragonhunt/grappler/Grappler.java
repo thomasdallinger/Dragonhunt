@@ -21,7 +21,7 @@ public class Grappler {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
-        meta.addEnchant(Enchantment.DURABILITY, 1, true);
+        meta.addEnchant(Enchantment.QUICK_CHARGE, 2, true);
         meta.setUnbreakable(true);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);

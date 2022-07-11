@@ -20,16 +20,7 @@ public class GameEnd {
     Timer timer = Main.getInstance().getTimer();
     Timer scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
 
-    /**
-     * Used when there is no winner, which means that the time ran out.
-     */
     public GameEnd() {
-        configureGameEnd();
-    }
-
-    public GameEnd(Player winner) {
-        this.winner = winner;
-
         // TIMER and SCOREBOARD COUNTDOWN are no longer running after the game ends
         timer.setRunning(false);
         scoreboardCountdown.setRunning(false);
@@ -37,6 +28,14 @@ public class GameEnd {
         updateGame();
         configureGameEnd();
         serverStopsCountdown();
+    }
+
+    /**
+     * Only used when there is a winner, meaning the time didn't run out
+     */
+    public GameEnd(Player winner) {
+        this.winner = winner;
+        new GameEnd();
     }
 
     /**
@@ -137,6 +136,6 @@ public class GameEnd {
                 duration[0]--;
             }
 
-        }.runTaskTimer(Main.getInstance(), 20, 20);
+        }.runTaskTimer(Main.getInstance(), 0, 20);
     }
 }

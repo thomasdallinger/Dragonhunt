@@ -65,7 +65,8 @@ public class EntityDeathListener implements Listener {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.ENDER_PEARL, 2));
                 break;
             case "Blaze":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.BLAZE_ROD, 1));
+                if (killer != null)
+                    GameState.putItemInInventory(killer, new ItemStack(Material.BLAZE_ROD));
                 break;
             case "Piglin Brute":
             case "Wither Skeleton":

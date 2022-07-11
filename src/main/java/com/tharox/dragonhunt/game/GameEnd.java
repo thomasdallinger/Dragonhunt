@@ -16,7 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.sql.Statement;
 
 public class GameEnd {
-    Player winner;
+    static Player winner;
     Timer timer = Main.getInstance().getTimer();
     Timer scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
 
@@ -34,7 +34,7 @@ public class GameEnd {
      * Only used when there is a winner, meaning the time didn't run out
      */
     public GameEnd(Player winner) {
-        this.winner = winner;
+        GameEnd.winner = winner;
         new GameEnd();
     }
 

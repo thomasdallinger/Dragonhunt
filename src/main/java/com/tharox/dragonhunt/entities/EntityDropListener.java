@@ -28,7 +28,7 @@ public class EntityDropListener implements Listener {
 
             switch (totalPiglinTrades) {
                 case 1:
-                    item.setItemStack(new ItemStack(Material.GRAVEL, 7));
+                    item.setItemStack(new ItemStack(Material.GLOWSTONE, 3));
                     break;
                 case 2:
                 case 7:

@@ -64,22 +64,24 @@ public class GameEnd {
             player.setGameMode(GameMode.SPECTATOR);
             player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 1);
 
+            // no winner != null check because the else block still executes if the winner is null
             if (player == winner) {
-                player.sendTitle(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "YOU WON", ChatColor.GREEN
-                        + "You defeated the Enderdragon", 10, 90, 20);
+                player.sendTitle(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "YOU WON",
+                        ChatColor.GREEN + "You defeated the Enderdragon", 10, 90, 20);
                 addWinnerAndXPLevel(player, true);
             } else {
-                player.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "YOU LOST", ChatColor.RED
-                        + "Try again next time", 10, 90, 20);
+                player.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "YOU LOST",
+                        ChatColor.RED + "Try again next time", 10, 90, 20);
                 addWinnerAndXPLevel(player, false);
             }
 
             if (winner != null) {
-                player.sendMessage(Main.getPrefix() + ChatColor.GOLD + ChatColor.BOLD + winner.getName().toUpperCase() + " has won the Dragonhunt!");
+                player.sendMessage(Main.getPrefix() + ChatColor.GOLD + ChatColor.BOLD + winner.getName().toUpperCase()
+                        + " has won the Dragonhunt!");
             }
 
-            player.sendMessage(Main.getPrefix() + ChatColor.YELLOW + ChatColor.BOLD + "TIME PLAYED: " + ChatColor.WHITE
-                    + DbValues.getTimestamp());
+            player.sendMessage(Main.getPrefix() + ChatColor.YELLOW + ChatColor.BOLD + "TIME PLAYED: "
+                    + ChatColor.WHITE + DbValues.getTimestamp());
             //TODO: Game Stats messages?
         }
     }
@@ -130,8 +132,10 @@ public class GameEnd {
                 }
 
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.RED.toString() + ChatColor.BOLD
-                            + "BACK TO LOBBY IN " + duration[0] + " SECONDS"));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
+                            ChatColor.RED.toString() + ChatColor.BOLD + "BACK TO LOBBY IN "
+                                    + ChatColor.DARK_RED + ChatColor.BOLD + duration[0]
+                                    + ChatColor.RED + ChatColor.BOLD + " SECONDS"));
                 }
                 duration[0]--;
             }

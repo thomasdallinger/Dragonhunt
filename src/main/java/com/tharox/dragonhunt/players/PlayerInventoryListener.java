@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.players;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -59,10 +58,10 @@ public class PlayerInventoryListener implements Listener {
 
         if (displayName.contains(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")
                 || displayName.contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")
-                || displayName.contains(ChatColor.YELLOW + "Generated Arrow"))
+                || displayName.contains(ChatColor.GOLD + "Generated Arrow"))
             event.setCancelled(true);
 
-        if(item.getType() == Material.ELYTRA) {
+        if (item.getType() == Material.ELYTRA) {
             event.setCancelled(true);
         }
     }

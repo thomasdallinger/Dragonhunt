@@ -12,8 +12,8 @@ import java.util.stream.Stream;
 public class BlockExplodeListener implements Listener {
 
     /**
-     * Chests, ores that shouldn't drop their default materials
-     * and all wood types should not get exploded by entities (Creepers, TNT, ...).
+     * Chests, ores/blocks that are not dropping their default materials and all wood types
+     * should not get exploded by entities (Creepers, TNT, ...).
      */
     @EventHandler
     public void onExplode(EntityExplodeEvent event) {
@@ -24,8 +24,13 @@ public class BlockExplodeListener implements Listener {
                 Material.DEEPSLATE_REDSTONE_ORE, Material.COPPER_ORE,
                 Material.DEEPSLATE_COPPER_ORE, Material.IRON_ORE,
                 Material.DEEPSLATE_IRON_ORE, Material.GOLD_ORE,
-                Material.DEEPSLATE_GOLD_ORE).forEach(material -> blocks.removeIf(block -> block.getType() == material));
+                Material.DEEPSLATE_GOLD_ORE, Material.DIAMOND_ORE,
+                Material.DEEPSLATE_DIAMOND_ORE, Material.COAL_ORE,
+                Material.DEEPSLATE_COAL_ORE, Material.NETHER_GOLD_ORE,
+                Material.GILDED_BLACKSTONE, Material.GRAVEL)
+                .forEach(material -> blocks.removeIf(block -> block.getType() == material));
 
-        BlockBreakListener.woods.forEach(woodType -> blocks.removeIf(currentBlock -> currentBlock.getType() == woodType));
+        BlockBreakListener.woods.forEach(woodType -> blocks.removeIf
+                (currentBlock -> currentBlock.getType() == woodType));
     }
 }

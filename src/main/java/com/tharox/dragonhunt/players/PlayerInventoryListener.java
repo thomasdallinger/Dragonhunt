@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -22,24 +23,25 @@ public class PlayerInventoryListener implements Listener {
             item = event.getCurrentItem();
         }
 
-        // Tracker = 7, Grappler = 8, Arrows = 17
+        // Tracker = 7, Grappler = 8, Generated Arrows = 17
         if (event.getHotbarButton() == 7 || event.getHotbarButton() == 8 || event.getHotbarButton() == 17) {
             event.setCancelled(true);
             return;
         }
 
+        // Check if the inventory is not null or an irrelevant one before checking the inventory slots
         if (event.getClickedInventory() == null) return;
         if (event.getClickedInventory().getType() != InventoryType.PLAYER) return;
-
-        if (item == null) return;
-        if (item.getItemMeta() == null) return;
 
         if (event.getSlot() == 7 || event.getSlot() == 8 || event.getSlot() == 17) {
             event.setCancelled(true);
             return;
         }
 
-        // Elytra
+        if (item == null) return;
+        if (item.getItemMeta() == null) return;
+
+        // Check if the item was an Elytra and if the Chestplate slot was clicked
         if (item.getType().equals(Material.ELYTRA)) {
             if (event.getSlot() == 38) {
                 event.setCancelled(true);

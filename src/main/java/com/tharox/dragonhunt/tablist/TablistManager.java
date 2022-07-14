@@ -30,10 +30,10 @@ public class TablistManager {
             players = scoreboard.registerNewTeam("");
         }
 
-        players.setPrefix(Main.getNamePrefix(player));
         players.setColor(ChatColor.YELLOW);
 
         for (Player target : Bukkit.getOnlinePlayers()) {
+            players.setPrefix(Main.getNamePrefix(target));
             players.addEntry(target.getName());
         }
     }

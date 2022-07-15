@@ -49,8 +49,8 @@ public class GameState {
         if (!didNotFit.isEmpty()) {
             player.getWorld().dropItemNaturally(player.getLocation(), didNotFit.get(0));
             // index 0 = max. only 1 item in the HashMap
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(ChatColor.RED + "Inventory full! Item dropped...");
-            player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
         }
     }
 

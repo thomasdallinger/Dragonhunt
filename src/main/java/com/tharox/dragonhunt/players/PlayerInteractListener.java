@@ -47,7 +47,7 @@ public class PlayerInteractListener implements Listener {
                         || block.getType() == Material.BREWING_STAND
                         || block.getType() == Material.ANVIL) {
                     event.setCancelled(true);
-                    player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                     player.sendMessage(ChatColor.RED + "You are not allowed to use this block!");
                 }
             }

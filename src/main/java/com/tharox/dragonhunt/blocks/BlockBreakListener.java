@@ -41,9 +41,10 @@ public class BlockBreakListener implements Listener {
             if ((int) player.getLocation().distance(GameState.firstNetherEntry) < 15 &&
                     block.getType() == Material.OBSIDIAN) {
                 event.setCancelled(true);
-                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
-                player.sendMessage(ChatColor.RED +
-                        "You are not allowed to break obsidian close to this nether portal!");
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                player.sendMessage(ChatColor.RED + "You are not allowed to break "
+                        + ChatColor.DARK_RED + ChatColor.BOLD + "OBSIDIAN"
+                        + ChatColor.RED + " close to this Nether Portal!");
             }
         }
 

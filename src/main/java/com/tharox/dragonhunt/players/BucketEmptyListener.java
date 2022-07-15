@@ -20,8 +20,10 @@ public class BucketEmptyListener implements Listener {
             if ((int) player.getLocation().distance(GameState.firstNetherEntry) < 15
                     && bucket.toString().contains("LAVA")) {
                 event.setCancelled(true);
-                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
-                player.sendMessage(ChatColor.RED + "You are not allowed to place lava close to this nether portal!");
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                player.sendMessage(ChatColor.RED + "You are not allowed to place "
+                        + ChatColor.DARK_RED + ChatColor.BOLD + "LAVA"
+                        + ChatColor.RED + " close to this Nether Portal!");
             }
         }
 
@@ -30,8 +32,10 @@ public class BucketEmptyListener implements Listener {
             if ((int) player.getLocation().distance(GameState.endPlatform) < 15
                     && bucket.toString().contains("LAVA")) {
                 event.setCancelled(true);
-                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
-                player.sendMessage(ChatColor.RED + "You are not allowed to place lava near the spawn platform!");
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                player.sendMessage(ChatColor.RED + "You are not allowed to place "
+                        + ChatColor.DARK_RED + ChatColor.BOLD + "LAVA"
+                        + ChatColor.RED + " near the End Spawn Platform!");
             }
         }
     }

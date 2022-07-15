@@ -17,6 +17,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class JoinListener implements Listener {
+    boolean firstPlayer = true; // only true the first time executing
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
@@ -58,9 +59,15 @@ public class JoinListener implements Listener {
 
         // if there are more players in the playersAllowedToPlay list, send a message to all players on the server
         // telling them how many more players are needed
+        // start the "stopServerIn" runnable
         for (Player online : Bukkit.getOnlinePlayers()) {
             online.sendMessage(ChatColor.RED + "Waiting for " + ChatColor.DARK_RED + ChatColor.BOLD
                     + DbValues.playersAllowedToPlay.size() + ChatColor.RED + " more player(s).");
+
+            if (firstPlayer) {
+                Main.stopServerIn();
+                firstPlayer = false;
+            }
         }
     }
 }

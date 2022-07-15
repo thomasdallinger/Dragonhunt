@@ -7,8 +7,6 @@ import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Difficulty;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -24,7 +22,8 @@ public class Scoreboard extends ScoreboardBuilder {
     private String message = "";
 
     public Scoreboard(Player player) {
-        super(player, ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "DRAGON" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "HUNT");
+        super(player, ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD
+                + "DRAGON" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "HUNT");
         socialId = 0;
 
         funMessages.add("Repairing Grappler");

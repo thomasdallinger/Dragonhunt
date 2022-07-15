@@ -29,6 +29,8 @@ import com.tharox.dragonhunt.tracker.Tracker;
 import com.tharox.dragonhunt.upgradeMenu.UpgradeCommand;
 import com.tharox.dragonhunt.upgradeMenu.UpgradeListener;
 import com.tharox.dragonhunt.vehicles.VehicleListener;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -72,8 +74,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
         listenerRegistration();
         commandRegistration();
-
-        stopServerIn();
     }
 
     @Override
@@ -98,17 +98,27 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     }
 
     /**
-     * If one or more of the players, who is/are supposed to join the game,
-     * are not joining the players on the server will get moved back to the lobby after 60 seconds.
-     * The time starts once the plugin gets enabled.
+     * If one or more of the players, who are supposed to join the game,
+     * are not joining, the players on the server will get moved back to the lobby after 60 seconds.
+     * Once no more players are on this server, the server closes.
+     * <p>
+     * The time starts once the first player joins this server (there has to be more than one player playing).
+     * This method is only called once (see firstPlayer boolean in JoinListener).
      */
-    private void stopServerIn() {
+    public static void stopServerIn() {
         new BukkitRunnable() {
             int timeLeft = 60;
 
             @Override
             public void run() {
                 timeLeft--;
+
+                for (Player online : Bukkit.getOnlinePlayers()) {
+                    online.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
+                            ChatColor.YELLOW.toString() + ChatColor.ITALIC + "Waiting for "
+                                    + ChatColor.GOLD + ChatColor.ITALIC + timeLeft
+                                    + ChatColor.YELLOW + ChatColor.ITALIC + " more seconds..."));
+                }
 
                 if (timeLeft == 0) {
                     GameState.movePlayersToLobby();

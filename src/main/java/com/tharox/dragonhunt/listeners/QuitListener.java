@@ -14,6 +14,7 @@ public class QuitListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
+
         event.setQuitMessage(Main.getPrefix() + ChatColor.RED + player.getName() + ChatColor.WHITE + " has left.");
 
         if (Bukkit.getOnlinePlayers().size() == 1) {
@@ -23,7 +24,7 @@ public class QuitListener implements Listener {
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             p.sendMessage(Main.getPrefix() + ChatColor.DARK_RED + ChatColor.BOLD
-                    + (Bukkit.getOnlinePlayers().size() - 1) + ChatColor.RED + " players remaining.");
+                    + (Bukkit.getOnlinePlayers().size() - 1) + ChatColor.RED + " player(s) remaining.");
             // - 1 because the player that left is still included in the OnlinePlayers list at that time
         }
     }

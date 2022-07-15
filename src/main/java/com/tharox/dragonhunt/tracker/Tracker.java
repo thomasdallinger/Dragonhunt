@@ -30,13 +30,11 @@ import java.util.Map;
  * new Tracker in main - getTracker(), 1 instance for all players
  */
 public class Tracker implements Listener {
-
     public Map<Player, String> playerTracksStructure = new HashMap<>();
     public Map<Player, Location> playerTracksLocation = new HashMap<>();
     public Map<Player, Integer> playerTracksIndex = new HashMap<>();
 
     public Tracker() {
-
         run();
     }
 
@@ -58,22 +56,29 @@ public class Tracker implements Listener {
         LinkedList<Location> locationList = new LinkedList<>();
 
         if (world.getName().equals("world")) {
-            locationList.add(world.locateNearestStructure(player.getLocation(), StructureType.VILLAGE, 32, false));
+            locationList.add(world.locateNearestStructure(player.getLocation(),
+                    StructureType.VILLAGE, 32, false));
             structureList.add("Village");
-            locationList.add(world.locateNearestStructure(player.getLocation(), StructureType.SHIPWRECK, 32, false));
+            locationList.add(world.locateNearestStructure(player.getLocation(),
+                    StructureType.SHIPWRECK, 32, false));
             structureList.add("Shipwreck");
+
         } else if (world.getName().equals("world_nether")) {
-            locationList.add(world.locateNearestStructure(player.getLocation(), StructureType.NETHER_FORTRESS, 32, false));
+            locationList.add(world.locateNearestStructure(player.getLocation(),
+                    StructureType.NETHER_FORTRESS, 32, false));
             structureList.add("Fortress");
-            locationList.add(world.locateNearestStructure(player.getLocation(), StructureType.BASTION_REMNANT, 32, false));
+            locationList.add(world.locateNearestStructure(player.getLocation(),
+                    StructureType.BASTION_REMNANT, 32, false));
             structureList.add("Bastion");
         }
 
         // locate a Ruined Portal in both dimensions
-        locationList.add(world.locateNearestStructure(player.getLocation(), StructureType.RUINED_PORTAL, 32, false));
+        locationList.add(world.locateNearestStructure(player.getLocation(),
+                StructureType.RUINED_PORTAL, 32, false));
         structureList.add("Ruined Portal");
 
-        if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+        if (e.equals(EquipmentSlot.HAND)
+                && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
 
                 if (Main.getInstance().getTimer().getTime() < 30) {
@@ -100,7 +105,8 @@ public class Tracker implements Listener {
             }
         }
 
-        if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
+        if (e.equals(EquipmentSlot.HAND)
+                && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
                 player.performCommand("upgrades");
             }
@@ -137,12 +143,14 @@ public class Tracker implements Listener {
                 }
 
                 if (trackedStructure == null) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GREEN.toString() + ChatColor.BOLD
-                            + "RIGHT-CLICK " + ChatColor.WHITE + "to track a structure"));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
+                            ChatColor.GREEN.toString() + ChatColor.BOLD
+                                    + "RIGHT-CLICK " + ChatColor.WHITE + "to track a structure"));
                     return;
                 }
 
-                trackedStructureName = ChatColor.GOLD.toString() + ChatColor.BOLD + trackedStructure.toUpperCase() + ChatColor.DARK_GRAY + " » ";
+                trackedStructureName = ChatColor.GOLD.toString() + ChatColor.BOLD + trackedStructure.toUpperCase()
+                        + ChatColor.DARK_GRAY + " » ";
                 distance = (int) player.getLocation().distance(trackedLocation);
 
                 if (distance < 100) {
@@ -153,13 +161,13 @@ public class Tracker implements Listener {
                             + ChatColor.WHITE + distance + " Blocks away"));
                 }
 
-                //SET TARGET
+                // set the compass target (where to point the needle)
                 if (player.getWorld().getEnvironment() != World.Environment.NORMAL) {
                     CompassMeta meta = (CompassMeta) player.getInventory().getItemInMainHand().getItemMeta();
 
                     if (meta != null) {
                         meta.setLodestone(trackedLocation);
-                        meta.setLodestoneTracked(false); //no real lodestone present at that location
+                        meta.setLodestoneTracked(false); // no real lodestone present at that location
                         player.getInventory().getItemInMainHand().setItemMeta(meta);
                     }
 

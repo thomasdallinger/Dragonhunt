@@ -9,8 +9,12 @@ import org.bukkit.scoreboard.Team;
 
 public class TablistManager {
 
+    /**
+     * Sets a custom header and footer in a players tablist.
+     * @param player player who receives the header and footer in the tablist
+     */
     public void setPlayerList(Player player) {
-        player.setPlayerListHeaderFooter(Main.getPrefix(), "Alpha 3.0");
+        player.setPlayerListHeaderFooter(Main.getPrefix(), "v.0.3 (Alpha)");
     }
 
     /**
@@ -20,7 +24,11 @@ public class TablistManager {
         Bukkit.getOnlinePlayers().forEach(this::setPlayerTeams);
     }
 
-
+    /**
+     * One player receives the formatted tablist (using teams) which includes
+     * certain stats of all online players.
+     * @param player player who receives the formatted tablist
+     */
     public void setPlayerTeams(Player player) {
         Scoreboard scoreboard = player.getScoreboard();
 

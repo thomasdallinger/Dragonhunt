@@ -17,7 +17,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 public class JoinListener implements Listener {
-    boolean firstPlayer = true; // only true the first time executing
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
@@ -30,6 +29,10 @@ public class JoinListener implements Listener {
         UpgradePoints.setPoints(player, 0);
         new Scoreboard(player);
         Main.getInstance().getTablistManager().setPlayerList(player); // sets tablist header and footer
+
+        if (!Main.firstPlayerJoined) { // only false if no player has joined the server yet
+            Main.firstPlayerJoined = true;
+        }
 
         DbValues.getPlayersAllowedToPlay();
         checkIfGameCanStart();
@@ -63,11 +66,6 @@ public class JoinListener implements Listener {
         for (Player online : Bukkit.getOnlinePlayers()) {
             online.sendMessage(ChatColor.RED + "Waiting for " + ChatColor.DARK_RED + ChatColor.BOLD
                     + DbValues.playersAllowedToPlay.size() + ChatColor.RED + " more player(s).");
-
-            if (firstPlayer) {
-                Main.stopServerIn();
-                firstPlayer = false;
-            }
         }
     }
 }

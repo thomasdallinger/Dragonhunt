@@ -45,6 +45,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 public final class Main extends JavaPlugin implements PluginMessageListener {
 
     private static Main instance;
+    public static boolean firstPlayerJoined = false;
 
     public Timer timer;
     public Countdown scoreboardCountdown; // single countdown for all player scoreboards (started in GameStart)
@@ -74,6 +75,8 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
         listenerRegistration();
         commandRegistration();
+
+        stopServerIn();
     }
 
     @Override
@@ -99,15 +102,19 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
     /**
      * If one or more of the players, who are supposed to join the game,
-     * are not joining, the players on the server will get moved back to the lobby after 60 seconds.
-     * Once no more players are on this server, the server closes.
+     * are not joining, the players on the server will get moved back to the lobby 90 seconds
+     * after the plugin has been enabled.
+     * Once no more players are on this server, the server closes and the database is updated.
      * <p>
-     * The time starts once the first player joins this server (there has to be more than one player playing).
-     * This method is only called once (see firstPlayer boolean in JoinListener).
+     * If no players join the server the server also closes 90 seconds after the plugin has been enabled.
+     * This can happen if the server is started but the game countdown in the LOBBY gets cancelled
+     * due to players leaving the queue.
+     * <p>
+     * This method is only called once.
      */
     public static void stopServerIn() {
         new BukkitRunnable() {
-            int timeLeft = 60;
+            int timeLeft = 90;
 
             @Override
             public void run() {
@@ -124,7 +131,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
                     GameState.movePlayersToLobby();
                 }
 
-                if (DbValues.playersAllowedToPlay.size() == 0) {
+                if (Main.firstPlayerJoined && DbValues.playersAllowedToPlay.size() == 0) {
                     this.cancel();
                 }
             }

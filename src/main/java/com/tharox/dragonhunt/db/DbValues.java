@@ -17,8 +17,11 @@ public class DbValues {
 
     /**
      * Add all players who are allowed to join the server to a list.
+     * Clear the list each time the method is executed.
      */
     public static void getPlayersAllowedToPlay() {
+        playersAllowedToPlay.clear();
+
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "SELECT Player FROM Plays WHERE GameID = '" + getGameID() + "'";
             Statement stmt = con.createStatement();

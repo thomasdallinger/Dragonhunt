@@ -19,9 +19,11 @@ public class GameStart extends GameConfiguration {
     Countdown scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
     BossBar bossBar;
     World overworld = Bukkit.getServer().getWorld("world");
-    Location startLocation = new Location(overworld, 0, 150, 0);
+    Location startLocation = new Location(overworld, 0, 200, 0);
     Location highestBlock;
-    Location higherStartLocation = new Location(startLocation.getWorld(), startLocation.getX(), startLocation.getY() + 40, startLocation.getZ());
+    // used if the highest block at x: 0 and z: 0 is within 40 blocks of the startLocation
+    Location higherStartLocation = new Location(startLocation.getWorld(), startLocation.getX(),
+            startLocation.getY() + 40, startLocation.getZ());
 
     public GameStart() {
         startCountdown = new Countdown(true, 20, this::onCountdown);
@@ -89,11 +91,11 @@ public class GameStart extends GameConfiguration {
             elytraCountdown = new Countdown(true, 30, this::onElytraCountdown);
             overworld.setGameRule(GameRule.FALL_DAMAGE, false);
             bossBar = Bukkit.createBossBar(ChatColor.GREEN + "Elytra removed in " + ChatColor.DARK_GREEN
-                    + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.GREEN + " seconds", BarColor.GREEN, BarStyle.SEGMENTED_10);
+                    + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.GREEN + " seconds",
+                    BarColor.GREEN, BarStyle.SEGMENTED_10);
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-
             if (startCountdown.getTime() % 10 == 0 && startCountdown.getTime() > 0) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
             }
@@ -164,7 +166,7 @@ public class GameStart extends GameConfiguration {
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);
                 player.getInventory().setChestplate(new ItemStack(Material.AIR));
-                new Arrows(); //start arrow generation
+                new Arrows(); // start arrow generation
             }
         }
     }

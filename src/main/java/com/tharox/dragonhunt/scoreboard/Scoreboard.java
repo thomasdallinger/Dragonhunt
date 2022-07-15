@@ -7,6 +7,8 @@ import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Difficulty;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -104,8 +106,9 @@ public class Scoreboard extends ScoreboardBuilder {
         setScore(ChatColor.WHITE + "Players: " + ChatColor.DARK_GREEN
                 + Bukkit.getOnlinePlayers().size(), 8);
         setScore("Starting soon!", 6);
+        // a lot of places to make the scoreboard wider - scoreboard size won't change with every new random message
+        // will be replaced once the game starts
         setScore("                                ", 4);
-
 
         switch (socialId) {
             case 0:
@@ -122,7 +125,7 @@ public class Scoreboard extends ScoreboardBuilder {
                 break;
         }
 
-        // Skill Level: implement average points in this round (from DB player table)
+        // Skill Level: implement average rank in this round (from DB)
 
         socialId++;
 

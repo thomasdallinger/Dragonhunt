@@ -32,6 +32,7 @@ import com.tharox.dragonhunt.vehicles.VehicleListener;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
@@ -67,6 +68,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         tracker = new Tracker();
         tablistManager = new TablistManager();
         new CustomRecipes(); // adds all custom recipes to the game
+        timeSetNight();
 
         listenerRegistration();
         commandRegistration();
@@ -81,6 +83,18 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
     public static Main getInstance() {
         return instance;
+    }
+
+    /**
+     * Sets the time in the OVERWORLD to 13000.
+     */
+    private void timeSetNight() {
+        World overworld = Bukkit.getServer().getWorld("world");
+        if (overworld == null) {
+            Bukkit.getServer().broadcastMessage(ChatColor.RED + "ERROR: World name is incorrect.");
+            return;
+        }
+        overworld.setTime(13000); // time set night
     }
 
     /**

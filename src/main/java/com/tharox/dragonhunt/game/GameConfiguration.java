@@ -19,6 +19,12 @@ public class GameConfiguration {
      */
     public void configureOverworld() {
         World overworld = Bukkit.getServer().getWorld("world");
+
+        if (overworld == null) {
+            Bukkit.getServer().broadcastMessage(ChatColor.RED + "ERROR: World name is incorrect.");
+            return;
+        }
+
         overworld.setDifficulty(Difficulty.NORMAL);
         overworld.setTime(0);
 
@@ -33,6 +39,12 @@ public class GameConfiguration {
      */
     public void configureNether() {
         World nether = Bukkit.getServer().getWorld("world_nether");
+
+        if (nether == null) {
+            Bukkit.getServer().broadcastMessage(ChatColor.RED + "ERROR: World Nether name is incorrect.");
+            return;
+        }
+
         WorldBorder worldBorder = nether.getWorldBorder();
         worldBorder.setCenter(new Location(nether, 0, 0, 0));
         worldBorder.setSize(4000);

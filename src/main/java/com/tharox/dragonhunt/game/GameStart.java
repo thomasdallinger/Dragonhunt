@@ -82,18 +82,23 @@ public class GameStart extends GameConfiguration {
      * @param time time of the countdown
      */
     public void onCountdown(int time) {
-        if (overworld == null) return;
+        if (overworld == null) {
+            Bukkit.getServer().broadcastMessage(ChatColor.RED + "ERROR: World name is incorrect.");
+            return;
+        }
 
         // once the countdown hits zero, start the TIMER and SCOREBOARD COUNTDOWN
         if (startCountdown.getTime() == 0) {
             timer.setRunning(true);
             scoreboardCountdown.setRunning(true);
-            Main.elytraInInventory();
 
+            Main.elytraInInventory();
             elytraCountdown = new Countdown(true, 30, this::onElytraCountdown);
+
+            overworld.setTime(0);
             overworld.setGameRule(GameRule.FALL_DAMAGE, false);
             bossBar = Bukkit.createBossBar(ChatColor.GREEN + "Elytra removed in " + ChatColor.DARK_GREEN
-                    + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.GREEN + " seconds",
+                            + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.GREEN + " seconds",
                     BarColor.GREEN, BarStyle.SEGMENTED_10);
         }
 

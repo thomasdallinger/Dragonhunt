@@ -26,7 +26,6 @@ public class GameConfiguration {
         }
 
         overworld.setDifficulty(Difficulty.NORMAL);
-        overworld.setTime(0);
 
         WorldBorder worldBorder = overworld.getWorldBorder();
         worldBorder.setCenter(new Location(overworld, 0, 0, 0));

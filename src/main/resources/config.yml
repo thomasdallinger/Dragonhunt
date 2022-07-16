@@ -306,7 +306,7 @@ armor:
     amount: 1
     slot: 6
     name: "Feather Falling I"
-    cost: 1
+    cost: 2
     lore: "Reduces fall damage by 12%."
   6:
     material: DIAMOND_BOOTS
@@ -371,7 +371,7 @@ resource:
     amount: 2
     slot: 13
     name: "Resource Amount II"
-    cost: 1
+    cost: 2
     lore: "Triple iron, gold & diamonds."
   2:
     material: DIAMOND

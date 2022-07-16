@@ -70,7 +70,7 @@ public class Arrows {
                     }
                 }
             }
-        }.runTaskTimer(Main.getInstance(), 0, 200);
+        }.runTaskTimer(Main.getInstance(), 0, 240);
     }
 
     private ItemStack createArrow(int amount) {

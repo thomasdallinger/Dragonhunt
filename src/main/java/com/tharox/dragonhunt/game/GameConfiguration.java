@@ -29,7 +29,7 @@ public class GameConfiguration {
 
         WorldBorder worldBorder = overworld.getWorldBorder();
         worldBorder.setCenter(new Location(overworld, 0, 0, 0));
-        worldBorder.setSize(20000);
+        worldBorder.setSize(6000);
         worldBorder.setDamageAmount(0);
     }
 

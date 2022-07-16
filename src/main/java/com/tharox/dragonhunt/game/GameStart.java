@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.game;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
+import com.tharox.dragonhunt.elytra.ElytraSwapRunnable;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import com.tharox.dragonhunt.upgrades.*;
@@ -11,6 +12,7 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class GameStart extends GameConfiguration {
     Timer timer = Main.getInstance().getTimer();
@@ -167,6 +169,7 @@ public class GameStart extends GameConfiguration {
                 bossBar.setVisible(false);
                 player.getInventory().setChestplate(new ItemStack(Material.AIR));
                 new Arrows(); // start arrow generation
+                new ElytraSwapRunnable().runTaskTimer(Main.getInstance(), 0, 5);
             }
         }
     }

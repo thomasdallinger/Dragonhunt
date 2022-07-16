@@ -70,7 +70,7 @@ public class GameConfiguration {
 
             // adds the TRACKER, ELYTRA, START-EQUIPMENT (Shield) and GRAPPLER to the player's inventory
             player.getInventory().setItem(7, Main.getInstance().getTracker().givePlayerTracker());
-            player.getInventory().setChestplate(new ItemStack(Material.ELYTRA));
+            player.getInventory().setChestplate(addItem(new ItemStack(Material.ELYTRA)));
             player.getInventory().setItemInOffHand(addItem(new ItemStack(Material.SHIELD)));
             new Grappler(player);
 
@@ -101,11 +101,15 @@ public class GameConfiguration {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
-        if (item.getType() == Material.SHIELD) { // making the shield unbreakable while looking enchanted
-            meta.addEnchant(Enchantment.DURABILITY, 1, true);
-            meta.setUnbreakable(true);
+        // making the item unbreakable while looking enchanted
+        meta.addEnchant(Enchantment.DURABILITY, 1, true);
+        meta.setUnbreakable(true);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        if (item.getType() == Material.SHIELD) {
             meta.setDisplayName(ChatColor.AQUA.toString() + ChatColor.BOLD + "Shield");
-            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        } else if (item.getType() == Material.ELYTRA) {
+            meta.setDisplayName(ChatColor.YELLOW.toString() + ChatColor.BOLD + "Elytra");
         }
 
         item.setItemMeta(meta);

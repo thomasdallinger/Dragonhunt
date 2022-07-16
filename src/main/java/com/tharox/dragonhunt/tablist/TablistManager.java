@@ -11,6 +11,7 @@ public class TablistManager {
 
     /**
      * Sets a custom header and footer in a players tablist.
+     *
      * @param player player who receives the header and footer in the tablist
      */
     public void setPlayerList(Player player) {
@@ -27,22 +28,25 @@ public class TablistManager {
     /**
      * One player receives the formatted tablist (using teams) which includes
      * certain stats of all online players.
+     * Every player has his own scoreboard team.
+     *
      * @param player player who receives the formatted tablist
      */
     public void setPlayerTeams(Player player) {
         Scoreboard scoreboard = player.getScoreboard();
 
-        Team players = scoreboard.getTeam("");
+        int playerCount = 0;
 
-        if (players == null) {
-            players = scoreboard.registerNewTeam("");
-        }
+        for (Player target : Bukkit.getOnlinePlayers()) { // sorted alphabetically
+            Team team = scoreboard.getTeam(playerCount + "player");
+            if (team == null)
+                team = scoreboard.registerNewTeam(playerCount + "player");
 
-        players.setColor(ChatColor.YELLOW);
+            team.setColor(ChatColor.YELLOW);
+            team.setPrefix(Main.getNamePrefix(target));
+            team.addEntry(target.getName());
 
-        for (Player target : Bukkit.getOnlinePlayers()) {
-            players.setPrefix(Main.getNamePrefix(target));
-            players.addEntry(target.getName());
+            playerCount++;
         }
     }
 }

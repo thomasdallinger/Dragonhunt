@@ -50,7 +50,11 @@ public class ElytraSwapRunnable extends BukkitRunnable {
                 player.getInventory().setChestplate(playerChestPlate.get(player));
             } else if (!playerWasInAir.get(player) && isPlayerNowInTheAir(player)) {
                 playerWasInAir.put(player, true);
-                playerChestPlate.put(player, player.getInventory().getChestplate());
+                ItemStack chestPlate = player.getInventory().getChestplate();
+                if(chestPlate.getType() == Material.ELYTRA)
+                    playerChestPlate.put(player, new ItemStack(Material.AIR));
+                else
+                    playerChestPlate.put(player, chestPlate);
                 player.getInventory().setChestplate(getUnbreakableElytra());
             }
 

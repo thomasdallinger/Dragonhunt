@@ -81,11 +81,6 @@ public class Tracker implements Listener {
                 && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
 
-                if (Main.getInstance().getTimer().getTime() < 30) {
-                    player.sendMessage(ChatColor.RED + "Tracker currently disabled.");
-                    return;
-                }
-
                 if (world.getName().equals("world_the_end")) {
                     player.sendMessage(ChatColor.RED + "Tracker disabled in the End.");
                     return;
@@ -127,14 +122,6 @@ public class Tracker implements Listener {
 
         if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
             try {
-
-                if (timer.getTime() < 30) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
-                            ChatColor.RED.toString() + ChatColor.BOLD + "UNAVAILABLE FOR "
-                                    + ChatColor.DARK_RED + ChatColor.BOLD + (30 - timer.getTime())
-                                    + ChatColor.RED + ChatColor.BOLD + " SECONDS"));
-                    return;
-                }
 
                 if (player.getWorld().getName().equals("world_the_end")) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(

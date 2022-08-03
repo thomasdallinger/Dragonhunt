@@ -10,6 +10,7 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashMap;
 import java.util.List;
@@ -60,16 +61,33 @@ public class GameState {
      * Shuts down the server.
      */
     public static void movePlayersToLobby() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+        new BukkitRunnable() {
+            int duration = 15; // move all players, who where on the server, within 15 seconds
 
-            ByteArrayDataOutput out = ByteStreams.newDataOutput();
-            out.writeUTF("Connect");
-            out.writeUTF("lobby");
-            player.sendPluginMessage(Main.getInstance(), "BungeeCord", out.toByteArray());
-        }
+            @Override
+            public void run() {
+                Player[] players = (Player[]) Bukkit.getOnlinePlayers().toArray();
 
-        DbValues.updateServerStatus();
-        Bukkit.getServer().shutdown();
+                // no more players to move or time is up
+                if (players.length == 0 || duration <= 0) {
+                    DbValues.updateServerStatus();
+                    Bukkit.getServer().shutdown();
+                    this.cancel();
+                }
+
+                // move one player at every odd second
+                // max. amount of players: 8
+                if (duration % 2 == 1) {
+                    players[0].playSound(players[0].getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+
+                    ByteArrayDataOutput out = ByteStreams.newDataOutput();
+                    out.writeUTF("Connect");
+                    out.writeUTF("lobby");
+                    players[0].sendPluginMessage(Main.getInstance(), "BungeeCord", out.toByteArray());
+                }
+
+                duration -= 1;
+            }
+        }.runTaskTimer(Main.getInstance(), 0, 20);
     }
 }

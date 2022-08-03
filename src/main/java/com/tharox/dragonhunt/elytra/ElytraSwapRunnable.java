@@ -15,13 +15,23 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 
 public class ElytraSwapRunnable extends BukkitRunnable {
-    private final HashMap<Player, ItemStack> playerChestPlate = new HashMap<>();
+    private final HashMap<Player, ItemStack> playerChestplate = new HashMap<>();
     private final HashMap<Player, Boolean> playerWasInAir = new HashMap<>();
 
+    /**
+     * Checks if the player is at least 5 blocks above the ground.
+     *
+     * @param p player to be checked if in the air
+     * @return true if the player is 5 blocks above the ground otherwise false
+     */
     private boolean isPlayerNowInTheAir(Player p) {
-        return p.getLocation().subtract(0, 1, 0).getBlock().getType() == Material.AIR
-                && p.getLocation().subtract(0, 2, 0).getBlock().getType() == Material.AIR
-                && p.getLocation().subtract(0, 3, 0).getBlock().getType() == Material.AIR;
+        for (int blocksBelow = 1; blocksBelow <= 6; blocksBelow++) {
+            if (p.getLocation().subtract(0, blocksBelow, 0).getBlock().getType() != Material.AIR) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     private ItemStack getUnbreakableElytra() {
@@ -44,24 +54,29 @@ public class ElytraSwapRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        Bukkit.getOnlinePlayers().forEach(player -> {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            // player is no longer in the air - give the chestplate back (if it wasn't air)
             if (playerWasInAir.get(player) && !isPlayerNowInTheAir(player)) {
                 playerWasInAir.put(player, false);
-                player.getInventory().setChestplate(playerChestPlate.get(player));
+                player.getInventory().setChestplate(playerChestplate.get(player));
+
+                // player is currently in the air - replace the chestplate with an elytra
             } else if (!playerWasInAir.get(player) && isPlayerNowInTheAir(player)) {
                 playerWasInAir.put(player, true);
-                ItemStack chestPlate = player.getInventory().getChestplate();
+                ItemStack chestplate = player.getInventory().getChestplate();
 
-                if (chestPlate != null && chestPlate.getType() == Material.ELYTRA)
-                    playerChestPlate.put(player, new ItemStack(Material.AIR));
+                if (chestplate != null && chestplate.getType() == Material.ELYTRA)
+                    playerChestplate.put(player, new ItemStack(Material.AIR));
                 else
-                    playerChestPlate.put(player, chestPlate);
+                    playerChestplate.put(player, chestplate);
+
                 player.getInventory().setChestplate(getUnbreakableElytra());
             }
 
+            // make the player glow while in the air
             if (isPlayerNowInTheAir(player)) {
                 player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 10, 0));
             }
-        });
+        }
     }
 }

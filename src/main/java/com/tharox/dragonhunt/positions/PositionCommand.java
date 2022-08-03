@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.timer.Timer;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,8 +24,9 @@ public class PositionCommand implements CommandExecutor {
             player = (Player) sender;
         } else return true;
 
-        if (timer.getTime() == 0) { // the Timer is set to time 0 in the onEnable method in Main
-            player.sendMessage(ChatColor.RED + "Positions can be created once the game starts.");
+        if (!timer.isRunning()) {
+            player.sendMessage(ChatColor.RED + "This feature is currently disabled.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
 
@@ -55,6 +57,7 @@ public class PositionCommand implements CommandExecutor {
         // add a position
         if (args[0].length() > 20) {
             player.sendMessage(ChatColor.RED + "Position name too long (max. length: 20 characters).");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
 
@@ -64,6 +67,7 @@ public class PositionCommand implements CommandExecutor {
         } else { // another position
             if (positions.get(player).length() > 500) {
                 player.sendMessage(ChatColor.RED + "You have exceeded the positions limit.");
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                 return true;
             }
 

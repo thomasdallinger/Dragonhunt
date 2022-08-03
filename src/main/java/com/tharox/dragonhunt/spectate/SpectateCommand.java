@@ -5,6 +5,7 @@ import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.timer.Timer;
 import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,8 +23,9 @@ public class SpectateCommand implements CommandExecutor {
             player = (Player) sender;
         } else return true;
 
-        if (Spectate.spectatesLeft.get(player) == 0) {
-            player.sendMessage(ChatColor.RED + "You have no Spectate Tokens left.");
+        if (!timer.isRunning()) {
+            player.sendMessage(ChatColor.RED + "This feature is currently disabled.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
 
@@ -33,8 +35,15 @@ public class SpectateCommand implements CommandExecutor {
             return true;
         }
 
+        if (Spectate.spectatesLeft.get(player) == 0) {
+            player.sendMessage(ChatColor.RED + "You have no Spectate Tokens left.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+            return true;
+        }
+
         if (!Spectate.commandUsable.get(player)) {
             player.sendMessage(ChatColor.RED + "You are currently using a Spectate Token.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
 

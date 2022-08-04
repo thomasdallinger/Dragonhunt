@@ -19,10 +19,10 @@ public class ElytraSwapRunnable extends BukkitRunnable {
     private final HashMap<Player, Boolean> playerWasInAir = new HashMap<>();
 
     /**
-     * Checks if the player is at least 5 blocks above the ground.
+     * Checks if the player is at least 6 blocks above the ground.
      *
      * @param p player to be checked if in the air
-     * @return true if the player is 5 blocks above the ground otherwise false
+     * @return true if the player is 6 blocks above the ground otherwise false
      */
     private boolean isPlayerNowInTheAir(Player p) {
         for (int blocksBelow = 1; blocksBelow <= 6; blocksBelow++) {

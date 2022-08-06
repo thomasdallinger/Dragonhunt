@@ -9,7 +9,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 
 public class PositionCommand implements CommandExecutor {
     public static HashMap<Player, List<Position>> positions = new HashMap<>();
@@ -35,7 +38,7 @@ public class PositionCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 0 || args.length > 1) {
+        if (args.length != 1) {
             player.sendMessage(ChatColor.GREEN.toString()
                     + ChatColor.ITALIC + "Use /pos [name] to add a position.");
             return true;
@@ -49,13 +52,11 @@ public class PositionCommand implements CommandExecutor {
             return true;
         }
 
-        // first position
-        if (!positions.containsKey(player)) {
+        if (!positions.containsKey(player)) { // first position
             positions.put(player, Collections.singletonList(new Position(args[0], player.getLocation())));
-            // add another position
-        } else {
-            List<Position> updatedList = new ArrayList<>(positions.get(player));
-            updatedList.add(new Position(args[0], player.getLocation()));
+        } else { // another position
+            List<Position> updatedList = new ArrayList<>(positions.get(player)); // add all existing positions
+            updatedList.add(new Position(args[0], player.getLocation())); // add new position
 
             if (updatedList.size() > 15) {
                 player.sendMessage(ChatColor.RED

@@ -25,11 +25,10 @@ import java.util.List;
 public class BlockBreakListener implements Listener {
 
     // a list of all wood types currently in the game
-    protected static List<Material> woods = List.of(
-            Material.ACACIA_LOG, Material.BIRCH_LOG,
-            Material.DARK_OAK_LOG, Material.JUNGLE_LOG,
-            Material.OAK_LOG, Material.SPRUCE_LOG,
-            Material.CRIMSON_STEM, Material.WARPED_STEM);
+    public static List<Material> woods = List.of(
+            Material.ACACIA_LOG, Material.BIRCH_LOG, Material.DARK_OAK_LOG,
+            Material.JUNGLE_LOG, Material.OAK_LOG, Material.SPRUCE_LOG,
+            Material.MANGROVE_WOOD, Material.CRIMSON_STEM, Material.WARPED_STEM);
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
@@ -45,6 +44,7 @@ public class BlockBreakListener implements Listener {
                 player.sendMessage(ChatColor.RED + "You are not allowed to break "
                         + ChatColor.DARK_RED + ChatColor.BOLD + "OBSIDIAN"
                         + ChatColor.RED + " close to this Nether Portal!");
+                return;
             }
         }
 

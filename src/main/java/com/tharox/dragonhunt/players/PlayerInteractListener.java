@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.points.UpgradePoints;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.ChatColor;
@@ -40,6 +41,12 @@ public class PlayerInteractListener implements Listener {
                 if (block.getType() == Material.CHEST || block.getType() == Material.CHEST_MINECART) {
                     event.setCancelled(true);
                     block.setType(Material.ENDER_CHEST);
+                    return;
+                }
+
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK
+                        && BlockBreakListener.woods.contains(block.getType())) { // can not strip wood logs
+                    event.setCancelled(true);
                     return;
                 }
 

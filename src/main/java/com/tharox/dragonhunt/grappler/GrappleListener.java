@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.grappler;
 
 import com.tharox.dragonhunt.Main;
-import org.apache.commons.lang.Validate;
 import org.bukkit.*;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Player;
@@ -12,6 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import java.util.Objects;
 
 public class GrappleListener implements Listener {
 
@@ -62,7 +63,10 @@ public class GrappleListener implements Listener {
 
     private void drawLine(Location point1, Location point2, double space) {
         World world = point1.getWorld();
-        Validate.isTrue(point2.getWorld().equals(world), "Particles can not be drawn in different worlds.");
+
+        if (!Objects.equals(point2.getWorld(), world)) { // point2.getWorld().equals(world) produces a warning
+            return; // Particles can not be drawn in different worlds.
+        }
 
         double distance = point1.distance(point2);
 

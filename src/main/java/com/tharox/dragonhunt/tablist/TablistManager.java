@@ -15,7 +15,7 @@ public class TablistManager {
      * @param player player who receives the header and footer in the tablist
      */
     public void setPlayerList(Player player) {
-        player.setPlayerListHeaderFooter(Main.getPrefix(), "v.0.3 (Alpha)");
+        player.setPlayerListHeaderFooter(Main.getPrefix(), "v.0.4 (Alpha)");
     }
 
     /**

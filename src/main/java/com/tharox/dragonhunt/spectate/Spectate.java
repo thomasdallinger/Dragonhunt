@@ -69,6 +69,7 @@ public class Spectate {
             @Override
             public void run() {
                 if (duration[0] <= 0) {
+                    player.performCommand("pos Spectate" + (spectatesLeft.get(player) + 1));
                     player.teleport(Spectate.spectateLocation.get(player));
                     player.setGameMode(GameMode.SURVIVAL);
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);

@@ -56,7 +56,8 @@ public class PositionCommand implements CommandExecutor {
 
         // add a position
         if (args[0].length() > 20) {
-            player.sendMessage(ChatColor.RED + "Position name too long (max. length: 20 characters).");
+            player.sendMessage(ChatColor.RED
+                    + "Failed to create a position. Name too long (max. length: 20 characters).");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
@@ -66,7 +67,8 @@ public class PositionCommand implements CommandExecutor {
             // NOTE: % is just a split character
         } else { // another position
             if (positions.get(player).length() > 500) {
-                player.sendMessage(ChatColor.RED + "You have exceeded the positions limit.");
+                player.sendMessage(ChatColor.RED
+                        + "Failed to create a position. You have exceeded the positions limit.");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                 return true;
             }

@@ -12,6 +12,8 @@ import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class GameStart extends GameConfiguration {
@@ -128,6 +130,7 @@ public class GameStart extends GameConfiguration {
                 }
 
                 player.setGameMode(GameMode.SURVIVAL);
+                player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 600, 0));
                 player.sendMessage(Main.getPrefix() + ChatColor.GOLD + "Whoever kills the Enderdragon wins.");
                 player.sendMessage(Main.getPrefix() + ChatColor.RED + "Fall damage is disabled!");
                 player.sendMessage(Main.getPrefix() + ChatColor.GREEN + "Mark locations using "

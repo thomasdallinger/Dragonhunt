@@ -130,10 +130,8 @@ public class GameStart extends GameConfiguration {
                 player.setGameMode(GameMode.SURVIVAL);
                 player.sendMessage(Main.getPrefix() + ChatColor.GOLD + "Whoever kills the Enderdragon wins.");
                 player.sendMessage(Main.getPrefix() + ChatColor.RED + "Fall damage is disabled!");
-                player.sendMessage(Main.getPrefix() + ChatColor.GREEN + "Mark positions using "
+                player.sendMessage(Main.getPrefix() + ChatColor.GREEN + "Mark locations using "
                         + ChatColor.DARK_GREEN + "/pos [name]" + ChatColor.GREEN + ".");
-                player.sendMessage(Main.getPrefix() + ChatColor.GREEN + "List your created positions using "
-                        + ChatColor.DARK_GREEN + "/pos" + ChatColor.GREEN + ".");
             }
         }
     }

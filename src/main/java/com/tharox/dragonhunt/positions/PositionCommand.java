@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.positions;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.timer.Timer;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -10,10 +9,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class PositionCommand implements CommandExecutor {
-    public HashMap<Player, String> positions = new HashMap<>();
+    public static HashMap<Player, List<Position>> positions = new HashMap<>();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -30,27 +29,15 @@ public class PositionCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length > 1) {
-            player.sendMessage(ChatColor.GREEN.toString()
-                    + ChatColor.ITALIC + "Use /pos [name] to add a position.");
+        if (player.getWorld().getName().equals("world_the_end")) {
+            player.sendMessage(ChatColor.RED + "This feature is disabled in the End.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
 
-        // print all positions
-        if (args.length == 0) {
-            player.sendMessage(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "YOUR POSITIONS:");
-
-            if (positions.containsKey(player)) { // list of all created positions
-                for (String position : positions.get(player).split(";")) {
-                    String[] nameAndLocation = position.split("%");
-                    player.sendMessage(ChatColor.DARK_GREEN + nameAndLocation[0] + ": "
-                            + ChatColor.GREEN + nameAndLocation[1]);
-                }
-            } else { // no positions where created
-                player.sendMessage(ChatColor.GREEN.toString()
-                        + ChatColor.ITALIC + "Use /pos [name] to add a position.");
-            }
-
+        if (args.length == 0 || args.length > 1) {
+            player.sendMessage(ChatColor.GREEN.toString()
+                    + ChatColor.ITALIC + "Use /pos [name] to add a position.");
             return true;
         }
 
@@ -62,19 +49,22 @@ public class PositionCommand implements CommandExecutor {
             return true;
         }
 
-        if (!positions.containsKey(player)) { // first position
-            positions.put(player, args[0] + "%" + DbValues.locationToString(player.getLocation()));
-            // NOTE: % is just a split character
-        } else { // another position
-            if (positions.get(player).length() > 500) {
+        // first position
+        if (!positions.containsKey(player)) {
+            positions.put(player, Collections.singletonList(new Position(args[0], player.getLocation())));
+            // add another position
+        } else {
+            List<Position> updatedList = new ArrayList<>(positions.get(player));
+            updatedList.add(new Position(args[0], player.getLocation()));
+
+            if (updatedList.size() > 15) {
                 player.sendMessage(ChatColor.RED
-                        + "Failed to create a position. You have exceeded the positions limit.");
+                        + "Failed to create a position. You have exceeded the limit of 15 positions.");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                 return true;
             }
 
-            positions.put(player, positions.get(player) + ";"
-                    + args[0] + "%" + DbValues.locationToString(player.getLocation()));
+            positions.put(player, updatedList);
         }
 
         player.sendMessage(ChatColor.GREEN + "Position "

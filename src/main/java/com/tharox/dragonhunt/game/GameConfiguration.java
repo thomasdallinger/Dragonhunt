@@ -88,7 +88,7 @@ public class GameConfiguration {
                     new ItemStack(Material.DIAMOND)));
 
             // set default TRACKER values, nobody is tracked when the player receives the TRACKER
-            Main.getInstance().getTracker().playerTracksStructure.put(player, null);
+            Main.getInstance().getTracker().playerTracksName.put(player, null);
             Main.getInstance().getTracker().playerTracksIndex.put(player, 0);
         }
     }

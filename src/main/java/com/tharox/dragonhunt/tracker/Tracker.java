@@ -13,12 +13,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.generator.structure.Structure;
+import org.bukkit.generator.structure.StructureType;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.StructureSearchResult;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -55,7 +58,24 @@ public class Tracker implements Listener {
 
         LinkedList<String> structureList = new LinkedList<>();
         LinkedList<Location> locationList = new LinkedList<>();
-        addStructureLocationsToLists(player, structureList, locationList);
+
+        if (world.getName().equals("world")) {
+            addStructureTypeToLists(player, StructureType.SHIPWRECK, "Shipwreck", structureList, locationList);
+            addStructureToLists(player, Structure.ANCIENT_CITY, "Ancient City", structureList, locationList);
+            addStructureToLists(player, Structure.MINESHAFT, "Mineshaft", structureList, locationList);
+
+        } else if (world.getName().equals("world_nether")) {
+            addStructureToLists(player, Structure.FORTRESS, "Fortress", structureList, locationList);
+            addStructureToLists(player, Structure.BASTION_REMNANT, "Bastion", structureList, locationList);
+
+            if (GameState.firstNetherEntry != null) {
+                structureList.add("Nether Portal");
+                locationList.add(GameState.firstNetherEntry);
+            }
+        }
+
+        // locate a Ruined Portal in the OVERWORLD and the NETHER (Tracker disabled in the End)
+        addStructureTypeToLists(player, StructureType.RUINED_PORTAL, "Ruined Portal", structureList, locationList);
 
         if (e.equals(EquipmentSlot.HAND)
                 && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
@@ -70,28 +90,28 @@ public class Tracker implements Listener {
                     player.setSneaking(false);
                 }
 
+                index++;    // switch the located structure / position (if sneaking)
+
                 if (player.isSneaking()) {
-                    index++;    // switch the located position
-                    if (index > PositionCommand.positions.get(player).size() - 1) {
+                    if (index > PositionCommand.positions.get(player).size() - 1)
                         index = 0;
-                    }
 
                     playerTracksName.put(player, "[POS] " + PositionCommand.positions.get(player).get(index).getName());
                     playerTracksLocation.put(player, PositionCommand.positions.get(player).get(index).getLocation());
+                    player.sendMessage(ChatColor.WHITE + "Tracking " + ChatColor.DARK_GREEN.toString()
+                            + ChatColor.BOLD + playerTracksName.get(player).substring(6).toUpperCase()
+                            + ChatColor.WHITE + ".");
                 } else {
-                    index++;    // switch the located structure
-                    if (index > locationList.size() - 1) {
+                    if (index > locationList.size() - 1)
                         index = 0;
-                    }
 
                     playerTracksName.put(player, structureList.get(index));
                     playerTracksLocation.put(player, locationList.get(index));
+                    player.sendMessage(ChatColor.WHITE + "Tracking " + ChatColor.GOLD.toString()
+                            + ChatColor.BOLD + playerTracksName.get(player).toUpperCase() + ChatColor.WHITE + ".");
                 }
 
                 playerTracksIndex.replace(player, index);
-
-                player.sendMessage(ChatColor.WHITE + "Tracking " + ChatColor.GOLD.toString()
-                        + ChatColor.BOLD + playerTracksName.get(player).toUpperCase() + ChatColor.WHITE + ".");
             }
         }
 
@@ -126,14 +146,20 @@ public class Tracker implements Listener {
                 if (trackedObject == null) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
                             ChatColor.GREEN.toString() + ChatColor.BOLD
-                                    + "RIGHT-CLICK: " + ChatColor.WHITE + "Structure "
+                                    + "RIGHT-CLICK: " + ChatColor.WHITE + "Structure, "
                                     + ChatColor.GREEN.toString() + ChatColor.BOLD
                                     + "SHIFT + RIGHT-CLICK: " + ChatColor.WHITE + "Position"));
                     return;
                 }
 
-                trackedObjectName = ChatColor.GOLD.toString() + ChatColor.BOLD + trackedObject.toUpperCase()
-                        + ChatColor.DARK_GRAY + " » ";
+                if (trackedObject.contains("[POS]")) {
+                    trackedObjectName = ChatColor.DARK_GREEN.toString() + ChatColor.BOLD
+                            + trackedObject.substring(6).toUpperCase() + ChatColor.DARK_GRAY + " » ";
+                } else {
+                    trackedObjectName = ChatColor.GOLD.toString() + ChatColor.BOLD + trackedObject.toUpperCase()
+                            + ChatColor.DARK_GRAY + " » ";
+                }
+
                 distance = (int) player.getLocation().distance(trackedLocation);
 
                 if (distance < 100) {
@@ -179,38 +205,36 @@ public class Tracker implements Listener {
         }.runTaskTimer(Main.getInstance(), 20, 20);
     }
 
-    protected void addStructureLocationsToLists(
-            Player player, LinkedList<String> structureList, LinkedList<Location> locationList) {
-        World world = player.getWorld();
+    /**
+     * Finds a specific structure and adds its name and location to the appropriate lists.
+     */
+    protected void addStructureToLists(
+            Player player, Structure structure, String structureName,
+            LinkedList<String> structureList, LinkedList<Location> locationList) {
+        StructureSearchResult structureSearchResult;
 
-        if (world.getName().equals("world")) {
-            structureList.add("Village");
-            locationList.add(world.locateNearestStructure(player.getLocation(),
-                    StructureType.VILLAGE, 32, false));
-
-            structureList.add("Shipwreck");
-            locationList.add(world.locateNearestStructure(player.getLocation(),
-                    StructureType.SHIPWRECK, 32, false));
-
-        } else if (world.getName().equals("world_nether")) {
-            structureList.add("Fortress");
-            locationList.add(world.locateNearestStructure(player.getLocation(),
-                    StructureType.NETHER_FORTRESS, 32, false));
-
-            structureList.add("Bastion");
-            locationList.add(world.locateNearestStructure(player.getLocation(),
-                    StructureType.BASTION_REMNANT, 32, false));
-
-            if (GameState.firstNetherEntry != null) {
-                structureList.add("Nether Portal");
-                locationList.add(GameState.firstNetherEntry);
-            }
+        structureSearchResult = player.getWorld().locateNearestStructure(
+                player.getLocation(), structure, 32, false);
+        if (structureSearchResult != null) {
+            structureList.add(structureName);
+            locationList.add(structureSearchResult.getLocation());
         }
+    }
 
-        // locate a Ruined Portal in both dimensions
-        structureList.add("Ruined Portal");
-        locationList.add(world.locateNearestStructure(player.getLocation(),
-                StructureType.RUINED_PORTAL, 32, false));
+    /**
+     * Finds a specific structure type and adds its name and location to the appropriate lists.
+     */
+    protected void addStructureTypeToLists(
+            Player player, StructureType structureType, String structureName,
+            LinkedList<String> structureList, LinkedList<Location> locationList) {
+        StructureSearchResult structureSearchResult;
+
+        structureSearchResult = player.getWorld().locateNearestStructure(
+                player.getLocation(), structureType, 32, false);
+        if (structureSearchResult != null) {
+            structureList.add(structureName);
+            locationList.add(structureSearchResult.getLocation());
+        }
     }
 
     public ItemStack givePlayerTracker() {

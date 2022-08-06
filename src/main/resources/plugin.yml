@@ -13,4 +13,4 @@ commands:
   spec:
     description: Spectate ability.
   pos:
-    description: Add a position or get a list of all created positions.
+    description: Mark a location.

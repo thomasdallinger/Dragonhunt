@@ -125,17 +125,24 @@ public class EnchantmentUpgrades {
 
                     // Armor
                     ItemStack[] armor = player.getInventory().getArmorContents();
+                    ItemStack chestplate = player.getInventory().getChestplate();
+                    ItemStack boots = player.getInventory().getBoots();
+
                     for (ItemStack item : armor) {
                         if (item != null) {
                             if (Protection.get(player) > 1)
                                 item.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, Protection.get(player) - 1);
-
-                            if (Thorns.get(player) > 1)
-                                item.addUnsafeEnchantment(Enchantment.THORNS, Thorns.get(player) - 1);
-
-                            if (FeatherFalling.get(player) > 1)
-                                item.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, FeatherFalling.get(player) - 1);
                         }
+                    }
+
+                    if (chestplate != null) {
+                        if (Thorns.get(player) > 1)
+                            chestplate.addUnsafeEnchantment(Enchantment.THORNS, Thorns.get(player) - 1);
+                    }
+
+                    if (boots != null) {
+                        if (FeatherFalling.get(player) > 1)
+                            boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, FeatherFalling.get(player) - 1);
                     }
                 }
             }

@@ -37,6 +37,9 @@ public class PlayerDeathListener implements Listener {
         //TODO: change DB implementation
         addPlayerDeath(player, event.getDeathMessage());
 
+        // strike a lightning effect at the player's death location
+        player.getWorld().strikeLightningEffect(player.getLocation());
+
         if (killer != null) {
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
             killer.giveExp(UpgradePoints.playerXP + XPUpgrade.MoreXP.get(killer) - 1);

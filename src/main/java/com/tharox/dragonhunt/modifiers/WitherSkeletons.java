@@ -1,0 +1,20 @@
+package com.tharox.dragonhunt.modifiers;
+
+@DragonhuntModifier
+public class WitherSkeletons extends Modifier {
+    public static String title = "Danger Inbound!";
+    public static String lore = "Every 2-5 minutes, a wither skeleton spawns at your location.";
+    public static boolean positive = false;
+    public static int impact = 2;
+    public static boolean active = false;
+
+    @Override
+    public void setActive(boolean active) {
+        WitherSkeletons.active = active;
+    }
+
+    @Override
+    public boolean isPositive() {
+        return positive;
+    }
+}

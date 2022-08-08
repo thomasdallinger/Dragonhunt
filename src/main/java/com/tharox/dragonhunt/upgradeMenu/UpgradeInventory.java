@@ -53,11 +53,13 @@ public class UpgradeInventory {
 
         Inventory inv;
         if (!category.equals("menu")) {
-            inv = Bukkit.createInventory(null, 27, ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "UPGRADES "
-                    + ChatColor.LIGHT_PURPLE + UpgradePoints.getPoints(player) + " Point(s)");
+            inv = Bukkit.createInventory(null, 27,
+                    ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "UPGRADES "
+                            + ChatColor.LIGHT_PURPLE + UpgradePoints.getPoints(player) + " Point(s)");
             addBackToMenuItem(inv);
         } else {
-            inv = Bukkit.createInventory(null, 27, ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "UPGRADES MENU");
+            inv = Bukkit.createInventory(null, 27,
+                    ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "UPGRADES MENU");
         }
 
         for (Item item : itemList) {

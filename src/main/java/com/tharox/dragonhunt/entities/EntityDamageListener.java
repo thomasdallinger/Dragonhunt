@@ -1,23 +1,25 @@
 package com.tharox.dragonhunt.entities;
 
+import com.tharox.dragonhunt.modifiers.FireWeakness;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
 
 public class EntityDamageListener implements Listener {
 
-    /**
-     * Grappler can't do damage.
-     */
     @EventHandler
     public void onEntityDamage(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
+        Entity entity = event.getEntity();
         AbstractArrow arrow; // includes normal Arrows, Tipped Arrows and Spectral Arrows
         ProjectileSource shooter;
         Player player;
@@ -32,12 +34,24 @@ public class EntityDamageListener implements Listener {
             player = (Player) shooter;
         } else return;
 
+        // Grappler can't do damage
         itemInMainHand = player.getInventory().getItemInMainHand();
         if (itemInMainHand.getItemMeta() == null) return;
         if (itemInMainHand.getItemMeta().getDisplayName().equals(
                 ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")) {
             arrow.remove();
             event.setCancelled(true);
+        }
+
+        // if a living entity is on fire and the modifier is active, let it glow and give weakness to the entity
+        if (FireWeakness.active) {
+            if (entity instanceof LivingEntity) {
+                LivingEntity livingEntity = (LivingEntity) entity;
+                if (livingEntity.getFireTicks() > 20) {
+                    livingEntity.setGlowing(true);
+                    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100, 0));
+                }
+            }
         }
     }
 }

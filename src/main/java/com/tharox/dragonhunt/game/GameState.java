@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GameState {
+    // modifier inventory can be closed after the first 15 seconds before the game starts
+    public static boolean modifierInventoryClose = false;
+
     // location of the first player entering the NETHER (null as long as no player enters the NETHER)
     public static Location firstNetherEntry = null;
 

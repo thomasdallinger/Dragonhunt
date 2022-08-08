@@ -17,7 +17,6 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Timer {
-
     private boolean running;
     private int time;
 
@@ -47,16 +46,17 @@ public class Timer {
     public void sendActionBar() {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-
-            //If the player has his Tracker in his main hand, the time wont get displayed
+            // if the player has his Tracker in his main hand, the time wont get displayed
             ItemStack item = player.getInventory().getItemInMainHand();
 
             if (item.getItemMeta() != null)
                 if (item.getItemMeta().getDisplayName().equals((ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")))
                     continue;
 
+            // if the player is in Spectator mode, the time wont get displayed (Spectate or after the game ended)
             if (player.getGameMode().equals(GameMode.SPECTATOR)) continue;
 
+            // display the time
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString() +
                     ChatColor.BOLD + DbValues.getTimestamp()));
         }
@@ -105,7 +105,7 @@ public class Timer {
                     }
                 }
 
-                //once the timer hits 50 minutes, the game will end and nobody won
+                // once the timer hits 50 minutes, the game will end without a winner
                 if (getTime() == 3000) {
                     new GameEnd();
                     setRunning(false);

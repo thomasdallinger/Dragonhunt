@@ -1,13 +1,19 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.game.GameState;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 public class PlayerInventoryListener implements Listener {
@@ -46,6 +52,19 @@ public class PlayerInventoryListener implements Listener {
                 event.setCancelled(true);
             }
         }
+    }
+
+    @EventHandler
+    public void onInventoryClose(InventoryCloseEvent event) {
+        Player player = (Player) event.getPlayer();
+        Inventory inv = event.getInventory();
+
+        if (!event.getView().getTitle().equals(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "MODIFIERS"))
+            return;
+        if (GameState.modifierInventoryClose) return;
+
+        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(),
+                () -> player.openInventory(inv), 1);
     }
 
     @EventHandler

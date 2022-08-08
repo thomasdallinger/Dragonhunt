@@ -3,6 +3,8 @@ package com.tharox.dragonhunt.game;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.elytra.ElytraSwapRunnable;
+import com.tharox.dragonhunt.modifiers.EndlessNight;
+import com.tharox.dragonhunt.modifiers.ModifierInventory;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import com.tharox.dragonhunt.upgrades.*;
@@ -17,9 +19,9 @@ import org.bukkit.potion.PotionEffectType;
 
 public class GameStart extends GameConfiguration {
     Timer timer = Main.getInstance().getTimer();
-    Countdown startCountdown;
-    Countdown elytraCountdown;
+    Countdown startCountdown, elytraCountdown;
     Countdown scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
+    ModifierInventory modifierInventory;
     BossBar bossBar;
     World overworld = Bukkit.getServer().getWorld("world");
     Location startLocation = new Location(overworld, 0, 200, 0);
@@ -30,10 +32,12 @@ public class GameStart extends GameConfiguration {
 
     public GameStart() {
         startCountdown = new Countdown(true, 20, this::onCountdown);
+        modifierInventory = new ModifierInventory();
         highestBlock = overworld.getHighestBlockAt(0, 0).getLocation();
 
         configureOverworld();
         configureNether();
+        configureEnd();
         configurePlayer();
         upgradeRegistration();
     }
@@ -96,7 +100,11 @@ public class GameStart extends GameConfiguration {
             Main.elytraInInventory();
             elytraCountdown = new Countdown(true, 30, this::onElytraCountdown);
 
-            overworld.setTime(0);
+            if (!EndlessNight.active)
+                overworld.setTime(0);
+            else
+                new PermanentNight();
+
             overworld.setGameRule(GameRule.FALL_DAMAGE, false);
             bossBar = Bukkit.createBossBar(ChatColor.GREEN + "Elytra removed in " + ChatColor.DARK_GREEN
                             + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.GREEN + " seconds",
@@ -104,21 +112,24 @@ public class GameStart extends GameConfiguration {
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (startCountdown.getTime() % 10 == 0 && startCountdown.getTime() > 0) {
+            if (startCountdown.getTime() == 20) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+                player.openInventory(modifierInventory.modifiers);
             }
             if (startCountdown.getTime() <= 5 && startCountdown.getTime() > 0) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
             }
 
-            if (startCountdown.getTime() > 5)
+            if (startCountdown.getTime() == 5) {
+                GameState.modifierInventoryClose = true;
+                player.closeInventory();
+            }
+
+            if (startCountdown.getTime() > 3)
                 player.sendTitle(ChatColor.GOLD.toString() + ChatColor.BOLD + startCountdown.getTime(),
                         "", 0, 20, 0);
-            else if (startCountdown.getTime() <= 5 && startCountdown.getTime() > 0)
+            else if (startCountdown.getTime() <= 3 && startCountdown.getTime() > 0)
                 player.sendTitle(ChatColor.RED.toString() + ChatColor.BOLD + startCountdown.getTime(),
-                        "", 0, 20, 0);
-            else
-                player.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "GO",
                         "", 0, 20, 0);
 
             if (startCountdown.getTime() == 0) {

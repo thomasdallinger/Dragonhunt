@@ -1,0 +1,20 @@
+package com.tharox.dragonhunt.modifiers;
+
+@DragonhuntModifier
+public class PowerfulMobs extends Modifier {
+    public static String title = "Powerful Mobs";
+    public static String lore = "Certain mobs have armor and weapons.";
+    public static boolean positive = false;
+    public static int impact = 3;
+    public static boolean active = false;
+
+    @Override
+    public void setActive(boolean active) {
+        PowerfulMobs.active = active;
+    }
+
+    @Override
+    public boolean isPositive() {
+        return positive;
+    }
+}

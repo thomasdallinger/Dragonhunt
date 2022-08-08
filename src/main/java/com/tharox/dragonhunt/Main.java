@@ -159,8 +159,8 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     }
 
     public static String getPrefix() {
-        return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "DRAGON"
-                + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "HUNT" + ChatColor.DARK_GRAY + "] "
+        return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "D"
+                + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "H" + ChatColor.DARK_GRAY + "] "
                 + ChatColor.WHITE;
     }
 

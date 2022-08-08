@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.modifiers.PowderOnly;
 import com.tharox.dragonhunt.points.UpgradePoints;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.Material;
@@ -66,7 +67,10 @@ public class EntityDeathListener implements Listener {
                 break;
             case "Blaze":
                 if (killer != null)
-                    GameState.putItemInInventory(killer, new ItemStack(Material.BLAZE_ROD));
+                    if (PowderOnly.active)
+                        GameState.putItemInInventory(killer, new ItemStack(Material.BLAZE_POWDER));
+                    else
+                        GameState.putItemInInventory(killer, new ItemStack(Material.BLAZE_ROD));
                 break;
             case "Piglin Brute":
             case "Wither Skeleton":

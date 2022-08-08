@@ -22,7 +22,7 @@ public class JoinListener implements Listener {
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        event.setJoinMessage(Main.getPrefix() + ChatColor.GREEN + player.getName() + ChatColor.WHITE + " has joined.");
+        event.setJoinMessage(null);
         player.teleport(new Location(Bukkit.getServer().getWorld("world"), 0, 15000, 0));
         player.setGameMode(GameMode.SPECTATOR);
 

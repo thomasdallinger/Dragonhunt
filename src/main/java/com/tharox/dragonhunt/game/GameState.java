@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -69,10 +70,10 @@ public class GameState {
 
             @Override
             public void run() {
-                Player[] players = (Player[]) Bukkit.getOnlinePlayers().toArray();
+                ArrayList<Player> playerList = new ArrayList<>(Bukkit.getOnlinePlayers());
 
                 // no more players to move or time is up
-                if (players.length == 0 || duration <= 0) {
+                if (playerList.size() == 0 || duration <= 0) {
                     DbValues.updateServerStatus();
                     Bukkit.getServer().shutdown();
                     this.cancel();
@@ -81,12 +82,13 @@ public class GameState {
                 // move one player at every odd second
                 // max. amount of players: 8
                 if (duration % 2 == 1) {
-                    players[0].playSound(players[0].getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+                    playerList.get(0).playSound(playerList.get(0).getLocation(),
+                            Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 
                     ByteArrayDataOutput out = ByteStreams.newDataOutput();
                     out.writeUTF("Connect");
                     out.writeUTF("lobby");
-                    players[0].sendPluginMessage(Main.getInstance(), "BungeeCord", out.toByteArray());
+                    playerList.get(0).sendPluginMessage(Main.getInstance(), "BungeeCord", out.toByteArray());
                 }
 
                 duration -= 1;

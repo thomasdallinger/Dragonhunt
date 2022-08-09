@@ -129,6 +129,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
                 if (timeLeft == 0) {
                     GameState.movePlayersToLobby();
+                    this.cancel();
                 }
 
                 if (Main.firstPlayerJoined && DbValues.playersAllowedToPlay.size() == 0) {

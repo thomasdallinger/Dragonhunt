@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.modifiers;
 @DragonhuntModifier
 public class FireWeakness extends Modifier {
     public static String title = "Weakened by Flames";
-    public static String lore = "Entities on fire are weakened.";
+    public static String lore = "Entities on fire are weakened and glow.";
     public static boolean positive = true;
     public static int impact = 2;
     public static boolean active = false;

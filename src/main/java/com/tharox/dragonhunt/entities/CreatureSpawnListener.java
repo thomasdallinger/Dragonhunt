@@ -60,7 +60,6 @@ public class CreatureSpawnListener implements Listener {
         // SKELETONS and WITHER SKELETONS are invulnerable if the modifier is active
         if (ImmuneSkeletons.active) {
             if (entity instanceof Skeleton || entity instanceof WitherSkeleton) {
-                entity.setGlowing(true);
                 entity.setInvulnerable(true);
             }
         }

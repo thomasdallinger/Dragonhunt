@@ -12,17 +12,20 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class PermanentEffect {
     PotionEffectType potionEffectType = null;
+    PotionEffectType potionEffectType2 = null;
 
     public PermanentEffect() {
         if (Heavyweight.active) {
             potionEffectType = PotionEffectType.INCREASE_DAMAGE;
         } else if (Lightweight.active) {
             potionEffectType = PotionEffectType.WEAKNESS;
-        } else if (HighSpeed.active) {
-            potionEffectType = PotionEffectType.SPEED;
         }
 
-        if (potionEffectType != null) {
+        if (HighSpeed.active) {
+            potionEffectType2 = PotionEffectType.SPEED;
+        }
+
+        if (potionEffectType != null || potionEffectType2 != null) {
             run();
         }
     }
@@ -32,7 +35,13 @@ public class PermanentEffect {
             @Override
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.addPotionEffect(new PotionEffect(potionEffectType, 40, 0));
+                    if (potionEffectType != null) {
+                        player.addPotionEffect(new PotionEffect(potionEffectType, 40, 0));
+                    }
+
+                    if (potionEffectType2 != null) {
+                        player.addPotionEffect(new PotionEffect(potionEffectType2, 40, 0));
+                    }
                 }
             }
         }.runTaskTimer(Main.getInstance(), 0, 20);

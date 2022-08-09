@@ -8,13 +8,16 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 public abstract class Modifier {
     public abstract void setActive(boolean active);
+
     public abstract boolean isPositive();
 
+    /**
+     * @return an item representing the modifier in the inventory shown to all players at the start of the game
+     */
     public static ItemStack getDisplayItem(String title, String lore, boolean positive, Integer impact,
                                            boolean active) {
         Material material;
@@ -47,17 +50,37 @@ public abstract class Modifier {
         return item;
     }
 
-    public static String displayModifierSelection(String title, boolean positive, Integer impact, boolean active) {
+    /**
+     * @return a formatted modifier title message
+     */
+    public static String displayModifierSelection(String title, boolean positive, boolean active) {
         String color;
 
-        if(!active) return null;
+        if (!active) return null;
 
-        if(positive) {
+        if (positive) {
             color = ChatColor.GREEN.toString();
         } else {
             color = ChatColor.RED.toString();
         }
 
-        return Main.getPrefix() + color + title + ChatColor.WHITE + " [" + impact + "]";
+        return color + title;
+    }
+
+    /**
+     * @return a formatted modifier lore message
+     */
+    public static String getLore(String lore, boolean positive, boolean active) {
+        String color;
+
+        if (!active) return null;
+
+        if (positive) {
+            color = ChatColor.GREEN.toString();
+        } else {
+            color = ChatColor.RED.toString();
+        }
+
+        return color + lore;
     }
 }

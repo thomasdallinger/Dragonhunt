@@ -22,18 +22,22 @@ public abstract class Modifier {
                                            boolean active) {
         String titleColor, loreColor;
 
-        if (positive) { // positive
-            titleColor = ChatColor.DARK_GREEN.toString() + ChatColor.BOLD;
-            loreColor = HexColor.GREEN.toString() + ChatColor.ITALIC;
-        } else { // negative
-            titleColor = ChatColor.DARK_RED.toString() + ChatColor.BOLD;
-            loreColor = HexColor.RED.toString() + ChatColor.ITALIC;
-        }
-
         ItemStack item = new ItemStack(material);
 
-        if (active)
+        if (active) {
             item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
+
+            if (positive) { // positive
+                titleColor = ChatColor.DARK_GREEN.toString() + ChatColor.BOLD;
+                loreColor = HexColor.GREEN.toString() + ChatColor.ITALIC;
+            } else { // negative
+                titleColor = ChatColor.DARK_RED.toString() + ChatColor.BOLD;
+                loreColor = HexColor.RED.toString() + ChatColor.ITALIC;
+            }
+        } else {
+            titleColor = ChatColor.DARK_GRAY.toString() + ChatColor.BOLD;
+            loreColor = ChatColor.GRAY.toString() + ChatColor.ITALIC;
+        }
 
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;

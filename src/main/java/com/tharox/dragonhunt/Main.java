@@ -3,6 +3,7 @@ package com.tharox.dragonhunt;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.commands.DateCommand;
 import com.tharox.dragonhunt.crafting.CustomRecipes;
 import com.tharox.dragonhunt.db.DbValues;
@@ -18,9 +19,9 @@ import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.players.*;
 import com.tharox.dragonhunt.points.LevelUp;
+import com.tharox.dragonhunt.points.UpgradePoints;
 import com.tharox.dragonhunt.positions.PositionCommand;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
-import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.spectate.SpectateCommand;
 import com.tharox.dragonhunt.tablist.TablistManager;
 import com.tharox.dragonhunt.timer.Countdown;
@@ -177,13 +178,11 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     }
 
     public static String getNamePrefix(Player player) {
-        return ChatColor.DARK_GRAY + "["
-                + ChatColor.GREEN.toString() + DbValues.getKills(player, true)
-                + ChatColor.DARK_GRAY + " | "
-                + ChatColor.GOLD + Spectate.spectatesLeft.get(player)
-                + ChatColor.DARK_GRAY + " | "
-                + ChatColor.LIGHT_PURPLE + player.getLevel()
-                + ChatColor.DARK_GRAY + "] ";
+        return ChatColor.WHITE.toString() + "☠ "
+                + HexColor.GOLD + DbValues.getKills(player, true)
+                + ChatColor.WHITE + " ⛃ "
+                + HexColor.HIGHLIGHT + UpgradePoints.getPoints(player)
+                + ChatColor.DARK_GRAY + " | ";
     }
 
     public static void elytraInInventory() {

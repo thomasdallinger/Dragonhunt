@@ -173,17 +173,12 @@ public class Tracker implements Listener {
                 }
 
                 // set the compass target (where to point the needle)
-                if (player.getWorld().getEnvironment() != World.Environment.NORMAL) {
-                    CompassMeta meta = (CompassMeta) player.getInventory().getItemInMainHand().getItemMeta();
+                CompassMeta meta = (CompassMeta) player.getInventory().getItemInMainHand().getItemMeta();
 
-                    if (meta != null) {
-                        meta.setLodestone(trackedLocation);
-                        meta.setLodestoneTracked(false); // no real lodestone present at that location
-                        player.getInventory().getItemInMainHand().setItemMeta(meta);
-                    }
-
-                } else {
-                    player.setCompassTarget(trackedLocation);
+                if (meta != null) {
+                    meta.setLodestone(trackedLocation);
+                    meta.setLodestoneTracked(false); // no real lodestone present at that location
+                    player.getInventory().getItemInMainHand().setItemMeta(meta);
                 }
 
             } catch (IllegalArgumentException ex) {

@@ -1,9 +1,12 @@
 package com.tharox.dragonhunt.modifiers;
 
+import org.bukkit.Material;
+
 @DragonhuntModifier
 public class EasyDifficulty extends Modifier {
     public static String title = "Difficulty: Easy";
     public static String lore = "Low hunger points depletion, less mobs spawns, weak mobs.";
+    public static Material material = Material.GREEN_CONCRETE;
     public static boolean positive = true;
     public static int impact = 2;
     public static boolean active = false;

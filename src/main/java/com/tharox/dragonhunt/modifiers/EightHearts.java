@@ -1,9 +1,12 @@
 package com.tharox.dragonhunt.modifiers;
 
+import org.bukkit.Material;
+
 @DragonhuntModifier
 public class EightHearts extends Modifier {
     public static String title = "8 Hearts";
     public static String lore = "All players only have 8 hearts.";
+    public static Material material = Material.BARRIER;
     public static boolean positive = false;
     public static int impact = 3;
     public static boolean active = false;

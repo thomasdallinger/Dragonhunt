@@ -1,9 +1,5 @@
 package com.tharox.dragonhunt.modifiers;
 
-import com.tharox.dragonhunt.Main;
-import org.bukkit.ChatColor;
-import org.checkerframework.checker.units.qual.C;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -32,8 +28,6 @@ public class ModifierSelection {
         } else {
             negative++;
         }
-
-
 
         // pos pos -> re-roll, 1 1, neg neg
         do {

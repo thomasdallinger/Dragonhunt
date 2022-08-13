@@ -1,9 +1,12 @@
 package com.tharox.dragonhunt.modifiers;
 
+import org.bukkit.Material;
+
 @DragonhuntModifier
 public class Diamonds extends Modifier {
     public static String title = "Diamonds, Diamonds, Diamonds!";
     public static String lore = "Iron, Gold and Copper Ores drop Diamonds.";
+    public static Material material = Material.DIAMOND;
     public static boolean positive = true;
     public static int impact = 3;
     public static boolean active = false;

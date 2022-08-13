@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.modifiers;
 import com.tharox.dragonhunt.Main;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.reflections.Reflections;
@@ -34,8 +35,8 @@ public class ModifierInventory {
                                     Modifier.getDisplayItem(
                                             (String) modifierClass.getField("title").get(null),
                                             (String) modifierClass.getField("lore").get(null),
+                                            (Material) modifierClass.getField("material").get(null),
                                             (Boolean) modifierClass.getField("positive").get(null),
-                                            (Integer) modifierClass.getField("impact").get(null),
                                             (Boolean) modifierClass.getField("active").get(null)));
                             // get(null) because static
 

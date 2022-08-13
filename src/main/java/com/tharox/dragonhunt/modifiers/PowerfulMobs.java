@@ -1,9 +1,12 @@
 package com.tharox.dragonhunt.modifiers;
 
+import org.bukkit.Material;
+
 @DragonhuntModifier
 public class PowerfulMobs extends Modifier {
     public static String title = "Powerful Mobs";
     public static String lore = "Certain mobs have armor and weapons.";
+    public static Material material = Material.IRON_AXE;
     public static boolean positive = false;
     public static int impact = 3;
     public static boolean active = false;

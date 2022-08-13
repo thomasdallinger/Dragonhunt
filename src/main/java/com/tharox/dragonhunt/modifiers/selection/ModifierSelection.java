@@ -14,11 +14,11 @@ public class ModifierSelection {
     int negative = 0; // needs to be 2 after modifier selection
 
     public ModifierSelection() {
-        lowImpact.addAll(Arrays.asList(
-                new HighSpeed(), new ExplosiveCreepers(), new CaveSpiders(), new PowderOnly(), new EndlessNight()));
+        lowImpact.addAll(Arrays.asList(new HighSpeed(), new ExplosiveCreepers(), new CaveSpiders(), new PowderOnly(),
+                new EndlessNight()));
         mediumImpact.addAll(Arrays.asList(new FireWeakness(), new EasyDifficulty(), new WitherSkeletons(),
                 new ImmuneSkeletons(), new HardDifficulty()));
-        highImpact.addAll(Arrays.asList(new Heavyweight(), new Diamonds(), new EightHearts(), new Lightweight(),
+        highImpact.addAll(Arrays.asList(new Heavyweight(), new Diamonds(), new EightHearts(), new FireMobs(),
                 new PowerfulMobs()));
 
         Random rand = new Random();

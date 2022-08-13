@@ -4,7 +4,7 @@ import org.bukkit.Material;
 
 @DragonhuntModifier
 public class FireWeakness extends Modifier {
-    public static String title = "Weakened by Flames";
+    public static String title = "Weakened By Flames";
     public static String lore = "Entities on fire are weakened and glow.";
     public static Material material = Material.FIRE_CHARGE;
     public static boolean positive = true;

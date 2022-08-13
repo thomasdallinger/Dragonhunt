@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.modifiers.classes.Heavyweight;
 import com.tharox.dragonhunt.modifiers.classes.HighSpeed;
-import com.tharox.dragonhunt.modifiers.classes.Lightweight;
+import com.tharox.dragonhunt.modifiers.classes.FireMobs;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -17,8 +17,6 @@ public class PermanentEffect {
     public PermanentEffect() {
         if (Heavyweight.active) {
             potionEffectType = PotionEffectType.INCREASE_DAMAGE;
-        } else if (Lightweight.active) {
-            potionEffectType = PotionEffectType.WEAKNESS;
         }
 
         if (HighSpeed.active) {

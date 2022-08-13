@@ -40,8 +40,11 @@ public class JoinListener implements Listener {
 
     private void checkIfGameCanStart() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            // if a player joining is not allowed to play, send the player back to the lobby
-            if (!DbValues.playersAllowedToPlay.contains(player.getName())) {
+            // if a player joining is not allowed to play
+            // or is trying to rejoin after the game already started,
+            // send the player back to the lobby
+            if (!DbValues.playersAllowedToPlay.contains(player.getName())
+                    || Main.getInstance().getTimer().isRunning()) {
                 ByteArrayDataOutput out = ByteStreams.newDataOutput();
                 out.writeUTF("Connect");
                 out.writeUTF("lobby");

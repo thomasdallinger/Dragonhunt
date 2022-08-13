@@ -39,6 +39,7 @@ public abstract class Modifier {
         if (meta == null) return null;
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.setDisplayName(titleColor + title);
         meta.setLore(Collections.singletonList(loreColor + lore));
 

@@ -1,9 +1,10 @@
-package com.tharox.dragonhunt.upgradeMenu;
+package com.tharox.dragonhunt.shop;
 
 import com.tharox.dragonhunt.coins.Coins;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.upgrades.Item;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -18,12 +19,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UpgradeInventory {
+public class ShopInventory {
 
     public Inventory menu, weapon, bow, crossbow, arrow, tool, armor, food, resource, xp;
     public static final HashMap<String, Integer> upgradeCost = new HashMap<>();
 
-    public UpgradeInventory(FileConfiguration config, Player player) {
+    public ShopInventory(FileConfiguration config, Player player) {
         menu = createInventory(config, "menu", player);
         weapon = createInventory(config, "weapon", player);
         bow = createInventory(config, "bow", player);
@@ -54,12 +55,12 @@ public class UpgradeInventory {
         Inventory inv;
         if (!category.equals("menu")) {
             inv = Bukkit.createInventory(null, 27,
-                    ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "UPGRADES "
-                            + ChatColor.LIGHT_PURPLE + Coins.getCoins(player) + " Coin(s)");
+                    HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "SHOP "
+                            + ChatColor.LIGHT_PURPLE + Coins.getCoins(player) + " ⛃");
             addBackToMenuItem(inv);
         } else {
             inv = Bukkit.createInventory(null, 27,
-                    ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "UPGRADES MENU");
+                    HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "SHOP MENU");
         }
 
         for (Item item : itemList) {

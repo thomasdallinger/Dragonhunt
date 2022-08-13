@@ -27,8 +27,8 @@ import com.tharox.dragonhunt.tablist.TablistManager;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import com.tharox.dragonhunt.tracker.Tracker;
-import com.tharox.dragonhunt.upgradeMenu.UpgradeCommand;
-import com.tharox.dragonhunt.upgradeMenu.UpgradeListener;
+import com.tharox.dragonhunt.shop.ShopCommand;
+import com.tharox.dragonhunt.shop.ShopListener;
 import com.tharox.dragonhunt.vehicles.VehicleListener;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
@@ -212,7 +212,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new GrappleListener(), this);
 
         pluginManager.registerEvents(new LevelUp(), this);
-        pluginManager.registerEvents(new UpgradeListener(), this);
+        pluginManager.registerEvents(new ShopListener(), this);
 
         pluginManager.registerEvents(new BlockBreakListener(), this);
         pluginManager.registerEvents(new BlockExplodeListener(), this);
@@ -240,7 +240,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
     private void commandRegistration() {
         getCommand("date").setExecutor(new DateCommand());
-        getCommand("upgrades").setExecutor(new UpgradeCommand());
+        getCommand("shop").setExecutor(new ShopCommand());
         getCommand("spec").setExecutor(new SpectateCommand());
         getCommand("pos").setExecutor(new PositionCommand());
     }

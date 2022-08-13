@@ -8,8 +8,8 @@ description: Dragonhunt by Tharox
 commands:
   date:
     description: Shows the current date.
-  upgrades:
-    description: Opens the upgrades menu.
+  shop:
+    description: Opens the shop menu.
   spec:
     description: Spectate ability.
   pos:

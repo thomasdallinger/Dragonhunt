@@ -1,10 +1,10 @@
 package com.tharox.dragonhunt.shop;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.*;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -107,15 +107,10 @@ public class ShopListener implements Listener {
         } else if (upgradeName.contains("Flame")) {
             EnchantmentUpgrades.Flame.put(player, EnchantmentUpgrades.Flame.get(player) + 1);
             purchaseUpgrade(player, upgradeName, "Bow");
-        } else if (upgradeName.contains("Piercing")) {
-            EnchantmentUpgrades.Piercing.put(player, EnchantmentUpgrades.Piercing.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Crossbow");
-        } else if (upgradeName.contains("Multishot")) {
-            EnchantmentUpgrades.Multishot.put(player, EnchantmentUpgrades.Multishot.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Crossbow");
-        } else if (upgradeName.contains("Quick Charge")) {
-            EnchantmentUpgrades.QuickCharge.put(player, EnchantmentUpgrades.QuickCharge.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Crossbow");
+        } else if (upgradeName.contains("/spec") || upgradeName.contains("/top") || upgradeName.contains("/respawn")) {
+            player.closeInventory();
+            Coins.removeCoins(player, ShopInventory.upgradeCost.get(upgradeName));
+            player.performCommand(upgradeName.substring(5)); // upgrade name without the color codes and "/"
         } else if (upgradeName.contains("More Arrows") || upgradeName.contains("Effect Arrows")) {
             new ArrowUpgrade(player, upgradeName);
             purchaseUpgrade(player, upgradeName, "Arrow");
@@ -166,8 +161,8 @@ public class ShopListener implements Listener {
             player.openInventory(shopInventory.weapon);
         else if (name.contains("Bow"))
             player.openInventory(shopInventory.bow);
-        else if (name.contains("Crossbow"))
-            player.openInventory(shopInventory.crossbow);
+        else if (name.contains("Mobility"))
+            player.openInventory(shopInventory.mobility);
         else if (name.contains("Arrow"))
             player.openInventory(shopInventory.arrow);
         else if (name.contains("Tool"))

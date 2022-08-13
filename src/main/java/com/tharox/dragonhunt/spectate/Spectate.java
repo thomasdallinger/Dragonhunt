@@ -39,7 +39,6 @@ public class Spectate {
 
         commandUsable.put(player, false);
         spectateLocation.put(player, player.getLocation());
-        Coins.removeCoins(player, 1);
         player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 1, 1);
 
         for (Player p : Bukkit.getOnlinePlayers()) {

@@ -16,11 +16,11 @@ menu:
     name: "» Bow Upgrades"
     lore: "Adds enchantments to ALL BOWS      in your inventory."
   2:
-    material: CROSSBOW
+    material: ENDER_PEARL
     amount: 1
     slot: 11
-    name: "» Crossbow Upgrades"
-    lore: "Adds enchantments to ALL CROSSBOWS in your inventory (excludes Grappler)."
+    name: "» Mobility"
+    lore: "Use /spec, /top or /respawn.        "
   3:
     material: ARROW
     amount: 1
@@ -32,7 +32,7 @@ menu:
     amount: 1
     slot: 13
     name: "» Tool Upgrades"
-    lore: "Adds enchantments to ALL AXES      and PICKAXES in your inventory."
+    lore: "Adds enchantments to ALL AXES,      PICKAXES, HOES and SHOVELS in your inventory."
   5:
     material: GOLDEN_CHESTPLATE
     amount: 1
@@ -44,13 +44,13 @@ menu:
     amount: 1
     slot: 15
     name: "» Food Upgrades"
-    lore: "Upgrade to better FOOD SOURCES     and receive DOUBLE or TRIPLE FOOD from Entities."
+    lore: "Upgrade to better FOOD SOURCES     and receive TRIPLE or QUADRUPLE FOOD from entities."
   7:
     material: IRON_INGOT
     amount: 1
     slot: 16
     name: "» Resource Upgrades"
-    lore: "Obtain DOUBLE, TRIPLE and even     QUADRUPLE resources."
+    lore: "Obtain DOUBLE, TRIPLE and even     QUADRUPLE RESOURCES from ores."
   8:
     material: EXPERIENCE_BOTTLE
     amount: 1
@@ -150,49 +150,28 @@ bow:
     name: "Flame"
     cost: 3
     lore: "Arrows set the target on fire."
-crossbow:
+mobility:
   0:
-    material: CROSSBOW
+    material: ENDER_EYE
     amount: 1
-    slot: 2
-    name: "Piercing I"
-    cost: 1
-    lore: "Arrows pass through multiple entities."
-  1:
-    material: CROSSBOW
-    amount: 2
     slot: 11
-    name: "Piercing II"
+    name: "/spec"
     cost: 1
-    lore: "Arrows pass through multiple entities."
+    lore: "Go into spectator mode for a short duration."
+  1:
+    material: STICKY_PISTON
+    amount: 1
+    slot: 13
+    name: "/top"
+    cost: 1
+    lore: "Get to the surface quickly."
   2:
-    material: CROSSBOW
-    amount: 3
-    slot: 20
-    name: "Piercing III"
-    cost: 1
-    lore: "Arrows pass through multiple entities."
-  3:
-    material: SPECTRAL_ARROW
+    material: RESPAWN_ANCHOR
     amount: 1
-    slot: 4
-    name: "Multishot"
-    cost: 2
-    lore: "Shoot 3 arrows in a spread at the cost of one."
-  4:
-    material: ARROW
-    amount: 1
-    slot: 6
-    name: "Quick Charge I"
-    cost: 1
-    lore: "Reduces draw time by 0.25 seconds."
-  5:
-    material: ARROW
-    amount: 2
     slot: 15
-    name: "Quick Charge II"
+    name: "/respawn"
     cost: 1
-    lore: "Reduces draw time by 0.5 seconds."
+    lore: "Sets a respawn point."
 arrow:
   0:
     material: ARROW
@@ -241,23 +220,23 @@ tool:
     material: GOLDEN_PICKAXE
     amount: 1
     slot: 3
-    name: "Efficiency I"
+    name: "Efficiency II"
     cost: 1
-    lore: "Increases mine speed by 2."
+    lore: "Increases mine speed by 5."
   1:
     material: GOLDEN_PICKAXE
     amount: 2
     slot: 12
-    name: "Efficiency II"
+    name: "Efficiency III"
     cost: 1
-    lore: "Increases mine speed by 5."
+    lore: "Increases mine speed by 10."
   2:
     material: GOLDEN_PICKAXE
     amount: 3
     slot: 21
-    name: "Efficiency III"
+    name: "Efficiency IV"
     cost: 2
-    lore: "Increases mine speed by 10."
+    lore: "Increases mine speed by 17."
   3:
     material: NETHERITE_PICKAXE
     amount: 1
@@ -350,14 +329,14 @@ food:
     slot: 5
     name: "Food Amount I"
     cost: 1
-    lore: "Double food from all sources."
+    lore: "Triple food from all sources."
   4:
     material: COOKED_BEEF
     amount: 2
     slot: 14
     name: "Food Amount II"
     cost: 1
-    lore: "Triple food from all sources."
+    lore: "Quadruple food from all sources."
 resource:
   0:
     material: DIAMOND

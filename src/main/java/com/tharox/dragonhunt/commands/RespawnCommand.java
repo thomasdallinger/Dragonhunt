@@ -23,7 +23,6 @@ public class RespawnCommand extends CommandErrors implements CommandExecutor {
 
         player.setBedSpawnLocation(player.getLocation(), true);
         player.sendMessage(HexColor.GREEN + "Respawn point set.");
-        Coins.removeCoins(player, 1);
 
         return false;
     }

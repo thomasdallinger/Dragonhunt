@@ -36,7 +36,6 @@ public class TopCommand extends CommandErrors implements CommandExecutor {
 
         player.teleport(new Location(world, x, world.getHighestBlockYAt((int) x, (int) z), z));
         player.sendMessage(HexColor.GREEN + "Whoosh.");
-        Coins.removeCoins(player, 1);
 
         return false;
     }

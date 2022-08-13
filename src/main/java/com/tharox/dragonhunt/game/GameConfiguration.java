@@ -124,7 +124,7 @@ public class GameConfiguration {
 
             // every player starts with the base items for food and resources
             // the item and amount can be upgraded using FOOD or RESOURCE UPGRADES respectively
-            GameState.food.put(player, new ItemStack(Material.COOKED_RABBIT));
+            GameState.food.put(player, new ItemStack(Material.COOKED_RABBIT, 2));
 
             // diamonds drop from IRON ORES, GOLD ORES and COPPER ORES too if the modifier is active
             if (Diamonds.active) {

@@ -39,9 +39,10 @@ public class FoodUpgrade extends ItemUpgrade {
 
             if (FoodSource.get(player) <= 3)
                 FoodSource.put(player, FoodSource.get(player) + 1);
+
         } else if (upgrade.contains("Food Amount")) {
-            // level 1 = double food, level 2 = triple food
-            GameState.food.put(player, new ItemStack(GameState.food.get(player).getType(), level + 1));
+            // level 1 = triple food, level 2 = quadruple food
+            GameState.food.put(player, new ItemStack(GameState.food.get(player).getType(), level + 2));
 
             if (FoodAmount.get(player) <= 2)
                 FoodAmount.put(player, FoodAmount.get(player) + 1);

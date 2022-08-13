@@ -21,14 +21,14 @@ import java.util.List;
 
 public class ShopInventory {
 
-    public Inventory menu, weapon, bow, crossbow, arrow, tool, armor, food, resource, xp;
+    public Inventory menu, weapon, bow, mobility, arrow, tool, armor, food, resource, xp;
     public static final HashMap<String, Integer> upgradeCost = new HashMap<>();
 
     public ShopInventory(FileConfiguration config, Player player) {
         menu = createInventory(config, "menu", player);
         weapon = createInventory(config, "weapon", player);
         bow = createInventory(config, "bow", player);
-        crossbow = createInventory(config, "crossbow", player);
+        mobility = createInventory(config, "mobility", player);
         arrow = createInventory(config, "arrow", player);
         tool = createInventory(config, "tool", player);
         armor = createInventory(config, "armor", player);

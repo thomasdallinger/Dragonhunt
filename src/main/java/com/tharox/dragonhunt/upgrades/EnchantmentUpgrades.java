@@ -18,15 +18,15 @@ public class EnchantmentUpgrades {
 
     // a list of all weapons affected by the Weapon Upgrades
     protected static List<Material> weapons = List.of(
-            Material.IRON_SWORD, Material.DIAMOND_SWORD,
-            Material.NETHERITE_SWORD, Material.IRON_AXE,
-            Material.DIAMOND_AXE, Material.NETHERITE_AXE);
+            Material.IRON_SWORD, Material.DIAMOND_SWORD, Material.NETHERITE_SWORD,
+            Material.IRON_AXE, Material.DIAMOND_AXE, Material.NETHERITE_AXE);
 
     // a list of all tools affected by the Tool Upgrades
     protected static List<Material> tools = List.of(
-            Material.IRON_PICKAXE, Material.DIAMOND_PICKAXE,
-            Material.NETHERITE_PICKAXE, Material.IRON_AXE,
-            Material.DIAMOND_AXE, Material.NETHERITE_AXE);
+            Material.IRON_PICKAXE, Material.DIAMOND_PICKAXE, Material.NETHERITE_PICKAXE,
+            Material.IRON_AXE, Material.DIAMOND_AXE, Material.NETHERITE_AXE,
+            Material.IRON_HOE, Material.DIAMOND_HOE, Material.NETHERITE_HOE,
+            Material.IRON_SHOVEL, Material.DIAMOND_SHOVEL, Material.NETHERITE_SHOVEL);
 
     // Weapon Upgrades
     public static HashMap<Player, Integer> Sharpness = new HashMap<>();
@@ -37,11 +37,6 @@ public class EnchantmentUpgrades {
     public static HashMap<Player, Integer> Power = new HashMap<>();
     public static HashMap<Player, Integer> Punch = new HashMap<>();
     public static HashMap<Player, Integer> Flame = new HashMap<>();
-
-    // Crossbow Upgrades
-    public static HashMap<Player, Integer> Piercing = new HashMap<>();
-    public static HashMap<Player, Integer> Multishot = new HashMap<>();
-    public static HashMap<Player, Integer> QuickCharge = new HashMap<>();
 
     // Tool Upgrades
     public static HashMap<Player, Integer> Efficiency = new HashMap<>();
@@ -87,26 +82,10 @@ public class EnchantmentUpgrades {
                                     item.addEnchantment(Enchantment.ARROW_FIRE, Flame.get(player) - 1);
                             }
 
-                            // Crossbow
-                            if (item.getType().equals(Material.CROSSBOW)) {
-                                // do not enchant the Grappler
-                                if (item.getItemMeta() != null && item.getItemMeta().getDisplayName().equals(
-                                        ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")) continue;
-
-                                if (Piercing.get(player) > 1)
-                                    item.addEnchantment(Enchantment.PIERCING, Piercing.get(player) - 1);
-
-                                if (Multishot.get(player) > 1)
-                                    item.addEnchantment(Enchantment.MULTISHOT, Multishot.get(player) - 1);
-
-                                if (QuickCharge.get(player) > 1)
-                                    item.addEnchantment(Enchantment.QUICK_CHARGE, QuickCharge.get(player) - 1);
-                            }
-
                             // Tools
                             if (tools.contains(item.getType())) {
                                 if (Efficiency.get(player) > 1)
-                                    item.addEnchantment(Enchantment.DIG_SPEED, Efficiency.get(player) - 1);
+                                    item.addEnchantment(Enchantment.DIG_SPEED, Efficiency.get(player));
 
                                 if (Unbreakable.get(player) > 1) {
                                     ItemMeta meta = item.getItemMeta();

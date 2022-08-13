@@ -23,12 +23,6 @@ public class CommandErrors {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
-
-        if (Coins.getCoins(player) == 0) {
-            player.sendMessage(ChatColor.RED + "You have no coins left.");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            return true;
-        }
         return false;
     }
 }

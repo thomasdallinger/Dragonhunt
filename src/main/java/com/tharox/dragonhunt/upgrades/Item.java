@@ -65,12 +65,12 @@ public class Item {
                 itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Punch.get(player));
             else if (NAME.contains("Flame"))
                 itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Flame.get(player));
-            else if (NAME.contains("Piercing"))
-                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Piercing.get(player));
-            else if (NAME.contains("Multishot"))
-                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Multishot.get(player));
-            else if (NAME.contains("Quick Charge"))
-                itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.QuickCharge.get(player));
+            else if (NAME.contains("/spec"))
+                itemStack = checkIfUnlocked(itemStack, 1); // only 1 level available
+            else if (NAME.contains("/top"))
+                itemStack = checkIfUnlocked(itemStack, 1);
+            else if (NAME.contains("/respawn"))
+                itemStack = checkIfUnlocked(itemStack, 1);
             else if (NAME.contains("More Arrows"))
                 itemStack = checkIfUnlocked(itemStack, ArrowUpgrade.MoreArrows.get(player));
             else if (NAME.contains("Effect Arrows"))

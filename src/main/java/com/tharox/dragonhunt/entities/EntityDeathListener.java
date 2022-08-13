@@ -48,7 +48,7 @@ public class EntityDeathListener implements Listener {
                 break;
             case "Skeleton":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.ARROW, 4));
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.CROSSBOW));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.BOW));
                 break;
             case "Piglin":
             case "Zombie":

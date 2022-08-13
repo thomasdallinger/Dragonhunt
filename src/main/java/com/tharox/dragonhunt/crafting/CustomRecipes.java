@@ -14,21 +14,33 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class CustomRecipes {
 
     public CustomRecipes() {
-        changePickaxeRecipe(new ItemStack(Material.IRON_PICKAXE), "wood_pickaxe", Material.OAK_PLANKS);
-        changePickaxeRecipe(new ItemStack(Material.IRON_PICKAXE), "gold_pickaxe", Material.GOLD_INGOT);
-        changePickaxeRecipe(new ItemStack(Material.IRON_PICKAXE), "stone_pickaxe", Material.COBBLESTONE);
+        ItemStack pickaxe = new ItemStack(Material.IRON_PICKAXE);
+        pickaxe.addEnchantment(Enchantment.DIG_SPEED, 1);
 
-        changeAxeRecipe(new ItemStack(Material.IRON_AXE), "wood_axe", Material.OAK_PLANKS);
-        changeAxeRecipe(new ItemStack(Material.IRON_AXE), "gold_axe", Material.GOLD_INGOT);
-        changeAxeRecipe(new ItemStack(Material.IRON_AXE), "stone_axe", Material.COBBLESTONE);
+        changePickaxeRecipe(pickaxe, "wood_pickaxe", Material.OAK_PLANKS);
+        changePickaxeRecipe(pickaxe, "gold_pickaxe", Material.GOLD_INGOT);
+        changePickaxeRecipe(pickaxe, "stone_pickaxe", Material.COBBLESTONE);
 
-        changeHoeRecipe(new ItemStack(Material.IRON_HOE), "wood_hoe", Material.OAK_PLANKS);
-        changeHoeRecipe(new ItemStack(Material.IRON_HOE), "gold_hoe", Material.GOLD_INGOT);
-        changeHoeRecipe(new ItemStack(Material.IRON_HOE), "stone_hoe", Material.COBBLESTONE);
+        ItemStack axe = new ItemStack(Material.IRON_AXE);
+        axe.addEnchantment(Enchantment.DIG_SPEED, 1);
 
-        changeShovelRecipe(new ItemStack(Material.IRON_SHOVEL), "wood_shovel", Material.OAK_PLANKS);
-        changeShovelRecipe(new ItemStack(Material.IRON_SHOVEL), "gold_shovel", Material.GOLD_INGOT);
-        changeShovelRecipe(new ItemStack(Material.IRON_SHOVEL), "stone_shovel", Material.COBBLESTONE);
+        changeAxeRecipe(axe, "wood_axe", Material.OAK_PLANKS);
+        changeAxeRecipe(axe, "gold_axe", Material.GOLD_INGOT);
+        changeAxeRecipe(axe, "stone_axe", Material.COBBLESTONE);
+
+        ItemStack hoe = new ItemStack(Material.IRON_HOE);
+        hoe.addEnchantment(Enchantment.DIG_SPEED, 1);
+
+        changeHoeRecipe(hoe, "wood_hoe", Material.OAK_PLANKS);
+        changeHoeRecipe(hoe, "gold_hoe", Material.GOLD_INGOT);
+        changeHoeRecipe(hoe, "stone_hoe", Material.COBBLESTONE);
+
+        ItemStack shovel = new ItemStack(Material.IRON_SHOVEL);
+        shovel.addEnchantment(Enchantment.DIG_SPEED, 1);
+
+        changeShovelRecipe(shovel, "wood_shovel", Material.OAK_PLANKS);
+        changeShovelRecipe(shovel, "gold_shovel", Material.GOLD_INGOT);
+        changeShovelRecipe(shovel, "stone_shovel", Material.COBBLESTONE);
 
         changeSwordRecipe(new ItemStack(Material.IRON_SWORD), "wood_sword", Material.OAK_PLANKS);
         changeSwordRecipe(new ItemStack(Material.IRON_SWORD), "gold_sword", Material.GOLD_INGOT);

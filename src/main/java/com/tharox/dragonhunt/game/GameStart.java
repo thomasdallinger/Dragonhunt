@@ -58,10 +58,6 @@ public class GameStart extends GameConfiguration {
             EnchantmentUpgrades.Power.put(player, 1);
             EnchantmentUpgrades.Punch.put(player, 1);
             EnchantmentUpgrades.Flame.put(player, 1);
-            // Crossbow
-            EnchantmentUpgrades.Piercing.put(player, 1);
-            EnchantmentUpgrades.Multishot.put(player, 1);
-            EnchantmentUpgrades.QuickCharge.put(player, 1);
             // Tool
             EnchantmentUpgrades.Efficiency.put(player, 1);
             EnchantmentUpgrades.Unbreakable.put(player, 1);
@@ -69,7 +65,6 @@ public class GameStart extends GameConfiguration {
             EnchantmentUpgrades.Protection.put(player, 1);
             EnchantmentUpgrades.Thorns.put(player, 1);
             EnchantmentUpgrades.FeatherFalling.put(player, 1);
-
             // Non-enchantment upgrades
             ArrowUpgrade.MoreArrows.put(player, 1);
             ArrowUpgrade.EffectArrows.put(player, 1);

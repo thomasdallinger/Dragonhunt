@@ -33,8 +33,7 @@ public class Grappler {
                 ChatColor.LIGHT_PURPLE.toString() + ChatColor.ITALIC + "but can be picked up.",
                 ChatColor.LIGHT_PURPLE.toString() + ChatColor.ITALIC + "Be aware of fall damage.",
                 "",
-                ChatColor.WHITE + "Max. arrow distance: " + ChatColor.RED + "20 blocks",
-                ChatColor.DARK_RED + "Not affected by Crossbow Upgrades."));
+                ChatColor.WHITE + "Max. arrow distance: " + ChatColor.RED + "20 blocks"));
         item.setItemMeta(meta);
 
         return item;

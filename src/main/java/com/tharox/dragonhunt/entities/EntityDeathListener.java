@@ -2,7 +2,7 @@ package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.modifiers.PowderOnly;
+import com.tharox.dragonhunt.modifiers.classes.PowderOnly;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.Material;

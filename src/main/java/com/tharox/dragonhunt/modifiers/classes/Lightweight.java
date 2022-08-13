@@ -1,19 +1,19 @@
-package com.tharox.dragonhunt.modifiers;
+package com.tharox.dragonhunt.modifiers.classes;
 
 import org.bukkit.Material;
 
 @DragonhuntModifier
-public class PowerfulMobs extends Modifier {
-    public static String title = "Powerful Mobs";
-    public static String lore = "Certain mobs have armor and weapons.";
-    public static Material material = Material.IRON_AXE;
+public class Lightweight extends Modifier {
+    public static String title = "Lightweight";
+    public static String lore = "All players have Weakness I permanently.";
+    public static Material material = Material.WOODEN_SWORD;
     public static boolean positive = false;
     public static int impact = 3;
     public static boolean active = false;
 
     @Override
     public void setActive(boolean active) {
-        PowerfulMobs.active = active;
+        Lightweight.active = active;
     }
 
     @Override

@@ -1,6 +1,8 @@
-package com.tharox.dragonhunt.modifiers;
+package com.tharox.dragonhunt.modifiers.selection;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.modifiers.classes.DragonhuntModifier;
+import com.tharox.dragonhunt.modifiers.classes.Modifier;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

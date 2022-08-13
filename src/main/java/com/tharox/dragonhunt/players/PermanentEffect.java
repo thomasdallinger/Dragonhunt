@@ -1,9 +1,9 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.modifiers.Heavyweight;
-import com.tharox.dragonhunt.modifiers.HighSpeed;
-import com.tharox.dragonhunt.modifiers.Lightweight;
+import com.tharox.dragonhunt.modifiers.classes.Heavyweight;
+import com.tharox.dragonhunt.modifiers.classes.HighSpeed;
+import com.tharox.dragonhunt.modifiers.classes.Lightweight;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;

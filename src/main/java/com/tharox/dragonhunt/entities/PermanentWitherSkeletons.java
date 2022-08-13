@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.modifiers.WitherSkeletons;
+import com.tharox.dragonhunt.modifiers.classes.WitherSkeletons;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.EntityType;

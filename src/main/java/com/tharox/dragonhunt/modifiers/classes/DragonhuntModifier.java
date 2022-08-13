@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.modifiers;
+package com.tharox.dragonhunt.modifiers.classes;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

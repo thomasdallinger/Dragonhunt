@@ -1,11 +1,12 @@
 package com.tharox.dragonhunt.entities;
 
-import com.tharox.dragonhunt.modifiers.CaveSpiders;
-import com.tharox.dragonhunt.modifiers.ExplosiveCreepers;
-import com.tharox.dragonhunt.modifiers.ImmuneSkeletons;
-import com.tharox.dragonhunt.modifiers.PowerfulMobs;
+import com.tharox.dragonhunt.modifiers.classes.CaveSpiders;
+import com.tharox.dragonhunt.modifiers.classes.ExplosiveCreepers;
+import com.tharox.dragonhunt.modifiers.classes.ImmuneSkeletons;
+import com.tharox.dragonhunt.modifiers.classes.PowerfulMobs;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -44,12 +45,21 @@ public class CreatureSpawnListener implements Listener {
         }
 
         if (PowerfulMobs.active) {
-            if (entity.getEquipment() != null) {
-                entity.getEquipment().setItemInMainHand(new ItemStack(Material.IRON_AXE, 1));
+            if (entity.getEquipment() != null) { // entity can have equipment
+                // armor
                 entity.getEquipment().setHelmet(new ItemStack(Material.GOLDEN_HELMET, 1));
                 entity.getEquipment().setChestplate(new ItemStack(Material.GOLDEN_CHESTPLATE, 1));
                 entity.getEquipment().setLeggings(new ItemStack(Material.GOLDEN_LEGGINGS, 1));
                 entity.getEquipment().setBoots(new ItemStack(Material.GOLDEN_BOOTS, 1));
+
+                //weapon
+                if (entity instanceof Skeleton) {
+                    ItemStack bow = new ItemStack(Material.BOW);
+                    bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
+                    entity.getEquipment().setItemInMainHand(bow);
+                } else {
+                    entity.getEquipment().setItemInMainHand(new ItemStack(Material.IRON_AXE, 1));
+                }
             }
 
             Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))

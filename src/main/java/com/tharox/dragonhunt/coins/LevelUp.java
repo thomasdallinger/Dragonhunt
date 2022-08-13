@@ -1,7 +1,8 @@
 package com.tharox.dragonhunt.coins;
 
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -18,17 +19,17 @@ public class LevelUp implements Listener {
         int level = event.getNewLevel();
 
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
-        player.sendTitle(ChatColor.AQUA + " ", ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "LEVEL "
+        player.sendTitle(ChatColor.AQUA + " ", HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "LEVEL "
                 + level, 5, 60, 5);
-        player.sendMessage(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "LEVEL UP REWARDS:");
+        player.sendMessage(HexColor.GREEN + "Level Up!");
 
         if (level % 5 == 0) {
-            player.sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + "+1"
-                    + ChatColor.GOLD + " Golden Apple");
+            player.sendMessage(HexColor.HIGHLIGHT + "\uD83C\uDF4F" + ChatColor.DARK_GRAY + " | "
+                    + HexColor.GREEN + "+1" + ChatColor.GRAY + " Golden Apple");
             GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE));
-            Coins.addCoins(player, 2); // extra coin
+            Coins.addCoins(player, 20); // extra coins
         } else {
-            Coins.addCoins(player, 1);
+            Coins.addCoins(player, 10);
         }
     }
 }

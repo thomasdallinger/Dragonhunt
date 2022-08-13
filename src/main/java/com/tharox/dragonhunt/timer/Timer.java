@@ -88,7 +88,7 @@ public class Timer {
                         else if (getTime() == 2400) {
                             player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 1);
                             player.getWorld().strikeLightningEffect(player.getLocation());
-                            Coins.addCoins(player, 3);
+                            Coins.addCoins(player, 30);
 
                             player.sendTitle(ChatColor.AQUA + " ", ChatColor.DARK_RED.toString()
                                     + ChatColor.BOLD + "SHOWDOWN", 5, 100, 5);

@@ -17,7 +17,7 @@ public class Item {
     private final int AMOUNT;
     private final int SLOT;
     public int cost;
-    private final String NAME;
+    public final String NAME;
     private final String LORE;
 
     public Item(ConfigurationSection section) {

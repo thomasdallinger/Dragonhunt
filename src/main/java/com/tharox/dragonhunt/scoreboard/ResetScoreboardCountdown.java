@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class ResetScoreboardCountdown {
     /**
-     * resets the scoreboard countdown and gives coins to all players once the countdown hits zero
+     * resets the scoreboard countdown and gives the same amount of coins to all players once the countdown hits zero
      */
     public static void countdownHitsZero(Countdown countdown) {
         new BukkitRunnable() {
@@ -21,7 +21,7 @@ public class ResetScoreboardCountdown {
                     countdown.setTime(300);
 
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        Coins.addCoins(player, 1);
+                        Coins.addCoins(player, 10);
                         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                     }
                 }

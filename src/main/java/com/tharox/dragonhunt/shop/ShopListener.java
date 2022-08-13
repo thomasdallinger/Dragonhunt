@@ -109,7 +109,8 @@ public class ShopListener implements Listener {
             purchaseUpgrade(player, upgradeName, "Bow");
         } else if (upgradeName.contains("/spec") || upgradeName.contains("/top") || upgradeName.contains("/respawn")) {
             player.closeInventory();
-            Coins.removeCoins(player, ShopInventory.upgradeCost.get(upgradeName));
+            // coins are removed when performing the command, not in the ShopListener,
+            // because players can directly use the commands without opening the shop
             player.performCommand(upgradeName.substring(5)); // upgrade name without the color codes and "/"
         } else if (upgradeName.contains("More Arrows") || upgradeName.contains("Effect Arrows")) {
             new ArrowUpgrade(player, upgradeName);

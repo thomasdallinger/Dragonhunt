@@ -4,14 +4,16 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.timer.Timer;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class TopCommand extends CommandErrors implements CommandExecutor {
+public class TopCommand extends CommandHelper implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player;
@@ -34,6 +36,13 @@ public class TopCommand extends CommandErrors implements CommandExecutor {
             return true;
         }
 
+        if (Coins.getCoins(player) < getCommandCost(Main.getInstance().getConfig(), "/top")) {
+            player.sendMessage(ChatColor.RED + "Not enough coins.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+            return true;
+        }
+
+        Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/top"));
         player.teleport(new Location(world, x, world.getHighestBlockYAt((int) x, (int) z), z));
         player.sendMessage(HexColor.GREEN + "Whoosh.");
 

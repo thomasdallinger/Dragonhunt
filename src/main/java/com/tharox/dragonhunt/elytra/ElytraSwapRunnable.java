@@ -19,15 +19,24 @@ public class ElytraSwapRunnable extends BukkitRunnable {
     private final HashMap<Player, Boolean> playerWasInAir = new HashMap<>();
 
     /**
-     * Checks if the player is at least 6 blocks above the ground.
+     * Checks if the player is at least 2 or 6 blocks above the ground.
      *
-     * @param p player to be checked if in the air
-     * @return true if the player is 6 blocks above the ground otherwise false
+     * @param player player to be checked if in the air
+     * @return true if the player is at least 2 blocks above the ground and was in the air,<br>
+     * true if the player is at least 6 blocks above the ground and was not in the air
      */
-    private boolean isPlayerNowInTheAir(Player p) {
-        for (int blocksBelow = 1; blocksBelow <= 6; blocksBelow++) {
-            if (p.getLocation().subtract(0, blocksBelow, 0).getBlock().getType() != Material.AIR) {
-                return false;
+    private boolean isPlayerNowInTheAir(Player player) {
+        if (playerWasInAir.get(player)) {
+            for (int blocksBelow = 1; blocksBelow <= 2; blocksBelow++) {
+                if (player.getLocation().subtract(0, blocksBelow, 0).getBlock().getType() != Material.AIR) {
+                    return false;
+                }
+            }
+        } else {
+            for (int blocksBelow = 1; blocksBelow <= 6; blocksBelow++) {
+                if (player.getLocation().subtract(0, blocksBelow, 0).getBlock().getType() != Material.AIR) {
+                    return false;
+                }
             }
         }
 
@@ -65,10 +74,15 @@ public class ElytraSwapRunnable extends BukkitRunnable {
                 playerWasInAir.put(player, true);
                 ItemStack chestplate = player.getInventory().getChestplate();
 
-                if (chestplate != null && chestplate.getType() == Material.ELYTRA)
+                if (chestplate != null) {
+                    if (chestplate.getType() == Material.ELYTRA) {
+                        playerChestplate.put(player, new ItemStack(Material.AIR));
+                    } else {
+                        playerChestplate.put(player, chestplate);
+                    }
+                } else {
                     playerChestplate.put(player, new ItemStack(Material.AIR));
-                else
-                    playerChestplate.put(player, chestplate);
+                }
 
                 player.getInventory().setChestplate(getUnbreakableElytra());
             }

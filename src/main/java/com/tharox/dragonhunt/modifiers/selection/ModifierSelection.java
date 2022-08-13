@@ -15,16 +15,10 @@ public class ModifierSelection {
 
     public ModifierSelection() {
         lowImpact.addAll(Arrays.asList(
-                //new HighSpeed(), new ExplosiveCreepers(), new CaveSpiders(), new PowderOnly(),
-                new EndlessNight()));
-        mediumImpact.addAll(Arrays.asList(
-                //new FireWeakness(),
-                new EasyDifficulty()
-                //, new WitherSkeletons(),
-                //new ImmuneSkeletons(), new HardDifficulty()
-        ));
-        highImpact.addAll(Arrays.asList(
-                //new Heavyweight(), new Diamonds(), new EightHearts(), new Lightweight(),
+                new HighSpeed(), new ExplosiveCreepers(), new CaveSpiders(), new PowderOnly(), new EndlessNight()));
+        mediumImpact.addAll(Arrays.asList(new FireWeakness(), new EasyDifficulty(), new WitherSkeletons(),
+                new ImmuneSkeletons(), new HardDifficulty()));
+        highImpact.addAll(Arrays.asList(new Heavyweight(), new Diamonds(), new EightHearts(), new Lightweight(),
                 new PowerfulMobs()));
 
         Random rand = new Random();

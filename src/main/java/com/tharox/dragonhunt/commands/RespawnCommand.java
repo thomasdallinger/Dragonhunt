@@ -4,7 +4,6 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.timer.Timer;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,14 +21,7 @@ public class RespawnCommand extends CommandHelper implements CommandExecutor {
         } else return true;
 
         if (checkIfValid(player, timer)) return true;
-
-        if (Coins.getCoins(player) < getCommandCost(Main.getInstance().getConfig(), "/respawn")) {
-            player.sendMessage(ChatColor.RED + "You don't have enough coins! Need "
-                    + (getCommandCost(Main.getInstance().getConfig(), "/respawn") - Coins.getCoins(player))
-                    + " more.");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            return true;
-        }
+        if (checkIfEnoughCoins(player, "/respawn")) return true;
 
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/respawn"));

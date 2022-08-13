@@ -36,6 +36,18 @@ public class CommandHelper {
         return false;
     }
 
+    protected boolean checkIfEnoughCoins(Player player, String itemName) {
+        if (Coins.getCoins(player) < getCommandCost(Main.getInstance().getConfig(), itemName)) {
+            player.sendMessage(ChatColor.RED + "You don't have enough coins! Need "
+                    + (getCommandCost(Main.getInstance().getConfig(), itemName) - Coins.getCoins(player))
+                    + " more.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+            return true;
+        }
+
+        return false;
+    }
+
     protected int getCommandCost(FileConfiguration config, String itemName) {
         ConfigurationSection itemsSection = config.getConfigurationSection("mobility");
         List<Item> itemList = new ArrayList<>();

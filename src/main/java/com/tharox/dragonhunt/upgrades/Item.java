@@ -1,6 +1,6 @@
 package com.tharox.dragonhunt.upgrades;
 
-import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.coins.Coins;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -116,7 +116,7 @@ public class Item {
                 itemMeta.setLore(Arrays.asList(
                         ChatColor.GREEN.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        ChatColor.WHITE.toString() + cost + " Upgrade Points",
+                        ChatColor.WHITE.toString() + cost + " Coins",
                         ChatColor.GREEN + "Unlocked!"
                 ));
                 break; // player has already bought the upgrade
@@ -124,29 +124,29 @@ public class Item {
                 itemMeta.setLore(Arrays.asList(
                         ChatColor.RED.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        ChatColor.WHITE.toString() + cost + " Upgrade Points",
+                        ChatColor.WHITE.toString() + cost + " Coins",
                         ChatColor.DARK_RED + "Purchase previous levels first!"
                 ));
                 break;
             }
 
-            // player has enough upgrade points to buy the upgrade
-            if (UpgradePoints.getPoints(player) >= cost) {
+            // player has enough coins to buy the upgrade
+            if (Coins.getCoins(player) >= cost) {
                 itemMeta.setLore(Arrays.asList(
                         ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        ChatColor.LIGHT_PURPLE.toString() + UpgradePoints.getPoints(player) +
-                                ChatColor.WHITE + " / " + cost + " Upgrade Points",
+                        ChatColor.LIGHT_PURPLE.toString() + Coins.getCoins(player) +
+                                ChatColor.WHITE + " / " + cost + " Coins",
                         ChatColor.GOLD + "Click to buy!"
                 ));
                 break;
-            } else { // player needs more upgrade points to buy the upgrade
+            } else { // player needs more coins to buy the upgrade
                 itemMeta.setLore(Arrays.asList(
                         ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        ChatColor.DARK_RED.toString() + UpgradePoints.getPoints(player) +
-                                ChatColor.WHITE + " / " + cost + " Upgrade Points",
-                        ChatColor.RED.toString() + (cost - UpgradePoints.getPoints(player)) + " Upgrade Point(s) missing!"
+                        ChatColor.DARK_RED.toString() + Coins.getCoins(player) +
+                                ChatColor.WHITE + " / " + cost + " Coins",
+                        ChatColor.RED.toString() + (cost - Coins.getCoins(player)) + " Coin(s) missing!"
                 ));
                 break;
             }

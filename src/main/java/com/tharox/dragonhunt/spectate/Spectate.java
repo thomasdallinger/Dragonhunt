@@ -1,6 +1,9 @@
 package com.tharox.dragonhunt.spectate;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.db.DatabaseExecutor;
+import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.coins.Coins;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
@@ -9,12 +12,13 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class Spectate {
-    public static HashMap<Player, Integer> spectatesLeft = new HashMap<>();
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
     public static HashMap<Player, Boolean> commandUsable = new HashMap<>();
 
@@ -31,8 +35,8 @@ public class Spectate {
         effects.add(new PotionEffect(PotionEffectType.JUMP, 40, -9));
 
         commandUsable.put(player, false);
-        spectatesLeft.put(player, spectatesLeft.get(player) - 1);
         spectateLocation.put(player, player.getLocation());
+        Coins.removeCoins(player, 1);
         player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 1, 1);
 
         for (Player p : Bukkit.getOnlinePlayers()) {
@@ -69,7 +73,7 @@ public class Spectate {
             @Override
             public void run() {
                 if (duration[0] <= 0) {
-                    player.performCommand("pos Spectate" + (spectatesLeft.get(player) + 1));
+                    player.performCommand("pos Spectate" + getSpectateAmount(player));
                     player.teleport(Spectate.spectateLocation.get(player));
                     player.setGameMode(GameMode.SURVIVAL);
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
@@ -84,5 +88,31 @@ public class Spectate {
             }
 
         }.runTaskTimer(Main.getInstance(), 20, 20);
+    }
+
+    /**
+     * @return the amount of spectates purchased by a player in this game
+     */
+    public static int getSpectateAmount(Player player) {
+        final int[] amount = {0};
+
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "SELECT COUNT(*) FROM Spectate WHERE GameID = '" + DbValues.getGameID() + "' " +
+                    "AND Player = '" + player.getName() + "'";
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            int columns = rs.getMetaData().getColumnCount();
+
+            while (rs.next()) {
+                for (int i = 1; i <= columns; i++) {
+                    amount[0] = rs.getInt(i);
+                }
+            }
+            rs.close();
+            stmt.close();
+        });
+
+        return amount[0];
     }
 }

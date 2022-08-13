@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.spectate;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.timer.Timer;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
@@ -35,8 +36,8 @@ public class SpectateCommand implements CommandExecutor {
             return true;
         }
 
-        if (Spectate.spectatesLeft.get(player) == 0) {
-            player.sendMessage(ChatColor.RED + "You have no Spectate Tokens left.");
+        if (Coins.getCoins(player) == 0) {
+            player.sendMessage(ChatColor.RED + "You have no coins left.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }

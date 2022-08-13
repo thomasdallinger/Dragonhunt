@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.upgradeMenu;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.*;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -66,10 +66,10 @@ public class UpgradeListener implements Listener {
         }
 
         // not enough points to purchase upgrade level
-        if (UpgradePoints.getPoints(player) < UpgradeInventory.upgradeCost.get(upgradeName)) {
+        if (Coins.getCoins(player) < UpgradeInventory.upgradeCost.get(upgradeName)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(ChatColor.RED + "You don't have enough points! Need "
-                    + (UpgradeInventory.upgradeCost.get(upgradeName) - UpgradePoints.getPoints(player)) + " more.");
+            player.sendMessage(ChatColor.RED + "You don't have enough coins! Need "
+                    + (UpgradeInventory.upgradeCost.get(upgradeName) - Coins.getCoins(player)) + " more.");
             return;
         }
 
@@ -153,7 +153,7 @@ public class UpgradeListener implements Listener {
      */
     private void purchaseUpgrade(Player player, String upgradeName, String inventory) {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        UpgradePoints.removePoints(player, UpgradeInventory.upgradeCost.get(upgradeName));
+        Coins.removeCoins(player, UpgradeInventory.upgradeCost.get(upgradeName));
 
         menuNavigation(player, inventory);
     }
@@ -185,7 +185,7 @@ public class UpgradeListener implements Listener {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO UpgradeAccess (GameID, Player, upgrade, pointsBefore, cost, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + upgradeName.substring(4) + "', '"
-                    + UpgradePoints.getPoints(player) + "', '" + UpgradeInventory.upgradeCost.get(upgradeName)
+                    + Coins.getCoins(player) + "', '" + UpgradeInventory.upgradeCost.get(upgradeName)
                     + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();

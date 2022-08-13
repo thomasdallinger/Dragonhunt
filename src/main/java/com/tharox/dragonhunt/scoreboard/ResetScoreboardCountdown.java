@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.Bukkit;
@@ -11,7 +11,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class ResetScoreboardCountdown {
     /**
-     * resets the scoreboard countdown and gives points to all players once the countdown hits zero
+     * resets the scoreboard countdown and gives coins to all players once the countdown hits zero
      */
     public static void countdownHitsZero(Countdown countdown) {
         new BukkitRunnable() {
@@ -21,7 +21,7 @@ public class ResetScoreboardCountdown {
                     countdown.setTime(300);
 
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        player.giveExp(UpgradePoints.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
+                        Coins.addCoins(player, 1);
                         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                     }
                 }

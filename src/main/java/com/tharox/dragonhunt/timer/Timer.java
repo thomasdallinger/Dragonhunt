@@ -4,7 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameEnd;
-import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.coins.Coins;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -88,7 +88,7 @@ public class Timer {
                         else if (getTime() == 2400) {
                             player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 1);
                             player.getWorld().strikeLightningEffect(player.getLocation());
-                            UpgradePoints.addPoints(player, 3);
+                            Coins.addCoins(player, 3);
 
                             player.sendTitle(ChatColor.AQUA + " ", ChatColor.DARK_RED.toString()
                                     + ChatColor.BOLD + "SHOWDOWN", 5, 100, 5);

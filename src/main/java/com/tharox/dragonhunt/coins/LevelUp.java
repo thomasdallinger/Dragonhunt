@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.points;
+package com.tharox.dragonhunt.coins;
 
 import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.ChatColor;
@@ -26,9 +26,9 @@ public class LevelUp implements Listener {
             player.sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + "+1"
                     + ChatColor.GOLD + " Golden Apple");
             GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE));
-            UpgradePoints.addPoints(player, 2); // extra Upgrade Point
+            Coins.addCoins(player, 2); // extra coin
         } else {
-            UpgradePoints.addPoints(player, 1);
+            Coins.addCoins(player, 1);
         }
     }
 }

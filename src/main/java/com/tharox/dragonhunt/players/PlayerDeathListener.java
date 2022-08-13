@@ -4,7 +4,7 @@ import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -48,7 +48,7 @@ public class PlayerDeathListener implements Listener {
                     + HexColor.RED + event.getDeathMessage().substring(0, player.getName().length())
                     + ChatColor.GRAY + event.getDeathMessage().substring(player.getName().length()));
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
-            killer.giveExp(UpgradePoints.playerXP + XPUpgrade.MoreXP.get(killer) - 1);
+            killer.giveExp(Coins.playerXP + XPUpgrade.MoreXP.get(killer) - 1);
             killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             addPlayerKill(killer, player);
         } else {

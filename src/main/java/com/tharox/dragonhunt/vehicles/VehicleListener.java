@@ -1,6 +1,6 @@
 package com.tharox.dragonhunt.vehicles;
 
-import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
@@ -27,7 +27,7 @@ public class VehicleListener implements Listener {
 
         if (entity.getType() == EntityType.MINECART_CHEST) {
             event.setCancelled(true);
-            player.giveExp(UpgradePoints.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
+            player.giveExp(Coins.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
             player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
             StorageMinecart mc = ((StorageMinecart) entity);

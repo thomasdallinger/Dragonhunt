@@ -1,6 +1,6 @@
 package com.tharox.dragonhunt.upgradeMenu;
 
-import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.Item;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -55,7 +55,7 @@ public class UpgradeInventory {
         if (!category.equals("menu")) {
             inv = Bukkit.createInventory(null, 27,
                     ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "UPGRADES "
-                            + ChatColor.LIGHT_PURPLE + UpgradePoints.getPoints(player) + " Point(s)");
+                            + ChatColor.LIGHT_PURPLE + Coins.getCoins(player) + " Coin(s)");
             addBackToMenuItem(inv);
         } else {
             inv = Bukkit.createInventory(null, 27,

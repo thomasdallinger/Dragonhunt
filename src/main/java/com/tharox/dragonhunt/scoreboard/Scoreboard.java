@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.scoreboard;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.timer.Countdown;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -43,7 +43,7 @@ public class Scoreboard extends ScoreboardBuilder {
         setScore(ChatColor.WHITE + "☻ " + Bukkit.getOnlinePlayers().size() + " "
                 + ChatColor.WHITE + "☠ " + HexColor.GOLD + DbValues.getKills(player, true) + " "
                 + ChatColor.WHITE + "✟ " + HexColor.RED + DbValues.getKills(player, false), 4);
-        setScore(ChatColor.WHITE + "⛃ " + HexColor.HIGHLIGHT + UpgradePoints.getPoints(player)
+        setScore(ChatColor.WHITE + "⛃ " + HexColor.HIGHLIGHT + Coins.getCoins(player)
                 + ChatColor.DARK_GRAY + " » " + ChatColor.WHITE + countdownFormat(countdown), 2);
         setScore(HexColor.YELLOW + "playdragonhunt.net", 0);
     }

@@ -18,8 +18,8 @@ import com.tharox.dragonhunt.listeners.ChatListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.players.*;
-import com.tharox.dragonhunt.points.LevelUp;
-import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.coins.LevelUp;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.positions.PositionCommand;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
 import com.tharox.dragonhunt.spectate.SpectateCommand;
@@ -181,7 +181,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         return ChatColor.WHITE.toString() + "☠ "
                 + HexColor.GOLD + DbValues.getKills(player, true)
                 + ChatColor.WHITE + " ⛃ "
-                + HexColor.HIGHLIGHT + UpgradePoints.getPoints(player)
+                + HexColor.HIGHLIGHT + Coins.getCoins(player)
                 + ChatColor.DARK_GRAY + " | ";
     }
 

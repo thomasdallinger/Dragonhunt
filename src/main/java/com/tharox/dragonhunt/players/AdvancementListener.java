@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.points.UpgradePoints;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.*;
 import org.bukkit.advancement.Advancement;
@@ -63,7 +63,7 @@ public class AdvancementListener implements Listener {
     }
 
     public void addBonusXP(Player player, String dimension) {
-        player.giveExp(UpgradePoints.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
+        player.giveExp(Coins.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         player.sendMessage(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + "BONUS XP: "
                 + ChatColor.AQUA + "First in " + dimension);

@@ -119,9 +119,7 @@ public class GameConfiguration {
             player.getInventory().setItemInOffHand(addItem(new ItemStack(Material.SHIELD)));
             new Grappler(player);
 
-            // give the player 3 SPECTATE TOKENS which can be used throughout the game
-            Spectate.spectatesLeft.put(player, 3);
-            // HashMap which prevents players from executing the command multiple times without a delay
+            // HashMap which prevents players from executing the command while the SPECTATE is still active
             Spectate.commandUsable.put(player, true);
 
             // every player starts with the base items for food and resources

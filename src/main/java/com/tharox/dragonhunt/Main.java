@@ -4,7 +4,7 @@ import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
 import com.tharox.dragonhunt.colors.HexColor;
-import com.tharox.dragonhunt.commands.DateCommand;
+import com.tharox.dragonhunt.commands.*;
 import com.tharox.dragonhunt.crafting.CustomRecipes;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.dimensions.DimensionListener;
@@ -20,14 +20,11 @@ import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.players.*;
 import com.tharox.dragonhunt.coins.LevelUp;
 import com.tharox.dragonhunt.coins.Coins;
-import com.tharox.dragonhunt.positions.PositionCommand;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
-import com.tharox.dragonhunt.spectate.SpectateCommand;
 import com.tharox.dragonhunt.tablist.TablistManager;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import com.tharox.dragonhunt.tracker.Tracker;
-import com.tharox.dragonhunt.shop.ShopCommand;
 import com.tharox.dragonhunt.shop.ShopListener;
 import com.tharox.dragonhunt.vehicles.VehicleListener;
 import net.md_5.bungee.api.ChatColor;
@@ -242,6 +239,8 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         getCommand("date").setExecutor(new DateCommand());
         getCommand("shop").setExecutor(new ShopCommand());
         getCommand("spec").setExecutor(new SpectateCommand());
+        getCommand("top").setExecutor(new TopCommand());
+        getCommand("respawn").setExecutor(new RespawnCommand());
         getCommand("pos").setExecutor(new PositionCommand());
     }
 }

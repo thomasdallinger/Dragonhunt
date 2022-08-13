@@ -11,6 +11,10 @@ commands:
   shop:
     description: Opens the shop menu.
   spec:
-    description: Spectate ability.
+    description: Starts a spectate.
+  top:
+    description: Teleports the player to the surface.
+  respawn:
+     description: Sets the player's respawn point.
   pos:
     description: Mark a location.

@@ -1,11 +1,11 @@
-package com.tharox.dragonhunt.spectate;
+package com.tharox.dragonhunt.commands;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.coins.Coins;
+import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Timer;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 
 import java.sql.Statement;
 
-public class SpectateCommand implements CommandExecutor {
+public class SpectateCommand extends CommandErrors implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player;
@@ -24,26 +24,10 @@ public class SpectateCommand implements CommandExecutor {
             player = (Player) sender;
         } else return true;
 
-        if (!timer.isRunning()) {
-            player.sendMessage(ChatColor.RED + "This feature is currently disabled.");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            return true;
-        }
-
-        if (timer.getTime() < 31) {
-            player.sendMessage(ChatColor.RED + "Spectate Tokens are usable in " +
-                    ChatColor.DARK_RED + (31 - timer.getTime()) + ChatColor.RED + " seconds.");
-            return true;
-        }
-
-        if (Coins.getCoins(player) == 0) {
-            player.sendMessage(ChatColor.RED + "You have no coins left.");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            return true;
-        }
+        if (checkIfValid(player, timer)) return true;
 
         if (!Spectate.commandUsable.get(player)) {
-            player.sendMessage(ChatColor.RED + "You are currently using a Spectate Token.");
+            player.sendMessage(ChatColor.RED + "You are currently in a Spectate.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }

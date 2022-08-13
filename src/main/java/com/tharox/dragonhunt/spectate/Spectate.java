@@ -1,11 +1,14 @@
 package com.tharox.dragonhunt.spectate;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.coins.Coins;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -40,8 +43,8 @@ public class Spectate {
         player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 1, 1);
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage(Main.getPrefix() + ChatColor.GOLD + ChatColor.BOLD + player.getName().toUpperCase()
-                    + ChatColor.YELLOW + " uses a Spectate Token.");
+            p.sendMessage(Main.getPrefix() + HexColor.YELLOW + player.getName()
+                    + ChatColor.GRAY + " uses a Spectate Token.");
         }
 
         new BukkitRunnable() {

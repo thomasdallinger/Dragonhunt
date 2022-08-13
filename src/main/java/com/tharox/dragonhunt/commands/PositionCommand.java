@@ -1,8 +1,9 @@
-package com.tharox.dragonhunt.positions;
+package com.tharox.dragonhunt.commands;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.positions.Position;
 import com.tharox.dragonhunt.timer.Timer;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

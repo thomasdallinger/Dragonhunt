@@ -1,6 +1,7 @@
-package com.tharox.dragonhunt.shop;
+package com.tharox.dragonhunt.commands;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.shop.ShopInventory;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

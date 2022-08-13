@@ -9,6 +9,7 @@ import com.tharox.dragonhunt.modifiers.ModifierInventory;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import com.tharox.dragonhunt.upgrades.*;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -142,11 +143,18 @@ public class GameStart extends GameConfiguration {
 
                 player.setGameMode(GameMode.SURVIVAL);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 600, 0));
-                player.sendMessage(Main.getPrefix() + HexColor.HIGHLIGHT + "Whoever kills the Enderdragon wins.");
+                player.sendMessage(Main.getPrefix() + HexColor.GOLD + ChatColor.BOLD
+                        + "Whoever kills the Enderdragon wins.");
                 player.sendMessage(Main.getPrefix() + ChatColor.GRAY + "Fall damage is "
                         + HexColor.RED + "disabled" + ChatColor.GRAY + ".");
-                player.sendMessage(Main.getPrefix() + ChatColor.GRAY + "Mark locations using "
-                        + HexColor.HIGHLIGHT + "/pos [name]" + ChatColor.GRAY + ".");
+                player.sendMessage(Main.getPrefix() + HexColor.YELLOW + "/pos [name]" + ChatColor.DARK_GRAY + ": "
+                        + ChatColor.GRAY + "mark locations");
+                player.sendMessage(Main.getPrefix() + HexColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
+                        + ChatColor.GRAY + "get to the surface quickly");
+                player.sendMessage(Main.getPrefix() + HexColor.YELLOW + "/respawn" + ChatColor.DARK_GRAY + ": "
+                        + ChatColor.GRAY + "sets a respawn point");
+                player.sendMessage(Main.getPrefix() + HexColor.YELLOW + "/spec" + ChatColor.DARK_GRAY + ": "
+                        + ChatColor.GRAY + "go into spectator mode");
             }
         }
     }
@@ -181,8 +189,6 @@ public class GameStart extends GameConfiguration {
             if (elytraCountdown.getTime() == 0) {
                 player.sendMessage(Main.getPrefix() + ChatColor.GRAY + "Fall damage is "
                         + HexColor.GREEN + "enabled" + ChatColor.GRAY + ".");
-                player.sendMessage(Main.getPrefix() + ChatColor.GOLD + "Spectates (/spec) " +
-                        HexColor.YELLOW + "are now usable.");
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);
                 player.getInventory().setChestplate(new ItemStack(Material.AIR));

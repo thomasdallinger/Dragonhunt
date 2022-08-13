@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.shop.ShopInventory;
 import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
@@ -34,7 +35,9 @@ public class SpectateCommand extends CommandHelper implements CommandExecutor {
         }
 
         if (Coins.getCoins(player) < getCommandCost(Main.getInstance().getConfig(), "/spec")) {
-            player.sendMessage(ChatColor.RED + "Not enough coins.");
+            player.sendMessage(ChatColor.RED + "You don't have enough coins! Need "
+                    + (getCommandCost(Main.getInstance().getConfig(), "/spec") - Coins.getCoins(player))
+                    + " more.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
@@ -49,8 +52,10 @@ public class SpectateCommand extends CommandHelper implements CommandExecutor {
             stmt.close();
         });
 
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/spec"));
         new Spectate(player);
+
         return false;
     }
 }

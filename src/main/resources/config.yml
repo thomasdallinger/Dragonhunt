@@ -32,7 +32,7 @@ menu:
     amount: 1
     slot: 13
     name: "» Tool Upgrades"
-    lore: "Adds enchantments to ALL AXES,      PICKAXES, HOES and SHOVELS in your inventory."
+    lore: "Adds enchantments to ALL AXES,     PICKAXES, HOES and SHOVELS in your inventory."
   5:
     material: GOLDEN_CHESTPLATE
     amount: 1

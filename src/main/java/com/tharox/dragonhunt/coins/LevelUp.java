@@ -24,7 +24,7 @@ public class LevelUp implements Listener {
         player.sendMessage(HexColor.GREEN + "Level Up!");
 
         if (level % 5 == 0) {
-            player.sendMessage(HexColor.HIGHLIGHT + "\uD83C\uDF4F" + ChatColor.DARK_GRAY + " | "
+            player.sendMessage(HexColor.HIGHLIGHT + "⛃" + ChatColor.DARK_GRAY + " | "
                     + HexColor.GREEN + "+1" + ChatColor.GRAY + " Golden Apple");
             GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE));
             Coins.addCoins(player, 20); // extra coins

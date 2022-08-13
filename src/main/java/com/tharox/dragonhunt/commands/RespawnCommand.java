@@ -24,11 +24,14 @@ public class RespawnCommand extends CommandHelper implements CommandExecutor {
         if (checkIfValid(player, timer)) return true;
 
         if (Coins.getCoins(player) < getCommandCost(Main.getInstance().getConfig(), "/respawn")) {
-            player.sendMessage(ChatColor.RED + "Not enough coins.");
+            player.sendMessage(ChatColor.RED + "You don't have enough coins! Need "
+                    + (getCommandCost(Main.getInstance().getConfig(), "/respawn") - Coins.getCoins(player))
+                    + " more.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
 
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/respawn"));
         player.setBedSpawnLocation(player.getLocation(), true);
         player.sendMessage(HexColor.GREEN + "Respawn point set.");

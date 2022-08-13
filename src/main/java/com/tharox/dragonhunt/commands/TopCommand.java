@@ -37,11 +37,14 @@ public class TopCommand extends CommandHelper implements CommandExecutor {
         }
 
         if (Coins.getCoins(player) < getCommandCost(Main.getInstance().getConfig(), "/top")) {
-            player.sendMessage(ChatColor.RED + "Not enough coins.");
+            player.sendMessage(ChatColor.RED + "You don't have enough coins! Need "
+                    + (getCommandCost(Main.getInstance().getConfig(), "/top") - Coins.getCoins(player))
+                    + " more.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
 
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/top"));
         player.teleport(new Location(world, x, world.getHighestBlockYAt((int) x, (int) z), z));
         player.sendMessage(HexColor.GREEN + "Whoosh.");

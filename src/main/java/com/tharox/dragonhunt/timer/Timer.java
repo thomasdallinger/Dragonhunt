@@ -1,13 +1,14 @@
 package com.tharox.dragonhunt.timer;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.points.UpgradePoints;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -57,8 +58,8 @@ public class Timer {
             if (player.getGameMode().equals(GameMode.SPECTATOR)) continue;
 
             // display the time
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString() +
-                    ChatColor.BOLD + DbValues.getTimestamp()));
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                    new ComponentBuilder(DbValues.getTimestamp()).color(HexColor.HIGHLIGHT).bold(true).create());
         }
     }
 

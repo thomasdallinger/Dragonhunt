@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.modifiers;
 
-import com.tharox.dragonhunt.Main;
-import org.bukkit.ChatColor;
+import com.tharox.dragonhunt.colors.HexColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -26,11 +26,11 @@ public abstract class Modifier {
         if (positive) { // positive
             material = Material.GREEN_CONCRETE;
             titleColor = ChatColor.DARK_GREEN.toString() + ChatColor.BOLD;
-            loreColor = ChatColor.GREEN.toString() + ChatColor.ITALIC;
+            loreColor = HexColor.GREEN.toString() + ChatColor.ITALIC;
         } else { // negative
             material = Material.RED_CONCRETE;
             titleColor = ChatColor.DARK_RED.toString() + ChatColor.BOLD;
-            loreColor = ChatColor.RED.toString() + ChatColor.ITALIC;
+            loreColor = HexColor.RED.toString() + ChatColor.ITALIC;
         }
 
         ItemStack item = new ItemStack(material, impact);
@@ -51,7 +51,7 @@ public abstract class Modifier {
     }
 
     /**
-     * @return a formatted modifier title message
+     * @return a formatted modifier title/lore message
      */
     public static String displayModifierSelection(String title, boolean positive, boolean active) {
         String color;
@@ -59,28 +59,20 @@ public abstract class Modifier {
         if (!active) return null;
 
         if (positive) {
-            color = ChatColor.GREEN.toString();
+            color = HexColor.GREEN.toString() + ChatColor.BOLD;
         } else {
-            color = ChatColor.RED.toString();
+            color = HexColor.RED.toString() + ChatColor.BOLD;
         }
 
         return color + title;
     }
 
     /**
-     * @return a formatted modifier lore message
+     * @return a modifier lore message
      */
-    public static String getLore(String lore, boolean positive, boolean active) {
-        String color;
-
+    public static String getLore(String lore, boolean active) {
         if (!active) return null;
 
-        if (positive) {
-            color = ChatColor.GREEN.toString();
-        } else {
-            color = ChatColor.RED.toString();
-        }
-
-        return color + lore;
+        return lore;
     }
 }

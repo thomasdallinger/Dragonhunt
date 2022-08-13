@@ -1,19 +1,19 @@
 package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.points.UpgradePoints;
 import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Countdown;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
 public class Scoreboard extends ScoreboardBuilder {
 
@@ -22,8 +22,7 @@ public class Scoreboard extends ScoreboardBuilder {
     private String message = "";
 
     public Scoreboard(Player player) {
-        super(player, ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD
-                + "DRAGON" + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "HUNT");
+        super(player, Main.getTitle());
         socialId = 0;
 
         funMessages.add("Repairing Grappler");
@@ -47,11 +46,9 @@ public class Scoreboard extends ScoreboardBuilder {
         LocalDateTime now = LocalDateTime.now();
 
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
-                + DbValues.getServerID() + "]", 11);
-        setScore(ChatColor.GOLD.toString() + ChatColor.BOLD + "1vs1", 10);
-        setScore("", 9);
-        setScore("", 8);
-        setScore("", 7);
+                + DbValues.getServerID() + "]", 8);
+        setScore(ChatColor.WHITE.toString() + ChatColor.BOLD + "1vs1"
+                + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE + "Casual", 7);
         setScore("", 6);
         setScore("", 5);
         setScore("", 4);
@@ -69,18 +66,13 @@ public class Scoreboard extends ScoreboardBuilder {
             return;
         }
 
-        setScore(ChatColor.WHITE + "Players: "
-                + ChatColor.DARK_GREEN + Bukkit.getOnlinePlayers().size(), 8);
-        setScore(ChatColor.WHITE + "Kills: "
-                + ChatColor.GREEN + DbValues.getKills(player, true), 7);
-        setScore(ChatColor.WHITE + "Deaths: "
-                + ChatColor.GREEN + DbValues.getKills(player, false), 6);
-        setScore(ChatColor.WHITE + "Spectate Tokens: "
-                + ChatColor.GOLD.toString() + Spectate.spectatesLeft.get(player), 4);
-        setScore(ChatColor.WHITE + "Upgrade Points: "
-                + ChatColor.LIGHT_PURPLE.toString() + UpgradePoints.getPoints(player), 3);
-        setScore(ChatColor.WHITE + "Free XP in:", 1);
-        setScore(ChatColor.AQUA + countdownFormat(countdown), 0);
+        setScore(ChatColor.WHITE + "☻ " + Bukkit.getOnlinePlayers().size() + " "
+                + ChatColor.WHITE + "☠ " + ChatColor.GOLD + DbValues.getKills(player, true) + " "
+                + ChatColor.WHITE + "✟ " + HexColor.RED + DbValues.getKills(player, false), 5);
+        setScore(ChatColor.WHITE + "Coins" + ChatColor.DARK_GRAY + ": "
+                + HexColor.HIGHLIGHT + UpgradePoints.getPoints(player), 3);
+        setScore(ChatColor.WHITE + "Free XP in" + ChatColor.DARK_GRAY + ":", 1);
+        setScore(HexColor.HIGHLIGHT + countdownFormat(countdown), 0);
     }
 
     private void run(Player player, Countdown countdown) {
@@ -102,25 +94,24 @@ public class Scoreboard extends ScoreboardBuilder {
             message = funMessages.get(random);
         }
 
-        setScore(ChatColor.WHITE + "Players: " + ChatColor.DARK_GREEN
-                + Bukkit.getOnlinePlayers().size(), 8);
-        setScore("Starting soon!", 6);
+        setScore(ChatColor.WHITE + "Players: " + HexColor.HIGHLIGHT
+                + Bukkit.getOnlinePlayers().size(), 5);
         // a lot of places to make the scoreboard wider - scoreboard size won't change with every new random message
         // will be replaced once the game starts
-        setScore("                                ", 4);
+        setScore("                                ", 3);
 
         switch (socialId) {
             case 0:
-                setScore(ChatColor.YELLOW.toString() + ChatColor.ITALIC + message + ".", 3);
+                setScore(ChatColor.YELLOW.toString() + ChatColor.ITALIC + message + ".", 1);
                 break;
             case 1:
-                setScore(ChatColor.YELLOW.toString() + ChatColor.ITALIC + message + "..", 3);
+                setScore(ChatColor.YELLOW.toString() + ChatColor.ITALIC + message + "..", 1);
                 break;
             case 2:
-                setScore(ChatColor.YELLOW.toString() + ChatColor.ITALIC + message + "...", 3);
+                setScore(ChatColor.YELLOW.toString() + ChatColor.ITALIC + message + "...", 1);
                 break;
             case 3:
-                setScore(ChatColor.YELLOW.toString() + ChatColor.ITALIC + message + "....", 3);
+                setScore(ChatColor.YELLOW.toString() + ChatColor.ITALIC + message + "....", 1);
                 break;
         }
 

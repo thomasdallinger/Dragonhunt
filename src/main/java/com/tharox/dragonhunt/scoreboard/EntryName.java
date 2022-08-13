@@ -12,11 +12,11 @@ public enum EntryName {
     ENTRY_5(5, ChatColor.DARK_GREEN.toString()),
     ENTRY_6(6, ChatColor.LIGHT_PURPLE.toString()),
     ENTRY_7(7, ChatColor.GREEN.toString()),
-    ENTRY_8(8, ChatColor.RED.toString()),
-    ENTRY_9(9, ChatColor.BLUE.toString()),
+    ENTRY_8(8, ChatColor.RED.toString());
+    /*ENTRY_9(9, ChatColor.BLUE.toString()),
     ENTRY_10(10, ChatColor.GOLD.toString()),
-    ENTRY_11(11, ChatColor.YELLOW.toString());
-    /*ENTRY_12(12, ChatColor.WHITE.toString()),
+    ENTRY_11(11, ChatColor.YELLOW.toString()),
+    ENTRY_12(12, ChatColor.WHITE.toString()),
     ENTRY_13(13, ChatColor.AQUA.toString());*/
 
     private final int entry;

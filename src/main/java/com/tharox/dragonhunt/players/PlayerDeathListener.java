@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
@@ -40,11 +41,20 @@ public class PlayerDeathListener implements Listener {
         // strike a lightning effect at the player's death location
         player.getWorld().strikeLightningEffect(player.getLocation());
 
+
         if (killer != null) {
+
+            event.setDeathMessage(ChatColor.GOLD + "☠" + ChatColor.DARK_GRAY + " | "
+                    + HexColor.RED + event.getDeathMessage().substring(0, player.getName().length())
+                    + ChatColor.GRAY + event.getDeathMessage().substring(player.getName().length()));
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
             killer.giveExp(UpgradePoints.playerXP + XPUpgrade.MoreXP.get(killer) - 1);
             killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             addPlayerKill(killer, player);
+        } else {
+            event.setDeathMessage(HexColor.RED + "✟" + ChatColor.DARK_GRAY + " | "
+                    + HexColor.RED + event.getDeathMessage().substring(0, player.getName().length())
+                    + ChatColor.GRAY + event.getDeathMessage().substring(player.getName().length()));
         }
 
         ItemStack itemToRemove;

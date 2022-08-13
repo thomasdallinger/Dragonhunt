@@ -19,10 +19,10 @@ public class AdvancementListener implements Listener {
     @EventHandler
     public void onAdvancement(PlayerAdvancementDoneEvent event) {
         Player player = event.getPlayer();
-        Advancement advancementValue = event.getAdvancement();
+        Advancement advancement = event.getAdvancement();
         String advancementName = "";
 
-        switch (advancementValue.getKey().toString()) {
+        switch (advancement.getKey().toString()) {
             case "minecraft:story/smelt_iron":
                 advancementName = "Gather Iron";
                 break;

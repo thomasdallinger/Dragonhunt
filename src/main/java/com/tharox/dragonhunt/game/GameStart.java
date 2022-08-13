@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.game;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.elytra.ElytraSwapRunnable;
 import com.tharox.dragonhunt.modifiers.EndlessNight;
 import com.tharox.dragonhunt.modifiers.ModifierInventory;
@@ -106,9 +107,9 @@ public class GameStart extends GameConfiguration {
                 new PermanentNight();
 
             overworld.setGameRule(GameRule.FALL_DAMAGE, false);
-            bossBar = Bukkit.createBossBar(ChatColor.GREEN + "Elytra removed in " + ChatColor.DARK_GREEN
-                            + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.GREEN + " seconds",
-                    BarColor.GREEN, BarStyle.SEGMENTED_10);
+            bossBar = Bukkit.createBossBar(ChatColor.WHITE + "Elytra removed in " + HexColor.HIGHLIGHT
+                            + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.WHITE + " seconds",
+                    BarColor.PINK, BarStyle.SEGMENTED_6);
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -141,10 +142,11 @@ public class GameStart extends GameConfiguration {
 
                 player.setGameMode(GameMode.SURVIVAL);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 600, 0));
-                player.sendMessage(Main.getPrefix() + ChatColor.GOLD + "Whoever kills the Enderdragon wins.");
-                player.sendMessage(Main.getPrefix() + ChatColor.RED + "Fall damage is disabled!");
-                player.sendMessage(Main.getPrefix() + ChatColor.GREEN + "Mark locations using "
-                        + ChatColor.DARK_GREEN + "/pos [name]" + ChatColor.GREEN + ".");
+                player.sendMessage(Main.getPrefix() + HexColor.HIGHLIGHT + "Whoever kills the Enderdragon wins.");
+                player.sendMessage(Main.getPrefix() + ChatColor.GRAY + "Fall damage is "
+                        + HexColor.RED + "disabled" + ChatColor.GRAY + ".");
+                player.sendMessage(Main.getPrefix() + ChatColor.GRAY + "Mark locations using "
+                        + HexColor.HIGHLIGHT + "/pos [name]" + ChatColor.GRAY + ".");
             }
         }
     }
@@ -156,8 +158,8 @@ public class GameStart extends GameConfiguration {
      * @param time time of the countdown
      */
     public void onElytraCountdown(int time) {
-        bossBar.setTitle(ChatColor.GREEN + "Elytra removed in " + ChatColor.DARK_GREEN
-                + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.GREEN + " seconds");
+        bossBar.setTitle(ChatColor.WHITE + "Elytra removed in " + HexColor.HIGHLIGHT
+                + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.WHITE + " seconds");
         bossBar.setProgress(time / 31D);
         bossBar.setVisible(true);
 
@@ -166,21 +168,21 @@ public class GameStart extends GameConfiguration {
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-
             if (elytraCountdown.getTime() == 30) {
                 bossBar.addPlayer(player);
             }
 
             if (elytraCountdown.getTime() <= 5 && elytraCountdown.getTime() > 0) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-                player.sendMessage(Main.getPrefix() + ChatColor.YELLOW + "Elytra removed in "
-                        + ChatColor.GOLD + elytraCountdown.getTime() + ChatColor.YELLOW + " seconds.");
+                player.sendMessage(Main.getPrefix() + ChatColor.GRAY + "Elytra removed in "
+                        + HexColor.HIGHLIGHT + elytraCountdown.getTime() + ChatColor.GRAY + " seconds.");
             }
 
             if (elytraCountdown.getTime() == 0) {
-                player.sendMessage(Main.getPrefix() + ChatColor.GREEN + "Fall damage is enabled!");
+                player.sendMessage(Main.getPrefix() + ChatColor.GRAY + "Fall damage is "
+                        + HexColor.GREEN + "enabled" + ChatColor.GRAY + ".");
                 player.sendMessage(Main.getPrefix() + ChatColor.GOLD + "Spectates (/spec) " +
-                        ChatColor.YELLOW + "are now usable.");
+                        HexColor.YELLOW + "are now usable.");
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);
                 player.getInventory().setChestplate(new ItemStack(Material.AIR));

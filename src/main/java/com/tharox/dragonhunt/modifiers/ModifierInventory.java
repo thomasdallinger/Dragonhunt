@@ -1,11 +1,8 @@
 package com.tharox.dragonhunt.modifiers;
 
 import com.tharox.dragonhunt.Main;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.chat.hover.content.Text;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.reflections.Reflections;
@@ -15,18 +12,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ModifierInventory {
     public Inventory modifiers;
-    TextComponent textComponent = new TextComponent(
-            Main.getPrefix() + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "MODIFIERS: ");
-    String tablistInformation = "";
 
     public ModifierInventory() {
         new ModifierSelection();
         createInventory();
-
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            player.spigot().sendMessage(textComponent);
-            player.setPlayerListFooter(player.getPlayerListFooter() + "\n" + tablistInformation);
-        }
     }
 
     public void createInventory() {
@@ -50,22 +39,21 @@ public class ModifierInventory {
                                             (Boolean) modifierClass.getField("active").get(null)));
                             // get(null) because static
 
-                            String message = Modifier.displayModifierSelection(
+                            String title = Modifier.displayModifierSelection(
                                     (String) modifierClass.getField("title").get(null),
                                     (Boolean) modifierClass.getField("positive").get(null),
                                     (Boolean) modifierClass.getField("active").get(null));
 
-                            String lore = Modifier.displayModifierSelection(
+                            String lore = Modifier.getLore(
                                     (String) modifierClass.getField("lore").get(null),
-                                    (Boolean) modifierClass.getField("positive").get(null),
                                     (Boolean) modifierClass.getField("active").get(null));
 
-                            if (message != null && lore != null) {
-                                TextComponent modifier = new TextComponent(message + "  ");
-                                modifier.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT,
-                                        new Text(lore)));
-                                textComponent.addExtra(modifier);
-                                tablistInformation += message + "  ";
+                            for (Player player : Bukkit.getOnlinePlayers()) {
+                                if (title != null && lore != null) {
+                                    player.sendMessage(Main.getPrefix() + title
+                                            + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + lore);
+                                    player.setPlayerListFooter(player.getPlayerListFooter() + "\n" + title);
+                                }
                             }
 
                         } catch (NoSuchFieldException | IllegalAccessException e) {

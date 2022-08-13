@@ -29,10 +29,10 @@ import com.tharox.dragonhunt.tracker.Tracker;
 import com.tharox.dragonhunt.upgradeMenu.UpgradeCommand;
 import com.tharox.dragonhunt.upgradeMenu.UpgradeListener;
 import com.tharox.dragonhunt.vehicles.VehicleListener;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -160,9 +160,20 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     }
 
     public static String getPrefix() {
-        return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_PURPLE + ChatColor.BOLD + "D"
-                + ChatColor.LIGHT_PURPLE + ChatColor.BOLD + "H" + ChatColor.DARK_GRAY + "] "
-                + ChatColor.WHITE;
+        return ChatColor.WHITE + "☻" + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE;
+    }
+
+    public static String getTitle() {
+        return ChatColor.of("#800ce9").toString() + ChatColor.BOLD + "D"
+                + ChatColor.of("#8f11e7").toString() + ChatColor.BOLD + "R"
+                + ChatColor.of("#9c12e7").toString() + ChatColor.BOLD + "A"
+                + ChatColor.of("#aa17e5").toString() + ChatColor.BOLD + "G"
+                + ChatColor.of("#b818e2").toString() + ChatColor.BOLD + "O"
+                + ChatColor.of("#c61de2").toString() + ChatColor.BOLD + "N"
+                + ChatColor.of("#d520e0").toString() + ChatColor.BOLD + "H"
+                + ChatColor.of("#e222de").toString() + ChatColor.BOLD + "U"
+                + ChatColor.of("#f127dc").toString() + ChatColor.BOLD + "N"
+                + ChatColor.of("#fe28dc").toString() + ChatColor.BOLD + "T";
     }
 
     public static String getNamePrefix(Player player) {

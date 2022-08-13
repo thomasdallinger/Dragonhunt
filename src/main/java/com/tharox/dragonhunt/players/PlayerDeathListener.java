@@ -40,7 +40,7 @@ public class PlayerDeathListener implements Listener {
 
         // strike a lightning effect at the player's death location
         player.getWorld().strikeLightningEffect(player.getLocation());
-
+        player.performCommand("pos Death" + DbValues.getKills(player, false));
 
         if (killer != null) {
 

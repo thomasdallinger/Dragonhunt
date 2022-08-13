@@ -59,9 +59,9 @@ public class PositionCommand implements CommandExecutor {
             List<Position> updatedList = new ArrayList<>(positions.get(player)); // add all existing positions
             updatedList.add(new Position(args[0], player.getLocation())); // add new position
 
-            if (updatedList.size() > 15) {
+            if (updatedList.size() > 20) {
                 player.sendMessage(ChatColor.RED
-                        + "Failed to create a position. You have exceeded the limit of 15 positions.");
+                        + "Failed to create a position. You have exceeded the limit of 20 positions.");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                 return true;
             }

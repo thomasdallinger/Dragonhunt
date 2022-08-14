@@ -113,21 +113,22 @@ public class GameStart extends GameConfiguration {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
                 player.openInventory(modifierInventory.modifiers);
             }
-            if (startCountdown.getTime() <= 5 && startCountdown.getTime() > 0) {
-                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-            }
 
             if (startCountdown.getTime() == 5) {
                 GameState.modifierInventoryClose = true;
                 player.closeInventory();
             }
 
-            if (startCountdown.getTime() > 3)
-                player.sendTitle(ChatColor.GOLD.toString() + ChatColor.BOLD + startCountdown.getTime(),
-                        "", 0, 20, 0);
-            else if (startCountdown.getTime() <= 3 && startCountdown.getTime() > 0)
-                player.sendTitle(ChatColor.RED.toString() + ChatColor.BOLD + startCountdown.getTime(),
-                        "", 0, 20, 0);
+            if (startCountdown.getTime() <= 5 && startCountdown.getTime() > 0) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+
+                if (startCountdown.getTime() > 3)
+                    player.sendTitle(ChatColor.GOLD.toString() + ChatColor.BOLD + startCountdown.getTime(),
+                            "", 0, 20, 0);
+                else if (startCountdown.getTime() <= 3)
+                    player.sendTitle(HexColor.RED.toString() + ChatColor.BOLD + startCountdown.getTime(),
+                            "", 0, 20, 0);
+            }
 
             if (startCountdown.getTime() == 0) {
                 if (startLocation.getY() - highestBlock.getY() <= 40) {

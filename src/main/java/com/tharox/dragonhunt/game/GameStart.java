@@ -94,16 +94,14 @@ public class GameStart extends GameConfiguration {
             new Arrows(); // start arrow generation
             new ElytraSwapRunnable().runTaskTimer(Main.getInstance(), 0, 5);
 
-            Main.elytraInInventory();
             fallDamageCountdown = new Countdown(true, 30, this::onFallDamageCountdown);
+            overworld.setGameRule(GameRule.FALL_DAMAGE, false);
+            bossBar = Bukkit.createBossBar("", BarColor.RED, BarStyle.SEGMENTED_6);
 
             if (!EndlessNight.active)
                 overworld.setTime(0);
             else
                 new PermanentNight();
-
-            overworld.setGameRule(GameRule.FALL_DAMAGE, false);
-            bossBar = Bukkit.createBossBar("", BarColor.RED, BarStyle.SEGMENTED_6);
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {

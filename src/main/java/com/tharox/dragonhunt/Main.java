@@ -170,24 +170,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
                 + ChatColor.of("#fe28dc").toString() + ChatColor.BOLD + "T";
     }
 
-    public static void elytraInInventory() {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    for (ItemStack item : player.getInventory()) {
-                        if (item != null && item.getItemMeta() != null) {
-                            if (item.getType() == Material.ELYTRA) {
-                                player.getInventory().remove(item);
-                                player.getInventory().setChestplate(item);
-                            }
-                        }
-                    }
-                }
-            }
-        }.runTaskTimer(Main.getInstance(), 20, 20);
-    }
-
     private void listenerRegistration() {
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new JoinListener(), this);

@@ -22,7 +22,7 @@ public class LevelUp implements Listener {
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
         player.sendTitle(ChatColor.AQUA + " ", HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "LEVEL "
                 + level, 5, 60, 5);
-        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "Level Up!");
+        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.HIGHLIGHT + "Level Up!");
 
         if (level % 5 == 0) {
             player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "+1" + ChatColor.GRAY + " Golden Apple");

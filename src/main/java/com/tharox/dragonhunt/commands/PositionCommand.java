@@ -42,7 +42,7 @@ public class PositionCommand implements CommandExecutor {
 
         if (args.length != 1) {
             player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Use "
-                    + ChatColor.DARK_GREEN + "/pos [name]" + ChatColor.GRAY + "to add a position.");
+                    + ChatColor.DARK_GREEN + "/pos [name]" + ChatColor.GRAY + " to add a position.");
             return true;
         }
 

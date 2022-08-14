@@ -18,7 +18,7 @@ import java.util.Arrays;
 
 public class Arrows {
     /**
-     * Arrow generation is started once the elytra countdown after the game start hits 0.
+     * Arrow generation is started once the timer is running;
      */
     public Arrows() {
         generateArrows();
@@ -62,7 +62,8 @@ public class Arrows {
                             generatedArrows = createArrow(amount);
                         }
                         if (generatedArrows != null)
-                            if (arrowStack != null && (arrowStack.getType() == Material.ARROW || arrowStack.getType() == Material.TIPPED_ARROW))
+                            if (arrowStack != null && (arrowStack.getType() == Material.ARROW
+                                    || arrowStack.getType() == Material.TIPPED_ARROW))
                                 replaceCurrentArrowStack(arrowStack, generatedArrows, player);
                             else
                                 //replaceCurrentStack -> currently not arrows or tipped arrows
@@ -70,7 +71,7 @@ public class Arrows {
                     }
                 }
             }
-        }.runTaskTimer(Main.getInstance(), 0, 240);
+        }.runTaskTimer(Main.getInstance(), 0, 400);
     }
 
     private ItemStack createArrow(int amount) {

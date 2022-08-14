@@ -26,7 +26,7 @@ menu:
     amount: 1
     slot: 12
     name: "» Arrow Upgrades"
-    lore: "Increases ARROW GAIN RATE and      allows you to obtain EFFECT ARROWS."
+    lore: "Increases ARROWS GENERATED and     allows you to obtain EFFECT ARROWS."
   4:
     material: DIAMOND_PICKAXE
     amount: 1
@@ -179,42 +179,42 @@ arrow:
     slot: 3
     name: "More Arrows I"
     cost: 5
-    lore: "Receive 2 Arrows every 12 seconds."
+    lore: "Receive 2 Arrows every 20 seconds."
   1:
     material: ARROW
     amount: 2
     slot: 12
     name: "More Arrows II"
     cost: 5
-    lore: "Receive 3 arrows every 12 seconds."
+    lore: "Receive 3 arrows every 20 seconds."
   2:
     material: ARROW
     amount: 3
     slot: 21
     name: "More Arrows III"
     cost: 5
-    lore: "Receive 4 arrows every 12 seconds."
+    lore: "Receive 4 arrows every 20 seconds."
   3:
     material: TIPPED_ARROW
     amount: 1
     slot: 5
     name: "Effect Arrows I"
     cost: 5
-    lore: "Receive SLOWNESS arrows every 12 seconds."
+    lore: "Receive SLOWNESS arrows every 20 seconds."
   4:
     material: TIPPED_ARROW
     amount: 2
     slot: 14
     name: "Effect Arrows II"
     cost: 10
-    lore: "Receive BLINDNESS arrows every 12 seconds."
+    lore: "Receive BLINDNESS arrows every 20 seconds."
   5:
     material: TIPPED_ARROW
     amount: 3
     slot: 23
     name: "Effect Arrows III"
     cost: 10
-    lore: "Receive POISON arrows every 12 seconds."
+    lore: "Receive POISON arrows every 20 seconds."
 tool:
   0:
     material: GOLDEN_PICKAXE

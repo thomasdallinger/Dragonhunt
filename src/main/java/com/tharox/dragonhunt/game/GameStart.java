@@ -94,6 +94,7 @@ public class GameStart extends GameConfiguration {
         if (startCountdown.getTime() == 0) {
             timer.setRunning(true);
             scoreboardCountdown.setRunning(true);
+            new Arrows(); // start arrow generation
 
             Main.elytraInInventory();
             elytraCountdown = new Countdown(true, 30, this::onElytraCountdown);
@@ -186,7 +187,6 @@ public class GameStart extends GameConfiguration {
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);
                 player.getInventory().setChestplate(new ItemStack(Material.AIR));
-                new Arrows(); // start arrow generation
                 new ElytraSwapRunnable().runTaskTimer(Main.getInstance(), 0, 5);
             }
         }

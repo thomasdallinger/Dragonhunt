@@ -24,18 +24,18 @@ public class GameStart extends GameConfiguration {
     ModifierInventory modifierInventory;
     BossBar bossBar;
     World overworld = Bukkit.getServer().getWorld("world");
-    Location startLocation = new Location(overworld, 0, 200, 0);
-    Location highestBlock;
+    Location startLocation;
+    double x = overworld != null ? overworld.getSpawnLocation().getX() : 0, highestY,
+            z = overworld != null ? overworld.getSpawnLocation().getZ() : 0;
     // used if the highest block at x: 0 and z: 0 is within 40 blocks of the startLocation
-    Location higherStartLocation = new Location(startLocation.getWorld(), startLocation.getX(),
-            startLocation.getY() + 40, startLocation.getZ());
 
     public GameStart() {
         startCountdown = new Countdown(true, 20, this::onCountdown);
         modifierInventory = new ModifierInventory();
-        highestBlock = overworld.getHighestBlockAt(0, 0).getLocation();
+        highestY = overworld.getHighestBlockYAt((int) x, (int) z);
+        startLocation = new Location(overworld, x, highestY + 40, z);
 
-        configureOverworld();
+        configureOverworld(x, z);
         configureNether();
         configureEnd();
         configurePlayer();
@@ -129,13 +129,9 @@ public class GameStart extends GameConfiguration {
             }
 
             if (startCountdown.getTime() == 0) {
-                if (startLocation.getY() - highestBlock.getY() <= 40) {
-                    player.teleport(higherStartLocation);
-                } else {
-                    player.teleport(startLocation);
-                }
-
+                player.teleport(startLocation);
                 player.setGameMode(GameMode.SURVIVAL);
+
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GOLD + ChatColor.BOLD
                         + "Whoever kills the Enderdragon wins.");
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Fall damage is "

@@ -24,7 +24,7 @@ public class GameConfiguration {
     /**
      * Sets different parameters for the OVERWORLD such as difficulty, daytime and the world border.
      */
-    public void configureOverworld() {
+    public void configureOverworld(double x, double z) {
         World overworld = Bukkit.getServer().getWorld("world");
 
         if (overworld == null) {
@@ -40,8 +40,8 @@ public class GameConfiguration {
             overworld.setDifficulty(Difficulty.NORMAL);
 
         WorldBorder worldBorder = overworld.getWorldBorder();
-        worldBorder.setCenter(new Location(overworld, 0, 0, 0));
-        worldBorder.setSize(6000);
+        worldBorder.setCenter(new Location(overworld, x, 0, z));
+        worldBorder.setSize(7000);
         worldBorder.setDamageAmount(0);
     }
 

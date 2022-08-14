@@ -71,7 +71,7 @@ public class AdvancementListener implements Listener {
         player.giveExp(Coins.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         player.sendMessage(Prefixes.getCoinPrefix() + HexColor.HIGHLIGHT + "Bonus XP: "
-                + ChatColor.GRAY + "First in " + HexColor.HIGHLIGHT + dimension + ChatColor.GRAY + ".");
+                + ChatColor.GRAY + "First in " + dimension + ".");
     }
 
     /**

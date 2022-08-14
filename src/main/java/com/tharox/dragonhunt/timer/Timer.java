@@ -83,7 +83,7 @@ public class Timer {
                 if (getTime() % 600 == 0) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         if (getTime() < 2400)
-                            player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "All Players will receive "
+                            player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "All Players will receive "
                                     + ChatColor.YELLOW + "Strength I" + ChatColor.GRAY + " and "
                                     + ChatColor.YELLOW + "Speed II" + ChatColor.GRAY + " in "
                                     + ChatColor.YELLOW + (2400 - getTime()) / 60 + ChatColor.GRAY + " minutes.");
@@ -94,7 +94,7 @@ public class Timer {
 
                             player.sendTitle(ChatColor.AQUA + " ", ChatColor.DARK_RED.toString()
                                     + ChatColor.BOLD + "SHOWDOWN", 5, 100, 5);
-                            player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "The game ends in "
+                            player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "The game ends in "
                                     + ChatColor.YELLOW + "10" + ChatColor.GRAY + " minutes.");
                         }
                     }
@@ -119,7 +119,7 @@ public class Timer {
     private void showdownCountdown() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-            player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "Final showdown in "
+            player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Final showdown in "
                     + ChatColor.YELLOW + (2400 - getTime()) + ChatColor.GRAY + " seconds.");
         }
     }

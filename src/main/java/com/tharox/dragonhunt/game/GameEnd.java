@@ -61,7 +61,7 @@ public class GameEnd {
      */
     private void configureGameEnd() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            player.sendMessage(Prefixes.getPrefix() + ChatColor.GOLD + ChatColor.BOLD + "GAME OVER.");
+            player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GOLD + ChatColor.BOLD + "GAME OVER.");
 
             player.setGameMode(GameMode.SPECTATOR);
             player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 1);
@@ -78,11 +78,11 @@ public class GameEnd {
             }
 
             if (winner != null) {
-                player.sendMessage(Prefixes.getPrefix() + ChatColor.YELLOW + winner.getName()
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + winner.getName()
                         + ChatColor.GRAY + " has won the Dragonhunt!");
             }
 
-            player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "Time played: "
+            player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Time played: "
                     + ChatColor.YELLOW + DbValues.getTimestamp());
             //TODO: Game Stats messages?
         }
@@ -135,9 +135,9 @@ public class GameEnd {
 
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
-                            HexColor.RED.toString() + ChatColor.BOLD + "BACK TO LOBBY IN "
-                                    + ChatColor.DARK_RED + ChatColor.BOLD + duration[0]
-                                    + HexColor.RED + ChatColor.BOLD + " SECONDS"));
+                            ChatColor.YELLOW.toString() + ChatColor.BOLD + "BACK TO LOBBY IN "
+                                    + ChatColor.GOLD + ChatColor.BOLD + duration[0]
+                                    + ChatColor.YELLOW + ChatColor.BOLD + " SECONDS"));
                 }
                 duration[0]--;
             }

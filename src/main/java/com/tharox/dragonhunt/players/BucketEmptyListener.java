@@ -1,5 +1,7 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -21,9 +23,8 @@ public class BucketEmptyListener implements Listener {
                     && bucket.toString().contains("LAVA")) {
                 event.setCancelled(true);
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                player.sendMessage(ChatColor.RED + "You are not allowed to place "
-                        + ChatColor.DARK_RED + ChatColor.BOLD + "LAVA"
-                        + ChatColor.RED + " close to this Nether Portal!");
+                player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are not allowed to place "
+                        + HexColor.RED + "Lava" + ChatColor.GRAY + " close to this Nether Portal.");
             }
         }
 
@@ -33,9 +34,8 @@ public class BucketEmptyListener implements Listener {
                     && bucket.toString().contains("LAVA")) {
                 event.setCancelled(true);
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                player.sendMessage(ChatColor.RED + "You are not allowed to place "
-                        + ChatColor.DARK_RED + ChatColor.BOLD + "LAVA"
-                        + ChatColor.RED + " near the End Spawn Platform!");
+                player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are not allowed to place "
+                        + HexColor.RED + "Lava" + ChatColor.GRAY + " near the End Spawn Platform.");
             }
         }
     }

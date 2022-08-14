@@ -1,13 +1,10 @@
 package com.tharox.dragonhunt.elytra;
 
-import net.md_5.bungee.api.ChatColor;
+import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -17,6 +14,10 @@ import java.util.HashMap;
 public class ElytraSwapRunnable extends BukkitRunnable {
     private final HashMap<Player, ItemStack> playerChestplate = new HashMap<>();
     private final HashMap<Player, Boolean> playerWasInAir = new HashMap<>();
+
+    public ElytraSwapRunnable() {
+        Bukkit.getOnlinePlayers().forEach(player -> playerWasInAir.put(player, false));
+    }
 
     /**
      * Checks if the player is at least 2 or 6 blocks above the ground.
@@ -43,24 +44,6 @@ public class ElytraSwapRunnable extends BukkitRunnable {
         return true;
     }
 
-    private ItemStack getUnbreakableElytra() {
-        ItemStack item = new ItemStack(Material.ELYTRA);
-        ItemMeta meta = item.getItemMeta();
-
-        assert meta != null;
-        meta.addEnchant(Enchantment.DURABILITY, 1, true);
-        meta.setUnbreakable(true);
-        meta.setDisplayName(ChatColor.YELLOW.toString() + ChatColor.BOLD + "Elytra");
-        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        item.setItemMeta(meta);
-
-        return item;
-    }
-
-    public ElytraSwapRunnable() {
-        Bukkit.getOnlinePlayers().forEach(player -> playerWasInAir.put(player, false));
-    }
-
     @Override
     public void run() {
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -84,7 +67,7 @@ public class ElytraSwapRunnable extends BukkitRunnable {
                     playerChestplate.put(player, new ItemStack(Material.AIR));
                 }
 
-                player.getInventory().setChestplate(getUnbreakableElytra());
+                player.getInventory().setChestplate(GameState.addItem(new ItemStack(Material.ELYTRA)));
             }
 
             // make the player glow while in the air

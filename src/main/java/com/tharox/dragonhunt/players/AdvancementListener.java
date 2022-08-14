@@ -1,16 +1,21 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.coins.Coins;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
-import org.bukkit.*;
+import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
+import org.bukkit.generator.structure.Structure;
+import org.bukkit.util.StructureSearchResult;
 
 import java.sql.Statement;
 
@@ -65,8 +70,8 @@ public class AdvancementListener implements Listener {
     public void addBonusXP(Player player, String dimension) {
         player.giveExp(Coins.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        player.sendMessage(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + "BONUS XP: "
-                + ChatColor.AQUA + "First in " + dimension);
+        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.HIGHLIGHT + "Bonus XP: "
+                + ChatColor.GRAY + "First in " + HexColor.HIGHLIGHT + dimension + ChatColor.GRAY + ".");
     }
 
     /**
@@ -76,17 +81,16 @@ public class AdvancementListener implements Listener {
      * @return the distance score (the lower, the better the NETHER spawn)
      */
     public int getDistanceScore(Player player) {
-        World world = player.getWorld();
-        Location fortress = world.locateNearestStructure(
-                player.getLocation(), StructureType.NETHER_FORTRESS, 32, false);
-        Location bastion = world.locateNearestStructure(
-                player.getLocation(), StructureType.BASTION_REMNANT, 32, false);
+        StructureSearchResult fortress = player.getWorld().locateNearestStructure(
+                player.getLocation(), Structure.FORTRESS, 32, false);
+        StructureSearchResult bastion = player.getWorld().locateNearestStructure(
+                player.getLocation(), Structure.BASTION_REMNANT, 32, false);
         int fortressDistance = 0, bastionDistance = 0;
 
         if (fortress != null)
-            fortressDistance = (int) player.getLocation().distance(fortress);
+            fortressDistance = (int) player.getLocation().distance(fortress.getLocation());
         if (bastion != null)
-            bastionDistance = (int) player.getLocation().distance(bastion);
+            bastionDistance = (int) player.getLocation().distance(bastion.getLocation());
 
         return fortressDistance + bastionDistance;
     }

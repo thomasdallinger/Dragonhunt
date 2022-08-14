@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -18,9 +19,9 @@ public class PlayerRespawnListener implements Listener {
 
             player.getInventory().setContents(GameState.itemsToKeepOnDeath.get(player));
 
-            player.sendMessage(ChatColor.GREEN + "Respawned with "
-                    + ChatColor.DARK_GREEN + ChatColor.BOLD + "HOTBAR, ARMOR & OFFHAND"
-                    + ChatColor.GREEN + " items...");
+            player.sendMessage(Prefixes.getDeathPrefix() + ChatColor.GRAY + "Respawned with "
+                    + ChatColor.YELLOW + "Hotbar, Armor" + ChatColor.GRAY + " and " + ChatColor.YELLOW + "Offhand"
+                    + ChatColor.GRAY + " items.");
         }, 5L);
     }
 }

@@ -47,7 +47,8 @@ public class GrappleListener implements Listener {
                     }
 
                     if (arrow.isOnGround() && !arrow.isDead()) {
-                        Vector direction = arrow.getLocation().toVector().subtract(player.getLocation().toVector()).normalize();
+                        Vector direction = arrow.getLocation().toVector()
+                                .subtract(player.getLocation().toVector()).normalize();
                         player.setVelocity(direction.multiply(2D));
                         drawLine(player.getLocation(), arrow.getLocation(), 2);
 

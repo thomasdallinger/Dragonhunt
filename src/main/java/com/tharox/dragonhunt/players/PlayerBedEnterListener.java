@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.chat.Prefixes;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,7 +12,7 @@ public class PlayerBedEnterListener implements Listener {
     @EventHandler
     public void onBedEnter(PlayerBedEnterEvent event) {
         Player player = event.getPlayer();
-        player.sendMessage(ChatColor.RED + "Sleeping is not allowed.");
+        player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "Sleeping is not allowed.");
         event.setCancelled(true);
     }
 }

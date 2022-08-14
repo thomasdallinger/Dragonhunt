@@ -104,9 +104,7 @@ public class GameStart extends GameConfiguration {
                 new PermanentNight();
 
             overworld.setGameRule(GameRule.FALL_DAMAGE, false);
-            bossBar = Bukkit.createBossBar(ChatColor.WHITE + "Elytra removed in " + HexColor.HIGHLIGHT
-                            + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.WHITE + " seconds",
-                    BarColor.PINK, BarStyle.SEGMENTED_6);
+            bossBar = Bukkit.createBossBar("", BarColor.RED, BarStyle.SEGMENTED_6);
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -139,17 +137,17 @@ public class GameStart extends GameConfiguration {
 
                 player.setGameMode(GameMode.SURVIVAL);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 600, 0));
-                player.sendMessage(Prefixes.getPrefix() + ChatColor.GOLD + ChatColor.BOLD
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GOLD + ChatColor.BOLD
                         + "Whoever kills the Enderdragon wins.");
-                player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "Fall damage is "
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Fall damage is "
                         + HexColor.RED + "disabled" + ChatColor.GRAY + ".");
-                player.sendMessage(Prefixes.getPrefix() + ChatColor.YELLOW + "/pos [name]" + ChatColor.DARK_GRAY + ": "
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/pos [name]" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "mark locations");
-                player.sendMessage(Prefixes.getPrefix() + ChatColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "get to the surface quickly");
-                player.sendMessage(Prefixes.getPrefix() + ChatColor.YELLOW + "/respawn" + ChatColor.DARK_GRAY + ": "
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/respawn" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "sets a respawn point");
-                player.sendMessage(Prefixes.getPrefix() + ChatColor.YELLOW + "/spec" + ChatColor.DARK_GRAY + ": "
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/spec" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "go into spectator mode");
             }
         }
@@ -162,8 +160,8 @@ public class GameStart extends GameConfiguration {
      * @param time time of the countdown
      */
     public void onElytraCountdown(int time) {
-        bossBar.setTitle(ChatColor.WHITE + "Elytra removed in " + HexColor.HIGHLIGHT
-                + ChatColor.BOLD + elytraCountdown.getTime() + ChatColor.WHITE + " seconds");
+        bossBar.setTitle(HexColor.RED + "Elytra removed in " + ChatColor.DARK_RED
+                + ChatColor.BOLD + elytraCountdown.getTime() + HexColor.RED + " seconds");
         bossBar.setProgress(time / 31D);
         bossBar.setVisible(true);
 
@@ -178,12 +176,12 @@ public class GameStart extends GameConfiguration {
 
             if (elytraCountdown.getTime() <= 5 && elytraCountdown.getTime() > 0) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-                player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "Elytra removed in "
-                        + HexColor.HIGHLIGHT + elytraCountdown.getTime() + ChatColor.GRAY + " seconds.");
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Elytra removed in "
+                        + HexColor.RED + elytraCountdown.getTime() + ChatColor.GRAY + " seconds.");
             }
 
             if (elytraCountdown.getTime() == 0) {
-                player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "Fall damage is "
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Fall damage is "
                         + HexColor.GREEN + "enabled" + ChatColor.GRAY + ".");
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);

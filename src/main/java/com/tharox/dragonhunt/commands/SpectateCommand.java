@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.commands;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
@@ -28,7 +29,7 @@ public class SpectateCommand extends CommandHelper implements CommandExecutor {
         if (checkIfValid(player, timer)) return true;
 
         if (!Spectate.commandUsable.get(player)) {
-            player.sendMessage(ChatColor.RED + "You are currently in a Spectate.");
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are currently in a Spectate.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }

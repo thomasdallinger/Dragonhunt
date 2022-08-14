@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 public class Prefixes {
 
     // ALL: used for messages displayed to all players
-    public static String getPrefix() {
+    public static String getAllPrefix() {
         return ChatColor.WHITE + "☻" + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY;
     }
 
@@ -30,7 +30,7 @@ public class Prefixes {
 
     // DEATH: when a player dies
     public static String getDeathPrefix() {
-        return HexColor.RED.toString() + ChatColor.BOLD + "✟" + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY;
+        return HexColor.RED + "☠" + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY;
     }
 
     // KILL: when a player gets killed by another player

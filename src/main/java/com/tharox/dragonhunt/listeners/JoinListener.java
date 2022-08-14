@@ -3,9 +3,10 @@ package com.tharox.dragonhunt.listeners;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameStart;
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.scoreboard.Scoreboard;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -67,8 +68,8 @@ public class JoinListener implements Listener {
         // telling them how many more players are needed
         // start the "stopServerIn" runnable
         for (Player online : Bukkit.getOnlinePlayers()) {
-            online.sendMessage(ChatColor.RED + "Waiting for " + ChatColor.DARK_RED + ChatColor.BOLD
-                    + DbValues.playersAllowedToPlay.size() + ChatColor.RED + " more player(s).");
+            online.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Waiting for "
+                    + ChatColor.YELLOW + DbValues.playersAllowedToPlay.size() + ChatColor.GRAY + " more player(s).");
         }
     }
 }

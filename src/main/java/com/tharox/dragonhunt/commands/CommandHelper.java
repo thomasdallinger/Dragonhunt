@@ -1,7 +1,9 @@
 package com.tharox.dragonhunt.commands;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.timer.Timer;
 import com.tharox.dragonhunt.upgrades.Item;
 import net.md_5.bungee.api.ChatColor;
@@ -22,13 +24,13 @@ public class CommandHelper {
      */
     protected boolean checkIfValid(Player player, Timer timer) {
         if (!timer.isRunning()) {
-            player.sendMessage(ChatColor.RED + "This feature is currently disabled.");
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "This feature is currently disabled.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
 
         if (player.getWorld().getName().equals("world_the_end")) {
-            player.sendMessage(ChatColor.RED + "This feature is disabled in the End.");
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "This feature is disabled in the End.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
@@ -38,9 +40,9 @@ public class CommandHelper {
 
     protected boolean checkIfEnoughCoins(Player player, String itemName) {
         if (Coins.getCoins(player) < getCommandCost(Main.getInstance().getConfig(), itemName)) {
-            player.sendMessage(ChatColor.RED + "You don't have enough coins! Need "
-                    + (getCommandCost(Main.getInstance().getConfig(), itemName) - Coins.getCoins(player))
-                    + " more.");
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You don't have enough coins! Need "
+                    + HexColor.RED + (getCommandCost(Main.getInstance().getConfig(), itemName) - Coins.getCoins(player))
+                    + ChatColor.GRAY + " more.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }

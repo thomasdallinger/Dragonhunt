@@ -78,7 +78,7 @@ public class Arrows {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
-        meta.setDisplayName(ChatColor.GOLD + "Generated Arrow");
+        meta.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD + "Generated Arrow");
         item.setItemMeta(meta);
 
         return item;
@@ -91,7 +91,7 @@ public class Arrows {
 
         meta.addCustomEffect(new PotionEffect(effect, 100, 0), true);
         meta.setColor(color);
-        meta.setDisplayName(ChatColor.GOLD + "Generated Arrow");
+        meta.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD + "Generated Arrow");
         meta.setLore(Arrays.asList(
                 ChatColor.YELLOW.toString() + ChatColor.ITALIC + "Effect duration: 5 seconds",
                 ""));

@@ -1,8 +1,10 @@
 package com.tharox.dragonhunt.blocks;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
+import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
@@ -41,9 +43,8 @@ public class BlockBreakListener implements Listener {
                     block.getType() == Material.OBSIDIAN) {
                 event.setCancelled(true);
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                player.sendMessage(ChatColor.RED + "You are not allowed to break "
-                        + ChatColor.DARK_RED + ChatColor.BOLD + "OBSIDIAN"
-                        + ChatColor.RED + " close to this Nether Portal!");
+                player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are not allowed to break "
+                        + HexColor.RED + "Obsidian" + ChatColor.GRAY + " close to this Nether Portal.");
                 return;
             }
         }
@@ -173,7 +174,8 @@ public class BlockBreakListener implements Listener {
         for (int x = -1; x <= 1; x++)
             for (int z = -1; z <= 1; z++)
                 for (int y = -1; y <= 1; y++)
-                    locations.add(new Location(location.getWorld(), location.getX() + x, location.getY() + y, location.getZ() + z).getBlock());
+                    locations.add(new Location(location.getWorld(), location.getX() + x, location.getY() + y,
+                            location.getZ() + z).getBlock());
 
         for (Block nextBlock :
                 locations) {

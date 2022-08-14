@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.shop;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
@@ -59,7 +60,7 @@ public class ShopListener implements Listener {
         if (event.getClick() == ClickType.NUMBER_KEY) return;
 
         // back to menu functionality
-        if (upgradeName.equals(ChatColor.RED + "Back to menu")) {
+        if (upgradeName.equals(HexColor.RED + "Back To Menu")) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASEDRUM, 1, 1);
             player.closeInventory();
             player.openInventory(shopInventory.menu);
@@ -69,22 +70,24 @@ public class ShopListener implements Listener {
         // not enough points to purchase upgrade level
         if (Coins.getCoins(player) < ShopInventory.upgradeCost.get(upgradeName)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(ChatColor.RED + "You don't have enough coins! Need "
-                    + (ShopInventory.upgradeCost.get(upgradeName) - Coins.getCoins(player)) + " more.");
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You don't have enough coins! Need "
+                    + HexColor.RED + (ShopInventory.upgradeCost.get(upgradeName) - Coins.getCoins(player))
+                    + ChatColor.GRAY + " more.");
             return;
         }
 
         // upgrade already bought
         if (upgradeName.contains("UNLOCKED")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(ChatColor.RED + "You have already bought this upgrade!");
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You have already bought this upgrade!");
             return;
         }
 
         // upgrade level not unlocked
         if (upgradeName.contains("LOCKED")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(ChatColor.RED + "Purchase the previous level to unlock this one!");
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY
+                    + "Purchase the previous level to unlock this one!");
             return;
         }
 

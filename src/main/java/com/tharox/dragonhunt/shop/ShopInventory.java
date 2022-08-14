@@ -81,7 +81,7 @@ public class ShopInventory {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return;
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        meta.setDisplayName(ChatColor.RED + "Back to menu");
+        meta.setDisplayName(HexColor.RED + "Back To Menu");
         item.setItemMeta(meta);
 
         inventory.setItem(26, item);

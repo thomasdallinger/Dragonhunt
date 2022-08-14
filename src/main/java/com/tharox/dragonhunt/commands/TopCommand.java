@@ -1,9 +1,11 @@
 package com.tharox.dragonhunt.commands;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.timer.Timer;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
@@ -32,14 +34,14 @@ public class TopCommand extends CommandHelper implements CommandExecutor {
         if (checkIfEnoughCoins(player, "/top")) return true;
 
         if (player.getLocation().getY() > world.getHighestBlockYAt((int) x, (int) z)) {
-            player.sendMessage(HexColor.RED + "Already on the surface.");
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "Already on the surface.");
             return true;
         }
 
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/top"));
         player.teleport(new Location(world, x, world.getHighestBlockYAt((int) x, (int) z), z));
-        player.sendMessage(HexColor.GREEN + "Whoosh.");
+        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "Whoosh.");
 
         return false;
     }

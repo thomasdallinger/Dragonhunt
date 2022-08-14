@@ -1,11 +1,11 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -24,9 +24,9 @@ public class PlayerDeathListener implements Listener {
 
     /**
      * The player always keeps:
-     * - hotbar (9 items, including tracker and grappler)
-     * - offhand (1 item)
-     * - armor (4 items, 3 items if the player had an elytra)
+     * - Hotbar (9 items, including TRACKER and GRAPPLER)
+     * - Offhand (1 item)
+     * - Armor (4 items, 3 items if the player had an elytra)
      * - XP (level only)
      * <p>
      * The killer gets a certain amount of XP.
@@ -36,7 +36,7 @@ public class PlayerDeathListener implements Listener {
         Player player = event.getEntity();
         Player killer = event.getEntity().getKiller();
 
-        //TODO: change DB implementation
+        // TODO: change DB implementation
         addPlayerDeath(player, event.getDeathMessage());
 
         // strike a lightning effect at the player's death location
@@ -47,6 +47,7 @@ public class PlayerDeathListener implements Listener {
             event.setDeathMessage(Prefixes.getKillPrefix()
                     + HexColor.RED + event.getDeathMessage().substring(0, player.getName().length())
                     + ChatColor.GRAY + event.getDeathMessage().substring(player.getName().length()));
+
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
             killer.giveExp(Coins.playerXP + XPUpgrade.MoreXP.get(killer) - 1);
             killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
@@ -79,9 +80,9 @@ public class PlayerDeathListener implements Listener {
 
         GameState.itemsToKeepOnDeath.put(player, player.getInventory().getContents());
 
-        player.sendMessage(ChatColor.YELLOW.toString() + ChatColor.ITALIC + "You died at "
-                + ChatColor.YELLOW.toString() + ChatColor.ITALIC + ChatColor.BOLD
-                + DbValues.locationToString(player.getLocation()));
+        player.sendMessage(Prefixes.getDeathPrefix() + ChatColor.GRAY.toString() + "You died at "
+                + ChatColor.GOLD + DbValues.locationToString(player.getLocation())
+                + ChatColor.GRAY + ".");
     }
 
     private void addPlayerDeath(Player player, String deathmessage) {

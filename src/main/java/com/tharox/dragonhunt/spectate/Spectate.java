@@ -2,14 +2,11 @@ package com.tharox.dragonhunt.spectate;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
-import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.coins.Coins;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -43,7 +40,7 @@ public class Spectate {
         player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 1, 1);
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage(Prefixes.getPrefix() + ChatColor.YELLOW + player.getName()
+            p.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + player.getName()
                     + ChatColor.GRAY + " uses a Spectate.");
         }
 
@@ -59,8 +56,8 @@ public class Spectate {
                 }
 
                 player.spawnParticle(Particle.PORTAL, player.getLocation(), 50);
-                player.sendMessage(ChatColor.YELLOW + "Spectate starts in " + ChatColor.GOLD + countdown[0]
-                        + ChatColor.YELLOW + " seconds.");
+                player.sendMessage(Prefixes.getCoinPrefix() + ChatColor.GRAY + "Spectate starts in "
+                        + ChatColor.YELLOW + countdown[0] + ChatColor.GRAY + " seconds.");
                 player.addPotionEffects(effects);
                 countdown[0]--;
             }

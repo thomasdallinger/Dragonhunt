@@ -119,8 +119,8 @@ public class GameConfiguration {
 
             // adds the TRACKER, ELYTRA, START-EQUIPMENT (Shield) and GRAPPLER to the player's inventory
             player.getInventory().setItem(7, Main.getInstance().getTracker().givePlayerTracker());
-            player.getInventory().setChestplate(addItem(new ItemStack(Material.ELYTRA)));
-            player.getInventory().setItemInOffHand(addItem(new ItemStack(Material.SHIELD)));
+            player.getInventory().setChestplate(GameState.addItem(new ItemStack(Material.ELYTRA)));
+            player.getInventory().setItemInOffHand(GameState.addItem(new ItemStack(Material.SHIELD)));
             new Grappler(player);
 
             // HashMap which prevents players from executing the command while the SPECTATE is still active
@@ -151,28 +151,5 @@ public class GameConfiguration {
         // active if any of the specified modifiers are active
         new PermanentEffect();
         new PermanentWitherSkeletons();
-    }
-
-    /**
-     * @param item ItemStack to be modified and returned
-     * @return ItemStack to be added to the players inventory
-     */
-    private ItemStack addItem(ItemStack item) {
-        ItemMeta meta = item.getItemMeta();
-        if (meta == null) return null;
-
-        // making the item unbreakable while looking enchanted
-        meta.addEnchant(Enchantment.DURABILITY, 1, true);
-        meta.setUnbreakable(true);
-        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-
-        if (item.getType() == Material.SHIELD) {
-            meta.setDisplayName(ChatColor.AQUA.toString() + ChatColor.BOLD + "Shield");
-        } else if (item.getType() == Material.ELYTRA) {
-            meta.setDisplayName(ChatColor.YELLOW.toString() + ChatColor.BOLD + "Elytra");
-        }
-
-        item.setItemMeta(meta);
-        return item;
     }
 }

@@ -3,13 +3,19 @@ package com.tharox.dragonhunt.game;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
@@ -55,8 +61,33 @@ public class GameState {
             player.getWorld().dropItemNaturally(player.getLocation(), didNotFit.get(0));
             // index 0 = max. only 1 item in the HashMap
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(ChatColor.RED + "Inventory full! Item dropped...");
+            player.sendMessage(Prefixes.getErrorPrefix() + HexColor.RED + "Inventory full! "
+                    + ChatColor.GRAY + "Item dropped on the ground.");
         }
+    }
+
+    /**
+     * @param item ItemStack to be modified and returned
+     * @return ItemStack to be added to the players inventory
+     */
+    public static ItemStack addItem(ItemStack item) {
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return null;
+
+        // making the item unbreakable while looking enchanted
+        meta.addEnchant(Enchantment.DURABILITY, 1, true);
+        meta.setUnbreakable(true);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
+
+        if (item.getType() == Material.SHIELD) {
+            meta.setDisplayName(org.bukkit.ChatColor.AQUA.toString() + org.bukkit.ChatColor.BOLD + "Shield");
+        } else if (item.getType() == Material.ELYTRA) {
+            meta.setDisplayName(org.bukkit.ChatColor.YELLOW.toString() + org.bukkit.ChatColor.BOLD + "Elytra");
+        }
+
+        item.setItemMeta(meta);
+        return item;
     }
 
     /**

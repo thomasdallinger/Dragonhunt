@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.grappler;
 
+import com.tharox.dragonhunt.colors.HexColor;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -33,7 +34,7 @@ public class Grappler {
                 ChatColor.LIGHT_PURPLE.toString() + ChatColor.ITALIC + "but can be picked up.",
                 ChatColor.LIGHT_PURPLE.toString() + ChatColor.ITALIC + "Be aware of fall damage.",
                 "",
-                ChatColor.WHITE + "Max. arrow distance: " + ChatColor.RED + "20 blocks"));
+                ChatColor.WHITE + "Max. arrow distance: " + HexColor.RED + "20 blocks"));
         item.setItemMeta(meta);
 
         return item;

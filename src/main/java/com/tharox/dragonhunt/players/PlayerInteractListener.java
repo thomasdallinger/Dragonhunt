@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import net.md_5.bungee.api.ChatColor;
@@ -55,7 +56,8 @@ public class PlayerInteractListener implements Listener {
                         || block.getType() == Material.ANVIL) {
                     event.setCancelled(true);
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                    player.sendMessage(ChatColor.RED + "You are not allowed to use this block!");
+                    player.sendMessage(Prefixes.getErrorPrefix()
+                            + ChatColor.GRAY + "You are not allowed to use this block!");
                 }
             }
         }

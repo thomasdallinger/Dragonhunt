@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -59,7 +60,7 @@ public class PlayerInventoryListener implements Listener {
         Player player = (Player) event.getPlayer();
         Inventory inv = event.getInventory();
 
-        if (!event.getView().getTitle().equals(ChatColor.LIGHT_PURPLE.toString() + ChatColor.BOLD + "MODIFIERS"))
+        if (!event.getView().getTitle().equals(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "MODIFIERS"))
             return;
         if (GameState.modifierInventoryClose) return;
 
@@ -77,7 +78,7 @@ public class PlayerInventoryListener implements Listener {
 
         if (displayName.contains(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")
                 || displayName.contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")
-                || displayName.contains(ChatColor.GOLD + "Generated Arrow"))
+                || displayName.contains(ChatColor.GOLD.toString() + ChatColor.BOLD + "Generated Arrow"))
             event.setCancelled(true);
 
         if (item.getType() == Material.ELYTRA) {

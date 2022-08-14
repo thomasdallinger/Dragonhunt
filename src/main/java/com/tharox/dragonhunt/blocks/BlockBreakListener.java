@@ -4,7 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;

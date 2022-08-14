@@ -1,12 +1,13 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -43,8 +44,7 @@ public class PlayerDeathListener implements Listener {
         player.performCommand("pos Death" + DbValues.getKills(player, false));
 
         if (killer != null) {
-
-            event.setDeathMessage(ChatColor.GOLD + "☠" + ChatColor.DARK_GRAY + " | "
+            event.setDeathMessage(Prefixes.getKillPrefix()
                     + HexColor.RED + event.getDeathMessage().substring(0, player.getName().length())
                     + ChatColor.GRAY + event.getDeathMessage().substring(player.getName().length()));
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
@@ -52,7 +52,7 @@ public class PlayerDeathListener implements Listener {
             killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             addPlayerKill(killer, player);
         } else {
-            event.setDeathMessage(HexColor.RED + "✟" + ChatColor.DARK_GRAY + " | "
+            event.setDeathMessage(Prefixes.getDeathPrefix()
                     + HexColor.RED + event.getDeathMessage().substring(0, player.getName().length())
                     + ChatColor.GRAY + event.getDeathMessage().substring(player.getName().length()));
         }

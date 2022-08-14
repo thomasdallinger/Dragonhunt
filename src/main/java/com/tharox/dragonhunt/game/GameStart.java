@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.game;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.elytra.ElytraSwapRunnable;
 import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
@@ -85,7 +86,7 @@ public class GameStart extends GameConfiguration {
      */
     public void onCountdown(int time) {
         if (overworld == null) {
-            Bukkit.getServer().broadcastMessage(ChatColor.RED + "ERROR: World name is incorrect.");
+            Bukkit.getServer().broadcastMessage(Prefixes.getErrorPrefix() + HexColor.RED + "World name is incorrect.");
             return;
         }
 
@@ -138,17 +139,17 @@ public class GameStart extends GameConfiguration {
 
                 player.setGameMode(GameMode.SURVIVAL);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 600, 0));
-                player.sendMessage(Main.getPrefix() + HexColor.GOLD + ChatColor.BOLD
+                player.sendMessage(Prefixes.getPrefix() + ChatColor.GOLD + ChatColor.BOLD
                         + "Whoever kills the Enderdragon wins.");
-                player.sendMessage(Main.getPrefix() + ChatColor.GRAY + "Fall damage is "
+                player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "Fall damage is "
                         + HexColor.RED + "disabled" + ChatColor.GRAY + ".");
-                player.sendMessage(Main.getPrefix() + HexColor.YELLOW + "/pos [name]" + ChatColor.DARK_GRAY + ": "
+                player.sendMessage(Prefixes.getPrefix() + ChatColor.YELLOW + "/pos [name]" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "mark locations");
-                player.sendMessage(Main.getPrefix() + HexColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
+                player.sendMessage(Prefixes.getPrefix() + ChatColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "get to the surface quickly");
-                player.sendMessage(Main.getPrefix() + HexColor.YELLOW + "/respawn" + ChatColor.DARK_GRAY + ": "
+                player.sendMessage(Prefixes.getPrefix() + ChatColor.YELLOW + "/respawn" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "sets a respawn point");
-                player.sendMessage(Main.getPrefix() + HexColor.YELLOW + "/spec" + ChatColor.DARK_GRAY + ": "
+                player.sendMessage(Prefixes.getPrefix() + ChatColor.YELLOW + "/spec" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "go into spectator mode");
             }
         }
@@ -177,12 +178,12 @@ public class GameStart extends GameConfiguration {
 
             if (elytraCountdown.getTime() <= 5 && elytraCountdown.getTime() > 0) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-                player.sendMessage(Main.getPrefix() + ChatColor.GRAY + "Elytra removed in "
+                player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "Elytra removed in "
                         + HexColor.HIGHLIGHT + elytraCountdown.getTime() + ChatColor.GRAY + " seconds.");
             }
 
             if (elytraCountdown.getTime() == 0) {
-                player.sendMessage(Main.getPrefix() + ChatColor.GRAY + "Fall damage is "
+                player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "Fall damage is "
                         + HexColor.GREEN + "enabled" + ChatColor.GRAY + ".");
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);

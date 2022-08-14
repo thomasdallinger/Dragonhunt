@@ -1,7 +1,8 @@
 package com.tharox.dragonhunt.upgrades;
 
 import com.tharox.dragonhunt.coins.Coins;
-import org.bukkit.ChatColor;
+import com.tharox.dragonhunt.colors.HexColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
@@ -47,12 +48,17 @@ public class Item {
         return SLOT;
     }
 
+    /**
+     * Creates the actual ItemStack with the parameters (name, amount, slot, ...) provided.
+     *
+     * @return an ItemStack
+     */
     public ItemStack createItem(Player player) {
         ItemStack itemStack = new ItemStack(MATERIAL, AMOUNT);
 
         if (NAME != null) {
             if (NAME.contains("»"))
-                itemStack = setEnchantmentAndName(itemStack);
+                itemStack = setEnchantmentAndName(itemStack); // menu item
             else if (NAME.contains("Sharpness"))
                 itemStack = checkIfUnlocked(itemStack, EnchantmentUpgrades.Sharpness.get(player));
             else if (NAME.contains("Knockback"))
@@ -105,8 +111,8 @@ public class Item {
 
         if (NAME != null && NAME.contains("»") && LORE != null) {
             itemMeta.setLore(Arrays.asList(
-                    ChatColor.YELLOW + ChatColor.ITALIC.toString() + LORE.substring(0, 34),
-                    ChatColor.YELLOW + ChatColor.ITALIC.toString() + LORE.substring(35)
+                    ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE.substring(0, 34),
+                    ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE.substring(35)
             ));
         }
 
@@ -114,15 +120,15 @@ public class Item {
             // player can't acquire the upgrade yet
             if (NAME != null && itemMeta.getDisplayName().contains("UNLOCKED")) {
                 itemMeta.setLore(Arrays.asList(
-                        ChatColor.GREEN.toString() + ChatColor.ITALIC + LORE,
+                        HexColor.GREEN.toString() + ChatColor.ITALIC + LORE,
                         "",
                         ChatColor.WHITE.toString() + cost + " Coins",
-                        ChatColor.GREEN + "Unlocked!"
+                        HexColor.GREEN + "Unlocked!"
                 ));
                 break; // player has already bought the upgrade
             } else if (NAME != null && itemMeta.getDisplayName().contains("LOCKED")) {
                 itemMeta.setLore(Arrays.asList(
-                        ChatColor.RED.toString() + ChatColor.ITALIC + LORE,
+                        HexColor.RED.toString() + ChatColor.ITALIC + LORE,
                         "",
                         ChatColor.WHITE.toString() + cost + " Coins",
                         ChatColor.DARK_RED + "Purchase previous levels first!"
@@ -135,7 +141,7 @@ public class Item {
                 itemMeta.setLore(Arrays.asList(
                         ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        ChatColor.LIGHT_PURPLE.toString() + Coins.getCoins(player) +
+                        HexColor.HIGHLIGHT.toString() + Coins.getCoins(player) +
                                 ChatColor.WHITE + " / " + cost + " Coins",
                         ChatColor.GOLD + "Click to buy!"
                 ));
@@ -146,7 +152,7 @@ public class Item {
                         "",
                         ChatColor.DARK_RED.toString() + Coins.getCoins(player) +
                                 ChatColor.WHITE + " / " + cost + " Coins",
-                        ChatColor.RED.toString() + (cost - Coins.getCoins(player)) + " Coin(s) missing!"
+                        HexColor.RED.toString() + (cost - Coins.getCoins(player)) + " Coin(s) missing!"
                 ));
                 break;
             }
@@ -168,14 +174,14 @@ public class Item {
             // item has already been purchased
         } else if (AMOUNT < level) {
             itemMeta.setDisplayName(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + NAME +
-                    ChatColor.GREEN + ChatColor.ITALIC + " UNLOCKED");
+                    HexColor.GREEN + ChatColor.ITALIC + " UNLOCKED");
             itemStack.setItemMeta(itemMeta);
             return itemStack;
 
             // item can't be purchased yet
         } else {
             itemMeta.setDisplayName(ChatColor.DARK_RED.toString() + ChatColor.BOLD + NAME +
-                    ChatColor.RED + ChatColor.ITALIC + " LOCKED");
+                    HexColor.RED + ChatColor.ITALIC + " LOCKED");
             itemStack.setItemMeta(itemMeta);
             return itemStack;
         }

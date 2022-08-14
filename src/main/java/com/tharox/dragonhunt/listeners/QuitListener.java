@@ -1,9 +1,9 @@
 package com.tharox.dragonhunt.listeners;
 
-import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.db.DbValues;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,7 +15,8 @@ public class QuitListener implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
 
-        event.setQuitMessage(Main.getPrefix() + ChatColor.RED + player.getName() + ChatColor.WHITE + " has left.");
+        event.setQuitMessage(Prefixes.getLeavePrefix() + ChatColor.YELLOW + player.getName()
+                + ChatColor.GRAY + " has left.");
 
         if (Bukkit.getOnlinePlayers().size() == 1) {
             DbValues.updateServerStatus();
@@ -23,8 +24,8 @@ public class QuitListener implements Listener {
         }
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage(Main.getPrefix() + ChatColor.DARK_RED + ChatColor.BOLD
-                    + (Bukkit.getOnlinePlayers().size() - 1) + ChatColor.RED + " player(s) remaining.");
+            p.sendMessage(Prefixes.getLeavePrefix() + ChatColor.YELLOW
+                    + (Bukkit.getOnlinePlayers().size() - 1) + ChatColor.GRAY + " player(s) remaining.");
             // - 1 because the player that left is still included in the OnlinePlayers list at that time
         }
     }

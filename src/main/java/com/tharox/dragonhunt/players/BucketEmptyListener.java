@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.game.GameState;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

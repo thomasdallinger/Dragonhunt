@@ -1,6 +1,8 @@
 package com.tharox.dragonhunt.game;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.entities.PermanentWitherSkeletons;
 import com.tharox.dragonhunt.grappler.Grappler;
 import com.tharox.dragonhunt.modifiers.classes.Diamonds;
@@ -29,7 +31,7 @@ public class GameConfiguration {
         World overworld = Bukkit.getServer().getWorld("world");
 
         if (overworld == null) {
-            Bukkit.getServer().broadcastMessage(ChatColor.RED + "ERROR: World name is incorrect.");
+            Bukkit.getServer().broadcastMessage(Prefixes.getErrorPrefix() + HexColor.RED + "World name is incorrect.");
             return;
         }
 
@@ -53,7 +55,8 @@ public class GameConfiguration {
         World nether = Bukkit.getServer().getWorld("world_nether");
 
         if (nether == null) {
-            Bukkit.getServer().broadcastMessage(ChatColor.RED + "ERROR: World Nether name is incorrect.");
+            Bukkit.getServer().broadcastMessage(Prefixes.getErrorPrefix()
+                    + HexColor.RED + "World Nether name is incorrect.");
             return;
         }
 
@@ -77,7 +80,8 @@ public class GameConfiguration {
         World end = Bukkit.getServer().getWorld("world_the_end");
 
         if (end == null) {
-            Bukkit.getServer().broadcastMessage(ChatColor.RED + "ERROR: World End name is incorrect.");
+            Bukkit.getServer().broadcastMessage(Prefixes.getErrorPrefix()
+                    + HexColor.RED + "World End name is incorrect.");
             return;
         }
 

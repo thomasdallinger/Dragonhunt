@@ -41,11 +41,11 @@ public class Scoreboard extends ScoreboardBuilder {
     @Override
     public void update(Player player, Countdown countdown) {
         setScore(ChatColor.WHITE + "☻ " + Bukkit.getOnlinePlayers().size() + " "
-                + ChatColor.WHITE + "☠ " + HexColor.GOLD + DbValues.getKills(player, true) + " "
+                + ChatColor.WHITE + "☠ " + ChatColor.GOLD + DbValues.getKills(player, true) + " "
                 + ChatColor.WHITE + "✟ " + HexColor.RED + DbValues.getKills(player, false), 4);
         setScore(ChatColor.WHITE + "⛃ " + HexColor.HIGHLIGHT + Coins.getCoins(player)
                 + ChatColor.DARK_GRAY + " » " + ChatColor.WHITE + countdownFormat(countdown), 2);
-        setScore(HexColor.YELLOW + "playdragonhunt.net", 0);
+        setScore(ChatColor.YELLOW + "playdragonhunt.net", 0);
     }
 
     private void run(Player player, Countdown countdown) {

@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.coins;
 
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
@@ -34,13 +35,11 @@ public class Coins {
     // used in: LevelUp, Timer (Final Showdown), ResetScoreboardCountdown
     public static void addCoins(Player player, int coinsToAdd) {
         coins.put(player, coins.get(player) + coinsToAdd);
-        player.sendMessage(HexColor.HIGHLIGHT + "⛃" + ChatColor.DARK_GRAY + " | "
-                + HexColor.GREEN + "+" + coinsToAdd + ChatColor.GRAY + " Coins");
+        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "+" + coinsToAdd + ChatColor.GRAY + " Coins");
     }
 
     public static void removeCoins(Player player, int coinsToRemove) {
         coins.put(player, coins.get(player) - coinsToRemove);
-        player.sendMessage(HexColor.HIGHLIGHT + "⛃" + ChatColor.DARK_GRAY + " | "
-                + HexColor.RED + "-" + coinsToRemove + ChatColor.GRAY + " Coins");
+        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.RED + "-" + coinsToRemove + ChatColor.GRAY + " Coins");
     }
 }

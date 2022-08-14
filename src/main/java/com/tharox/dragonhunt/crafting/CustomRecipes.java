@@ -1,8 +1,8 @@
 package com.tharox.dragonhunt.crafting;
 
 import com.tharox.dragonhunt.Main;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;

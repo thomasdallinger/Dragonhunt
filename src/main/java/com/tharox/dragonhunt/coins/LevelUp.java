@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.coins;
 
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
@@ -21,11 +22,10 @@ public class LevelUp implements Listener {
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
         player.sendTitle(ChatColor.AQUA + " ", HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "LEVEL "
                 + level, 5, 60, 5);
-        player.sendMessage(HexColor.GREEN + "Level Up!");
+        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "Level Up!");
 
         if (level % 5 == 0) {
-            player.sendMessage(HexColor.HIGHLIGHT + "⛃" + ChatColor.DARK_GRAY + " | "
-                    + HexColor.GREEN + "+1" + ChatColor.GRAY + " Golden Apple");
+            player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "+1" + ChatColor.GRAY + " Golden Apple");
             GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE));
             Coins.addCoins(player, 20); // extra coins
         } else {

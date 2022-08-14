@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.modifiers.selection;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.modifiers.classes.DragonhuntModifier;
 import com.tharox.dragonhunt.modifiers.classes.Modifier;
 import net.md_5.bungee.api.ChatColor;
@@ -53,7 +54,7 @@ public class ModifierInventory {
 
                             for (Player player : Bukkit.getOnlinePlayers()) {
                                 if (title != null && lore != null) {
-                                    player.sendMessage(Main.getPrefix() + title
+                                    player.sendMessage(Prefixes.getPrefix() + title
                                             + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + lore);
                                     player.setPlayerListFooter(player.getPlayerListFooter() + "\n" + title);
                                 }

@@ -1,10 +1,11 @@
 package com.tharox.dragonhunt.timer;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameEnd;
-import com.tharox.dragonhunt.coins.Coins;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -51,7 +52,8 @@ public class Timer {
             ItemStack item = player.getInventory().getItemInMainHand();
 
             if (item.getItemMeta() != null)
-                if (item.getItemMeta().getDisplayName().equals((ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")))
+                if (item.getItemMeta().getDisplayName().equals((ChatColor.GOLD.toString()
+                        + ChatColor.BOLD + "Tracker")))
                     continue;
 
             // if the player is in Spectator mode, the time wont get displayed (Spectate or after the game ended)
@@ -81,10 +83,10 @@ public class Timer {
                 if (getTime() % 600 == 0) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         if (getTime() < 2400)
-                            player.sendMessage(Main.getPrefix() + ChatColor.RED + "All Players will receive "
-                                    + ChatColor.DARK_RED + "Strength I" + ChatColor.RED + " and "
-                                    + ChatColor.DARK_RED + "Speed II" + ChatColor.RED + " in "
-                                    + ChatColor.DARK_RED + (2400 - getTime()) / 60 + ChatColor.RED + " minutes.");
+                            player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "All Players will receive "
+                                    + ChatColor.YELLOW + "Strength I" + ChatColor.GRAY + " and "
+                                    + ChatColor.YELLOW + "Speed II" + ChatColor.GRAY + " in "
+                                    + ChatColor.YELLOW + (2400 - getTime()) / 60 + ChatColor.GRAY + " minutes.");
                         else if (getTime() == 2400) {
                             player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 1);
                             player.getWorld().strikeLightningEffect(player.getLocation());
@@ -92,9 +94,8 @@ public class Timer {
 
                             player.sendTitle(ChatColor.AQUA + " ", ChatColor.DARK_RED.toString()
                                     + ChatColor.BOLD + "SHOWDOWN", 5, 100, 5);
-                            player.sendMessage(Main.getPrefix() + ChatColor.RED + ChatColor.BOLD
-                                    + "The game ends in " + ChatColor.DARK_RED + ChatColor.BOLD + "10"
-                                    + ChatColor.RED + ChatColor.BOLD + " minutes.");
+                            player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "The game ends in "
+                                    + ChatColor.YELLOW + "10" + ChatColor.GRAY + " minutes.");
                         }
                     }
                 }
@@ -118,8 +119,8 @@ public class Timer {
     private void showdownCountdown() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-            player.sendMessage(Main.getPrefix() + ChatColor.RED + "Final showdown in "
-                    + ChatColor.DARK_RED + (2400 - getTime()) + ChatColor.RED + " seconds.");
+            player.sendMessage(Prefixes.getPrefix() + ChatColor.GRAY + "Final showdown in "
+                    + ChatColor.YELLOW + (2400 - getTime()) + ChatColor.GRAY + " seconds.");
         }
     }
 }

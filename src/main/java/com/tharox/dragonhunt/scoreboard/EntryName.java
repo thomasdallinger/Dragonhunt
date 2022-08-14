@@ -1,6 +1,6 @@
 package com.tharox.dragonhunt.scoreboard;
 
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 
 public enum EntryName {
 

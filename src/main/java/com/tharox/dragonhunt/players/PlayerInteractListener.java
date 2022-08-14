@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;

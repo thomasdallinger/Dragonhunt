@@ -3,6 +3,9 @@ package com.tharox.dragonhunt;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
+import com.tharox.dragonhunt.chat.ChatListener;
+import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.coins.LevelUp;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.commands.*;
 import com.tharox.dragonhunt.crafting.CustomRecipes;
@@ -14,18 +17,15 @@ import com.tharox.dragonhunt.entities.EntityDeathListener;
 import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.grappler.GrappleListener;
-import com.tharox.dragonhunt.listeners.ChatListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.players.*;
-import com.tharox.dragonhunt.coins.LevelUp;
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
+import com.tharox.dragonhunt.shop.ShopListener;
 import com.tharox.dragonhunt.tablist.TablistManager;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import com.tharox.dragonhunt.tracker.Tracker;
-import com.tharox.dragonhunt.shop.ShopListener;
 import com.tharox.dragonhunt.vehicles.VehicleListener;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
@@ -57,7 +57,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig(); //config.yml
+        saveDefaultConfig(); // config.yml
 
         Bukkit.getLogger().fine("Plugin activated");
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
@@ -92,7 +92,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     private void timeSetNight() {
         World overworld = Bukkit.getServer().getWorld("world");
         if (overworld == null) {
-            Bukkit.getServer().broadcastMessage(ChatColor.RED + "ERROR: World name is incorrect.");
+            Bukkit.getServer().broadcastMessage(Prefixes.getErrorPrefix() + HexColor.RED + "World name is incorrect.");
             return;
         }
         overworld.setTime(13000); // time set night
@@ -157,10 +157,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         return tablistManager;
     }
 
-    public static String getPrefix() {
-        return ChatColor.WHITE + "☻" + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE;
-    }
-
     public static String getTitle() {
         return ChatColor.of("#800ce9").toString() + ChatColor.BOLD + "D"
                 + ChatColor.of("#8f11e7").toString() + ChatColor.BOLD + "R"
@@ -172,14 +168,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
                 + ChatColor.of("#e222de").toString() + ChatColor.BOLD + "U"
                 + ChatColor.of("#f127dc").toString() + ChatColor.BOLD + "N"
                 + ChatColor.of("#fe28dc").toString() + ChatColor.BOLD + "T";
-    }
-
-    public static String getNamePrefix(Player player) {
-        return ChatColor.WHITE.toString() + "☠ "
-                + HexColor.GOLD + DbValues.getKills(player, true)
-                + ChatColor.WHITE + " ⛃ "
-                + HexColor.HIGHLIGHT + Coins.getCoins(player)
-                + ChatColor.DARK_GRAY + " | ";
     }
 
     public static void elytraInInventory() {

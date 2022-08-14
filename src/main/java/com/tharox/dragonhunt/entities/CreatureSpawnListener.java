@@ -1,5 +1,7 @@
 package com.tharox.dragonhunt.entities;
 
+import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.modifiers.classes.*;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
@@ -23,7 +25,7 @@ public class CreatureSpawnListener implements Listener {
         World world = Bukkit.getServer().getWorld("world");
 
         if (world == null) {
-            Bukkit.getServer().broadcastMessage(ChatColor.RED + "ERROR: World name is incorrect.");
+            Bukkit.getServer().broadcastMessage(Prefixes.getErrorPrefix() + HexColor.RED + "World name is incorrect.");
             return;
         }
 

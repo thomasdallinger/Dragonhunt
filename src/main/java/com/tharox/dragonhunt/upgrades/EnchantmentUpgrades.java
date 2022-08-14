@@ -2,7 +2,6 @@ package com.tharox.dragonhunt.upgrades;
 
 import com.tharox.dragonhunt.Main;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -67,7 +66,8 @@ public class EnchantmentUpgrades {
                                     item.addUnsafeEnchantment(Enchantment.KNOCKBACK, Knockback.get(player) - 1);
 
                                 if (FireAspect.get(player) > 1)
-                                    item.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, FireAspect.get(player) - 1);
+                                    item.addUnsafeEnchantment(Enchantment.FIRE_ASPECT,
+                                            FireAspect.get(player) - 1);
                             }
 
                             // Bow
@@ -110,7 +110,8 @@ public class EnchantmentUpgrades {
                     for (ItemStack item : armor) {
                         if (item != null) {
                             if (Protection.get(player) > 1)
-                                item.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, Protection.get(player) - 1);
+                                item.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,
+                                        Protection.get(player) - 1);
                         }
                     }
 
@@ -121,7 +122,8 @@ public class EnchantmentUpgrades {
 
                     if (boots != null) {
                         if (FeatherFalling.get(player) > 1)
-                            boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, FeatherFalling.get(player) - 1);
+                            boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL,
+                                    FeatherFalling.get(player) - 1);
                     }
                 }
             }

@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.spectate;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
@@ -42,8 +43,8 @@ public class Spectate {
         player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 1, 1);
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage(Main.getPrefix() + HexColor.YELLOW + player.getName()
-                    + ChatColor.GRAY + " uses a Spectate Token.");
+            p.sendMessage(Prefixes.getPrefix() + ChatColor.YELLOW + player.getName()
+                    + ChatColor.GRAY + " uses a Spectate.");
         }
 
         new BukkitRunnable() {

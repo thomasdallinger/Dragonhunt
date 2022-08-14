@@ -1,8 +1,9 @@
 package com.tharox.dragonhunt.tablist;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
@@ -42,8 +43,8 @@ public class TablistManager {
             if (team == null)
                 team = scoreboard.registerNewTeam(playerCount + "player");
 
-            team.setColor(ChatColor.YELLOW);
-            team.setPrefix(Main.getNamePrefix(target));
+            team.setColor(org.bukkit.ChatColor.YELLOW);
+            team.setPrefix(Prefixes.getNamePrefix(target));
             team.addEntry(target.getName());
 
             playerCount++;

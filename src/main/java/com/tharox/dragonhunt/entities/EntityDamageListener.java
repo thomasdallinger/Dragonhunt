@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.modifiers.classes.FireWeakness;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;

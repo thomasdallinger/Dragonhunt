@@ -1,11 +1,14 @@
 package com.tharox.dragonhunt.tracker;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.commands.PositionCommand;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.commands.PositionCommand;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -56,17 +59,23 @@ public class Tracker implements Listener {
         if (e == null)
             return;
 
+        // a list of all structures (and locations) trackable in the world the player is in
         LinkedList<String> structureList = new LinkedList<>();
         LinkedList<Location> locationList = new LinkedList<>();
 
         if (world.getName().equals("world")) {
-            addStructureTypeToLists(player, StructureType.SHIPWRECK, "Shipwreck", structureList, locationList);
-            addStructureToLists(player, Structure.ANCIENT_CITY, "Ancient City", structureList, locationList);
-            addStructureToLists(player, Structure.MINESHAFT, "Mineshaft", structureList, locationList);
+            addStructureTypeToLists(player, StructureType.SHIPWRECK, "Shipwreck", structureList,
+                    locationList);
+            addStructureToLists(player, Structure.ANCIENT_CITY, "Ancient City", structureList,
+                    locationList);
+            addStructureToLists(player, Structure.MINESHAFT, "Mineshaft", structureList,
+                    locationList);
 
         } else if (world.getName().equals("world_nether")) {
-            addStructureToLists(player, Structure.FORTRESS, "Fortress", structureList, locationList);
-            addStructureToLists(player, Structure.BASTION_REMNANT, "Bastion", structureList, locationList);
+            addStructureToLists(player, Structure.FORTRESS, "Fortress", structureList,
+                    locationList);
+            addStructureToLists(player, Structure.BASTION_REMNANT, "Bastion", structureList,
+                    locationList);
 
             if (GameState.firstNetherEntry != null) {
                 structureList.add("Nether Portal");
@@ -75,14 +84,15 @@ public class Tracker implements Listener {
         }
 
         // locate a Ruined Portal in the OVERWORLD and the NETHER (Tracker disabled in the End)
-        addStructureTypeToLists(player, StructureType.RUINED_PORTAL, "Ruined Portal", structureList, locationList);
+        addStructureTypeToLists(player, StructureType.RUINED_PORTAL, "Ruined Portal", structureList,
+                locationList);
 
         if (e.equals(EquipmentSlot.HAND)
                 && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
 
                 if (world.getName().equals("world_the_end")) {
-                    player.sendMessage(ChatColor.RED + "Tracker disabled in the End.");
+                    player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "Tracker disabled in the End.");
                     return;
                 }
 
@@ -98,17 +108,16 @@ public class Tracker implements Listener {
 
                     playerTracksName.put(player, "[POS] " + PositionCommand.positions.get(player).get(index).getName());
                     playerTracksLocation.put(player, PositionCommand.positions.get(player).get(index).getLocation());
-                    player.sendMessage(ChatColor.WHITE + "Tracking " + ChatColor.DARK_GREEN.toString()
-                            + ChatColor.BOLD + playerTracksName.get(player).substring(6).toUpperCase()
-                            + ChatColor.WHITE + ".");
+                    player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
+                            + ChatColor.DARK_GREEN + playerTracksName.get(player).substring(6) + ChatColor.GRAY + ".");
                 } else {
                     if (index > locationList.size() - 1)
                         index = 0;
 
                     playerTracksName.put(player, structureList.get(index));
                     playerTracksLocation.put(player, locationList.get(index));
-                    player.sendMessage(ChatColor.WHITE + "Tracking " + ChatColor.GOLD.toString()
-                            + ChatColor.BOLD + playerTracksName.get(player).toUpperCase() + ChatColor.WHITE + ".");
+                    player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
+                            + ChatColor.GOLD + playerTracksName.get(player) + ChatColor.GRAY + ".");
                 }
 
                 playerTracksIndex.replace(player, index);
@@ -138,17 +147,19 @@ public class Tracker implements Listener {
             try {
 
                 if (player.getWorld().getName().equals("world_the_end")) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
-                            ChatColor.RED.toString() + ChatColor.BOLD + "DISABLED IN THE END"));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                            new ComponentBuilder("DISABLED IN THE END").color(HexColor.RED).bold(true).create());
                     return;
                 }
 
                 if (trackedObject == null) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
-                            ChatColor.GREEN.toString() + ChatColor.BOLD
-                                    + "RIGHT-CLICK: " + ChatColor.WHITE + "Structure, "
-                                    + ChatColor.GREEN.toString() + ChatColor.BOLD
-                                    + "SHIFT + RIGHT-CLICK: " + ChatColor.WHITE + "Position"));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                            new ComponentBuilder("RIGHT-CLICK: ").color(ChatColor.GOLD).bold(true)
+                                    .append("Structure").color(ChatColor.WHITE).bold(false)
+                                    .append(" | ").color(ChatColor.DARK_GRAY)
+                                    .append("SHIFT + RIGHT-CLICK: ").color(ChatColor.DARK_GREEN).bold(true)
+                                    .append("Position").color(ChatColor.WHITE).bold(false).create());
+
                     return;
                 }
 
@@ -165,11 +176,11 @@ public class Tracker implements Listener {
                 // do not show "In close proximity" when tracking a position
                 // but still needed to make it easier to find structures since the coords provided are not very accurate
                 if (distance < 100 && !trackedObject.contains("[POS]")) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedObjectName
-                            + ChatColor.GREEN + "In close proximity"));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(trackedObjectName)
+                            .append("In close proximity").color(HexColor.GREEN).create());
                 } else {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedObjectName
-                            + ChatColor.WHITE + distance + " Blocks away"));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(trackedObjectName)
+                            .append(distance + " Blocks away").color(ChatColor.WHITE).create());
                 }
 
                 // set the compass target (where to point the needle)
@@ -183,8 +194,8 @@ public class Tracker implements Listener {
 
             } catch (IllegalArgumentException ex) {
                 if (trackedObject != null) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(trackedObjectName
-                            + ChatColor.RED + DbValues.getCurrentWorld(trackedLocation).toUpperCase()));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(trackedObjectName)
+                            .append(DbValues.getCurrentWorld(trackedLocation)).color(HexColor.RED).create());
                 }
             }
         }
@@ -242,13 +253,14 @@ public class Tracker implements Listener {
 
         meta.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker");
         meta.setLore(Arrays.asList(
-                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "Displays the distance towards different structures.",
+                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "Displays the distance towards different",
+                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "structures and positions.",
                 ChatColor.YELLOW.toString() + ChatColor.ITALIC + "The compass needle points to the",
-                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "tracked structure location.",
+                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "tracked structure/position location.",
                 "",
-                ChatColor.WHITE + "Left-Click: " + ChatColor.GREEN + "Open shop menu (/shop)",
-                ChatColor.WHITE + "Right-Click: " + ChatColor.GREEN + "Switch tracked structure",
-                ChatColor.WHITE + "Shift + Right-Click: " + ChatColor.GREEN + "Switch tracked position"));
+                ChatColor.WHITE + "Left-Click: " + HexColor.HIGHLIGHT + "Open shop menu (/shop)",
+                ChatColor.WHITE + "Right-Click: " + ChatColor.GOLD + "Switch tracked structure",
+                ChatColor.WHITE + "Shift + Right-Click: " + ChatColor.DARK_GREEN + "Switch tracked position"));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 

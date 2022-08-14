@@ -1,7 +1,6 @@
-package com.tharox.dragonhunt.listeners;
+package com.tharox.dragonhunt.chat;
 
-import com.tharox.dragonhunt.Main;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
@@ -10,7 +9,7 @@ public class ChatListener implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
-        event.setFormat(Main.getNamePrefix(event.getPlayer())
+        event.setFormat(Prefixes.getNamePrefix(event.getPlayer())
                 + ChatColor.YELLOW + "%1$s" + ChatColor.DARK_GRAY + " » " + ChatColor.WHITE + "%2$s");
     }
 }

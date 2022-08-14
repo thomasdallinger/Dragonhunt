@@ -16,13 +16,10 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 public class GameStart extends GameConfiguration {
     Timer timer = Main.getInstance().getTimer();
-    Countdown startCountdown, elytraCountdown;
+    Countdown startCountdown, fallDamageCountdown;
     Countdown scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
     ModifierInventory modifierInventory;
     BossBar bossBar;
@@ -95,9 +92,10 @@ public class GameStart extends GameConfiguration {
             timer.setRunning(true);
             scoreboardCountdown.setRunning(true);
             new Arrows(); // start arrow generation
+            new ElytraSwapRunnable().runTaskTimer(Main.getInstance(), 0, 5);
 
             Main.elytraInInventory();
-            elytraCountdown = new Countdown(true, 30, this::onElytraCountdown);
+            fallDamageCountdown = new Countdown(true, 30, this::onFallDamageCountdown);
 
             if (!EndlessNight.active)
                 overworld.setTime(0);
@@ -138,7 +136,6 @@ public class GameStart extends GameConfiguration {
                 }
 
                 player.setGameMode(GameMode.SURVIVAL);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 600, 0));
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GOLD + ChatColor.BOLD
                         + "Whoever kills the Enderdragon wins.");
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Fall damage is "
@@ -161,34 +158,32 @@ public class GameStart extends GameConfiguration {
      *
      * @param time time of the countdown
      */
-    public void onElytraCountdown(int time) {
-        bossBar.setTitle(HexColor.RED + "Elytra removed in " + ChatColor.DARK_RED
-                + ChatColor.BOLD + elytraCountdown.getTime() + HexColor.RED + " seconds");
+    public void onFallDamageCountdown(int time) {
+        bossBar.setTitle(HexColor.RED + "Fall damage enabled in " + ChatColor.DARK_RED
+                + ChatColor.BOLD + fallDamageCountdown.getTime() + HexColor.RED + " seconds");
         bossBar.setProgress(time / 31D);
         bossBar.setVisible(true);
 
-        if (elytraCountdown.getTime() == 0) {
+        if (fallDamageCountdown.getTime() == 0) {
             overworld.setGameRule(GameRule.FALL_DAMAGE, true);
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (elytraCountdown.getTime() == 30) {
+            if (fallDamageCountdown.getTime() == 30) {
                 bossBar.addPlayer(player);
             }
 
-            if (elytraCountdown.getTime() <= 5 && elytraCountdown.getTime() > 0) {
+            if (fallDamageCountdown.getTime() <= 5 && fallDamageCountdown.getTime() > 0) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Elytra removed in "
-                        + HexColor.RED + elytraCountdown.getTime() + ChatColor.GRAY + " seconds.");
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Fall damage enabled in "
+                        + HexColor.RED + fallDamageCountdown.getTime() + ChatColor.GRAY + " seconds.");
             }
 
-            if (elytraCountdown.getTime() == 0) {
+            if (fallDamageCountdown.getTime() == 0) {
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Fall damage is "
                         + HexColor.GREEN + "enabled" + ChatColor.GRAY + ".");
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);
-                player.getInventory().setChestplate(new ItemStack(Material.AIR));
-                new ElytraSwapRunnable().runTaskTimer(Main.getInstance(), 0, 5);
             }
         }
     }

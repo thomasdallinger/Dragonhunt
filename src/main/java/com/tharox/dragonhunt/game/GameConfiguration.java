@@ -13,11 +13,8 @@ import com.tharox.dragonhunt.players.PermanentEffect;
 import com.tharox.dragonhunt.spectate.Spectate;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.List;
@@ -117,9 +114,8 @@ public class GameConfiguration {
             // clears the player's inventory
             player.getInventory().clear();
 
-            // adds the TRACKER, ELYTRA, START-EQUIPMENT (Shield) and GRAPPLER to the player's inventory
+            // adds the TRACKER, START-EQUIPMENT (Shield) and GRAPPLER to the player's inventory
             player.getInventory().setItem(7, Main.getInstance().getTracker().givePlayerTracker());
-            player.getInventory().setChestplate(GameState.addItem(new ItemStack(Material.ELYTRA)));
             player.getInventory().setItemInOffHand(GameState.addItem(new ItemStack(Material.SHIELD)));
             new Grappler(player);
 

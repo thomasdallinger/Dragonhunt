@@ -95,9 +95,34 @@ public class CreatureSpawnListener implements Listener {
             // SKELETONS and WITHER SKELETONS are invulnerable if the modifier is active
             if (ImmuneSkeletons.active) {
                 if (entity instanceof Skeleton || entity instanceof WitherSkeleton) {
+                    equipNetheriteArmor(entity);
                     entity.setInvulnerable(true);
                 }
             }
         }
+    }
+
+    /**
+     * Gives the provided entity a fully enchanted netherite armor.
+     */
+    private void equipNetheriteArmor(LivingEntity entity) {
+        // not possible if the entity can't have any equipment
+        if (entity.getEquipment() == null) return;
+
+        ItemStack helmet = new ItemStack(Material.NETHERITE_HELMET);
+        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        entity.getEquipment().setHelmet(helmet);
+
+        ItemStack chestplate = new ItemStack(Material.NETHERITE_CHESTPLATE);
+        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        entity.getEquipment().setChestplate(chestplate);
+
+        ItemStack leggings = new ItemStack(Material.NETHERITE_LEGGINGS);
+        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        entity.getEquipment().setLeggings(leggings);
+
+        ItemStack boots = new ItemStack(Material.NETHERITE_BOOTS);
+        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        entity.getEquipment().setBoots(boots);
     }
 }

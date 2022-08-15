@@ -115,7 +115,7 @@ public class GameConfiguration {
             player.getInventory().clear();
 
             // adds the TRACKER, START-EQUIPMENT (Shield) and GRAPPLER to the player's inventory
-            player.getInventory().setItem(7, Main.getInstance().getTracker().givePlayerTracker());
+            player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
             player.getInventory().setItemInOffHand(GameState.addItem(new ItemStack(Material.SHIELD)));
             new Grappler(player);
 

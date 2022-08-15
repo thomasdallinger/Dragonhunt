@@ -245,7 +245,7 @@ public class Tracker implements Listener {
         }
     }
 
-    public ItemStack givePlayerTracker() {
+    public ItemStack createTracker() {
         ItemStack tracker = new ItemStack(Material.COMPASS);
         tracker.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         ItemMeta meta = tracker.getItemMeta();

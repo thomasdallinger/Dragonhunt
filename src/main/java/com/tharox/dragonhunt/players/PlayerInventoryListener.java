@@ -29,7 +29,7 @@ public class PlayerInventoryListener implements Listener {
             item = event.getCurrentItem();
         }
 
-        // Tracker = 7, Grappler = 8, Generated Arrows = 17
+        // Tracker = 7, Grappler / END Teleport = 8, Generated Arrows = 17
         if (event.getHotbarButton() == 7 || event.getHotbarButton() == 8 || event.getHotbarButton() == 17) {
             event.setCancelled(true);
             return;
@@ -78,6 +78,7 @@ public class PlayerInventoryListener implements Listener {
 
         if (displayName.contains(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")
                 || displayName.contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")
+                || displayName.contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "TP TO END")
                 || displayName.contains(ChatColor.GOLD.toString() + ChatColor.BOLD + "Generated Arrow"))
             event.setCancelled(true);
 
@@ -95,7 +96,8 @@ public class PlayerInventoryListener implements Listener {
 
         String displayName = offHandItem.getItemMeta().getDisplayName();
         if (displayName.contains(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")
-                || displayName.contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")) {
+                || displayName.contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")
+                || displayName.contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "TP TO END")) {
             // Generated Arrows can't be swapped: not in the hotbar, no checking needed
             event.setCancelled(true);
         }

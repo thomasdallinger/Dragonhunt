@@ -41,7 +41,7 @@ public class GameConfiguration {
 
         WorldBorder worldBorder = overworld.getWorldBorder();
         worldBorder.setCenter(new Location(overworld, x, 0, z));
-        worldBorder.setSize(7000);
+        worldBorder.setSize(2000);
         worldBorder.setDamageAmount(0);
     }
 

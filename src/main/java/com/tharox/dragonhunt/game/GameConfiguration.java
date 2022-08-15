@@ -126,18 +126,20 @@ public class GameConfiguration {
             // the item and amount can be upgraded using FOOD or RESOURCE UPGRADES respectively
             GameState.food.put(player, new ItemStack(Material.COOKED_RABBIT, 2));
 
-            // diamonds drop from IRON ORES, GOLD ORES and COPPER ORES too if the modifier is active
+            // diamond ores drop diamond blocks if the modifier is active
+            ItemStack diamonds;
+
             if (Diamonds.active) {
-                GameState.resources.put(player, List.of(
-                        new ItemStack(Material.DIAMOND),
-                        new ItemStack(Material.DIAMOND),
-                        new ItemStack(Material.DIAMOND)));
+                diamonds = new ItemStack(Material.DIAMOND_BLOCK);
             } else {
-                GameState.resources.put(player, List.of(
-                        new ItemStack(Material.IRON_INGOT),
-                        new ItemStack(Material.GOLD_INGOT),
-                        new ItemStack(Material.DIAMOND)));
+                diamonds = new ItemStack(Material.DIAMOND);
             }
+
+            GameState.resources.put(player, List.of(
+                    new ItemStack(Material.IRON_INGOT),
+                    new ItemStack(Material.COPPER_INGOT),
+                    new ItemStack(Material.GOLD_INGOT),
+                    diamonds));
 
             // set default TRACKER values, nobody is tracked when the player receives the TRACKER
             Main.getInstance().getTracker().playerTracksName.put(player, null);

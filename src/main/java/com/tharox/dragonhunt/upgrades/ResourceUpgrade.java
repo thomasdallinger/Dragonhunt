@@ -19,7 +19,8 @@ public class ResourceUpgrade extends ItemUpgrade {
             GameState.resources.put(player, List.of(
                     new ItemStack(GameState.resources.get(player).get(0).getType(), level + 1),
                     new ItemStack(GameState.resources.get(player).get(1).getType(), level + 1),
-                    new ItemStack(GameState.resources.get(player).get(2).getType(), level + 1)));
+                    new ItemStack(GameState.resources.get(player).get(2).getType(), level + 1),
+                    new ItemStack(GameState.resources.get(player).get(3).getType(), level + 1)));
 
             if (ResourceAmount.get(player) <= 3)
                 ResourceAmount.put(player, ResourceAmount.get(player) + 1);

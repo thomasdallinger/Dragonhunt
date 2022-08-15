@@ -47,6 +47,9 @@ public class CustomRecipes {
         changeSwordRecipe(new ItemStack(Material.IRON_SWORD), "stone_sword", Material.COBBLESTONE);
 
         changeShieldRecipe();
+
+        addCopperDiamond();
+        addCopperGold();
     }
 
     /**
@@ -171,6 +174,30 @@ public class CustomRecipes {
         recipe.shape("SRS", "SSS", " S ");
         recipe.setIngredient('R', Material.IRON_INGOT);
         recipe.setIngredient('S', Material.OAK_PLANKS);
+
+        Bukkit.addRecipe(recipe);
+    }
+
+    /**
+     * Adds a new copper recipe: 9 copper ingots = 1 diamond.
+     */
+    private void addCopperDiamond() {
+        NamespacedKey key = new NamespacedKey(Main.getInstance(), "copper_diamond");
+        ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.DIAMOND));
+        recipe.shape("CCC", "CCC", "CCC");
+        recipe.setIngredient('C', Material.COPPER_INGOT);
+
+        Bukkit.addRecipe(recipe);
+    }
+
+    /**
+     * Adds a new copper recipe: 4 copper ingots = 1 gold ingot.
+     */
+    private void addCopperGold() {
+        NamespacedKey key = new NamespacedKey(Main.getInstance(), "copper_gold");
+        ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.GOLD_INGOT));
+        recipe.shape("CC", "CC");
+        recipe.setIngredient('C', Material.COPPER_INGOT);
 
         Bukkit.addRecipe(recipe);
     }

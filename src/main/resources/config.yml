@@ -344,21 +344,21 @@ resource:
     slot: 4
     name: "Resource Amount I"
     cost: 10
-    lore: "Double iron, gold & diamonds."
+    lore: "Double iron, copper, gold & diamonds."
   1:
     material: DIAMOND
     amount: 2
     slot: 13
     name: "Resource Amount II"
     cost: 10
-    lore: "Triple iron, gold & diamonds."
+    lore: "Triple iron, copper, gold & diamonds."
   2:
     material: DIAMOND
     amount: 3
     slot: 22
     name: "Resource Amount III"
     cost: 15
-    lore: "Quadruple iron, gold & diamonds."
+    lore: "Quadruple iron, copper, gold & diamonds."
 xp:
   0:
     material: EXPERIENCE_BOTTLE

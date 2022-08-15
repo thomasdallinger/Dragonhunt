@@ -125,11 +125,11 @@ public class BlockBreakListener implements Listener {
         // the new drops can be upgraded using RESOURCE UPGRADES
         HashMap<Material, ItemStack> materials = new HashMap<>();
         materials.put(Material.RAW_IRON, GameState.resources.get(player).get(0));
-        materials.put(Material.RAW_GOLD, GameState.resources.get(player).get(1));
         materials.put(Material.RAW_COPPER, GameState.resources.get(player).get(1));
-        materials.put(Material.GOLD_NUGGET, GameState.resources.get(player).get(1)); // Nether Gold Ore
-        materials.put(Material.GILDED_BLACKSTONE, GameState.resources.get(player).get(1));
-        materials.put(Material.DIAMOND, GameState.resources.get(player).get(2));
+        materials.put(Material.RAW_GOLD, GameState.resources.get(player).get(2));
+        materials.put(Material.GOLD_NUGGET, GameState.resources.get(player).get(2)); // Nether Gold Ore
+        materials.put(Material.GILDED_BLACKSTONE, GameState.resources.get(player).get(2));
+        materials.put(Material.DIAMOND, GameState.resources.get(player).get(3));
         materials.put(Material.COAL, new ItemStack(Material.TORCH, 4));
         materials.put(Material.GRAVEL, new ItemStack(Material.FLINT));
 

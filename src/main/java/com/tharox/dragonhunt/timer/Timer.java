@@ -60,8 +60,15 @@ public class Timer {
             if (player.getGameMode().equals(GameMode.SPECTATOR)) continue;
 
             // display the time
+            // if the showdown is active, the time will get displayed in red
+            ChatColor color = HexColor.HIGHLIGHT;
+
+            if (getTime() >= 2400) {
+                color = HexColor.RED;
+            }
+
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                    new ComponentBuilder(DbValues.getTimestamp()).color(HexColor.HIGHLIGHT).bold(true).create());
+                    new ComponentBuilder(DbValues.getTimestamp()).color(color).bold(true).create());
         }
     }
 
@@ -77,15 +84,16 @@ public class Timer {
                 sendActionBar();
                 Main.getInstance().getTablistManager().setAllPlayerTeams();
 
-                if (getTime() >= 2390 && getTime() < 2400)
+                if (getTime() >= 2395 && getTime() < 2400)
                     showdownCountdown();
 
                 if (getTime() % 600 == 0) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         if (getTime() < 2400)
                             player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "All Players will receive "
-                                    + ChatColor.YELLOW + "Strength I" + ChatColor.GRAY + " and "
-                                    + ChatColor.YELLOW + "Speed II" + ChatColor.GRAY + " in "
+                                    + ChatColor.YELLOW + "Strength II" + ChatColor.GRAY + ", "
+                                    + ChatColor.YELLOW + "Speed II" + ChatColor.GRAY + " and "
+                                    + ChatColor.YELLOW + "Resistance II" + ChatColor.GRAY + " in "
                                     + ChatColor.YELLOW + (2400 - getTime()) / 60 + ChatColor.GRAY + " minutes.");
                         else if (getTime() == 2400) {
                             player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 1);
@@ -100,10 +108,15 @@ public class Timer {
                     }
                 }
 
+                // add effects to each player, if the showdown is active (time >= 40 minutes)
                 if (getTime() >= 2400 && getTime() < 3000) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 40, 0));
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, 1));
+                        player.addPotionEffect(new PotionEffect(
+                                PotionEffectType.INCREASE_DAMAGE, 40, 1));
+                        player.addPotionEffect(new PotionEffect(
+                                PotionEffectType.SPEED, 40, 1));
+                        player.addPotionEffect(new PotionEffect(
+                                PotionEffectType.DAMAGE_RESISTANCE, 40, 1));
                     }
                 }
 
@@ -119,7 +132,7 @@ public class Timer {
     private void showdownCountdown() {
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-            player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Final showdown in "
+            player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Showdown starts in "
                     + ChatColor.YELLOW + (2400 - getTime()) + ChatColor.GRAY + " seconds.");
         }
     }

@@ -32,7 +32,7 @@ public class Coins {
         coins.put(player, coinsToSet);
     }
 
-    // used in: LevelUp, Timer (Final Showdown), ResetScoreboardCountdown
+    // used in: LevelUp, Timer (Showdown), ResetScoreboardCountdown
     public static void addCoins(Player player, int coinsToAdd) {
         coins.put(player, coins.get(player) + coinsToAdd);
         player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "+" + coinsToAdd + ChatColor.GRAY + " Coins");

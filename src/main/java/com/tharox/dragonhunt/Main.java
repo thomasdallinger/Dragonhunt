@@ -28,13 +28,9 @@ import com.tharox.dragonhunt.timer.Timer;
 import com.tharox.dragonhunt.tracker.Tracker;
 import com.tharox.dragonhunt.vehicles.VehicleListener;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
@@ -119,10 +115,8 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
                 timeLeft--;
 
                 for (Player online : Bukkit.getOnlinePlayers()) {
-                    online.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
-                            ChatColor.YELLOW.toString() + ChatColor.ITALIC + "Waiting for "
-                                    + ChatColor.GOLD + ChatColor.ITALIC + timeLeft
-                                    + ChatColor.YELLOW + ChatColor.ITALIC + " more seconds..."));
+                    online.sendTitle(Main.getTitle(), HexColor.HIGHLIGHT + "PLAYERS ARE JOINING",
+                            0, 25, 0);
                 }
 
                 if (timeLeft == 0) {

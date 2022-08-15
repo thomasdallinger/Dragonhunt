@@ -38,8 +38,9 @@ public class PlayerDeathListener implements Listener {
         Player player = event.getEntity();
         Player killer = event.getEntity().getKiller();
 
-        // TODO: change DB implementation
-        addPlayerDeath(player, event.getDeathMessage());
+        if (event.getDeathMessage() == null) return;
+        // character "'" in some death messages causes SQL error
+        addPlayerDeath(player, event.getDeathMessage().replaceAll("'", " "));
 
         // strike a lightning effect at the player's death location
         player.getWorld().strikeLightningEffect(player.getLocation());

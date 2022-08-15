@@ -49,6 +49,11 @@ public class BlockBreakListener implements Listener {
             }
         }
 
+        // give the player 3 coins for breaking an amethyst cluster
+        if (block.getType() == Material.AMETHYST_CLUSTER) {
+            Coins.addCoins(player, 3);
+        }
+
         // play the break wood sound for the amount of blocks destroyed
         final int[] blocksDestroyed = {10};
 

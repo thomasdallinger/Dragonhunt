@@ -4,11 +4,8 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
-import com.tharox.dragonhunt.db.DatabaseExecutor;
-import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.upgrades.*;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,10 +14,11 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.sql.Statement;
-
 public class ShopListener implements Listener {
 
+    /**
+     * Note: Object refers to an upgrade or mobility command.
+     */
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
@@ -36,17 +34,11 @@ public class ShopListener implements Listener {
 
         String objectName = item.getItemMeta().getDisplayName();
 
-        // inventory is Upgrade Menu
+        // inventory is shop menu
         if (event.getView().getTitle().contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "SHOP MENU")) {
             player.closeInventory();
             player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
             menuNavigation(player, objectName);
-            return;
-        }
-
-        // TODO: seems to be not needed
-        // item is air (placeholder)
-        if (item.getType() == Material.AIR) {
             return;
         }
 
@@ -67,7 +59,7 @@ public class ShopListener implements Listener {
             return;
         }
 
-        // not enough points to purchase upgrade level
+        // not enough points to purchase the object
         if (Coins.getCoins(player) < ShopInventory.objectCost.get(objectName)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You don't have enough coins! Need "
@@ -91,7 +83,7 @@ public class ShopListener implements Listener {
             return;
         }
 
-        // upgrade can be purchased - raise the level by 1
+        // upgrade or mobility command can be purchased - raise the level by 1
         if (objectName.contains("Sharpness")) {
             EnchantmentUpgrades.Sharpness.put(player, EnchantmentUpgrades.Sharpness.get(player) + 1);
             purchaseUpgrade(player, objectName, "Weapon");
@@ -143,8 +135,6 @@ public class ShopListener implements Listener {
             new XPUpgrade(player);
             purchaseUpgrade(player, objectName, "XP");
         }
-
-        addShopAccess(player, objectName);
     }
 
     /**
@@ -153,7 +143,7 @@ public class ShopListener implements Listener {
      */
     private void purchaseUpgrade(Player player, String upgradeName, String inventory) {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        Coins.removeCoins(player, ShopInventory.objectCost.get(upgradeName));
+        Coins.removeCoins(player, ShopInventory.objectCost.get(upgradeName), upgradeName);
 
         menuNavigation(player, inventory);
     }
@@ -179,18 +169,5 @@ public class ShopListener implements Listener {
             player.openInventory(shopInventory.resource);
         else if (name.contains("XP"))
             player.openInventory(shopInventory.xp);
-    }
-
-    private void addShopAccess(Player player, String upgradeName) {
-        DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "INSERT INTO ShopAccess (GameID, Player, purchasedObject, coinsBefore, cost, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + upgradeName.substring(4)
-                    + "', '" + Coins.getCoins(player) + "', '" + ShopInventory.objectCost.get(upgradeName)
-                    + "', '" + DbValues.getTimestamp() + "')";
-
-            Statement stmt = con.createStatement();
-            stmt.execute(query);
-            stmt.close();
-        });
     }
 }

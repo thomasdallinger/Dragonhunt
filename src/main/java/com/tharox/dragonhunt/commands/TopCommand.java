@@ -39,7 +39,8 @@ public class TopCommand extends CommandHelper implements CommandExecutor {
         }
 
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/top"));
+        Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/top"),
+                ChatColor.GOLD.toString() + ChatColor.BOLD + "/top");
         player.teleport(new Location(world, x, world.getHighestBlockYAt((int) x, (int) z), z));
         player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "Whoosh.");
 

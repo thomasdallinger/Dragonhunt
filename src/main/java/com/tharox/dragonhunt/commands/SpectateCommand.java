@@ -47,7 +47,8 @@ public class SpectateCommand extends CommandHelper implements CommandExecutor {
         });
 
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/spec"));
+        Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/spec"),
+                ChatColor.GOLD.toString() + ChatColor.BOLD + "/spec");
         new Spectate(player);
 
         return false;

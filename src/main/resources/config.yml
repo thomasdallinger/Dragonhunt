@@ -19,7 +19,7 @@ menu:
     material: ENDER_PEARL
     amount: 1
     slot: 11
-    name: "» Mobility"
+    name: "» Mobility Commands"
     lore: "Use /spec, /top or /respawn.        "
   3:
     material: ARROW

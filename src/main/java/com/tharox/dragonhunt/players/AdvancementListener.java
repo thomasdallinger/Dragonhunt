@@ -24,7 +24,6 @@ public class AdvancementListener implements Listener {
     @EventHandler
     public void onAdvancement(PlayerAdvancementDoneEvent event) {
         Player player = event.getPlayer();
-        Coins.addCoins(player, 5);
         Advancement advancement = event.getAdvancement();
         String advancementName = "";
 
@@ -63,6 +62,8 @@ public class AdvancementListener implements Listener {
 
         if (advancementName.equals("")) {
             return;
+        } else {
+            Coins.addCoins(player, 10);
         }
 
         addAdvancement(player, advancementName);

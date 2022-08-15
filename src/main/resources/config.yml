@@ -125,9 +125,9 @@ bow:
   2:
     material: BOW
     amount: 3
-    slot: 15
+    slot: 20
     name: "Power III"
-    cost: 1
+    cost: 15
     lore: "Increases arrow damage by 2."
   3:
     material: RABBIT_FOOT
@@ -262,9 +262,9 @@ armor:
   2:
     material: IRON_CHESTPLATE
     amount: 3
-    slot: 15
+    slot: 20
     name: "Protection III"
-    cost: 1
+    cost: 15
     lore: "12% damage reduction for each armor piece."
   3:
     material: POINTED_DRIPSTONE

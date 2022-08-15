@@ -116,26 +116,35 @@ public class GameStart extends GameConfiguration {
             }
 
             if (startCountdown.getTime() <= 5 && startCountdown.getTime() > 0) {
-                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+                StringBuilder lights = new StringBuilder();
+                // red lights
+                lights.append(HexColor.RED);
+                for (int amount = 5; amount >= startCountdown.getTime(); amount--) {
+                    lights.append("● ");
+                }
 
-                if (startCountdown.getTime() > 3)
-                    player.sendTitle(ChatColor.GOLD.toString() + ChatColor.BOLD + startCountdown.getTime(),
-                            "", 0, 20, 0);
-                else if (startCountdown.getTime() <= 3)
-                    player.sendTitle(HexColor.RED.toString() + ChatColor.BOLD + startCountdown.getTime(),
-                            "", 0, 20, 0);
+                // gray lights
+                lights.append(ChatColor.DARK_GRAY);
+                for (int amount = 1; amount < startCountdown.getTime(); amount++) {
+                    lights.append("● ");
+                }
+
+                player.sendTitle(String.valueOf(lights), "", 0, 25, 0);
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
             }
 
             if (startCountdown.getTime() == 0) {
                 player.teleport(startLocation);
                 player.setGameMode(GameMode.SURVIVAL);
+                player.sendTitle(ChatColor.DARK_GRAY + "● ● ● ● ● ", "", 0, 20, 0);
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GOLD + ChatColor.BOLD
                         + "Whoever kills the Enderdragon wins.");
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Fall damage is "
                         + HexColor.RED + "disabled" + ChatColor.GRAY + ".");
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/pos [name]" + ChatColor.DARK_GRAY + ": "
-                        + ChatColor.GRAY + "mark locations");
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/pos [name]"
+                        + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + "mark locations");
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "get to the surface quickly");
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/respawn" + ChatColor.DARK_GRAY + ": "

@@ -60,7 +60,7 @@ public class PlayerInventoryListener implements Listener {
         Player player = (Player) event.getPlayer();
         Inventory inv = event.getInventory();
 
-        if (!event.getView().getTitle().equals(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "MODIFIERS"))
+        if (!event.getView().getTitle().contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "MODIFIERS"))
             return;
         if (GameState.modifierInventoryClose) return;
 

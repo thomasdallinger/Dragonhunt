@@ -34,13 +34,13 @@ public class ShopListener implements Listener {
         if (item == null) return;
         if (item.getItemMeta() == null) return;
 
-        String upgradeName = item.getItemMeta().getDisplayName();
+        String objectName = item.getItemMeta().getDisplayName();
 
         // inventory is Upgrade Menu
         if (event.getView().getTitle().contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "SHOP MENU")) {
             player.closeInventory();
             player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
-            menuNavigation(player, upgradeName);
+            menuNavigation(player, objectName);
             return;
         }
 
@@ -60,7 +60,7 @@ public class ShopListener implements Listener {
         if (event.getClick() == ClickType.NUMBER_KEY) return;
 
         // back to menu functionality
-        if (upgradeName.equals(HexColor.RED + "Back To Menu")) {
+        if (objectName.equals(HexColor.RED + "Back To Menu")) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASEDRUM, 1, 1);
             player.closeInventory();
             player.openInventory(shopInventory.menu);
@@ -68,23 +68,23 @@ public class ShopListener implements Listener {
         }
 
         // not enough points to purchase upgrade level
-        if (Coins.getCoins(player) < ShopInventory.upgradeCost.get(upgradeName)) {
+        if (Coins.getCoins(player) < ShopInventory.objectCost.get(objectName)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You don't have enough coins! Need "
-                    + HexColor.RED + (ShopInventory.upgradeCost.get(upgradeName) - Coins.getCoins(player))
+                    + HexColor.RED + (ShopInventory.objectCost.get(objectName) - Coins.getCoins(player))
                     + ChatColor.GRAY + " more.");
             return;
         }
 
         // upgrade already bought
-        if (upgradeName.contains("UNLOCKED")) {
+        if (objectName.contains("UNLOCKED")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You have already bought this upgrade!");
             return;
         }
 
         // upgrade level not unlocked
-        if (upgradeName.contains("LOCKED")) {
+        if (objectName.contains("LOCKED")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY
                     + "Purchase the previous level to unlock this one!");
@@ -92,59 +92,59 @@ public class ShopListener implements Listener {
         }
 
         // upgrade can be purchased - raise the level by 1
-        if (upgradeName.contains("Sharpness")) {
+        if (objectName.contains("Sharpness")) {
             EnchantmentUpgrades.Sharpness.put(player, EnchantmentUpgrades.Sharpness.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Weapon");
-        } else if (upgradeName.contains("Knockback")) {
+            purchaseUpgrade(player, objectName, "Weapon");
+        } else if (objectName.contains("Knockback")) {
             EnchantmentUpgrades.Knockback.put(player, EnchantmentUpgrades.Knockback.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Weapon");
-        } else if (upgradeName.contains("Fire Aspect")) {
+            purchaseUpgrade(player, objectName, "Weapon");
+        } else if (objectName.contains("Fire Aspect")) {
             EnchantmentUpgrades.FireAspect.put(player, EnchantmentUpgrades.FireAspect.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Weapon");
-        } else if (upgradeName.contains("Power")) {
+            purchaseUpgrade(player, objectName, "Weapon");
+        } else if (objectName.contains("Power")) {
             EnchantmentUpgrades.Power.put(player, EnchantmentUpgrades.Power.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Bow");
-        } else if (upgradeName.contains("Punch")) {
+            purchaseUpgrade(player, objectName, "Bow");
+        } else if (objectName.contains("Punch")) {
             EnchantmentUpgrades.Punch.put(player, EnchantmentUpgrades.Punch.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Bow");
-        } else if (upgradeName.contains("Flame")) {
+            purchaseUpgrade(player, objectName, "Bow");
+        } else if (objectName.contains("Flame")) {
             EnchantmentUpgrades.Flame.put(player, EnchantmentUpgrades.Flame.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Bow");
-        } else if (upgradeName.contains("/spec") || upgradeName.contains("/top") || upgradeName.contains("/respawn")) {
+            purchaseUpgrade(player, objectName, "Bow");
+        } else if (objectName.contains("/spec") || objectName.contains("/top") || objectName.contains("/respawn")) {
             player.closeInventory();
             // coins are removed when performing the command, not in the ShopListener,
             // because players can directly use the commands without opening the shop
-            player.performCommand(upgradeName.substring(5)); // upgrade name without the color codes and "/"
-        } else if (upgradeName.contains("More Arrows") || upgradeName.contains("Effect Arrows")) {
-            new ArrowUpgrade(player, upgradeName);
-            purchaseUpgrade(player, upgradeName, "Arrow");
-        } else if (upgradeName.contains("Efficiency")) {
+            player.performCommand(objectName.substring(5)); // upgrade name without the color codes and "/"
+        } else if (objectName.contains("More Arrows") || objectName.contains("Effect Arrows")) {
+            new ArrowUpgrade(player, objectName);
+            purchaseUpgrade(player, objectName, "Arrow");
+        } else if (objectName.contains("Efficiency")) {
             EnchantmentUpgrades.Efficiency.put(player, EnchantmentUpgrades.Efficiency.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Tool");
-        } else if (upgradeName.contains("Unbreakable")) {
+            purchaseUpgrade(player, objectName, "Tool");
+        } else if (objectName.contains("Unbreakable")) {
             EnchantmentUpgrades.Unbreakable.put(player, EnchantmentUpgrades.Unbreakable.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Tool");
-        } else if (upgradeName.contains("Protection")) {
+            purchaseUpgrade(player, objectName, "Tool");
+        } else if (objectName.contains("Protection")) {
             EnchantmentUpgrades.Protection.put(player, EnchantmentUpgrades.Protection.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Armor");
-        } else if (upgradeName.contains("Thorns")) {
+            purchaseUpgrade(player, objectName, "Armor");
+        } else if (objectName.contains("Thorns")) {
             EnchantmentUpgrades.Thorns.put(player, EnchantmentUpgrades.Thorns.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Armor");
-        } else if (upgradeName.contains("Feather Falling")) {
+            purchaseUpgrade(player, objectName, "Armor");
+        } else if (objectName.contains("Feather Falling")) {
             EnchantmentUpgrades.FeatherFalling.put(player, EnchantmentUpgrades.FeatherFalling.get(player) + 1);
-            purchaseUpgrade(player, upgradeName, "Armor");
-        } else if (upgradeName.contains("Food Source") || upgradeName.contains("Food Amount")) {
-            new FoodUpgrade(player, upgradeName, item.getAmount());
-            purchaseUpgrade(player, upgradeName, "Food");
-        } else if (upgradeName.contains("Resource Amount")) {
-            new ResourceUpgrade(player, upgradeName, item.getAmount());
-            purchaseUpgrade(player, upgradeName, "Resource");
-        } else if (upgradeName.contains("More XP")) {
+            purchaseUpgrade(player, objectName, "Armor");
+        } else if (objectName.contains("Food Source") || objectName.contains("Food Amount")) {
+            new FoodUpgrade(player, objectName, item.getAmount());
+            purchaseUpgrade(player, objectName, "Food");
+        } else if (objectName.contains("Resource Amount")) {
+            new ResourceUpgrade(player, objectName, item.getAmount());
+            purchaseUpgrade(player, objectName, "Resource");
+        } else if (objectName.contains("More XP")) {
             new XPUpgrade(player);
-            purchaseUpgrade(player, upgradeName, "XP");
+            purchaseUpgrade(player, objectName, "XP");
         }
 
-        addUpgradeAccess(player, upgradeName);
+        addShopAccess(player, objectName);
     }
 
     /**
@@ -153,7 +153,7 @@ public class ShopListener implements Listener {
      */
     private void purchaseUpgrade(Player player, String upgradeName, String inventory) {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        Coins.removeCoins(player, ShopInventory.upgradeCost.get(upgradeName));
+        Coins.removeCoins(player, ShopInventory.objectCost.get(upgradeName));
 
         menuNavigation(player, inventory);
     }
@@ -181,11 +181,11 @@ public class ShopListener implements Listener {
             player.openInventory(shopInventory.xp);
     }
 
-    private void addUpgradeAccess(Player player, String upgradeName) {
+    private void addShopAccess(Player player, String upgradeName) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "INSERT INTO UpgradeAccess (GameID, Player, upgrade, pointsBefore, cost, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + upgradeName.substring(4) + "', '"
-                    + Coins.getCoins(player) + "', '" + ShopInventory.upgradeCost.get(upgradeName)
+            String query = "INSERT INTO ShopAccess (GameID, Player, purchasedObject, coinsBefore, cost, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + upgradeName.substring(4)
+                    + "', '" + Coins.getCoins(player) + "', '" + ShopInventory.objectCost.get(upgradeName)
                     + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();

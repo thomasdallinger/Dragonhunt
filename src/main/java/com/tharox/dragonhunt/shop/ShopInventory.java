@@ -22,7 +22,7 @@ import java.util.List;
 public class ShopInventory {
 
     public Inventory menu, weapon, bow, mobility, arrow, tool, armor, food, resource, xp;
-    public static final HashMap<String, Integer> upgradeCost = new HashMap<>();
+    public static final HashMap<String, Integer> objectCost = new HashMap<>();
 
     public ShopInventory(FileConfiguration config, Player player) {
         menu = createInventory(config, "menu", player);
@@ -68,7 +68,7 @@ public class ShopInventory {
             inv.setItem(item.getSlot(), itemStack);
 
             if (item.cost != 0) { //if it has no cost it also isn't air -> air has no displayname
-                upgradeCost.put(itemStack.getItemMeta().getDisplayName(), item.cost); //save the cost of the item
+                objectCost.put(itemStack.getItemMeta().getDisplayName(), item.cost); //save the cost of the item
             }
         }
 

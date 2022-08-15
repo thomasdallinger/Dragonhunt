@@ -30,7 +30,7 @@ public class GameStart extends GameConfiguration {
     // used if the highest block at x: 0 and z: 0 is within 40 blocks of the startLocation
 
     public GameStart() {
-        startCountdown = new Countdown(true, 20, this::onCountdown);
+        startCountdown = new Countdown(true, 25, this::onCountdown);
         modifierInventory = new ModifierInventory();
         highestY = overworld.getHighestBlockYAt((int) x, (int) z);
         startLocation = new Location(overworld, x, highestY + 40, z);
@@ -105,39 +105,48 @@ public class GameStart extends GameConfiguration {
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (startCountdown.getTime() == 20) {
+            if (startCountdown.getTime() == 25) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
                 player.openInventory(modifierInventory.modifiers);
             }
 
-            if (startCountdown.getTime() == 5) {
+            if (startCountdown.getTime() == 10) {
                 GameState.modifierInventoryClose = true;
                 player.closeInventory();
             }
 
-            if (startCountdown.getTime() <= 5 && startCountdown.getTime() > 0) {
+            if (startCountdown.getTime() <= 10 && startCountdown.getTime() > 6) {
+                player.sendTitle(Main.getTitle(), ChatColor.DARK_GRAY + "■ ■ ■ ■ ■ "
+                        , 0, 25, 0);
+            }
+
+            if (startCountdown.getTime() <= 6 && startCountdown.getTime() > 1) {
                 StringBuilder lights = new StringBuilder();
-                // red lights
-                lights.append(HexColor.RED);
-                for (int amount = 5; amount >= startCountdown.getTime(); amount--) {
-                    lights.append("● ");
+
+                // colored lights
+                lights.append(HexColor.HIGHLIGHT);
+                for (int amount = 5; amount >= startCountdown.getTime() - 1; amount--) {
+                    lights.append("■ ");
                 }
 
                 // gray lights
                 lights.append(ChatColor.DARK_GRAY);
-                for (int amount = 1; amount < startCountdown.getTime(); amount++) {
-                    lights.append("● ");
+                for (int amount = 1; amount < startCountdown.getTime() - 1; amount++) {
+                    lights.append("■ ");
                 }
 
-                player.sendTitle(String.valueOf(lights), "", 0, 25, 0);
+                player.sendTitle(Main.getTitle(), String.valueOf(lights), 0, 25, 0);
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+            }
+
+            if (startCountdown.getTime() == 1) {
+                player.sendTitle(Main.getTitle(), HexColor.HIGHLIGHT + "■ ■ ■ ■ ■ "
+                        , 0, 20, 0);
             }
 
             if (startCountdown.getTime() == 0) {
                 player.teleport(startLocation);
                 player.setGameMode(GameMode.SURVIVAL);
-                player.sendTitle(ChatColor.DARK_GRAY + "● ● ● ● ● ", "", 0, 20, 0);
-                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GOLD + ChatColor.BOLD
                         + "Whoever kills the Enderdragon wins.");

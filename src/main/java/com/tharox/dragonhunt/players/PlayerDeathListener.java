@@ -10,8 +10,8 @@ import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
-import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -64,18 +64,18 @@ public class PlayerDeathListener implements Listener {
 
         // create a chest at the death location and move the player's loot into it
         ItemStack itemToRemove;
-        Block chest = player.getWorld().getBlockAt(player.getLocation());
-        chest.setType(Material.TRAPPED_CHEST);
-        Chest state = (Chest) chest.getState();
-        state.setCustomName(HexColor.RED + player.getName() + "'s Loot");
-        state.update();
+        Block block = player.getWorld().getBlockAt(player.getLocation());
+        block.setType(Material.BARREL);
+        Barrel barrel = (Barrel) block.getState();
+        barrel.setCustomName(HexColor.RED + player.getName() + "'s Loot");
+        barrel.update();
 
         for (int index = 9; index <= 35; index++) {
             itemToRemove = player.getInventory().getItem(index);
 
             if (itemToRemove != null) {
                 player.getInventory().remove(itemToRemove);
-                state.getInventory().setItem(index - 9, itemToRemove);
+                barrel.getInventory().setItem(index - 9, itemToRemove);
             }
         }
 

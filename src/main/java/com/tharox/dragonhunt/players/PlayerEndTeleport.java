@@ -7,7 +7,6 @@ import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -53,8 +52,10 @@ public class PlayerEndTeleport implements Listener {
                     return;
                 }
 
-                player.teleport(GameState.endPlatform);
-                player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 1);
+                player.getLocation().getBlock().setType(Material.END_PORTAL);
+
+                Bukkit.getScheduler().runTaskLater(Main.getInstance(),
+                        task -> player.getLocation().getBlock().setType(Material.AIR), 5L);
             }
         }
     }

@@ -1,7 +1,11 @@
 package com.tharox.dragonhunt.entities;
 
+import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.grappler.Grappler;
 import com.tharox.dragonhunt.modifiers.classes.FireWeakness;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -41,6 +45,15 @@ public class EntityDamageListener implements Listener {
                 ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")) {
             arrow.remove();
             event.setCancelled(true);
+
+            // put the GRAPPLER on cooldown
+            player.setCooldown(Material.CROSSBOW,
+                    Grappler.grapplerCooldown.getOrDefault(player, 160));
+
+            // after the cooldown ends, replace the old GRAPPLER with a new one having a charged projectile
+            Bukkit.getScheduler().runTaskLater(Main.getInstance(),
+                    task -> new Grappler(player),
+                    (long) Grappler.grapplerCooldown.getOrDefault(player, 160));
         }
 
         // if a living entity is on fire and the modifier is active, let it glow and give weakness to the entity

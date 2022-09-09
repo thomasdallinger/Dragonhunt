@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.grappler.Grappler;
 import com.tharox.dragonhunt.mobility.DoubleJump;
 import com.tharox.dragonhunt.upgrades.*;
 import net.md_5.bungee.api.ChatColor;
@@ -110,6 +111,14 @@ public class ShopListener implements Listener {
             player.performCommand(objectName.substring(5)); // upgrade name without the color codes and "/"
         } else if (objectName.contains("Double Jump")) {
             DoubleJump.playersAllowedToDoubleJump.add(player.getName());
+            purchaseUpgrade(player, objectName, "Mobility");
+        } else if (objectName.contains("Grappler Cooldown")) {
+            if (!Grappler.grapplerCooldown.containsKey(player)) {
+                Grappler.grapplerCooldown.put(player, 120);
+            } else {
+                Grappler.grapplerCooldown.put(player, 80);
+            }
+
             purchaseUpgrade(player, objectName, "Mobility");
         } else if (objectName.contains("More Arrows") || objectName.contains("Effect Arrows")) {
             new ArrowUpgrade(player, objectName);

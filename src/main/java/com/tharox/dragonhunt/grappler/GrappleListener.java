@@ -52,6 +52,15 @@ public class GrappleListener implements Listener {
                         player.setVelocity(direction.multiply(2D));
                         drawLine(player.getLocation(), arrow.getLocation(), 2);
 
+                        // put the GRAPPLER on cooldown
+                        player.setCooldown(Material.CROSSBOW,
+                                Grappler.grapplerCooldown.getOrDefault(player, 160));
+
+                        // after the cooldown ends, replace the old GRAPPLER with a new one having a charged projectile
+                        Bukkit.getScheduler().runTaskLater(Main.getInstance(),
+                                task -> new Grappler(player),
+                                (long) Grappler.grapplerCooldown.getOrDefault(player, 160));
+
                         if (player.getLocation().distance(arrow.getLocation()) <= 3) {
                             this.cancel();
                             arrow.remove();

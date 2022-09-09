@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.upgrades;
 
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.grappler.Grappler;
 import com.tharox.dragonhunt.mobility.DoubleJump;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -79,10 +80,18 @@ public class Item {
             else if (NAME.contains("/respawn"))
                 itemStack = checkIfUnlocked(itemStack, 1);
             else if (NAME.contains("Double Jump"))
-                if(!DoubleJump.playersAllowedToDoubleJump.contains(player.getName())) {
+                if (!DoubleJump.playersAllowedToDoubleJump.contains(player.getName())) {
                     itemStack = checkIfUnlocked(itemStack, 1);
                 } else {
                     itemStack = checkIfUnlocked(itemStack, 2);
+                }
+            else if (NAME.contains("Grappler Cooldown"))
+                if (!Grappler.grapplerCooldown.containsKey(player)) {
+                    itemStack = checkIfUnlocked(itemStack, 1);
+                } else if (Grappler.grapplerCooldown.get(player) == 120) {
+                    itemStack = checkIfUnlocked(itemStack, 2);
+                } else {
+                    itemStack = checkIfUnlocked(itemStack, 3);
                 }
             else if (NAME.contains("More Arrows"))
                 itemStack = checkIfUnlocked(itemStack, ArrowUpgrade.MoreArrows.get(player));

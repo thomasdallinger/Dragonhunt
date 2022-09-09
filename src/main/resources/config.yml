@@ -20,7 +20,7 @@ menu:
     amount: 1
     slot: 11
     name: "» Mobility"
-    lore: "Use /spec, /top or /respawn        or purchase the ability to DOUBLE JUMP."
+    lore: "Use commands, purchase the ability to double jump or reduce the Grappler cooldown."
   3:
     material: ARROW
     amount: 1
@@ -154,31 +154,45 @@ mobility:
   0:
     material: ENDER_EYE
     amount: 1
-    slot: 10
+    slot: 9
     name: "/spec"
     cost: 30
     lore: "Go into spectator mode for a short duration."
   1:
     material: STICKY_PISTON
     amount: 1
-    slot: 12
+    slot: 11
     name: "/top"
     cost: 5
     lore: "Get to the surface quickly."
   2:
     material: RESPAWN_ANCHOR
     amount: 1
-    slot: 14
+    slot: 13
     name: "/respawn"
     cost: 5
     lore: "Sets a respawn point."
   3:
     material: POTION
     amount: 1
-    slot: 16
+    slot: 15
     name: "Double Jump"
     cost: 30
     lore: "Unlocks the ability to double jump."
+  4:
+    material: CROSSBOW
+    amount: 1
+    slot: 17
+    name: "Grappler Cooldown I"
+    cost: 20
+    lore: "Reduces the cooldown by 2 seconds."
+  5:
+    material: CROSSBOW
+    amount: 2
+    slot: 26
+    name: "Grappler Cooldown II"
+    cost: 30
+    lore: "Reduces the cooldown by 4 seconds."
 arrow:
   0:
     material: ARROW

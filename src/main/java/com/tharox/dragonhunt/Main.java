@@ -19,6 +19,7 @@ import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.grappler.GrappleListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
+import com.tharox.dragonhunt.mobility.DoubleJump;
 import com.tharox.dragonhunt.players.*;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
 import com.tharox.dragonhunt.shop.ShopListener;
@@ -171,6 +172,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new ChatListener(), this);
 
         pluginManager.registerEvents(new GrappleListener(), this);
+        pluginManager.registerEvents(new DoubleJump(), this);
 
         pluginManager.registerEvents(new LevelUp(), this);
         pluginManager.registerEvents(new ShopListener(), this);

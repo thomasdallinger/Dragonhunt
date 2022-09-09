@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.mobility.DoubleJump;
 import com.tharox.dragonhunt.upgrades.*;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
@@ -59,15 +60,6 @@ public class ShopListener implements Listener {
             return;
         }
 
-        // not enough points to purchase the object
-        if (Coins.getCoins(player) < ShopInventory.objectCost.get(objectName)) {
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You don't have enough coins! Need "
-                    + HexColor.RED + (ShopInventory.objectCost.get(objectName) - Coins.getCoins(player))
-                    + ChatColor.GRAY + " more.");
-            return;
-        }
-
         // upgrade already bought
         if (objectName.contains("UNLOCKED")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
@@ -80,6 +72,15 @@ public class ShopListener implements Listener {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY
                     + "Purchase the previous level to unlock this one!");
+            return;
+        }
+
+        // not enough points to purchase the object
+        if (Coins.getCoins(player) < ShopInventory.objectCost.get(objectName)) {
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You don't have enough coins! Need "
+                    + HexColor.RED + (ShopInventory.objectCost.get(objectName) - Coins.getCoins(player))
+                    + ChatColor.GRAY + " more.");
             return;
         }
 
@@ -107,6 +108,9 @@ public class ShopListener implements Listener {
             // coins are removed when performing the command, not in the ShopListener,
             // because players can directly use the commands without opening the shop
             player.performCommand(objectName.substring(5)); // upgrade name without the color codes and "/"
+        } else if (objectName.contains("Double Jump")) {
+            DoubleJump.playersAllowedToDoubleJump.add(player.getName());
+            purchaseUpgrade(player, objectName, "Mobility");
         } else if (objectName.contains("More Arrows") || objectName.contains("Effect Arrows")) {
             new ArrowUpgrade(player, objectName);
             purchaseUpgrade(player, objectName, "Arrow");

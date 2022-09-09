@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.upgrades;
 
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.mobility.DoubleJump;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -77,6 +78,12 @@ public class Item {
                 itemStack = checkIfUnlocked(itemStack, 1);
             else if (NAME.contains("/respawn"))
                 itemStack = checkIfUnlocked(itemStack, 1);
+            else if (NAME.contains("Double Jump"))
+                if(!DoubleJump.playersAllowedToDoubleJump.contains(player.getName())) {
+                    itemStack = checkIfUnlocked(itemStack, 1);
+                } else {
+                    itemStack = checkIfUnlocked(itemStack, 2);
+                }
             else if (NAME.contains("More Arrows"))
                 itemStack = checkIfUnlocked(itemStack, ArrowUpgrade.MoreArrows.get(player));
             else if (NAME.contains("Effect Arrows"))

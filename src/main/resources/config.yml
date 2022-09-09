@@ -19,8 +19,8 @@ menu:
     material: ENDER_PEARL
     amount: 1
     slot: 11
-    name: "» Mobility Commands"
-    lore: "Use /spec, /top or /respawn.        "
+    name: "» Mobility"
+    lore: "Use /spec, /top or /respawn        or purchase the ability to DOUBLE JUMP."
   3:
     material: ARROW
     amount: 1
@@ -154,24 +154,31 @@ mobility:
   0:
     material: ENDER_EYE
     amount: 1
-    slot: 11
+    slot: 10
     name: "/spec"
     cost: 30
     lore: "Go into spectator mode for a short duration."
   1:
     material: STICKY_PISTON
     amount: 1
-    slot: 13
+    slot: 12
     name: "/top"
     cost: 5
     lore: "Get to the surface quickly."
   2:
     material: RESPAWN_ANCHOR
     amount: 1
-    slot: 15
+    slot: 14
     name: "/respawn"
     cost: 5
     lore: "Sets a respawn point."
+  3:
+    material: POTION
+    amount: 1
+    slot: 16
+    name: "Double Jump"
+    cost: 30
+    lore: "Unlocks the ability to double jump."
 arrow:
   0:
     material: ARROW

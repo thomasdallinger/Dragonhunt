@@ -180,14 +180,14 @@ mobility:
     cost: 30
     lore: "Unlocks the ability to double jump."
   4:
-    material: CROSSBOW
+    material: ARROW
     amount: 1
     slot: 17
     name: "Grappler Cooldown I"
     cost: 20
     lore: "Reduces the cooldown by 2 seconds."
   5:
-    material: CROSSBOW
+    material: ARROW
     amount: 2
     slot: 26
     name: "Grappler Cooldown II"

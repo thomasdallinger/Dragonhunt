@@ -78,7 +78,8 @@ public class CombatListener implements Listener {
                     temp.remove(id);
                     bossBar.removePlayer(player);
 
-                    player.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "You are no longer in combat.");
+                    player.sendMessage(ChatColor.YELLOW + "☻" + ChatColor.DARK_GRAY + " | "
+                            + HexColor.GREEN + "You are no longer in combat.");
                 }
 
                 bossBar.setVisible(true);

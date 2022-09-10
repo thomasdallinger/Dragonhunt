@@ -63,19 +63,28 @@ public class PlayerDeathListener implements Listener {
         }
 
         // create a chest at the death location and move the player's loot into it
-        ItemStack itemToRemove;
         Block block = player.getWorld().getBlockAt(player.getLocation());
-        block.setType(Material.BARREL);
-        Barrel barrel = (Barrel) block.getState();
-        barrel.setCustomName(HexColor.RED + player.getName() + "'s Loot");
-        barrel.update();
+        Barrel barrel = null;
+
+        if (block.getLocation().getY() > -64) {
+            block.setType(Material.BARREL);
+
+            barrel = (Barrel) block.getState();
+            barrel.setCustomName(HexColor.RED + player.getName() + "'s Loot");
+            barrel.update();
+        }
+
+        ItemStack itemToRemove;
 
         for (int index = 9; index <= 35; index++) {
             itemToRemove = player.getInventory().getItem(index);
 
             if (itemToRemove != null) {
                 player.getInventory().remove(itemToRemove);
-                barrel.getInventory().setItem(index - 9, itemToRemove);
+
+                if (barrel != null) {
+                    barrel.getInventory().setItem(index - 9, itemToRemove);
+                }
             }
         }
 

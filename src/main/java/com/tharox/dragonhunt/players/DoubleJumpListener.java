@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.mobility;
+package com.tharox.dragonhunt.players;
 
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerToggleFlightEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoubleJump implements Listener {
+public class DoubleJumpListener implements Listener {
     public static List<String> playersAllowedToDoubleJump = new ArrayList<>();
 
     @EventHandler
@@ -33,7 +33,7 @@ public class DoubleJump implements Listener {
 
             player.setAllowFlight(false);
             player.setFlying(false);
-            player.setVelocity(player.getLocation().getDirection().multiply(0.25D).setY(0.75D));
+            player.setVelocity(player.getLocation().getDirection().multiply(0.5D).setY(0.75D));
             player.playSound(player.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 1, 1);
         }
     }

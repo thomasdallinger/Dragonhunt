@@ -49,6 +49,14 @@ public class BlockBreakListener implements Listener {
             }
         }
 
+        // prevent players from breaking spawners
+        if (block.getType() == Material.SPAWNER) {
+            event.setCancelled(true);
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are not allowed to break Spawners.");
+            return;
+        }
+
         // give the player 3 coins for breaking an amethyst cluster
         if (block.getType() == Material.AMETHYST_CLUSTER) {
             Coins.addCoins(player, 3);

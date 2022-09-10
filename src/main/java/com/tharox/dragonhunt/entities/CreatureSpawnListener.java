@@ -66,8 +66,8 @@ public class CreatureSpawnListener implements Listener {
                 }
 
                 Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
-                        .setBaseValue(entity.getHealth() + 10); // set max health to a higher value
-                entity.setHealth(entity.getHealth() + 10);
+                        .setBaseValue(entity.getHealth() + 6); // set max health to a higher value
+                entity.setHealth(entity.getHealth() + 6);
             }
 
             if (FireMobs.active) {
@@ -78,16 +78,16 @@ public class CreatureSpawnListener implements Listener {
                         entity.getEquipment().setItemInMainHand(bow);
                     } else {
                         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-                        sword.addEnchantment(Enchantment.FIRE_ASPECT, 2);
+                        sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
                         entity.getEquipment().setItemInMainHand(sword);
                     }
                 }
 
                 Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
-                        .setBaseValue(entity.getHealth() + 10);
-                entity.setHealth(entity.getHealth() + 10);
+                        .setBaseValue(entity.getHealth() + 6);
+                entity.setHealth(entity.getHealth() + 6);
 
-                if (!(entity instanceof WaterMob)) {
+                if (!(entity instanceof WaterMob) && !(entity instanceof Animals)) {
                     entity.setVisualFire(true);
                 }
             }

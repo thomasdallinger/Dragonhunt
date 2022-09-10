@@ -12,7 +12,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 
 public class ElytraSwapRunnable extends BukkitRunnable {
-    private final HashMap<Player, ItemStack> playerChestplate = new HashMap<>();
+    public static final HashMap<Player, ItemStack> playerChestplate = new HashMap<>();
     private final HashMap<Player, Boolean> playerWasInAir = new HashMap<>();
 
     public ElytraSwapRunnable() {

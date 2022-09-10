@@ -5,6 +5,7 @@ import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.elytra.ElytraSwapRunnable;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import net.md_5.bungee.api.ChatColor;
@@ -88,10 +89,11 @@ public class PlayerDeathListener implements Listener {
             }
         }
 
-        // if the player had an Elytra, replace it with air
+        // if the player had an Elytra, replace it with air or with the chestplate the player had
         ItemStack chestplate = player.getInventory().getChestplate();
         if (chestplate != null && chestplate.getType() == Material.ELYTRA) {
-            player.getInventory().setChestplate(new ItemStack(Material.AIR));
+            player.getInventory().setChestplate(ElytraSwapRunnable.playerChestplate.getOrDefault(player,
+                    new ItemStack(Material.AIR)));
         }
 
         // drop no loot or XP

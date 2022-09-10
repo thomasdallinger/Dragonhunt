@@ -1,6 +1,8 @@
 package com.tharox.dragonhunt.dimensions;
 
+import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.game.GameState;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,6 +16,8 @@ import org.bukkit.potion.PotionEffectType;
 public class DimensionListener implements Listener {
     /**
      * Give players Resistance 10 when changing worlds so they can't be damaged for the first 7 seconds.
+     * Removes the Tracker from a player's inventory in the END. Returns the Tracker when changing to a different
+     * world again.
      */
     @EventHandler
     public void onWorldChange(PlayerChangedWorldEvent event) {
@@ -22,6 +26,13 @@ public class DimensionListener implements Listener {
         for (PotionEffect effect : player.getActivePotionEffects())
             player.removePotionEffect(effect.getType());
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 9));
+
+        if (player.getWorld().getName().equals("world_the_end")) {
+            player.getInventory().remove(Material.COMPASS);
+        } else {
+            if (!player.getInventory().contains(Material.COMPASS))
+                player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
+        }
     }
 
     /**

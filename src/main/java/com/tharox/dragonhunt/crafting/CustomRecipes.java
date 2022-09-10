@@ -41,8 +41,9 @@ public class CustomRecipes {
 
         changeShieldRecipe();
 
-        addCopperDiamond();
         addCopperGold();
+        addCopperDiamond();
+        addDiamondNetherite();
     }
 
     /**
@@ -181,6 +182,18 @@ public class CustomRecipes {
     }
 
     /**
+     * Adds a new copper recipe: 4 copper ingots = 1 gold ingot.
+     */
+    private void addCopperGold() {
+        NamespacedKey key = new NamespacedKey(Main.getInstance(), "copper_gold");
+        ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.GOLD_INGOT));
+        recipe.shape("CC", "CC");
+        recipe.setIngredient('C', Material.COPPER_INGOT);
+
+        Bukkit.addRecipe(recipe);
+    }
+
+    /**
      * Adds a new copper recipe: 9 copper ingots = 1 diamond.
      */
     private void addCopperDiamond() {
@@ -193,13 +206,13 @@ public class CustomRecipes {
     }
 
     /**
-     * Adds a new copper recipe: 4 copper ingots = 1 gold ingot.
+     * Adds a new diamond recipe: 9 diamonds = 1 netherite ingot.
      */
-    private void addCopperGold() {
-        NamespacedKey key = new NamespacedKey(Main.getInstance(), "copper_gold");
-        ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.GOLD_INGOT));
-        recipe.shape("CC", "CC");
-        recipe.setIngredient('C', Material.COPPER_INGOT);
+    private void addDiamondNetherite() {
+        NamespacedKey key = new NamespacedKey(Main.getInstance(), "diamond_netherite");
+        ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.NETHERITE_INGOT));
+        recipe.shape("DDD", "DDD", "DDD");
+        recipe.setIngredient('D', Material.DIAMOND);
 
         Bukkit.addRecipe(recipe);
     }

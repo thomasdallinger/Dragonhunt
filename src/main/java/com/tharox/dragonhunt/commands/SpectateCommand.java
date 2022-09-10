@@ -8,6 +8,7 @@ import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.spectate.Spectate;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -28,7 +29,8 @@ public class SpectateCommand extends CommandHelper implements CommandExecutor {
 
         if (checkIfValid(player, timer)) return true;
 
-        if (!Spectate.commandUsable.get(player)) {
+        // prevents players from executing the command while the SPECTATE is still active
+        if (player.getGameMode().equals(GameMode.SPECTATOR)) {
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are currently in a Spectate.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;

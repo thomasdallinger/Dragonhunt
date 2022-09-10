@@ -57,6 +57,12 @@ public class PlayerEndTeleport implements Listener {
                     return;
                 }
 
+                if (CombatListener.combatList.containsKey(player.getUniqueId())) {
+                    player.sendMessage(Prefixes.getErrorPrefix()
+                            + ChatColor.GRAY + "This teleporter is blocked while in combat.");
+                    return;
+                }
+
                 player.getLocation().getBlock().setType(Material.END_PORTAL);
 
                 Bukkit.getScheduler().runTaskLater(Main.getInstance(),

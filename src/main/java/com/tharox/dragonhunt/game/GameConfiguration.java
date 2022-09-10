@@ -119,9 +119,6 @@ public class GameConfiguration {
             player.getInventory().setItemInOffHand(GameState.addItem(new ItemStack(Material.SHIELD)));
             new Grappler(player);
 
-            // HashMap which prevents players from executing the command while the SPECTATE is still active
-            Spectate.commandUsable.put(player, true);
-
             // every player starts with the base items for food and resources
             // the item and amount can be upgraded using FOOD or RESOURCE UPGRADES respectively
             GameState.food.put(player, new ItemStack(Material.COOKED_RABBIT, 2));

@@ -4,10 +4,14 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.grappler.Grappler;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.World;
+import org.bukkit.advancement.Advancement;
+import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,6 +26,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class PlayerEndTeleport implements Listener {
 
@@ -67,9 +72,31 @@ public class PlayerEndTeleport implements Listener {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     Inventory inventory = player.getInventory();
 
-                    // player already has the "TP TO END" item
-                    if (inventory.contains(createEndTeleport())) continue;
+                    // 1: give the player the GRAPPLER back - if in the end
+                    if (inventory.contains(createEndTeleport())
+                            && player.getWorld().getName().equals("world_the_end")) {
+                        new Grappler(player);
+                        continue;
+                    }
 
+                    // 2: give the player the END TELEPORTER back
+                    // if the player has been in the end and is currently not in the end
+                    if (!inventory.contains(createEndTeleport())
+                            && !player.getWorld().getName().equals("world_the_end")) {
+                        Advancement advancement = Bukkit.getAdvancement(
+                                Objects.requireNonNull(NamespacedKey.fromString("story/enter_the_end")));
+
+                        if (advancement != null) {
+                            AdvancementProgress progress = player.getAdvancementProgress(advancement);
+
+                            if (progress.isDone()) {
+                                inventory.setItem(8, createEndTeleport());
+                                continue;
+                            }
+                        }
+                    }
+
+                    // 3: the player never had a END TELEPORTER yet
                     for (ItemStack item : inventory) {
                         if (item == null) continue;
 
@@ -77,7 +104,7 @@ public class PlayerEndTeleport implements Listener {
                         if (item.getType() == Material.ENDER_EYE && item.getAmount() >= getEyesNeeded()) {
                             inventory.remove(item);
 
-                            // replace the Grappler with the END teleport item
+                            // replace the Grappler with the END TELEPORTER item
                             inventory.setItem(8, createEndTeleport());
                             player.sendMessage(ChatColor.DARK_PURPLE + "✮" + ChatColor.DARK_GRAY + " | "
                                     + HexColor.HIGHLIGHT + ChatColor.BOLD + "Teleport to the End dimension unlocked.");

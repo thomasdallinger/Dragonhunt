@@ -6,11 +6,13 @@ import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameEnd;
+import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -60,7 +62,7 @@ public class Timer {
             if (player.getGameMode().equals(GameMode.SPECTATOR)) continue;
 
             // display the time
-            // if the showdown is active, the time will get displayed in red
+            // if the last 10 minutes have arrived, the time will get displayed in red
             ChatColor color = HexColor.HIGHLIGHT;
 
             if (getTime() >= 2400) {
@@ -84,56 +86,25 @@ public class Timer {
                 sendActionBar();
                 Main.getInstance().getTablistManager().setAllPlayerTeams();
 
-                if (getTime() >= 2395 && getTime() < 2400)
-                    showdownCountdown();
-
                 if (getTime() % 600 == 0) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        if (getTime() < 2400)
-                            player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "All Players will receive "
-                                    + ChatColor.YELLOW + "Strength II" + ChatColor.GRAY + ", "
-                                    + ChatColor.YELLOW + "Speed II" + ChatColor.GRAY + " and "
-                                    + ChatColor.YELLOW + "Resistance II" + ChatColor.GRAY + " in "
-                                    + ChatColor.YELLOW + (2400 - getTime()) / 60 + ChatColor.GRAY + " minutes.");
-                        else if (getTime() == 2400) {
-                            player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 1);
-                            player.getWorld().strikeLightningEffect(player.getLocation());
+                        if (getTime() == 1200) { // 20 minutes played
                             Coins.addCoins(player, 30);
-
-                            player.sendTitle(ChatColor.AQUA + " ", ChatColor.DARK_RED.toString()
-                                    + ChatColor.BOLD + "SHOWDOWN", 5, 100, 5);
-                            player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "The game ends in "
-                                    + ChatColor.YELLOW + "10" + ChatColor.GRAY + " minutes.");
+                            GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE, 2));
+                            GameState.putItemInInventory(player, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
                         }
+
+                        player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "The game ends in "
+                                    + ChatColor.YELLOW + (2100 / 60 - getTime() / 60) + ChatColor.GRAY + " minutes.");
                     }
                 }
 
-                // add effects to each player, if the showdown is active (time >= 40 minutes)
-                if (getTime() >= 2400 && getTime() < 3000) {
-                    for (Player player : Bukkit.getOnlinePlayers()) {
-                        player.addPotionEffect(new PotionEffect(
-                                PotionEffectType.INCREASE_DAMAGE, 40, 1));
-                        player.addPotionEffect(new PotionEffect(
-                                PotionEffectType.SPEED, 40, 1));
-                        player.addPotionEffect(new PotionEffect(
-                                PotionEffectType.DAMAGE_RESISTANCE, 40, 1));
-                    }
-                }
-
-                // once the timer hits 50 minutes, the game will end without a winner
-                if (getTime() == 3000) {
+                // once the timer hits 35 minutes, the game will end without a winner
+                if (getTime() == 2100) {
                     new GameEnd();
                     setRunning(false);
                 }
             }
         }.runTaskTimer(Main.getInstance(), 40, 20);
-    }
-
-    private void showdownCountdown() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-            player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Showdown starts in "
-                    + ChatColor.YELLOW + (2400 - getTime()) + ChatColor.GRAY + " seconds.");
-        }
     }
 }

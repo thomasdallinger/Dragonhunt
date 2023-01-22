@@ -47,10 +47,10 @@ public class Scoreboard extends ScoreboardBuilder {
                 + "☠ " + DbValues.getKills(player, true) + " "
                 + "✟ " + DbValues.getKills(player, false), 5);
 
-        if (timer.getTime() <= 2400) {
+        if (timer.getTime() <= 1500) {
             setScore(ChatColor.WHITE + "✮ " + ChatColor.DARK_PURPLE + PlayerEndTeleport.getEyesNeeded()
                     + ChatColor.DARK_GRAY + " » "
-                    + ChatColor.WHITE + countdownFormat(2400 - timer.getTime()), 3);
+                    + ChatColor.WHITE + countdownFormat(1500 - timer.getTime()), 3);
         } else {
             setScore(ChatColor.WHITE + "✮ " + ChatColor.DARK_PURPLE + PlayerEndTeleport.getEyesNeeded(),
                     3);

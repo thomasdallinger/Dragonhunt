@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.vehicles;
 
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -13,6 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.vehicle.VehicleCreateEvent;
 import org.bukkit.event.vehicle.VehicleDestroyEvent;
+import org.bukkit.inventory.ItemStack;
 
 public class VehicleListener implements Listener {
 
@@ -32,6 +34,9 @@ public class VehicleListener implements Listener {
 
             StorageMinecart mc = ((StorageMinecart) entity);
             mc.getInventory().clear();
+            mc.getInventory().addItem(
+                    new ItemStack(Material.COPPER_INGOT, 9),
+                    new ItemStack(Material.IRON_INGOT, 6));
             entity.remove();
         }
     }

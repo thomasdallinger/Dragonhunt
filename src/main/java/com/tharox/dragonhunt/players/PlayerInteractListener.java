@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.ItemStack;
 
 public class PlayerInteractListener implements Listener {
 
@@ -32,15 +33,6 @@ public class PlayerInteractListener implements Listener {
                 (event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
 
             if (block != null) {
-                if (block.getType() == Material.ENDER_CHEST) {
-                    event.setCancelled(true);
-                    block.setType(Material.AIR);
-
-                    player.giveExp(Coins.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
-                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-                    return;
-                }
-
                 // clicking on an enchanting table opens the enchant inventory
                 if (block.getType() == Material.ENCHANTING_TABLE) {
                     event.setCancelled(true);
@@ -52,7 +44,12 @@ public class PlayerInteractListener implements Listener {
 
                 if (block.getType() == Material.CHEST || block.getType() == Material.CHEST_MINECART) {
                     event.setCancelled(true);
-                    block.setType(Material.ENDER_CHEST);
+                    block.setType(Material.AIR);
+                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.COPPER_INGOT, 9));
+                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.IRON_INGOT, 6));
+
+                    player.giveExp(Coins.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
+                    player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                     return;
                 }
 

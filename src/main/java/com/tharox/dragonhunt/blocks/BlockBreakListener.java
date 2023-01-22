@@ -130,14 +130,13 @@ public class BlockBreakListener implements Listener {
      */
     protected void changeDrops(Block block, Player player) {
         // a HashMap with the old drops as materials and new drops as ItemStacks
-        // the new drops can be upgraded using RESOURCE UPGRADES
         HashMap<Material, ItemStack> materials = new HashMap<>();
-        materials.put(Material.RAW_IRON, GameState.resources.get(player).get(0));
-        materials.put(Material.RAW_COPPER, GameState.resources.get(player).get(1));
-        materials.put(Material.RAW_GOLD, GameState.resources.get(player).get(2));
-        materials.put(Material.GOLD_NUGGET, GameState.resources.get(player).get(2)); // Nether Gold Ore
-        materials.put(Material.GILDED_BLACKSTONE, GameState.resources.get(player).get(2));
-        materials.put(Material.DIAMOND, GameState.resources.get(player).get(3));
+        materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
+        materials.put(Material.RAW_COPPER, new ItemStack(Material.COPPER_INGOT, 2));
+        materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 2));
+        materials.put(Material.GOLD_NUGGET, new ItemStack(Material.GOLD_INGOT, 1)); // Nether Gold Ore
+        materials.put(Material.GILDED_BLACKSTONE,new ItemStack(Material.GOLD_INGOT, 1));
+        materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 2));
         materials.put(Material.COAL, new ItemStack(Material.TORCH, 4));
         materials.put(Material.GRAVEL, new ItemStack(Material.FLINT));
         materials.put(Material.MELON_SLICE, new ItemStack(GameState.food.get(player).getType(), 1));

@@ -31,8 +31,7 @@ public class Scoreboard extends ScoreboardBuilder {
 
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
                 + DbValues.getServerID() + "]", 8);
-        setScore(ChatColor.WHITE.toString() + ChatColor.BOLD + "12x1"
-                + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE + "Casual", 7);
+        setScore(ChatColor.WHITE + "12x1" + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE + "Casual", 7);
         setScore("", 6);
         setScore("", 5);
         setScore("", 4);
@@ -44,9 +43,9 @@ public class Scoreboard extends ScoreboardBuilder {
 
     @Override
     public void update(Player player, Countdown countdown) {
-        setScore(ChatColor.WHITE + "☻ " + Bukkit.getOnlinePlayers().size() + " "
-                + ChatColor.WHITE + "☠ " + ChatColor.GOLD + DbValues.getKills(player, true) + " "
-                + ChatColor.WHITE + "✟ " + HexColor.RED + DbValues.getKills(player, false), 5);
+        setScore("☻ " + Bukkit.getOnlinePlayers().size() + " "
+                + "☠ " + DbValues.getKills(player, true) + " "
+                + "✟ " + DbValues.getKills(player, false), 5);
 
         if (timer.getTime() <= 2400) {
             setScore(ChatColor.WHITE + "✮ " + ChatColor.DARK_PURPLE + PlayerEndTeleport.getEyesNeeded()
@@ -59,7 +58,7 @@ public class Scoreboard extends ScoreboardBuilder {
 
         setScore(ChatColor.WHITE + "⛃ " + HexColor.HIGHLIGHT + Coins.getCoins(player)
                 + ChatColor.DARK_GRAY + " » " + ChatColor.WHITE + countdownFormat(countdown.getTime()), 2);
-        setScore(ChatColor.YELLOW + "playdragonhunt.net", 0);
+        setScore(ChatColor.GOLD + "dragonhunt.net", 0);
     }
 
     private void run(Player player, Countdown countdown) {

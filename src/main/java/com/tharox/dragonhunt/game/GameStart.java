@@ -115,38 +115,41 @@ public class GameStart extends GameConfiguration {
             if (startCountdown.getTime() == 10) {
                 GameState.modifierInventoryClose = true;
                 player.closeInventory();
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
             }
 
-            if (startCountdown.getTime() <= 10 && startCountdown.getTime() > 6) {
-                player.sendTitle(Main.getTitle(), ChatColor.DARK_GRAY + "■ ■ ■ ■ ■ "
+            if (startCountdown.getTime() <= 10 && startCountdown.getTime() > 3) {
+                player.sendTitle(HexColor.HIGHLIGHT + "Starting in",
+                        ChatColor.WHITE.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
                         , 0, 25, 0);
             }
 
-            if (startCountdown.getTime() <= 6 && startCountdown.getTime() > 1) {
-                StringBuilder lights = new StringBuilder();
+            if (startCountdown.getTime() == 3) {
+                player.sendTitle(HexColor.HIGHLIGHT + "Starting in",
+                        HexColor.RED.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
+                        , 0, 25, 0);
 
-                // colored lights
-                lights.append(HexColor.HIGHLIGHT);
-                for (int amount = 5; amount >= startCountdown.getTime() - 1; amount--) {
-                    lights.append("■ ");
-                }
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+            }
 
-                // gray lights
-                lights.append(ChatColor.DARK_GRAY);
-                for (int amount = 1; amount < startCountdown.getTime() - 1; amount++) {
-                    lights.append("■ ");
-                }
+            if (startCountdown.getTime() == 2) {
+                player.sendTitle(HexColor.HIGHLIGHT + "Starting in",
+                        ChatColor.GOLD.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
+                        , 0, 25, 0);
 
-                player.sendTitle(Main.getTitle(), String.valueOf(lights), 0, 25, 0);
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
             }
 
             if (startCountdown.getTime() == 1) {
-                player.sendTitle(Main.getTitle(), HexColor.HIGHLIGHT + "■ ■ ■ ■ ■ "
-                        , 0, 20, 0);
+                player.sendTitle(HexColor.HIGHLIGHT + "Starting in",
+                        HexColor.GREEN.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
+                        , 0, 25, 0);
+
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
             }
 
             if (startCountdown.getTime() == 0) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
                 player.teleport(startLocation);
                 player.setGameMode(GameMode.SURVIVAL);
 

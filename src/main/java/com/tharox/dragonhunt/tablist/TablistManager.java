@@ -16,7 +16,7 @@ public class TablistManager {
      * @param player player who receives the header and footer in the tablist
      */
     public void setPlayerList(Player player) {
-        player.setPlayerListHeaderFooter(Main.getTitle(), ChatColor.GRAY + "v23.1");
+        player.setPlayerListHeaderFooter(Main.getTitle(), ChatColor.WHITE + "dragonhunt.net" + "\n");
     }
 
     /**

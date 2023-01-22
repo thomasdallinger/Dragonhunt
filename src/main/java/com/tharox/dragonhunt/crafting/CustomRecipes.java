@@ -48,6 +48,7 @@ public class CustomRecipes {
         changeSwordRecipe(new ItemStack(Material.IRON_SWORD), "blackstone_sword", Material.BLACKSTONE);
 
         changeShieldRecipe();
+        changeCrossbowRecipe();
 
         addCopperGold();
         addCopperDiamond();
@@ -190,6 +191,24 @@ public class CustomRecipes {
         recipe.shape("SRS", "SSS", " S ");
         recipe.setIngredient('R', Material.IRON_INGOT);
         recipe.setIngredient('S', Material.OAK_PLANKS);
+
+        Bukkit.addRecipe(recipe);
+    }
+
+    /**
+     * Updates the existing bukkit crossbow recipe.
+     */
+    private void changeCrossbowRecipe() {
+        NamespacedKey key = new NamespacedKey(Main.getInstance(), "crossbow");
+        ItemStack crossbow = new ItemStack(Material.CROSSBOW);
+        crossbow.addEnchantment(Enchantment.QUICK_CHARGE, 3);
+
+        ShapedRecipe recipe = new ShapedRecipe(key, crossbow);
+        recipe.shape("SIS", "THT", " S ");
+        recipe.setIngredient('S', Material.STICK);
+        recipe.setIngredient('I', Material.IRON_INGOT);
+        recipe.setIngredient('T', Material.STRING);
+        recipe.setIngredient('H', Material.TRIPWIRE_HOOK);
 
         Bukkit.addRecipe(recipe);
     }

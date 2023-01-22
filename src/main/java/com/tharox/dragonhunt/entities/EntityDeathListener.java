@@ -7,6 +7,7 @@ import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -47,8 +48,10 @@ public class EntityDeathListener implements Listener {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.TNT, 1));
                 break;
             case "Skeleton":
+                ItemStack crossbow = new ItemStack(Material.CROSSBOW);
+                crossbow.addEnchantment(Enchantment.QUICK_CHARGE, 3);
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(crossbow));
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.ARROW, 4));
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.BOW));
                 break;
             case "Piglin":
             case "Zombie":

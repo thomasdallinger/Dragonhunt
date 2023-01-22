@@ -31,7 +31,7 @@ public class Scoreboard extends ScoreboardBuilder {
 
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
                 + DbValues.getServerID() + "]", 8);
-        setScore(ChatColor.WHITE.toString() + ChatColor.BOLD + "1vs1"
+        setScore(ChatColor.WHITE.toString() + ChatColor.BOLD + "12x1"
                 + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE + "Casual", 7);
         setScore("", 6);
         setScore("", 5);

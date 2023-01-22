@@ -1,8 +1,10 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
+import com.tharox.dragonhunt.enchanting.EnchantingInventory;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -39,6 +41,15 @@ public class PlayerInteractListener implements Listener {
                     return;
                 }
 
+                // clicking on an enchanting table opens the enchant inventory
+                if (block.getType() == Material.ENCHANTING_TABLE) {
+                    event.setCancelled(true);
+
+                    EnchantingInventory inventory = new EnchantingInventory(Main.getInstance().getConfig(), player);
+                    player.openInventory(inventory.enchant);
+                    return;
+                }
+
                 if (block.getType() == Material.CHEST || block.getType() == Material.CHEST_MINECART) {
                     event.setCancelled(true);
                     block.setType(Material.ENDER_CHEST);
@@ -51,8 +62,7 @@ public class PlayerInteractListener implements Listener {
                     return;
                 }
 
-                if (block.getType() == Material.ENCHANTING_TABLE
-                        || block.getType() == Material.BREWING_STAND
+                if (block.getType() == Material.BREWING_STAND
                         || block.getType() == Material.ANVIL) {
                     event.setCancelled(true);
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);

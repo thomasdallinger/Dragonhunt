@@ -5,6 +5,7 @@ import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.elytra.ElytraSwapRunnable;
+import com.tharox.dragonhunt.enchanting.Enchantments;
 import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
 import com.tharox.dragonhunt.modifiers.selection.ModifierInventory;
 import com.tharox.dragonhunt.timer.Countdown;
@@ -73,6 +74,7 @@ public class GameStart extends GameConfiguration {
         }
 
         new EnchantmentUpgrades(); // start the runnable
+        new Enchantments(); // start the runnable
         // checks if each player has purchased enchantment upgrades and enchants items based on the upgrade level
     }
 

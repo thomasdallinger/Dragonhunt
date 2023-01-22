@@ -11,6 +11,7 @@ import com.tharox.dragonhunt.commands.*;
 import com.tharox.dragonhunt.crafting.CustomRecipes;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.dimensions.DimensionListener;
+import com.tharox.dragonhunt.enchanting.EnchantingListener;
 import com.tharox.dragonhunt.entities.CreatureSpawnListener;
 import com.tharox.dragonhunt.entities.EntityDamageListener;
 import com.tharox.dragonhunt.entities.EntityDeathListener;
@@ -175,6 +176,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
         pluginManager.registerEvents(new LevelUp(), this);
         pluginManager.registerEvents(new ShopListener(), this);
+        pluginManager.registerEvents(new EnchantingListener(), this);
 
         pluginManager.registerEvents(new BlockBreakListener(), this);
         pluginManager.registerEvents(new BlockExplodeListener(), this);

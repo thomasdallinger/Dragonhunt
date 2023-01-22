@@ -14,25 +14,29 @@ import java.util.Objects;
 public class CustomRecipes {
 
     public CustomRecipes() {
-        changePickaxeRecipe("wood_pickaxe", Material.OAK_PLANKS);
-        changePickaxeRecipe("gold_pickaxe", Material.GOLD_INGOT);
-        changePickaxeRecipe("stone_pickaxe", Material.COBBLESTONE);
-        changePickaxeRecipe("blackstone_pickaxe", Material.BLACKSTONE);
+        changePickaxeRecipe(Material.IRON_PICKAXE, "wood_pickaxe", Material.OAK_PLANKS);
+        changePickaxeRecipe(Material.IRON_PICKAXE, "gold_pickaxe", Material.GOLD_INGOT);
+        changePickaxeRecipe(Material.IRON_PICKAXE, "stone_pickaxe", Material.COBBLESTONE);
+        changePickaxeRecipe(Material.IRON_PICKAXE, "blackstone_pickaxe", Material.BLACKSTONE);
+        changePickaxeRecipe(Material.DIAMOND_PICKAXE, "diamond_pickaxe", Material.DIAMOND);
 
-        changeAxeRecipe("wood_axe", Material.OAK_PLANKS);
-        changeAxeRecipe("gold_axe", Material.GOLD_INGOT);
-        changeAxeRecipe("stone_axe", Material.COBBLESTONE);
-        changeAxeRecipe("blackstone_axe", Material.BLACKSTONE);
+        changeAxeRecipe(Material.IRON_AXE, "wood_axe", Material.OAK_PLANKS);
+        changeAxeRecipe(Material.IRON_AXE, "gold_axe", Material.GOLD_INGOT);
+        changeAxeRecipe(Material.IRON_AXE, "stone_axe", Material.COBBLESTONE);
+        changeAxeRecipe(Material.IRON_AXE, "blackstone_axe", Material.BLACKSTONE);
+        changeAxeRecipe(Material.DIAMOND_AXE, "diamond_axe", Material.DIAMOND);
 
-        changeHoeRecipe("wood_hoe", Material.OAK_PLANKS);
-        changeHoeRecipe("gold_hoe", Material.GOLD_INGOT);
-        changeHoeRecipe("stone_hoe", Material.COBBLESTONE);
-        changeHoeRecipe("blackstone_hoe", Material.BLACKSTONE);
+        changeHoeRecipe(Material.IRON_HOE, "wood_hoe", Material.OAK_PLANKS);
+        changeHoeRecipe(Material.IRON_HOE, "gold_hoe", Material.GOLD_INGOT);
+        changeHoeRecipe(Material.IRON_HOE, "stone_hoe", Material.COBBLESTONE);
+        changeHoeRecipe(Material.IRON_HOE, "blackstone_hoe", Material.BLACKSTONE);
+        changeHoeRecipe(Material.DIAMOND_HOE, "diamond_hoe", Material.DIAMOND);
 
-        changeShovelRecipe("wood_shovel", Material.OAK_PLANKS);
-        changeShovelRecipe("gold_shovel", Material.GOLD_INGOT);
-        changeShovelRecipe("stone_shovel", Material.COBBLESTONE);
-        changeShovelRecipe("blackstone_shovel", Material.BLACKSTONE);
+        changeShovelRecipe(Material.IRON_SHOVEL, "wood_shovel", Material.OAK_PLANKS);
+        changeShovelRecipe(Material.IRON_SHOVEL, "gold_shovel", Material.GOLD_INGOT);
+        changeShovelRecipe(Material.IRON_SHOVEL, "stone_shovel", Material.COBBLESTONE);
+        changeShovelRecipe(Material.IRON_SHOVEL, "blackstone_shovel", Material.BLACKSTONE);
+        changeShovelRecipe(Material.DIAMOND_SHOVEL, "diamond_shovel", Material.DIAMOND);
 
         changeSwordRecipe(new ItemStack(Material.IRON_SWORD), "wood_sword", Material.OAK_PLANKS);
         changeSwordRecipe(new ItemStack(Material.IRON_SWORD), "gold_sword", Material.GOLD_INGOT);
@@ -49,13 +53,14 @@ public class CustomRecipes {
     /**
      * Updates an existing bukkit pickaxe recipe.
      *
+     * @param item     item which the player receives when crafting the recipe
      * @param keyName  used to identify this recipe
      * @param resource resource needed to craft this pickaxe
      */
-    private void changePickaxeRecipe(String keyName, Material resource) {
+    private void changePickaxeRecipe(Material item, String keyName, Material resource) {
         // Create the result ItemStack
-        ItemStack pickaxe = new ItemStack(Material.IRON_PICKAXE);
-        pickaxe.addEnchantment(Enchantment.DIG_SPEED, 1);
+        ItemStack pickaxe = new ItemStack(item);
+        pickaxe.addEnchantment(Enchantment.DIG_SPEED, 3);
 
         // Create a NamespacedKey for the recipe.
         NamespacedKey key = new NamespacedKey(Main.getInstance(), keyName);
@@ -78,12 +83,13 @@ public class CustomRecipes {
     /**
      * Updates an existing bukkit axe recipe.
      *
+     * @param item     item which the player receives when crafting the recipe
      * @param keyName  used to identify this recipe
      * @param resource resource needed to craft this axe
      */
-    private void changeAxeRecipe(String keyName, Material resource) {
-        ItemStack axe = new ItemStack(Material.IRON_AXE);
-        axe.addEnchantment(Enchantment.DIG_SPEED, 1);
+    private void changeAxeRecipe(Material item, String keyName, Material resource) {
+        ItemStack axe = new ItemStack(item);
+        axe.addEnchantment(Enchantment.DIG_SPEED, 3);
 
         NamespacedKey key = new NamespacedKey(Main.getInstance(), keyName);
         ShapedRecipe recipe = new ShapedRecipe(key, axe);
@@ -106,12 +112,13 @@ public class CustomRecipes {
     /**
      * Updates an existing bukkit hoe recipe.
      *
+     * @param item     item which the player receives when crafting the recipe
      * @param keyName  used to identify this recipe
      * @param resource resource needed to craft this hoe
      */
-    private void changeHoeRecipe(String keyName, Material resource) {
-        ItemStack hoe = new ItemStack(Material.IRON_HOE);
-        hoe.addEnchantment(Enchantment.DIG_SPEED, 1);
+    private void changeHoeRecipe(Material item, String keyName, Material resource) {
+        ItemStack hoe = new ItemStack(item);
+        hoe.addEnchantment(Enchantment.DIG_SPEED, 3);
 
         NamespacedKey key = new NamespacedKey(Main.getInstance(), keyName);
         ShapedRecipe recipe = new ShapedRecipe(key, hoe);
@@ -134,12 +141,13 @@ public class CustomRecipes {
     /**
      * Updates an existing bukkit shovel recipe.
      *
+     * @param item     item which the player receives when crafting the recipe
      * @param keyName  used to identify this recipe
      * @param resource resource needed to craft this shovel
      */
-    private void changeShovelRecipe(String keyName, Material resource) {
-        ItemStack shovel = new ItemStack(Material.IRON_SHOVEL);
-        shovel.addEnchantment(Enchantment.DIG_SPEED, 1);
+    private void changeShovelRecipe(Material item, String keyName, Material resource) {
+        ItemStack shovel = new ItemStack(item);
+        shovel.addEnchantment(Enchantment.DIG_SPEED, 3);
 
         NamespacedKey key = new NamespacedKey(Main.getInstance(), keyName);
         ShapedRecipe recipe = new ShapedRecipe(key, shovel);
@@ -153,7 +161,7 @@ public class CustomRecipes {
     /**
      * Updates an existing bukkit sword recipe.
      *
-     * @param item     item which players get from crafting the recipe
+     * @param item     item item which the player receives when crafting the recipe
      * @param keyName  used to identify this recipe
      * @param resource resource needed to craft this sword
      */

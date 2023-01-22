@@ -32,8 +32,7 @@ public class EntityDeathListener implements Listener {
             }
 
             if (mob instanceof Animals || mob instanceof WaterMob) {
-                if (GameState.food.containsKey(killer)) // first values added in GameConfiguration
-                    mob.getWorld().dropItemNaturally(mob.getLocation(), GameState.food.get(killer));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
                 killer.giveExp(Coins.animalXP + XPUpgrade.MoreXP.get(killer) - 1);
                 killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
             }

@@ -74,7 +74,7 @@ public class EntityDeathListener implements Listener {
                 break;
             case "Piglin Brute":
             case "Wither Skeleton":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.NETHERITE_INGOT));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.NETHERITE_SCRAP, 2));
                 break;
             case "Iron Golem":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 5));

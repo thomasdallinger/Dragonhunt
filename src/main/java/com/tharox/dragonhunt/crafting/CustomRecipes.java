@@ -51,7 +51,7 @@ public class CustomRecipes {
 
         addCopperGold();
         addCopperDiamond();
-        addDiamondNetherite();
+        addEnchantedGoldenApple();
     }
 
     /**
@@ -218,13 +218,14 @@ public class CustomRecipes {
     }
 
     /**
-     * Adds a new diamond recipe: 9 diamonds = 1 netherite ingot.
+     * Adds a new recipe: 8 diamonds + 1 golden apple = 1 enchanted golden apple.
      */
-    private void addDiamondNetherite() {
-        NamespacedKey key = new NamespacedKey(Main.getInstance(), "diamond_netherite");
-        ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.NETHERITE_INGOT));
-        recipe.shape("DDD", "DDD", "DDD");
+    private void addEnchantedGoldenApple() {
+        NamespacedKey key = new NamespacedKey(Main.getInstance(), "enchanted_golden_apple");
+        ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
+        recipe.shape("DDD", "DGD", "DDD");
         recipe.setIngredient('D', Material.DIAMOND);
+        recipe.setIngredient('G', Material.GOLDEN_APPLE);
 
         Bukkit.addRecipe(recipe);
     }

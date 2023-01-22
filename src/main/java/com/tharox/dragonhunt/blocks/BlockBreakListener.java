@@ -145,6 +145,8 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.POTATO, new ItemStack(Material.GOLDEN_CARROT));
         materials.put(Material.BEETROOT, new ItemStack(Material.GOLDEN_CARROT));
         materials.put(Material.NETHER_WART, new ItemStack(Material.GOLDEN_CARROT));
+        materials.put(Material.SWEET_BERRIES, new ItemStack(Material.GOLDEN_CARROT));
+        materials.put(Material.GLOW_BERRIES, new ItemStack(Material.GOLDEN_CARROT));
 
         // loop through all drops and check if they have to be changed
         for (ItemStack item : block.getDrops()) {

@@ -13,6 +13,10 @@ import java.util.Objects;
 
 public class CustomRecipes {
 
+    /**
+     * When diamond tools are converted to netherite tools, the efficiency enchantment stays on the tool.
+     * Therefore, no recipe changes for the smithing table are needed.
+     */
     public CustomRecipes() {
         changePickaxeRecipe(Material.IRON_PICKAXE, "wood_pickaxe", Material.OAK_PLANKS);
         changePickaxeRecipe(Material.IRON_PICKAXE, "gold_pickaxe", Material.GOLD_INGOT);

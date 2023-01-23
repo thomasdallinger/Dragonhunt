@@ -90,7 +90,7 @@ public class EnchantingItem {
 
         while (cost != 0) { // not looping while
             // player can't acquire the enchantment yet
-            if (NAME != null && meta.getDisplayName().contains("UNLOCKED")) {
+            if (NAME != null && meta.getDisplayName().contains("ᴜɴʟᴏᴄᴋᴇᴅ")) {
                 meta.setLore(Arrays.asList(
                         HexColor.GREEN.toString() + ChatColor.ITALIC + LORE,
                         "",
@@ -101,7 +101,7 @@ public class EnchantingItem {
 
             }
             // player has already bought the enchantment
-            else if (NAME != null && meta.getDisplayName().contains("LOCKED")) {
+            else if (NAME != null && meta.getDisplayName().contains("ʟᴏᴄᴋᴇᴅ")) {
                 meta.setLore(Arrays.asList(
                         HexColor.RED.toString() + ChatColor.ITALIC + LORE,
                         "",
@@ -151,14 +151,14 @@ public class EnchantingItem {
         // item has already been purchased
         else if (AMOUNT < level) {
             meta.setDisplayName(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + NAME +
-                    HexColor.GREEN + ChatColor.ITALIC + " UNLOCKED");
+                    HexColor.GREEN + " ᴜɴʟᴏᴄᴋᴇᴅ");
             itemStack.setItemMeta(meta);
             return itemStack;
         }
         // item has not been unlocked yet
         else {
             meta.setDisplayName(ChatColor.DARK_RED.toString() + ChatColor.BOLD + NAME +
-                    HexColor.RED + ChatColor.ITALIC + " LOCKED");
+                    HexColor.RED + " ʟᴏᴄᴋᴇᴅ");
             itemStack.setItemMeta(meta);
             return itemStack;
         }

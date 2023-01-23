@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.tablist;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.colors.HexColor;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -16,7 +17,7 @@ public class TablistManager {
      * @param player player who receives the header and footer in the tablist
      */
     public void setPlayerList(Player player) {
-        player.setPlayerListHeaderFooter(Main.getTitle(), ChatColor.WHITE + "dragonhunt.net" + "\n");
+        player.setPlayerListHeaderFooter(Main.getTitle(), "\n" + ChatColor.GRAY + "ᴍᴏᴅɪꜰɪᴇʀꜱ" + "\n");
     }
 
     /**

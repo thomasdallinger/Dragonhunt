@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.grappler.Grappler;
 import com.tharox.dragonhunt.modifiers.classes.FireWeakness;
 import net.md_5.bungee.api.ChatColor;
@@ -42,7 +43,7 @@ public class EntityDamageListener implements Listener {
         itemInMainHand = player.getInventory().getItemInMainHand();
         if (itemInMainHand.getItemMeta() == null) return;
         if (itemInMainHand.getItemMeta().getDisplayName().equals(
-                ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")) {
+                ChatColor.LIGHT_PURPLE + "Grappler")) {
             arrow.remove();
             event.setCancelled(true);
 

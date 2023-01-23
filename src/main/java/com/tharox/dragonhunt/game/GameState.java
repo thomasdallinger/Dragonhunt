@@ -81,9 +81,9 @@ public class GameState {
         meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
 
         if (item.getType() == Material.SHIELD) {
-            meta.setDisplayName(org.bukkit.ChatColor.AQUA.toString() + org.bukkit.ChatColor.BOLD + "Shield");
+            meta.setDisplayName(ChatColor.AQUA + "Shield");
         } else if (item.getType() == Material.ELYTRA) {
-            meta.setDisplayName(org.bukkit.ChatColor.YELLOW.toString() + org.bukkit.ChatColor.BOLD + "Elytra");
+            meta.setDisplayName(ChatColor.AQUA + "Elytra");
         }
 
         item.setItemMeta(meta);

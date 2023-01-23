@@ -57,7 +57,7 @@ public class ModifierInventory {
                                 if (title != null && lore != null) {
                                     player.sendMessage(Prefixes.getAllPrefix() + title
                                             + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + lore);
-                                    player.setPlayerListFooter(player.getPlayerListFooter() + "\n" + title);
+                                    player.setPlayerListFooter(player.getPlayerListFooter() + title + "\n");
                                 }
                             }
 

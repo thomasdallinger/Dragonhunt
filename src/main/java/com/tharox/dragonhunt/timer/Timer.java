@@ -54,8 +54,7 @@ public class Timer {
             ItemStack item = player.getInventory().getItemInMainHand();
 
             if (item.getItemMeta() != null)
-                if (item.getItemMeta().getDisplayName().equals((ChatColor.GOLD.toString()
-                        + ChatColor.BOLD + "Tracker")))
+                if (item.getItemMeta().getDisplayName().equals((ChatColor.LIGHT_PURPLE + "Tracker")))
                     continue;
 
             // if the player is in Spectator mode, the time wont get displayed (Spectate or after the game ended)
@@ -63,7 +62,7 @@ public class Timer {
 
             // display the time
             // if the last 10 minutes have arrived, the time will get displayed in red
-            ChatColor color = HexColor.HIGHLIGHT;
+            ChatColor color = ChatColor.GOLD;
 
             if (getTime() >= 2400) {
                 color = HexColor.RED;

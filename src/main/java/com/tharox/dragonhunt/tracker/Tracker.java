@@ -89,7 +89,7 @@ public class Tracker implements Listener {
 
         if (e.equals(EquipmentSlot.HAND)
                 && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
+            if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Tracker")) {
 
                 if (world.getName().equals("world_the_end")) {
                     player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "Tracker disabled in the End.");
@@ -126,7 +126,7 @@ public class Tracker implements Listener {
 
         if (e.equals(EquipmentSlot.HAND)
                 && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
+            if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Tracker")) {
                 player.performCommand("shop");
             }
         }
@@ -143,7 +143,7 @@ public class Tracker implements Listener {
         String trackedObjectName = "";
         int distance;
 
-        if (item.getItemMeta().getDisplayName().equals(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")) {
+        if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Tracker")) {
             try {
 
                 if (player.getWorld().getName().equals("world_the_end")) {
@@ -251,12 +251,12 @@ public class Tracker implements Listener {
         ItemMeta meta = tracker.getItemMeta();
         if (meta == null) return null;
 
-        meta.setDisplayName(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker");
+        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Tracker");
         meta.setLore(Arrays.asList(
-                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "Displays the distance towards different",
-                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "structures and positions.",
-                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "The compass needle points to the",
-                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "tracked structure/position location.",
+                ChatColor.BLUE.toString() + ChatColor.ITALIC + "Displays the distance towards different",
+                ChatColor.BLUE.toString() + ChatColor.ITALIC + "structures and positions.",
+                ChatColor.BLUE.toString() + ChatColor.ITALIC + "The compass needle points to the",
+                ChatColor.BLUE.toString() + ChatColor.ITALIC + "tracked structure/position location.",
                 "",
                 ChatColor.WHITE + "Left-Click: " + HexColor.HIGHLIGHT + "Open shop menu (/shop)",
                 ChatColor.WHITE + "Right-Click: " + ChatColor.GOLD + "Switch tracked structure",

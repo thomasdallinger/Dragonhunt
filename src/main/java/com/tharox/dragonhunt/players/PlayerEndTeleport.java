@@ -48,8 +48,7 @@ public class PlayerEndTeleport implements Listener {
 
         if (e.equals(EquipmentSlot.HAND)
                 && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().equals(HexColor.HIGHLIGHT.toString()
-                    + ChatColor.BOLD + "TP TO END")) {
+            if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Teleport » End Dimension")) {
                 event.setCancelled(true); // do not place the end stone block
 
                 if (world.getName().equals("world_the_end")) {
@@ -126,7 +125,7 @@ public class PlayerEndTeleport implements Listener {
     /**
      * Used in the scoreboard.
      *
-     * @return the amount of ender eyes needed to get the "TP TO END" item
+     * @return the amount of ender eyes needed to get the "Teleport » End Dimension" item
      */
     public static int getEyesNeeded() {
         int eyesNeeded = 12;
@@ -150,7 +149,7 @@ public class PlayerEndTeleport implements Listener {
         if (meta == null) return null;
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        meta.setDisplayName(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "TP TO END");
+        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Teleport » End Dimension");
         meta.setLore(Arrays.asList(
                 ChatColor.WHITE + "Right-Click: " + ChatColor.LIGHT_PURPLE + "Teleports you to the spawn platform",
                 ChatColor.LIGHT_PURPLE + "in the END dimension.",

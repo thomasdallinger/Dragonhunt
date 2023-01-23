@@ -61,9 +61,9 @@ public abstract class Modifier {
         if (!active) return null;
 
         if (positive) {
-            color = HexColor.GREEN.toString() + ChatColor.BOLD;
+            color = HexColor.GREEN.toString();
         } else {
-            color = HexColor.RED.toString() + ChatColor.BOLD;
+            color = HexColor.RED.toString();
         }
 
         return color + title;

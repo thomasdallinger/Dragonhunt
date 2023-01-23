@@ -28,7 +28,7 @@ public class GrappleListener implements Listener {
             ItemMeta meta = bow.getItemMeta();
             if (meta == null) return;
 
-            if (!meta.getDisplayName().equals(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")) return;
+            if (!meta.getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Grappler")) return;
 
             arrow.setVelocity(arrow.getVelocity().multiply(2D));
 

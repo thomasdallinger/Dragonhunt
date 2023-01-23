@@ -39,14 +39,14 @@ public class EnchantingListener implements Listener {
         if (event.getClick() == ClickType.NUMBER_KEY) return;
 
         // ERROR: enchantment already bought
-        if (enchantment.contains("UNLOCKED")) {
+        if (enchantment.contains("ᴜɴʟᴏᴄᴋᴇᴅ")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You have already bought this enchantment!");
             return;
         }
 
         // ERROR: enchantment level not unlocked
-        if (enchantment.contains("LOCKED")) {
+        if (enchantment.contains("ʟᴏᴄᴋᴇᴅ")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY
                     + "Purchase the previous level to unlock this one!");

@@ -58,7 +58,7 @@ public class Scoreboard extends ScoreboardBuilder {
 
         setScore(ChatColor.WHITE + "⛃ " + HexColor.HIGHLIGHT + Coins.getCoins(player)
                 + ChatColor.DARK_GRAY + " » " + ChatColor.WHITE + countdownFormat(countdown.getTime()), 2);
-        setScore(ChatColor.GOLD + "dragonhunt.net", 0);
+        setScore(ChatColor.GOLD + "ᴅʀᴀɢᴏɴʜᴜɴᴛ.ɴᴇᴛ", 0);
     }
 
     private void run(Player player, Countdown countdown) {

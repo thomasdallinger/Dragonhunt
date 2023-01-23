@@ -76,10 +76,10 @@ public class PlayerInventoryListener implements Listener {
 
         String displayName = item.getItemMeta().getDisplayName();
 
-        if (displayName.contains(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")
-                || displayName.contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")
-                || displayName.contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "TP TO END")
-                || displayName.contains(ChatColor.GOLD.toString() + ChatColor.BOLD + "Generated Arrow"))
+        if (displayName.contains(ChatColor.LIGHT_PURPLE + "Tracker")
+                || displayName.contains(ChatColor.LIGHT_PURPLE + "Grappler")
+                || displayName.contains(ChatColor.LIGHT_PURPLE + "Teleport » End Dimension")
+                || displayName.contains(ChatColor.LIGHT_PURPLE + "Generated Arrow"))
             event.setCancelled(true);
 
         if (item.getType() == Material.ELYTRA) {
@@ -95,9 +95,9 @@ public class PlayerInventoryListener implements Listener {
         if (offHandItem.getItemMeta() == null) return;
 
         String displayName = offHandItem.getItemMeta().getDisplayName();
-        if (displayName.contains(ChatColor.GOLD.toString() + ChatColor.BOLD + "Tracker")
-                || displayName.contains(ChatColor.DARK_PURPLE.toString() + ChatColor.BOLD + "Grappler")
-                || displayName.contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "TP TO END")) {
+        if (displayName.contains(ChatColor.LIGHT_PURPLE + "Tracker")
+                || displayName.contains(ChatColor.LIGHT_PURPLE + "Grappler")
+                || displayName.contains(ChatColor.LIGHT_PURPLE + "Teleport » End Dimension")) {
             // Generated Arrows can't be swapped: not in the hotbar, no checking needed
             event.setCancelled(true);
         }

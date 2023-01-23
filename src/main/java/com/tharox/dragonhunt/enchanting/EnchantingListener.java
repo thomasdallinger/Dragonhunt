@@ -54,10 +54,10 @@ public class EnchantingListener implements Listener {
         }
 
         // ERROR: not enough points to purchase the enchantment
-        if (Coins.getCoins(player) < EnchantingInventory.objectCost.get(enchantment)) {
+        if (Coins.getCoins(player) < EnchantingInventory.enchantmentCost.get(enchantment)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You don't have enough coins! Need "
-                    + HexColor.RED + (EnchantingInventory.objectCost.get(enchantment) - Coins.getCoins(player))
+                    + HexColor.RED + (EnchantingInventory.enchantmentCost.get(enchantment) - Coins.getCoins(player))
                     + ChatColor.GRAY + " more.");
             return;
         }
@@ -91,8 +91,9 @@ public class EnchantingListener implements Listener {
      */
     private void purchaseEnchantment(Player player, String enchantment) {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        Coins.removeCoins(player, EnchantingInventory.objectCost.get(enchantment), enchantment);
+        Coins.removeCoins(player, EnchantingInventory.enchantmentCost.get(enchantment), enchantment);
 
+        // inventory needs to be re-opened (refresh the amount of coins the player has)
         EnchantingInventory inventory = new EnchantingInventory(Main.getInstance().getConfig(), player);
         player.openInventory(inventory.enchant);
     }

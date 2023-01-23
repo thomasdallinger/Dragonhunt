@@ -3,6 +3,7 @@ package com.tharox.dragonhunt;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
+import com.tharox.dragonhunt.brewing.BrewingListener;
 import com.tharox.dragonhunt.chat.ChatListener;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.LevelUp;
@@ -177,6 +178,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new LevelUp(), this);
         pluginManager.registerEvents(new ShopListener(), this);
         pluginManager.registerEvents(new EnchantingListener(), this);
+        pluginManager.registerEvents(new BrewingListener(), this);
 
         pluginManager.registerEvents(new BlockBreakListener(), this);
         pluginManager.registerEvents(new BlockExplodeListener(), this);

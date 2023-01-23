@@ -89,46 +89,46 @@ public class EnchantingItem {
         meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 
         while (cost != 0) { // not looping while
-            // player can't acquire the upgrade yet
+            // player can't acquire the enchantment yet
             if (NAME != null && meta.getDisplayName().contains("UNLOCKED")) {
                 meta.setLore(Arrays.asList(
                         HexColor.GREEN.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        ChatColor.WHITE.toString() + cost + " Coins",
+                        ChatColor.WHITE.toString() + cost + " ⛃",
                         HexColor.GREEN + "Unlocked!"
                 ));
                 break;
 
             }
-            // player has already bought the upgrade
+            // player has already bought the enchantment
             else if (NAME != null && meta.getDisplayName().contains("LOCKED")) {
                 meta.setLore(Arrays.asList(
                         HexColor.RED.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        ChatColor.WHITE.toString() + cost + " Coins",
+                        ChatColor.WHITE.toString() + cost + " ⛃",
                         ChatColor.DARK_RED + "Purchase previous levels first!"
                 ));
                 break;
             }
 
-            // player has enough coins to buy the upgrade
+            // player has enough coins to buy the enchantment
             if (Coins.getCoins(player) >= cost) {
                 meta.setLore(Arrays.asList(
                         ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                         "",
                         HexColor.HIGHLIGHT.toString() + Coins.getCoins(player) +
-                                ChatColor.WHITE + " / " + cost + " Coins",
+                                ChatColor.WHITE + " / " + cost + " ⛃",
                         ChatColor.GOLD + "Click to buy!"
                 ));
                 break;
             }
-            // player needs more coins to buy the upgrade
+            // player needs more coins to buy the enchantment
             else {
                 meta.setLore(Arrays.asList(
                         ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                         "",
                         ChatColor.DARK_RED.toString() + Coins.getCoins(player) +
-                                ChatColor.WHITE + " / " + cost + " Coins",
+                                ChatColor.WHITE + " / " + cost + " ⛃",
                         HexColor.RED.toString() + (cost - Coins.getCoins(player)) + " Coin(s) missing!"
                 ));
                 break;
@@ -141,8 +141,8 @@ public class EnchantingItem {
     }
 
     private ItemStack checkIfUnlocked(ItemStack itemStack, int level) {
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        if (itemMeta == null) return null;
+        ItemMeta meta = itemStack.getItemMeta();
+        if (meta == null) return null;
 
         // item is purchasable
         if (AMOUNT == level) {
@@ -150,16 +150,16 @@ public class EnchantingItem {
         }
         // item has already been purchased
         else if (AMOUNT < level) {
-            itemMeta.setDisplayName(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + NAME +
+            meta.setDisplayName(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + NAME +
                     HexColor.GREEN + ChatColor.ITALIC + " UNLOCKED");
-            itemStack.setItemMeta(itemMeta);
+            itemStack.setItemMeta(meta);
             return itemStack;
         }
         // item has not been unlocked yet
         else {
-            itemMeta.setDisplayName(ChatColor.DARK_RED.toString() + ChatColor.BOLD + NAME +
+            meta.setDisplayName(ChatColor.DARK_RED.toString() + ChatColor.BOLD + NAME +
                     HexColor.RED + ChatColor.ITALIC + " LOCKED");
-            itemStack.setItemMeta(itemMeta);
+            itemStack.setItemMeta(meta);
             return itemStack;
         }
     }

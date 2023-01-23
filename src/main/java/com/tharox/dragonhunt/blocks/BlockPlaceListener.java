@@ -18,7 +18,7 @@ public class BlockPlaceListener implements Listener {
         Block block = event.getBlock();
 
         // prevent players from placing certain blocks in ANY dimension
-        if (block.getType() == Material.BREWING_STAND || block.getType() == Material.ENDER_CHEST
+        if (block.getType() == Material.ENDER_CHEST
                 || block.getType() == Material.CHEST || block.getType() == Material.CHEST_MINECART
                 || block.getType() == Material.ANVIL || block.getType() == Material.OAK_LOG
                 || block.getType() == Material.REDSTONE) {

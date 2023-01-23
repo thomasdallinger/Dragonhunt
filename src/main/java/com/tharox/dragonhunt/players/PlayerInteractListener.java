@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
+import com.tharox.dragonhunt.brewing.BrewingInventory;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.enchanting.EnchantingInventory;
@@ -37,8 +38,17 @@ public class PlayerInteractListener implements Listener {
                 if (block.getType() == Material.ENCHANTING_TABLE) {
                     event.setCancelled(true);
 
-                    EnchantingInventory inventory = new EnchantingInventory(Main.getInstance().getConfig(), player);
-                    player.openInventory(inventory.enchant);
+                    EnchantingInventory enchantingInventory = new EnchantingInventory(Main.getInstance().getConfig(), player);
+                    player.openInventory(enchantingInventory.enchant);
+                    return;
+                }
+
+                // clicking on a brewing stand opens the brewing stand inventory
+                if (block.getType() == Material.BREWING_STAND) {
+                    event.setCancelled(true);
+
+                    BrewingInventory brewingInventory = new BrewingInventory(Main.getInstance().getConfig(), player);
+                    player.openInventory(brewingInventory.brewingStand);
                     return;
                 }
 
@@ -59,8 +69,7 @@ public class PlayerInteractListener implements Listener {
                     return;
                 }
 
-                if (block.getType() == Material.BREWING_STAND
-                        || block.getType() == Material.ANVIL) {
+                if (block.getType() == Material.ANVIL) {
                     event.setCancelled(true);
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                     player.sendMessage(Prefixes.getErrorPrefix()

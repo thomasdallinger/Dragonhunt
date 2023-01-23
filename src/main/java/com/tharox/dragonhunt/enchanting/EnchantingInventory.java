@@ -16,7 +16,7 @@ import java.util.List;
 
 public class EnchantingInventory {
     public Inventory enchant;
-    public static final HashMap<String, Integer> objectCost = new HashMap<>();
+    public static final HashMap<String, Integer> enchantmentCost = new HashMap<>();
 
     public EnchantingInventory(FileConfiguration config, Player player) {
         enchant = createInventory(config, player);
@@ -46,7 +46,7 @@ public class EnchantingInventory {
             inv.setItem(item.getSlot(), itemStack);
 
             if (item.cost != 0) { //if it has no cost it also isn't air -> air has no displayname
-                objectCost.put(itemStack.getItemMeta().getDisplayName(), item.cost); //save the cost of the item
+                enchantmentCost.put(itemStack.getItemMeta().getDisplayName(), item.cost); //save the cost of the item
             }
         }
 

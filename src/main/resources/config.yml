@@ -479,14 +479,14 @@ enchanting:
     slot: 3
     name: "Punch I"
     cost: 15
-    lore: "Adds 0.6 knockback strength to arrows."
+    lore: "Adds 3 blocks of knockback distance."
   11:
     material: ARROW
     amount: 2
     slot: 12
     name: "Punch II"
     cost: 20
-    lore: "Adds 1.2 knockback strength to arrows."
+    lore: "Adds 6 blocks of knockback distance."
   12:
     material: FIRE_CHARGE
     amount: 1
@@ -578,86 +578,86 @@ enchanting:
     name: "Feather Falling IV"
     cost: 20
     lore: "Reduces fall damage by 48%."
-brewingPotions:
+brewing:
   0:
     slot: 0
-    name: "Speed"
+    name: "Potion of Swiftness"
     material: POTION
-    color:
-    effect: SPEED
-    amplifier: 0 # always +1
-    duration: 600
+    amount: 1
+    color: 0x7cafc6
+    effects:
+      SPEED: 0,600
     cost: 20
   1:
     slot: 1
-    name: "Jump Boost"
+    name: "Potion of Haste"
     material: POTION
-    color:
-    effect: JUMP
-    amplifier: 2
-    duration: 600
+    amount: 1
+    color: 0xffa500
+    effects:
+      FAST_DIGGING: 0,600
     cost: 20
   2:
     slot: 2
-    name: "Instant Healing"
-    material: POTION
-    color:
-    effect: HEAL
-    amplifier: 1
-    duration: 600 # ?
+    name: "Splash Potion of Healing"
+    material: SPLASH_POTION
+    amount: 3
+    color: 0xf82423
+    effects:
+      HEAL: 1,0
     cost: 20
   3:
     slot: 3
-    name: "Fire Resistance"
+    name: "Potion of Fire Resistance"
     material: POTION
-    color:
-    effect: FIRE_RESISTANCE
-    amplifier: 0
-    duration: 600
+    amount: 1
+    color: 0xe49a3a
+    effects:
+      FIRE_RESISTANCE: 0,600
     cost: 20
   4:
     slot: 4
-    name: "Poison"
+    name: "Splash Potion of Mining Fatigue"
     material: SPLASH_POTION
-    color:
-    effect: POISON
-    amplifier: 0
-    duration: 300
+    amount: 2
+    color: 0x4a4217
+    effects:
+      SLOW_DIGGING: 0,300
     cost: 20
   5:
     slot: 5
-    name: "Blindness"
+    name: "Splash Potion of Poison"
     material: SPLASH_POTION
-    color:
-    effect: BLINDNESS
-    amplifier: 0
-    duration: 300
+    amount: 1
+    color: 0x4e9331
+    effects:
+      POISON: 0,300
     cost: 20
   6:
     slot: 6
-    name: "Slowness"
-    material: POTION
-    color:
-    effect: SLOW
-    amplifier: 1
-    duration: 300
+    name: "Splash Potion of Blindness"
+    material: SPLASH_POTION
+    amount: 1
+    color: 0x000000
+    effects:
+      BLINDNESS: 0,300
     cost: 20
   7:
     slot: 7
-    name: "Weakness"
-    material: POTION
-    color:
-    effect: WEAK
-    amplifier: 0
-    duration: 300
+    name: "Splash Potion of Weakness"
+    material: SPLASH_POTION
+    amount: 1
+    color: 0x484d48
+    effects:
+      WEAKNESS: 0,300
     cost: 20
   8:
     slot: 8
-    name: "Instant Damage"
-    material: POTION
-    color:
-    effect: HARMING
-    amplifier: 1
-    duration: 300 # ?
+    name: "Splash Potion of Hunger"
+    material: SPLASH_POTION
+    amount: 1
+    color: 0x587653
+    effects:
+      HUNGER: 1,300
     cost: 20
-brewingArrows:
+  # spectral arrow, poison, blindness, slowness, weakness, instant damage

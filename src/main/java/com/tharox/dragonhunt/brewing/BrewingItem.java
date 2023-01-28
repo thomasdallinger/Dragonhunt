@@ -88,10 +88,12 @@ public class BrewingItem {
             );
         }
 
-        // add name, color, costs and whether the player is able to purchase the item or not
+        // set color
+        meta.setColor(color);
+
+        // add name, costs and whether the player is able to purchase the item or not
         if (Coins.getCoins(player) >= COST) {
             meta.setDisplayName(ChatColor.AQUA + NAME);
-            meta.setColor(color);
             meta.setLore(Arrays.asList(
                     "",
                     HexColor.HIGHLIGHT.toString() + Coins.getCoins(player) +
@@ -99,8 +101,7 @@ public class BrewingItem {
                     ChatColor.GOLD + "Click to buy!"
             ));
         } else {
-            meta.setDisplayName(ChatColor.GRAY + NAME);
-            meta.setColor(Color.fromRGB(0x808080)); // set the color to gray (item not purchasable
+            meta.setDisplayName(HexColor.RED + NAME);
             meta.setLore(Arrays.asList(
                     "",
                     ChatColor.DARK_RED.toString() + Coins.getCoins(player) +

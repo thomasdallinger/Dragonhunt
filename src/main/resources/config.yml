@@ -601,7 +601,7 @@ brewing:
     slot: 2
     name: "Splash Potion of Healing"
     material: SPLASH_POTION
-    amount: 3
+    amount: 2
     color: 0xf82423
     effects:
       HEAL: 1,0
@@ -628,7 +628,7 @@ brewing:
     slot: 5
     name: "Splash Potion of Poison"
     material: LINGERING_POTION
-    amount: 1
+    amount: 2
     color: 0x4e9331
     effects:
       POISON: 0,300
@@ -637,7 +637,7 @@ brewing:
     slot: 6
     name: "Splash Potion of Blindness"
     material: LINGERING_POTION
-    amount: 1
+    amount: 2
     color: 0x000000
     effects:
       BLINDNESS: 0,300
@@ -646,7 +646,7 @@ brewing:
     slot: 7
     name: "Splash Potion of Weakness"
     material: LINGERING_POTION
-    amount: 1
+    amount: 2
     color: 0x484d48
     effects:
       WEAKNESS: 0,300
@@ -655,7 +655,7 @@ brewing:
     slot: 8
     name: "Splash Potion of Hunger"
     material: LINGERING_POTION
-    amount: 1
+    amount: 2
     color: 0x587653
     effects:
       HUNGER: 1,300

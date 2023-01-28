@@ -1,7 +1,5 @@
 package com.tharox.dragonhunt.entities;
 
-import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -9,9 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 public class EntityDropListener implements Listener {
     public Integer totalPiglinTrades = 0;
@@ -28,7 +23,7 @@ public class EntityDropListener implements Listener {
 
             switch (totalPiglinTrades) {
                 case 1:
-                    item.setItemStack(new ItemStack(Material.GLOWSTONE, 3));
+                    item.setItemStack(new ItemStack(Material.GLOWSTONE_DUST, 12));
                     break;
                 case 2:
                 case 7:
@@ -41,7 +36,7 @@ public class EntityDropListener implements Listener {
                     item.setItemStack(new ItemStack(Material.CRYING_OBSIDIAN, 3));
                     break;
                 case 5:
-                    item.setItemStack(new ItemStack(Material.SOUL_SOIL, 9));
+                    item.setItemStack(new ItemStack(Material.BLACKSTONE, 9));
                     break;
                 case 6:
                     item.setItemStack(new ItemStack(Material.OBSIDIAN, 2));
@@ -50,26 +45,12 @@ public class EntityDropListener implements Listener {
                     item.setItemStack(new ItemStack(Material.ENDER_PEARL, 2));
                     break;
                 case 9:
-                    item.setItemStack(new ItemStack(Material.SPECTRAL_ARROW, 3));
+                    item.setItemStack(new ItemStack(Material.FLINT, 6));
                     break;
                 case 10:
-                    item.setItemStack(createPotion());
+                    item.setItemStack(new ItemStack(Material.FEATHER, 6));
                     break;
             }
         }
-    }
-
-    public ItemStack createPotion() {
-        ItemStack item = new ItemStack(Material.POTION);
-        PotionMeta meta = (PotionMeta) item.getItemMeta();
-        if (meta == null) return null;
-
-        meta.addCustomEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 1200, 0),
-                true);
-        meta.setColor(Color.ORANGE);
-        meta.setDisplayName(ChatColor.YELLOW + "Potion of Fire Resistance");
-        item.setItemMeta(meta);
-
-        return item;
     }
 }

@@ -618,7 +618,7 @@ brewing:
   4:
     slot: 4
     name: "Splash Potion of Mining Fatigue"
-    material: SPLASH_POTION
+    material: LINGERING_POTION
     amount: 2
     color: 0x4a4217
     effects:
@@ -627,7 +627,7 @@ brewing:
   5:
     slot: 5
     name: "Splash Potion of Poison"
-    material: SPLASH_POTION
+    material: LINGERING_POTION
     amount: 1
     color: 0x4e9331
     effects:
@@ -636,7 +636,7 @@ brewing:
   6:
     slot: 6
     name: "Splash Potion of Blindness"
-    material: SPLASH_POTION
+    material: LINGERING_POTION
     amount: 1
     color: 0x000000
     effects:
@@ -645,7 +645,7 @@ brewing:
   7:
     slot: 7
     name: "Splash Potion of Weakness"
-    material: SPLASH_POTION
+    material: LINGERING_POTION
     amount: 1
     color: 0x484d48
     effects:
@@ -654,10 +654,9 @@ brewing:
   8:
     slot: 8
     name: "Splash Potion of Hunger"
-    material: SPLASH_POTION
+    material: LINGERING_POTION
     amount: 1
     color: 0x587653
     effects:
       HUNGER: 1,300
     cost: 20
-  # spectral arrow, poison, blindness, slowness, weakness, instant damage

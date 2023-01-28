@@ -37,7 +37,7 @@ public class BrewingInventory {
             itemList.add(new BrewingItem(section));
         }
 
-        Inventory inv = Bukkit.createInventory(null, 18,
+        Inventory inv = Bukkit.createInventory(null, 9,
                 HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "BREWING STAND "
                         + ChatColor.LIGHT_PURPLE + Coins.getCoins(player) + " ⛃");
 

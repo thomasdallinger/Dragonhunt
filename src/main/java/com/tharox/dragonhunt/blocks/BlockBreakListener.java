@@ -5,6 +5,7 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.modifiers.classes.Diamonds;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
@@ -135,10 +136,9 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.RAW_COPPER, new ItemStack(Material.COPPER_INGOT, 2));
         materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 2));
         materials.put(Material.GOLD_NUGGET, new ItemStack(Material.GOLD_INGOT, 1)); // Nether Gold Ore
-        materials.put(Material.GILDED_BLACKSTONE,new ItemStack(Material.GOLD_INGOT, 1));
-        materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 2));
+        materials.put(Material.GILDED_BLACKSTONE, new ItemStack(Material.GOLD_INGOT, 1));
         materials.put(Material.COAL, new ItemStack(Material.TORCH, 4));
-        materials.put(Material.GRAVEL, new ItemStack(Material.FLINT));
+        materials.put(Material.GRAVEL, new ItemStack(Material.FLINT, 2)); // for Flint and Steel & Arrow crafting
         materials.put(Material.MELON_SLICE, new ItemStack(Material.GOLDEN_CARROT));
         materials.put(Material.WHEAT, new ItemStack(Material.GOLDEN_CARROT));
         materials.put(Material.CARROT, new ItemStack(Material.GOLDEN_CARROT));
@@ -147,6 +147,12 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.NETHER_WART, new ItemStack(Material.GOLDEN_CARROT));
         materials.put(Material.SWEET_BERRIES, new ItemStack(Material.GOLDEN_CARROT));
         materials.put(Material.GLOW_BERRIES, new ItemStack(Material.GOLDEN_CARROT));
+
+        if (Diamonds.active) {
+            materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND_BLOCK));
+        } else {
+            materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 2));
+        }
 
         // loop through all drops and check if they have to be changed
         for (ItemStack item : block.getDrops()) {

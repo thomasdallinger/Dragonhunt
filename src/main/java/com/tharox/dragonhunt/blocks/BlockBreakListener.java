@@ -27,11 +27,12 @@ import java.util.List;
 
 public class BlockBreakListener implements Listener {
 
-    // a list of all wood types currently in the game
+    // a list of all wood types currently in the game + cactus
     public static List<Material> woods = List.of(
             Material.ACACIA_LOG, Material.BIRCH_LOG, Material.DARK_OAK_LOG,
             Material.JUNGLE_LOG, Material.OAK_LOG, Material.SPRUCE_LOG,
-            Material.MANGROVE_WOOD, Material.CRIMSON_STEM, Material.WARPED_STEM);
+            Material.MANGROVE_WOOD, Material.CRIMSON_STEM, Material.WARPED_STEM,
+            Material.CACTUS);
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {

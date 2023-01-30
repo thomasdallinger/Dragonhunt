@@ -76,14 +76,12 @@ public class BrewingItem {
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.ExtraHearts.get(player));
                 this.cost = cost + (Effects.ExtraHearts.get(player) * 10);
             }
-
         }
 
         if (itemToCreate == null) return null;
         PotionMeta meta = (PotionMeta) itemToCreate.getItemMeta();
         if (meta == null) return null;
 
-        meta.addCustomEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 300, 0), true); // dummy effect
         meta.setColor(Color.fromRGB(COLOR));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

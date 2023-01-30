@@ -48,7 +48,7 @@ public class PlayerInteractListener implements Listener {
                     event.setCancelled(true);
 
                     BrewingInventory brewingInventory = new BrewingInventory(Main.getInstance().getConfig(), player);
-                    player.openInventory(brewingInventory.brewingStand);
+                    player.openInventory(brewingInventory.menu);
                     return;
                 }
 

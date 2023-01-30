@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Enchantments {
-    // a list of all weapons affected by the sword enchantments
+    // a list of all weapons affected by sword enchantments
     protected static List<Material> swords = List.of(
             Material.IRON_SWORD, Material.DIAMOND_SWORD, Material.NETHERITE_SWORD);
 

@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.game;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
+import com.tharox.dragonhunt.brewing.Effects;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.elytra.ElytraSwapRunnable;
@@ -75,6 +76,7 @@ public class GameStart extends GameConfiguration {
 
         new EnchantmentUpgrades(); // start the runnable
         new Enchantments(); // start the runnable
+        new Effects(); // start the runnable
         // checks if each player has purchased enchantment upgrades and enchants items based on the upgrade level
     }
 

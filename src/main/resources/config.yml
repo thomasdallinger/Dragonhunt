@@ -580,83 +580,146 @@ enchanting:
     lore: "Reduces fall damage by 48%."
 brewing:
   0:
-    slot: 0
-    name: "Potion of Swiftness"
+    slot: 10
+    name: "» Permanent Effects"
+    lore: "Unlock permanent positive effects.  "
     material: POTION
     amount: 1
-    color: 0x7cafc6
-    effects:
-      SPEED: 0,600
+    color: 0xF82423
+  1:
+    slot: 13
+    name: "» Arrow Effects"
+    lore: "Unlock effects for arrows.          "
+    material: TIPPED_ARROW
+    amount: 1
+    color: 0x4E9331
+  2:
+    slot: 16
+    name: "» Sword Effects"
+    lore: "Unlock effects for all DIAMOND and NETHERITE SWORDS applied on hit."
+    material: POTION
+    amount: 1
+    color: 0x1F1F23
+permanentEffects:
+  0:
+    slot: 2
+    name: "Speed I"
+    lore: "Increases walking speed by 20%."
+    material: POTION
+    amount: 1
+    color: 0x7CAFC6
     cost: 20
   1:
-    slot: 1
-    name: "Potion of Haste"
+    slot: 11
+    name: "Speed II"
+    lore: "Increases walking speed by 40%."
     material: POTION
-    amount: 1
-    color: 0xffa500
-    effects:
-      FAST_DIGGING: 0,600
+    amount: 2
+    color: 0x7CAFC6
     cost: 20
   2:
-    slot: 2
-    name: "Splash Potion of Healing"
-    material: SPLASH_POTION
-    amount: 2
-    color: 0xf82423
-    effects:
-      HEAL: 1,0
+    slot: 20
+    name: "Speed III"
+    lore: "Increases walking speed by 60%."
+    material: POTION
+    amount: 3
+    color: 0x7CAFC6
     cost: 20
   3:
     slot: 3
-    name: "Potion of Fire Resistance"
+    name: "Haste I"
+    lore: "Increases mining speed by 20%."
     material: POTION
     amount: 1
-    color: 0xe49a3a
-    effects:
-      FIRE_RESISTANCE: 0,600
+    color: 0xD9C043
     cost: 20
   4:
-    slot: 4
-    name: "Splash Potion of Mining Fatigue"
-    material: LINGERING_POTION
+    slot: 12
+    name: "Haste II"
+    lore: "Increases mining speed by 40%."
+    material: POTION
     amount: 2
-    color: 0x4a4217
-    effects:
-      SLOW_DIGGING: 0,300
+    color: 0xD9C043
     cost: 20
   5:
-    slot: 5
-    name: "Splash Potion of Poison"
-    material: LINGERING_POTION
-    amount: 2
-    color: 0x4e9331
-    effects:
-      POISON: 0,300
+    slot: 21
+    name: "Haste III"
+    lore: "Increases mining speed by 60%."
+    material: POTION
+    amount: 3
+    color: 0xD9C043
     cost: 20
   6:
-    slot: 6
-    name: "Splash Potion of Blindness"
-    material: LINGERING_POTION
-    amount: 2
-    color: 0x000000
-    effects:
-      BLINDNESS: 0,300
+    slot: 4
+    name: "Resistance I"
+    lore: "Reduces incoming damage by 20%."
+    material: POTION
+    amount: 1
+    color: 0x99453A
     cost: 20
   7:
-    slot: 7
-    name: "Splash Potion of Weakness"
-    material: LINGERING_POTION
+    slot: 13
+    name: "Resistance II"
+    lore: "Reduces incoming damage by 40%."
+    material: POTION
     amount: 2
-    color: 0x484d48
-    effects:
-      WEAKNESS: 0,300
+    color: 0x99453A
     cost: 20
   8:
-    slot: 8
-    name: "Splash Potion of Hunger"
-    material: LINGERING_POTION
+    slot: 22
+    name: "Resistance III"
+    lore: "Reduces incoming damage by 60%."
+    material: POTION
+    amount: 3
+    color: 0x99453A
+    cost: 20
+  9:
+    slot: 5
+    name: "Regeneration I"
+    lore: "Heals half a heart every 50 ticks."
+    material: POTION
+    amount: 1
+    color: 0xCD5CAB
+    cost: 20
+  10:
+    slot: 14
+    name: "Regeneration II"
+    lore: "Heals half a heart every 25 ticks."
+    material: POTION
     amount: 2
-    color: 0x587653
-    effects:
-      HUNGER: 1,300
+    color: 0xCD5CAB
+    cost: 20
+  11:
+    slot: 23
+    name: "Regeneration III"
+    lore: "Heals half a heart every 22 ticks."
+    material: POTION
+    amount: 3
+    color: 0xCD5CAB
+    cost: 20
+  12:
+    slot: 6
+    name: "Extra Hearts ʀᴇ-ᴘᴜʀᴄʜᴀꜱᴇᴀʙʟᴇ"
+    lore: "+1 ❤ and +10 ⛃ cost per purchase."
+    material: POTION
+    amount: 1
+    color: 0xF82423
+    cost: 40
+arrowEffects:
+  0:
+    slot: 23
+    name: "Extra Hearts III"
+    lore: "Adds 6 hearts."
+    material: TIPPED_ARROW
+    amount: 3
+    color: 0xF82423
+    cost: 20
+swordEffects:
+  0:
+    slot: 23
+    name: "Extra Hearts III"
+    lore: "Adds 6 hearts."
+    material: POTION
+    amount: 3
+    color: 0xF82423
     cost: 20

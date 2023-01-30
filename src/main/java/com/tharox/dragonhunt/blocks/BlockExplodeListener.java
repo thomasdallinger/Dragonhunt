@@ -18,7 +18,7 @@ public class BlockExplodeListener implements Listener {
     @EventHandler
     public void onExplode(EntityExplodeEvent event) {
         List<Block> blocks = event.blockList();
-        Stream.of(Material.CHEST, Material.EMERALD_ORE,
+        Stream.of(Material.BREWING_STAND, Material.CHEST, Material.EMERALD_ORE,
                 Material.DEEPSLATE_EMERALD_ORE, Material.LAPIS_ORE,
                 Material.DEEPSLATE_LAPIS_ORE, Material.REDSTONE_ORE,
                 Material.DEEPSLATE_REDSTONE_ORE, Material.COPPER_ORE,

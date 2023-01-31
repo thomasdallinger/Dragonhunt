@@ -94,7 +94,6 @@ public class PlayerDeathListener implements Listener {
         // drop no loot or XP
         event.setDroppedExp(0);
         event.setKeepLevel(true);
-        player.setExp(0); // reset XP progress towards the next level
         event.getDrops().clear();
 
         // store the items to keep on death and give the player these items on respawn (PlayerRespawnListener)

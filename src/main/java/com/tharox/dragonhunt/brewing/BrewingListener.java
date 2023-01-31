@@ -110,6 +110,8 @@ public class BrewingListener implements Listener {
     private void purchaseEffect(Player player, String upgradeName, String inventory) {
         player.playSound(player.getLocation(), Sound.BLOCK_BREWING_STAND_BREW, 1, 1);
         Coins.removeCoins(player, BrewingInventory.effectCost.get(upgradeName), upgradeName);
+        player.sendMessage(Prefixes.getCoinPrefix(-BrewingInventory.effectCost.get(upgradeName))
+                + ChatColor.GRAY + "Purchased " + upgradeName + ChatColor.GRAY + ".");
 
         menuNavigation(player, inventory);
     }

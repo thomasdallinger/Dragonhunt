@@ -20,15 +20,17 @@ public class LevelUp implements Listener {
         int level = event.getNewLevel();
 
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
-        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.HIGHLIGHT + "Level "
-                + ChatColor.DARK_PURPLE + level + HexColor.HIGHLIGHT + " reached!");
+
+        int coinsToAdd;
 
         if (level % 5 == 0) {
-            player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "+1" + ChatColor.GRAY + " Golden Apple");
-            GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE));
-            Coins.addCoins(player, 20); // extra coins
+            coinsToAdd = 20;
         } else {
-            Coins.addCoins(player, 10);
+            coinsToAdd = 10;
         }
+
+        Coins.addCoins(player, coinsToAdd);
+        player.sendMessage(Prefixes.getCoinPrefix(coinsToAdd) + HexColor.HIGHLIGHT + ChatColor.BOLD + "Level "
+                + ChatColor.WHITE + ChatColor.BOLD + level + HexColor.HIGHLIGHT + ChatColor.BOLD + " reached.");
     }
 }

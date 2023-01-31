@@ -6,9 +6,7 @@ import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.upgrades.XPUpgrade;
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -63,17 +61,16 @@ public class AdvancementListener implements Listener {
         if (advancementName.equals("")) {
             return;
         } else {
-            Coins.addCoins(player, 10);
+            Coins.addXP(player, Coins.bonusXP);
         }
 
         addAdvancement(player, advancementName);
     }
 
     public void addBonusXP(Player player, String dimension) {
-        player.giveExp(Coins.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
-        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.HIGHLIGHT + "Bonus XP: "
-                + ChatColor.GRAY + "First in " + dimension + ".");
+        Coins.addXP(player, Coins.bonusXP);
+        player.sendMessage(Prefixes.getXPPrefix(Coins.bonusXP) + "First in the "
+                + HexColor.HIGHLIGHT + dimension + ChatColor.GRAY + " dimension.");
     }
 
     /**

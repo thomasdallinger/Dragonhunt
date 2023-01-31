@@ -1,9 +1,13 @@
 package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.timer.Countdown;
+import com.tharox.dragonhunt.timer.Timer;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -15,14 +19,17 @@ public class ResetScoreboardCountdown {
      */
     public static void countdownHitsZero(Countdown countdown) {
         new BukkitRunnable() {
+            final Timer timer = Main.getInstance().getTimer();
+
             @Override
             public void run() {
                 if (countdown.getTime() == 0) {
                     countdown.setTime(300);
 
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        Coins.addCoins(player, 10);
-                        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                        Coins.addXP(player, Coins.bonusXP);
+                        player.sendMessage(Prefixes.getXPPrefix(Coins.bonusXP) + ChatColor.GRAY + "Survived "
+                                + ChatColor.YELLOW + (timer.getTime() / 60) + ChatColor.GRAY + " minutes.");
                     }
                 }
             }

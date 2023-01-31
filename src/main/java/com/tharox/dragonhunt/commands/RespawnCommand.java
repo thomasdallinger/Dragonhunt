@@ -29,7 +29,7 @@ public class RespawnCommand extends CommandHelper implements CommandExecutor {
         Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/respawn"),
                 ChatColor.GOLD.toString() + ChatColor.BOLD + "/respawn");
         player.setBedSpawnLocation(player.getLocation(), true);
-        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "Respawn Point set.");
+        //player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "Respawn Point set.");
 
         return false;
     }

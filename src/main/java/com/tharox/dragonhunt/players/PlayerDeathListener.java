@@ -47,20 +47,15 @@ public class PlayerDeathListener implements Listener {
         player.getWorld().strikeLightningEffect(player.getLocation());
         player.performCommand("pos Death" + DbValues.getKills(player, false));
 
+        event.setDeathMessage(Prefixes.getDeathPrefix()
+                + HexColor.RED + event.getDeathMessage().substring(0, player.getName().length())
+                + ChatColor.GRAY + event.getDeathMessage().substring(player.getName().length()));
+
         // if the player has been killed by another player, give the killer regeneration and XP
         if (killer != null) {
-            event.setDeathMessage(Prefixes.getKillPrefix()
-                    + HexColor.RED + event.getDeathMessage().substring(0, player.getName().length())
-                    + ChatColor.GRAY + event.getDeathMessage().substring(player.getName().length()));
-
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
-            killer.giveExp(Coins.playerXP + XPUpgrade.MoreXP.get(killer) - 1);
-            killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+            Coins.addXP(killer, Coins.playerXP);
             addPlayerKill(killer, player);
-        } else {
-            event.setDeathMessage(Prefixes.getDeathPrefix()
-                    + HexColor.RED + event.getDeathMessage().substring(0, player.getName().length())
-                    + ChatColor.GRAY + event.getDeathMessage().substring(player.getName().length()));
         }
 
         // create a chest at the death location and move the player's loot into it

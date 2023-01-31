@@ -59,9 +59,9 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
-        // give the player 3 coins for breaking an amethyst cluster
+        // on top of dropping amethysts, give the player XP
         if (block.getType() == Material.AMETHYST_CLUSTER) {
-            Coins.addCoins(player, 3);
+            Coins.addXP(player, Coins.oreXP);
         }
 
         // play the break wood sound for the amount of blocks destroyed
@@ -172,8 +172,7 @@ public class BlockBreakListener implements Listener {
                 block.getDrops().clear();
                 block.setType(Material.AIR);
 
-                player.giveExp(Coins.oreXP + XPUpgrade.MoreXP.get(player) - 1);
-                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                Coins.addXP(player, Coins.oreXP);
             }
         }
     }

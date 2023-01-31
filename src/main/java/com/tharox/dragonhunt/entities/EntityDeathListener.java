@@ -1,10 +1,12 @@
 package com.tharox.dragonhunt.entities;
 
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.PowderOnly;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.upgrades.XPUpgrade;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
@@ -28,22 +30,13 @@ public class EntityDeathListener implements Listener {
                 new GameEnd(killer);
 
             if (mob instanceof Monster) {
-                killer.giveExp(Coins.monsterXP + XPUpgrade.MoreXP.get(killer) - 1);
-                killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                Coins.addXP(killer, Coins.monsterXP);
             }
 
-            if (mob instanceof Animals) {
+            if (mob instanceof Animals || mob instanceof WaterMob) {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.FEATHER, 2));
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.LEATHER, 1));
-                killer.giveExp(Coins.animalXP + XPUpgrade.MoreXP.get(killer) - 1);
-                killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-            }
-
-            if (mob instanceof WaterMob) {
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_COD, 2));
-                killer.giveExp(Coins.animalXP + XPUpgrade.MoreXP.get(killer) - 1);
-                killer.playSound(killer.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                Coins.addXP(killer, Coins.animalXP);
             }
         }
 

@@ -42,7 +42,7 @@ public class TopCommand extends CommandHelper implements CommandExecutor {
         Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/top"),
                 ChatColor.GOLD.toString() + ChatColor.BOLD + "/top");
         player.teleport(new Location(world, x, world.getHighestBlockYAt((int) x, (int) z), z));
-        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "Whoosh.");
+        //player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "Whoosh.");
 
         return false;
     }

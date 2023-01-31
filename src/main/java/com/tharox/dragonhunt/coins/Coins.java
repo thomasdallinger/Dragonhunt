@@ -5,7 +5,9 @@ import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.shop.ShopInventory;
+import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
 import java.sql.Statement;
@@ -18,13 +20,11 @@ import java.util.HashMap;
  * Note: Coal ores do not drop XP.
  */
 public class Coins {
-    // the amount of XP given to the player can be upgraded using XP UPGRADES
-    public static int bonusXP = 9; // XP that players would not normally receive
-    // from Enderchests, Minecarts, Scoreboard countdown, Advancements (Nether & End entry)
-    public static int playerXP = 11; // PlayerDeathListener
-    public static int oreXP = 3; // BlockBreakListener
-    public static int animalXP = 2; // EntityDeathListener
-    public static int monsterXP = 4; // EntityDeathListener
+    public static int bonusXP = 9; // XP awarded for advancements or interactions with chests / minecarts
+    public static int playerXP = 12; // XP awarded for killing players
+    public static int oreXP = 3; // XP awarded for mining ores that are not dropping resources
+    public static int animalXP = 2; // XP awarded for killing animals
+    public static int monsterXP = 4; // XP awarded for killing monsters
 
     private static final HashMap<Player, Integer> coins = new HashMap<>();
 
@@ -39,12 +39,10 @@ public class Coins {
     // used in: LevelUp, Timer (last 10 minutes), ResetScoreboardCountdown
     public static void addCoins(Player player, int coinsToAdd) {
         coins.put(player, coins.get(player) + coinsToAdd);
-        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "+" + coinsToAdd + ChatColor.GRAY + " Coins");
     }
 
     public static void removeCoins(Player player, int coinsToRemove, String objectName) {
         coins.put(player, coins.get(player) - coinsToRemove);
-        player.sendMessage(Prefixes.getCoinPrefix() + HexColor.RED + "-" + coinsToRemove + ChatColor.GRAY + " Coins");
 
         // add ShopAccess
         DatabaseExecutor.executeDatabaseHandler((con) -> {
@@ -57,5 +55,15 @@ public class Coins {
             stmt.execute(query);
             stmt.close();
         });
+    }
+
+    public static void addXP(Player player, int xpToAdd) {
+        player.giveExp(xpToAdd);
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+
+        int currentXPPoints = (int) (player.getExpToLevel() * (player.getExp() * 100) / 100);
+        player.sendTitle("", ChatColor.WHITE + "+" + xpToAdd + HexColor.GREEN + " XP "
+                + ChatColor.DARK_GRAY + "[" + currentXPPoints + "/" + player.getExpToLevel() + "]",
+                0, 30, 10);
     }
 }

@@ -29,14 +29,14 @@ public class VehicleListener implements Listener {
 
         if (entity.getType() == EntityType.MINECART_CHEST) {
             event.setCancelled(true);
-            player.giveExp(Coins.bonusXP + XPUpgrade.MoreXP.get(player) - 1);
-            player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+            Coins.addXP(player, Coins.bonusXP);
 
             StorageMinecart mc = ((StorageMinecart) entity);
             mc.getInventory().clear();
             mc.getInventory().addItem(
-                    new ItemStack(Material.COPPER_INGOT, 9),
-                    new ItemStack(Material.IRON_INGOT, 6));
+                    new ItemStack(Material.DIAMOND, 2),
+                    new ItemStack(Material.GOLD_INGOT, 4),
+                    new ItemStack(Material.IRON_INGOT, 4));
             entity.remove();
         }
     }

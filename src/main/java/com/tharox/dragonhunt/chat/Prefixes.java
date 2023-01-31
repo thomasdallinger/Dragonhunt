@@ -10,45 +10,49 @@ public class Prefixes {
 
     // ALL: used for messages displayed to all players
     public static String getAllPrefix() {
-        return ChatColor.WHITE + "☻" + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY;
+        return ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + ChatColor.BOLD + "»»" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
-    // COINS: used for messages related to coins and the shop
-    public static String getCoinPrefix() {
-        return HexColor.HIGHLIGHT + "⛃" + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY;
+    // XP: used for messages related to XP gains
+    public static String getXPPrefix(int xp) {
+        return ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + "+" + xp + HexColor.GREEN + " XP" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+    }
+
+    // COINS: used for messages related to coins
+    public static String getCoinPrefix(int coins) {
+        if(coins > 0)
+            return ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + "+" + coins + HexColor.GREEN + " ⛃" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+        else
+            return ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + coins + HexColor.RED + " ⛃" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
     // TRACKING: used for messages related to the tracker or positions
     public static String getTrackingPrefix() {
+        //TODO: add blocks (distance) example: [303m →] (arrow doesn't need to point in the right direction)
         return ChatColor.DARK_GREEN + "→" + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY;
     }
 
     // ERROR: when a player is not allowed to do something
     public static String getErrorPrefix() {
-        return ChatColor.DARK_RED + "✖" + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY;
+        return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "✖✖✖" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
     // DEATH: when a player dies
     public static String getDeathPrefix() {
-        return HexColor.RED + "☠" + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY;
-    }
-
-    // KILL: when a player gets killed by another player
-    public static String getKillPrefix() {
-        return ChatColor.GOLD + "☠" + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY;
+        return ChatColor.DARK_GRAY + "[" + HexColor.RED + "☠☠☠" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
     // LEAVE: when a player leaves
     public static String getLeavePrefix() {
-        return HexColor.RED + "«" + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY;
+        return ChatColor.DARK_GRAY + "[" + HexColor.RED + "«««" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
     // NAME: used for statistics in chat and the tablist next to a player's name
     public static String getNamePrefix(Player player) {
-        return ChatColor.WHITE.toString() + "☠ "
-                + ChatColor.GOLD + DbValues.getKills(player, true)
-                + ChatColor.WHITE + " ⛃ "
-                + HexColor.HIGHLIGHT + Coins.getCoins(player)
-                + ChatColor.DARK_GRAY + " | ";
+        return ChatColor.DARK_GRAY + "["
+                + ChatColor.WHITE + "⚔ " + ChatColor.AQUA + "Kitname"
+                + ChatColor.WHITE + " ✦ " + HexColor.HIGHLIGHT + player.getLevel()
+                + ChatColor.WHITE + " ☠ " + ChatColor.GOLD + DbValues.getKills(player, true)
+                + ChatColor.DARK_GRAY + "] ";
     }
 }

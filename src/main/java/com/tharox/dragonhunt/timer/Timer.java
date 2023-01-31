@@ -88,7 +88,11 @@ public class Timer {
                 if (getTime() % 600 == 0) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         if (getTime() == 1200) { // 20 minutes played
-                            Coins.addCoins(player, 30);
+                            int coinsToAdd = 30;
+                            Coins.addCoins(player, coinsToAdd);
+                            player.sendMessage(Prefixes.getCoinPrefix(coinsToAdd)
+                                    + HexColor.HIGHLIGHT + ChatColor.BOLD + "Bonus resources delivered.");
+
                             GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE, 2));
                             GameState.putItemInInventory(player, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
                         }

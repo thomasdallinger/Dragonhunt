@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.brewing;
 
 import com.tharox.dragonhunt.Main;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -27,8 +28,8 @@ public class Effects {
     public static HashMap<Player, Integer> ExtraHearts = new HashMap<>();
 
     // Arrow effects
-    public static HashMap<Player, Integer> ArrowEffectLevel = new HashMap<>();
-    public static HashMap<Player, PotionEffectType> ArrowEffectType = new HashMap<>();
+    public static HashMap<Player, Boolean> ArrowEffectsUnlocked = new HashMap<>();
+    public static HashMap<Player, ItemStack> ArrowEffectType = new HashMap<>();
 
     // Sword effects
     public static HashMap<Player, Integer> SwordEffectLevel = new HashMap<>();
@@ -42,6 +43,9 @@ public class Effects {
             Resistance.put(player, 1);
             Regeneration.put(player, 1);
             ExtraHearts.put(player, 1);
+
+            ArrowEffectsUnlocked.put(player, false);
+            ArrowEffectType.put(player, new ItemStack(Material.ARROW));
         }
 
         applyEffects();

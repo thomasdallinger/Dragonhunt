@@ -676,7 +676,7 @@ permanentEffects:
   9:
     slot: 5
     name: "Regeneration I"
-    lore: "Heals half a heart every 50 ticks."
+    lore: "Heals half a heart every 2.5 seconds."
     material: POTION
     amount: 1
     color: 0xCD5CAB
@@ -684,7 +684,7 @@ permanentEffects:
   10:
     slot: 14
     name: "Regeneration II"
-    lore: "Heals half a heart every 25 ticks."
+    lore: "Heals half a heart every 1.25 seconds."
     material: POTION
     amount: 2
     color: 0xCD5CAB
@@ -692,7 +692,7 @@ permanentEffects:
   11:
     slot: 23
     name: "Regeneration III"
-    lore: "Heals half a heart every 22 ticks."
+    lore: "Heals half a heart every 0.6 seconds."
     material: POTION
     amount: 3
     color: 0xCD5CAB
@@ -705,15 +705,55 @@ permanentEffects:
     amount: 1
     color: 0xF82423
     cost: 40
-arrowEffects:
+negativeEffects:
   0:
-    slot: 23
-    name: "Extra Hearts III"
-    lore: "Adds 6 hearts."
+    slot: 4
+    name: "Unlock Arrow Effects"
+    lore: "Select one of the effects available below when unlocked."
     material: TIPPED_ARROW
-    amount: 3
-    color: 0xF82423
-    cost: 20
+    amount: 1
+    color: 0x22FF4C
+    cost: 30
+  1:
+    slot: 11
+    name: "Arrow of Mining Fatigue"
+    lore: "Reduces attack and heavily reduces mining speed."
+    material: TIPPED_ARROW
+    amount: 1
+    effect: SLOW_DIGGING
+    color: 0x4A4217
+  2:
+    slot: 12
+    name: "Arrow of Poison"
+    lore: "Inflicts damage over time, but cannot kill."
+    material: TIPPED_ARROW
+    amount: 1
+    effect: POISON
+    color: 0x4E9331
+  3:
+    slot: 13
+    name: "Arrow of Blindness"
+    lore: "Impairs the player's vision."
+    material: TIPPED_ARROW
+    amount: 1
+    effect: BLINDNESS
+    color: 0x1F1F23
+  4:
+    slot: 14
+    name: "Arrow of Weakness"
+    lore: "Heavily decreases attack power."
+    material: TIPPED_ARROW
+    amount: 1
+    effect: WEAKNESS
+    color: 0x484D48
+  5:
+    slot: 15
+    name: "Arrow of Hunger"
+    lore: "Hunger bar depletes faster than normal."
+    material: TIPPED_ARROW
+    amount: 1
+    effect: HUNGER
+    color: 0x587653
 swordEffects:
   0:
     slot: 23

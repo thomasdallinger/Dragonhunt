@@ -23,6 +23,7 @@ public class BrewingItem {
     private final Material MATERIAL;
     private final int AMOUNT;
     private final int COLOR;
+    private PotionEffectType effectType;
     public int cost;
 
     public BrewingItem(ConfigurationSection section) {
@@ -44,6 +45,13 @@ public class BrewingItem {
         this.AMOUNT = section.getInt("amount");
         this.COLOR = section.getInt("color");
         this.cost = section.getInt("cost");
+
+        // effects are only used for arrows as a dummy effect
+        try {
+            effectType = PotionEffectType.getByName(section.getString("effect"));
+        } catch (Exception e) {
+            effectType = null;
+        }
     }
 
     /**
@@ -62,8 +70,11 @@ public class BrewingItem {
         ItemStack itemToCreate = new ItemStack(MATERIAL, AMOUNT);
 
         if (NAME != null) {
+            // Menu item
             if (NAME.contains("»"))
-                itemToCreate = setEnchantmentAndName(itemToCreate); // menu item
+                itemToCreate = setEnchantmentAndName(itemToCreate);
+
+            // Permanent Effects
             else if (NAME.contains("Speed"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Speed.get(player));
             else if (NAME.contains("Haste"))
@@ -75,6 +86,13 @@ public class BrewingItem {
             else if (NAME.contains("Extra Hearts")) {
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.ExtraHearts.get(player));
                 this.cost = cost + (Effects.ExtraHearts.get(player) * 10);
+            }
+
+            // Negative Effects
+            else if (NAME.contains("Unlock Arrow Effects")) {
+                itemToCreate =unlockArrowEffects(itemToCreate, player);
+            } else {
+                itemToCreate = checkIfArrowEffectsUnlocked(itemToCreate, player);
             }
         }
 
@@ -122,9 +140,9 @@ public class BrewingItem {
                 meta.setLore(Arrays.asList(
                         ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        HexColor.HIGHLIGHT.toString() + Coins.getCoins(player) +
+                        HexColor.GREEN.toString() + Coins.getCoins(player) +
                                 ChatColor.WHITE + " / " + cost + " ⛃",
-                        ChatColor.GOLD + "Click to buy!"
+                        ChatColor.GOLD + "Click to unlock!"
                 ));
                 break;
             }
@@ -133,9 +151,9 @@ public class BrewingItem {
                 meta.setLore(Arrays.asList(
                         ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        ChatColor.DARK_RED.toString() + Coins.getCoins(player) +
+                        HexColor.RED.toString() + Coins.getCoins(player) +
                                 ChatColor.WHITE + " / " + cost + " ⛃",
-                        HexColor.RED.toString() + (cost - Coins.getCoins(player)) + " Coin(s) missing!"
+                        ChatColor.DARK_RED.toString() + (cost - Coins.getCoins(player)) + " ⛃ missing!"
                 ));
                 break;
             }
@@ -170,6 +188,63 @@ public class BrewingItem {
         else {
             meta.setDisplayName(ChatColor.DARK_RED.toString() + ChatColor.BOLD + NAME +
                     HexColor.RED + " ʟᴏᴄᴋᴇᴅ");
+            item.setItemMeta(meta);
+            return item;
+        }
+    }
+
+    private ItemStack unlockArrowEffects(ItemStack item, Player player) {
+        PotionMeta meta = (PotionMeta) item.getItemMeta();
+        if (meta == null) return null;
+
+        // can be unlocked
+        if (!Effects.ArrowEffectsUnlocked.get(player)) {
+            return (setEnchantmentAndName(item));
+        }
+
+        // is already unlocked
+        else {
+            meta.setDisplayName(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + NAME +
+                    HexColor.GREEN + " ᴜɴʟᴏᴄᴋᴇᴅ");
+            item.setItemMeta(meta);
+            return item;
+        }
+    }
+
+    /**
+     * Opposite to unlockArrowEffects.
+     * Lore is set here since the items have no cost.
+     * Applies a dummy effect so the PotionEffectType can be used later.
+     */
+    private ItemStack checkIfArrowEffectsUnlocked(ItemStack item, Player player) {
+        PotionMeta meta = (PotionMeta) item.getItemMeta();
+        if (meta == null) return null;
+
+        if(effectType != null) {
+            meta.addCustomEffect(new PotionEffect(effectType, 0, 0), true);
+        }
+
+        // item is available
+        if (Effects.ArrowEffectsUnlocked.get(player)) {
+            meta.setLore(Arrays.asList(
+                    ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
+                    "",
+                    ChatColor.GOLD + "Click to get this effect!"
+            ));
+            item.setItemMeta(meta);
+
+            return (setEnchantmentAndName(item));
+        }
+
+        // item is locked
+        else {
+            meta.setDisplayName(ChatColor.DARK_RED.toString() + ChatColor.BOLD + NAME +
+                    HexColor.RED + " ʟᴏᴄᴋᴇᴅ");
+            meta.setLore(Arrays.asList(
+                    HexColor.RED.toString() + ChatColor.ITALIC + LORE,
+                    "",
+                    ChatColor.DARK_RED + "Unlock Arrow Effects first!"
+            ));
             item.setItemMeta(meta);
             return item;
         }

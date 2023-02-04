@@ -26,8 +26,8 @@ public class BrewingInventory {
     public BrewingInventory(FileConfiguration config, Player player) {
         menu = createInventory(config, "brewing", player);
         permanentEffects = createInventory(config, "permanentEffects", player);
-        arrowEffects = createInventory(config, "arrowEffects", player);
-        swordEffects = createInventory(config, "swordEffects", player);
+        arrowEffects = createInventory(config, "negativeEffects", player);
+        swordEffects = createInventory(config, "negativeEffects", player);
     }
 
     private Inventory createInventory(FileConfiguration config, String category, Player player) {

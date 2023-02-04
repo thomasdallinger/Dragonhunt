@@ -1,12 +1,15 @@
 package com.tharox.dragonhunt.arrows;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.brewing.Effects;
 import com.tharox.dragonhunt.upgrades.ArrowUpgrade;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
@@ -38,26 +41,13 @@ public class Arrows {
                     if (arrowStack == null
                             || (arrowStack.getType() != Material.ARROW && arrowStack.getType() != Material.TIPPED_ARROW)
                             || arrowStack.getAmount() <= 64) {
-                        if (ArrowUpgrade.EffectArrows.get(player) > 1) {
 
-                            switch (ArrowUpgrade.EffectArrows.get(player)) {
-                                case 2:
-                                    arrowEffect = PotionEffectType.SLOW;
-                                    color = Color.GRAY;
-                                    break;
-                                case 3:
-                                    arrowEffect = PotionEffectType.BLINDNESS;
-                                    color = Color.BLACK;
-                                    break;
-                                case 4:
-                                    arrowEffect = PotionEffectType.POISON;
-                                    color = Color.GREEN;
-                                    break;
-                                default:
-                                    arrowEffect = null;
-                                    color = null;
-                            }
-                            generatedArrows = createEffectArrow(amount, arrowEffect, color);
+                        // if arrow effects have been unlocked AND one of the available arrow effects has been selected
+                        if (Effects.ArrowEffectsUnlocked.get(player) && Effects.ArrowEffectType.get(player).getType() == Material.TIPPED_ARROW) {
+                            ItemStack arrowToUse = Effects.ArrowEffectType.get(player);
+                            PotionMeta meta = (PotionMeta) arrowToUse.getItemMeta();
+                            // index is always 0 since there is only one effect on the arrow at a time
+                            generatedArrows = createEffectArrow(amount, meta.getCustomEffects().get(0).getType(), meta.getColor());
                         } else {
                             generatedArrows = createArrow(amount);
                         }
@@ -66,7 +56,7 @@ public class Arrows {
                                     || arrowStack.getType() == Material.TIPPED_ARROW))
                                 replaceCurrentArrowStack(arrowStack, generatedArrows, player);
                             else
-                                //replaceCurrentStack -> currently not arrows or tipped arrows
+                                // replaceCurrentStack -> currently not arrows or tipped arrows
                                 player.getInventory().setItem(17, generatedArrows);
                     }
                 }
@@ -86,16 +76,25 @@ public class Arrows {
     }
 
     private ItemStack createEffectArrow(int amount, PotionEffectType effect, Color color) {
+        int duration = 100; // In ticks. //TODO: add modifier changing this value
+        int amplifier = 0; //TODO: add modifier changing this value
+
         ItemStack item = new ItemStack(Material.TIPPED_ARROW, amount);
         PotionMeta meta = (PotionMeta) item.getItemMeta();
         if (meta == null) return null;
 
-        meta.addCustomEffect(new PotionEffect(effect, 100, 0), true);
+        // enchanted look
+        meta.addEnchant(Enchantment.DURABILITY, 1, true);
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+
+        meta.addCustomEffect(new PotionEffect(effect, duration, amplifier), true);
         meta.setColor(color);
         meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Generated Arrow");
         meta.setLore(Arrays.asList(
-                ChatColor.YELLOW.toString() + ChatColor.ITALIC + "Effect duration: 5 seconds",
-                ""));
+                "",
+                ChatColor.GRAY + "Effect duration: " + ChatColor.YELLOW + (duration / 20) + " sec",
+                ChatColor.GRAY + "Effect level: " + ChatColor.YELLOW + (amplifier + 1)
+        ));
         item.setItemMeta(meta);
 
         return item;

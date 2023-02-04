@@ -116,9 +116,9 @@ public class EnchantingItem {
                 meta.setLore(Arrays.asList(
                         ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        HexColor.HIGHLIGHT.toString() + Coins.getCoins(player) +
+                        HexColor.GREEN.toString() + Coins.getCoins(player) +
                                 ChatColor.WHITE + " / " + cost + " ⛃",
-                        ChatColor.GOLD + "Click to buy!"
+                        ChatColor.GOLD + "Click to unlock!"
                 ));
                 break;
             }
@@ -127,9 +127,9 @@ public class EnchantingItem {
                 meta.setLore(Arrays.asList(
                         ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
                         "",
-                        ChatColor.DARK_RED.toString() + Coins.getCoins(player) +
+                        HexColor.RED.toString() + Coins.getCoins(player) +
                                 ChatColor.WHITE + " / " + cost + " ⛃",
-                        HexColor.RED.toString() + (cost - Coins.getCoins(player)) + " Coin(s) missing!"
+                        ChatColor.DARK_RED.toString() + (cost - Coins.getCoins(player)) + " ⛃ missing!"
                 ));
                 break;
             }

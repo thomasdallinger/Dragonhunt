@@ -51,12 +51,13 @@ public class PlayerInteractListener implements Listener {
                     return;
                 }
 
-                if (block.getType() == Material.CHEST || block.getType() == Material.CHEST_MINECART) {
+                if (block.getType() == Material.CHEST) {
                     event.setCancelled(true);
                     block.setType(Material.AIR);
                     block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.DIAMOND, 2));
                     block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.GOLD_INGOT, 4));
                     block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.IRON_INGOT, 4));
+                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.APPLE, 1));
 
                     Coins.addXP(player, Coins.bonusXP);
                     return;

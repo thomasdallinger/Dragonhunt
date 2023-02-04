@@ -11,7 +11,6 @@ import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
 import com.tharox.dragonhunt.modifiers.selection.ModifierInventory;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
-import com.tharox.dragonhunt.upgrades.*;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.*;
 import org.bukkit.boss.BarColor;
@@ -41,43 +40,9 @@ public class GameStart extends GameConfiguration {
         configureNether();
         configureEnd();
         configurePlayer();
-        upgradeRegistration();
-    }
 
-    /**
-     * Sets the access level of all available UPGRADES to 1.
-     * This means that each level 1 UPGRADE can be purchased from the UPGRADE inventory (/upgrades).
-     */
-    private void upgradeRegistration() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            // Weapon
-            EnchantmentUpgrades.Sharpness.put(player, 1);
-            EnchantmentUpgrades.Knockback.put(player, 1);
-            EnchantmentUpgrades.FireAspect.put(player, 1);
-            // Bow
-            EnchantmentUpgrades.Power.put(player, 1);
-            EnchantmentUpgrades.Punch.put(player, 1);
-            EnchantmentUpgrades.Flame.put(player, 1);
-            // Tool
-            EnchantmentUpgrades.Efficiency.put(player, 1);
-            EnchantmentUpgrades.Unbreakable.put(player, 1);
-            // Armor
-            EnchantmentUpgrades.Protection.put(player, 1);
-            EnchantmentUpgrades.Thorns.put(player, 1);
-            EnchantmentUpgrades.FeatherFalling.put(player, 1);
-            // Non-enchantment upgrades
-            ArrowUpgrade.MoreArrows.put(player, 1);
-            ArrowUpgrade.EffectArrows.put(player, 1);
-            FoodUpgrade.FoodSource.put(player, 1);
-            FoodUpgrade.FoodAmount.put(player, 1);
-            ResourceUpgrade.ResourceAmount.put(player, 1);
-            XPUpgrade.MoreXP.put(player, 1);
-        }
-
-        new EnchantmentUpgrades(); // start the runnable
         new Enchantments(); // start the runnable
         new Effects(); // start the runnable
-        // checks if each player has purchased enchantment upgrades and enchants items based on the upgrade level
     }
 
     /**

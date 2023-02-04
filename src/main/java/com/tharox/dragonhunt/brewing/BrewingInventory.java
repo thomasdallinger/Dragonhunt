@@ -2,7 +2,6 @@ package com.tharox.dragonhunt.brewing;
 
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
-import com.tharox.dragonhunt.upgrades.Item;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

@@ -2,7 +2,6 @@ package com.tharox.dragonhunt.arrows;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.brewing.Effects;
-import com.tharox.dragonhunt.upgrades.ArrowUpgrade;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -34,9 +33,6 @@ public class Arrows {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     ItemStack arrowStack = player.getInventory().getItem(17);
                     ItemStack generatedArrows;
-                    PotionEffectType arrowEffect;
-                    Color color;
-                    int amount = ArrowUpgrade.MoreArrows.get(player);
 
                     if (arrowStack == null
                             || (arrowStack.getType() != Material.ARROW && arrowStack.getType() != Material.TIPPED_ARROW)
@@ -47,9 +43,9 @@ public class Arrows {
                             ItemStack arrowToUse = Effects.ArrowEffectType.get(player);
                             PotionMeta meta = (PotionMeta) arrowToUse.getItemMeta();
                             // index is always 0 since there is only one effect on the arrow at a time
-                            generatedArrows = createEffectArrow(amount, meta.getCustomEffects().get(0).getType(), meta.getColor());
+                            generatedArrows = createEffectArrow(meta.getCustomEffects().get(0).getType(), meta.getColor());
                         } else {
-                            generatedArrows = createArrow(amount);
+                            generatedArrows = createArrow();
                         }
                         if (generatedArrows != null)
                             if (arrowStack != null && (arrowStack.getType() == Material.ARROW
@@ -61,11 +57,11 @@ public class Arrows {
                     }
                 }
             }
-        }.runTaskTimer(Main.getInstance(), 0, 400);
+        }.runTaskTimer(Main.getInstance(), 0, 300);
     }
 
-    private ItemStack createArrow(int amount) {
-        ItemStack item = new ItemStack(Material.ARROW, amount);
+    private ItemStack createArrow() {
+        ItemStack item = new ItemStack(Material.ARROW);
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
@@ -75,11 +71,11 @@ public class Arrows {
         return item;
     }
 
-    private ItemStack createEffectArrow(int amount, PotionEffectType effect, Color color) {
+    private ItemStack createEffectArrow(PotionEffectType effect, Color color) {
         int duration = 100; // In ticks. //TODO: add modifier changing this value
         int amplifier = 0; //TODO: add modifier changing this value
 
-        ItemStack item = new ItemStack(Material.TIPPED_ARROW, amount);
+        ItemStack item = new ItemStack(Material.TIPPED_ARROW);
         PotionMeta meta = (PotionMeta) item.getItemMeta();
         if (meta == null) return null;
 

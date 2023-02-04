@@ -123,13 +123,6 @@ public class Tracker implements Listener {
                 playerTracksIndex.replace(player, index);
             }
         }
-
-        if (e.equals(EquipmentSlot.HAND)
-                && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Tracker")) {
-                player.performCommand("shop");
-            }
-        }
     }
 
     public void sendActionBar(Player player) {
@@ -258,7 +251,6 @@ public class Tracker implements Listener {
                 ChatColor.BLUE.toString() + ChatColor.ITALIC + "The compass needle points to the",
                 ChatColor.BLUE.toString() + ChatColor.ITALIC + "tracked structure/position location.",
                 "",
-                ChatColor.WHITE + "Left-Click: " + HexColor.HIGHLIGHT + "Open shop menu (/shop)",
                 ChatColor.WHITE + "Right-Click: " + ChatColor.GOLD + "Switch tracked structure",
                 ChatColor.WHITE + "Shift + Right-Click: " + ChatColor.DARK_GREEN + "Switch tracked position"));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);

@@ -1,11 +1,8 @@
 package com.tharox.dragonhunt.coins;
 
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.shop.ShopInventory;
-import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -44,6 +41,7 @@ public class Coins {
     public static void removeCoins(Player player, int coinsToRemove, String objectName) {
         coins.put(player, coins.get(player) - coinsToRemove);
 
+        /* TODO: update db
         // add ShopAccess
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO ShopAccess (GameID, Player, purchasedObject, coinsBefore, cost, timestamp) " +
@@ -54,7 +52,7 @@ public class Coins {
             Statement stmt = con.createStatement();
             stmt.execute(query);
             stmt.close();
-        });
+        });*/
     }
 
     public static void addXP(Player player, int xpToAdd) {

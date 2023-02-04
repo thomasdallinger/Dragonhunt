@@ -1,9 +1,7 @@
 package com.tharox.dragonhunt.vehicles;
 
 import com.tharox.dragonhunt.coins.Coins;
-import com.tharox.dragonhunt.upgrades.XPUpgrade;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;

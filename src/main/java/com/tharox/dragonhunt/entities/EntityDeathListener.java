@@ -1,14 +1,10 @@
 package com.tharox.dragonhunt.entities;
 
-import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.PowderOnly;
 import com.tharox.dragonhunt.coins.Coins;
-import com.tharox.dragonhunt.upgrades.XPUpgrade;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;

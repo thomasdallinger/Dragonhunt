@@ -5,17 +5,14 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.timer.Timer;
-import com.tharox.dragonhunt.upgrades.Item;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CommandHelper {
     /**
@@ -52,6 +49,8 @@ public class CommandHelper {
     }
 
     protected int getCommandCost(FileConfiguration config, String itemName) {
+        return 0; //TODO: update mobility -> kits
+        /*
         ConfigurationSection itemsSection = config.getConfigurationSection("mobility");
         List<Item> itemList = new ArrayList<>();
 
@@ -75,5 +74,7 @@ public class CommandHelper {
         }
 
         return 0;
+
+         */
     }
 }

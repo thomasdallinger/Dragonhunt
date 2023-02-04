@@ -25,7 +25,6 @@ import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.players.DoubleJumpListener;
 import com.tharox.dragonhunt.players.*;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
-import com.tharox.dragonhunt.shop.ShopListener;
 import com.tharox.dragonhunt.tablist.TablistManager;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
@@ -179,7 +178,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new ProjectileHitListener(), this);
 
         pluginManager.registerEvents(new LevelUp(), this);
-        pluginManager.registerEvents(new ShopListener(), this);
         pluginManager.registerEvents(new EnchantingListener(), this);
         pluginManager.registerEvents(new BrewingListener(), this);
 
@@ -213,7 +211,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
     private void commandRegistration() {
         getCommand("date").setExecutor(new DateCommand());
-        getCommand("shop").setExecutor(new ShopCommand());
         getCommand("spec").setExecutor(new SpectateCommand());
         getCommand("top").setExecutor(new TopCommand());
         getCommand("respawn").setExecutor(new RespawnCommand());

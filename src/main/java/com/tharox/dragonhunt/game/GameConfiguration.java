@@ -125,25 +125,6 @@ public class GameConfiguration {
             player.getInventory().setItemInOffHand(GameState.addItem(new ItemStack(Material.SHIELD)));
             new Grappler(player);
 
-            // every player starts with the base items for food and resources
-            // the item and amount can be upgraded using FOOD or RESOURCE UPGRADES respectively
-            GameState.food.put(player, new ItemStack(Material.COOKED_RABBIT, 2));
-
-            // diamond ores drop diamond blocks if the modifier is active
-            ItemStack diamonds;
-
-            if (Diamonds.active) {
-                diamonds = new ItemStack(Material.DIAMOND_BLOCK);
-            } else {
-                diamonds = new ItemStack(Material.DIAMOND);
-            }
-
-            GameState.resources.put(player, List.of(
-                    new ItemStack(Material.IRON_INGOT),
-                    new ItemStack(Material.COPPER_INGOT),
-                    new ItemStack(Material.GOLD_INGOT),
-                    diamonds));
-
             // set default TRACKER values, nobody is tracked when the player receives the TRACKER
             Main.getInstance().getTracker().playerTracksName.put(player, null);
             Main.getInstance().getTracker().playerTracksIndex.put(player, 0);

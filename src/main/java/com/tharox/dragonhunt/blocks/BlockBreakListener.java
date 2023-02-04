@@ -107,7 +107,7 @@ public class BlockBreakListener implements Listener {
         // a HashMap with the old drops as materials and new drops as ItemStacks
         HashMap<Material, ItemStack> materials = new HashMap<>();
         materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
-        materials.put(Material.RAW_COPPER, new ItemStack(Material.COPPER_INGOT, 2));
+        materials.put(Material.RAW_COPPER, new ItemStack(Material.COPPER_INGOT, 3));
         materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 2));
         materials.put(Material.GOLD_NUGGET, new ItemStack(Material.GOLD_INGOT, 1)); // Nether Gold Ore
         materials.put(Material.GILDED_BLACKSTONE, new ItemStack(Material.GOLD_INGOT, 1));

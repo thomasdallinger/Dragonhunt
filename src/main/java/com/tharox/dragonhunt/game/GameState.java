@@ -41,13 +41,6 @@ public class GameState {
     // counts the trees destroyed by each player (used to drop apples not randomly)
     public static HashMap<Player, Integer> treesDestroyed = new HashMap<>();
 
-    // all items a player keeps on death stored in a HashMap
-    public static HashMap<Player, ItemStack[]> itemsToKeepOnDeath = new HashMap<>();
-
-    // HashMaps which contain which food / resource a player is supposed to get from killing entities / mining blocks
-    public static HashMap<Player, ItemStack> food = new HashMap<>();
-    public static HashMap<Player, List<ItemStack>> resources = new HashMap<>();
-
     /**
      * Used in LevelUp.
      *

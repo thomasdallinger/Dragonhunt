@@ -243,7 +243,7 @@ public class CustomRecipes {
     private void addEnchantedGoldenApple() {
         NamespacedKey key = new NamespacedKey(Main.getInstance(), "enchanted_golden_apple");
         ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
-        recipe.shape("DDD", "DGD", "DDD");
+        recipe.shape(" D ", "DGD", " D ");
         recipe.setIngredient('D', Material.DIAMOND);
         recipe.setIngredient('G', Material.GOLDEN_APPLE);
 

@@ -73,7 +73,7 @@ public class Arrows {
 
     private ItemStack createEffectArrow(PotionEffectType effect, Color color) {
         int duration = 100; // In ticks. //TODO: add modifier changing this value
-        int amplifier = 0; //TODO: add modifier changing this value
+        int amplifier = 1; //TODO: add modifier changing this value
 
         ItemStack item = new ItemStack(Material.TIPPED_ARROW);
         PotionMeta meta = (PotionMeta) item.getItemMeta();

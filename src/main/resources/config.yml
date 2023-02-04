@@ -580,26 +580,19 @@ enchanting:
     lore: "Reduces fall damage by 48%."
 brewing:
   0:
-    slot: 10
+    slot: 11
     name: "» Permanent Effects"
     lore: "Unlock permanent positive effects.  "
     material: POTION
     amount: 1
     color: 0xF82423
   1:
-    slot: 13
+    slot: 15
     name: "» Arrow Effects"
     lore: "Unlock effects for arrows.          "
     material: TIPPED_ARROW
     amount: 1
     color: 0x4E9331
-  2:
-    slot: 16
-    name: "» Sword Effects"
-    lore: "Unlock effects for all DIAMOND and NETHERITE SWORDS applied on hit."
-    material: POTION
-    amount: 1
-    color: 0x1F1F23
 permanentEffects:
   0:
     slot: 2
@@ -754,12 +747,3 @@ negativeEffects:
     amount: 1
     effect: HUNGER
     color: 0x587653
-swordEffects:
-  0:
-    slot: 23
-    name: "Extra Hearts III"
-    lore: "Adds 6 hearts."
-    material: POTION
-    amount: 3
-    color: 0xF82423
-    cost: 20

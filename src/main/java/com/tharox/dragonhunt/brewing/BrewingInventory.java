@@ -20,14 +20,13 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BrewingInventory {
-    public Inventory menu, permanentEffects, arrowEffects, swordEffects;
+    public Inventory menu, permanentEffects, arrowEffects;
     public static final HashMap<String, Integer> effectCost = new HashMap<>();
 
     public BrewingInventory(FileConfiguration config, Player player) {
         menu = createInventory(config, "brewing", player);
         permanentEffects = createInventory(config, "permanentEffects", player);
         arrowEffects = createInventory(config, "negativeEffects", player);
-        swordEffects = createInventory(config, "negativeEffects", player);
     }
 
     private Inventory createInventory(FileConfiguration config, String category, Player player) {

@@ -85,7 +85,7 @@ public class BrewingItem {
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Regeneration.get(player));
             else if (NAME.contains("Extra Hearts")) {
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.ExtraHearts.get(player));
-                this.cost = cost + (Effects.ExtraHearts.get(player) * 10);
+                this.cost = cost + (Effects.ExtraHearts.get(player) * 5);
             }
 
             // Negative Effects
@@ -174,8 +174,8 @@ public class BrewingItem {
         }
         // item has already been purchased
         else if (AMOUNT < level) {
-            // Extra Hearts should be re-purchasable
-            if (NAME.contains("Extra Hearts")) {
+            // re-purchasable effects can be bought multiple times
+            if (NAME.contains("ʀᴇ-ᴘᴜʀᴄʜᴀꜱᴇᴀʙʟᴇ")) {
                 return (setEnchantmentAndName(item));
             } else {
                 meta.setDisplayName(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + NAME +

@@ -290,11 +290,11 @@ permanentEffects:
   12:
     slot: 6
     name: "Extra Hearts ʀᴇ-ᴘᴜʀᴄʜᴀꜱᴇᴀʙʟᴇ"
-    lore: "+1 ❤ and +10 ⛃ cost per purchase."
-    material: POTION
+    lore: "+1 ❤ and +5 ⛃ cost per purchase."
+    material: LINGERING_POTION
     amount: 1
     color: 0xF82423
-    cost: 40
+    cost: 25
 negativeEffects:
   0:
     slot: 4

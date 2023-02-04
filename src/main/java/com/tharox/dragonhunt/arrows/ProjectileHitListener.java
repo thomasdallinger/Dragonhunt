@@ -6,6 +6,9 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class ProjectileHitListener implements Listener {
 
+    /**
+     * Arrows disappear when hitting an entity / the ground.
+     */
     @EventHandler
     public void onArrowHit(ProjectileHitEvent event) {
         event.getEntity().remove();

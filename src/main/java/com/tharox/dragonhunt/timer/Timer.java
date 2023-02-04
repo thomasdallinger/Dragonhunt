@@ -95,6 +95,7 @@ public class Timer {
 
                             GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE, 2));
                             GameState.putItemInInventory(player, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
+                            GameState.putItemInInventory(player, new ItemStack(Material.NETHERITE_INGOT));
                         }
 
                         player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "The game ends in "

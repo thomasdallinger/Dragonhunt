@@ -5,12 +5,15 @@ import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -42,10 +45,11 @@ public class PlayerDeathListener implements Listener {
                 + HexColor.RED + event.getDeathMessage().substring(0, player.getName().length())
                 + ChatColor.GRAY + event.getDeathMessage().substring(player.getName().length()));
 
-        // if the player has been killed by another player, give the killer regeneration and XP
+        // if the player has been killed by another player, give the killer regeneration, XP and other rewards
         if (killer != null) {
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
             Coins.addXP(killer, Coins.playerXP);
+            GameState.putItemInInventory(killer, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
             addPlayerKill(killer, player);
         }
 

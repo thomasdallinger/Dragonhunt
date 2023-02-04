@@ -37,7 +37,7 @@ public class EntityDeathListener implements Listener {
         }
 
         event.setDroppedExp(0); // no natural XP orbs
-        event.getDrops().clear();
+        event.getDrops().clear(); // clear all natural drops
 
         switch (mob.getName()) {
             case "Creeper":
@@ -76,7 +76,7 @@ public class EntityDeathListener implements Listener {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.NETHERITE_SCRAP, 2));
                 break;
             case "Iron Golem":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 5));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 8));
                 break;
             default:
                 break;

@@ -1,26 +1,24 @@
 package com.tharox.dragonhunt.players;
 
-import org.bukkit.World;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
 public class PlayerDamageListener implements Listener {
 
+    public static boolean gracePeriodActive = false;
+
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         Entity entity = event.getEntity();
-        World world = entity.getWorld();
 
-        //TODO: possibly used for future Modifiers
-
-       /* if(entity instanceof Player) {
-            if(world.getName().equals("world_nether")) {
-                if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
-                    event.setCancelled(true);
-                }
+        if (entity instanceof Player) {
+            if (gracePeriodActive) {
+                // Players cannot receive ANY damage.
+                event.setCancelled(true);
             }
-        }*/
+        }
     }
 }

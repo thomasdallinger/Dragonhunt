@@ -33,6 +33,8 @@ public class PlayerRespawnListener implements Listener {
             player.setFlySpeed(0f);
             player.setFreezeTicks(1000);
 
+            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT_FREEZE, 1, 1);
+
             deathTimer.put(player, ((player.getLevel() + 20) * 1.2));
             deathTimerCountdown(player);
 

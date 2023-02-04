@@ -9,6 +9,7 @@ import com.tharox.dragonhunt.elytra.ElytraSwapRunnable;
 import com.tharox.dragonhunt.enchanting.Enchantments;
 import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
 import com.tharox.dragonhunt.modifiers.selection.ModifierInventory;
+import com.tharox.dragonhunt.players.PlayerDamageListener;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
@@ -20,7 +21,7 @@ import org.bukkit.entity.Player;
 
 public class GameStart extends GameConfiguration {
     Timer timer = Main.getInstance().getTimer();
-    Countdown startCountdown, fallDamageCountdown;
+    Countdown startCountdown, gracePeriodCountdown;
     Countdown scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
     ModifierInventory modifierInventory;
     BossBar bossBar;
@@ -63,9 +64,9 @@ public class GameStart extends GameConfiguration {
             new Arrows(); // start arrow generation
             new ElytraSwapRunnable().runTaskTimer(Main.getInstance(), 0, 5);
 
-            fallDamageCountdown = new Countdown(true, 30, this::onFallDamageCountdown);
-            overworld.setGameRule(GameRule.FALL_DAMAGE, false);
-            bossBar = Bukkit.createBossBar("", BarColor.RED, BarStyle.SEGMENTED_6);
+            gracePeriodCountdown = new Countdown(true, 60, this::onGracePeriodCountdown);
+            bossBar = Bukkit.createBossBar("", BarColor.GREEN, BarStyle.SEGMENTED_6);
+            PlayerDamageListener.gracePeriodActive = true;
 
             if (!EndlessNight.active)
                 overworld.setTime(0);
@@ -122,8 +123,6 @@ public class GameStart extends GameConfiguration {
 
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GOLD + ChatColor.BOLD
                         + "Whoever kills the Enderdragon wins.");
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Fall damage is "
-                        + HexColor.RED + "disabled" + ChatColor.GRAY + ".");
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/pos [name]"
                         + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + "mark locations");
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
@@ -138,34 +137,37 @@ public class GameStart extends GameConfiguration {
 
     /**
      * Executed after the timer starts.
-     * 30s BossBar
+     * 60s BossBar
      *
      * @param time time of the countdown
      */
-    public void onFallDamageCountdown(int time) {
-        bossBar.setTitle(HexColor.RED + "Fall damage enabled in " + ChatColor.DARK_RED
-                + ChatColor.BOLD + fallDamageCountdown.getTime() + HexColor.RED + " seconds");
-        bossBar.setProgress(time / 31D);
+    public void onGracePeriodCountdown(int time) {
+        bossBar.setTitle(HexColor.GREEN + "Grace Period ends in " + ChatColor.DARK_GREEN
+                + ChatColor.BOLD + gracePeriodCountdown.getTime() + HexColor.GREEN + " seconds");
+        bossBar.setProgress(time / 61D);
         bossBar.setVisible(true);
 
-        if (fallDamageCountdown.getTime() == 0) {
-            overworld.setGameRule(GameRule.FALL_DAMAGE, true);
+        if (gracePeriodCountdown.getTime() == 0) {
+            PlayerDamageListener.gracePeriodActive = false;
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (fallDamageCountdown.getTime() == 30) {
+            if (gracePeriodCountdown.getTime() == 60) {
                 bossBar.addPlayer(player);
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "The Grace Period ends in "
+                        + HexColor.GREEN + "60" + ChatColor.GRAY + " seconds.");
             }
 
-            if (fallDamageCountdown.getTime() <= 5 && fallDamageCountdown.getTime() > 0) {
+            if (gracePeriodCountdown.getTime() == 30 || gracePeriodCountdown.getTime() == 15
+                    || (gracePeriodCountdown.getTime() <= 5 && gracePeriodCountdown.getTime() > 0)) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Fall damage enabled in "
-                        + HexColor.RED + fallDamageCountdown.getTime() + ChatColor.GRAY + " seconds.");
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "The Grace Period ends in "
+                        + HexColor.GREEN + gracePeriodCountdown.getTime() + ChatColor.GRAY + " seconds.");
             }
 
-            if (fallDamageCountdown.getTime() == 0) {
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Fall damage is "
-                        + HexColor.GREEN + "enabled" + ChatColor.GRAY + ".");
+            if (gracePeriodCountdown.getTime() == 0) {
+                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+                player.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "The Grace Period has ended.");
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);
             }

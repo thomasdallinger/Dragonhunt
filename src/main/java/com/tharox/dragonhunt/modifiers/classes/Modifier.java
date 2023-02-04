@@ -37,7 +37,7 @@ public abstract class Modifier {
             }
         } else {
             titleColor = ChatColor.DARK_GRAY.toString() + ChatColor.BOLD;
-            loreColor = ChatColor.GRAY.toString() + ChatColor.ITALIC;
+            loreColor = ChatColor.GRAY.toString();
 
             // overwrite the modifiers original material when it is not active
             item.setType(Material.BLACK_STAINED_GLASS_PANE);

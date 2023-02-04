@@ -246,13 +246,13 @@ public class Tracker implements Listener {
 
         meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Tracker");
         meta.setLore(Arrays.asList(
-                ChatColor.BLUE.toString() + ChatColor.ITALIC + "Displays the distance towards different",
-                ChatColor.BLUE.toString() + ChatColor.ITALIC + "structures and positions.",
-                ChatColor.BLUE.toString() + ChatColor.ITALIC + "The compass needle points to the",
-                ChatColor.BLUE.toString() + ChatColor.ITALIC + "tracked structure/position location.",
+                ChatColor.GRAY + "Displays the distance towards different",
+                ChatColor.GRAY + "structures and positions.",
+                ChatColor.GRAY + "The compass needle points to the",
+                ChatColor.GRAY + "tracked structure/position location.",
                 "",
-                ChatColor.WHITE + "Right-Click: " + ChatColor.GOLD + "Switch tracked structure",
-                ChatColor.WHITE + "Shift + Right-Click: " + ChatColor.DARK_GREEN + "Switch tracked position"));
+                ChatColor.GRAY + "Right-Click: " + ChatColor.GOLD + "Switch tracked structure",
+                ChatColor.GRAY + "Shift + Right-Click: " + ChatColor.DARK_GREEN + "Switch tracked position"));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 

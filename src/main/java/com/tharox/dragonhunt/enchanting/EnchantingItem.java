@@ -92,7 +92,7 @@ public class EnchantingItem {
             // player can't acquire the enchantment yet
             if (NAME != null && meta.getDisplayName().contains("ᴜɴʟᴏᴄᴋᴇᴅ")) {
                 meta.setLore(Arrays.asList(
-                        HexColor.GREEN.toString() + ChatColor.ITALIC + LORE,
+                        HexColor.GREEN + LORE,
                         "",
                         ChatColor.WHITE.toString() + cost + " ⛃",
                         HexColor.GREEN + "Unlocked!"
@@ -103,7 +103,7 @@ public class EnchantingItem {
             // player has already bought the enchantment
             else if (NAME != null && meta.getDisplayName().contains("ʟᴏᴄᴋᴇᴅ")) {
                 meta.setLore(Arrays.asList(
-                        HexColor.RED.toString() + ChatColor.ITALIC + LORE,
+                        HexColor.RED + LORE,
                         "",
                         ChatColor.WHITE.toString() + cost + " ⛃",
                         ChatColor.DARK_RED + "Purchase previous levels first!"
@@ -114,7 +114,7 @@ public class EnchantingItem {
             // player has enough coins to buy the enchantment
             if (Coins.getCoins(player) >= cost) {
                 meta.setLore(Arrays.asList(
-                        ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
+                        ChatColor.YELLOW + LORE,
                         "",
                         HexColor.GREEN.toString() + Coins.getCoins(player) +
                                 ChatColor.WHITE + " / " + cost + " ⛃",
@@ -125,7 +125,7 @@ public class EnchantingItem {
             // player needs more coins to buy the enchantment
             else {
                 meta.setLore(Arrays.asList(
-                        ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
+                        ChatColor.YELLOW + LORE,
                         "",
                         HexColor.RED.toString() + Coins.getCoins(player) +
                                 ChatColor.WHITE + " / " + cost + " ⛃",

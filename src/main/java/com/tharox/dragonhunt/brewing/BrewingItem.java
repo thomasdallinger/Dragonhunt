@@ -107,8 +107,8 @@ public class BrewingItem {
 
         if (NAME != null && NAME.contains("»") && LORE != null) {
             meta.setLore(Arrays.asList(
-                    ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE.substring(0, 34),
-                    ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE.substring(35)
+                    ChatColor.YELLOW + LORE.substring(0, 34),
+                    ChatColor.YELLOW + LORE.substring(35)
             ));
         }
 
@@ -116,7 +116,7 @@ public class BrewingItem {
             // player can't acquire the effect yet
             if (NAME != null && meta.getDisplayName().contains("ᴜɴʟᴏᴄᴋᴇᴅ")) {
                 meta.setLore(Arrays.asList(
-                        HexColor.GREEN.toString() + ChatColor.ITALIC + LORE,
+                        HexColor.GREEN + LORE,
                         "",
                         ChatColor.WHITE.toString() + cost + " ⛃",
                         HexColor.GREEN + "Unlocked!"
@@ -127,7 +127,7 @@ public class BrewingItem {
             // player has already bought the effect
             else if (NAME != null && meta.getDisplayName().contains("ʟᴏᴄᴋᴇᴅ")) {
                 meta.setLore(Arrays.asList(
-                        HexColor.RED.toString() + ChatColor.ITALIC + LORE,
+                        HexColor.RED + LORE,
                         "",
                         ChatColor.WHITE.toString() + cost + " ⛃",
                         ChatColor.DARK_RED + "Purchase previous levels first!"
@@ -138,7 +138,7 @@ public class BrewingItem {
             // player has enough coins to buy the effect
             if (Coins.getCoins(player) >= cost) {
                 meta.setLore(Arrays.asList(
-                        ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
+                        ChatColor.YELLOW + LORE,
                         "",
                         HexColor.GREEN.toString() + Coins.getCoins(player) +
                                 ChatColor.WHITE + " / " + cost + " ⛃",
@@ -149,7 +149,7 @@ public class BrewingItem {
             // player needs more coins to buy the effect
             else {
                 meta.setLore(Arrays.asList(
-                        ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
+                        ChatColor.YELLOW + LORE,
                         "",
                         HexColor.RED.toString() + Coins.getCoins(player) +
                                 ChatColor.WHITE + " / " + cost + " ⛃",
@@ -227,7 +227,7 @@ public class BrewingItem {
         // item is available
         if (Effects.ArrowEffectsUnlocked.get(player)) {
             meta.setLore(Arrays.asList(
-                    ChatColor.YELLOW.toString() + ChatColor.ITALIC + LORE,
+                    ChatColor.YELLOW + LORE,
                     "",
                     ChatColor.GOLD + "Click to get this effect!"
             ));
@@ -241,7 +241,7 @@ public class BrewingItem {
             meta.setDisplayName(ChatColor.DARK_RED.toString() + ChatColor.BOLD + NAME +
                     HexColor.RED + " ʟᴏᴄᴋᴇᴅ");
             meta.setLore(Arrays.asList(
-                    HexColor.RED.toString() + ChatColor.ITALIC + LORE,
+                    HexColor.RED + LORE,
                     "",
                     ChatColor.DARK_RED + "Unlock Arrow Effects first!"
             ));

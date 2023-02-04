@@ -31,12 +31,11 @@ public class Grappler {
 
         meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Grappler");
         meta.setLore(Arrays.asList(
-                ChatColor.BLUE.toString() + ChatColor.ITALIC + "Pull yourself to different locations.",
-                ChatColor.BLUE.toString() + ChatColor.ITALIC + "Arrows shot can't do damage,",
-                ChatColor.BLUE.toString() + ChatColor.ITALIC + "but can be picked up.",
-                ChatColor.BLUE.toString() + ChatColor.ITALIC + "Be aware of fall damage.",
+                ChatColor.GRAY + "Pull yourself to different locations.",
+                ChatColor.GRAY + "Arrows shot cannot do damage.",
+                ChatColor.GOLD + "Be aware of fall damage.",
                 "",
-                ChatColor.WHITE + "Max. arrow distance: " + HexColor.RED + "20 blocks"));
+                ChatColor.GRAY + "Max. Arrow Distance: " + ChatColor.YELLOW + "20 Blocks"));
         item.setItemMeta(meta);
 
         return item;

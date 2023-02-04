@@ -14,7 +14,7 @@ import java.util.HashMap;
 public class Effects {
     // Permanent effects
     public static HashMap<Player, Integer> Speed = new HashMap<>();
-    public static HashMap<Player, Integer> Haste = new HashMap<>();
+    public static HashMap<Player, Integer> JumpBoost = new HashMap<>();
     public static HashMap<Player, Integer> Resistance = new HashMap<>();
     public static HashMap<Player, Integer> Regeneration = new HashMap<>();
     public static HashMap<Player, Integer> ExtraHearts = new HashMap<>();
@@ -27,7 +27,7 @@ public class Effects {
         // set default values: level 1 can be purchased
         for (Player player : Bukkit.getOnlinePlayers()) {
             Speed.put(player, 1);
-            Haste.put(player, 1);
+            JumpBoost.put(player, 1);
             Resistance.put(player, 1);
             Regeneration.put(player, 1);
             ExtraHearts.put(player, 1);
@@ -47,8 +47,8 @@ public class Effects {
                     if (Speed.get(player) > 1)
                         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, Speed.get(player) - 2));
 
-                    if (Haste.get(player) > 1)
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 40, Haste.get(player) - 2));
+                    if (JumpBoost.get(player) > 1) // Higher amplifier than any other permanent effect due to Jump Boost 1 being very weak.
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 40, JumpBoost.get(player)));
 
                     if (Resistance.get(player) > 2)
                         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 40, Resistance.get(player) - 2));

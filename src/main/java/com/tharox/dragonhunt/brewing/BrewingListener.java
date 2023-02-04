@@ -109,8 +109,8 @@ public class BrewingListener implements Listener {
         if (effectName.contains("Speed")) {
             Effects.Speed.put(player, Effects.Speed.get(player) + 1);
             purchaseEffect(player, effectName);
-        } else if (effectName.contains("Haste")) {
-            Effects.Haste.put(player, Effects.Haste.get(player) + 1);
+        } else if (effectName.contains("Jump Boost")) {
+            Effects.JumpBoost.put(player, Effects.JumpBoost.get(player) + 1);
             purchaseEffect(player, effectName);
         } else if (effectName.contains("Resistance")) {
             Effects.Resistance.put(player, Effects.Resistance.get(player) + 1);

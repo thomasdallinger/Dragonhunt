@@ -77,8 +77,8 @@ public class BrewingItem {
             // Permanent Effects
             else if (NAME.contains("Speed"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Speed.get(player));
-            else if (NAME.contains("Haste"))
-                itemToCreate = checkIfUnlocked(itemToCreate, Effects.Haste.get(player));
+            else if (NAME.contains("Jump Boost"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Effects.JumpBoost.get(player));
             else if (NAME.contains("Resistance"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Resistance.get(player));
             else if (NAME.contains("Regeneration"))

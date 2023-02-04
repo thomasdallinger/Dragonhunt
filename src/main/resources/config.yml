@@ -217,27 +217,27 @@ permanentEffects:
     cost: 20
   3:
     slot: 3
-    name: "Haste I"
-    lore: "Increases mining speed by 20%."
+    name: "Jump Boost I"
+    lore: "Adds 50% to the base jump height."
     material: POTION
     amount: 1
-    color: 0xD9C043
+    color: 0x22FF4C
     cost: 20
   4:
     slot: 12
-    name: "Haste II"
-    lore: "Increases mining speed by 40%."
+    name: "Jump Boost II"
+    lore: "Adds 100% to the base jump height."
     material: POTION
     amount: 2
-    color: 0xD9C043
+    color: 0x22FF4C
     cost: 20
   5:
     slot: 21
-    name: "Haste III"
-    lore: "Increases mining speed by 60%."
+    name: "Jump Boost III"
+    lore: "Adds 150% to the base jump height."
     material: POTION
     amount: 3
-    color: 0xD9C043
+    color: 0x22FF4C
     cost: 20
   6:
     slot: 4

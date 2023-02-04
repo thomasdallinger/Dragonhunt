@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -16,12 +17,6 @@ public class Enchantments {
     // a list of all weapons affected by sword enchantments
     protected static List<Material> swords = List.of(
             Material.IRON_SWORD, Material.DIAMOND_SWORD, Material.NETHERITE_SWORD);
-
-    // a list of all netherite tools, armor and weapons
-    protected static List<Material> netherite = List.of(
-            Material.NETHERITE_SWORD, Material.NETHERITE_AXE, Material.NETHERITE_HOE,
-            Material.NETHERITE_PICKAXE, Material.NETHERITE_SHOVEL, Material.NETHERITE_HELMET,
-            Material.NETHERITE_CHESTPLATE, Material.NETHERITE_LEGGINGS, Material.NETHERITE_BOOTS);
 
     // Swords
     public static HashMap<Player, Integer> Sharpness = new HashMap<>();
@@ -65,16 +60,15 @@ public class Enchantments {
                     for (ItemStack item : player.getInventory()) {
                         if (item == null) continue;
 
-                        // Make all netherite items unbreakable
-                        if (netherite.contains(item.getType())) {
-                            ItemMeta meta = item.getItemMeta();
+                        // Make all items that can break unbreakable.
+                        ItemMeta meta = item.getItemMeta();
 
-                            if (meta != null) {
-                                meta.setUnbreakable(true);
-                            }
-
-                            item.setItemMeta(meta);
+                        if (meta != null) {
+                            meta.setUnbreakable(true);
+                            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
                         }
+
+                        item.setItemMeta(meta);
 
                         // Swords
                         if (swords.contains(item.getType())) {

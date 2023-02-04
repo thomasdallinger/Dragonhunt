@@ -96,31 +96,7 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
-        setDamageToUsedTool(player);
         changeDrops(block, player);
-    }
-
-    /**
-     * Sets 1 damage to the players used tool to break the block.
-     *
-     * @param player person who broke the block
-     */
-    private void setDamageToUsedTool(Player player) {
-        ItemStack hand = player.getInventory().getItemInMainHand();
-        ItemMeta meta = hand.getItemMeta();
-        if (meta instanceof Damageable) {
-            if (hand.getType().getMaxDurability() > 0) {
-                ((Damageable) meta).setDamage(((Damageable) meta).getDamage() + 1);
-
-                // avoid negative durability
-                if (((Damageable) meta).getDamage() > hand.getType().getMaxDurability()) {
-                    player.getInventory().removeItem(hand);
-                    player.playSound(player.getLocation(), Sound.ENTITY_ITEM_BREAK, 1, 1);
-                    return;
-                }
-            }
-        }
-        hand.setItemMeta(meta);
     }
 
     /**
@@ -191,8 +167,6 @@ public class BlockBreakListener implements Listener {
         block.getDrops().clear();
         block.setType(Material.AIR);
         GameState.putItemInInventory(player, new ItemStack(Material.OAK_LOG));
-
-        setDamageToUsedTool(player); // costs 1 durability for each block of wood mined
 
         Location location = block.getLocation();
         ArrayList<Block> locations = new ArrayList<>();

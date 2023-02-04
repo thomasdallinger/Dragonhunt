@@ -185,7 +185,7 @@ public class CustomRecipes {
      * Updates the existing bukkit shield recipe.
      */
     private void changeShieldRecipe() {
-        NamespacedKey key = new NamespacedKey(Main.getInstance(), "unbreakable_shield");
+        NamespacedKey key = new NamespacedKey(Main.getInstance(), "enchanted_shield");
         ShapedRecipe recipe = new ShapedRecipe(key,
                 Objects.requireNonNull(GameState.addItem(new ItemStack(Material.SHIELD))));
         recipe.shape("SRS", "SSS", " S ");

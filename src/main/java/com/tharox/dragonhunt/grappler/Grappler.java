@@ -26,10 +26,8 @@ public class Grappler {
 
         meta.addChargedProjectile(new ItemStack(Material.ARROW, 1));
         meta.addEnchant(Enchantment.DURABILITY, 1, true);
-        meta.setUnbreakable(true);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
 
         meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Grappler");
         meta.setLore(Arrays.asList(

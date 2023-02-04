@@ -74,11 +74,9 @@ public class GameState {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
-        // making the item unbreakable while looking enchanted
+        // enchanted look
         meta.addEnchant(Enchantment.DURABILITY, 1, true);
-        meta.setUnbreakable(true);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
 
         if (item.getType() == Material.SHIELD) {
             meta.setDisplayName(ChatColor.AQUA + "Shield");

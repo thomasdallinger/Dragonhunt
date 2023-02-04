@@ -39,6 +39,8 @@ public class GameConfiguration {
         else
             overworld.setDifficulty(Difficulty.NORMAL);
 
+        overworld.setGameRule(GameRule.KEEP_INVENTORY, true);
+
         WorldBorder worldBorder = overworld.getWorldBorder();
         worldBorder.setCenter(new Location(overworld, x, 0, z));
         worldBorder.setSize(2000);
@@ -46,7 +48,7 @@ public class GameConfiguration {
     }
 
     /**
-     * Sets the world border and difficulty for the NETHER
+     * Sets the world border, difficulty and game rules for the NETHER
      */
     public void configureNether() {
         World nether = Bukkit.getServer().getWorld("world_nether");
@@ -64,6 +66,8 @@ public class GameConfiguration {
         else
             nether.setDifficulty(Difficulty.NORMAL);
 
+        nether.setGameRule(GameRule.KEEP_INVENTORY, true);
+
         WorldBorder worldBorder = nether.getWorldBorder();
         worldBorder.setCenter(new Location(nether, 0, 0, 0));
         worldBorder.setSize(4000);
@@ -71,7 +75,7 @@ public class GameConfiguration {
     }
 
     /**
-     * Sets the difficulty for the END
+     * Sets the difficulty and game rules for the END
      */
     public void configureEnd() {
         World end = Bukkit.getServer().getWorld("world_the_end");
@@ -88,6 +92,8 @@ public class GameConfiguration {
             end.setDifficulty(Difficulty.HARD);
         else
             end.setDifficulty(Difficulty.NORMAL);
+
+        end.setGameRule(GameRule.KEEP_INVENTORY, true);
     }
 
     /**

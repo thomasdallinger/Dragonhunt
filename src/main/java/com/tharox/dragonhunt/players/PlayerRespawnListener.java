@@ -17,13 +17,7 @@ public class PlayerRespawnListener implements Listener {
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
             Player player = event.getPlayer();
 
-            if (GameState.itemsToKeepOnDeath.containsKey(player) && GameState.itemsToKeepOnDeath.get(player) != null) {
-                player.getInventory().setContents(GameState.itemsToKeepOnDeath.get(player));
-
-                player.sendMessage(Prefixes.getDeathPrefix() + ChatColor.GRAY + "Respawned with "
-                        + ChatColor.YELLOW + "Hotbar, Armor" + ChatColor.GRAY + " and " + ChatColor.YELLOW + "Offhand"
-                        + ChatColor.GRAY + " items.");
-            }
+            // TODO: Death timer
         }, 5L);
     }
 }

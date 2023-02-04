@@ -24,13 +24,7 @@ import java.sql.Statement;
 public class PlayerDeathListener implements Listener {
 
     /**
-     * The player always keeps:
-     * - Hotbar (9 items, including TRACKER and GRAPPLER)
-     * - Offhand (1 item)
-     * - Armor (4 items, 3 items if the player had an elytra)
-     * - XP (level only)
-     * <p>
-     * The killer gets a certain amount of XP.
+     * When a player dies, the player keeps the entire inventory and XP.
      */
     @EventHandler
     public void onPlayerKill(PlayerDeathEvent event) {
@@ -51,54 +45,17 @@ public class PlayerDeathListener implements Listener {
 
         // if the player has been killed by another player, give the killer regeneration and XP
         if (killer != null) {
-            killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 100, 0));
+            killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
             Coins.addXP(killer, Coins.playerXP);
             addPlayerKill(killer, player);
         }
 
-        // create a chest at the death location and move the player's loot into it
-        Block block = player.getWorld().getBlockAt(player.getLocation());
-        Barrel barrel = null;
-
-        if (block.getLocation().getY() > -64) {
-            block.setType(Material.BARREL);
-
-            barrel = (Barrel) block.getState();
-            barrel.setCustomName(HexColor.RED + player.getName() + "'s Loot");
-            barrel.update();
-        }
-
-        ItemStack itemToRemove;
-
-        for (int index = 9; index <= 35; index++) {
-            itemToRemove = player.getInventory().getItem(index);
-
-            if (itemToRemove != null) {
-                player.getInventory().remove(itemToRemove);
-
-                if (barrel != null) {
-                    barrel.getInventory().setItem(index - 9, itemToRemove);
-                }
-            }
-        }
-
-        // if the player had an Elytra, replace it with air or with the chestplate the player had
-        ItemStack chestplate = player.getInventory().getChestplate();
-        if (chestplate != null && chestplate.getType() == Material.ELYTRA) {
-            player.getInventory().setChestplate(ElytraSwapRunnable.playerChestplate.getOrDefault(player,
-                    new ItemStack(Material.AIR)));
-        }
-
-        // drop no loot or XP
+        // drop no XP
         event.setDroppedExp(0);
         event.setKeepLevel(true);
-        event.getDrops().clear();
-
-        // store the items to keep on death and give the player these items on respawn (PlayerRespawnListener)
-        GameState.itemsToKeepOnDeath.put(player, player.getInventory().getContents());
 
         // send a message with the location where the player died
-        player.sendMessage(Prefixes.getDeathPrefix() + ChatColor.GRAY.toString() + "You died at "
+        player.sendMessage(Prefixes.getDeathPrefix() + ChatColor.GRAY.toString() + "Death Location: "
                 + ChatColor.GOLD + DbValues.locationToString(player.getLocation())
                 + ChatColor.GRAY + ".");
     }

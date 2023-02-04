@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.commands;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.positions.Position;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
@@ -41,8 +42,8 @@ public class PositionCommand implements CommandExecutor {
         }
 
         if (args.length != 1) {
-            player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Use "
-                    + ChatColor.DARK_GREEN + "/pos [name]" + ChatColor.GRAY + " to add a position.");
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "Use "
+                    + HexColor.RED + "/pos [name]" + ChatColor.GRAY + " to add a position.");
             return true;
         }
 

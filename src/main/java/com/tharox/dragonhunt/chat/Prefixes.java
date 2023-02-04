@@ -28,11 +28,10 @@ public class Prefixes {
 
     // TRACKING: used for messages related to the tracker or positions
     public static String getTrackingPrefix() {
-        //TODO: add blocks (distance) example: [303m →] (arrow doesn't need to point in the right direction)
-        return ChatColor.DARK_GREEN + "→" + ChatColor.DARK_GRAY + " | " + ChatColor.GRAY;
+        return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_GREEN + "↑↑↑" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
-    // ERROR: when a player is not allowed to do something
+    // ERROR: when a player is not allowed to do something or is doing something wrong
     public static String getErrorPrefix() {
         return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "✖✖✖" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }

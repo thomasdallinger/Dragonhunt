@@ -8,6 +8,7 @@ import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.elytra.ElytraSwapRunnable;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Barrel;
 import org.bukkit.block.Block;
@@ -20,8 +21,11 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.sql.Statement;
+import java.util.HashMap;
 
 public class PlayerDeathListener implements Listener {
+
+    public static HashMap<Player, Location> deathLocation = new HashMap<>();
 
     /**
      * When a player dies, the player keeps the entire inventory and XP.
@@ -30,6 +34,7 @@ public class PlayerDeathListener implements Listener {
     public void onPlayerKill(PlayerDeathEvent event) {
         Player player = event.getEntity();
         Player killer = event.getEntity().getKiller();
+        deathLocation.put(player, player.getLocation());
 
         if (event.getDeathMessage() == null) return;
         // character "'" in some death messages causes SQL error
@@ -53,11 +58,6 @@ public class PlayerDeathListener implements Listener {
         // drop no XP
         event.setDroppedExp(0);
         event.setKeepLevel(true);
-
-        // send a message with the location where the player died
-        player.sendMessage(Prefixes.getDeathPrefix() + ChatColor.GRAY.toString() + "Death Location: "
-                + ChatColor.GOLD + DbValues.locationToString(player.getLocation())
-                + ChatColor.GRAY + ".");
     }
 
     private void addPlayerDeath(Player player, String deathmessage) {

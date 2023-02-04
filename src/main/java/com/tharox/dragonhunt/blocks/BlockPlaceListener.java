@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,6 +17,7 @@ public class BlockPlaceListener implements Listener {
     public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
+        World world = block.getWorld();
 
         // prevent players from placing certain blocks in ANY dimension
         if (block.getType() == Material.ENDER_CHEST || block.getType() == Material.CHEST
@@ -24,6 +26,25 @@ public class BlockPlaceListener implements Listener {
             event.setCancelled(true);
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are not allowed to place this block.");
+        }
+
+        // prevent players from bed bombing in the NETHER
+        if (world.getName().equals("world_nether")) {
+            if (block.getType() == Material.WHITE_BED) {
+                event.setCancelled(true);
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You cannot place Beds in the Nether.");
+            }
+        }
+
+        // prevent players from bed / anchor bombing in the END
+        if (world.getName().equals("world_the_end")) {
+            if (block.getType() == Material.WHITE_BED || block.getType() == Material.RESPAWN_ANCHOR) {
+                event.setCancelled(true);
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY
+                        + "You cannot place Beds or Respawn Anchors in the Nether.");
+            }
         }
     }
 }

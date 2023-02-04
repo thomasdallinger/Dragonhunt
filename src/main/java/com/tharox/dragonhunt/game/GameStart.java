@@ -29,13 +29,13 @@ public class GameStart extends GameConfiguration {
     Location startLocation;
     double x = overworld != null ? overworld.getSpawnLocation().getX() : 0, highestY,
             z = overworld != null ? overworld.getSpawnLocation().getZ() : 0;
-    // used if the highest block at x: 0 and z: 0 is within 40 blocks of the startLocation
+    // used if the highest block at x: 0 and z: 0 is within 55 blocks of the startLocation
 
     public GameStart() {
         startCountdown = new Countdown(true, 25, this::onCountdown);
         modifierInventory = new ModifierInventory();
         highestY = overworld.getHighestBlockYAt((int) x, (int) z);
-        startLocation = new Location(overworld, x, highestY + 40, z);
+        startLocation = new Location(overworld, x, highestY + 55, z);
 
         configureOverworld(x, z);
         configureNether();

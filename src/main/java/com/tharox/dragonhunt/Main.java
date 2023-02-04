@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt;
 
+import com.tharox.dragonhunt.arrows.ProjectileHitListener;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
@@ -174,6 +175,8 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new ChatListener(), this);
 
         pluginManager.registerEvents(new GrappleListener(), this);
+
+        pluginManager.registerEvents(new ProjectileHitListener(), this);
 
         pluginManager.registerEvents(new LevelUp(), this);
         pluginManager.registerEvents(new ShopListener(), this);

@@ -90,7 +90,7 @@ public class EnchantingListener implements Listener {
      * @param player player who purchased an enchantment
      */
     private void purchaseEnchantment(Player player, String enchantment) {
-        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+        player.playSound(player.getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1, 1);
         Coins.removeCoins(player, EnchantingInventory.enchantmentCost.get(enchantment), enchantment);
 
         // inventory needs to be re-opened (refresh the amount of coins the player has)

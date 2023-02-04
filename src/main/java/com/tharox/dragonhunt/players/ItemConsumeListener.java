@@ -26,6 +26,9 @@ public class ItemConsumeListener implements Listener {
                 player.getInventory().remove(item);
             }
 
+            player.setFoodLevel(player.getFoodLevel() + 4);
+            player.setSaturation((float) (player.getSaturation() + 9.6));
+
             player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 2400, 1));
             // = 4 yellow hearts
             player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));

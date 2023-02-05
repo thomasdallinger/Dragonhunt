@@ -87,8 +87,6 @@ public class EntityDeathListener implements Listener {
         // Extra Drops (on top of food drops)
         if (mob.getName().equals("Sheep")) { // for crafting beds, bows
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.STRING, 8));
-        } else if (mob.getName().equals("Chicken")) { // for crafting arrows
-            mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.FEATHER, 2));
         }
     }
 }

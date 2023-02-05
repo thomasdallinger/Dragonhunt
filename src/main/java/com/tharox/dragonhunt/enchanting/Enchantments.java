@@ -64,10 +64,8 @@ public class Enchantments {
                         ItemMeta meta = item.getItemMeta();
 
                         if (meta != null && !meta.isUnbreakable() && item.getType().getMaxDurability() > 0) {
-                            player.sendMessage(item.getType().name());
                             meta.setUnbreakable(true);
                             meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-
                             item.setItemMeta(meta);
                         }
 

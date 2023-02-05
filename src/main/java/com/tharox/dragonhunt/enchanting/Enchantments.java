@@ -60,15 +60,16 @@ public class Enchantments {
                     for (ItemStack item : player.getInventory()) {
                         if (item == null) continue;
 
-                        // Make all items that can break unbreakable.
+                        // Make all items that are can break unbreakable (if they are not unbreakable already).
                         ItemMeta meta = item.getItemMeta();
 
-                        if (meta != null) {
+                        if (meta != null && !meta.isUnbreakable() && item.getType().getMaxDurability() > 0) {
+                            player.sendMessage(item.getType().name());
                             meta.setUnbreakable(true);
                             meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-                        }
 
-                        item.setItemMeta(meta);
+                            item.setItemMeta(meta);
+                        }
 
                         // Swords
                         if (swords.contains(item.getType())) {

@@ -81,10 +81,6 @@ public class Timer {
                     return;
                 }
 
-                setTime(getTime() + 1);
-                sendActionBar();
-                Main.getInstance().getTablistManager().setAllPlayerTeams();
-
                 if (getTime() % 600 == 0) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         if (getTime() == 1200) { // 20 minutes played
@@ -108,6 +104,15 @@ public class Timer {
                     new GameEnd();
                     setRunning(false);
                 }
+
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    player.sendMessage("Timer: " + getTime());
+                }
+
+                setTime(getTime() + 1);
+                sendActionBar();
+                Main.getInstance().getTablistManager().setAllPlayerTeams();
+
             }
         }.runTaskTimer(Main.getInstance(), 40, 20);
     }

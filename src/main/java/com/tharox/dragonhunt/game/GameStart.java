@@ -61,12 +61,13 @@ public class GameStart extends GameConfiguration {
         if (startCountdown.getTime() == 0) {
             timer.setRunning(true);
             scoreboardCountdown.setRunning(true);
-            new Arrows(); // start arrow generation
-            new ElytraSwapRunnable().runTaskTimer(Main.getInstance(), 0, 5);
 
             gracePeriodCountdown = new Countdown(true, 60, this::onGracePeriodCountdown);
             bossBar = Bukkit.createBossBar("", BarColor.GREEN, BarStyle.SEGMENTED_6);
             PlayerDamageListener.gracePeriodActive = true;
+
+            new Arrows(); // start arrow generation
+            new ElytraSwapRunnable().runTaskTimer(Main.getInstance(), 0, 5);
 
             if (!EndlessNight.active)
                 overworld.setTime(0);

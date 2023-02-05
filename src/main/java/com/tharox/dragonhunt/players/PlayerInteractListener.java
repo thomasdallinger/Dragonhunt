@@ -33,24 +33,6 @@ public class PlayerInteractListener implements Listener {
                 (event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
 
             if (block != null) {
-                // clicking on an enchanting table opens the enchant inventory
-                if (block.getType() == Material.ENCHANTING_TABLE) {
-                    event.setCancelled(true);
-
-                    EnchantingInventory enchantingInventory = new EnchantingInventory(Main.getInstance().getConfig(), player);
-                    player.openInventory(enchantingInventory.enchant);
-                    return;
-                }
-
-                // clicking on a brewing stand opens the brewing stand inventory
-                if (block.getType() == Material.BREWING_STAND) {
-                    event.setCancelled(true);
-
-                    BrewingInventory brewingInventory = new BrewingInventory(Main.getInstance().getConfig(), player);
-                    player.openInventory(brewingInventory.menu);
-                    return;
-                }
-
                 if (block.getType() == Material.CHEST) {
                     event.setCancelled(true);
                     block.setType(Material.AIR);
@@ -63,17 +45,36 @@ public class PlayerInteractListener implements Listener {
                     return;
                 }
 
-                if (event.getAction() == Action.RIGHT_CLICK_BLOCK
-                        && BlockBreakListener.woods.contains(block.getType())) { // can not strip wood logs
-                    event.setCancelled(true);
-                    return;
-                }
+                if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                    // clicking on an enchanting table opens the enchant inventory
+                    if (block.getType() == Material.ENCHANTING_TABLE) {
+                        event.setCancelled(true);
 
-                if (block.getType() == Material.ANVIL) {
-                    event.setCancelled(true);
-                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                    player.sendMessage(Prefixes.getErrorPrefix()
-                            + ChatColor.GRAY + "You are not allowed to use this block!");
+                        EnchantingInventory enchantingInventory = new EnchantingInventory(Main.getInstance().getConfig(), player);
+                        player.openInventory(enchantingInventory.enchant);
+                        return;
+                    }
+
+                    // clicking on a brewing stand opens the brewing stand inventory
+                    if (block.getType() == Material.BREWING_STAND) {
+                        event.setCancelled(true);
+
+                        BrewingInventory brewingInventory = new BrewingInventory(Main.getInstance().getConfig(), player);
+                        player.openInventory(brewingInventory.menu);
+                        return;
+                    }
+
+                    if (BlockBreakListener.woods.contains(block.getType())) { // can not strip wood logs
+                        event.setCancelled(true);
+                        return;
+                    }
+
+                    if (block.getType() == Material.ANVIL) {
+                        event.setCancelled(true);
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                        player.sendMessage(Prefixes.getErrorPrefix()
+                                + ChatColor.GRAY + "You are not allowed to use this block!");
+                    }
                 }
             }
         }

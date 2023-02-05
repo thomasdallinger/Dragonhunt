@@ -1,9 +1,9 @@
 package com.tharox.dragonhunt.entities;
 
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.PowderOnly;
-import com.tharox.dragonhunt.coins.Coins;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
@@ -54,6 +54,7 @@ public class EntityDeathListener implements Listener {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.GOLD_INGOT, 3));
                 break;
             case "Witch":
+            case "Vindicator":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.DIAMOND, 2));
                 break;
             case "Spider":
@@ -71,12 +72,13 @@ public class EntityDeathListener implements Listener {
                     else
                         GameState.putItemInInventory(killer, new ItemStack(Material.BLAZE_ROD));
                 break;
+            case "Iron Golem":
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 8));
+                break;
+            case "Evoker":
             case "Piglin Brute":
             case "Wither Skeleton":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.NETHERITE_INGOT));
-                break;
-            case "Iron Golem":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 8));
                 break;
             default:
                 break;

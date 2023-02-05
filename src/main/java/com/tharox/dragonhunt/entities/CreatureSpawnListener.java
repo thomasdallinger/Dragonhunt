@@ -1,9 +1,6 @@
 package com.tharox.dragonhunt.entities;
 
-import com.tharox.dragonhunt.chat.Prefixes;
-import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.modifiers.classes.*;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -16,6 +13,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class CreatureSpawnListener implements Listener {
 
@@ -23,14 +21,22 @@ public class CreatureSpawnListener implements Listener {
     public void onCreatureSpawn(CreatureSpawnEvent event) {
         LivingEntity entity = event.getEntity();
         Location location = event.getLocation();
-        World world = Bukkit.getServer().getWorld("world");
-
-        if (world == null) {
-            Bukkit.getServer().broadcastMessage(Prefixes.getErrorPrefix() + HexColor.RED + "World name is incorrect.");
-            return;
-        }
+        World world = entity.getWorld();
 
         if (entity instanceof Mob) {
+            if (world.getName().equals("world_the_end")) {
+                Random random = new Random();
+                int spawnEnderman = random.nextInt(3) + 1; // values 1-3
+
+                if (entity instanceof Enderman) {
+                    if (spawnEnderman == 3) {
+                        event.setCancelled(true);
+                        spawnEndCreatures(world, location);
+                    }
+                    // else spawn the Enderman
+                }
+            }
+
             if (CaveSpiders.active) {
                 if (entity instanceof Spider) {
                     if (!(entity instanceof CaveSpider)) {
@@ -124,5 +130,26 @@ public class CreatureSpawnListener implements Listener {
         ItemStack boots = new ItemStack(Material.NETHERITE_BOOTS);
         boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         entity.getEquipment().setBoots(boots);
+    }
+
+    private LivingEntity spawnEndCreatures(World world, Location location) {
+        Random random = new Random();
+        int type = random.nextInt(8) + 1; // values 1-8
+
+        EntityType entityType = EntityType.ENDERMAN;
+
+        if (type <= 4) { // 50%
+            entityType = EntityType.PILLAGER;
+        }
+
+        if (type >= 5 && type <= 6) { // 25%
+            entityType = EntityType.VINDICATOR;
+        }
+
+        if (type >= 7) { // 25%
+            entityType = EntityType.EVOKER;
+        }
+
+        return (LivingEntity) world.spawnEntity(location, entityType);
     }
 }

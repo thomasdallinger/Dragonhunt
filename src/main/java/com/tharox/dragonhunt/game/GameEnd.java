@@ -78,8 +78,10 @@ public class GameEnd {
             }
 
             if (winner != null) {
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + winner.getName()
-                        + ChatColor.GRAY + " has won the Dragonhunt!");
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.DARK_GREEN + ChatColor.BOLD + winner.getName()
+                        + HexColor.GREEN + " has won the Dragonhunt.");
+            } else {
+                player.sendMessage(Prefixes.getAllPrefix() + HexColor.RED + "Time is up.");
             }
 
             player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Time played: "

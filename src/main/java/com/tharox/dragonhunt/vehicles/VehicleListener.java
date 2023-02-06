@@ -33,9 +33,9 @@ public class VehicleListener implements Listener {
             mc.getInventory().clear();
             mc.getInventory().addItem(
                     new ItemStack(Material.DIAMOND, 2),
-                    new ItemStack(Material.GOLD_INGOT, 4),
-                    new ItemStack(Material.IRON_INGOT, 4),
-                    new ItemStack(Material.APPLE, 1));
+                    new ItemStack(Material.GOLD_INGOT, 6),
+                    new ItemStack(Material.IRON_INGOT, 6),
+                    new ItemStack(Material.OBSIDIAN, 2));
             entity.remove();
         }
     }

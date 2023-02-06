@@ -37,9 +37,9 @@ public class PlayerInteractListener implements Listener {
                     event.setCancelled(true);
                     block.setType(Material.AIR);
                     block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.DIAMOND, 2));
-                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.GOLD_INGOT, 4));
-                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.IRON_INGOT, 4));
-                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.APPLE, 1));
+                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.GOLD_INGOT, 6));
+                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.IRON_INGOT, 6));
+                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.OBSIDIAN, 2));
 
                     Coins.addXP(player, Coins.bonusXP);
                     return;

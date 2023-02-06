@@ -10,8 +10,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 
 public class TridentSwapRunnable extends BukkitRunnable {
-    public static final HashMap<Player, ItemStack> playerMainHand = new HashMap<>();
-    public static final HashMap<Player, ItemStack> playerOffHand = new HashMap<>();
+    public static final HashMap<Player, ItemStack> playerMainHandItem = new HashMap<>();
+    public static final HashMap<Player, Integer> playerMainHandSlot = new HashMap<>();
+    public static final HashMap<Player, ItemStack> playerOffHandItem = new HashMap<>();
     private final HashMap<Player, Boolean> playerWasInWater = new HashMap<>();
 
     public TridentSwapRunnable() {
@@ -36,8 +37,8 @@ public class TridentSwapRunnable extends BukkitRunnable {
             // player is no longer in water - give the mainhand and offhand item back (if it wasn't air)
             if (playerWasInWater.get(player) && !isPlayerNowInWater(player)) {
                 playerWasInWater.put(player, false);
-                player.getInventory().setItemInMainHand(playerMainHand.get(player));
-                player.getInventory().setItemInOffHand(playerOffHand.get(player));
+                player.getInventory().setItem(playerMainHandSlot.get(player), playerMainHandItem.get(player));
+                player.getInventory().setItemInOffHand(playerOffHandItem.get(player));
             }
 
             // player is currently in water - replace the mainhand item with a trident,
@@ -48,11 +49,12 @@ public class TridentSwapRunnable extends BukkitRunnable {
                 ItemStack offHand = player.getInventory().getItemInOffHand();
 
                 if (mainHand.getType() == Material.TRIDENT) {
-                    playerMainHand.put(player, new ItemStack(Material.AIR));
-                    playerOffHand.put(player, new ItemStack(Material.AIR));
+                    playerMainHandItem.put(player, new ItemStack(Material.AIR));
+                    playerOffHandItem.put(player, new ItemStack(Material.AIR));
                 } else {
-                    playerMainHand.put(player, mainHand);
-                    playerOffHand.put(player, offHand);
+                    playerMainHandItem.put(player, mainHand);
+                    playerMainHandSlot.put(player, player.getInventory().getHeldItemSlot());
+                    playerOffHandItem.put(player, offHand);
                 }
 
                 ItemStack trident = new ItemStack(Material.TRIDENT);

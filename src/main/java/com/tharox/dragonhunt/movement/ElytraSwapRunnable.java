@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.elytra;
+package com.tharox.dragonhunt.movement;
 
 import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.Bukkit;
@@ -51,9 +51,10 @@ public class ElytraSwapRunnable extends BukkitRunnable {
             if (playerWasInAir.get(player) && !isPlayerNowInTheAir(player)) {
                 playerWasInAir.put(player, false);
                 player.getInventory().setChestplate(playerChestplate.get(player));
+            }
 
-                // player is currently in the air - replace the chestplate with an elytra
-            } else if (!playerWasInAir.get(player) && isPlayerNowInTheAir(player)) {
+            // player is currently in the air - replace the chestplate with an elytra
+            else if (!playerWasInAir.get(player) && isPlayerNowInTheAir(player)) {
                 playerWasInAir.put(player, true);
                 ItemStack chestplate = player.getInventory().getChestplate();
 
@@ -68,11 +69,6 @@ public class ElytraSwapRunnable extends BukkitRunnable {
                 }
 
                 player.getInventory().setChestplate(GameState.addItem(new ItemStack(Material.ELYTRA)));
-            }
-
-            // make the player glow while in the air
-            if (isPlayerNowInTheAir(player)) {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 10, 0));
             }
         }
     }

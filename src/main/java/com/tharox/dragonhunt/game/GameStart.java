@@ -5,10 +5,11 @@ import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.brewing.Effects;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
-import com.tharox.dragonhunt.elytra.ElytraSwapRunnable;
+import com.tharox.dragonhunt.movement.ElytraSwapRunnable;
 import com.tharox.dragonhunt.enchanting.Enchantments;
 import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
 import com.tharox.dragonhunt.modifiers.selection.ModifierInventory;
+import com.tharox.dragonhunt.movement.TridentSwapRunnable;
 import com.tharox.dragonhunt.players.PlayerDamageListener;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
@@ -68,6 +69,7 @@ public class GameStart extends GameConfiguration {
 
             new Arrows(); // start arrow generation
             new ElytraSwapRunnable().runTaskTimer(Main.getInstance(), 0, 5);
+            new TridentSwapRunnable().runTaskTimer(Main.getInstance(), 0, 5);
 
             if (!EndlessNight.active)
                 overworld.setTime(0);

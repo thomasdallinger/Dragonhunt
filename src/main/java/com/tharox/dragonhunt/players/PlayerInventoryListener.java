@@ -53,6 +53,11 @@ public class PlayerInventoryListener implements Listener {
                 event.setCancelled(true);
             }
         }
+
+        // Check if the item was a Trident
+        if (item.getType().equals(Material.TRIDENT)) {
+            event.setCancelled(true);
+        }
     }
 
     @EventHandler
@@ -82,7 +87,7 @@ public class PlayerInventoryListener implements Listener {
                 || displayName.contains(ChatColor.LIGHT_PURPLE + "Generated Arrow"))
             event.setCancelled(true);
 
-        if (item.getType() == Material.ELYTRA) {
+        if (item.getType() == Material.ELYTRA || item.getType() == Material.TRIDENT) {
             event.setCancelled(true);
         }
     }
@@ -101,6 +106,11 @@ public class PlayerInventoryListener implements Listener {
             // Generated Arrows can't be swapped: not in the hotbar, no checking needed
             event.setCancelled(true);
         }
+
+        if (offHandItem.getType() == Material.TRIDENT) {
+            event.setCancelled(true);
+        }
+        // Elytra cannot be swapped: not in the hotbar, no checking needed
     }
 }
 

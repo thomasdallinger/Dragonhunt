@@ -37,6 +37,8 @@ public class TridentSwapRunnable extends BukkitRunnable {
             // player is no longer in water - give the mainhand and offhand item back (if it wasn't air)
             if (playerWasInWater.get(player) && !isPlayerNowInWater(player)) {
                 playerWasInWater.put(player, false);
+                // If the player swapped the main hand slot while being underwater, the trident
+                // gets replaced with the saved item in the saved slot (getHeldItemSlot())
                 player.getInventory().setItem(playerMainHandSlot.get(player), playerMainHandItem.get(player));
                 player.getInventory().setItemInOffHand(playerOffHandItem.get(player));
             }

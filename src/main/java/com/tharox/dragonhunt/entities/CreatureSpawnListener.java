@@ -92,10 +92,6 @@ public class CreatureSpawnListener implements Listener {
                 Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
                         .setBaseValue(entity.getHealth() + 6);
                 entity.setHealth(entity.getHealth() + 6);
-
-                if (!(entity instanceof WaterMob) && !(entity instanceof Animals)) {
-                    entity.setVisualFire(true);
-                }
             }
 
             // SKELETONS and WITHER SKELETONS are invulnerable if the modifier is active

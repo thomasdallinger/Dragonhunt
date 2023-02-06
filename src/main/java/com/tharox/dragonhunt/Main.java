@@ -4,7 +4,6 @@ import com.tharox.dragonhunt.arrows.ProjectileHitListener;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
-import com.tharox.dragonhunt.blocks.LeavesDecayListener;
 import com.tharox.dragonhunt.brewing.BrewingListener;
 import com.tharox.dragonhunt.chat.ChatListener;
 import com.tharox.dragonhunt.chat.Prefixes;
@@ -185,7 +184,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new BlockBreakListener(), this);
         pluginManager.registerEvents(new BlockExplodeListener(), this);
         pluginManager.registerEvents(new BlockPlaceListener(), this);
-        pluginManager.registerEvents(new LeavesDecayListener(), this);
 
         pluginManager.registerEvents(new DimensionListener(), this);
 

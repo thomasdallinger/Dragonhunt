@@ -7,20 +7,20 @@ import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.Diamonds;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.type.Leaves;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class BlockBreakListener implements Listener {
 
@@ -93,6 +93,13 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
+        /**
+         * Whenever a player breaks a log or leaves block, there is a chance
+         * that its surrounding blocks should also decay. Instead of waiting
+         * for the first leave to decay naturally, we give players instant feedback.
+         */
+        onBlockRemove(event.getBlock(), breakDelay);
+
         changeDrops(block, player);
     }
 
@@ -106,11 +113,11 @@ public class BlockBreakListener implements Listener {
     protected void changeDrops(Block block, Player player) {
         // a HashMap with the old drops as materials and new drops as ItemStacks
         HashMap<Material, ItemStack> materials = new HashMap<>();
-        materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
+        materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 3));
         materials.put(Material.RAW_COPPER, new ItemStack(Material.COPPER_INGOT, 3));
-        materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 2));
-        materials.put(Material.GOLD_NUGGET, new ItemStack(Material.GOLD_INGOT, 1)); // Nether Gold Ore
-        materials.put(Material.GILDED_BLACKSTONE, new ItemStack(Material.GOLD_INGOT, 1));
+        materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 3));
+        materials.put(Material.GOLD_NUGGET, new ItemStack(Material.GOLD_INGOT, 2)); // Nether Gold Ore
+        materials.put(Material.GILDED_BLACKSTONE, new ItemStack(Material.GOLD_INGOT, 2));
         materials.put(Material.COAL, new ItemStack(Material.TORCH, 4));
         materials.put(Material.GRAVEL, new ItemStack(Material.FLINT)); // for Flint and Steel
         materials.put(Material.MELON_SLICE, new ItemStack(Material.GOLDEN_CARROT));
@@ -177,6 +184,88 @@ public class BlockBreakListener implements Listener {
         for (Block nextBlock :
                 locations) {
             destroyTree(nextBlock, player);
+        }
+
+        return true;
+    }
+
+    private final long breakDelay = 5; // in ticks
+    private final long decayDelay = 2;
+    private final List<Block> scheduledBlocks = new ArrayList<>();
+    private static final List<BlockFace> NEIGHBORS = Arrays
+            .asList(BlockFace.UP,
+                    BlockFace.NORTH, BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST,
+                    BlockFace.DOWN);
+
+    /**
+     * Leaves decay has a tendency to cascade. Whenever leaves decay,
+     * we want to check its neighbors to find out if they will also
+     * decay.
+     */
+    @EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
+    public void onLeavesDecay(LeavesDecayEvent event) {
+        onBlockRemove(event.getBlock(), decayDelay);
+    }
+
+    /**
+     * Check if block is either leaves or a log.
+     * If so, schedule their respective removal via
+     * {@link #decay(Block) block()}.
+     * The latter will perform all necessary checks, including distance.
+     *
+     * @param oldBlock the block
+     * @param delay    the delay of the scheduled check, in ticks
+     */
+    private void onBlockRemove(final Block oldBlock, long delay) {
+        if (!Tag.LOGS.isTagged(oldBlock.getType())
+                && !Tag.LEAVES.isTagged(oldBlock.getType())) {
+            return;
+        }
+
+        Collections.shuffle(NEIGHBORS);
+        for (BlockFace neighborFace : NEIGHBORS) {
+            final Block block = oldBlock.getRelative(neighborFace);
+            if (!Tag.LEAVES.isTagged(block.getType())) continue;
+            if (scheduledBlocks.contains(block)) continue;
+            Bukkit.getServer().getScheduler().runTaskLater(Main.getInstance(), () -> decay(block), delay);
+            scheduledBlocks.add(block);
+        }
+    }
+
+    /**
+     * Decay if it is a leaves block and its distance to the nearest
+     * log block is 4 or greater.
+     * <p>
+     * This method may only be called by a scheduler if the given
+     * block has previously been added to the scheduledBlocks set,
+     * from which it will be removed.
+     * </p>
+     *
+     * @param block The block
+     * @return true if the block was decayed, false otherwise.
+     */
+    private boolean decay(Block block) {
+        if (!scheduledBlocks.remove(block)) return false;
+        if (!block.getWorld().isChunkLoaded(block.getX() >> 4, block.getZ() >> 4)) return false;
+        if (!Tag.LEAVES.isTagged(block.getType())) return false;
+        Leaves leaves = (Leaves) block.getBlockData();
+        if (leaves.getDistance() < 4) return false;
+
+        LeavesDecayEvent event = new LeavesDecayEvent(block);
+        Bukkit.getServer().getPluginManager().callEvent(event);
+        if (event.isCancelled()) return false;
+
+        block.getWorld().playSound(block.getLocation(),
+                Sound.BLOCK_GRASS_BREAK,
+                SoundCategory.BLOCKS, 0.05f, 1.2f);
+
+        block.breakNaturally();
+
+        Random random = new Random();
+        int chance = random.nextInt(50);
+
+        if (chance == 0) { // 2% chance
+            block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.APPLE));
         }
 
         return true;

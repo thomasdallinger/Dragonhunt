@@ -105,10 +105,6 @@ public class Timer {
                     setRunning(false);
                 }
 
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.sendMessage("Timer: " + getTime());
-                }
-
                 setTime(getTime() + 1);
                 sendActionBar();
                 Main.getInstance().getTablistManager().setAllPlayerTeams();

@@ -43,10 +43,6 @@ public class Countdown extends Timer {
                         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
                 }
 
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.sendMessage("Countdown: " + getTime());
-                }
-
                 setTime(getTime() - 1);
             }
         }.runTaskTimer(Main.getInstance(), 0, 20); //20 Ticks = 1 Second

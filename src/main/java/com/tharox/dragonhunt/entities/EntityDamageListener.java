@@ -1,10 +1,8 @@
 package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.colors.HexColor;
-import com.tharox.dragonhunt.grappler.Grappler;
+import com.tharox.dragonhunt.kits.classes.Grappler;
 import com.tharox.dragonhunt.modifiers.classes.FireWeakness;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.AbstractArrow;
@@ -15,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
@@ -42,8 +41,7 @@ public class EntityDamageListener implements Listener {
         // Grappler can't do damage
         itemInMainHand = player.getInventory().getItemInMainHand();
         if (itemInMainHand.getItemMeta() == null) return;
-        if (itemInMainHand.getItemMeta().getDisplayName().equals(
-                ChatColor.LIGHT_PURPLE + "Grappler")) {
+        if (itemInMainHand.getItemMeta().getDisplayName().contains("Grappler")) {
             arrow.remove();
             event.setCancelled(true);
 
@@ -51,10 +49,12 @@ public class EntityDamageListener implements Listener {
             player.setCooldown(Material.CROSSBOW,
                     Grappler.grapplerCooldown.getOrDefault(player, 160));
 
-            // after the cooldown ends, replace the old GRAPPLER with a new one having a charged projectile
-            Bukkit.getScheduler().runTaskLater(Main.getInstance(),
-                    task -> new Grappler(player),
-                    (long) Grappler.grapplerCooldown.getOrDefault(player, 160));
+            // after the cooldown ends, add the next charged projectile
+            Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
+                CrossbowMeta crossbowMeta = (CrossbowMeta) itemInMainHand.getItemMeta();
+                crossbowMeta.addChargedProjectile(new ItemStack(Material.ARROW, 1));
+                Grappler.grapplerCooldown.getOrDefault(player, 160);
+            }, 5L);
         }
 
         // if a living entity is on fire and the modifier is active, let it glow and give weakness to the entity

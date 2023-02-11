@@ -32,8 +32,7 @@ public class ProjectileHitListener implements Listener {
         // If the Grappler shot the arrow do not remove the arrow.
         itemInMainHand = player.getInventory().getItemInMainHand();
         if (itemInMainHand.getItemMeta() == null) return;
-        if (!itemInMainHand.getItemMeta().getDisplayName().equals(
-                ChatColor.LIGHT_PURPLE + "Grappler")) {
+        if (!itemInMainHand.getItemMeta().getDisplayName().contains("Grappler")) {
             arrow.remove();
         }
     }

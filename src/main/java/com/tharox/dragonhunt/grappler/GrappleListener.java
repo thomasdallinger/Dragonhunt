@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.grappler;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.kits.classes.Grappler;
 import org.bukkit.*;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Player;
@@ -8,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
@@ -15,6 +17,8 @@ import org.bukkit.util.Vector;
 import java.util.Objects;
 
 public class GrappleListener implements Listener {
+
+    public static int maxArrowDistance = 20;
 
     @EventHandler
     public void grappleEvent(EntityShootBowEvent event) {
@@ -28,7 +32,7 @@ public class GrappleListener implements Listener {
             ItemMeta meta = bow.getItemMeta();
             if (meta == null) return;
 
-            if (!meta.getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Grappler")) return;
+            if (!meta.getDisplayName().contains("Grappler")) return;
 
             arrow.setVelocity(arrow.getVelocity().multiply(2D));
 
@@ -36,15 +40,17 @@ public class GrappleListener implements Listener {
             player.setCooldown(Material.CROSSBOW,
                     Grappler.grapplerCooldown.getOrDefault(player, 160));
 
-            // after the cooldown ends, replace the old GRAPPLER with a new one having a charged projectile
-            Bukkit.getScheduler().runTaskLater(Main.getInstance(),
-                    task -> new Grappler(player),
-                    (long) Grappler.grapplerCooldown.getOrDefault(player, 160));
+            // after the cooldown ends, add the next charged projectile
+            Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
+                CrossbowMeta crossbowMeta = (CrossbowMeta) bow.getItemMeta();
+                crossbowMeta.addChargedProjectile(new ItemStack(Material.ARROW, 1));
+                Grappler.grapplerCooldown.getOrDefault(player, 160);
+            }, 5L);
 
             new BukkitRunnable() {
                 @Override
                 public void run() {
-                    if (arrow.getLocation().distance(player.getLocation()) > 20) {
+                    if (arrow.getLocation().distance(player.getLocation()) > maxArrowDistance) {
                         arrow.remove();
                         this.cancel();
                     }

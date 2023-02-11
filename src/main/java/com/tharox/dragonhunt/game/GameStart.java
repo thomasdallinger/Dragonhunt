@@ -5,10 +5,11 @@ import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.brewing.Effects;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
-import com.tharox.dragonhunt.movement.ElytraSwapRunnable;
 import com.tharox.dragonhunt.enchanting.Enchantments;
+import com.tharox.dragonhunt.kits.selection.KitInventory;
 import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
 import com.tharox.dragonhunt.modifiers.selection.ModifierInventory;
+import com.tharox.dragonhunt.movement.ElytraSwapRunnable;
 import com.tharox.dragonhunt.movement.TridentSwapRunnable;
 import com.tharox.dragonhunt.players.PlayerDamageListener;
 import com.tharox.dragonhunt.timer.Countdown;
@@ -25,6 +26,7 @@ public class GameStart extends GameConfiguration {
     Countdown startCountdown, gracePeriodCountdown;
     Countdown scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
     ModifierInventory modifierInventory;
+    KitInventory kitInventory = new KitInventory();
     BossBar bossBar;
     World overworld = Bukkit.getServer().getWorld("world");
     Location startLocation;
@@ -33,7 +35,7 @@ public class GameStart extends GameConfiguration {
     // used if the highest block at x: 0 and z: 0 is within 55 blocks of the startLocation
 
     public GameStart() {
-        startCountdown = new Countdown(true, 25, this::onCountdown);
+        startCountdown = new Countdown(true, 30, this::onCountdown);
         modifierInventory = new ModifierInventory();
         highestY = overworld.getHighestBlockYAt((int) x, (int) z);
         startLocation = new Location(overworld, x, highestY + 55, z);
@@ -78,18 +80,24 @@ public class GameStart extends GameConfiguration {
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (startCountdown.getTime() == 25) {
+            if (startCountdown.getTime() == 30) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
                 player.openInventory(modifierInventory.modifiers);
             }
 
-            if (startCountdown.getTime() == 10) {
+            if (startCountdown.getTime() == 20) {
                 GameState.modifierInventoryClose = true;
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+
+                player.openInventory(kitInventory.kits);
             }
 
-            if (startCountdown.getTime() <= 10 && startCountdown.getTime() > 3) {
+            /*if (startCountdown.getTime() == 5) {
+                player.closeInventory();
+            }*/
+
+            if (startCountdown.getTime() <= 20 && startCountdown.getTime() > 3) {
                 player.sendTitle(HexColor.HIGHLIGHT + "Starting in",
                         ChatColor.WHITE.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
                         , 0, 25, 0);

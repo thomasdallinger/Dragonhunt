@@ -1,10 +1,11 @@
 package com.tharox.dragonhunt.chat;
 
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
+
+import java.util.HashMap;
 
 public class Prefixes {
 
@@ -20,7 +21,7 @@ public class Prefixes {
 
     // COINS: used for messages related to coins
     public static String getCoinPrefix(int coins) {
-        if(coins > 0)
+        if (coins > 0)
             return ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + "+" + coins + HexColor.GREEN + " ⛃" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
         else
             return ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + coins + HexColor.RED + " ⛃" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
@@ -46,12 +47,21 @@ public class Prefixes {
         return ChatColor.DARK_GRAY + "[" + HexColor.RED + "«««" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
+    public static HashMap<Player, String> selectedKit = new HashMap<>();
+
     // NAME: used for statistics in chat and the tablist next to a player's name
     public static String getNamePrefix(Player player) {
-        return ChatColor.DARK_GRAY + "["
-                + ChatColor.WHITE + "⚔ " + ChatColor.AQUA + "Kitname"
-                + ChatColor.WHITE + " ✦ " + HexColor.HIGHLIGHT + player.getLevel()
-                + ChatColor.WHITE + " ☠ " + ChatColor.GOLD + DbValues.getKills(player, true)
-                + ChatColor.DARK_GRAY + "] ";
+        if (selectedKit.containsKey(player)) {
+            return ChatColor.DARK_GRAY + "["
+                    + selectedKit.get(player)
+                    + ChatColor.WHITE + " ✦ " + HexColor.HIGHLIGHT + player.getLevel()
+                    + ChatColor.WHITE + " ☠ " + ChatColor.GOLD + DbValues.getKills(player, true)
+                    + ChatColor.DARK_GRAY + "] ";
+        } else {
+            return ChatColor.DARK_GRAY + "["
+                    + ChatColor.WHITE + "✦ " + HexColor.HIGHLIGHT + player.getLevel()
+                    + ChatColor.WHITE + " ☠ " + ChatColor.GOLD + DbValues.getKills(player, true)
+                    + ChatColor.DARK_GRAY + "] ";
+        }
     }
 }

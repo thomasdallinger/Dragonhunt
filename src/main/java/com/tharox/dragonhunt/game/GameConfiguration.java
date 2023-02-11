@@ -4,20 +4,16 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.entities.PermanentWitherSkeletons;
-import com.tharox.dragonhunt.grappler.Grappler;
-import com.tharox.dragonhunt.modifiers.classes.Diamonds;
 import com.tharox.dragonhunt.modifiers.classes.EasyDifficulty;
 import com.tharox.dragonhunt.modifiers.classes.EightHearts;
 import com.tharox.dragonhunt.modifiers.classes.HardDifficulty;
 import com.tharox.dragonhunt.players.PermanentEffect;
-import com.tharox.dragonhunt.spectate.Spectate;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
-import java.util.List;
 import java.util.Objects;
 
 public class GameConfiguration {
@@ -101,6 +97,9 @@ public class GameConfiguration {
      */
     public void configurePlayer() {
         for (Player player : Bukkit.getOnlinePlayers()) {
+            // non of the players has selected a kit yet
+            GameState.kitInventoryClose.put(player, false);
+
             // removes all active potion effects players may have
             for (PotionEffect effect : player.getActivePotionEffects())
                 player.removePotionEffect(effect.getType());
@@ -120,10 +119,9 @@ public class GameConfiguration {
             // clears the player's inventory
             player.getInventory().clear();
 
-            // adds the TRACKER, START-EQUIPMENT (Shield) and GRAPPLER to the player's inventory
+            // adds the TRACKER and SHIELD to the player's inventory
             player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
             player.getInventory().setItemInOffHand(GameState.addItem(new ItemStack(Material.SHIELD)));
-            new Grappler(player);
 
             // set default TRACKER values, nobody is tracked when the player receives the TRACKER
             Main.getInstance().getTracker().playerTracksName.put(player, null);

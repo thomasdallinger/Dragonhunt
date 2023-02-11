@@ -20,6 +20,8 @@ import com.tharox.dragonhunt.entities.EntityDeathListener;
 import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.grappler.GrappleListener;
+import com.tharox.dragonhunt.kits.classes.KitClass;
+import com.tharox.dragonhunt.kits.selection.KitListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.players.DoubleJumpListener;
@@ -176,6 +178,9 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new GrappleListener(), this);
 
         pluginManager.registerEvents(new ProjectileHitListener(), this);
+
+        pluginManager.registerEvents(new KitClass(), this);
+        pluginManager.registerEvents(new KitListener(), this);
 
         pluginManager.registerEvents(new LevelUp(), this);
         pluginManager.registerEvents(new EnchantingListener(), this);

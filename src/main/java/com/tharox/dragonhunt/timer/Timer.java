@@ -7,17 +7,15 @@ import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kits.classes.KitClass;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Timer {
@@ -50,12 +48,19 @@ public class Timer {
     public void sendActionBar() {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            // if the player has his Tracker in his main hand, the time wont get displayed
+            // if the player has his/her Tracker in the main hand, the time wont get displayed
+            // if the player has his/her Kit Ability in the main hand, the time wont get displayed
             ItemStack item = player.getInventory().getItemInMainHand();
 
-            if (item.getItemMeta() != null)
-                if (item.getItemMeta().getDisplayName().equals((ChatColor.LIGHT_PURPLE + "Tracker")))
+            if (item.getItemMeta() != null) {
+                if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Tracker"))
                     continue;
+                if (item.getItemMeta().getDisplayName().contains(KitClass.ASSASSIN)
+                        || item.getItemMeta().getDisplayName().contains(KitClass.TANK)
+                        || item.getItemMeta().getDisplayName().contains(KitClass.SUPPORT)
+                        || item.getItemMeta().getDisplayName().contains(KitClass.MOBILITY))
+                    continue;
+            }
 
             // if the player is in Spectator mode, the time wont get displayed (Spectate or after the game ended)
             if (player.getGameMode().equals(GameMode.SPECTATOR)) continue;
@@ -95,7 +100,7 @@ public class Timer {
                         }
 
                         player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "The game ends in "
-                                    + ChatColor.YELLOW + (2100 / 60 - getTime() / 60) + ChatColor.GRAY + " minutes.");
+                                + ChatColor.YELLOW + (2100 / 60 - getTime() / 60) + ChatColor.GRAY + " minutes.");
                     }
                 }
 

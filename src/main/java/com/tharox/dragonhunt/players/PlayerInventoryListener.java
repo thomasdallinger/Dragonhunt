@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kits.classes.KitClass;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -65,9 +66,13 @@ public class PlayerInventoryListener implements Listener {
         Player player = (Player) event.getPlayer();
         Inventory inv = event.getInventory();
 
-        if (!event.getView().getTitle().contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "MODIFIERS"))
+        if (!event.getView().getTitle().contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "MODIFIERS")
+                || !event.getView().getTitle().equals(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "KIT SELECTION"))
             return;
+
         if (GameState.modifierInventoryClose) return;
+        if (GameState.kitInventoryClose.get(player)) return;
+        // kit inventory shows up after the modifier inventory - modifier inventory has to be true already
 
         Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(),
                 () -> player.openInventory(inv), 1);
@@ -82,7 +87,10 @@ public class PlayerInventoryListener implements Listener {
         String displayName = item.getItemMeta().getDisplayName();
 
         if (displayName.contains(ChatColor.LIGHT_PURPLE + "Tracker")
-                || displayName.contains(ChatColor.LIGHT_PURPLE + "Grappler")
+                || displayName.contains(KitClass.ASSASSIN)
+                || displayName.contains(KitClass.TANK)
+                || displayName.contains(KitClass.SUPPORT)
+                || displayName.contains(KitClass.MOBILITY)
                 || displayName.contains(ChatColor.LIGHT_PURPLE + "Teleport » End Dimension")
                 || displayName.contains(ChatColor.LIGHT_PURPLE + "Generated Arrow"))
             event.setCancelled(true);
@@ -101,7 +109,10 @@ public class PlayerInventoryListener implements Listener {
 
         String displayName = offHandItem.getItemMeta().getDisplayName();
         if (displayName.contains(ChatColor.LIGHT_PURPLE + "Tracker")
-                || displayName.contains(ChatColor.LIGHT_PURPLE + "Grappler")
+                || displayName.contains(KitClass.ASSASSIN)
+                || displayName.contains(KitClass.TANK)
+                || displayName.contains(KitClass.SUPPORT)
+                || displayName.contains(KitClass.MOBILITY)
                 || displayName.contains(ChatColor.LIGHT_PURPLE + "Teleport » End Dimension")) {
             // Generated Arrows can't be swapped: not in the hotbar, no checking needed
             event.setCancelled(true);

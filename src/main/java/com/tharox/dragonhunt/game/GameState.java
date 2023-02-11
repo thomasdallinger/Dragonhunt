@@ -20,11 +20,13 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class GameState {
     // modifier inventory can be closed after the first 15 seconds before the game starts
     public static boolean modifierInventoryClose = false;
+
+    // kit inventory can be closed after a kit has been selected
+    public static HashMap<Player, Boolean> kitInventoryClose = new HashMap<>();
 
     // location of the first player entering the NETHER (null as long as no player enters the NETHER)
     public static Location firstNetherEntry = null;

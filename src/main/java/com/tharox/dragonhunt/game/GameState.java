@@ -28,6 +28,9 @@ public class GameState {
     // kit inventory can be closed after a kit has been selected
     public static HashMap<Player, Boolean> kitInventoryClose = new HashMap<>();
 
+    // which player has selected which kit
+    public static HashMap<Player, String> selectedKit = new HashMap<>();
+
     // location of the first player entering the NETHER (null as long as no player enters the NETHER)
     public static Location firstNetherEntry = null;
 

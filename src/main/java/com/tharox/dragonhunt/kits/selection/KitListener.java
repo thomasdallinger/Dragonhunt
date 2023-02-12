@@ -69,7 +69,7 @@ public class KitListener implements Listener {
                 + HexColor.HIGHLIGHT + name + ChatColor.GRAY + " Kit.");
         player.closeInventory();
 
-        Prefixes.selectedKit.put(player, (String) kitClass.getField("title").get(null));
+        GameState.selectedKit.put(player, (String) kitClass.getField("title").get(null));
         GameState.kitInventoryClose.put(player, true);
 
         //addKit(player, name); --> related to db

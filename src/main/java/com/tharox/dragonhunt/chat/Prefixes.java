@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.chat;
 
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
@@ -47,13 +48,11 @@ public class Prefixes {
         return ChatColor.DARK_GRAY + "[" + HexColor.RED + "«««" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
-    public static HashMap<Player, String> selectedKit = new HashMap<>();
-
     // NAME: used for statistics in chat and the tablist next to a player's name
     public static String getNamePrefix(Player player) {
-        if (selectedKit.containsKey(player)) {
+        if (GameState.selectedKit.containsKey(player)) {
             return ChatColor.DARK_GRAY + "["
-                    + selectedKit.get(player)
+                    + GameState.selectedKit.get(player)
                     + ChatColor.WHITE + " ✦ " + HexColor.HIGHLIGHT + player.getLevel()
                     + ChatColor.WHITE + " ☠ " + ChatColor.GOLD + DbValues.getKills(player, true)
                     + ChatColor.DARK_GRAY + "] ";

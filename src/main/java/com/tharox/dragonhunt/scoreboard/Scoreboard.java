@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.players.PlayerEndTeleport;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
@@ -30,8 +31,9 @@ public class Scoreboard extends ScoreboardBuilder {
         LocalDateTime now = LocalDateTime.now();
 
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
-                + DbValues.getServerID() + "]", 8);
-        setScore(ChatColor.WHITE + "12x1" + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE + "Casual", 7);
+                + DbValues.getServerID() + "]", 9);
+        setScore(ChatColor.WHITE + "12x1" + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE + "Casual", 8);
+        setScore("", 7);
         setScore("", 6);
         setScore("", 5);
         setScore("", 4);
@@ -45,7 +47,11 @@ public class Scoreboard extends ScoreboardBuilder {
     public void update(Player player, Countdown countdown) {
         setScore("☻ " + Bukkit.getOnlinePlayers().size() + " "
                 + "☠ " + DbValues.getKills(player, true) + " "
-                + "✟ " + DbValues.getKills(player, false), 5);
+                + "✟ " + DbValues.getKills(player, false), 6);
+
+        if (GameState.selectedKit.containsKey(player)) {
+            setScore(GameState.selectedKit.get(player), 4);
+        }
 
         if (timer.getTime() <= 1500) {
             setScore(ChatColor.WHITE + "✮ " + ChatColor.DARK_PURPLE + PlayerEndTeleport.getEyesNeeded()

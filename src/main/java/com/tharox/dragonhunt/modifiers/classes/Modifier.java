@@ -22,7 +22,7 @@ public abstract class Modifier {
      */
     public static ItemStack getDisplayItem(String title, String lore, Material material, boolean positive,
                                            boolean active) {
-        String titleColor, loreColor;
+        String titleColor;
 
         ItemStack item = new ItemStack(material);
 
@@ -32,14 +32,11 @@ public abstract class Modifier {
 
             if (positive) { // positive
                 titleColor = ChatColor.DARK_GREEN.toString() + ChatColor.BOLD;
-                loreColor = HexColor.GREEN.toString();
             } else { // negative
                 titleColor = ChatColor.DARK_RED.toString() + ChatColor.BOLD;
-                loreColor = HexColor.RED.toString();
             }
         } else {
             titleColor = ChatColor.DARK_GRAY.toString() + ChatColor.BOLD;
-            loreColor = ChatColor.GRAY.toString();
 
             // overwrite the modifiers original material when it is not active
             item.setType(Material.BLACK_STAINED_GLASS_PANE);
@@ -55,11 +52,11 @@ public abstract class Modifier {
         if (positive) {
             meta.setLore(Arrays.asList(
                     ChatColor.DARK_GRAY + "ᴘᴏꜱɪᴛɪᴠᴇ",
-                    loreColor + lore));
+                    HexColor.GREEN + "▲ " + ChatColor.GRAY + lore));
         } else {
             meta.setLore(Arrays.asList(
                     ChatColor.DARK_GRAY + "ɴᴇɢᴀᴛɪᴠᴇ",
-                    loreColor + lore));
+                    HexColor.RED + "▼ " + ChatColor.GRAY + lore));
         }
 
         item.setItemMeta(meta);

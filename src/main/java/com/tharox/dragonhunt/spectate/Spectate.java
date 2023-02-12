@@ -20,9 +20,11 @@ import java.util.HashMap;
 
 public class Spectate {
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
+    public static final int[] duration = {12};
 
     public Spectate(Player player) {
         activateSpectate(player);
+        addSpectateToDB(player);
     }
 
     private void activateSpectate(Player player) {
@@ -40,8 +42,6 @@ public class Spectate {
     }
 
     private void spectateDurationLeft(Player player) {
-        final int[] duration = {12};
-
         new BukkitRunnable() {
 
             @Override
@@ -61,6 +61,18 @@ public class Spectate {
             }
 
         }.runTaskTimer(Main.getInstance(), 20, 20);
+    }
+
+    private void addSpectateToDB(Player player) {
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "INSERT INTO Spectate (GameID, Player, dimension, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" +
+                    DbValues.getCurrentWorld(player.getLocation()) + "', '" + DbValues.getTimestamp() + "')";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
     }
 
     /**

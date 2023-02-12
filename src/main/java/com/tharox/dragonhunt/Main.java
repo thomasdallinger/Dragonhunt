@@ -216,7 +216,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
     private void commandRegistration() {
         getCommand("date").setExecutor(new DateCommand());
-        getCommand("spec").setExecutor(new SpectateCommand());
         getCommand("top").setExecutor(new TopCommand());
         getCommand("respawn").setExecutor(new RespawnCommand());
         getCommand("pos").setExecutor(new PositionCommand());

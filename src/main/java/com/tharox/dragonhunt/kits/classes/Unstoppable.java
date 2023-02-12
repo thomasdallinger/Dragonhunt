@@ -13,7 +13,7 @@ public class Unstoppable extends Kit {
     static int cooldown = 120;
 
     public static final String title = HexColor.TANK + KitClass.TANK + " Unstoppable";
-    public static final String lore = ChatColor.GRAY + "Become unstoppable!\n"
+    public static final String lore = ChatColor.GRAY + "Become unstoppable for a short time!\n"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "On activation you become " + HexColor.TANK + "invulnerable\n"
             + ChatColor.GRAY + "to all incoming damage.\n"

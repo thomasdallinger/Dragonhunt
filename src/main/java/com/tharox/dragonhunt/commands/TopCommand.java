@@ -14,9 +14,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class TopCommand extends CommandHelper implements CommandExecutor {
+public class TopCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+        int cost = 5;
         Player player;
         World world;
         double x, z;
@@ -26,23 +27,33 @@ public class TopCommand extends CommandHelper implements CommandExecutor {
             player = (Player) sender;
         } else return true;
 
+        if (!timer.isRunning()) {
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "This feature is currently disabled.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+            return true;
+        }
+
+        if (Coins.getCoins(player) < cost) {
+            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You don't have enough coins! Need "
+                    + HexColor.RED + (cost - Coins.getCoins(player))
+                    + ChatColor.GRAY + " more.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+            return true;
+        }
+
         world = player.getWorld();
         x = player.getLocation().getX();
         z = player.getLocation().getZ();
-
-        if (checkIfValid(player, timer)) return true;
-        if (checkIfEnoughCoins(player, "/top")) return true;
 
         if (player.getLocation().getY() > world.getHighestBlockYAt((int) x, (int) z)) {
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "Already on the surface.");
             return true;
         }
 
-        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        Coins.removeCoins(player, getCommandCost(Main.getInstance().getConfig(), "/top"),
-                ChatColor.GOLD.toString() + ChatColor.BOLD + "/top");
+        Coins.removeCoins(player, cost, "/top");
         player.teleport(new Location(world, x, world.getHighestBlockYAt((int) x, (int) z), z));
-        //player.sendMessage(Prefixes.getCoinPrefix() + HexColor.GREEN + "Whoosh.");
+        player.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "Teleported to the surface.");
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
         return false;
     }

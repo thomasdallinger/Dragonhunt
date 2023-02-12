@@ -19,8 +19,8 @@ public class Unstoppable extends Kit {
             + ChatColor.GRAY + "to all incoming damage.\n"
             + ChatColor.GRAY + "Duration: " + HexColor.TANK + duration + " sec\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
-    public static final Material material = Material.ENDER_PEARL;
-    public static final int slot = 2;
+    public static final Material material = Material.SHIELD;
+    public static final int slot = 11;
 
     public Unstoppable(Player player) {
         super(player);

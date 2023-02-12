@@ -13,6 +13,7 @@ public class Healer extends Kit {
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Healer";
     public static final String lore = ChatColor.GRAY + "Instantly heal yourself in critical moments!\n"
+            + ChatColor.GRAY + "Difficulty: " + ChatColor.YELLOW + "✮" + ChatColor.GRAY + "✮✮"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "On activation you get " + HexColor.SUPPORT + heartsToAdd + " Hearts"
             + ChatColor.GRAY + ".\n"

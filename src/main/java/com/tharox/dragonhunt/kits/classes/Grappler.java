@@ -15,6 +15,7 @@ public class Grappler extends Kit {
 
     public static final String title = HexColor.MOBILITY + KitClass.MOBILITY + " Grappler";
     public static final String lore = ChatColor.GRAY + "Crossbow turns into Grappling Hook!\n"
+            + ChatColor.GRAY + "Difficulty: " + ChatColor.YELLOW + "✮✮✮"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "Pull yourself to different locations.\n"
             + ChatColor.GRAY + "Arrows shot cannot do damage.\n"

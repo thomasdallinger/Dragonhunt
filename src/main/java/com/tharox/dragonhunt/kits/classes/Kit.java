@@ -6,10 +6,7 @@ import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -20,6 +17,7 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
@@ -189,6 +187,24 @@ public abstract class Kit implements Listener {
 
         meta.setDisplayName(title);
         meta.setLore(Arrays.asList(lore.split("\n")));
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+
+        item.setItemMeta(meta);
+
+        return item;
+    }
+
+    public static ItemStack getDisplayItem(String title, Material material, String lore, Color color) {
+        ItemStack item = new ItemStack(material);
+        item.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+
+        PotionMeta meta = (PotionMeta) item.getItemMeta();
+        if (meta == null) return null;
+
+        meta.setDisplayName(title);
+        meta.setLore(Arrays.asList(lore.split("\n")));
+        meta.setColor(color);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 

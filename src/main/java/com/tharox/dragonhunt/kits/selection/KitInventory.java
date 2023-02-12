@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.kits.classes.Kit;
 import com.tharox.dragonhunt.kits.classes.KitClass;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.reflections.Reflections;
@@ -25,7 +26,7 @@ public class KitInventory {
 
         // Set the kit classes
         inv.setItem(0, Kit.getDisplayItem(HexColor.ASSASSIN + KitClass.ASSASSIN + " Assassin",
-                Material.IRON_SWORD,
+                Material.NETHERITE_SWORD,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
                         + ChatColor.GRAY + "Permanent Effect: " + HexColor.ASSASSIN + "Strength 1"));
 
@@ -35,14 +36,15 @@ public class KitInventory {
                         + ChatColor.GRAY + "Base max. Health: " + HexColor.TANK + "12 Hearts"));
 
         inv.setItem(18, Kit.getDisplayItem(HexColor.SUPPORT + KitClass.SUPPORT + " Support",
-                Material.GOLDEN_APPLE,
+                Material.POTION,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
                         + ChatColor.GRAY + "Gains " + HexColor.SUPPORT + "20% more Health"
                         + ChatColor.GRAY + " from all\n"
-                        + ChatColor.GRAY + "healing sources (food, saturation, effects)"));
+                        + ChatColor.GRAY + "healing sources (food, saturation, effects)",
+                Color.fromRGB(0x1F1F23)));
 
         inv.setItem(27, Kit.getDisplayItem(HexColor.MOBILITY + KitClass.MOBILITY + " Mobility",
-                Material.RECOVERY_COMPASS,
+                Material.NETHERITE_BOOTS,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
                         + ChatColor.GRAY + "Special Ability: " + HexColor.MOBILITY + "Double Jump\n"
                         + ChatColor.GRAY + "Permanent Effect: " + HexColor.MOBILITY + "Haste 1"));

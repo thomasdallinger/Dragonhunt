@@ -21,25 +21,12 @@ public class TopCommand implements CommandExecutor {
         Player player;
         World world;
         double x, z;
-        Timer timer = Main.getInstance().getTimer();
 
         if (sender instanceof Player) {
             player = (Player) sender;
         } else return true;
 
-        if (!timer.isRunning()) {
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "This feature is currently disabled.");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            return true;
-        }
-
-        if (Coins.getCoins(player) < cost) {
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You don't have enough coins! Need "
-                    + HexColor.RED + (cost - Coins.getCoins(player))
-                    + ChatColor.GRAY + " more.");
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            return true;
-        }
+        if (PaidCommandsValidator.commandExecutionIsValid(player, cost)) return true;
 
         world = player.getWorld();
         x = player.getLocation().getX();

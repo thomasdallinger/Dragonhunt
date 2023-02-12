@@ -156,9 +156,8 @@ public abstract class Kit implements Listener {
 
                 // Displaying the duration left in the action bar
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
-                        ChatColor.WHITE.toString() + ChatColor.BOLD + "» "
-                                + String.format("%1.1f", durationLeft) + " sec"
-                                + " «"));
+                        ChatColor.GOLD.toString() + ChatColor.BOLD + String.format("%1.1f", durationLeft)
+                                + ChatColor.YELLOW + ChatColor.BOLD + " SECONDS LEFT"));
 
                 if (player.isDead()) { //without a executor
                     this.cancel();

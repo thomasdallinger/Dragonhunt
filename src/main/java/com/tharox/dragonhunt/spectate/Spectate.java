@@ -76,7 +76,7 @@ public class Spectate {
     }
 
     /**
-     * @return the amount of spectates purchased by a player in this game
+     * @return the amount of spectates used by a player in this game
      */
     public static int getSpectateAmount(Player player) {
         final int[] amount = {0};

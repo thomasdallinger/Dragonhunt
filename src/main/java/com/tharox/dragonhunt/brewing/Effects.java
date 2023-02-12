@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.brewing;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.modifiers.classes.Hunger;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -55,6 +56,10 @@ public class Effects {
 
                     if (Regeneration.get(player) > 1)
                         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 40, Regeneration.get(player) - 2));
+
+                    if (Hunger.active) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 40, 0));
+                    }
                 }
             }
         }.runTaskTimer(Main.getInstance(), 0, 20);

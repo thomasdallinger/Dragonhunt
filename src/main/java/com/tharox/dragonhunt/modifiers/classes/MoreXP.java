@@ -3,17 +3,17 @@ package com.tharox.dragonhunt.modifiers.classes;
 import org.bukkit.Material;
 
 @DragonhuntModifier
-public class Heavyweight extends Modifier {
-    public static String title = "Heavyweight";
-    public static String lore = "All players have Strength I permanently.";
-    public static Material material = Material.NETHERITE_SWORD;
+public class MoreXP extends Modifier {
+    public static String title = "More XP";
+    public static String lore = "Players receive XP points for surviving every 3 min.";
+    public static Material material = Material.EXPERIENCE_BOTTLE;
     public static boolean positive = true;
-    public static int impact = 3;
+    public static int impact = 2;
     public static boolean active = false;
 
     @Override
     public void setActive(boolean active) {
-        Heavyweight.active = active;
+        MoreXP.active = active;
     }
 
     @Override

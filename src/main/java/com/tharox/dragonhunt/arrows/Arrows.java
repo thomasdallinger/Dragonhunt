@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.arrows;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.brewing.Effects;
+import com.tharox.dragonhunt.modifiers.classes.EnhancedArrowEffects;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -72,8 +73,13 @@ public class Arrows {
     }
 
     private ItemStack createEffectArrow(PotionEffectType effect, Color color) {
-        int duration = 120; // In ticks. //TODO: add modifier changing this value
-        int amplifier = 1; //TODO: add modifier changing this value
+        int duration = 120; // In ticks.
+        int amplifier = 1;
+
+        if (EnhancedArrowEffects.active) {
+            duration = 160;
+            amplifier = 2;
+        }
 
         ItemStack item = new ItemStack(Material.TIPPED_ARROW);
         PotionMeta meta = (PotionMeta) item.getItemMeta();

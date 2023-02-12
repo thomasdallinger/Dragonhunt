@@ -11,6 +11,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Objects;
 import java.util.Random;
@@ -35,6 +37,10 @@ public class CreatureSpawnListener implements Listener {
                     }
                     // else spawn the Enderman
                 }
+            }
+
+            if (SpeedyMobs.active) {
+                entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50000, 0));
             }
 
             if (CaveSpiders.active) {

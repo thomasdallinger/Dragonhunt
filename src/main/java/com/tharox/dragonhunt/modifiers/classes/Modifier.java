@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.modifiers.classes;
 
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -8,6 +9,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 public abstract class Modifier {
@@ -49,7 +51,16 @@ public abstract class Modifier {
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.setDisplayName(titleColor + title);
-        meta.setLore(Collections.singletonList(loreColor + lore));
+
+        if (positive) {
+            meta.setLore(Arrays.asList(
+                    ChatColor.DARK_GRAY + "ᴘᴏꜱɪᴛɪᴠᴇ",
+                    loreColor + lore));
+        } else {
+            meta.setLore(Arrays.asList(
+                    ChatColor.DARK_GRAY + "ɴᴇɢᴀᴛɪᴠᴇ",
+                    loreColor + lore));
+        }
 
         item.setItemMeta(meta);
 

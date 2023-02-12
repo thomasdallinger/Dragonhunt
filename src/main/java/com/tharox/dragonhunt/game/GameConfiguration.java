@@ -4,10 +4,9 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.entities.PermanentWitherSkeletons;
-import com.tharox.dragonhunt.modifiers.classes.EasyDifficulty;
+import com.tharox.dragonhunt.modifiers.classes.MoreXP;
 import com.tharox.dragonhunt.modifiers.classes.EightHearts;
-import com.tharox.dragonhunt.modifiers.classes.HardDifficulty;
-import com.tharox.dragonhunt.players.PermanentEffect;
+import com.tharox.dragonhunt.modifiers.classes.EnhancedArrowEffects;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -18,7 +17,7 @@ import java.util.Objects;
 
 public class GameConfiguration {
     /**
-     * Sets different parameters for the OVERWORLD such as difficulty, daytime and the world border.
+     * Sets different parameters for the OVERWORLD such as the daytime and the world border.
      */
     public void configureOverworld(double x, double z) {
         World overworld = Bukkit.getServer().getWorld("world");
@@ -28,13 +27,7 @@ public class GameConfiguration {
             return;
         }
 
-        if (EasyDifficulty.active)
-            overworld.setDifficulty(Difficulty.EASY);
-        else if (HardDifficulty.active)
-            overworld.setDifficulty(Difficulty.HARD);
-        else
-            overworld.setDifficulty(Difficulty.NORMAL);
-
+        overworld.setDifficulty(Difficulty.NORMAL);
         overworld.setGameRule(GameRule.KEEP_INVENTORY, true);
 
         WorldBorder worldBorder = overworld.getWorldBorder();
@@ -44,7 +37,7 @@ public class GameConfiguration {
     }
 
     /**
-     * Sets the world border, difficulty and game rules for the NETHER
+     * Sets the world border and game rules for the NETHER.
      */
     public void configureNether() {
         World nether = Bukkit.getServer().getWorld("world_nether");
@@ -55,13 +48,7 @@ public class GameConfiguration {
             return;
         }
 
-        if (EasyDifficulty.active)
-            nether.setDifficulty(Difficulty.EASY);
-        else if (HardDifficulty.active)
-            nether.setDifficulty(Difficulty.HARD);
-        else
-            nether.setDifficulty(Difficulty.NORMAL);
-
+        nether.setDifficulty(Difficulty.NORMAL);
         nether.setGameRule(GameRule.KEEP_INVENTORY, true);
 
         WorldBorder worldBorder = nether.getWorldBorder();
@@ -71,7 +58,7 @@ public class GameConfiguration {
     }
 
     /**
-     * Sets the difficulty and game rules for the END
+     * Sets game rules for the END.
      */
     public void configureEnd() {
         World end = Bukkit.getServer().getWorld("world_the_end");
@@ -82,13 +69,7 @@ public class GameConfiguration {
             return;
         }
 
-        if (EasyDifficulty.active)
-            end.setDifficulty(Difficulty.EASY);
-        else if (HardDifficulty.active)
-            end.setDifficulty(Difficulty.HARD);
-        else
-            end.setDifficulty(Difficulty.NORMAL);
-
+        end.setDifficulty(Difficulty.NORMAL);
         end.setGameRule(GameRule.KEEP_INVENTORY, true);
     }
 
@@ -129,7 +110,6 @@ public class GameConfiguration {
         }
 
         // active if any of the specified modifiers are active
-        new PermanentEffect();
         new PermanentWitherSkeletons();
     }
 }

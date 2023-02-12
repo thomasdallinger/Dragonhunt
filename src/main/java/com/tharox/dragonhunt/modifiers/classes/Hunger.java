@@ -3,17 +3,17 @@ package com.tharox.dragonhunt.modifiers.classes;
 import org.bukkit.Material;
 
 @DragonhuntModifier
-public class PowderOnly extends Modifier {
-    public static String title = "Just The Powder";
-    public static String lore = "Blazes drop one Blaze Powder on death.";
-    public static Material material = Material.BLAZE_POWDER;
+public class Hunger extends Modifier {
+    public static String title = "Forever Hungry";
+    public static String lore = "All players have Hunger 1 permanently.";
+    public static Material material = Material.COOKED_BEEF;
     public static boolean positive = false;
-    public static int impact = 1;
+    public static int impact = 3;
     public static boolean active = false;
 
     @Override
     public void setActive(boolean active) {
-        PowderOnly.active = active;
+        Hunger.active = active;
     }
 
     @Override

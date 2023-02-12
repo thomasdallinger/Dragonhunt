@@ -3,7 +3,6 @@ package com.tharox.dragonhunt.entities;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.modifiers.classes.PowderOnly;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
@@ -77,10 +76,7 @@ public class EntityDeathListener implements Listener {
                 break;
             case "Blaze":
                 if (killer != null)
-                    if (PowderOnly.active)
-                        GameState.putItemInInventory(killer, new ItemStack(Material.BLAZE_POWDER));
-                    else
-                        GameState.putItemInInventory(killer, new ItemStack(Material.BLAZE_ROD));
+                    GameState.putItemInInventory(killer, new ItemStack(Material.BLAZE_ROD));
                 break;
             case "Iron Golem":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 8));

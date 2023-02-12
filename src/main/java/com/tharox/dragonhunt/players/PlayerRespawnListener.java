@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.modifiers.classes.DecreasedDeathTime;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -37,7 +38,12 @@ public class PlayerRespawnListener implements Listener {
 
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT_FREEZE, 1, 1);
 
-            deathTimer.put(player, ((player.getLevel() + 20) * 1.2));
+            if (DecreasedDeathTime.active) {
+                deathTimer.put(player, (double) (player.getLevel() + 20));
+            } else {
+                deathTimer.put(player, ((player.getLevel() + 20) * 1.2));
+            }
+
             deathTimerCountdown(player);
 
         }, 5L);

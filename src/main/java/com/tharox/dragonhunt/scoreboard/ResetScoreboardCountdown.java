@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.scoreboard;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
+import com.tharox.dragonhunt.modifiers.classes.MoreXP;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
@@ -12,7 +13,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class ResetScoreboardCountdown {
     /**
-     * resets the scoreboard countdown and gives the same amount of coins to all players once the countdown hits zero
+     * Resets the scoreboard countdown and gives the same amount of XP
+     * to all players once the countdown hits zero.
      */
     public static void countdownHitsZero(Countdown countdown) {
         new BukkitRunnable() {
@@ -20,8 +22,17 @@ public class ResetScoreboardCountdown {
 
             @Override
             public void run() {
+                // Default: Countdown is set to 300 sec (overrule this if the modifier is active)
+                if (MoreXP.active && countdown.getTime() == 300) {
+                    countdown.setTime(180);
+                }
+
                 if (countdown.getTime() == 0) {
-                    countdown.setTime(300);
+                    if (MoreXP.active) {
+                        countdown.setTime(180);
+                    } else {
+                        countdown.setTime(300);
+                    }
 
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         Coins.addXP(player, Coins.bonusXP);

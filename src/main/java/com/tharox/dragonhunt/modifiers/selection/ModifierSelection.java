@@ -10,15 +10,28 @@ public class ModifierSelection {
     ArrayList<Modifier> lowImpact = new ArrayList<>();
     ArrayList<Modifier> mediumImpact = new ArrayList<>();
     ArrayList<Modifier> highImpact = new ArrayList<>();
-    int positive = 0; // needs to be 1 after modifier selection
-    int negative = 0; // needs to be 2 after modifier selection
+    int positive = 0; // needs to be 2 after modifier selection
+    int negative = 0; // needs to be 1 after modifier selection
 
     public ModifierSelection() {
-        lowImpact.addAll(Arrays.asList(new HighSpeed(), new ExplosiveCreepers(), new CaveSpiders(), new PowderOnly(),
+        // PowderOnly -> Remove
+        lowImpact.addAll(Arrays.asList(
+                new SpeedyMobs(),
+                new ExplosiveCreepers(),
+                new CaveSpiders(),
+                new DecreasedDeathTime(),
                 new EndlessNight()));
-        mediumImpact.addAll(Arrays.asList(new FireWeakness(), new EasyDifficulty(), new WitherSkeletons(),
-                new ImmuneSkeletons(), new HardDifficulty()));
-        highImpact.addAll(Arrays.asList(new Heavyweight(), new Diamonds(), new EightHearts(), new FireMobs(),
+        mediumImpact.addAll(Arrays.asList(
+                new FireWeakness(),
+                new MoreXP(),
+                new WitherSkeletons(),
+                new ImmuneSkeletons(),
+                new EnhancedArrowEffects()));
+        highImpact.addAll(Arrays.asList(
+                new Hunger(),
+                new Diamonds(),
+                new EightHearts(),
+                new FireMobs(),
                 new PowerfulMobs()));
 
         Random rand = new Random();
@@ -31,43 +44,43 @@ public class ModifierSelection {
             negative++;
         }
 
-        // pos pos -> re-roll, 1 1, neg neg
+        // pos pos -> fine, pos neg -> fine, neg neg -> re-roll
         do {
             random = rand.nextInt(mediumImpact.size());
             mediumImpact.get(random).setActive(true);
 
-            if (mediumImpact.get(random).isPositive()) {
-                positive++;
-                if (positive > 1) {
+            if (!mediumImpact.get(random).isPositive()) {
+                negative++;
+                if (negative > 1) {
                     mediumImpact.get(random).setActive(false);
                 }
             } else {
-                negative++;
-                positive = 1;
+                positive++;
+                negative = 1;
             }
-        } while (positive > 1);
+        } while (negative > 1);
 
-        // 2 1 neg -> re-roll, 1 1 neg, 1 1 pos -> re-roll
+        // 2 pos 1 neg -> fine, 1 pos 2 neg -> re-roll
         do {
             random = rand.nextInt(highImpact.size());
             highImpact.get(random).setActive(true);
 
-            if (highImpact.get(random).isPositive()) {
-                positive++;
-                if (positive > 1) {
+            if (!highImpact.get(random).isPositive()) {
+                negative++;
+                if (negative > 1) {
                     highImpact.get(random).setActive(false);
                 } else {
-                    negative = 2;
+                    positive = 2;
                 }
             } else {
-                negative++;
-                if (negative > 2) {
+                positive++;
+                if (positive > 2) {
                     highImpact.get(random).setActive(false);
-                    positive = 0;
+                    negative = 0;
                 } else {
-                    positive = 1;
+                    negative = 1;
                 }
             }
-        } while (positive > 1 || negative > 2);
+        } while (negative > 1 || positive > 2);
     }
 }

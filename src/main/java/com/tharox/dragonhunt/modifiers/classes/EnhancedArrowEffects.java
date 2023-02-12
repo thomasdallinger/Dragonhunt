@@ -3,17 +3,17 @@ package com.tharox.dragonhunt.modifiers.classes;
 import org.bukkit.Material;
 
 @DragonhuntModifier
-public class EasyDifficulty extends Modifier {
-    public static String title = "Difficulty: Easy";
-    public static String lore = "Low hunger points depletion, less mobs spawns, weak mobs.";
-    public static Material material = Material.GREEN_CONCRETE;
+public class EnhancedArrowEffects extends Modifier {
+    public static String title = "Enhanced Arrow Effects";
+    public static String lore = "Arrow Effects last 8 sec and are level 3.";
+    public static Material material = Material.TIPPED_ARROW;
     public static boolean positive = true;
     public static int impact = 2;
     public static boolean active = false;
 
     @Override
     public void setActive(boolean active) {
-        EasyDifficulty.active = active;
+        EnhancedArrowEffects.active = active;
     }
 
     @Override

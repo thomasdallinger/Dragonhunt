@@ -49,14 +49,27 @@ public abstract class Modifier {
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.setDisplayName(titleColor + title);
 
-        if (positive) {
-            meta.setLore(Arrays.asList(
-                    ChatColor.DARK_GRAY + "ᴘᴏꜱɪᴛɪᴠᴇ",
-                    HexColor.GREEN + "▲ " + ChatColor.GRAY + lore));
+        // Set the modifier lore.
+        if (active) {
+            if (positive) {
+                meta.setLore(Arrays.asList(
+                        ChatColor.DARK_GRAY + "ᴘᴏꜱɪᴛɪᴠᴇ",
+                        HexColor.GREEN + "▲ " + ChatColor.GRAY + lore));
+            } else {
+                meta.setLore(Arrays.asList(
+                        ChatColor.DARK_GRAY + "ɴᴇɢᴀᴛɪᴠᴇ",
+                        HexColor.RED + "▼ " + ChatColor.GRAY + lore));
+            }
         } else {
-            meta.setLore(Arrays.asList(
-                    ChatColor.DARK_GRAY + "ɴᴇɢᴀᴛɪᴠᴇ",
-                    HexColor.RED + "▼ " + ChatColor.GRAY + lore));
+            if (positive) {
+                meta.setLore(Arrays.asList(
+                        ChatColor.DARK_GRAY + "ᴘᴏꜱɪᴛɪᴠᴇ",
+                        ChatColor.DARK_GRAY + "▲ " + ChatColor.GRAY + lore));
+            } else {
+                meta.setLore(Arrays.asList(
+                        ChatColor.DARK_GRAY + "ɴᴇɢᴀᴛɪᴠᴇ",
+                        ChatColor.DARK_GRAY + "▼ " + ChatColor.GRAY + lore));
+            }
         }
 
         item.setItemMeta(meta);

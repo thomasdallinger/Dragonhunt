@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 @DragonhuntKit
 public class Scout extends Kit {
-    static int duration = Spectate.duration[0];
+    static int duration = (int) Spectate.duration[0];
     static int cooldown = 120;
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Scout";

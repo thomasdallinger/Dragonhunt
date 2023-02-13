@@ -9,7 +9,10 @@ import com.tharox.dragonhunt.chat.ChatListener;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.LevelUp;
 import com.tharox.dragonhunt.colors.HexColor;
-import com.tharox.dragonhunt.commands.*;
+import com.tharox.dragonhunt.commands.DateCommand;
+import com.tharox.dragonhunt.commands.PositionCommand;
+import com.tharox.dragonhunt.commands.RespawnCommand;
+import com.tharox.dragonhunt.commands.TopCommand;
 import com.tharox.dragonhunt.crafting.CustomRecipes;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.dimensions.DimensionListener;
@@ -24,7 +27,6 @@ import com.tharox.dragonhunt.kits.classes.KitClass;
 import com.tharox.dragonhunt.kits.selection.KitListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
-import com.tharox.dragonhunt.players.DoubleJumpListener;
 import com.tharox.dragonhunt.players.*;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
 import com.tharox.dragonhunt.tablist.TablistManager;
@@ -40,6 +42,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.bukkit.scheduler.BukkitRunnable;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public final class Main extends JavaPlugin implements PluginMessageListener {
 
@@ -70,7 +75,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         tracker = new Tracker();
         tablistManager = new TablistManager();
         new CustomRecipes(); // adds all custom recipes to the game
-        timeSetNight();
+        setWorldTime();
 
         listenerRegistration();
         commandRegistration();
@@ -88,15 +93,28 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     }
 
     /**
-     * Sets the time in the OVERWORLD to 13000.
+     * Sets the time in the OVERWORLD to one of the available times.
      */
-    private void timeSetNight() {
+    private void setWorldTime() {
         World overworld = Bukkit.getServer().getWorld("world");
+
         if (overworld == null) {
             Bukkit.getServer().broadcastMessage(Prefixes.getErrorPrefix() + HexColor.RED + "World name is incorrect.");
             return;
         }
-        overworld.setTime(13000); // time set night
+
+        ArrayList<Integer> availableTimes = new ArrayList<>();
+        availableTimes.add(16000);
+        availableTimes.add(13000);
+        availableTimes.add(12000);
+        availableTimes.add(11000);
+        availableTimes.add(10000);
+        availableTimes.add(0);
+
+        Random random = new Random();
+        int index = random.nextInt(availableTimes.size());
+
+        overworld.setTime(availableTimes.get(index));
     }
 
     /**

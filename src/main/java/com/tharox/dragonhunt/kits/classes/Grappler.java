@@ -14,11 +14,11 @@ public class Grappler extends Kit {
     static int cooldown = 8;
 
     public static final String title = HexColor.MOBILITY + KitClass.MOBILITY + " Grappler";
-    public static final String lore = ChatColor.GRAY + "Crossbow turns into Grappling Hook!\n"
+    public static final String lore = ChatColor.GRAY + "Crossbow turns into Grappling Hook!\n\n"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ " + HexColor.MOBILITY + "✮✮✮\n"
             + ChatColor.GRAY + "Pull yourself to different locations.\n"
             + ChatColor.GRAY + "Arrows shot cannot do damage.\n"
-            + ChatColor.GRAY + "Be aware of fall damage.\n"
+            + ChatColor.GRAY + "Be aware of fall damage.\n\n"
             + ChatColor.GRAY + "Max. Arrow Distance: " + HexColor.MOBILITY + GrappleListener.maxArrowDistance + " Blocks\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
     public static final Material material = Material.CROSSBOW;

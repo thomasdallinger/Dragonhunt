@@ -14,10 +14,10 @@ public class Unstoppable extends Kit {
     static int cooldown = 120;
 
     public static final String title = HexColor.TANK + KitClass.TANK + " Unstoppable";
-    public static final String lore = ChatColor.GRAY + "Become unstoppable for a short time!\n"
+    public static final String lore = ChatColor.GRAY + "Become unstoppable for a short time!\n\n"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ " + HexColor.TANK + "✮" + ChatColor.DARK_GRAY + "✮✮\n"
             + ChatColor.GRAY + "On activation you become " + HexColor.TANK + "invulnerable\n"
-            + ChatColor.GRAY + "to all incoming damage.\n"
+            + ChatColor.GRAY + "to all incoming damage.\n\n"
             + ChatColor.GRAY + "Duration: " + HexColor.TANK + duration + " sec\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
     public static final Material material = Material.BARRIER;

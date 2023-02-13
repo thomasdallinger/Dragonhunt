@@ -15,10 +15,10 @@ public class Scout extends Kit {
     static int cooldown = 120;
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Scout";
-    public static final String lore = ChatColor.GRAY + "Be in Spectator Mode for a short time!\n"
+    public static final String lore = ChatColor.GRAY + "Be in Spectator Mode for a short time!\n\n"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ " + HexColor.SUPPORT + "✮" + ChatColor.DARK_GRAY + "✮✮\n"
             + ChatColor.GRAY + "On activation you will be put in "
-            + HexColor.SUPPORT + "Spectator Mode" + ChatColor.GRAY + ".\n"
+            + HexColor.SUPPORT + "Spectator Mode" + ChatColor.GRAY + ".\n\n"
             + ChatColor.GRAY + "Duration: " + HexColor.SUPPORT + duration + " sec\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
     public static final Material material = Material.ENDER_EYE;

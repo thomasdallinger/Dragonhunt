@@ -22,7 +22,7 @@ public class Scout extends Kit {
             + ChatColor.GRAY + "Duration: " + HexColor.SUPPORT + duration + " sec\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
     public static final Material material = Material.ENDER_EYE;
-    public static final int slot = 30;
+    public static final int slot = 21;
 
     public Scout(Player player) {
         super(player);

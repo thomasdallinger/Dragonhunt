@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+@DragonhuntKit
 public class Unstoppable extends Kit {
     static int duration = 10;
     static int cooldown = 120;
@@ -19,7 +20,7 @@ public class Unstoppable extends Kit {
             + ChatColor.GRAY + "to all incoming damage.\n"
             + ChatColor.GRAY + "Duration: " + HexColor.TANK + duration + " sec\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
-    public static final Material material = Material.SHIELD;
+    public static final Material material = Material.BARRIER;
     public static final int slot = 11;
 
     public Unstoppable(Player player) {

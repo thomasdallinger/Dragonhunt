@@ -45,13 +45,13 @@ public class Scoreboard extends ScoreboardBuilder {
 
     @Override
     public void update(Player player, Countdown countdown) {
+        if (GameState.selectedKit.containsKey(player)) {
+            setScore(GameState.selectedKit.get(player), 6);
+        }
+
         setScore("☻ " + Bukkit.getOnlinePlayers().size() + " "
                 + "☠ " + DbValues.getKills(player, true) + " "
-                + "✟ " + DbValues.getKills(player, false), 6);
-
-        if (GameState.selectedKit.containsKey(player)) {
-            setScore(GameState.selectedKit.get(player), 4);
-        }
+                + "✟ " + DbValues.getKills(player, false), 5);
 
         if (timer.getTime() <= 1500) {
             setScore(ChatColor.WHITE + "✮ " + ChatColor.DARK_PURPLE + PlayerEndTeleport.getEyesNeeded()

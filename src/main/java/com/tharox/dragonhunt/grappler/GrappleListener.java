@@ -19,6 +19,7 @@ import java.util.Objects;
 public class GrappleListener implements Listener {
 
     public static int maxArrowDistance = 20;
+    public static int cooldown = 160;
 
     @EventHandler
     public void grappleEvent(EntityShootBowEvent event) {
@@ -38,13 +39,15 @@ public class GrappleListener implements Listener {
 
             // put the GRAPPLER on cooldown
             player.setCooldown(Material.CROSSBOW,
-                    Grappler.grapplerCooldown.getOrDefault(player, 160));
+                    Grappler.grapplerCooldown.getOrDefault(player, cooldown));
 
             // after the cooldown ends, add the next charged projectile
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
                 CrossbowMeta crossbowMeta = (CrossbowMeta) bow.getItemMeta();
                 crossbowMeta.addChargedProjectile(new ItemStack(Material.ARROW, 1));
-                Grappler.grapplerCooldown.getOrDefault(player, 160);
+                bow.setItemMeta(crossbowMeta);
+
+                Grappler.grapplerCooldown.getOrDefault(player, cooldown);
             }, 5L);
 
             new BukkitRunnable() {

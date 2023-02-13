@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 public class Spectate {
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
-    public static final int[] duration = {12};
+    public static final int[] duration = {20};
 
     public Spectate(Player player) {
         activateSpectate(player);
@@ -47,7 +47,6 @@ public class Spectate {
             @Override
             public void run() {
                 if (duration[0] <= 0) {
-                    player.performCommand("pos Spectate" + getSpectateAmount(player));
                     player.teleport(Spectate.spectateLocation.get(player));
                     player.setGameMode(GameMode.SURVIVAL);
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
@@ -73,31 +72,5 @@ public class Spectate {
             stmt.execute(query);
             stmt.close();
         });
-    }
-
-    /**
-     * @return the amount of spectates used by a player in this game
-     */
-    public static int getSpectateAmount(Player player) {
-        final int[] amount = {0};
-
-        DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "SELECT COUNT(*) FROM Spectate WHERE GameID = '" + DbValues.getGameID() + "' " +
-                    "AND Player = '" + player.getName() + "'";
-
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            int columns = rs.getMetaData().getColumnCount();
-
-            while (rs.next()) {
-                for (int i = 1; i <= columns; i++) {
-                    amount[0] = rs.getInt(i);
-                }
-            }
-            rs.close();
-            stmt.close();
-        });
-
-        return amount[0];
     }
 }

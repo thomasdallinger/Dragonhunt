@@ -5,175 +5,175 @@ enchanting:
     amount: 1
     slot: 0
     name: "Sharpness I"
-    cost: 10
+    cost: 5
     lore: "Adds 1 attack damage."
   1:
     material: DIAMOND_SWORD
     amount: 2
     slot: 9
     name: "Sharpness II"
-    cost: 10
+    cost: 7
     lore: "Adds 1.5 attack damage."
   2:
     material: DIAMOND_SWORD
     amount: 3
     slot: 18
     name: "Sharpness III"
-    cost: 15
+    cost: 9
     lore: "Adds 2 attack damage."
   3:
     material: DIAMOND_SWORD
     amount: 4
     slot: 27
     name: "Sharpness IV"
-    cost: 15
+    cost: 11
     lore: "Adds 2.5 attack damage."
   4:
     material: FLINT_AND_STEEL
     amount: 1
     slot: 1
     name: "Fire Aspect I"
-    cost: 20
+    cost: 15
     lore: "Sets entities on fire for 4 seconds."
   5:
     material: FLINT_AND_STEEL
     amount: 2
     slot: 10
     name: "Fire Aspect II"
-    cost: 20
+    cost: 10
     lore: "Sets entities on fire for 8 seconds."
   6:
     material: BOW
     amount: 1
     slot: 2
     name: "Power I"
-    cost: 10
+    cost: 5
     lore: "Increases arrow damage by 50%."
   7:
     material: BOW
     amount: 2
     slot: 11
     name: "Power II"
-    cost: 10
+    cost: 7
     lore: "Increases arrow damage by 75%."
   8:
     material: BOW
     amount: 3
     slot: 20
     name: "Power III"
-    cost: 15
+    cost: 9
     lore: "Increases arrow damage by 100%."
   9:
     material: BOW
     amount: 4
     slot: 29
     name: "Power IV"
-    cost: 15
+    cost: 11
     lore: "Increases arrow damage by 125%."
   10:
     material: ARROW
     amount: 1
     slot: 3
     name: "Punch I"
-    cost: 15
+    cost: 10
     lore: "Adds 3 blocks of knockback distance."
   11:
     material: ARROW
     amount: 2
     slot: 12
     name: "Punch II"
-    cost: 20
+    cost: 10
     lore: "Adds 6 blocks of knockback distance."
   12:
     material: FIRE_CHARGE
     amount: 1
     slot: 4
     name: "Flame"
-    cost: 25
+    cost: 15
     lore: "Arrows set the target on fire."
   13:
     material: CROSSBOW
     amount: 1
     slot: 5
     name: "Multishot"
-    cost: 15
+    cost: 10
     lore: "Shoots three arrows on each shot."
   14:
     material: IRON_CHESTPLATE
     amount: 1
     slot: 6
     name: "Protection I"
-    cost: 10
+    cost: 5
     lore: "4% damage reduction for each armor piece."
   15:
     material: IRON_CHESTPLATE
     amount: 2
     slot: 15
     name: "Protection II"
-    cost: 10
+    cost: 7
     lore: "8% damage reduction for each armor piece."
   16:
     material: IRON_CHESTPLATE
     amount: 3
     slot: 24
     name: "Protection III"
-    cost: 15
+    cost: 9
     lore: "12% damage reduction for each armor piece."
   17:
     material: IRON_CHESTPLATE
     amount: 4
     slot: 33
     name: "Protection IV"
-    cost: 15
+    cost: 11
     lore: "16% damage reduction for each armor piece."
   18:
     material: CHAINMAIL_CHESTPLATE
     amount: 1
     slot: 7
     name: "Thorns I"
-    cost: 10
+    cost: 5
     lore: "Reflects damage at the cost of durability. Chance: 15%"
   19:
     material: CHAINMAIL_CHESTPLATE
     amount: 2
     slot: 16
     name: "Thorns II"
-    cost: 15
+    cost: 10
     lore: "Reflects damage at the cost of durability. Chance: 30%"
   20:
     material: CHAINMAIL_CHESTPLATE
     amount: 3
     slot: 25
     name: "Thorns III"
-    cost: 20
+    cost: 15
     lore: "Reflects damage at the cost of durability. Chance: 45%"
   21:
     material: NETHERITE_BOOTS
     amount: 1
     slot: 8
     name: "Feather Falling I"
-    cost: 10
+    cost: 6
     lore: "Reduces fall damage by 12%."
   22:
     material: NETHERITE_BOOTS
     amount: 2
     slot: 17
     name: "Feather Falling II"
-    cost: 15
+    cost: 9
     lore: "Reduces fall damage by 24%."
   23:
     material: NETHERITE_BOOTS
     amount: 3
     slot: 26
     name: "Feather Falling III"
-    cost: 15
+    cost: 12
     lore: "Reduces fall damage by 36%."
   24:
     material: NETHERITE_BOOTS
     amount: 4
     slot: 35
     name: "Feather Falling IV"
-    cost: 20
+    cost: 15
     lore: "Reduces fall damage by 48%."
 brewing:
   0:
@@ -198,7 +198,7 @@ permanentEffects:
     material: POTION
     amount: 1
     color: 0x7CAFC6
-    cost: 20
+    cost: 6
   1:
     slot: 11
     name: "Speed II"
@@ -206,7 +206,7 @@ permanentEffects:
     material: POTION
     amount: 2
     color: 0x7CAFC6
-    cost: 20
+    cost: 9
   2:
     slot: 20
     name: "Speed III"
@@ -214,7 +214,7 @@ permanentEffects:
     material: POTION
     amount: 3
     color: 0x7CAFC6
-    cost: 20
+    cost: 12
   3:
     slot: 3
     name: "Jump Boost I"
@@ -222,7 +222,7 @@ permanentEffects:
     material: POTION
     amount: 1
     color: 0x22FF4C
-    cost: 20
+    cost: 6
   4:
     slot: 12
     name: "Jump Boost II"
@@ -230,7 +230,7 @@ permanentEffects:
     material: POTION
     amount: 2
     color: 0x22FF4C
-    cost: 20
+    cost: 9
   5:
     slot: 21
     name: "Jump Boost III"
@@ -238,7 +238,7 @@ permanentEffects:
     material: POTION
     amount: 3
     color: 0x22FF4C
-    cost: 20
+    cost: 12
   6:
     slot: 4
     name: "Resistance I"
@@ -246,7 +246,7 @@ permanentEffects:
     material: POTION
     amount: 1
     color: 0x99453A
-    cost: 20
+    cost: 8
   7:
     slot: 13
     name: "Resistance II"
@@ -254,7 +254,7 @@ permanentEffects:
     material: POTION
     amount: 2
     color: 0x99453A
-    cost: 20
+    cost: 12
   8:
     slot: 22
     name: "Resistance III"
@@ -262,7 +262,7 @@ permanentEffects:
     material: POTION
     amount: 3
     color: 0x99453A
-    cost: 20
+    cost: 16
   9:
     slot: 5
     name: "Regeneration I"
@@ -270,7 +270,7 @@ permanentEffects:
     material: POTION
     amount: 1
     color: 0xCD5CAB
-    cost: 20
+    cost: 8
   10:
     slot: 14
     name: "Regeneration II"
@@ -278,7 +278,7 @@ permanentEffects:
     material: POTION
     amount: 2
     color: 0xCD5CAB
-    cost: 20
+    cost: 12
   11:
     slot: 23
     name: "Regeneration III"
@@ -286,7 +286,7 @@ permanentEffects:
     material: POTION
     amount: 3
     color: 0xCD5CAB
-    cost: 20
+    cost: 16
   12:
     slot: 6
     name: "Extra Hearts ʀᴇ-ᴘᴜʀᴄʜᴀꜱᴇᴀʙʟᴇ"
@@ -294,7 +294,7 @@ permanentEffects:
     material: LINGERING_POTION
     amount: 1
     color: 0xF82423
-    cost: 25
+    cost: 10 # +5 will be applied to this value
 negativeEffects:
   0:
     slot: 4
@@ -303,7 +303,7 @@ negativeEffects:
     material: TIPPED_ARROW
     amount: 1
     color: 0x22FF4C
-    cost: 30
+    cost: 25
   1:
     slot: 11
     name: "Arrow of Mining Fatigue"

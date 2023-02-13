@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.KitClass;
 import net.md_5.bungee.api.ChatColor;
@@ -66,16 +65,20 @@ public class PlayerInventoryListener implements Listener {
         Player player = (Player) event.getPlayer();
         Inventory inv = event.getInventory();
 
-        if (!event.getView().getTitle().contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "MODIFIERS")
-                || !event.getView().getTitle().equals(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "KIT SELECTION"))
+        if (event.getView().getTitle().contains("MODIFIERS")) {
+            if (GameState.modifierInventoryClose) return;
+
+            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(),
+                    () -> player.openInventory(inv), 1);
             return;
+        }
 
-        if (GameState.modifierInventoryClose) return;
-        if (GameState.kitInventoryClose.get(player)) return;
-        // kit inventory shows up after the modifier inventory - modifier inventory has to be true already
+        if (event.getView().getTitle().contains("KIT SELECTION")) {
+            if (GameState.kitInventoryClose.get(player)) return;
 
-        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(),
-                () -> player.openInventory(inv), 1);
+            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(),
+                    () -> player.openInventory(inv), 1);
+        }
     }
 
     @EventHandler

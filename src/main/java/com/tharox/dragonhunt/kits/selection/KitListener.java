@@ -67,10 +67,10 @@ public class KitListener implements Listener {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         player.sendMessage(Prefixes.getAllPrefix() + "You have selected the "
                 + HexColor.HIGHLIGHT + name + ChatColor.GRAY + " Kit.");
-        player.closeInventory();
 
         GameState.selectedKit.put(player, (String) kitClass.getField("title").get(null));
         GameState.kitInventoryClose.put(player, true);
+        player.closeInventory();
 
         //addKit(player, name); --> related to db
     }

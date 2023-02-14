@@ -1,10 +1,16 @@
 package com.tharox.dragonhunt.kits.classes;
 
+import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.grappler.GrappleListener;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -31,11 +37,14 @@ public class Unstoppable extends Kit {
 
     @Override
     public void executeAbility() {
+        GameState.activeKitAbilities.put(player, true);
         player.sendMessage(title + ChatColor.GRAY + " Kit Ability is active.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
         player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, duration * 20, 0));
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration * 20, 9));
+
+        this.runKitAbility(2, duration, null, null);
     }
 
     @Override

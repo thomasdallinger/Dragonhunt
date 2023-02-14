@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
@@ -148,6 +149,7 @@ public abstract class Kit implements Listener {
 
                 if (durationLeft <= 0) {
                     kitAbilityActive = false;
+                    GameState.activeKitAbilities.put(player, false);
 
                     if (executor != null) {
                         executor.execute();

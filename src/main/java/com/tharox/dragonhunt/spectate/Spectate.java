@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.spectate;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -39,6 +40,7 @@ public class Spectate {
             @Override
             public void run() {
                 if (duration[0] <= 0) {
+                    GameState.activeKitAbilities.put(player, false);
                     player.teleport(Spectate.spectateLocation.get(player));
                     player.setGameMode(GameMode.SURVIVAL);
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);

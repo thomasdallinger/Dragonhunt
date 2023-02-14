@@ -12,7 +12,6 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -56,13 +55,17 @@ public class Timer {
                 if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Tracker"))
                     continue;
 
-                // Grappler shows the Timer - has no cooldown / duration to display
+                // Grappler shows the Timer - has no cooldown to display
                 if ((item.getItemMeta().getDisplayName().contains(KitClass.ASSASSIN)
                         || item.getItemMeta().getDisplayName().contains(KitClass.TANK)
                         || item.getItemMeta().getDisplayName().contains(KitClass.SUPPORT)
                         || item.getItemMeta().getDisplayName().contains(KitClass.MOBILITY))
                         && !item.getItemMeta().getDisplayName().contains("Grappler"))
                     continue;
+
+                if (GameState.activeKitAbilities.containsKey(player)) {
+                    if (GameState.activeKitAbilities.get(player)) continue;
+                }
             }
 
             // display the time

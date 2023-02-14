@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.spectate.Spectate;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -32,6 +33,7 @@ public class Scout extends Kit {
 
     @Override
     public void executeAbility() {
+        GameState.activeKitAbilities.put(player, true);
         new Spectate(player);
         player.sendMessage(title + ChatColor.GRAY + " Kit Ability is active.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);

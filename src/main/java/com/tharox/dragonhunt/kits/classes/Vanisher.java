@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -34,6 +35,7 @@ public class Vanisher extends Kit {
 
     @Override
     public void executeAbility() {
+        GameState.activeKitAbilities.put(player, true);
         player.sendMessage(title + ChatColor.GRAY + " Kit Ability is active.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
         player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, duration * 20, 0));

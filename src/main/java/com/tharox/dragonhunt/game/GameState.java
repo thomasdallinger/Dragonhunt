@@ -31,6 +31,9 @@ public class GameState {
     // which player has selected which kit
     public static HashMap<Player, String> selectedKit = new HashMap<>();
 
+    // which player has an active kit ability
+    public static HashMap<Player, Boolean> activeKitAbilities = new HashMap<>();
+
     // location of the first player entering the NETHER (null as long as no player enters the NETHER)
     public static Location firstNetherEntry = null;
 

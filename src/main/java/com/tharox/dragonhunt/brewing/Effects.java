@@ -57,6 +57,10 @@ public class Effects {
                     if (Regeneration.get(player) > 1)
                         player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 40, Regeneration.get(player) - 2));
 
+                    if (player.getWorld().getName().equals("world")) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 40, 0));
+                    }
+
                     if (Hunger.active) {
                         player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 40, 0));
                     }

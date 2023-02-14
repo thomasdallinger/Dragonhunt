@@ -118,7 +118,6 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 3));
         materials.put(Material.GOLD_NUGGET, new ItemStack(Material.GOLD_INGOT, 2)); // Nether Gold Ore
         materials.put(Material.GILDED_BLACKSTONE, new ItemStack(Material.GOLD_INGOT, 2));
-        materials.put(Material.COAL, new ItemStack(Material.TORCH, 4));
         materials.put(Material.GRAVEL, new ItemStack(Material.FLINT)); // for Flint and Steel
         materials.put(Material.MELON_SLICE, new ItemStack(Material.GOLDEN_CARROT));
         materials.put(Material.WHEAT, new ItemStack(Material.GOLDEN_CARROT));
@@ -144,8 +143,9 @@ public class BlockBreakListener implements Listener {
                 block.getWorld().dropItemNaturally(block.getLocation(), materials.get(item.getType()));
             }
 
-            // instead of dropping LAPIS, EMERALDS, REDSTONE or QUARTZ give the player a certain amount of XP
-            if (item.getType() == Material.LAPIS_LAZULI
+            // instead of dropping the following items, give the player a certain amount of XP
+            if (item.getType() == Material.COAL
+                    || item.getType() == Material.LAPIS_LAZULI
                     || item.getType() == Material.EMERALD
                     || item.getType() == Material.REDSTONE
                     || item.getType() == Material.QUARTZ) {

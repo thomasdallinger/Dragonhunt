@@ -65,10 +65,6 @@ public class Timer {
                     continue;
             }
 
-            // NOT NEEDED cause ifRunning = false -> sendActionBar isn't called
-            // if the player is in Spectator mode, the time wont get displayed (Spectate or after the game ended)
-            //if (player.getGameMode().equals(GameMode.SPECTATOR)) continue;
-
             // display the time
             // if the last 10 minutes have arrived, the time will get displayed in red
             ChatColor color = ChatColor.GOLD;

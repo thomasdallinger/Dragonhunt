@@ -1,8 +1,7 @@
 package com.tharox.dragonhunt.dimensions;
 
-import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.game.GameState;
-import org.bukkit.Material;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,8 +9,10 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.generator.structure.Structure;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.StructureSearchResult;
 
 public class DimensionListener implements Listener {
     /**
@@ -40,14 +41,34 @@ public class DimensionListener implements Listener {
     @EventHandler
     public void onPortal(PlayerPortalEvent event) {
         World worldFrom = event.getFrom().getWorld();
+        Location eventTo = event.getTo();
+        Player player = event.getPlayer();
 
         if (worldFrom == null) return;
-        if (GameState.firstNetherEntry == null) return; // no player has reached the NETHER before
+        if (eventTo == null) return;
+
+        World worldTo = eventTo.getWorld();
+
+        if (worldTo == null) return;
+        if (!worldTo.getName().equals("world_nether")) return;
 
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.NETHER_PORTAL) {
             if (worldFrom.getName().equals("world")) {
-                event.setCanCreatePortal(false);
-                event.setTo(GameState.firstNetherEntry);
+
+                // No player has reached the NETHER before.
+                // Set the first NETHER PORTAL close to a fortress.
+                if (GameState.firstNetherEntry == null) {
+                    StructureSearchResult structureSearchResult = worldTo.locateNearestStructure(
+                            player.getLocation(), Structure.FORTRESS, 32, false);
+
+                    if (structureSearchResult != null) {
+                        event.setCanCreatePortal(true);
+                        event.setTo(structureSearchResult.getLocation());
+                    }
+                } else {
+                    event.setCanCreatePortal(false);
+                    event.setTo(GameState.firstNetherEntry);
+                }
             }
         }
     }

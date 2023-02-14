@@ -31,7 +31,7 @@ public class EntityDropListener implements Listener {
                     item.setItemStack(new ItemStack(Material.GLOWSTONE, 3));
                     break;
                 case 2:
-                    item.setItemStack(new ItemStack(Material.BOW));
+                    item.setItemStack(new ItemStack(Material.COOKED_BEEF, 3));
                     break;
                 case 3:
                     item.setItemStack(new ItemStack(Material.ENDER_PEARL));

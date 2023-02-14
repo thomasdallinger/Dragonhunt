@@ -26,13 +26,6 @@ public class DimensionListener implements Listener {
         for (PotionEffect effect : player.getActivePotionEffects())
             player.removePotionEffect(effect.getType());
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 9));
-
-        if (player.getWorld().getName().equals("world_the_end")) {
-            player.getInventory().remove(Material.COMPASS);
-        } else {
-            if (!player.getInventory().contains(Material.COMPASS))
-                player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
-        }
     }
 
     /**

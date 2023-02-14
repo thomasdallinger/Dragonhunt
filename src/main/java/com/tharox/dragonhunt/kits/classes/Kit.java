@@ -149,7 +149,7 @@ public abstract class Kit implements Listener {
 
                 if (durationLeft <= 0) {
                     kitAbilityActive = false;
-                    GameState.activeKitAbilities.put(player, false);
+                    GameState.actionBarNeededForKitAbility.put(player, false);
 
                     if (executor != null) {
                         executor.execute();

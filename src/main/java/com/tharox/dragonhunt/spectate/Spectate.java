@@ -40,7 +40,7 @@ public class Spectate {
             @Override
             public void run() {
                 if (duration[0] <= 0) {
-                    GameState.activeKitAbilities.put(player, false);
+                    GameState.actionBarNeededForKitAbility.put(player, false);
                     player.teleport(Spectate.spectateLocation.get(player));
                     player.setGameMode(GameMode.SURVIVAL);
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);

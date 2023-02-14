@@ -26,6 +26,10 @@ public class CreatureSpawnListener implements Listener {
         World world = entity.getWorld();
 
         if (entity instanceof Mob) {
+            if (entity instanceof Ghast) {
+                event.setCancelled(true);
+            }
+
             if (world.getName().equals("world_the_end")) {
                 Random random = new Random();
                 int spawnEnderman = random.nextInt(3) + 1; // values 1-3

@@ -11,19 +11,18 @@ import org.bukkit.potion.PotionEffectType;
 
 @DragonhuntKit
 public class Scout extends Kit {
-    static int duration = Spectate.duration[0];
+    static int duration = (int) Spectate.duration[0];
     static int cooldown = 120;
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Scout";
-    public static final String lore = ChatColor.GRAY + "Be in Spectator Mode for a short time!\n"
-            + ChatColor.GRAY + "Difficulty: " + ChatColor.YELLOW + "✮" + ChatColor.GRAY + "✮✮"
+    public static final String lore = ChatColor.GRAY + "Be in Spectator Mode for a short time!\n\n"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "On activation you will\n"
-            + ChatColor.GRAY + "be put in " + HexColor.SUPPORT + "Spectator Mode" + ChatColor.GRAY + ".\n"
+            + ChatColor.GRAY + "On activation you will be put in "
+            + HexColor.SUPPORT + "Spectator Mode" + ChatColor.GRAY + ".\n\n"
             + ChatColor.GRAY + "Duration: " + HexColor.SUPPORT + duration + " sec\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
     public static final Material material = Material.ENDER_EYE;
-    public static final int slot = 30;
+    public static final int slot = 21;
 
     public Scout(Player player) {
         super(player);

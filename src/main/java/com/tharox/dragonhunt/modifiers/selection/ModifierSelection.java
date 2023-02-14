@@ -19,7 +19,7 @@ public class ModifierSelection {
                 new SpeedyMobs(),
                 new ExplosiveCreepers(),
                 new CaveSpiders(),
-                new DecreasedDeathTime(),
+                new SpeedyComback(),
                 new EndlessNight()));
         mediumImpact.addAll(Arrays.asList(
                 new FireWeakness(),

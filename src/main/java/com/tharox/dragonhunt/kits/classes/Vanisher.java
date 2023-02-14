@@ -15,13 +15,12 @@ public class Vanisher extends Kit {
     static int cooldown = 120;
 
     public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Vanisher";
-    public static final String lore = ChatColor.GRAY + "Disappear in front of your enemies!\n"
+    public static final String lore = ChatColor.GRAY + "Disappear in front of your enemies!\n\n"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "Difficulty: " + ChatColor.YELLOW + "✮" + ChatColor.GRAY + "✮✮"
             + ChatColor.GRAY + "On activation you get " + HexColor.ASSASSIN + "Speed 3"
             + ChatColor.GRAY + " and " + HexColor.ASSASSIN + "Invisibility" + ChatColor.GRAY + ".\n"
             + ChatColor.GRAY + "You cannot take any damage and your inventory\n"
-            + ChatColor.GRAY + "will disappear while your ability is active.\n"
+            + ChatColor.GRAY + "will disappear while your ability is active.\n\n"
             + ChatColor.GRAY + "Duration: " + HexColor.ASSASSIN + duration + " sec\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
     public static final Material material = Material.ENDER_PEARL;

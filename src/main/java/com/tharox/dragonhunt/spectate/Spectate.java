@@ -1,26 +1,23 @@
 package com.tharox.dragonhunt.spectate;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
-import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.HashMap;
 
 public class Spectate {
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
-    public static final int[] duration = {20};
+    public static final double[] duration = {20};
 
     public Spectate(Player player) {
         activateSpectate(player);
@@ -34,11 +31,6 @@ public class Spectate {
         player.setGameMode(GameMode.SPECTATOR);
 
         spectateDurationLeft(player);
-
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + player.getName()
-                    + ChatColor.GRAY + " uses a Spectate.");
-        }
     }
 
     private void spectateDurationLeft(Player player) {
@@ -53,13 +45,18 @@ public class Spectate {
                     cancel();
                 }
 
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString()
-                        + ChatColor.BOLD + duration[0] + ChatColor.YELLOW + ChatColor.BOLD + " SECONDS LEFT"));
-                player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-                duration[0]--;
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
+                        ChatColor.GOLD.toString() + ChatColor.BOLD + String.format("%1.1f", duration[0])
+                                + ChatColor.YELLOW + ChatColor.BOLD + " SECONDS LEFT"));
+
+                if (duration[0] % 1 == 0) {
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+                }
+
+                duration[0] -= 0.1;
             }
 
-        }.runTaskTimer(Main.getInstance(), 20, 20);
+        }.runTaskTimer(Main.getInstance(), 2, 2);
     }
 
     private void addSpectateToDB(Player player) {

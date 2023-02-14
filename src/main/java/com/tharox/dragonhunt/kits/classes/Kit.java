@@ -53,6 +53,7 @@ public abstract class Kit implements Listener {
         ItemStack item = p.getInventory().getItemInMainHand();
 
         if (item.getItemMeta() == null) return;
+        if (item.getItemMeta().getDisplayName().contains("Grappler")) return;
 
         // Check if the Player has the Kit
         if (!p.equals(player)) return;
@@ -66,6 +67,7 @@ public abstract class Kit implements Listener {
                     || item.getItemMeta().getDisplayName().contains(KitClass.TANK)
                     || item.getItemMeta().getDisplayName().contains(KitClass.SUPPORT)
                     || item.getItemMeta().getDisplayName().contains(KitClass.MOBILITY)) {
+
                 // Not able to equip / place the item
                 event.setCancelled(true);
 
@@ -93,6 +95,7 @@ public abstract class Kit implements Listener {
 
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
+        if (item.getItemMeta().getDisplayName().contains("Grappler")) return;
 
         int timeLeft;
 
@@ -187,6 +190,7 @@ public abstract class Kit implements Listener {
         meta.setDisplayName(title);
         meta.setLore(Arrays.asList(lore.split("\n")));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         item.setItemMeta(meta);
@@ -194,6 +198,9 @@ public abstract class Kit implements Listener {
         return item;
     }
 
+    /**
+     * Includes PotionMeta and Color for Potions, Splash Potions, Lingering Potions and Tipped Arrows.
+     */
     public static ItemStack getDisplayItem(String title, Material material, String lore, Color color) {
         ItemStack item = new ItemStack(material);
         item.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
@@ -205,6 +212,7 @@ public abstract class Kit implements Listener {
         meta.setLore(Arrays.asList(lore.split("\n")));
         meta.setColor(color);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 
         item.setItemMeta(meta);

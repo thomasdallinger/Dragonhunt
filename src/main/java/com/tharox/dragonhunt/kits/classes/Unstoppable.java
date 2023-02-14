@@ -8,19 +8,19 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+@DragonhuntKit
 public class Unstoppable extends Kit {
     static int duration = 10;
     static int cooldown = 120;
 
     public static final String title = HexColor.TANK + KitClass.TANK + " Unstoppable";
-    public static final String lore = ChatColor.GRAY + "Become unstoppable for a short time!\n"
-            + ChatColor.GRAY + "Difficulty: " + ChatColor.YELLOW + "✮" + ChatColor.GRAY + "✮✮"
+    public static final String lore = ChatColor.GRAY + "Become unstoppable for a short time!\n\n"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "On activation you become " + HexColor.TANK + "invulnerable\n"
-            + ChatColor.GRAY + "to all incoming damage.\n"
+            + ChatColor.GRAY + "to all incoming damage.\n\n"
             + ChatColor.GRAY + "Duration: " + HexColor.TANK + duration + " sec\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
-    public static final Material material = Material.SHIELD;
+    public static final Material material = Material.BARRIER;
     public static final int slot = 11;
 
     public Unstoppable(Player player) {

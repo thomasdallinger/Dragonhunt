@@ -48,12 +48,11 @@ public class EntityDeathListener implements Listener {
                 crossbow.addEnchantment(Enchantment.QUICK_CHARGE, 3);
 
                 if (killer != null) {
-                    for (ItemStack item : killer.getInventory()) {
-                        if (item != null && item.getType() == Material.CROSSBOW) {
-                            mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 3));
-                        } else {
-                            mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(crossbow));
-                        }
+                    if (killer.getInventory().contains(Material.CROSSBOW)) {
+                        mob.getWorld().dropItemNaturally(mob.getLocation(),
+                                new ItemStack(Material.IRON_INGOT, 3));
+                    } else {
+                        mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(crossbow));
                     }
                 }
                 break;

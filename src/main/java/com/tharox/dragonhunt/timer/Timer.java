@@ -55,22 +55,26 @@ public class Timer {
             if (item.getItemMeta() != null) {
                 if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Tracker"))
                     continue;
-                if (item.getItemMeta().getDisplayName().contains(KitClass.ASSASSIN)
+
+                // Grappler shows the Timer - has no cooldown / duration to display
+                if ((item.getItemMeta().getDisplayName().contains(KitClass.ASSASSIN)
                         || item.getItemMeta().getDisplayName().contains(KitClass.TANK)
                         || item.getItemMeta().getDisplayName().contains(KitClass.SUPPORT)
                         || item.getItemMeta().getDisplayName().contains(KitClass.MOBILITY))
+                        && !item.getItemMeta().getDisplayName().contains("Grappler"))
                     continue;
             }
 
+            // NOT NEEDED cause ifRunning = false -> sendActionBar isn't called
             // if the player is in Spectator mode, the time wont get displayed (Spectate or after the game ended)
-            if (player.getGameMode().equals(GameMode.SPECTATOR)) continue;
+            //if (player.getGameMode().equals(GameMode.SPECTATOR)) continue;
 
             // display the time
             // if the last 10 minutes have arrived, the time will get displayed in red
             ChatColor color = ChatColor.GOLD;
 
-            if (getTime() >= 2400) {
-                color = HexColor.RED;
+            if (getTime() >= 1500) {
+                color = ChatColor.DARK_RED;
             }
 
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR,

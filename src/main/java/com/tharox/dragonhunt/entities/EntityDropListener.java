@@ -68,7 +68,7 @@ public class EntityDropListener implements Listener {
                 itemToDrop = new ItemStack(Material.ENDER_PEARL, 2);
                 break;
             case 9:
-                itemToDrop = new ItemStack(Material.FLINT_AND_STEEL);
+                itemToDrop = new ItemStack(Material.STRING, 3);
                 break;
             case 10:
                 itemToDrop = createPotion(false, PotionEffectType.FIRE_RESISTANCE, Color.ORANGE,

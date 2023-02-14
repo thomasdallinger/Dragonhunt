@@ -28,15 +28,6 @@ public class BlockPlaceListener implements Listener {
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are not allowed to place this block.");
         }
 
-        // prevent players from bed bombing in the NETHER
-        if (world.getName().equals("world_nether")) {
-            if (block.getType() == Material.WHITE_BED) {
-                event.setCancelled(true);
-                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You cannot place Beds in the Nether.");
-            }
-        }
-
         // prevent players from bed / anchor bombing in the END
         if (world.getName().equals("world_the_end")) {
             if (block.getType() == Material.WHITE_BED || block.getType() == Material.RESPAWN_ANCHOR) {

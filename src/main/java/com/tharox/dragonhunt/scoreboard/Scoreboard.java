@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.players.PlayerEndTeleport;
 import com.tharox.dragonhunt.timer.Countdown;
@@ -31,8 +32,9 @@ public class Scoreboard extends ScoreboardBuilder {
         LocalDateTime now = LocalDateTime.now();
 
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
-                + DbValues.getServerID() + "]", 9);
-        setScore(ChatColor.WHITE + "12x1" + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE + "Casual", 8);
+                + DbValues.getServerID() + "]", 10);
+        setScore(ChatColor.WHITE + "12x1" + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE + "Casual", 9);
+        setScore("", 8);
         setScore("", 7);
         setScore("", 6);
         setScore("", 5);
@@ -46,24 +48,31 @@ public class Scoreboard extends ScoreboardBuilder {
     @Override
     public void update(Player player, Countdown countdown) {
         if (GameState.selectedKit.containsKey(player)) {
-            setScore(GameState.selectedKit.get(player), 6);
+            setScore(GameState.selectedKit.get(player), 7);
         }
 
         setScore("☻ " + Bukkit.getOnlinePlayers().size() + " "
                 + "☠ " + DbValues.getKills(player, true) + " "
-                + "✟ " + DbValues.getKills(player, false), 5);
+                + "✟ " + DbValues.getKills(player, false), 6);
 
         if (timer.getTime() <= 1500) {
             setScore(ChatColor.WHITE + "✮ " + ChatColor.DARK_PURPLE + PlayerEndTeleport.getEyesNeeded()
                     + ChatColor.DARK_GRAY + " » "
-                    + ChatColor.WHITE + countdownFormat(1500 - timer.getTime()), 3);
+                    + ChatColor.WHITE + countdownFormat(1500 - timer.getTime()), 4);
         } else {
             setScore(ChatColor.WHITE + "✮ " + ChatColor.DARK_PURPLE + PlayerEndTeleport.getEyesNeeded(),
                     3);
         }
 
         setScore(ChatColor.WHITE + "⛃ " + HexColor.HIGHLIGHT + Coins.getCoins(player)
-                + ChatColor.DARK_GRAY + " » " + ChatColor.WHITE + countdownFormat(countdown.getTime()), 2);
+                + ChatColor.DARK_GRAY + " » " + ChatColor.WHITE + countdownFormat(countdown.getTime()), 3);
+
+        if (player.getWorld().getName().equals("world_nether")) {
+            setScore(ChatColor.WHITE + "♦ " + ChatColor.DARK_GRAY + EntityDropListener.nextDrop, 2);
+        } else {
+            setScore("", 2);
+        }
+
         setScore(ChatColor.GOLD + "ᴅʀᴀɢᴏɴʜᴜɴᴛ.ɴᴇᴛ", 0);
     }
 

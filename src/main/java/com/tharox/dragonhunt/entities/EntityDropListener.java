@@ -14,7 +14,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class EntityDropListener implements Listener {
-    public Integer totalPiglinTrades = 0;
+    public Integer dropIndex = 0; // Starts at 0 but is incremented on the first event call.
+    public static String nextDrop = "GLOWSTONE"; // Drop with dropIndex 1.
 
     @EventHandler
     public void onMobDrop(EntityDropItemEvent event) {
@@ -22,45 +23,63 @@ public class EntityDropListener implements Listener {
         Item item = event.getItemDrop();
 
         if (mob.getName().equals("Piglin")) {
-            totalPiglinTrades++;
-            if (totalPiglinTrades > 10)
-                totalPiglinTrades = 1;
+            dropIndex++;
+            if (dropIndex > 10)
+                dropIndex = 1;
 
-            switch (totalPiglinTrades) {
-                case 1:
-                    item.setItemStack(new ItemStack(Material.GLOWSTONE, 3));
-                    break;
-                case 2:
-                    item.setItemStack(new ItemStack(Material.COOKED_BEEF, 3));
-                    break;
-                case 3:
-                    item.setItemStack(new ItemStack(Material.ENDER_PEARL));
-                    break;
-                case 4:
-                    item.setItemStack(new ItemStack(Material.CRYING_OBSIDIAN, 3));
-                    break;
-                case 5:
-                    item.setItemStack(new ItemStack(Material.BLACKSTONE, 12));
-                    break;
-                case 6:
-                    item.setItemStack(new ItemStack(Material.OBSIDIAN, 2));
-                    break;
-                case 7:
-                    item.setItemStack(createPotion(true, PotionEffectType.HARM, Color.MAROON,
-                            "Harming"));
-                    break;
-                case 8:
-                    item.setItemStack(new ItemStack(Material.ENDER_PEARL, 2));
-                    break;
-                case 9:
-                    item.setItemStack(new ItemStack(Material.FLINT_AND_STEEL));
-                    break;
-                case 10:
-                    item.setItemStack(createPotion(false, PotionEffectType.FIRE_RESISTANCE, Color.ORANGE,
-                            "Fire Resistance"));
-                    break;
+            item.setItemStack(getDrop(dropIndex));
+
+            if ((dropIndex + 1) > 10) {
+                nextDrop = getDrop(dropIndex - 9).getType().toString().replace("_", " ");
+            } else {
+                nextDrop = getDrop(dropIndex + 1).getType().toString().replace("_", " ");
             }
+
         }
+    }
+
+    public ItemStack getDrop(int dropIndex) {
+        ItemStack itemToDrop;
+
+        switch (dropIndex) {
+            case 1:
+                itemToDrop = new ItemStack(Material.GLOWSTONE, 3);
+                break;
+            case 2:
+                itemToDrop = new ItemStack(Material.COOKED_BEEF, 3);
+                break;
+            case 3:
+                itemToDrop = new ItemStack(Material.ENDER_PEARL);
+                break;
+            case 4:
+                itemToDrop = new ItemStack(Material.CRYING_OBSIDIAN, 3);
+                break;
+            case 5:
+                itemToDrop = new ItemStack(Material.BLACKSTONE, 12);
+                break;
+            case 6:
+                itemToDrop = new ItemStack(Material.OBSIDIAN, 2);
+                break;
+            case 7:
+                itemToDrop = createPotion(true, PotionEffectType.HARM, Color.MAROON,
+                        "Harming");
+                break;
+            case 8:
+                itemToDrop = new ItemStack(Material.ENDER_PEARL, 2);
+                break;
+            case 9:
+                itemToDrop = new ItemStack(Material.FLINT_AND_STEEL);
+                break;
+            case 10:
+                itemToDrop = createPotion(false, PotionEffectType.FIRE_RESISTANCE, Color.ORANGE,
+                        "Fire Resistance");
+                break;
+            default:
+                // Unexpected Value.
+                itemToDrop = new ItemStack(Material.AIR);
+        }
+
+        return itemToDrop;
     }
 
     public ItemStack createPotion(boolean splash, PotionEffectType effect, Color color, String title) {

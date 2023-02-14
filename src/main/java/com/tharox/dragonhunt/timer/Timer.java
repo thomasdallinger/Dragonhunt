@@ -73,7 +73,7 @@ public class Timer {
             ChatColor color = ChatColor.GOLD;
 
             if (getTime() >= 1500) {
-                color = ChatColor.DARK_RED;
+                color = HexColor.RED;
             }
 
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR,

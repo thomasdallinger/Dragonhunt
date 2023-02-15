@@ -34,11 +34,14 @@ public class AdvancementListener implements Listener {
                 break;
             case "minecraft:story/enter_the_nether":
                 advancementName = "Enter Nether";
+
                 if (GameState.firstNetherEntry == null) {
                     GameState.firstNetherEntry = player.getLocation();
                     addBonusXP(player, "Nether");
                     GameState.distanceScore = getDistanceScore(player);
                 }
+
+                player.performCommand("pos NetherPortal");
                 break;
             case "minecraft:nether/distract_piglin":
                 advancementName = "Piglin Trading";

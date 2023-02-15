@@ -41,9 +41,57 @@ public class PositionCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length != 1) {
-            player.sendMessage(Prefixes.getErrorPrefix() + "Use "
-                    + HexColor.RED + "/pos [name]" + ChatColor.RED + " to add a position.");
+        if (args.length == 0) {
+            if (positions.containsKey(player)) {
+                player.sendMessage(ChatColor.DARK_GREEN + "Your Positions:");
+
+                for (Position position : positions.get(player)) {
+                    player.sendMessage(position.toString());
+                }
+
+            } else {
+                player.sendMessage(Prefixes.getErrorPrefix() + "You have not created a position yet. " +
+                        "Use " + HexColor.RED + "/pos <name>" + ChatColor.RED + " to do so.");
+            }
+
+            return true;
+        }
+
+        if (args.length == 2 && args[0].equals("tp")) {
+            if (positions.containsKey(player)) {
+                for (Position position : positions.get(player)) {
+                    if (position.getName().equals(args[1])) {
+                        // Player has to have at least 5 hearts.
+                        if (player.getHealth() >= 10.0) {
+                            player.teleport(position.getLocation());
+                            player.sendMessage(Prefixes.getTrackingPrefix() + "Teleport to "
+                                    + ChatColor.DARK_GREEN + position.getName() + ChatColor.GRAY + " successful.");
+                        } else {
+                            player.sendMessage(Prefixes.getErrorPrefix() + "You need to have at least 5 hearts " +
+                                    "to execute a position teleport.");
+                            return true;
+                        }
+                        return true;
+                    }
+                }
+
+                player.sendMessage(Prefixes.getErrorPrefix() + "Position name " + HexColor.RED + args[1]
+                        + ChatColor.RED + " not found. Use /pos to see your positions.");
+
+            } else {
+                player.sendMessage(Prefixes.getErrorPrefix() + "You have not created a position yet. " +
+                        "Use " + HexColor.RED + "/pos <name>" + ChatColor.RED + " to do so.");
+            }
+            return true;
+        }
+
+        if (args.length == 2 || args.length > 2) {
+            player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.YELLOW + "/pos"
+                    + ChatColor.GRAY + " to see all your positions.");
+            player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.YELLOW + "/pos <name>"
+                    + ChatColor.GRAY + " to add a position.");
+            player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.YELLOW + "/pos tp <name>" +
+                    ChatColor.GRAY + " to teleport to a position.");
             return true;
         }
 

@@ -112,7 +112,7 @@ public class Tracker implements Listener {
                 playerTracksName.put(player, "[P] " + allOtherPlayers.get(index).getName());
                 playerTracksLocation.put(player, allOtherPlayers.get(index).getLocation());
                 player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
-                        + ChatColor.YELLOW + playerTracksName.get(player).substring(6) + ChatColor.GRAY + ".");
+                        + ChatColor.YELLOW + playerTracksName.get(player).substring(4) + ChatColor.GRAY + ".");
 
                 playerTracksIndex.replace(player, index);
             }

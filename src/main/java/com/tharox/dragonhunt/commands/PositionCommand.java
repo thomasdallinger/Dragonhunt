@@ -61,13 +61,16 @@ public class PositionCommand implements CommandExecutor {
             if (positions.containsKey(player)) {
                 for (Position position : positions.get(player)) {
                     if (position.getName().equals(args[1])) {
-                        // Player has to have at least 5 hearts.
-                        if (player.getHealth() >= 10.0) {
+                        // Player has to have more than 5 hearts.
+                        // Players lose 5 hearts upon teleportation.
+                        if (player.getHealth() > 10.0) {
                             player.teleport(position.getLocation());
+                            player.setHealth(player.getHealth() - 10.0);
+                            player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
                             player.sendMessage(Prefixes.getTrackingPrefix() + "Teleport to "
                                     + ChatColor.DARK_GREEN + position.getName() + ChatColor.GRAY + " successful.");
                         } else {
-                            player.sendMessage(Prefixes.getErrorPrefix() + "You need to have at least 5 hearts " +
+                            player.sendMessage(Prefixes.getErrorPrefix() + "You need to have more than 5 hearts " +
                                     "to execute a position teleport.");
                             return true;
                         }

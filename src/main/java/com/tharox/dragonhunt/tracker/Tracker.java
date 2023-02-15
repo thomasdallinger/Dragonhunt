@@ -5,7 +5,6 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.commands.PositionCommand;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -26,10 +25,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.StructureSearchResult;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Tracker functionality
@@ -64,32 +61,23 @@ public class Tracker implements Listener {
         LinkedList<Location> locationList = new LinkedList<>();
 
         if (world.getName().equals("world")) {
-            addStructureTypeToLists(player, StructureType.SHIPWRECK, "Shipwreck", structureList,
-                    locationList);
             addStructureToLists(player, Structure.ANCIENT_CITY, "Ancient City", structureList,
                     locationList);
             addStructureToLists(player, Structure.MINESHAFT, "Mineshaft", structureList,
                     locationList);
 
         } else if (world.getName().equals("world_nether")) {
-            addStructureToLists(player, Structure.FORTRESS, "Fortress", structureList,
-                    locationList);
             addStructureToLists(player, Structure.BASTION_REMNANT, "Bastion", structureList,
                     locationList);
-
-            if (GameState.firstNetherEntry != null) {
-                structureList.add("Nether Portal");
-                locationList.add(GameState.firstNetherEntry);
-            }
         }
 
-        // locate a Ruined Portal in the OVERWORLD and the NETHER (Tracker disabled in the End)
+        // locate a Ruined Portal in the OVERWORLD and the NETHER (Tracker not available in the End)
         addStructureTypeToLists(player, StructureType.RUINED_PORTAL, "Ruined Portal", structureList,
                 locationList);
 
         if (e.equals(EquipmentSlot.HAND)
                 && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Tracker")) {
+            if (item.getItemMeta().getDisplayName().contains("Tracker")) {
 
                 if (!PositionCommand.positions.containsKey(player)) { // 0 positions added
                     player.setSneaking(false);
@@ -97,23 +85,34 @@ public class Tracker implements Listener {
 
                 index++;    // switch the located structure / position (if sneaking)
 
-                if (player.isSneaking()) {
-                    if (index > PositionCommand.positions.get(player).size() - 1)
-                        index = 0;
+                if (index > locationList.size() - 1)
+                    index = 0;
 
-                    playerTracksName.put(player, "[POS] " + PositionCommand.positions.get(player).get(index).getName());
-                    playerTracksLocation.put(player, PositionCommand.positions.get(player).get(index).getLocation());
-                    player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
-                            + ChatColor.DARK_GREEN + playerTracksName.get(player).substring(6) + ChatColor.GRAY + ".");
-                } else {
-                    if (index > locationList.size() - 1)
-                        index = 0;
+                playerTracksName.put(player, structureList.get(index));
+                playerTracksLocation.put(player, locationList.get(index));
+                player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
+                        + ChatColor.GOLD + playerTracksName.get(player) + ChatColor.GRAY + ".");
 
-                    playerTracksName.put(player, structureList.get(index));
-                    playerTracksLocation.put(player, locationList.get(index));
-                    player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
-                            + ChatColor.GOLD + playerTracksName.get(player) + ChatColor.GRAY + ".");
-                }
+                playerTracksIndex.replace(player, index);
+            }
+        }
+
+        if (e.equals(EquipmentSlot.HAND)
+                && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
+            if (item.getItemMeta().getDisplayName().contains("Tracker")) {
+                LinkedList<Player> playerList = new LinkedList<>(Bukkit.getServer().getOnlinePlayers());
+                List<Player> allOtherPlayers = playerList.stream().filter(o -> !(o.getName().equals(player.getName())))
+                        .collect(Collectors.toList());
+
+                index++;    // switch the located player
+
+                if (index > allOtherPlayers.size() - 1)
+                    index = 0;
+
+                playerTracksName.put(player, "[P] " + allOtherPlayers.get(index).getName());
+                playerTracksLocation.put(player, allOtherPlayers.get(index).getLocation());
+                player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
+                        + ChatColor.YELLOW + playerTracksName.get(player).substring(6) + ChatColor.GRAY + ".");
 
                 playerTracksIndex.replace(player, index);
             }
@@ -135,18 +134,18 @@ public class Tracker implements Listener {
             try {
                 if (trackedObject == null) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new ComponentBuilder("RIGHT-CLICK: ").color(ChatColor.GOLD).bold(true)
-                                    .append("Structure").color(ChatColor.WHITE).bold(false)
+                            new ComponentBuilder("LEFT-CLICK: ").color(ChatColor.WHITE).bold(true)
+                                    .append("Player").color(ChatColor.YELLOW).bold(false)
                                     .append(" | ").color(ChatColor.DARK_GRAY)
-                                    .append("SHIFT + RIGHT-CLICK: ").color(ChatColor.DARK_GREEN).bold(true)
-                                    .append("Position").color(ChatColor.WHITE).bold(false).create());
+                                    .append("RIGHT-CLICK: ").color(ChatColor.WHITE).bold(true)
+                                    .append("Structure").color(ChatColor.GOLD).bold(false).create());
 
                     return;
                 }
 
-                if (trackedObject.contains("[POS]")) {
-                    trackedObjectName = ChatColor.DARK_GREEN.toString() + ChatColor.BOLD
-                            + trackedObject.substring(6).toUpperCase() + ChatColor.DARK_GRAY + " » ";
+                if (trackedObject.contains("[P]")) {
+                    trackedObjectName = ChatColor.YELLOW.toString() + ChatColor.BOLD
+                            + trackedObject.substring(4).toUpperCase() + ChatColor.DARK_GRAY + " » ";
                 } else {
                     trackedObjectName = ChatColor.GOLD.toString() + ChatColor.BOLD + trackedObject.toUpperCase()
                             + ChatColor.DARK_GRAY + " » ";
@@ -156,7 +155,7 @@ public class Tracker implements Listener {
 
                 // do not show "In close proximity" when tracking a position
                 // but still needed to make it easier to find structures since the coords provided are not very accurate
-                if (distance < 100 && !trackedObject.contains("[POS]")) {
+                if (distance < 75 && !trackedObject.contains("[P]")) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(trackedObjectName)
                             .append("In close proximity").color(HexColor.GREEN).create());
                 } else {
@@ -235,12 +234,13 @@ public class Tracker implements Listener {
         meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Tracker");
         meta.setLore(Arrays.asList(
                 ChatColor.GRAY + "Displays the distance towards different",
-                ChatColor.GRAY + "structures and positions.",
+                ChatColor.GRAY + "players and structures.",
                 ChatColor.GRAY + "The compass needle points to the",
-                ChatColor.GRAY + "tracked structure/position location.",
+                ChatColor.GRAY + "tracked location.",
                 "",
-                ChatColor.GRAY + "Right-Click: " + ChatColor.GOLD + "Switch tracked structure",
-                ChatColor.GRAY + "Shift + Right-Click: " + ChatColor.DARK_GREEN + "Switch tracked position"));
+                ChatColor.GRAY + "Left-Click: " + ChatColor.YELLOW + "Switch tracked player",
+                ChatColor.GRAY + "Right-Click: " + ChatColor.GOLD + "Switch tracked structure"));
+
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
 

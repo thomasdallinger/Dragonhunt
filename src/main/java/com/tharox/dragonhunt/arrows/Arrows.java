@@ -73,12 +73,12 @@ public class Arrows {
     }
 
     private ItemStack createEffectArrow(PotionEffectType effect, Color color) {
-        int duration = 120; // In ticks.
-        int amplifier = 1;
+        int duration = 140; // In ticks.
+        int amplifier = 2;
 
         if (EnhancedArrowEffects.active) {
-            duration = 160;
-            amplifier = 2;
+            duration = 180;
+            amplifier = 3;
         }
 
         ItemStack item = new ItemStack(Material.TIPPED_ARROW);

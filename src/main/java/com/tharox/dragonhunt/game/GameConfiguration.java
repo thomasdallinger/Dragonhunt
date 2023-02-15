@@ -23,7 +23,7 @@ public class GameConfiguration {
         World overworld = Bukkit.getServer().getWorld("world");
 
         if (overworld == null) {
-            Bukkit.getServer().broadcastMessage(Prefixes.getErrorPrefix() + HexColor.RED + "World name is incorrect.");
+            Bukkit.getServer().broadcastMessage(Prefixes.getErrorPrefix() + "World name is incorrect.");
             return;
         }
 

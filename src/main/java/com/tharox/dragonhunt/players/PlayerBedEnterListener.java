@@ -12,7 +12,7 @@ public class PlayerBedEnterListener implements Listener {
     @EventHandler
     public void onBedEnter(PlayerBedEnterEvent event) {
         Player player = event.getPlayer();
-        player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "Sleeping is not allowed.");
+        player.sendMessage(Prefixes.getErrorPrefix() + "Sleeping is not allowed.");
         event.setCancelled(true);
     }
 }

@@ -41,24 +41,23 @@ public class EnchantingListener implements Listener {
         // ERROR: enchantment already bought
         if (enchantment.contains("ᴜɴʟᴏᴄᴋᴇᴅ")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You have already bought this enchantment!");
+            player.sendMessage(Prefixes.getErrorPrefix() + "You have already bought this enchantment!");
             return;
         }
 
         // ERROR: enchantment level not unlocked
         if (enchantment.contains("ʟᴏᴄᴋᴇᴅ")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY
-                    + "Purchase the previous level to unlock this one!");
+            player.sendMessage(Prefixes.getErrorPrefix() + "Purchase the previous level to unlock this one!");
             return;
         }
 
         // ERROR: not enough points to purchase the enchantment
         if (Coins.getCoins(player) < EnchantingInventory.enchantmentCost.get(enchantment)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You don't have enough coins! Need "
+            player.sendMessage(Prefixes.getErrorPrefix() + "You don't have enough coins! Need "
                     + HexColor.RED + (EnchantingInventory.enchantmentCost.get(enchantment) - Coins.getCoins(player))
-                    + ChatColor.GRAY + " more.");
+                    + ChatColor.RED + " more.");
             return;
         }
 

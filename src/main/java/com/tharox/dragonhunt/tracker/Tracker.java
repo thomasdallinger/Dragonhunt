@@ -91,11 +91,6 @@ public class Tracker implements Listener {
                 && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Tracker")) {
 
-                if (world.getName().equals("world_the_end")) {
-                    player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "Tracker disabled in the End.");
-                    return;
-                }
-
                 if (!PositionCommand.positions.containsKey(player)) { // 0 positions added
                     player.setSneaking(false);
                 }
@@ -138,13 +133,6 @@ public class Tracker implements Listener {
 
         if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Tracker")) {
             try {
-
-                if (player.getWorld().getName().equals("world_the_end")) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new ComponentBuilder("DISABLED IN THE END").color(HexColor.RED).bold(true).create());
-                    return;
-                }
-
                 if (trackedObject == null) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
                             new ComponentBuilder("RIGHT-CLICK: ").color(ChatColor.GOLD).bold(true)

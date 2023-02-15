@@ -42,8 +42,8 @@ public class BlockBreakListener implements Listener {
                     block.getType() == Material.OBSIDIAN) {
                 event.setCancelled(true);
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are not allowed to break "
-                        + HexColor.RED + "Obsidian" + ChatColor.GRAY + " close to this Nether Portal.");
+                player.sendMessage(Prefixes.getErrorPrefix() + "You are not allowed to break "
+                        + HexColor.RED + "Obsidian" + ChatColor.RED + " close to this Nether Portal.");
                 return;
             }
         }
@@ -52,7 +52,7 @@ public class BlockBreakListener implements Listener {
         if (block.getType() == Material.SPAWNER) {
             event.setCancelled(true);
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are not allowed to break Spawners.");
+            player.sendMessage(Prefixes.getErrorPrefix() + "You are not allowed to break Spawners.");
             return;
         }
 

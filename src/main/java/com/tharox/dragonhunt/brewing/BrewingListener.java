@@ -68,15 +68,14 @@ public class BrewingListener implements Listener {
         // effect already bought
         if (effectName.contains("ᴜɴʟᴏᴄᴋᴇᴅ")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You have already bought this effect!");
+            player.sendMessage(Prefixes.getErrorPrefix() + "You have already bought this effect!");
             return;
         }
 
         // effect level not unlocked
         if (effectName.contains("ʟᴏᴄᴋᴇᴅ")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY
-                    + "Purchase the previous level to unlock this one!");
+            player.sendMessage(Prefixes.getErrorPrefix() + "Purchase the previous level to unlock this one!");
             return;
         }
 
@@ -99,9 +98,9 @@ public class BrewingListener implements Listener {
         // not enough coins to purchase the effect
         if (Coins.getCoins(player) < BrewingInventory.effectCost.get(effectName)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You don't have enough coins! Need "
+            player.sendMessage(Prefixes.getErrorPrefix() + "You don't have enough coins! Need "
                     + HexColor.RED + (BrewingInventory.effectCost.get(effectName) - Coins.getCoins(player))
-                    + ChatColor.GRAY + " more.");
+                    + ChatColor.RED + " more.");
             return;
         }
 

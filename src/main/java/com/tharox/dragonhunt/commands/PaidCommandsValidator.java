@@ -14,15 +14,15 @@ public class PaidCommandsValidator {
 
     public static boolean commandExecutionIsValid(Player player, int cost) {
         if (!timer.isRunning()) {
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "This feature is currently disabled.");
+            player.sendMessage(Prefixes.getErrorPrefix() + "This feature is currently disabled.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return false;
         }
 
         if (Coins.getCoins(player) < cost) {
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You don't have enough coins! Need "
+            player.sendMessage(Prefixes.getErrorPrefix() + "You don't have enough coins! Need "
                     + HexColor.RED + (cost - Coins.getCoins(player))
-                    + ChatColor.GRAY + " more.");
+                    + ChatColor.RED + " more.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return false;
         }

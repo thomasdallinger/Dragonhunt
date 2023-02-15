@@ -23,8 +23,8 @@ public class BucketEmptyListener implements Listener {
                     && bucket.toString().contains("LAVA")) {
                 event.setCancelled(true);
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are not allowed to place "
-                        + HexColor.RED + "Lava" + ChatColor.GRAY + " close to this Nether Portal.");
+                player.sendMessage(Prefixes.getErrorPrefix() + "You are not allowed to place "
+                        + HexColor.RED + "Lava" + ChatColor.RED + " close to this Nether Portal.");
             }
         }
 
@@ -34,8 +34,8 @@ public class BucketEmptyListener implements Listener {
                     && bucket.toString().contains("LAVA")) {
                 event.setCancelled(true);
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are not allowed to place "
-                        + HexColor.RED + "Lava" + ChatColor.GRAY + " near the End Spawn Platform.");
+                player.sendMessage(Prefixes.getErrorPrefix() + "You are not allowed to place "
+                        + HexColor.RED + "Lava" + ChatColor.RED + " near the End Spawn Platform.");
             }
         }
     }

@@ -56,7 +56,7 @@ public class GameStart extends GameConfiguration {
      */
     public void onCountdown(int time) {
         if (overworld == null) {
-            Bukkit.getServer().broadcastMessage(Prefixes.getErrorPrefix() + HexColor.RED + "World name is incorrect.");
+            Bukkit.getServer().broadcastMessage(Prefixes.getErrorPrefix() + "World name is incorrect.");
             return;
         }
 

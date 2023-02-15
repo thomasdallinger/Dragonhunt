@@ -63,7 +63,7 @@ public class GameState {
             // index 0 = max. only 1 item in the HashMap
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(Prefixes.getErrorPrefix() + HexColor.RED + "Inventory full! "
-                    + ChatColor.GRAY + "Item dropped on the ground.");
+                    + ChatColor.RED + "Item dropped on the ground.");
         }
     }
 

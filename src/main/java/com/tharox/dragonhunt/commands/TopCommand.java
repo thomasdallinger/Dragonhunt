@@ -33,7 +33,7 @@ public class TopCommand implements CommandExecutor {
         z = player.getLocation().getZ();
 
         if (player.getLocation().getY() > world.getHighestBlockYAt((int) x, (int) z)) {
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "Already on the surface.");
+            player.sendMessage(Prefixes.getErrorPrefix() + "Already on the surface.");
             return true;
         }
 

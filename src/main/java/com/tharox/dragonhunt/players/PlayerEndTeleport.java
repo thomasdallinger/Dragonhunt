@@ -47,13 +47,12 @@ public class PlayerEndTeleport implements Listener {
                 event.setCancelled(true); // do not place the end stone block
 
                 if (world.getName().equals("world_the_end")) {
-                    player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "Already in the END dimension.");
+                    player.sendMessage(Prefixes.getErrorPrefix() + "Already in the End dimension.");
                     return;
                 }
 
                 if (CombatListener.combatList.containsKey(player.getUniqueId())) {
-                    player.sendMessage(Prefixes.getErrorPrefix()
-                            + ChatColor.GRAY + "This teleporter is blocked while in combat.");
+                    player.sendMessage(Prefixes.getErrorPrefix() + "This teleporter is blocked while in combat.");
                     return;
                 }
 

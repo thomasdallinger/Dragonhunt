@@ -30,26 +30,26 @@ public class PositionCommand implements CommandExecutor {
         } else return true;
 
         if (!timer.isRunning()) {
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "This feature is currently disabled.");
+            player.sendMessage(Prefixes.getErrorPrefix() + "This feature is currently disabled.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
 
         if (player.getWorld().getName().equals("world_the_end")) {
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "This feature is disabled in the End.");
+            player.sendMessage(Prefixes.getErrorPrefix() + "This feature is disabled in the End.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
         }
 
         if (args.length != 1) {
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "Use "
-                    + HexColor.RED + "/pos [name]" + ChatColor.GRAY + " to add a position.");
+            player.sendMessage(Prefixes.getErrorPrefix() + "Use "
+                    + HexColor.RED + "/pos [name]" + ChatColor.RED + " to add a position.");
             return true;
         }
 
         // add a position
         if (args[0].length() > 20) {
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY
+            player.sendMessage(Prefixes.getErrorPrefix()
                     + "Failed to create a position. Name too long (max. length: 20 characters).");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return true;
@@ -62,7 +62,7 @@ public class PositionCommand implements CommandExecutor {
             updatedList.add(new Position(args[0], player.getLocation())); // add new position
 
             if (updatedList.size() > 20) {
-                player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY
+                player.sendMessage(Prefixes.getErrorPrefix()
                         + "Failed to create a position. You have exceeded the limit of 20 positions.");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                 return true;

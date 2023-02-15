@@ -35,7 +35,7 @@ public class Prefixes {
 
     // ERROR: when a player is not allowed to do something or is doing something wrong
     public static String getErrorPrefix() {
-        return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "✖✖✖" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+        return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "✖✖✖" + ChatColor.DARK_GRAY + "] " + ChatColor.RED;
     }
 
     // DEATH: when a player dies

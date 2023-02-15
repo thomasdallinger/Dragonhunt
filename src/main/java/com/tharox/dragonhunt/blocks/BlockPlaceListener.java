@@ -24,7 +24,7 @@ public class BlockPlaceListener implements Listener {
                 || block.getType() == Material.CHEST_MINECART || block.getType() == Material.REDSTONE) {
             event.setCancelled(true);
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are not allowed to place this block.");
+            player.sendMessage(Prefixes.getErrorPrefix() + "You are not allowed to place this block.");
         }
 
         // prevent players from bed / anchor bombing in the END
@@ -32,8 +32,8 @@ public class BlockPlaceListener implements Listener {
             if (block.getType() == Material.WHITE_BED || block.getType() == Material.RESPAWN_ANCHOR) {
                 event.setCancelled(true);
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY
-                        + "You cannot place Beds or Respawn Anchors in the Nether.");
+                player.sendMessage(Prefixes.getErrorPrefix()
+                        + "You cannot place Beds or Respawn Anchors in the End.");
             }
         }
     }

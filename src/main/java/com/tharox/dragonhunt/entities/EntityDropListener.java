@@ -46,7 +46,7 @@ public class EntityDropListener implements Listener {
                 itemToDrop = new ItemStack(Material.GLOWSTONE, 3);
                 break;
             case 2:
-                itemToDrop = new ItemStack(Material.COOKED_BEEF, 3);
+                itemToDrop = new ItemStack(Material.APPLE, 3);
                 break;
             case 3:
                 itemToDrop = new ItemStack(Material.ENDER_PEARL);

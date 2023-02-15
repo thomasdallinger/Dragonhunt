@@ -79,17 +79,6 @@ public class BlockBreakListener implements Listener {
 
             event.setCancelled(true);
 
-            if (GameState.treesDestroyed.containsKey(player))
-                GameState.treesDestroyed.put(player, GameState.treesDestroyed.get(player) + 1);
-            else
-                GameState.treesDestroyed.put(player, 1); // first tree destroyed
-
-            if (GameState.treesDestroyed.get(player) % 6 == 0) // every sixth tree drops an apple
-                GameState.putItemInInventory(player, new ItemStack(Material.APPLE));
-
-            if (GameState.treesDestroyed.get(player) % 12 == 0) // every twelfth tree drops a golden apple
-                GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE));
-
             return;
         }
 
@@ -119,14 +108,14 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.GOLD_NUGGET, new ItemStack(Material.GOLD_INGOT, 2)); // Nether Gold Ore
         materials.put(Material.GILDED_BLACKSTONE, new ItemStack(Material.GOLD_INGOT, 2));
         materials.put(Material.GRAVEL, new ItemStack(Material.FLINT)); // for Flint and Steel
-        materials.put(Material.MELON_SLICE, new ItemStack(Material.GOLDEN_CARROT));
-        materials.put(Material.WHEAT, new ItemStack(Material.GOLDEN_CARROT));
-        materials.put(Material.CARROT, new ItemStack(Material.GOLDEN_CARROT));
-        materials.put(Material.POTATO, new ItemStack(Material.GOLDEN_CARROT));
-        materials.put(Material.BEETROOT, new ItemStack(Material.GOLDEN_CARROT));
-        materials.put(Material.NETHER_WART, new ItemStack(Material.GOLDEN_CARROT));
-        materials.put(Material.SWEET_BERRIES, new ItemStack(Material.GOLDEN_CARROT));
-        materials.put(Material.GLOW_BERRIES, new ItemStack(Material.GOLDEN_CARROT));
+        materials.put(Material.MELON_SLICE, new ItemStack(Material.APPLE));
+        materials.put(Material.WHEAT, new ItemStack(Material.APPLE));
+        materials.put(Material.CARROT, new ItemStack(Material.APPLE));
+        materials.put(Material.POTATO, new ItemStack(Material.APPLE));
+        materials.put(Material.BEETROOT, new ItemStack(Material.APPLE));
+        materials.put(Material.NETHER_WART, new ItemStack(Material.APPLE));
+        materials.put(Material.SWEET_BERRIES, new ItemStack(Material.APPLE));
+        materials.put(Material.GLOW_BERRIES, new ItemStack(Material.APPLE));
 
         if (Diamonds.active) {
             materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND_BLOCK));

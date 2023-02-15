@@ -29,7 +29,7 @@ public class EntityDeathListener implements Listener {
             }
 
             if (mob instanceof Animals || mob instanceof WaterMob) {
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.APPLE, 2));
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.LEATHER, 1));
                 Coins.addXP(killer, Coins.animalXP);
             }

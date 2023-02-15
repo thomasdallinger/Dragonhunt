@@ -21,8 +21,7 @@ public class BlockPlaceListener implements Listener {
 
         // prevent players from placing certain blocks in ANY dimension
         if (block.getType() == Material.ENDER_CHEST || block.getType() == Material.CHEST
-                || block.getType() == Material.CHEST_MINECART || block.getType() == Material.OAK_LOG
-                || block.getType() == Material.REDSTONE) {
+                || block.getType() == Material.CHEST_MINECART || block.getType() == Material.REDSTONE) {
             event.setCancelled(true);
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(Prefixes.getErrorPrefix() + ChatColor.GRAY + "You are not allowed to place this block.");

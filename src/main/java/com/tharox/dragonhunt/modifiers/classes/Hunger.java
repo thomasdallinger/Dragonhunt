@@ -6,7 +6,7 @@ import org.bukkit.Material;
 public class Hunger extends Modifier {
     public static String title = "Forever Hungry";
     public static String lore = "All players have Hunger 1 permanently.";
-    public static Material material = Material.COOKED_BEEF;
+    public static Material material = Material.ROTTEN_FLESH;
     public static boolean positive = false;
     public static int impact = 3;
     public static boolean active = false;

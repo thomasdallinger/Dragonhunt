@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
@@ -89,6 +90,11 @@ public abstract class Kit implements Listener {
 
     public void setCooldownEnds() {
         cooldownEnds = getCooldown() + timer.getTime();
+
+        Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
+            player.sendMessage(Prefixes.getAllPrefix() + GameState.selectedKit.get(player) + ChatColor.GRAY
+                    + " Kit Ability is " + HexColor.GREEN + "ready" + ChatColor.GRAY + ".");
+        }, getCooldown() * 20L);
     }
 
     public void sendActionBar(Player player) {

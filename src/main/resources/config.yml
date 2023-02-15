@@ -198,7 +198,7 @@ permanentEffects:
     material: POTION
     amount: 1
     color: 0x7CAFC6
-    cost: 6
+    cost: 5
   1:
     slot: 11
     name: "Speed II"
@@ -206,7 +206,7 @@ permanentEffects:
     material: POTION
     amount: 2
     color: 0x7CAFC6
-    cost: 9
+    cost: 7
   2:
     slot: 20
     name: "Speed III"
@@ -214,7 +214,7 @@ permanentEffects:
     material: POTION
     amount: 3
     color: 0x7CAFC6
-    cost: 12
+    cost: 9
   3:
     slot: 3
     name: "Jump Boost I"
@@ -222,7 +222,7 @@ permanentEffects:
     material: POTION
     amount: 1
     color: 0x22FF4C
-    cost: 6
+    cost: 5
   4:
     slot: 12
     name: "Jump Boost II"
@@ -230,7 +230,7 @@ permanentEffects:
     material: POTION
     amount: 2
     color: 0x22FF4C
-    cost: 9
+    cost: 7
   5:
     slot: 21
     name: "Jump Boost III"
@@ -238,7 +238,7 @@ permanentEffects:
     material: POTION
     amount: 3
     color: 0x22FF4C
-    cost: 12
+    cost: 9
   6:
     slot: 4
     name: "Resistance I"
@@ -246,7 +246,7 @@ permanentEffects:
     material: POTION
     amount: 1
     color: 0x99453A
-    cost: 8
+    cost: 9
   7:
     slot: 13
     name: "Resistance II"
@@ -254,7 +254,7 @@ permanentEffects:
     material: POTION
     amount: 2
     color: 0x99453A
-    cost: 12
+    cost: 13
   8:
     slot: 22
     name: "Resistance III"
@@ -262,7 +262,7 @@ permanentEffects:
     material: POTION
     amount: 3
     color: 0x99453A
-    cost: 16
+    cost: 17
   9:
     slot: 5
     name: "Regeneration I"
@@ -270,7 +270,7 @@ permanentEffects:
     material: POTION
     amount: 1
     color: 0xCD5CAB
-    cost: 8
+    cost: 9
   10:
     slot: 14
     name: "Regeneration II"
@@ -278,7 +278,7 @@ permanentEffects:
     material: POTION
     amount: 2
     color: 0xCD5CAB
-    cost: 12
+    cost: 13
   11:
     slot: 23
     name: "Regeneration III"
@@ -286,7 +286,7 @@ permanentEffects:
     material: POTION
     amount: 3
     color: 0xCD5CAB
-    cost: 16
+    cost: 17
   12:
     slot: 6
     name: "Extra Hearts ʀᴇ-ᴘᴜʀᴄʜᴀꜱᴇᴀʙʟᴇ"

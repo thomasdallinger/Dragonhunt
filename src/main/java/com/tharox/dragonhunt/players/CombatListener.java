@@ -5,9 +5,9 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -47,6 +47,9 @@ public class CombatListener implements Listener {
         if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
             Player target = (Player) event.getEntity();
             Player damager = (Player) event.getDamager();
+
+            // Once the grace period has ended, the in combat feature comes into effect.
+            if (Main.getInstance().getTimer().getTime() < GameState.gracePeriodTime) return;
 
             DatabaseExecutor.executeDatabaseHandler((con) -> {
                 String query = "INSERT INTO InCombat (GameID, Target, Damager, timestamp) " +

@@ -65,7 +65,7 @@ public class GameStart extends GameConfiguration {
             timer.setRunning(true);
             scoreboardCountdown.setRunning(true);
 
-            gracePeriodCountdown = new Countdown(true, 60, this::onGracePeriodCountdown);
+            gracePeriodCountdown = new Countdown(true, GameState.gracePeriodTime, this::onGracePeriodCountdown);
             bossBar = Bukkit.createBossBar("", BarColor.GREEN, BarStyle.SEGMENTED_6);
             PlayerDamageListener.gracePeriodActive = true;
 

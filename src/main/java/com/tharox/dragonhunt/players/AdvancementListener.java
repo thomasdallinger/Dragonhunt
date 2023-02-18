@@ -65,6 +65,8 @@ public class AdvancementListener implements Listener {
             return;
         } else {
             Coins.addXP(player, Coins.bonusXP);
+            player.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "Advancement made: "
+                    + ChatColor.DARK_GREEN + advancementName + HexColor.GREEN + ".");
         }
 
         addAdvancement(player, advancementName);

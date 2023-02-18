@@ -251,9 +251,9 @@ public class BlockBreakListener implements Listener {
         block.breakNaturally();
 
         Random random = new Random();
-        int chance = random.nextInt(50);
+        int chance = random.nextInt(75);
 
-        if (chance == 0) { // 2% chance
+        if (chance == 0) { // 1,33% chance
             block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.APPLE));
         }
 

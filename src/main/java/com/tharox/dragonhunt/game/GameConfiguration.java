@@ -29,6 +29,7 @@ public class GameConfiguration {
 
         overworld.setDifficulty(Difficulty.NORMAL);
         overworld.setGameRule(GameRule.KEEP_INVENTORY, true);
+        overworld.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
 
         WorldBorder worldBorder = overworld.getWorldBorder();
         worldBorder.setCenter(new Location(overworld, x, 0, z));
@@ -50,6 +51,7 @@ public class GameConfiguration {
 
         nether.setDifficulty(Difficulty.NORMAL);
         nether.setGameRule(GameRule.KEEP_INVENTORY, true);
+        nether.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
 
         WorldBorder worldBorder = nether.getWorldBorder();
         worldBorder.setCenter(new Location(nether, 0, 0, 0));
@@ -71,6 +73,7 @@ public class GameConfiguration {
 
         end.setDifficulty(Difficulty.NORMAL);
         end.setGameRule(GameRule.KEEP_INVENTORY, true);
+        end.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
     }
 
     /**

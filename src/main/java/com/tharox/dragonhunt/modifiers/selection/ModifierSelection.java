@@ -64,7 +64,7 @@ public class ModifierSelection {
 
             int finalRandom2 = random;
             DatabaseExecutor.executeDatabaseHandler((con) -> {
-                String query = "UPDATE Game SET modifierMediumImpact = '" + mediumImpact.get(finalRandom2)
+                String query = "UPDATE Game SET modifierMediumImpact = '" + mediumImpact.get(finalRandom2).getTitle()
                         + "' WHERE id = '" + DbValues.getGameID() + "'";
 
                 Statement stmt = con.createStatement();
@@ -90,7 +90,7 @@ public class ModifierSelection {
 
             int finalRandom2 = random;
             DatabaseExecutor.executeDatabaseHandler((con) -> {
-                String query = "UPDATE Game SET modifierHighImpact = '" + highImpact.get(finalRandom2)
+                String query = "UPDATE Game SET modifierHighImpact = '" + highImpact.get(finalRandom2).getTitle()
                         + "' WHERE id = '" + DbValues.getGameID() + "'";
 
                 Statement stmt = con.createStatement();

@@ -1,10 +1,8 @@
 package com.tharox.dragonhunt.commands;
 
-import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
-import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -22,7 +20,7 @@ public class RespawnCommand extends PaidCommandsValidator implements CommandExec
             player = (Player) sender;
         } else return true;
 
-        if (PaidCommandsValidator.commandExecutionIsValid(player, cost)) return true;
+        if (!PaidCommandsValidator.commandExecutionIsValid(player, cost)) return true;
 
         if (player.getWorld().getName().equals("world_the_end")) {
             player.sendMessage(Prefixes.getErrorPrefix()

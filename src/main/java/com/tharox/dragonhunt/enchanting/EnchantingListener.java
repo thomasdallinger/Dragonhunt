@@ -101,8 +101,8 @@ public class EnchantingListener implements Listener {
             // Substring 4 from enchantment to remove formatting
             String query = "INSERT INTO Purchases (GameID, Player, purchasedObject, coinsBefore, cost, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + enchantment.substring(4)
-                    + "', '" + (Coins.getCoins(player) + BrewingInventory.effectCost.get(enchantment))
-                    + "', '" + BrewingInventory.effectCost.get(enchantment)
+                    + "', '" + (Coins.getCoins(player) + EnchantingInventory.enchantmentCost.get(enchantment))
+                    + "', '" + EnchantingInventory.enchantmentCost.get(enchantment)
                     + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();

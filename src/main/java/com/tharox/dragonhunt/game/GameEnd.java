@@ -113,7 +113,8 @@ public class GameEnd {
             stmt.close();
 
             if (GameState.selectedKit.containsKey(player)) {
-                query = "UPDATE Plays SET Kit = '" + GameState.selectedKit.get(player) + "'" +
+                // Substring 14 from kit name to remove HEX formatting
+                query = "UPDATE Plays SET Kit = '" + GameState.selectedKit.get(player).substring(14) + "'" +
                         "WHERE GameID = '" + DbValues.getGameID() + "' AND Player = '" + player.getName() + "'";
             }
 

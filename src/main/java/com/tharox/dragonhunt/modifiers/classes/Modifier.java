@@ -14,8 +14,8 @@ import java.util.Collections;
 
 public abstract class Modifier {
     public abstract void setActive(boolean active);
-
     public abstract boolean isPositive();
+    public abstract String getTitle();
 
     /**
      * @return an item representing the modifier in the inventory shown to all players at the start of the game

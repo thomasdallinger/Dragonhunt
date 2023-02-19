@@ -20,4 +20,9 @@ public class EnhancedArrowEffects extends Modifier {
     public boolean isPositive() {
         return positive;
     }
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
 }

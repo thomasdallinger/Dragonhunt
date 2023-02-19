@@ -143,8 +143,9 @@ public class BrewingListener implements Listener {
                 + ChatColor.GRAY + "Purchased " + effectName + ChatColor.GRAY + ".");
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
+            // Substring 4 from effectName to remove formatting
             String query = "INSERT INTO Purchases (GameID, Player, purchasedObject, coinsBefore, cost, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + effectName
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + effectName.substring(4)
                     + "', '" + (Coins.getCoins(player) + BrewingInventory.effectCost.get(effectName))
                     + "', '" + BrewingInventory.effectCost.get(effectName)
                     + "', '" + DbValues.getTimestamp() + "')";

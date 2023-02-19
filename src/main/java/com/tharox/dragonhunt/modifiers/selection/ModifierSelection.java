@@ -43,7 +43,7 @@ public class ModifierSelection {
 
         int finalRandom = random;
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "UPDATE Game SET modifierLowImpact = '" + lowImpact.get(finalRandom)
+            String query = "UPDATE Game SET modifierLowImpact = '" + lowImpact.get(finalRandom).getTitle()
                     + "' WHERE id = '" + DbValues.getGameID() + "'";
 
             Statement stmt = con.createStatement();

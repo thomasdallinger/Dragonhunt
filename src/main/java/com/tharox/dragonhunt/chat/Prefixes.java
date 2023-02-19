@@ -6,8 +6,6 @@ import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-
 public class Prefixes {
 
     // ALL: used for messages displayed to all players

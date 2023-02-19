@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.blocks;
 
 import com.tharox.dragonhunt.chat.Prefixes;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.World;

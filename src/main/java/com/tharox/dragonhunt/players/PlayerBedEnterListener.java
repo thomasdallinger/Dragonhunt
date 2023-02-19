@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.chat.Prefixes;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

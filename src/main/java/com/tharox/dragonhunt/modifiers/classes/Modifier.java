@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.modifiers.classes;
 
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -10,11 +9,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 public abstract class Modifier {
     public abstract void setActive(boolean active);
+
     public abstract boolean isPositive();
+
     public abstract String getTitle();
 
     /**

@@ -1,13 +1,10 @@
 package com.tharox.dragonhunt.coins;
 
 import com.tharox.dragonhunt.colors.HexColor;
-import com.tharox.dragonhunt.db.DatabaseExecutor;
-import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-import java.sql.Statement;
 import java.util.HashMap;
 
 /**
@@ -61,7 +58,7 @@ public class Coins {
 
         int currentXPPoints = (int) (player.getExpToLevel() * (player.getExp() * 100) / 100);
         player.sendTitle("", ChatColor.WHITE + "+" + xpToAdd + HexColor.GREEN + " XP "
-                + ChatColor.DARK_GRAY + "[" + currentXPPoints + "/" + player.getExpToLevel() + "]",
+                        + ChatColor.DARK_GRAY + "[" + currentXPPoints + "/" + player.getExpToLevel() + "]",
                 0, 30, 10);
     }
 }

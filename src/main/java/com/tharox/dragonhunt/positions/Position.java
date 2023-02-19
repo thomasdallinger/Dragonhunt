@@ -5,8 +5,6 @@ import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 
-import java.util.Objects;
-
 public class Position {
     private final String name;
     private final Location location;

@@ -74,7 +74,7 @@ public class BrewingItem {
             if (NAME.contains("»"))
                 itemToCreate = setEnchantmentAndName(itemToCreate);
 
-            // Permanent Effects
+                // Permanent Effects
             else if (NAME.contains("Speed"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Speed.get(player));
             else if (NAME.contains("Jump Boost"))
@@ -90,7 +90,7 @@ public class BrewingItem {
 
             // Negative Effects
             else if (NAME.contains("Unlock Arrow Effects")) {
-                itemToCreate =unlockArrowEffects(itemToCreate, player);
+                itemToCreate = unlockArrowEffects(itemToCreate, player);
             } else {
                 itemToCreate = checkIfArrowEffectsUnlocked(itemToCreate, player);
             }
@@ -220,7 +220,7 @@ public class BrewingItem {
         PotionMeta meta = (PotionMeta) item.getItemMeta();
         if (meta == null) return null;
 
-        if(effectType != null) {
+        if (effectType != null) {
             meta.addCustomEffect(new PotionEffect(effectType, 0, 0), true);
         }
 

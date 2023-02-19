@@ -11,6 +11,6 @@ commands:
   top:
     description: Teleports the player to the surface.
   respawn:
-     description: Sets the player's respawn point.
+    description: Sets the player's respawn point.
   pos:
     description: Mark a location.

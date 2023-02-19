@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.arrows;
 
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

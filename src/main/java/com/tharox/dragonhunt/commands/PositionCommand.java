@@ -27,18 +27,18 @@ public class PositionCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             player = (Player) sender;
-        } else return true;
+        } else return false;
 
         if (!timer.isRunning()) {
             player.sendMessage(Prefixes.getErrorPrefix() + "This feature is currently disabled.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            return true;
+            return false;
         }
 
         if (player.getWorld().getName().equals("world_the_end")) {
             player.sendMessage(Prefixes.getErrorPrefix() + "This feature is disabled in the End.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            return true;
+            return false;
         }
 
         if (args.length == 0) {
@@ -59,7 +59,7 @@ public class PositionCommand implements CommandExecutor {
                         "Use " + HexColor.RED + "/pos <name>" + ChatColor.RED + " to do so.");
             }
 
-            return true;
+            return false;
         }
 
         if (args.length == 2 && args[0].equals("tp")) {
@@ -77,7 +77,7 @@ public class PositionCommand implements CommandExecutor {
                         } else {
                             player.sendMessage(Prefixes.getErrorPrefix() + "You need to have more than 5 hearts " +
                                     "to execute a position teleport.");
-                            return true;
+                            return false;
                         }
                         return true;
                     }
@@ -90,7 +90,7 @@ public class PositionCommand implements CommandExecutor {
                 player.sendMessage(Prefixes.getErrorPrefix() + "You have not created a position yet. " +
                         "Use " + HexColor.RED + "/pos <name>" + ChatColor.RED + " to do so.");
             }
-            return true;
+            return false;
         }
 
         if (args.length == 2 || args.length > 2) {
@@ -100,7 +100,7 @@ public class PositionCommand implements CommandExecutor {
                     + ChatColor.GRAY + " to add a position.");
             player.sendMessage(ChatColor.GRAY + "Use " + ChatColor.YELLOW + "/pos tp <name>" +
                     ChatColor.GRAY + " to teleport to a position.");
-            return true;
+            return false;
         }
 
         // add a position
@@ -108,7 +108,7 @@ public class PositionCommand implements CommandExecutor {
             player.sendMessage(Prefixes.getErrorPrefix()
                     + "Failed to create a position. Name too long (max. length: 20 characters).");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            return true;
+            return false;
         }
 
         if (!positions.containsKey(player)) { // first position
@@ -121,7 +121,7 @@ public class PositionCommand implements CommandExecutor {
                 player.sendMessage(Prefixes.getErrorPrefix()
                         + "Failed to create a position. You have exceeded the limit of 20 positions.");
                 player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                return true;
+                return false;
             }
 
             positions.put(player, updatedList);
@@ -130,6 +130,6 @@ public class PositionCommand implements CommandExecutor {
         player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Position "
                 + ChatColor.DARK_GREEN + args[0] + ChatColor.GRAY + " added.");
 
-        return false;
+        return true;
     }
 }

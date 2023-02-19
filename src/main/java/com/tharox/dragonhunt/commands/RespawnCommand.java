@@ -18,14 +18,14 @@ public class RespawnCommand extends PaidCommandsValidator implements CommandExec
 
         if (sender instanceof Player) {
             player = (Player) sender;
-        } else return true;
+        } else return false;
 
-        if (!PaidCommandsValidator.commandExecutionIsValid(player, cost)) return true;
+        if (!PaidCommandsValidator.commandExecutionIsValid(player, cost)) return false;
 
         if (player.getWorld().getName().equals("world_the_end")) {
             player.sendMessage(Prefixes.getErrorPrefix()
                     + ChatColor.GRAY + "Respawn point cannot be set in the End dimension.");
-            return true;
+            return false;
         }
 
         Coins.removeCoins(player, cost, "/respawn");
@@ -33,6 +33,6 @@ public class RespawnCommand extends PaidCommandsValidator implements CommandExec
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         player.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "Respawn Point set.");
 
-        return false;
+        return true;
     }
 }

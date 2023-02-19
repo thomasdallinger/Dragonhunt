@@ -21,9 +21,9 @@ public class TopCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             player = (Player) sender;
-        } else return true;
+        } else return false;
 
-        if (!PaidCommandsValidator.commandExecutionIsValid(player, cost)) return true;
+        if (!PaidCommandsValidator.commandExecutionIsValid(player, cost)) return false;
 
         world = player.getWorld();
         x = player.getLocation().getX();
@@ -31,7 +31,7 @@ public class TopCommand implements CommandExecutor {
 
         if (player.getLocation().getY() > world.getHighestBlockYAt((int) x, (int) z)) {
             player.sendMessage(Prefixes.getErrorPrefix() + "Already on the surface.");
-            return true;
+            return false;
         }
 
         Coins.removeCoins(player, cost, "/top");
@@ -39,6 +39,6 @@ public class TopCommand implements CommandExecutor {
         player.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "Teleported to the surface.");
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
-        return false;
+        return true;
     }
 }

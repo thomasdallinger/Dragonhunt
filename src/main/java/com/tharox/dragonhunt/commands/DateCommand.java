@@ -16,12 +16,12 @@ public class DateCommand implements CommandExecutor {
 
         if (sender instanceof Player) {
             player = (Player) sender;
-        } else return true;
+        } else return false;
 
         Date date = new Date();
         player.sendMessage(ChatColor.YELLOW + "☻" + ChatColor.DARK_GRAY + " | "
                 + ChatColor.GRAY + date.toString());
 
-        return false;
+        return true;
     }
 }

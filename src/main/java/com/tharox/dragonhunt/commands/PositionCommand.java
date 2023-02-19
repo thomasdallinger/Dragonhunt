@@ -43,10 +43,15 @@ public class PositionCommand implements CommandExecutor {
 
         if (args.length == 0) {
             if (positions.containsKey(player)) {
-                player.sendMessage(ChatColor.DARK_GREEN + "Your Positions:");
+                player.sendMessage(ChatColor.DARK_GRAY + "ʏᴏᴜʀ ᴘᴏꜱɪᴛɪᴏɴꜱ");
 
                 for (Position position : positions.get(player)) {
-                    player.sendMessage(position.toString());
+                    String message = position.toString();
+                    // Append the distance (player to position).
+                    message = message.concat(ChatColor.GRAY + " ("
+                            + (int) player.getLocation().distance(position.getLocation()) + " blocks away)");
+
+                    player.sendMessage(message);
                 }
 
             } else {

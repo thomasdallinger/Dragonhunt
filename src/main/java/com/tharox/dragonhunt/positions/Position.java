@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.positions;
 
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 
@@ -25,7 +26,9 @@ public class Position {
 
     @Override
     public String toString() {
-        return HexColor.GREEN + name + ": " + ChatColor.GRAY + Objects.requireNonNull(location.getWorld()).getName()
-                + ", x: " + (int) location.getX() + ", y: " + (int) location.getY() + ", z: " + (int) location.getZ();
+        return ChatColor.DARK_GREEN + name + ChatColor.DARK_GRAY + ": "
+                + ChatColor.GRAY + DbValues.getCurrentWorld(location)
+                + HexColor.GREEN + " [" + (int) location.getX() + ", " + (int) location.getY()
+                + ", " + (int) location.getZ() + "]";
     }
 }

@@ -156,9 +156,4 @@ public class DbValues {
 
         return currentWorld;
     }
-
-    public static String locationToString(Location location) {
-        return getCurrentWorld(location) + ", x: " + (int) location.getX() + ", y: " + (int) location.getY()
-                + ", z: " + (int) location.getZ();
-    }
 }

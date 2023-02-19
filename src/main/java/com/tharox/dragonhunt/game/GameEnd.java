@@ -46,7 +46,7 @@ public class GameEnd {
     private void updateGame() {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "UPDATE Game SET duration = '" + DbValues.getTimestamp()
-                    + "', distanceScore = '" + GameState.distanceScore + "' WHERE id = '" + DbValues.getGameID() + "'";
+                    + "' WHERE id = '" + DbValues.getGameID() + "'";
 
             Statement stmt = con.createStatement();
             stmt.execute(query);
@@ -109,6 +109,15 @@ public class GameEnd {
             }
 
             Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+
+            if (GameState.selectedKit.containsKey(player)) {
+                query = "UPDATE Plays SET Kit = '" + GameState.selectedKit.get(player) + "'" +
+                        "WHERE GameID = '" + DbValues.getGameID() + "' AND Player = '" + player.getName() + "'";
+            }
+
+            stmt = con.createStatement();
             stmt.execute(query);
             stmt.close();
         });

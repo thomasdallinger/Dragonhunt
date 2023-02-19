@@ -45,9 +45,6 @@ public class GameState {
     // location of the END spawn platform (always has the same coordinates)
     public static Location endPlatform = new Location(Bukkit.getWorld("world_the_end"), 100, 50, 0);
 
-    // distance of the NETHER entry portal in the NETHER to the nearest (looted or unlooted) Fortress and Bastion
-    public static int distanceScore = -1; // stays at -1 if none of the players reach the NETHER
-
     // counts the trees destroyed by each player (used to drop apples not randomly)
     public static HashMap<Player, Integer> treesDestroyed = new HashMap<>();
 

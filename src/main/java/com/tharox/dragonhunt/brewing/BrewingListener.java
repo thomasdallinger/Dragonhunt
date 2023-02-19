@@ -4,6 +4,8 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.db.DatabaseExecutor;
+import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -15,6 +17,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.sql.Statement;
 import java.util.Objects;
 
 public class BrewingListener implements Listener {
@@ -138,5 +141,17 @@ public class BrewingListener implements Listener {
         Coins.removeCoins(player, BrewingInventory.effectCost.get(effectName), effectName);
         player.sendMessage(Prefixes.getCoinPrefix(-BrewingInventory.effectCost.get(effectName))
                 + ChatColor.GRAY + "Purchased " + effectName + ChatColor.GRAY + ".");
+
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "INSERT INTO Purchases (GameID, Player, purchasedObject, coinsBefore, cost, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + effectName
+                    + "', '" + (Coins.getCoins(player) + BrewingInventory.effectCost.get(effectName))
+                    + "', '" + BrewingInventory.effectCost.get(effectName)
+                    + "', '" + DbValues.getTimestamp() + "')";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
     }
 }

@@ -1,7 +1,10 @@
 package com.tharox.dragonhunt.modifiers.selection;
 
+import com.tharox.dragonhunt.db.DatabaseExecutor;
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.modifiers.classes.*;
 
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -38,6 +41,16 @@ public class ModifierSelection {
         int random = rand.nextInt(lowImpact.size()); // generates random value from 0 to list size - 1
         lowImpact.get(random).setActive(true);
 
+        int finalRandom = random;
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "UPDATE Game SET modifierLowImpact = '" + lowImpact.get(finalRandom)
+                    + "' WHERE id = '" + DbValues.getGameID() + "'";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
+
         if (lowImpact.get(random).isPositive()) {
             positive++;
         } else {
@@ -48,6 +61,16 @@ public class ModifierSelection {
         do {
             random = rand.nextInt(mediumImpact.size());
             mediumImpact.get(random).setActive(true);
+
+            int finalRandom2 = random;
+            DatabaseExecutor.executeDatabaseHandler((con) -> {
+                String query = "UPDATE Game SET modifierMediumImpact = '" + mediumImpact.get(finalRandom2)
+                        + "' WHERE id = '" + DbValues.getGameID() + "'";
+
+                Statement stmt = con.createStatement();
+                stmt.execute(query);
+                stmt.close();
+            });
 
             if (!mediumImpact.get(random).isPositive()) {
                 negative++;
@@ -64,6 +87,16 @@ public class ModifierSelection {
         do {
             random = rand.nextInt(highImpact.size());
             highImpact.get(random).setActive(true);
+
+            int finalRandom2 = random;
+            DatabaseExecutor.executeDatabaseHandler((con) -> {
+                String query = "UPDATE Game SET modifierHighImpact = '" + highImpact.get(finalRandom2)
+                        + "' WHERE id = '" + DbValues.getGameID() + "'";
+
+                Statement stmt = con.createStatement();
+                stmt.execute(query);
+                stmt.close();
+            });
 
             if (!highImpact.get(random).isPositive()) {
                 negative++;

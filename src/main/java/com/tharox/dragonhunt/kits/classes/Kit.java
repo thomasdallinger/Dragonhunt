@@ -3,6 +3,8 @@ package com.tharox.dragonhunt.kits.classes;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.db.DatabaseExecutor;
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
@@ -22,6 +24,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.sql.Statement;
 import java.util.Arrays;
 
 public abstract class Kit implements Listener {
@@ -80,8 +83,8 @@ public abstract class Kit implements Listener {
                     return;
                 }
 
-                //addKitAbilityUsage(); TODO: db related
                 executeAbility();
+                addKitAbilityUsageToDB(player);
                 kitAbilityActive = true;
                 setCooldownEnds();
             }
@@ -177,16 +180,17 @@ public abstract class Kit implements Listener {
         }.runTaskTimer(Main.getInstance(), ticks, ticks);
     }
 
-    /*private void addKitAbilityUsage() {
+    private void addKitAbilityUsageToDB(Player player) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "INSERT INTO KitAbility (GameID, Player, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + DbValues.getTimestamp() + "')";
+            String query = "INSERT INTO KitAbility (GameID, Player, dimension, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" +
+                    DbValues.getCurrentWorld(player.getLocation()) + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();
             stmt.execute(query);
             stmt.close();
         });
-    }*/
+    }
 
     public static ItemStack getDisplayItem(String title, Material material, String lore) {
         ItemStack item = new ItemStack(material);

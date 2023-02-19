@@ -1,9 +1,12 @@
 package com.tharox.dragonhunt.enchanting;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.brewing.BrewingInventory;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.db.DatabaseExecutor;
+import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -12,6 +15,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.sql.Statement;
 
 public class EnchantingListener implements Listener {
 
@@ -91,6 +96,18 @@ public class EnchantingListener implements Listener {
     private void purchaseEnchantment(Player player, String enchantment) {
         player.playSound(player.getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1, 1);
         Coins.removeCoins(player, EnchantingInventory.enchantmentCost.get(enchantment), enchantment);
+
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "INSERT INTO Purchases (GameID, Player, purchasedObject, coinsBefore, cost, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + enchantment
+                    + "', '" + (Coins.getCoins(player) + BrewingInventory.effectCost.get(enchantment))
+                    + "', '" + BrewingInventory.effectCost.get(enchantment)
+                    + "', '" + DbValues.getTimestamp() + "')";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
 
         // inventory needs to be re-opened (refresh the amount of coins the player has)
         EnchantingInventory inventory = new EnchantingInventory(Main.getInstance().getConfig(), player);

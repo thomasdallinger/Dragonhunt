@@ -38,7 +38,6 @@ public class AdvancementListener implements Listener {
                 if (GameState.firstNetherEntry == null) {
                     GameState.firstNetherEntry = player.getLocation();
                     addBonusXP(player, "Nether");
-                    GameState.distanceScore = getDistanceScore(player);
                 }
 
                 player.performCommand("pos NetherPortal");
@@ -76,27 +75,6 @@ public class AdvancementListener implements Listener {
         Coins.addXP(player, Coins.bonusXP);
         player.sendMessage(Prefixes.getXPPrefix(Coins.bonusXP) + "First in the "
                 + HexColor.HIGHLIGHT + dimension + ChatColor.GRAY + " dimension.");
-    }
-
-    /**
-     * Calculates the distance score using the nearest Fortress and Bastion locations.
-     *
-     * @param player first player to enter the Nether
-     * @return the distance score (the lower, the better the NETHER spawn)
-     */
-    public int getDistanceScore(Player player) {
-        StructureSearchResult fortress = player.getWorld().locateNearestStructure(
-                player.getLocation(), Structure.FORTRESS, 32, false);
-        StructureSearchResult bastion = player.getWorld().locateNearestStructure(
-                player.getLocation(), Structure.BASTION_REMNANT, 32, false);
-        int fortressDistance = 0, bastionDistance = 0;
-
-        if (fortress != null)
-            fortressDistance = (int) player.getLocation().distance(fortress.getLocation());
-        if (bastion != null)
-            bastionDistance = (int) player.getLocation().distance(bastion.getLocation());
-
-        return fortressDistance + bastionDistance;
     }
 
     public void addAdvancement(Player player, String advancement) {

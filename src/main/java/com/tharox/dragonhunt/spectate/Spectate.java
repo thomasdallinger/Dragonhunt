@@ -22,7 +22,6 @@ public class Spectate {
 
     public Spectate(Player player) {
         activateSpectate(player);
-        addSpectateToDB(player);
     }
 
     private void activateSpectate(Player player) {
@@ -59,17 +58,5 @@ public class Spectate {
             }
 
         }.runTaskTimer(Main.getInstance(), 2, 2);
-    }
-
-    private void addSpectateToDB(Player player) {
-        DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "INSERT INTO Spectate (GameID, Player, dimension, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" +
-                    DbValues.getCurrentWorld(player.getLocation()) + "', '" + DbValues.getTimestamp() + "')";
-
-            Statement stmt = con.createStatement();
-            stmt.execute(query);
-            stmt.close();
-        });
     }
 }

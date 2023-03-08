@@ -242,7 +242,7 @@ permanentEffects:
   6:
     slot: 4
     name: "Resistance I"
-    lore: "Reduces incoming damage by 20%."
+    lore: "Reduces incoming damage by 10%."
     material: POTION
     amount: 1
     color: 0x99453A
@@ -250,7 +250,7 @@ permanentEffects:
   7:
     slot: 13
     name: "Resistance II"
-    lore: "Reduces incoming damage by 40%."
+    lore: "Reduces incoming damage by 20%."
     material: POTION
     amount: 2
     color: 0x99453A
@@ -258,7 +258,7 @@ permanentEffects:
   8:
     slot: 22
     name: "Resistance III"
-    lore: "Reduces incoming damage by 60%."
+    lore: "Reduces incoming damage by 30%."
     material: POTION
     amount: 3
     color: 0x99453A

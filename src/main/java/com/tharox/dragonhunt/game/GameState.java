@@ -45,8 +45,28 @@ public class GameState {
     // location of the END spawn platform (always has the same coordinates)
     public static Location endPlatform = new Location(Bukkit.getWorld("world_the_end"), 100, 50, 0);
 
-    // counts the trees destroyed by each player (used to drop apples not randomly)
-    public static HashMap<Player, Integer> treesDestroyed = new HashMap<>();
+    /**
+     * @return a list that contains chest and minecart loot
+     */
+    public static ArrayList<ItemStack> getChestLoot() {
+        ArrayList<ItemStack> chestLoot = new ArrayList<>();
+        chestLoot.add(new ItemStack(Material.OBSIDIAN, 2));
+        chestLoot.add(new ItemStack(Material.DIAMOND, 2));
+        chestLoot.add(new ItemStack(Material.GOLD_INGOT, 6));
+        chestLoot.add(new ItemStack(Material.IRON_INGOT, 6));
+
+        return chestLoot;
+    }
+
+    /**
+     * Sets messages displaying the loot a player got from clicking a chest / minecart.
+     */
+    public static void setChestLootMessages(Player player) {
+        player.sendMessage(org.bukkit.ChatColor.GRAY + "2x " + org.bukkit.ChatColor.DARK_PURPLE + "Obsidian");
+        player.sendMessage(org.bukkit.ChatColor.GRAY + "2x " + org.bukkit.ChatColor.AQUA + "Diamond");
+        player.sendMessage(org.bukkit.ChatColor.GRAY + "6x " + org.bukkit.ChatColor.GOLD + "Gold Ingot");
+        player.sendMessage(org.bukkit.ChatColor.GRAY + "6x " + org.bukkit.ChatColor.WHITE + "Iron Ingot");
+    }
 
     /**
      * Used in LevelUp.

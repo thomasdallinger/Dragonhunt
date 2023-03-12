@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.brewing.BrewingInventory;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.enchanting.EnchantingInventory;
+import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -36,12 +37,12 @@ public class PlayerInteractListener implements Listener {
                 if (block.getType() == Material.CHEST) {
                     event.setCancelled(true);
                     block.setType(Material.AIR);
-                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.DIAMOND, 2));
-                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.GOLD_INGOT, 6));
-                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.IRON_INGOT, 6));
-                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.OBSIDIAN, 2));
 
-                    Coins.addXP(player, Coins.bonusXP);
+                    for (ItemStack loot : GameState.getChestLoot()) {
+                        block.getWorld().dropItemNaturally(block.getLocation(), loot);
+                    }
+
+                    GameState.setChestLootMessages(player);
                     return;
                 }
 

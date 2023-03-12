@@ -81,6 +81,8 @@ public class BrewingItem {
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.JumpBoost.get(player));
             else if (NAME.contains("Resistance"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Resistance.get(player));
+            else if (NAME.contains("Strength"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Effects.Strength.get(player));
             else if (NAME.contains("Regeneration"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Regeneration.get(player));
             else if (NAME.contains("Extra Hearts")) {

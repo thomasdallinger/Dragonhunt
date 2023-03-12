@@ -18,11 +18,6 @@ public class ItemConsumeListener implements Listener {
         ItemStack item = event.getItem();
         int amount = player.getInventory().getItemInMainHand().getAmount();
 
-        if (item.getType() == Material.APPLE) {
-            player.setFoodLevel(player.getFoodLevel() + 2);
-            player.setSaturation((float) (player.getSaturation() + 7.2)); // 9.6 (Golden Apple) - 2.4 (Apple)
-        }
-
         if (item.getType() == Material.GOLDEN_APPLE) {
             player.setFoodLevel(player.getFoodLevel() + 2);
         }

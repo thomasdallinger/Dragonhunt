@@ -10,7 +10,5 @@ commands:
     description: Shows the current date.
   top:
     description: Teleports the player to the surface.
-  respawn:
-    description: Sets the player's respawn point.
   pos:
     description: Mark a location.

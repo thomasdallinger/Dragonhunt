@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 @DragonhuntKit
 public class Healer extends Kit {
-    static int cooldown = 120;
+    static int cooldown = 100;
     static int heartsToAdd = 6;
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Healer";

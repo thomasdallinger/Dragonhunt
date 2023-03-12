@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 @DragonhuntKit
 public class Unstoppable extends Kit {
-    static int duration = 10;
+    static int duration = 12;
     static int cooldown = 120;
 
     public static final String title = HexColor.TANK + KitClass.TANK + " Unstoppable";

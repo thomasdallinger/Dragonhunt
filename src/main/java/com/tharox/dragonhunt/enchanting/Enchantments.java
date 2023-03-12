@@ -14,9 +14,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Enchantments {
-    // a list of all weapons affected by sword enchantments
-    protected static List<Material> swords = List.of(
-            Material.IRON_SWORD, Material.DIAMOND_SWORD, Material.NETHERITE_SWORD);
+    // a list of all weapons affected by melee weapon enchantments
+    protected static List<Material> meleeWeapons = List.of(
+            Material.IRON_SWORD, Material.DIAMOND_SWORD, Material.NETHERITE_SWORD,
+            Material.IRON_AXE, Material.DIAMOND_AXE, Material.NETHERITE_AXE);
 
     // Swords
     public static HashMap<Player, Integer> Sharpness = new HashMap<>();
@@ -70,7 +71,7 @@ public class Enchantments {
                         }
 
                         // Swords
-                        if (swords.contains(item.getType())) {
+                        if (meleeWeapons.contains(item.getType())) {
                             if (Sharpness.get(player) > 1)
                                 item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, Sharpness.get(player) - 1);
 

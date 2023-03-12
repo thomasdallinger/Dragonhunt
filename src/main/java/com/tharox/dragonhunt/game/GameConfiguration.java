@@ -5,6 +5,7 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.entities.PermanentWitherSkeletons;
 import com.tharox.dragonhunt.modifiers.classes.EightHearts;
+import com.tharox.dragonhunt.respawn.SetRespawn;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -101,7 +102,8 @@ public class GameConfiguration {
             // clears the player's inventory
             player.getInventory().clear();
 
-            // adds the TRACKER and SHIELD to the player's inventory
+            // adds general items to the player's inventory
+            player.getInventory().setItem(6, SetRespawn.createItem(player));
             player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
             player.getInventory().setItemInOffHand(GameState.addItem(new ItemStack(Material.SHIELD)));
 

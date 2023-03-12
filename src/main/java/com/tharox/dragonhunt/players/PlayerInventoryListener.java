@@ -3,7 +3,6 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.KitClass;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -30,7 +29,8 @@ public class PlayerInventoryListener implements Listener {
         }
 
         // Tracker = 7, Grappler / END Teleport = 8, Generated Arrows = 17
-        if (event.getHotbarButton() == 7 || event.getHotbarButton() == 8 || event.getHotbarButton() == 17) {
+        if (event.getHotbarButton() == 7 || event.getHotbarButton() == 8
+                || event.getHotbarButton() == 17) {
             event.setCancelled(true);
             return;
         }
@@ -51,7 +51,13 @@ public class PlayerInventoryListener implements Listener {
         if (item.getType().equals(Material.ELYTRA)) {
             if (event.getSlot() == 38) {
                 event.setCancelled(true);
+                return;
             }
+        }
+
+        // Check if the respawn item was clicked
+        if (item.getItemMeta().getDisplayName().contains("Set Respawn Point")) {
+            event.setCancelled(true);
         }
     }
 
@@ -84,13 +90,14 @@ public class PlayerInventoryListener implements Listener {
 
         String displayName = item.getItemMeta().getDisplayName();
 
-        if (displayName.contains(ChatColor.LIGHT_PURPLE + "Tracker")
+        if (displayName.contains("Set Respawn Point")
+                || displayName.contains("Tracker")
                 || displayName.contains(KitClass.ASSASSIN)
                 || displayName.contains(KitClass.TANK)
                 || displayName.contains(KitClass.SUPPORT)
                 || displayName.contains(KitClass.MOBILITY)
-                || displayName.contains(ChatColor.LIGHT_PURPLE + "Teleport » End Dimension")
-                || displayName.contains(ChatColor.LIGHT_PURPLE + "Generated Arrow"))
+                || displayName.contains("Teleport » End Dimension")
+                || displayName.contains("Generated Arrow"))
             event.setCancelled(true);
 
         if (item.getType() == Material.ELYTRA) {
@@ -106,12 +113,13 @@ public class PlayerInventoryListener implements Listener {
         if (offHandItem.getItemMeta() == null) return;
 
         String displayName = offHandItem.getItemMeta().getDisplayName();
-        if (displayName.contains(ChatColor.LIGHT_PURPLE + "Tracker")
+        if (displayName.contains("Set Respawn Point")
+                || displayName.contains("Tracker")
                 || displayName.contains(KitClass.ASSASSIN)
                 || displayName.contains(KitClass.TANK)
                 || displayName.contains(KitClass.SUPPORT)
                 || displayName.contains(KitClass.MOBILITY)
-                || displayName.contains(ChatColor.LIGHT_PURPLE + "Teleport » End Dimension")) {
+                || displayName.contains("Teleport » End Dimension")) {
             // Generated Arrows can't be swapped: not in the hotbar, no checking needed
             event.setCancelled(true);
         }

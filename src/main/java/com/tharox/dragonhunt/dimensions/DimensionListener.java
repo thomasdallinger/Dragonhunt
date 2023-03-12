@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.dimensions;
 
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.respawn.SetRespawn;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -19,6 +20,8 @@ public class DimensionListener implements Listener {
      * Give players Resistance 10 when changing worlds so they can't be damaged for the first 7 seconds.
      * Removes the Tracker from a player's inventory in the END. Returns the Tracker when changing to a different
      * world again.
+     * Updated the item material for the respawn item.
+     * If the player was in the End already, the slot remains free to use.
      */
     @EventHandler
     public void onWorldChange(PlayerChangedWorldEvent event) {
@@ -27,6 +30,10 @@ public class DimensionListener implements Listener {
         for (PotionEffect effect : player.getActivePotionEffects())
             player.removePotionEffect(effect.getType());
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 9));
+
+        if (!event.getFrom().getEnvironment().equals(World.Environment.THE_END)) {
+            player.getInventory().setItem(6, SetRespawn.createItem(player));
+        }
     }
 
     /**

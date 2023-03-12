@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.commands.PositionCommand;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -86,11 +87,7 @@ public class Tracker implements Listener {
                 && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().contains("Tracker")) {
 
-                if (!PositionCommand.positions.containsKey(player)) { // 0 positions added
-                    player.setSneaking(false);
-                }
-
-                index++;    // switch the located structure / position (if sneaking)
+                index++;    // switch the located structure
 
                 if (index > locationList.size() - 1)
                     index = 0;
@@ -127,6 +124,7 @@ public class Tracker implements Listener {
     }
 
     public void sendActionBar(Player player) {
+        Timer timer = Main.getInstance().getTimer();
         ItemStack item = player.getInventory().getItemInMainHand();
         String trackedObject = playerTracksName.get(player);
         Location trackedLocation = playerTracksLocation.get(player);
@@ -137,16 +135,26 @@ public class Tracker implements Listener {
         String trackedObjectName = "";
         int distance;
 
-        if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Tracker")) {
+        if (item.getItemMeta().getDisplayName().contains("Tracker")) {
             try {
                 if (trackedObject == null) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new ComponentBuilder("LEFT-CLICK: ").color(ChatColor.WHITE).bold(true)
-                                    .append("Player").color(ChatColor.YELLOW).bold(false)
-                                    .append(" | ").color(ChatColor.DARK_GRAY)
-                                    .append("RIGHT-CLICK: ").color(ChatColor.WHITE).bold(true)
-                                    .append("Structure").color(ChatColor.GOLD).bold(false).create());
-
+                    if(timer.getTime() % 2 == 0) {
+                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                new ComponentBuilder("Structures").color(ChatColor.GOLD).bold(true)
+                                        .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                        .append("Right-Click").color(ChatColor.GRAY).italic(true).create());
+                    } else {
+                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                new ComponentBuilder("Players").color(ChatColor.YELLOW).bold(true)
+                                        .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                        .append("Left-Click").color(ChatColor.GRAY).italic(true).create());
+                        /*player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                new ComponentBuilder("LEFT-CLICK: ").color(ChatColor.WHITE).bold(true)
+                                        .append("Player").color(ChatColor.YELLOW).bold(false)
+                                        .append(" | ").color(ChatColor.DARK_GRAY)
+                                        .append("RIGHT-CLICK: ").color(ChatColor.WHITE).bold(true)
+                                        .append("Structure").color(ChatColor.GOLD).bold(false).create());*/
+                    }
                     return;
                 }
 

@@ -28,6 +28,7 @@ import com.tharox.dragonhunt.kits.selection.KitListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.players.*;
+import com.tharox.dragonhunt.respawn.SetRespawn;
 import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
 import com.tharox.dragonhunt.tablist.TablistManager;
 import com.tharox.dragonhunt.timer.Countdown;
@@ -54,6 +55,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     public Timer timer;
     public Countdown scoreboardCountdown; // single countdown for all player scoreboards (started in GameStart)
     public Tracker tracker; // single tracker for all players
+    public SetRespawn respawn;
     private TablistManager tablistManager;
 
     @Override
@@ -73,6 +75,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         scoreboardCountdown = new Countdown(false, 300);
         ResetScoreboardCountdown.countdownHitsZero(Main.getInstance().getScoreboardCountdown());
         tracker = new Tracker();
+        respawn = new SetRespawn();
         tablistManager = new TablistManager();
         new CustomRecipes(); // adds all custom recipes to the game
         setWorldTime();
@@ -231,6 +234,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new PlayerRespawnListener(), this);
 
         pluginManager.registerEvents(tracker, this);
+        pluginManager.registerEvents(respawn, this);
     }
 
     private void commandRegistration() {

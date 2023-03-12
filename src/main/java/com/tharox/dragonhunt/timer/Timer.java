@@ -52,7 +52,8 @@ public class Timer {
             ItemStack item = player.getInventory().getItemInMainHand();
 
             if (item.getItemMeta() != null) {
-                if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Tracker"))
+                if (item.getItemMeta().getDisplayName().contains("Tracker")
+                        || item.getItemMeta().getDisplayName().contains("Set Respawn Point"))
                     continue;
 
                 // Grappler shows the Timer - has no cooldown to display

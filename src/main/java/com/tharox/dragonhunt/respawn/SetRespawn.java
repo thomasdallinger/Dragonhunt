@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.players.CombatListener;
 import com.tharox.dragonhunt.players.PlayerDeathListener;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
@@ -58,6 +59,12 @@ public class SetRespawn implements Listener {
                 if (player.getHealth() < 10.0) {
                     player.sendMessage(Prefixes.getErrorPrefix() + "You need to have more than 5 ❤ " +
                             "to set your respawn point.");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                    return;
+                }
+
+                if (CombatListener.combatList.containsKey(player.getUniqueId())) {
+                    player.sendMessage(Prefixes.getErrorPrefix() + "You cannot set your respawn point while in combat.");
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                     return;
                 }

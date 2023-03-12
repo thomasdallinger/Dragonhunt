@@ -46,9 +46,18 @@ public class PlayerDeathListener implements Listener {
 
         // if the player has been killed by another player, give the killer regeneration, XP and other rewards
         if (killer != null) {
-            killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
+            CombatListener.combatList.remove(killer.getUniqueId());
+            CombatListener.bossBar.removePlayer(killer);
+            killer.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "You are no longer in combat.");
+
             Coins.addXP(killer, Coins.playerXP);
+
+            killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
             GameState.putItemInInventory(killer, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
+
+            killer.sendMessage(ChatColor.GRAY + "1x " + ChatColor.LIGHT_PURPLE + "Enchanted Golden Apple");
+            killer.sendMessage(ChatColor.GRAY + "1x " + ChatColor.LIGHT_PURPLE + "Regeneration 2 (0:10)");
+
             addPlayerKill(killer, player);
         }
 

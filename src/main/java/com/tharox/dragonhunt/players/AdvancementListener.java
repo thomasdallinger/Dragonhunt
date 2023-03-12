@@ -38,7 +38,6 @@ public class AdvancementListener implements Listener {
                     addBonusXP(player, "Nether");
                 }
 
-                player.performCommand("pos NetherPortal");
                 break;
             case "minecraft:nether/distract_piglin":
                 advancementName = "Piglin Trading";

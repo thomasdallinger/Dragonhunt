@@ -5,10 +5,12 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.commands.PositionCommand;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.*;
+import org.bukkit.block.Biome;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -69,6 +71,11 @@ public class Tracker implements Listener {
         } else if (world.getName().equals("world_nether")) {
             addStructureToLists(player, Structure.BASTION_REMNANT, "Bastion", structureList,
                     locationList);
+
+            if (GameState.firstNetherEntry != null) {
+                structureList.add("Nether Portal");
+                locationList.add(GameState.firstNetherEntry);
+            }
         }
 
         // locate a Ruined Portal in the OVERWORLD and the NETHER (Tracker not available in the End)

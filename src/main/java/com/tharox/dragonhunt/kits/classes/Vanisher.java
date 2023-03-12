@@ -12,8 +12,8 @@ import org.bukkit.potion.PotionEffectType;
 
 @DragonhuntKit
 public class Vanisher extends Kit {
-    static int duration = 15;
-    static int cooldown = 120;
+    static int duration = 10;
+    static int cooldown = 90;
 
     public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Vanisher";
     public static final String lore = ChatColor.GRAY + "Disappear in front of your enemies!\n\n"

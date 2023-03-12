@@ -109,7 +109,7 @@ public class CombatListener implements Listener {
             if (commands.contains(cmd)) {
                 event.setCancelled(true);
                 event.getPlayer().sendMessage(Prefixes.getErrorPrefix()
-                        + ChatColor.GRAY + "This command is blocked while in combat.");
+                        + ChatColor.RED + "This command is blocked while in combat.");
             }
         }
     }

@@ -116,8 +116,8 @@ public abstract class Kit implements Listener {
             // Check if on Cooldown
             if (cooldownEnds > timer.getTime()) {
                 timeLeft = cooldownEnds - timer.getTime();
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "COOLDOWN: "
-                        + ChatColor.WHITE + timeLeft + " sec"));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED.toString()
+                        + ChatColor.BOLD + "COOLDOWN: " + ChatColor.WHITE + timeLeft + " sec"));
                 return;
             }
 
@@ -126,9 +126,11 @@ public abstract class Kit implements Listener {
             }
 
             if (timer.getTime() % 2 == 0)
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.GOLD.toString() + ChatColor.BOLD + "ABILITY READY"));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
+                        ChatColor.GOLD.toString() + ChatColor.BOLD + "ABILITY READY"));
             else
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.WHITE.toString() + ChatColor.BOLD + "ABILITY READY"));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
+                        ChatColor.WHITE.toString() + ChatColor.BOLD + "ABILITY READY"));
         }
     }
 
@@ -143,7 +145,8 @@ public abstract class Kit implements Listener {
         }.runTaskTimer(Main.getInstance(), 20, 20);
     }
 
-    protected void runKitAbility(int ticks, int duration, CustomKitAbilityExecutor executor, EverySecondKitAbilityExecutor everySecondExecutor) {
+    protected void runKitAbility(int ticks, int duration, CustomKitAbilityExecutor executor,
+                                 EverySecondKitAbilityExecutor everySecondExecutor) {
         new BukkitRunnable() {
             double durationLeft = duration;
 

@@ -28,7 +28,8 @@ public class KitInventory {
         inv.setItem(0, Kit.getDisplayItem(HexColor.ASSASSIN + KitClass.ASSASSIN + " Assassin",
                 Material.NETHERITE_SWORD,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.GRAY + "Permanent Effect: " + HexColor.ASSASSIN + "Strength 1"));
+                        + ChatColor.GRAY + "Permanent Effect: " + HexColor.ASSASSIN + "5%"
+                        + ChatColor.GRAY + " Damage buff"));
 
         inv.setItem(9, Kit.getDisplayItem(HexColor.TANK + KitClass.TANK + " Tank",
                 Material.NETHERITE_CHESTPLATE,

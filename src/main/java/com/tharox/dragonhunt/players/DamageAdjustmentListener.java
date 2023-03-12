@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.kits.classes.KitClass;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -40,6 +41,11 @@ public class DamageAdjustmentListener implements Listener {
                         }
                     }
                 }
+            }
+
+            // Assassins passive: Buff all damage by 5%
+            if (KitClass.assassins.contains(damager)) {
+                damage = damage * 1.05;
             }
         }
 

@@ -1,8 +1,12 @@
 package com.tharox.dragonhunt.commands;
 
+import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.timer.Timer;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
@@ -14,7 +18,7 @@ import org.bukkit.entity.Player;
 public class TopCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        int cost = 5;
+        Timer timer = Main.getInstance().getTimer();
         Player player;
         World world;
         double x, z;
@@ -23,21 +27,38 @@ public class TopCommand implements CommandExecutor {
             player = (Player) sender;
         } else return false;
 
-        if (!PaidCommandsValidator.commandExecutionIsValid(player, cost)) return false;
+        if (!timer.isRunning()) {
+            player.sendMessage(Prefixes.getErrorPrefix() + "This feature is currently disabled.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+            return false;
+        }
 
         world = player.getWorld();
         x = player.getLocation().getX();
         z = player.getLocation().getZ();
 
         if (player.getLocation().getY() > world.getHighestBlockYAt((int) x, (int) z)) {
-            player.sendMessage(Prefixes.getErrorPrefix() + "Already on the surface.");
+            player.sendMessage(Prefixes.getErrorPrefix() + "You are already on the surface.");
             return false;
         }
 
-        Coins.removeCoins(player, cost, "/top");
+        // Player has to have more than 5 hearts.
+        // Players lose 5 hearts upon being teleported to the surface.
+        if (player.getHealth() < 10.0) {
+            player.sendMessage(Prefixes.getErrorPrefix() + "You need to have more than 5 ❤ " +
+                    "to be able to teleport to the surface.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+            return false;
+        }
+
+        player.setHealth(player.getHealth() - 10.0);
         player.teleport(new Location(world, x, world.getHighestBlockYAt((int) x, (int) z), z));
+
         player.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "Teleported to the surface.");
+        player.sendMessage(Prefixes.getAllPrefix() + HexColor.RED + "-5 ❤");
+
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
 
         return true;
     }

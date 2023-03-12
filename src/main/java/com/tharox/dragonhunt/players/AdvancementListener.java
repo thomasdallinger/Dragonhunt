@@ -7,6 +7,7 @@ import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -53,6 +54,14 @@ public class AdvancementListener implements Listener {
                 if (!GameState.playersReachedEnd) {
                     GameState.playersReachedEnd = true;
                     addBonusXP(player, "End");
+
+                    for (Player online : Bukkit.getOnlinePlayers()) {
+                        online.sendMessage(Prefixes.getAllPrefix() + HexColor.RED + "ATTENTION! "
+                                + HexColor.HIGHLIGHT + PlayerEndTeleport.getEyesNeeded()
+                                + " Eyes of Ender " + ChatColor.GRAY + "needed to get the "
+                                + ChatColor.LIGHT_PURPLE + " End Teleporter"
+                                + ChatColor.GRAY + ".");
+                    }
                 }
                 break;
         }

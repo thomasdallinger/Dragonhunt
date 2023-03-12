@@ -98,13 +98,13 @@ public class PlayerEndTeleport implements Listener {
      * @return the amount of ender eyes needed to get the "Teleport » End Dimension" item
      */
     public static int getEyesNeeded() {
-        int eyesNeeded = 12;
+        int eyesNeeded = 10;
 
         if (Main.getInstance().getTimer().getTime() >= 1500) { // last 10 minutes of the game
-            eyesNeeded = 8;
+            eyesNeeded = 6;
         } else {
             if (GameState.playersReachedEnd) {
-                eyesNeeded = 10;
+                eyesNeeded = 8;
             }
         }
 

@@ -136,10 +136,6 @@ public class GameStart extends GameConfiguration {
                         + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + "mark locations");
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "get to the surface quickly");
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/respawn" + ChatColor.DARK_GRAY + ": "
-                        + ChatColor.GRAY + "sets a respawn point");
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/spec" + ChatColor.DARK_GRAY + ": "
-                        + ChatColor.GRAY + "go into spectator mode");
             }
         }
     }

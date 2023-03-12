@@ -85,19 +85,28 @@ public class SetRespawn implements Listener {
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
 
         if (item.getItemMeta().getDisplayName().contains("Set Respawn Point")) {
-            if (PlayerDeathListener.deathLocation.containsKey(player)) {
-                distance = (int) player.getLocation().distance(PlayerDeathListener.deathLocation.get(player));
+            try {
+                if (PlayerDeathListener.deathLocation.containsKey(player)) {
+                    distance = (int) player.getLocation().distance(PlayerDeathListener.deathLocation.get(player));
 
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                            new ComponentBuilder("LAST DEATH").color(ChatColor.GOLD).bold(true)
+                                    .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                    .append(String.valueOf(distance)).color(ChatColor.WHITE)
+                                    .append(" Blocks away").color(ChatColor.WHITE).create());
+                } else {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                            new ComponentBuilder("LAST DEATH").color(ChatColor.GOLD).bold(true)
+                                    .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                    .append("- Blocks away").color(ChatColor.GRAY).italic(true).create());
+                }
+            } catch (IllegalArgumentException ex) {
+                // Different dimension.
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
                         new ComponentBuilder("LAST DEATH").color(ChatColor.GOLD).bold(true)
                                 .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                .append(String.valueOf(distance)).color(ChatColor.WHITE)
-                                .append(" Blocks away").color(ChatColor.WHITE).create());
-            } else {
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                        new ComponentBuilder("LAST DEATH").color(ChatColor.GOLD).bold(true)
-                                .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                .append("- Blocks away").color(ChatColor.GRAY).italic(true).create());
+                                .append(DbValues.getCurrentWorld(PlayerDeathListener.deathLocation.get(player)))
+                                .color(HexColor.RED).create());
             }
         }
     }

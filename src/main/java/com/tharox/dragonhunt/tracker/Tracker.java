@@ -188,6 +188,7 @@ public class Tracker implements Listener {
                 }
 
             } catch (IllegalArgumentException ex) {
+                // Different dimension.
                 if (trackedObject != null) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(trackedObjectName)
                             .append(DbValues.getCurrentWorld(trackedLocation)).color(HexColor.RED).create());

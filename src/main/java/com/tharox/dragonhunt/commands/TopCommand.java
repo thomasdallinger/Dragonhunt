@@ -39,6 +39,7 @@ public class TopCommand implements CommandExecutor {
 
         if (player.getLocation().getY() > world.getHighestBlockYAt((int) x, (int) z)) {
             player.sendMessage(Prefixes.getErrorPrefix() + "You are already on the surface.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return false;
         }
 
@@ -52,7 +53,7 @@ public class TopCommand implements CommandExecutor {
         }
 
         player.setHealth(player.getHealth() - 10.0);
-        player.teleport(new Location(world, x, world.getHighestBlockYAt((int) x, (int) z), z));
+        player.teleport(new Location(world, x, world.getHighestBlockYAt((int) x, (int) z) + 1, z));
 
         player.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "Teleported to the surface.");
         player.sendMessage(Prefixes.getAllPrefix() + HexColor.RED + "-5 ❤");

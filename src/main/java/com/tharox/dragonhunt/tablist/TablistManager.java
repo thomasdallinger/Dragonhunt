@@ -16,7 +16,7 @@ public class TablistManager {
      * @param player player who receives the header and footer in the tablist
      */
     public void setPlayerList(Player player) {
-        player.setPlayerListHeaderFooter(Main.getTitle(), "\n" + ChatColor.GRAY + "ᴍᴏᴅɪꜰɪᴇʀꜱ" + "\n");
+        player.setPlayerListHeaderFooter(Main.getTitle(), "\n" + ChatColor.DARK_GRAY + "ᴍᴏᴅɪꜰɪᴇʀꜱ" + "\n");
     }
 
     /**

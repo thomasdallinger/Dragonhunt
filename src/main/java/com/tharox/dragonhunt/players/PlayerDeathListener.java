@@ -61,7 +61,11 @@ public class PlayerDeathListener implements Listener {
             addPlayerKill(killer, player);
         }
 
-        // drop no XP
+        // Set dead player out of combat
+        CombatListener.combatList.remove(player.getUniqueId());
+        CombatListener.bossBar.removePlayer(player);
+
+        // Drop no XP
         event.setDroppedExp(0);
         event.setKeepLevel(true);
     }

@@ -62,10 +62,10 @@ public class GameState {
      * Sets messages displaying the loot a player got from clicking a chest / minecart.
      */
     public static void setChestLootMessages(Player player) {
-        player.sendMessage(org.bukkit.ChatColor.GRAY + "2x " + org.bukkit.ChatColor.DARK_PURPLE + "Obsidian");
-        player.sendMessage(org.bukkit.ChatColor.GRAY + "2x " + org.bukkit.ChatColor.AQUA + "Diamond");
-        player.sendMessage(org.bukkit.ChatColor.GRAY + "6x " + org.bukkit.ChatColor.GOLD + "Gold Ingot");
-        player.sendMessage(org.bukkit.ChatColor.GRAY + "6x " + org.bukkit.ChatColor.WHITE + "Iron Ingot");
+        player.sendMessage(ChatColor.GRAY + "2x " + ChatColor.DARK_PURPLE + "Obsidian");
+        player.sendMessage(ChatColor.GRAY + "2x " + ChatColor.AQUA + "Diamond");
+        player.sendMessage(ChatColor.GRAY + "6x " + ChatColor.GOLD + "Gold Ingot");
+        player.sendMessage(ChatColor.GRAY + "6x " + ChatColor.WHITE + "Iron Ingot");
     }
 
     /**

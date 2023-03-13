@@ -14,6 +14,7 @@ import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -96,12 +97,20 @@ public class Timer {
                         if (getTime() == 1200) { // 20 minutes played
                             int coinsToAdd = 30;
                             Coins.addCoins(player, coinsToAdd);
+
+                            GameState.putItemInInventory(player, new ItemStack(Material.NETHERITE_INGOT));
+                            GameState.putItemInInventory(player, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
+                            GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE, 2));
+                            GameState.putItemInInventory(player, new ItemStack(Material.COOKED_BEEF, 6));
+
                             player.sendMessage(Prefixes.getCoinPrefix(coinsToAdd)
                                     + HexColor.HIGHLIGHT + ChatColor.BOLD + "Bonus resources delivered.");
+                            player.sendMessage(ChatColor.GRAY + "1x " + ChatColor.DARK_PURPLE + "Netherite Ingot");
+                            player.sendMessage(ChatColor.GRAY + "1x " + ChatColor.LIGHT_PURPLE + "Enchanted Golden Apple");
+                            player.sendMessage(ChatColor.GRAY + "2x " + ChatColor.GOLD + "Golden Apple");
+                            player.sendMessage(ChatColor.GRAY + "6x " + ChatColor.RED + "Cooked Beef");
 
-                            GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE, 2));
-                            GameState.putItemInInventory(player, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
-                            GameState.putItemInInventory(player, new ItemStack(Material.NETHERITE_INGOT));
+                            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
                         }
 
                         player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "The game ends in "

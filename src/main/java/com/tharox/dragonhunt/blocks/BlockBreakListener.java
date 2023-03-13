@@ -108,6 +108,7 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.GOLD_NUGGET, new ItemStack(Material.GOLD_INGOT, 2)); // Nether Gold Ore
         materials.put(Material.GILDED_BLACKSTONE, new ItemStack(Material.GOLD_INGOT, 2));
         materials.put(Material.GRAVEL, new ItemStack(Material.FLINT)); // for Flint and Steel
+        materials.put(Material.CLAY, new ItemStack(Material.FLINT)); // for Flint and Steel
         materials.put(Material.MELON_SLICE, new ItemStack(Material.APPLE));
         materials.put(Material.WHEAT, new ItemStack(Material.APPLE));
         materials.put(Material.CARROT, new ItemStack(Material.APPLE));

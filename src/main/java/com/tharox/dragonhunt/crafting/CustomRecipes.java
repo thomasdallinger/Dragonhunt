@@ -226,12 +226,12 @@ public class CustomRecipes {
     }
 
     /**
-     * Adds a new copper recipe: 9 gold ingots = 1 diamond.
+     * Adds a new copper recipe: 4 gold ingots = 1 diamond.
      */
     private void addGoldDiamondRecipe() {
         NamespacedKey key = new NamespacedKey(Main.getInstance(), "gold_diamond");
         ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.DIAMOND));
-        recipe.shape("GGG", "GGG", "GGG");
+        recipe.shape("GG", "GG");
         recipe.setIngredient('G', Material.GOLD_INGOT);
 
         Bukkit.addRecipe(recipe);

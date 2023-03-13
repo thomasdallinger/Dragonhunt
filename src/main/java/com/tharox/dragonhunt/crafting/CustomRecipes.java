@@ -50,7 +50,6 @@ public class CustomRecipes {
         changeShieldRecipe();
         changeCrossbowRecipe();
 
-        addCopperGoldRecipe();
         addGoldDiamondRecipe();
         addEnchantedGoldenAppleRecipe();
         addBookRecipe();
@@ -214,31 +213,19 @@ public class CustomRecipes {
     }
 
     /**
-     * Adds a new copper recipe: 4 copper ingots = 1 gold ingot.
-     */
-    private void addCopperGoldRecipe() {
-        NamespacedKey key = new NamespacedKey(Main.getInstance(), "copper_gold");
-        ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.GOLD_INGOT));
-        recipe.shape("CC", "CC");
-        recipe.setIngredient('C', Material.COPPER_INGOT);
-
-        Bukkit.addRecipe(recipe);
-    }
-
-    /**
-     * Adds a new copper recipe: 4 gold ingots = 1 diamond.
+     * Adds a new recipe: 9 gold ingots = 1 diamond.
      */
     private void addGoldDiamondRecipe() {
         NamespacedKey key = new NamespacedKey(Main.getInstance(), "gold_diamond");
         ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.DIAMOND));
-        recipe.shape("GG", "GG");
+        recipe.shape("GGG", "GGG", "GGG");
         recipe.setIngredient('G', Material.GOLD_INGOT);
 
         Bukkit.addRecipe(recipe);
     }
 
     /**
-     * Adds a new recipe: 8 diamonds + 1 golden apple = 1 enchanted golden apple.
+     * Adds a new recipe: 4 diamonds + 1 golden apple = 1 enchanted golden apple.
      */
     private void addEnchantedGoldenAppleRecipe() {
         NamespacedKey key = new NamespacedKey(Main.getInstance(), "enchanted_golden_apple");

@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.entities;
 
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
@@ -9,8 +8,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.PotionMeta;
-import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 public class EntityDropListener implements Listener {
@@ -46,7 +43,7 @@ public class EntityDropListener implements Listener {
                 itemToDrop = new ItemStack(Material.GLOWSTONE, 3);
                 break;
             case 2:
-                itemToDrop = new ItemStack(Material.APPLE, 3);
+                itemToDrop = new ItemStack(Material.GOLDEN_APPLE, 2);
                 break;
             case 3:
                 itemToDrop = new ItemStack(Material.ENDER_PEARL);
@@ -61,8 +58,7 @@ public class EntityDropListener implements Listener {
                 itemToDrop = new ItemStack(Material.OBSIDIAN, 2);
                 break;
             case 7:
-                itemToDrop = createPotion(true, PotionEffectType.HARM, Color.MAROON,
-                        "Harming");
+                itemToDrop = new ItemStack(Material.DIAMOND, 2);
                 break;
             case 8:
                 itemToDrop = new ItemStack(Material.ENDER_PEARL, 2);
@@ -71,8 +67,7 @@ public class EntityDropListener implements Listener {
                 itemToDrop = new ItemStack(Material.STRING, 3);
                 break;
             case 10:
-                itemToDrop = createPotion(false, PotionEffectType.FIRE_RESISTANCE, Color.ORANGE,
-                        "Fire Resistance");
+                itemToDrop = new ItemStack(Material.NETHERITE_SCRAP, 1);
                 break;
             default:
                 // Unexpected Value.
@@ -80,29 +75,5 @@ public class EntityDropListener implements Listener {
         }
 
         return itemToDrop;
-    }
-
-    public ItemStack createPotion(boolean splash, PotionEffectType effect, Color color, String title) {
-        ItemStack item;
-        String potionType;
-        if (splash) {
-            item = new ItemStack(Material.SPLASH_POTION, 2);
-            potionType = "Splash Potion of ";
-        } else {
-            item = new ItemStack(Material.POTION);
-            potionType = "Potion of ";
-        }
-
-        PotionMeta meta = (PotionMeta) item.getItemMeta();
-        if (meta == null) return null;
-
-        meta.addCustomEffect(new PotionEffect(effect, 1200, 0),
-                true);
-        meta.setColor(color);
-
-        meta.setDisplayName(ChatColor.AQUA + potionType + title);
-        item.setItemMeta(meta);
-
-        return item;
     }
 }

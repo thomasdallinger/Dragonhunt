@@ -50,10 +50,10 @@ public class CustomRecipes {
         changeShieldRecipe();
         changeCrossbowRecipe();
 
-        addCopperGold();
-        addCopperDiamond();
-        addEnchantedGoldenApple();
-        addBook();
+        addCopperGoldRecipe();
+        addGoldDiamondRecipe();
+        addEnchantedGoldenAppleRecipe();
+        addBookRecipe();
     }
 
     /**
@@ -216,7 +216,7 @@ public class CustomRecipes {
     /**
      * Adds a new copper recipe: 4 copper ingots = 1 gold ingot.
      */
-    private void addCopperGold() {
+    private void addCopperGoldRecipe() {
         NamespacedKey key = new NamespacedKey(Main.getInstance(), "copper_gold");
         ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.GOLD_INGOT));
         recipe.shape("CC", "CC");
@@ -226,13 +226,13 @@ public class CustomRecipes {
     }
 
     /**
-     * Adds a new copper recipe: 9 copper ingots = 1 diamond.
+     * Adds a new copper recipe: 9 gold ingots = 1 diamond.
      */
-    private void addCopperDiamond() {
-        NamespacedKey key = new NamespacedKey(Main.getInstance(), "copper_diamond");
+    private void addGoldDiamondRecipe() {
+        NamespacedKey key = new NamespacedKey(Main.getInstance(), "gold_diamond");
         ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.DIAMOND));
-        recipe.shape("CCC", "CCC", "CCC");
-        recipe.setIngredient('C', Material.COPPER_INGOT);
+        recipe.shape("GGG", "GGG", "GGG");
+        recipe.setIngredient('G', Material.GOLD_INGOT);
 
         Bukkit.addRecipe(recipe);
     }
@@ -240,7 +240,7 @@ public class CustomRecipes {
     /**
      * Adds a new recipe: 8 diamonds + 1 golden apple = 1 enchanted golden apple.
      */
-    private void addEnchantedGoldenApple() {
+    private void addEnchantedGoldenAppleRecipe() {
         NamespacedKey key = new NamespacedKey(Main.getInstance(), "enchanted_golden_apple");
         ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
         recipe.shape(" D ", "DGD", " D ");
@@ -254,7 +254,7 @@ public class CustomRecipes {
      * Adds a new QoL recipe: 1 leather = 1 book.
      * Book needed to craft an enchanting table.
      */
-    private void addBook() {
+    private void addBookRecipe() {
         NamespacedKey key = new NamespacedKey(Main.getInstance(), "book");
         ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.BOOK));
         recipe.shape("L");

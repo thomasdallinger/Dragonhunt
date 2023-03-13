@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.entities;
 
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -8,7 +7,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffectType;
 
 public class EntityDropListener implements Listener {
     public Integer dropIndex = 0; // Starts at 0 but is incremented on the first event call.

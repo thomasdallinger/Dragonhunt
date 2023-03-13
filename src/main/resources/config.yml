@@ -182,14 +182,14 @@ brewing:
     lore: "Unlock permanent positive effects.  "
     material: POTION
     amount: 1
-    color: 0xF82423
+    color: 0x22FF4C
   1:
     slot: 15
     name: "» Arrow Effects"
     lore: "Unlock effects for arrows.          "
     material: TIPPED_ARROW
     amount: 1
-    color: 0x4E9331
+    color: 0x000000
 permanentEffects:
   0:
     slot: 1
@@ -197,7 +197,7 @@ permanentEffects:
     lore: "Increases walking speed by 20%."
     material: POTION
     amount: 1
-    color: 0x7CAFC6
+    color: 0x13D4E8
     cost: 5
   1:
     slot: 10
@@ -205,7 +205,7 @@ permanentEffects:
     lore: "Increases walking speed by 40%."
     material: POTION
     amount: 2
-    color: 0x7CAFC6
+    color: 0x13D4E8
     cost: 7
   2:
     slot: 19
@@ -213,7 +213,7 @@ permanentEffects:
     lore: "Increases walking speed by 60%."
     material: POTION
     amount: 3
-    color: 0x7CAFC6
+    color: 0x13D4E8
     cost: 9
   3:
     slot: 2
@@ -245,7 +245,7 @@ permanentEffects:
     lore: "Reduces incoming damage by 10%."
     material: POTION
     amount: 1
-    color: 0x99453A
+    color: 0xEA773C
     cost: 9
   7:
     slot: 12
@@ -253,7 +253,7 @@ permanentEffects:
     lore: "Reduces incoming damage by 20%."
     material: POTION
     amount: 2
-    color: 0x99453A
+    color: 0xEA773C
     cost: 13
   8:
     slot: 21
@@ -261,7 +261,7 @@ permanentEffects:
     lore: "Reduces incoming damage by 30%."
     material: POTION
     amount: 3
-    color: 0x99453A
+    color: 0xEA773C
     cost: 17
   9:
     slot: 4
@@ -269,7 +269,7 @@ permanentEffects:
     lore: "Increases damage by 10%."
     material: POTION
     amount: 1
-    color: 0x932423
+    color: 0xE22627
     cost: 9
   10:
     slot: 13
@@ -277,7 +277,7 @@ permanentEffects:
     lore: "Increases damage by 20%."
     material: POTION
     amount: 2
-    color: 0x932423
+    color: 0xE22627
     cost: 13
   11:
     slot: 22
@@ -285,7 +285,7 @@ permanentEffects:
     lore: "Increases damage by 30%."
     material: POTION
     amount: 3
-    color: 0x932423
+    color: 0xE22627
     cost: 17
   12:
     slot: 5
@@ -293,7 +293,7 @@ permanentEffects:
     lore: "Heals half a heart every 2.5 seconds."
     material: POTION
     amount: 1
-    color: 0xCD5CAB
+    color: 0xAE34CD
     cost: 15
   13:
     slot: 14
@@ -301,7 +301,7 @@ permanentEffects:
     lore: "Heals half a heart every 1.25 seconds."
     material: POTION
     amount: 2
-    color: 0xCD5CAB
+    color: 0xAE34CD
     cost: 20
   14:
     slot: 23
@@ -309,15 +309,15 @@ permanentEffects:
     lore: "Heals half a heart every 0.6 seconds."
     material: POTION
     amount: 3
-    color: 0xCD5CAB
+    color: 0xAE34CD
     cost: 25
   15:
     slot: 6
     name: "Extra Hearts ʀᴇ-ᴘᴜʀᴄʜᴀꜱᴇᴀʙʟᴇ"
     lore: "+1 ❤ and +5 ⛃ cost per purchase."
-    material: LINGERING_POTION
+    material: SPLASH_POTION
     amount: 1
-    color: 0xF82423
+    color: 0xF3CA54
     cost: 10 # +5 will be applied to this value
 negativeEffects:
   0:
@@ -326,7 +326,7 @@ negativeEffects:
     lore: "Select one of the effects available below when unlocked."
     material: TIPPED_ARROW
     amount: 1
-    color: 0x22FF4C
+    color: 0xF1F5F8
     cost: 25
   1:
     slot: 11
@@ -335,7 +335,7 @@ negativeEffects:
     material: TIPPED_ARROW
     amount: 1
     effect: SLOW_DIGGING
-    color: 0x4A4217
+    color: 0x894E2E
   2:
     slot: 12
     name: "Arrow of Poison"
@@ -343,7 +343,7 @@ negativeEffects:
     material: TIPPED_ARROW
     amount: 1
     effect: POISON
-    color: 0x4E9331
+    color: 0x366622
   3:
     slot: 13
     name: "Arrow of Blindness"
@@ -351,7 +351,7 @@ negativeEffects:
     material: TIPPED_ARROW
     amount: 1
     effect: BLINDNESS
-    color: 0x1F1F23
+    color: 0x000000
   4:
     slot: 14
     name: "Arrow of Weakness"
@@ -359,7 +359,7 @@ negativeEffects:
     material: TIPPED_ARROW
     amount: 1
     effect: WEAKNESS
-    color: 0x484D48
+    color: 0x484848
   5:
     slot: 15
     name: "Arrow of Hunger"
@@ -367,4 +367,4 @@ negativeEffects:
     material: TIPPED_ARROW
     amount: 1
     effect: HUNGER
-    color: 0x587653
+    color: 0x647845

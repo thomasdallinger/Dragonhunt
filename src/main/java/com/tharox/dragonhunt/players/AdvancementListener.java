@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
@@ -63,6 +64,13 @@ public class AdvancementListener implements Listener {
                                 + ChatColor.GRAY + ".");
                     }
                 }
+
+                // 10 Second delay
+                Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
+                    PlayerDamagesEnderdragon.timeLeft.put(player.getUniqueId(), 18);
+                    PlayerDamagesEnderdragon.bossBar.addPlayer(player);
+                }, 200L);
+
                 break;
         }
 

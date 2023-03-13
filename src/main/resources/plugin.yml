@@ -12,3 +12,9 @@ commands:
     description: Teleports the player to the surface.
   pos:
     description: Mark a location.
+  hub:
+    description: Brings you back to the lobby.
+  lobby:
+    description: Brings you back to the lobby.
+  l:
+    description: Brings you back to the lobby.

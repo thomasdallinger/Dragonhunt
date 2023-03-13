@@ -10,6 +10,7 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.LevelUp;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.commands.DateCommand;
+import com.tharox.dragonhunt.commands.HubCommand;
 import com.tharox.dragonhunt.commands.PositionCommand;
 import com.tharox.dragonhunt.commands.TopCommand;
 import com.tharox.dragonhunt.crafting.CustomRecipes;
@@ -240,5 +241,8 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         getCommand("date").setExecutor(new DateCommand());
         getCommand("top").setExecutor(new TopCommand());
         getCommand("pos").setExecutor(new PositionCommand());
+        getCommand("hub").setExecutor(new HubCommand());
+        getCommand("lobby").setExecutor(new HubCommand());
+        getCommand("l").setExecutor(new HubCommand());
     }
 }

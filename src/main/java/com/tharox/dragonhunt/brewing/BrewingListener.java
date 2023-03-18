@@ -27,7 +27,7 @@ public class BrewingListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         BrewingInventory brewingInventory = new BrewingInventory(Main.getInstance().getConfig(), player);
 
-        if (!event.getView().getTitle().contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "BREWING STAND"))
+        if (!event.getView().getTitle().contains("Brewing Stand"))
             return;
         event.setCancelled(true);
 
@@ -38,7 +38,7 @@ public class BrewingListener implements Listener {
         String effectName = item.getItemMeta().getDisplayName();
 
         // inventory is the brewing stand menu
-        if (event.getView().getTitle().contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "BREWING STAND MENU")) {
+        if (event.getView().getTitle().contains("Brewing Stand Menu")) {
             player.closeInventory();
             player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
 

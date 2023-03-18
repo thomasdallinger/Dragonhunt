@@ -24,7 +24,7 @@ public class EnchantingListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
 
-        if (!event.getView().getTitle().contains(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "ENCHANT"))
+        if (!event.getView().getTitle().contains("Enchant"))
             return;
         event.setCancelled(true);
 

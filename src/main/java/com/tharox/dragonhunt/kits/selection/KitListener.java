@@ -25,7 +25,7 @@ public class KitListener implements Listener {
             InvocationTargetException, InstantiationException, NoSuchFieldException {
         Player player = (Player) event.getWhoClicked();
 
-        if (!event.getView().getTitle().equals(HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "KIT SELECTION"))
+        if (!event.getView().getTitle().contains("Kit Selection"))
             return;
         event.setCancelled(true);
 

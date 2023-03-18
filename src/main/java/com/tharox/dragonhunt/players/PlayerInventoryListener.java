@@ -66,7 +66,7 @@ public class PlayerInventoryListener implements Listener {
         Player player = (Player) event.getPlayer();
         Inventory inv = event.getInventory();
 
-        if (event.getView().getTitle().contains("MODIFIERS")) {
+        if (event.getView().getTitle().contains("Modifiers")) {
             if (GameState.modifierInventoryClose) return;
 
             Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(),
@@ -74,7 +74,7 @@ public class PlayerInventoryListener implements Listener {
             return;
         }
 
-        if (event.getView().getTitle().contains("KIT SELECTION")) {
+        if (event.getView().getTitle().contains("Kit Selection")) {
             if (GameState.kitInventoryClose.get(player)) return;
 
             Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.getInstance(),

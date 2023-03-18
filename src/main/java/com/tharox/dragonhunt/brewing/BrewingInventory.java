@@ -45,13 +45,11 @@ public class BrewingInventory {
 
         Inventory inv;
         if (!category.equals("brewing")) {
-            inv = Bukkit.createInventory(null, 27,
-                    HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "BREWING STAND "
-                            + ChatColor.LIGHT_PURPLE + Coins.getCoins(player) + " ⛃");
+            inv = Bukkit.createInventory(null, 27, HexColor.HIGHLIGHT + "Brewing Stand "
+                    + ChatColor.DARK_GRAY + Coins.getCoins(player) + " ⛃");
             addBackToMenuItem(inv);
         } else {
-            inv = Bukkit.createInventory(null, 27,
-                    HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "BREWING STAND MENU");
+            inv = Bukkit.createInventory(null, 27, HexColor.HIGHLIGHT + "Brewing Stand Menu");
         }
 
         for (BrewingItem item : itemList) {

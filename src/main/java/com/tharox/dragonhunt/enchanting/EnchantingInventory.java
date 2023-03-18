@@ -37,9 +37,8 @@ public class EnchantingInventory {
             itemList.add(new EnchantingItem(section));
         }
 
-        Inventory inv = Bukkit.createInventory(null, 36,
-                HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "ENCHANT "
-                        + ChatColor.LIGHT_PURPLE + Coins.getCoins(player) + " ⛃");
+        Inventory inv = Bukkit.createInventory(null, 36, HexColor.HIGHLIGHT + "Enchant "
+                + ChatColor.DARK_GRAY + Coins.getCoins(player) + " ⛃");
 
         for (EnchantingItem item : itemList) {
             ItemStack itemStack = item.createItem(player); //create the itemStack for each item in the list

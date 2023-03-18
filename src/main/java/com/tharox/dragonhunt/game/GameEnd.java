@@ -69,7 +69,7 @@ public class GameEnd {
             // no winner != null check because the else block still executes if the winner is null
             if (player == winner) {
                 player.sendTitle(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "YOU WON",
-                        HexColor.GREEN + "You defeated the Enderdragon.", 10, 90, 20);
+                        HexColor.GREEN + "You defeated the Ender Dragon.", 10, 90, 20);
                 addWinnerAndXPLevel(player, true);
             } else {
                 player.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "YOU LOST",

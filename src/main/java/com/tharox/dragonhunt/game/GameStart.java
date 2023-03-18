@@ -131,7 +131,9 @@ public class GameStart extends GameConfiguration {
                 player.setGameMode(GameMode.SURVIVAL);
 
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GOLD + ChatColor.BOLD
-                        + "Whoever kills the Enderdragon wins.");
+                        + "RACE TO VICTORY");
+                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GOLD
+                        + "Whoever kills the Ender Dragon wins.");
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/pos [name]"
                         + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + "mark locations");
                 player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "

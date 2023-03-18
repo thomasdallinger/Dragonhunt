@@ -1,7 +1,10 @@
 package com.tharox.dragonhunt.dimensions;
 
+import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.players.EnderDragonDamageListener;
 import com.tharox.dragonhunt.respawn.SetRespawn;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -37,7 +40,7 @@ public class DimensionListener implements Listener {
     }
 
     /**
-     * Only affects nether portals.
+     * Only affects nether and end portals.
      * <p>
      * Once the first player has reached the NETHER, all other players will be teleported to that
      * NETHER portal when entering the NETHER.
@@ -57,7 +60,7 @@ public class DimensionListener implements Listener {
         World worldTo = eventTo.getWorld();
 
         if (worldTo == null) return;
-        if (!worldTo.getName().equals("world_nether")) return;
+        if (worldTo.getEnvironment().equals(World.Environment.NORMAL)) return;
 
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.NETHER_PORTAL) {
             if (worldFrom.getName().equals("world")) {
@@ -77,6 +80,14 @@ public class DimensionListener implements Listener {
                     event.setTo(GameState.firstNetherEntry);
                 }
             }
+        }
+
+        if (event.getCause() == PlayerTeleportEvent.TeleportCause.END_PORTAL) {
+            // 15 Second delay
+            Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
+                EnderDragonDamageListener.timeLeft.put(player.getUniqueId(), EnderDragonDamageListener.time);
+                EnderDragonDamageListener.bossBar.addPlayer(player);
+            }, 300L);
         }
     }
 }

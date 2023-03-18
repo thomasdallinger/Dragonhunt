@@ -96,7 +96,14 @@ public class CombatListener implements Listener {
         try {
             for (UUID id : combatList.keySet()) {
                 Player player = Bukkit.getPlayer(id);
-                if (player == null) return;
+                if (player == null) continue;
+
+                if (player.isDead()) {
+                    temp.remove(id);
+                    bossBar.removePlayer(player);
+                    continue;
+                }
+
                 int timer = combatList.get(id) - 1;
 
                 if (timer > 0) {

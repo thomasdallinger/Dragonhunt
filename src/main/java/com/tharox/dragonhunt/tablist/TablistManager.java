@@ -43,7 +43,6 @@ public class TablistManager {
             if (team == null)
                 team = scoreboard.registerNewTeam(playerCount + "player");
 
-            team.setColor(org.bukkit.ChatColor.YELLOW);
             team.setPrefix(Prefixes.getNamePrefix(target));
             team.addEntry(target.getName());
 

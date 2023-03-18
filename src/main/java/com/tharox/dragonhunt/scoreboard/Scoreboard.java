@@ -73,7 +73,7 @@ public class Scoreboard extends ScoreboardBuilder {
             setScore("", 2);
         }
 
-        setScore(ChatColor.GOLD + "ᴘʟᴀʏᴅʀᴀɢᴏɴʜᴜɴᴛ.ɴᴇᴛ", 0);
+        setScore(ChatColor.GOLD + "ᴘʟᴀʏᴅʀᴀɢᴏɴʜᴜɴᴛ", 0);
     }
 
     private void run(Player player, Countdown countdown) {

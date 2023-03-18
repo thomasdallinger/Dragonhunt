@@ -10,6 +10,6 @@ public class ChatListener implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event) {
         event.setFormat(Prefixes.getNamePrefix(event.getPlayer())
-                + ChatColor.YELLOW + "%1$s" + ChatColor.DARK_GRAY + " » " + ChatColor.GRAY + "%2$s");
+                + ChatColor.WHITE + "%1$s" + ChatColor.DARK_GRAY + " » " + ChatColor.GRAY + "%2$s");
     }
 }

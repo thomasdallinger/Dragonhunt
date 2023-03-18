@@ -3,15 +3,12 @@ package com.tharox.dragonhunt.tracker;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
-import com.tharox.dragonhunt.commands.PositionCommand;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.*;
-import org.bukkit.block.Biome;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -116,7 +113,7 @@ public class Tracker implements Listener {
                 playerTracksName.put(player, "[P] " + allOtherPlayers.get(index).getName());
                 playerTracksLocation.put(player, allOtherPlayers.get(index).getLocation());
                 player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
-                        + ChatColor.YELLOW + playerTracksName.get(player).substring(4) + ChatColor.GRAY + ".");
+                        + ChatColor.WHITE + playerTracksName.get(player).substring(4) + ChatColor.GRAY + ".");
 
                 playerTracksIndex.replace(player, index);
             }
@@ -124,7 +121,6 @@ public class Tracker implements Listener {
     }
 
     public void sendActionBar(Player player) {
-        Timer timer = Main.getInstance().getTimer();
         ItemStack item = player.getInventory().getItemInMainHand();
         String trackedObject = playerTracksName.get(player);
         Location trackedLocation = playerTracksLocation.get(player);
@@ -138,29 +134,22 @@ public class Tracker implements Listener {
         if (item.getItemMeta().getDisplayName().contains("Tracker")) {
             try {
                 if (trackedObject == null) {
-                    if(timer.getTime() % 2 == 0) {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                                new ComponentBuilder("Structures").color(ChatColor.GOLD).bold(true)
-                                        .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                        .append("Right-Click").color(ChatColor.GRAY).italic(true).create());
-                    } else {
-                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                                new ComponentBuilder("Players").color(ChatColor.YELLOW).bold(true)
-                                        .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                        .append("Left-Click").color(ChatColor.GRAY).italic(true).create());
-                        /*player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                                new ComponentBuilder("LEFT-CLICK: ").color(ChatColor.WHITE).bold(true)
-                                        .append("Player").color(ChatColor.YELLOW).bold(false)
-                                        .append(" | ").color(ChatColor.DARK_GRAY)
-                                        .append("RIGHT-CLICK: ").color(ChatColor.WHITE).bold(true)
-                                        .append("Structure").color(ChatColor.GOLD).bold(false).create());*/
-                    }
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                            new ComponentBuilder("PLAYER").color(ChatColor.WHITE).bold(true)
+                                    .append(" (Left-Click)").color(ChatColor.GRAY).bold(false)
+                                    .append(" | ").color(ChatColor.DARK_GRAY)
+                                    .append("STRUCTURE").color(ChatColor.GOLD).bold(true)
+                                    .append(" (Right-Click)").color(ChatColor.GRAY).bold(false).create());
                     return;
                 }
 
                 if (trackedObject.contains("[P]")) {
                     trackedObjectName = ChatColor.YELLOW.toString() + ChatColor.BOLD
                             + trackedObject.substring(4).toUpperCase() + ChatColor.DARK_GRAY + " » ";
+
+                    // Update the distance to other players constantly since they are moving
+                    trackedLocation = Objects.requireNonNull(
+                            Bukkit.getPlayer(trackedObject.substring(4))).getLocation();
                 } else {
                     trackedObjectName = ChatColor.GOLD.toString() + ChatColor.BOLD + trackedObject.toUpperCase()
                             + ChatColor.DARK_GRAY + " » ";
@@ -254,8 +243,8 @@ public class Tracker implements Listener {
                 ChatColor.GRAY + "The compass needle points to the",
                 ChatColor.GRAY + "tracked location.",
                 "",
-                ChatColor.GRAY + "Left-Click: " + ChatColor.YELLOW + "Switch tracked player",
-                ChatColor.GRAY + "Right-Click: " + ChatColor.GOLD + "Switch tracked structure"));
+                ChatColor.GRAY + "Left-Click: " + ChatColor.WHITE + "Track Player",
+                ChatColor.GRAY + "Right-Click: " + ChatColor.GOLD + "Track Structure"));
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

@@ -4,7 +4,10 @@ import com.tharox.dragonhunt.colors.HexColor;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
+
+import java.util.Objects;
 
 @DragonhuntKit
 public class Healer extends Kit {
@@ -29,10 +32,16 @@ public class Healer extends Kit {
 
     @Override
     public void executeAbility() {
+        double maxHealth = Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
+
         player.sendMessage(title + ChatColor.GRAY + " Kit Ability used.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 
-        player.setHealth(player.getHealth() + heartsToAdd * 2);
+        if ((player.getHealth() + heartsToAdd * 2) > maxHealth) {
+            player.setHealth(maxHealth);
+        } else {
+            player.setHealth(player.getHealth() + heartsToAdd * 2);
+        }
     }
 
     @Override

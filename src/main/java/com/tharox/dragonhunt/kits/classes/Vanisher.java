@@ -17,7 +17,7 @@ public class Vanisher extends Kit {
 
     public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Vanisher";
     public static final String lore = ChatColor.DARK_GRAY.toString()
-            + ChatColor.ITALIC + "Escape or Surprise\n\n"
+            + ChatColor.ITALIC + "Become Invisible\n\n"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "On activation you get " + ChatColor.WHITE + "Speed 3"
             + ChatColor.GRAY + " and " + ChatColor.WHITE + "Invisibility" + ChatColor.GRAY + ".\n"

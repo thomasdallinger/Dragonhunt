@@ -266,7 +266,7 @@ permanentEffects:
   9:
     slot: 4
     name: "Strength I"
-    lore: "Increases damage by 10%."
+    lore: "Increases damage by 1 ❤."
     material: POTION
     amount: 1
     color: 0xE22627
@@ -274,7 +274,7 @@ permanentEffects:
   10:
     slot: 13
     name: "Strength II"
-    lore: "Increases damage by 20%."
+    lore: "Increases damage by 2 ❤."
     material: POTION
     amount: 2
     color: 0xE22627
@@ -282,7 +282,7 @@ permanentEffects:
   11:
     slot: 22
     name: "Strength III"
-    lore: "Increases damage by 30%."
+    lore: "Increases damage by 3 ❤."
     material: POTION
     amount: 3
     color: 0xE22627

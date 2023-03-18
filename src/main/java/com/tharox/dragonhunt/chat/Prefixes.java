@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 
 public class Prefixes {
 
-    // ALL: used for messages displayed to all players
+    // IMPORTANT: used for important messages
     public static String getImportantPrefix() {
         return ChatColor.DARK_GRAY + "[" + ChatColor.RED + ChatColor.BOLD + "!!!" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
@@ -33,6 +33,11 @@ public class Prefixes {
     // MODIFIER: used for messages related to modifiers
     public static String getModifierPrefix() {
         return ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + "▲▼▲" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+    }
+
+    // ADVANCEMENT: used for messages related to advancements
+    public static String getAdvancementPrefix() {
+        return ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "✦✦✦" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
     // ERROR: when a player is not allowed to do something or is doing something wrong

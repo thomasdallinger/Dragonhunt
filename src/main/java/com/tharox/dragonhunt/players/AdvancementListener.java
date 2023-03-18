@@ -44,10 +44,10 @@ public class AdvancementListener implements Listener {
                 advancementName = "Piglin Trading";
                 break;
             case "minecraft:nether/find_fortress":
-                advancementName = "Fortress";
+                advancementName = "Find Fortress";
                 break;
             case "minecraft:nether/find_bastion":
-                advancementName = "Bastion";
+                advancementName = "Find Bastion";
                 break;
             case "minecraft:story/enter_the_end":
                 advancementName = "Enter End";
@@ -71,8 +71,12 @@ public class AdvancementListener implements Listener {
             return;
         } else {
             Coins.addXP(player, Coins.bonusXP);
-            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + "Advancement made: "
-                    + ChatColor.DARK_GREEN + advancementName + HexColor.GREEN + ".");
+
+            for(Player online : Bukkit.getOnlinePlayers()) {
+                online.sendMessage(Prefixes.getAdvancementPrefix() + ChatColor.WHITE + player.getName()
+                        + ChatColor.AQUA + " has made the advancement "
+                        + ChatColor.DARK_AQUA + advancementName + ChatColor.AQUA + " (#1).");
+            }
         }
 
         addAdvancement(player, advancementName);

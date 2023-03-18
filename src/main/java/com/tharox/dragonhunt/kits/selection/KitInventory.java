@@ -26,31 +26,32 @@ public class KitInventory {
                 HexColor.HIGHLIGHT.toString() + ChatColor.BOLD + "KIT SELECTION");
 
         // Set the kit classes
-        inv.setItem(0, Kit.getDisplayItem(HexColor.ASSASSIN + KitClass.ASSASSIN + " Assassin",
+        inv.setItem(0, Kit.getDisplayItem(HexColor.ASSASSIN.toString() + ChatColor.BOLD
+                        + KitClass.ASSASSIN + " Assassin" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_SWORD,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.GRAY + "Permanent Effect: " + HexColor.ASSASSIN
-                        + (DamageAdjustmentListener.assassinDamageBuff * 100 - 100) + "%"
-                        + ChatColor.GRAY + " Damage buff"));
+                        + ChatColor.WHITE + "+" + (int) (DamageAdjustmentListener.assassinDamageBuff * 100 - 100) + "%"
+                        + ChatColor.GRAY + " Damage"));
 
-        inv.setItem(9, Kit.getDisplayItem(HexColor.TANK + KitClass.TANK + " Tank",
+        inv.setItem(9, Kit.getDisplayItem(HexColor.TANK.toString() + ChatColor.BOLD
+                        + KitClass.TANK + " Tank" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_CHESTPLATE,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.GRAY + "Base max. Health: " + HexColor.TANK + "12 Hearts"));
+                        + ChatColor.WHITE + "+2 " + ChatColor.GRAY + "❤"));
 
-        inv.setItem(18, Kit.getDisplayItem(HexColor.SUPPORT + KitClass.SUPPORT + " Support",
+        inv.setItem(18, Kit.getDisplayItem(HexColor.SUPPORT.toString() + ChatColor.BOLD
+                        + KitClass.SUPPORT + " Support" + ChatColor.GRAY + " (Class)",
                 Material.POTION,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.GRAY + "Gains " + HexColor.SUPPORT + "20% more Health"
-                        + ChatColor.GRAY + " from all\n"
-                        + ChatColor.GRAY + "healing sources (food, saturation, effects)",
+                        + ChatColor.WHITE + "+20%" + ChatColor.GRAY + " Healing",
                 Color.fromRGB(0x1F1F23)));
 
-        inv.setItem(27, Kit.getDisplayItem(HexColor.MOBILITY + KitClass.MOBILITY + " Mobility",
+        inv.setItem(27, Kit.getDisplayItem(HexColor.MOBILITY.toString() + ChatColor.BOLD
+                        + KitClass.MOBILITY + " Mobility" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_BOOTS,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.GRAY + "Special Ability: " + HexColor.MOBILITY + "Double Jump\n"
-                        + ChatColor.GRAY + "Permanent Effect: " + HexColor.MOBILITY + "Haste 1"));
+                        + ChatColor.WHITE + "Double Jump" + ChatColor.GRAY + " Ability,\n"
+                        + ChatColor.GRAY + "Haste " + ChatColor.WHITE + "1"));
 
         // Add the kits
         Reflections reflections = new Reflections("com.tharox.dragonhunt");

@@ -12,9 +12,10 @@ public class Healer extends Kit {
     static int heartsToAdd = 6;
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Healer";
-    public static final String lore = ChatColor.GRAY + "Instantly heal yourself in critical moments!\n\n"
+    public static final String lore = ChatColor.DARK_GRAY.toString()
+            + ChatColor.ITALIC + "Instantly Heal Yourself\n\n"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "On activation you get " + HexColor.SUPPORT + heartsToAdd + " Hearts"
+            + ChatColor.GRAY + "On activation you get " + ChatColor.WHITE + heartsToAdd + " ❤"
             + ChatColor.GRAY + ".\n\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
     public static final Material material = Material.POTION;

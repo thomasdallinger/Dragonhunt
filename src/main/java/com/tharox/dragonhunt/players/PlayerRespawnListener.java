@@ -28,7 +28,13 @@ public class PlayerRespawnListener implements Listener {
         Player player = event.getPlayer();
 
         respawnLocation.put(player, event.getRespawnLocation());
-        event.setRespawnLocation(PlayerDeathListener.deathLocation.get(player));
+
+        // Void infinite deaths protection
+        if (PlayerDeathListener.deathLocation.get(player).getY() > -62) {
+            event.setRespawnLocation(PlayerDeathListener.deathLocation.get(player));
+        }
+
+        // else: uses actual respawn location
 
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
             player.setGameMode(GameMode.SPECTATOR);

@@ -5,6 +5,7 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
@@ -82,7 +83,7 @@ public class EnderDragonDamageListener implements Listener {
                 Player player = Bukkit.getPlayer(id);
                 if (player == null) continue;
 
-                if (player.isDead()) {
+                if (player.isDead() || player.getWorld().getEnvironment() != World.Environment.THE_END) {
                     temp.remove(id);
                     bossBar.removePlayer(player);
                     continue;

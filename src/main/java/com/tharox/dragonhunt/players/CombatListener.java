@@ -11,11 +11,13 @@ import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
+import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
+import org.bukkit.projectiles.ProjectileSource;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.Statement;
@@ -44,29 +46,48 @@ public class CombatListener implements Listener {
      */
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-        if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
-            Player target = (Player) event.getEntity();
-            Player damager = (Player) event.getDamager();
+        AbstractArrow arrow;
+        ProjectileSource shooter;
+        Player damager;
+        Player target;
 
-            // Once the grace period has ended, the in combat feature comes into effect.
-            if (Main.getInstance().getTimer().getTime() < GameState.gracePeriodTime) return;
-
-            DatabaseExecutor.executeDatabaseHandler((con) -> {
-                String query = "INSERT INTO InCombat (GameID, Target, Damager, timestamp) " +
-                        "VALUES ('" + DbValues.getGameID() + "', '" + target.getName() + "', '"
-                        + damager.getName() + "', '" + DbValues.getTimestamp() + "')";
-
-                Statement stmt = con.createStatement();
-                stmt.execute(query);
-                stmt.close();
-            });
-
-            combatList.put(target.getUniqueId(), 30);
-            combatList.put(damager.getUniqueId(), 30);
-
-            bossBar.addPlayer(target);
-            bossBar.addPlayer(damager);
+        if (event.getEntity() instanceof Player)
+            target = (Player) event.getEntity();
+        else {
+            return;
         }
+
+        if (event.getDamager() instanceof AbstractArrow) {
+            arrow = (AbstractArrow) event.getDamager();
+            shooter = arrow.getShooter();
+
+            if (shooter instanceof Player) {
+                damager = (Player) shooter;
+            } else return;
+
+        } else if (event.getDamager() instanceof Player) {
+            damager = (Player) event.getDamager();
+        } else return;
+
+        // Once the grace period has ended, the in combat feature comes into effect.
+        if (Main.getInstance().getTimer().getTime() < GameState.gracePeriodTime) return;
+
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "INSERT INTO InCombat (GameID, Target, Damager, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + target.getName() + "', '"
+                    + damager.getName() + "', '" + DbValues.getTimestamp() + "')";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
+
+        combatList.put(target.getUniqueId(), 30);
+        combatList.put(damager.getUniqueId(), 30);
+
+        bossBar.addPlayer(target);
+        bossBar.addPlayer(damager);
+
     }
 
     public void onInterval() {

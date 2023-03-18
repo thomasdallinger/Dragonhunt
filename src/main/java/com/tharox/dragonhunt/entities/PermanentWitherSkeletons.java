@@ -30,7 +30,7 @@ public class PermanentWitherSkeletons {
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     player.getWorld().spawnEntity(player.getLocation(), EntityType.WITHER_SKELETON);
-                    player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "A "
+                    player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.GRAY + "A "
                             + HexColor.HIGHLIGHT + "Wither Skeleton" + ChatColor.GRAY + " appeared near all players.");
                 }
 

@@ -71,13 +71,13 @@ public class SetRespawn implements Listener {
 
                 player.setBedSpawnLocation(player.getLocation(), true);
                 player.setHealth(player.getHealth() - 10.0);
-                player.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "Respawn Point set at "
+                player.sendMessage(HexColor.GREEN + "Respawn Point set at "
                         + ChatColor.DARK_GREEN + "[" + DbValues.getCurrentWorld(player.getLocation())
                         + ", x: " + (int) player.getLocation().getX()
                         + ", y: " + (int) player.getLocation().getY()
                         + ", z: " + (int) player.getLocation().getZ() + "]"
                         + HexColor.GREEN + ".");
-                player.sendMessage(Prefixes.getAllPrefix() + HexColor.RED + "-5 ❤");
+                player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤");
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
             }

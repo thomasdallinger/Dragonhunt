@@ -68,8 +68,8 @@ public class JoinListener implements Listener {
         // telling them how many more players are needed
         // start the "stopServerIn" runnable
         for (Player online : Bukkit.getOnlinePlayers()) {
-            online.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Waiting for "
-                    + ChatColor.YELLOW + DbValues.playersAllowedToPlay.size() + ChatColor.GRAY + " more player(s).");
+            online.sendMessage(ChatColor.GRAY + "Waiting for " + ChatColor.YELLOW + DbValues.playersAllowedToPlay.size()
+                    + ChatColor.GRAY + " more player(s).");
         }
     }
 }

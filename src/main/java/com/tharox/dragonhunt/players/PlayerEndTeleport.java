@@ -81,9 +81,9 @@ public class PlayerEndTeleport implements Listener {
 
                             // replace the Tracker with the END TELEPORTER item
                             inventory.setItem(7, createEndTeleport());
-                            player.sendMessage(Prefixes.getAllPrefix() + HexColor.HIGHLIGHT + ChatColor.BOLD
+                            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.HIGHLIGHT + ChatColor.BOLD
                                     + "Teleport to the End dimension unlocked.");
-                            player.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "Right-Click"
+                            player.sendMessage(HexColor.GREEN + "Right-Click"
                                     + ChatColor.GRAY + " the Endstone to teleport.");
                         }
                     }

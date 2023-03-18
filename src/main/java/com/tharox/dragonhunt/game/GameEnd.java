@@ -61,7 +61,7 @@ public class GameEnd {
      */
     private void configureGameEnd() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GOLD + ChatColor.BOLD + "GAME OVER.");
+            player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.GOLD + ChatColor.BOLD + "GAME OVER.");
 
             player.setGameMode(GameMode.SPECTATOR);
             player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 1);
@@ -78,13 +78,13 @@ public class GameEnd {
             }
 
             if (winner != null) {
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.DARK_GREEN + ChatColor.BOLD + winner.getName()
+                player.sendMessage(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + winner.getName()
                         + HexColor.GREEN + " has won the Dragonhunt.");
             } else {
-                player.sendMessage(Prefixes.getAllPrefix() + HexColor.RED + "Time is up.");
+                player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "Time is up.");
             }
 
-            player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "Time played: "
+            player.sendMessage(ChatColor.GRAY + "Time played: "
                     + ChatColor.YELLOW + DbValues.getTimestamp());
             //TODO: Game Stats messages?
         }

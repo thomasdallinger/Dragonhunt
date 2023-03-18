@@ -130,13 +130,11 @@ public class GameStart extends GameConfiguration {
                 player.teleport(startLocation);
                 player.setGameMode(GameMode.SURVIVAL);
 
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GOLD + ChatColor.BOLD
-                        + "RACE TO VICTORY");
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GOLD
-                        + "Whoever kills the Ender Dragon wins.");
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/pos [name]"
+                player.sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + "RACE TO VICTORY");
+                player.sendMessage(ChatColor.GOLD + "Whoever kills the Ender Dragon wins.");
+                player.sendMessage(ChatColor.YELLOW + "/pos [name]"
                         + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + "mark locations");
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
+                player.sendMessage(ChatColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "get to the surface quickly");
             }
         }
@@ -161,20 +159,20 @@ public class GameStart extends GameConfiguration {
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (gracePeriodCountdown.getTime() == 60) {
                 bossBar.addPlayer(player);
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "The Grace Period ends in "
+                player.sendMessage(ChatColor.GRAY + "The Grace Period ends in "
                         + HexColor.GREEN + "60" + ChatColor.GRAY + " seconds.");
             }
 
             if (gracePeriodCountdown.getTime() == 30 || gracePeriodCountdown.getTime() == 15
                     || (gracePeriodCountdown.getTime() <= 5 && gracePeriodCountdown.getTime() > 0)) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-                player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "The Grace Period ends in "
+                player.sendMessage(ChatColor.GRAY + "The Grace Period ends in "
                         + HexColor.GREEN + gracePeriodCountdown.getTime() + ChatColor.GRAY + " seconds.");
             }
 
             if (gracePeriodCountdown.getTime() == 0) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-                player.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "The Grace Period has ended.");
+                player.sendMessage(HexColor.GREEN + "The Grace Period has ended.");
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);
             }

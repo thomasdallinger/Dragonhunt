@@ -8,8 +8,8 @@ import org.bukkit.entity.Player;
 public class Prefixes {
 
     // ALL: used for messages displayed to all players
-    public static String getAllPrefix() {
-        return ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + ChatColor.BOLD + "»»" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+    public static String getImportantPrefix() {
+        return ChatColor.DARK_GRAY + "[" + ChatColor.RED + ChatColor.BOLD + "!!!" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
     // XP: used for messages related to XP gains
@@ -28,6 +28,11 @@ public class Prefixes {
     // TRACKING: used for messages related to the tracker or positions
     public static String getTrackingPrefix() {
         return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_GREEN + "↑↑↑" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+    }
+
+    // MODIFIER: used for messages related to modifiers
+    public static String getModifierPrefix() {
+        return ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + "▲▼▲" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
     // ERROR: when a player is not allowed to do something or is doing something wrong

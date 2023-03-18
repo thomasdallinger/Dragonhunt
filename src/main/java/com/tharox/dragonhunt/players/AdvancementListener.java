@@ -56,7 +56,7 @@ public class AdvancementListener implements Listener {
                     addBonusXP(player, "End");
 
                     for (Player online : Bukkit.getOnlinePlayers()) {
-                        online.sendMessage(Prefixes.getAllPrefix() + HexColor.RED + "ATTENTION! "
+                        online.sendMessage(Prefixes.getImportantPrefix()
                                 + HexColor.HIGHLIGHT + PlayerEndTeleport.getEyesNeeded()
                                 + " Eyes of Ender " + ChatColor.GRAY + "needed to get the "
                                 + ChatColor.LIGHT_PURPLE + " End Teleporter"
@@ -71,7 +71,7 @@ public class AdvancementListener implements Listener {
             return;
         } else {
             Coins.addXP(player, Coins.bonusXP);
-            player.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "Advancement made: "
+            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + "Advancement made: "
                     + ChatColor.DARK_GREEN + advancementName + HexColor.GREEN + ".");
         }
 

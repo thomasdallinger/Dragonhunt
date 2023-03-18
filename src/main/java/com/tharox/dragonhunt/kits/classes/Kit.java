@@ -95,7 +95,7 @@ public abstract class Kit implements Listener {
         cooldownEnds = getCooldown() + timer.getTime();
 
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
-            player.sendMessage(Prefixes.getAllPrefix() + GameState.selectedKit.get(player) + ChatColor.GRAY
+            player.sendMessage(Prefixes.getImportantPrefix() + GameState.selectedKit.get(player) + ChatColor.GRAY
                     + " Kit Ability is " + HexColor.GREEN + "ready" + ChatColor.GRAY + ".");
         }, getCooldown() * 20L);
     }

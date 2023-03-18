@@ -48,7 +48,7 @@ public class PlayerDeathListener implements Listener {
         if (killer != null) {
             CombatListener.combatList.remove(killer.getUniqueId());
             CombatListener.bossBar.removePlayer(killer);
-            killer.sendMessage(Prefixes.getAllPrefix() + HexColor.GREEN + "You are no longer in combat.");
+            killer.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + "You are no longer in combat.");
 
             Coins.addXP(killer, Coins.playerXP);
 

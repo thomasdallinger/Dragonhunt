@@ -74,7 +74,7 @@ public class PositionCommand implements CommandExecutor {
                             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
                             player.sendMessage(Prefixes.getTrackingPrefix() + "Teleport to "
                                     + ChatColor.DARK_GREEN + position.getName() + ChatColor.GRAY + " successful.");
-                            player.sendMessage(Prefixes.getAllPrefix() + HexColor.RED + "-5 ❤");
+                            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤");
                         } else {
                             player.sendMessage(Prefixes.getErrorPrefix() + "You need to have more than 5 hearts " +
                                     "to execute a position teleport.");

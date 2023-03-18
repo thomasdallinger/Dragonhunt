@@ -113,14 +113,14 @@ public class Timer {
                             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
                         }
 
-                        player.sendMessage(Prefixes.getAllPrefix() + ChatColor.GRAY + "The game ends in "
+                        player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.GRAY + "The game ends in "
                                 + ChatColor.YELLOW + (2100 / 60 - getTime() / 60) + ChatColor.GRAY + " minutes.");
                     }
                 }
 
                 if (getTime() == 1500) {
                     for (Player online : Bukkit.getOnlinePlayers()) {
-                        online.sendMessage(Prefixes.getAllPrefix() + HexColor.RED + "ATTENTION! "
+                        online.sendMessage(Prefixes.getImportantPrefix()
                                 + HexColor.HIGHLIGHT + PlayerEndTeleport.getEyesNeeded()
                                 + " Eyes of Ender " + ChatColor.GRAY + "needed to get the "
                                 + ChatColor.LIGHT_PURPLE + " End Teleporter"

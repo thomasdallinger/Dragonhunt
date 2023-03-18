@@ -144,7 +144,7 @@ public class Tracker implements Listener {
                 }
 
                 if (trackedObject.contains("[P]")) {
-                    trackedObjectName = ChatColor.YELLOW.toString() + ChatColor.BOLD
+                    trackedObjectName = ChatColor.WHITE.toString() + ChatColor.BOLD
                             + trackedObject.substring(4).toUpperCase() + ChatColor.DARK_GRAY + " » ";
 
                     // Update the distance to other players constantly since they are moving
@@ -164,7 +164,7 @@ public class Tracker implements Listener {
                             .append("In close proximity").color(HexColor.GREEN).create());
                 } else {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(trackedObjectName)
-                            .append(distance + " Blocks away").color(ChatColor.WHITE).create());
+                            .append(distance + " Blocks away").color(ChatColor.GRAY).create());
                 }
 
                 // set the compass target (where to point the needle)

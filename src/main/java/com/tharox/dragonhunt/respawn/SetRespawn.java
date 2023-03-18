@@ -97,15 +97,15 @@ public class SetRespawn implements Listener {
                     distance = (int) player.getLocation().distance(PlayerDeathListener.deathLocation.get(player));
 
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new ComponentBuilder("LAST DEATH").color(ChatColor.GOLD).bold(true)
+                            new ComponentBuilder("LAST DEATH").color(HexColor.RED).bold(true)
                                     .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                    .append(String.valueOf(distance)).color(ChatColor.WHITE)
-                                    .append(" Blocks away").color(ChatColor.WHITE).create());
+                                    .append(String.valueOf(distance)).color(ChatColor.GRAY)
+                                    .append(" Blocks away").color(ChatColor.GRAY).create());
                 } else {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new ComponentBuilder("LAST DEATH").color(ChatColor.GOLD).bold(true)
+                            new ComponentBuilder("LAST DEATH").color(HexColor.RED).bold(true)
                                     .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                    .append("- Blocks away").color(ChatColor.GRAY).italic(true).create());
+                                    .append("0 ✟").color(ChatColor.RED).create());
                 }
             } catch (IllegalArgumentException ex) {
                 // Different dimension.
@@ -143,13 +143,11 @@ public class SetRespawn implements Listener {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
-        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Set Respawn Point");
+        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Set Respawn Point" + ChatColor.GRAY + " (Right-Click)");
         meta.setLore(Arrays.asList(
                 ChatColor.GRAY + "Sets your respawn point",
                 ChatColor.GRAY + "at your current location.",
-                ChatColor.GOLD + "Costs 5 ❤.",
-                "",
-                ChatColor.GRAY + "Right-Click: " + ChatColor.YELLOW + "Set respawn point"));
+                ChatColor.GRAY + "Costs " + ChatColor.WHITE + "5 ❤" + ChatColor.GRAY + "."));
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

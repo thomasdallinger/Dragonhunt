@@ -65,8 +65,8 @@ public class EntityDamageListener implements Listener {
             if (entity instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity) entity;
                 if (livingEntity.getFireTicks() > 20) {
-                    livingEntity.setGlowing(true);
                     livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100, 0));
+                    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 100, 0));
                 }
             }
         }

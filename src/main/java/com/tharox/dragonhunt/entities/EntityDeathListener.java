@@ -73,7 +73,8 @@ public class EntityDeathListener implements Listener {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COBWEB));
                 break;
             case "Enderman":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.ENDER_PEARL, 2));
+                if (killer != null)
+                    GameState.putItemInInventory(killer, new ItemStack(Material.ENDER_PEARL, 2));
                 break;
             case "Blaze":
                 if (killer != null)

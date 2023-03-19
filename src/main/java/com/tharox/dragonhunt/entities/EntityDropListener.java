@@ -38,16 +38,16 @@ public class EntityDropListener implements Listener {
 
         switch (dropIndex) {
             case 1:
-                itemToDrop = new ItemStack(Material.GLOWSTONE, 3);
+                itemToDrop = new ItemStack(Material.COOKED_BEEF, 2);
                 break;
             case 2:
-                itemToDrop = new ItemStack(Material.GOLDEN_APPLE, 2);
+                itemToDrop = new ItemStack(Material.GOLDEN_APPLE);
                 break;
             case 3:
                 itemToDrop = new ItemStack(Material.ENDER_PEARL);
                 break;
             case 4:
-                itemToDrop = new ItemStack(Material.CRYING_OBSIDIAN, 3);
+                itemToDrop = new ItemStack(Material.BOOK);
                 break;
             case 5:
                 itemToDrop = new ItemStack(Material.BLACKSTONE, 12);
@@ -62,10 +62,10 @@ public class EntityDropListener implements Listener {
                 itemToDrop = new ItemStack(Material.ENDER_PEARL, 2);
                 break;
             case 9:
-                itemToDrop = new ItemStack(Material.STRING, 3);
+                itemToDrop = new ItemStack(Material.BOW);
                 break;
             case 10:
-                itemToDrop = new ItemStack(Material.NETHERITE_SCRAP, 1);
+                itemToDrop = new ItemStack(Material.NETHERITE_SCRAP, 2);
                 break;
             default:
                 // Unexpected Value.

@@ -26,9 +26,14 @@ public class BlockBreakListener implements Listener {
 
     // a list of all wood types currently in the game + cactus
     public static List<Material> woods = List.of(
-            Material.ACACIA_LOG, Material.BIRCH_LOG, Material.DARK_OAK_LOG,
-            Material.JUNGLE_LOG, Material.OAK_LOG, Material.SPRUCE_LOG,
-            Material.MANGROVE_WOOD, Material.CRIMSON_STEM, Material.WARPED_STEM,
+            Material.ACACIA_LOG, Material.ACACIA_WOOD,
+            Material.BIRCH_LOG, Material.BIRCH_WOOD,
+            Material.DARK_OAK_LOG, Material.DARK_OAK_WOOD,
+            Material.JUNGLE_LOG, Material.JUNGLE_WOOD,
+            Material.OAK_LOG, Material.OAK_WOOD,
+            Material.SPRUCE_LOG, Material.SPRUCE_WOOD,
+            Material.MANGROVE_LOG, Material.MANGROVE_WOOD,
+            Material.CRIMSON_STEM, Material.WARPED_STEM,
             Material.CACTUS);
 
     @EventHandler

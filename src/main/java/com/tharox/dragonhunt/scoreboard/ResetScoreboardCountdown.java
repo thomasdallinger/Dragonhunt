@@ -6,8 +6,8 @@ import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -42,8 +42,10 @@ public class ResetScoreboardCountdown {
 
                         for (Player player : Bukkit.getOnlinePlayers()) {
                             player.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + "XP increased by "
-                                    + ChatColor.DARK_GREEN + Coins.XPIncrease
-                                    + HexColor.GREEN + " XP Points for the next 3 minutes.");
+                                    + ChatColor.DARK_GREEN + ChatColor.BOLD + Coins.XPIncrease
+                                    + HexColor.GREEN + " XP Points for the next "
+                                    + ChatColor.DARK_GREEN + ChatColor.BOLD + "3 minutes"
+                                    + HexColor.GREEN + ".");
                         }
                     } else {
                         Coins.XPIncrease = 0; // reset

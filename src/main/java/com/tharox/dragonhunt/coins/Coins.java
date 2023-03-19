@@ -15,11 +15,11 @@ import java.util.HashMap;
  */
 public class Coins {
     public static int XPIncrease = 0;
-    public static int advancementXP = 9 + XPIncrease; // XP awarded for advancements
-    public static int playerXP = 18 + XPIncrease; // XP awarded for killing players
-    public static int oreXP = 3 + XPIncrease; // XP awarded for mining ores that are not dropping resources
-    public static int animalXP = 2 + XPIncrease; // XP awarded for killing animals
-    public static int monsterXP = 4 + XPIncrease; // XP awarded for killing monsters
+    public static int advancementXP = 9; // XP awarded for advancements
+    public static int playerXP = 18; // XP awarded for killing players
+    public static int oreXP = 3; // XP awarded for mining ores that are not dropping resources
+    public static int animalXP = 2; // XP awarded for killing animals
+    public static int monsterXP = 4; // XP awarded for killing monsters
 
     private static final HashMap<Player, Integer> coins = new HashMap<>();
 
@@ -54,11 +54,11 @@ public class Coins {
     }
 
     public static void addXP(Player player, int xpToAdd) {
-        player.giveExp(xpToAdd);
+        player.giveExp(xpToAdd + XPIncrease);
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
         int currentXPPoints = (int) (player.getExpToLevel() * (player.getExp() * 100) / 100);
-        player.sendTitle("", ChatColor.WHITE + "+" + xpToAdd + HexColor.GREEN + " XP "
+        player.sendTitle("", ChatColor.WHITE + "+" + (xpToAdd + XPIncrease) + HexColor.GREEN + " XP "
                         + ChatColor.DARK_GRAY + "[" + currentXPPoints + "/" + player.getExpToLevel() + "]",
                 0, 30, 10);
     }

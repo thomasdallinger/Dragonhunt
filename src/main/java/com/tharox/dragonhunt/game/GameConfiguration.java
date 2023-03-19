@@ -3,7 +3,6 @@ package com.tharox.dragonhunt.game;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
-import com.tharox.dragonhunt.entities.PermanentWitherSkeletons;
 import com.tharox.dragonhunt.modifiers.classes.EightHearts;
 import com.tharox.dragonhunt.respawn.SetRespawn;
 import org.bukkit.*;
@@ -111,8 +110,5 @@ public class GameConfiguration {
             Main.getInstance().getTracker().playerTracksName.put(player, null);
             Main.getInstance().getTracker().playerTracksIndex.put(player, 0);
         }
-
-        // active if any of the specified modifiers are active
-        new PermanentWitherSkeletons();
     }
 }

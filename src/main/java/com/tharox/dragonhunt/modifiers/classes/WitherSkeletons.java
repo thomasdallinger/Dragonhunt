@@ -4,9 +4,9 @@ import org.bukkit.Material;
 
 @DragonhuntModifier
 public class WitherSkeletons extends Modifier {
-    public static String title = "Danger Inbound!";
-    public static String lore = "Every 2-5 minutes, a Wither Skeleton spawns at every player's location.";
-    public static Material material = Material.WITHER_SKELETON_SPAWN_EGG;
+    public static String title = "Dangerous Fighters";
+    public static String lore = "Wither Skeletons have enchanted Netherite Swords.";
+    public static Material material = Material.NETHERITE_SWORD;
     public static boolean positive = false;
     public static int impact = 2;
     public static boolean active = false;

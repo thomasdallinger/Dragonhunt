@@ -5,7 +5,7 @@ import org.bukkit.Material;
 public class NoPillagers extends Modifier {
     public static String title = "No Pillagers";
     public static String lore = "The End contains no pillagers.";
-    public static Material material = Material.PILLAGER_SPAWN_EGG;
+    public static Material material = Material.CROSSBOW;
     public static boolean positive = true;
     public static int impact = 3;
     public static boolean active = false;

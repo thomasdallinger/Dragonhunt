@@ -107,35 +107,29 @@ public class CreatureSpawnListener implements Listener {
             // SKELETONS and WITHER SKELETONS are invulnerable if the modifier is active
             if (ImmuneSkeletons.active) {
                 if (entity instanceof Skeleton || entity instanceof WitherSkeleton) {
-                    equipNetheriteArmor(entity);
+                    // not possible if the entity can't have any equipment
+                    if (entity.getEquipment() != null) {
+                        entity.getEquipment().setHelmet(new ItemStack(Material.NETHERITE_HELMET));
+                        entity.getEquipment().setChestplate(new ItemStack(Material.NETHERITE_CHESTPLATE));
+                        entity.getEquipment().setLeggings(new ItemStack(Material.NETHERITE_LEGGINGS));
+                        entity.getEquipment().setBoots(new ItemStack(Material.NETHERITE_BOOTS));
+                    }
+
                     entity.setInvulnerable(true);
                 }
             }
+
+            if (WitherSkeletons.active) {
+                if (entity instanceof WitherSkeleton) {
+                    // not possible if the entity can't have any equipment
+                    if (entity.getEquipment() != null) {
+                        ItemStack sword = new ItemStack(Material.NETHERITE_SWORD);
+                        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+                        entity.getEquipment().setItemInMainHand(sword);
+                    }
+                }
+            }
         }
-    }
-
-    /**
-     * Gives the provided entity a fully enchanted netherite armor.
-     */
-    private void equipNetheriteArmor(LivingEntity entity) {
-        // not possible if the entity can't have any equipment
-        if (entity.getEquipment() == null) return;
-
-        ItemStack helmet = new ItemStack(Material.NETHERITE_HELMET);
-        helmet.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        entity.getEquipment().setHelmet(helmet);
-
-        ItemStack chestplate = new ItemStack(Material.NETHERITE_CHESTPLATE);
-        chestplate.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        entity.getEquipment().setChestplate(chestplate);
-
-        ItemStack leggings = new ItemStack(Material.NETHERITE_LEGGINGS);
-        leggings.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        entity.getEquipment().setLeggings(leggings);
-
-        ItemStack boots = new ItemStack(Material.NETHERITE_BOOTS);
-        boots.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
-        entity.getEquipment().setBoots(boots);
     }
 
     private LivingEntity spawnEndCreatures(World world, Location location) {

@@ -26,7 +26,7 @@ public class CreatureSpawnListener implements Listener {
         World world = entity.getWorld();
 
         if (entity instanceof Mob) {
-            if (entity instanceof Ghast) {
+            if (entity instanceof Ghast && NoGhasts.active) {
                 event.setCancelled(true);
             }
 

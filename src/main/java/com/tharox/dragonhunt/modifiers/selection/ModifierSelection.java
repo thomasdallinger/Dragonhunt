@@ -18,23 +18,27 @@ public class ModifierSelection {
 
     public ModifierSelection() {
         lowImpact.addAll(Arrays.asList(
-                new Frozen()
-                //new SpeedyMobs(),
-                //new ExplosiveCreepers(),
-                //new CaveSpiders(),
-                //new SpeedyComback(),
-                //new EndlessNight()
+                new Frozen(),
+                new NoGhasts(),
+                new SpeedyComback(),
+
+                new SpeedyMobs(),
+                new ExplosiveCreepers(),
+                new CaveSpiders(),
+                new EndlessNight()
         ));
         mediumImpact.addAll(Arrays.asList(
-                new FireWeakness(),
                 new MoreXP(),
+                new EnhancedArrowEffects(),
+
+                new FireWeakness(),
                 new WitherSkeletons(),
-                new ImmuneSkeletons(),
-                new EnhancedArrowEffects()
+                new ImmuneSkeletons()
         ));
         highImpact.addAll(Arrays.asList(
-                new Hunger(),
                 new Diamonds(),
+
+                new Hunger(),
                 new EightHearts(),
                 new FireMobs(),
                 new PowerfulMobs()

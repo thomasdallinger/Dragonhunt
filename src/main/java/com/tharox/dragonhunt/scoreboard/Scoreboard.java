@@ -61,11 +61,17 @@ public class Scoreboard extends ScoreboardBuilder {
                     + ChatColor.WHITE + countdownFormat(1500 - timer.getTime()), 4);
         } else {
             setScore(ChatColor.WHITE + "✮ " + ChatColor.DARK_PURPLE + PlayerEndTeleport.getEyesNeeded(),
-                    3);
+                    4);
         }
 
-        setScore(ChatColor.WHITE + "⛃ " + HexColor.HIGHLIGHT + Coins.getCoins(player)
-                + ChatColor.DARK_GRAY + " » " + ChatColor.WHITE + countdownFormat(countdown.getTime()), 3);
+        if (Coins.XPIncrease == 0) {
+            setScore(ChatColor.WHITE + "⛃ " + HexColor.HIGHLIGHT + Coins.getCoins(player)
+                    + ChatColor.DARK_GRAY + " » " + ChatColor.WHITE + countdownFormat(countdown.getTime()), 3);
+        } else { // XP Increase is active
+            setScore(ChatColor.WHITE + "⛃ " + HexColor.HIGHLIGHT + Coins.getCoins(player)
+                    + ChatColor.DARK_GRAY + " » " + HexColor.GREEN + countdownFormat(countdown.getTime())
+                    + ChatColor.DARK_GREEN + " +" + Coins.XPIncrease, 3);
+        }
 
         if (player.getWorld().getName().equals("world_nether")) {
             setScore(ChatColor.WHITE + "♦ " + ChatColor.DARK_GRAY + EntityDropListener.nextDrop, 2);

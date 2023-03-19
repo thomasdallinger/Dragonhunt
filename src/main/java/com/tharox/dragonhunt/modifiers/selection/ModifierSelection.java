@@ -28,7 +28,6 @@ public class ModifierSelection {
                 new EndlessNight()
         ));
         mediumImpact.addAll(Arrays.asList(
-                new MoreXP(),
                 new MoreFood(),
                 new EnhancedArrowEffects(),
 

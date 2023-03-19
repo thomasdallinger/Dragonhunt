@@ -14,11 +14,12 @@ import java.util.HashMap;
  * Note: Coal ores do not drop XP.
  */
 public class Coins {
-    public static int bonusXP = 9; // XP awarded for advancements and for time played
-    public static int playerXP = 18; // XP awarded for killing players
-    public static int oreXP = 3; // XP awarded for mining ores that are not dropping resources
-    public static int animalXP = 2; // XP awarded for killing animals
-    public static int monsterXP = 4; // XP awarded for killing monsters
+    public static int XPIncrease = 0;
+    public static int advancementXP = 9 + XPIncrease; // XP awarded for advancements
+    public static int playerXP = 18 + XPIncrease; // XP awarded for killing players
+    public static int oreXP = 3 + XPIncrease; // XP awarded for mining ores that are not dropping resources
+    public static int animalXP = 2 + XPIncrease; // XP awarded for killing animals
+    public static int monsterXP = 4 + XPIncrease; // XP awarded for killing monsters
 
     private static final HashMap<Player, Integer> coins = new HashMap<>();
 

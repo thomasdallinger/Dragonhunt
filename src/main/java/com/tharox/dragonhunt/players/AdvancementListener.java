@@ -76,7 +76,7 @@ public class AdvancementListener implements Listener {
         if (advancementName.equals("")) {
             return;
         } else {
-            Coins.addXP(player, Coins.bonusXP);
+            Coins.addXP(player, Coins.advancementXP);
 
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(Prefixes.getAdvancementPrefix() + ChatColor.WHITE + player.getName()
@@ -89,8 +89,8 @@ public class AdvancementListener implements Listener {
     }
 
     public void addBonusXP(Player player, String dimension) {
-        Coins.addXP(player, Coins.bonusXP * 2);
-        player.sendMessage(Prefixes.getXPPrefix(Coins.bonusXP) + "First in the "
+        Coins.addXP(player, Coins.advancementXP * 2);
+        player.sendMessage(Prefixes.getXPPrefix(Coins.advancementXP) + "First in the "
                 + HexColor.HIGHLIGHT + dimension + ChatColor.GRAY + " dimension.");
     }
 

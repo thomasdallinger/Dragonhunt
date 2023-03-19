@@ -72,7 +72,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 
         timer = new Timer(false, 0);
-        scoreboardCountdown = new Countdown(false, 300);
+        scoreboardCountdown = new Countdown(false, 180);
         ResetScoreboardCountdown.countdownHitsZero(Main.getInstance().getScoreboardCountdown());
         tracker = new Tracker();
         respawn = new SetRespawn();

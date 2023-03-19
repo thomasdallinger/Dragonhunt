@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.entities;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.modifiers.classes.MoreFood;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
@@ -29,7 +30,12 @@ public class EntityDeathListener implements Listener {
             }
 
             if (mob instanceof Animals || mob instanceof WaterMob) {
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
+                if (MoreFood.active) {
+                    mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 4));
+                } else {
+                    mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
+                }
+
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.LEATHER, 1));
                 Coins.addXP(killer, Coins.animalXP);
             }

@@ -29,6 +29,7 @@ public class ModifierSelection {
         ));
         mediumImpact.addAll(Arrays.asList(
                 new MoreXP(),
+                new MoreFood(),
                 new EnhancedArrowEffects(),
 
                 new FireWeakness(),

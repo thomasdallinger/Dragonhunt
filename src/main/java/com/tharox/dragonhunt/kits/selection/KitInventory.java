@@ -49,8 +49,8 @@ public class KitInventory {
                         + KitClass.MOBILITY + " Mobility" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_BOOTS,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.WHITE + "Double Jump" + ChatColor.GRAY + " Ability,\n"
-                        + ChatColor.GRAY + "Haste " + ChatColor.WHITE + "1"));
+                        + ChatColor.WHITE + "+20%" + ChatColor.GRAY + " Attack Speed,\n"
+                        + ChatColor.WHITE + "+40%" + ChatColor.GRAY + " Mining Speed"));
 
         // Add the kits
         Reflections reflections = new Reflections("com.tharox.dragonhunt");

@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.players.DoubleJumpListener;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Entity;
@@ -45,10 +44,7 @@ public class KitClass implements Listener {
                     }
 
                     if (mobilities.contains(player)) {
-                        if (!DoubleJumpListener.playersAllowedToDoubleJump.contains(player.getName())) {
-                            DoubleJumpListener.playersAllowedToDoubleJump.add(player.getName());
-                        }
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 40, 0));
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 40, 1));
                     }
                 }
             }

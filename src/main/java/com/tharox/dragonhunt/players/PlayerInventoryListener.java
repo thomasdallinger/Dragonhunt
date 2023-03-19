@@ -54,11 +54,6 @@ public class PlayerInventoryListener implements Listener {
                 return;
             }
         }
-
-        // Check if the respawn item was clicked
-        if (item.getItemMeta().getDisplayName().contains("Set Respawn Point")) {
-            event.setCancelled(true);
-        }
     }
 
     @EventHandler

@@ -40,8 +40,7 @@ public class PlayerRespawnListener implements Listener {
             player.setGameMode(GameMode.SPECTATOR);
             player.setWalkSpeed(0f);
             player.setFlySpeed(0f);
-            player.setFreezeTicks(1000);
-
+            player.setFreezeTicks(player.getMaxFreezeTicks());
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT_FREEZE, 1, 1);
 
             if (SpeedyComback.active) {

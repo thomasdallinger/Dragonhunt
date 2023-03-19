@@ -15,10 +15,15 @@ import java.util.HashMap;
 
 public class Spectate {
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
-    public static final double[] duration = {20};
+    private static final double duration = 20;
+    public double timeLeft = duration;
 
     public Spectate(Player player) {
         activateSpectate(player);
+    }
+
+    public static double getDuration() {
+        return duration;
     }
 
     private void activateSpectate(Player player) {
@@ -32,10 +37,9 @@ public class Spectate {
 
     private void spectateDurationLeft(Player player) {
         new BukkitRunnable() {
-
             @Override
             public void run() {
-                if (duration[0] <= 0) {
+                if (timeLeft <= 0) {
                     GameState.actionBarNeededForKitAbility.put(player, false);
                     player.teleport(Spectate.spectateLocation.get(player));
                     player.setGameMode(GameMode.SURVIVAL);
@@ -44,14 +48,14 @@ public class Spectate {
                 }
 
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
-                        ChatColor.GOLD.toString() + ChatColor.BOLD + String.format("%1.1f", duration[0])
+                        ChatColor.GOLD.toString() + ChatColor.BOLD + String.format("%1.1f", timeLeft)
                                 + ChatColor.YELLOW + ChatColor.BOLD + " SECONDS LEFT"));
 
-                if (duration[0] % 1 == 0) {
+                if (timeLeft % 1 == 0) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
                 }
 
-                duration[0] -= 0.1;
+                timeLeft -= 0.1;
             }
 
         }.runTaskTimer(Main.getInstance(), 2, 2);

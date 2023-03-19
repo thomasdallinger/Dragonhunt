@@ -7,12 +7,10 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 @DragonhuntKit
 public class Scout extends Kit {
-    static int duration = (int) Spectate.duration[0];
+    static int duration = (int) Spectate.getDuration();
     static int cooldown = 200;
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Scout";

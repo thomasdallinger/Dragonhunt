@@ -38,6 +38,7 @@ public class ModifierInventory {
                                             (String) modifierClass.getField("title").get(null),
                                             (String) modifierClass.getField("lore").get(null),
                                             (Material) modifierClass.getField("material").get(null),
+                                            (Integer) modifierClass.getField("impact").get(null),
                                             (Boolean) modifierClass.getField("positive").get(null),
                                             (Boolean) modifierClass.getField("active").get(null)));
                             // get(null) because static

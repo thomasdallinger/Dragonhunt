@@ -8,11 +8,13 @@ import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.sql.Statement;
 
@@ -53,6 +55,10 @@ public class AdvancementListener implements Listener {
                 advancementName = "Enter End";
                 if (!GameState.playersReachedEnd) {
                     GameState.playersReachedEnd = true;
+
+                    GameState.putItemInInventory(player, new ItemStack(Material.NETHERITE_INGOT));
+                    player.sendMessage(ChatColor.GRAY + "1x " + ChatColor.DARK_PURPLE + "Netherite Ingot");
+
                     addBonusXP(player, "End");
 
                     for (Player online : Bukkit.getOnlinePlayers()) {
@@ -72,7 +78,7 @@ public class AdvancementListener implements Listener {
         } else {
             Coins.addXP(player, Coins.bonusXP);
 
-            for(Player online : Bukkit.getOnlinePlayers()) {
+            for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(Prefixes.getAdvancementPrefix() + ChatColor.WHITE + player.getName()
                         + ChatColor.AQUA + " has made the advancement "
                         + ChatColor.DARK_AQUA + advancementName + ChatColor.AQUA + " (#1).");
@@ -83,7 +89,7 @@ public class AdvancementListener implements Listener {
     }
 
     public void addBonusXP(Player player, String dimension) {
-        Coins.addXP(player, Coins.bonusXP);
+        Coins.addXP(player, Coins.bonusXP * 2);
         player.sendMessage(Prefixes.getXPPrefix(Coins.bonusXP) + "First in the "
                 + HexColor.HIGHLIGHT + dimension + ChatColor.GRAY + " dimension.");
     }

@@ -30,7 +30,7 @@ public class CreatureSpawnListener implements Listener {
                 event.setCancelled(true);
             }
 
-            if (world.getName().equals("world_the_end")) {
+            if (world.getName().equals("world_the_end") && !NoPillagers.active) {
                 Random random = new Random();
                 int spawnEnderman = random.nextInt(3) + 1; // values 1-3
 
@@ -140,20 +140,24 @@ public class CreatureSpawnListener implements Listener {
 
     private LivingEntity spawnEndCreatures(World world, Location location) {
         Random random = new Random();
-        int type = random.nextInt(8) + 1; // values 1-8
+        int type = random.nextInt(10) + 1; // values 1-10
 
         EntityType entityType = EntityType.ENDERMAN;
 
-        if (type <= 4) { // 50%
+        if (type <= 5) { // 50%
             entityType = EntityType.PILLAGER;
         }
 
-        if (type >= 5 && type <= 6) { // 25%
+        if (type >= 6 && type <= 7) { // 20%
             entityType = EntityType.VINDICATOR;
         }
 
-        if (type >= 7) { // 25%
+        if (type >= 8 && type <= 9) { // 20%
             entityType = EntityType.EVOKER;
+        }
+
+        if (type >= 10) { // 10%
+            entityType = EntityType.RAVAGER;
         }
 
         return (LivingEntity) world.spawnEntity(location, entityType);

@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.brewing;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.modifiers.classes.BonusHearts;
 import com.tharox.dragonhunt.modifiers.classes.Hunger;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -69,6 +70,10 @@ public class Effects {
 
                     if (Hunger.active) {
                         player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 40, 0));
+                    }
+
+                    if (BonusHearts.active) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 40, 2));
                     }
                 }
             }

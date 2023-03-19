@@ -2,18 +2,17 @@ package com.tharox.dragonhunt.modifiers.classes;
 
 import org.bukkit.Material;
 
-@DragonhuntModifier
-public class EightHearts extends Modifier {
-    public static String title = "8 Hearts";
-    public static String lore = "All players only have 8 hearts.";
-    public static Material material = Material.BARRIER;
-    public static boolean positive = false;
+public class BonusHearts extends Modifier {
+    public static String title = "The More, The Better";
+    public static String lore = "+6 Absorption ❤";
+    public static Material material = Material.GOLDEN_APPLE;
+    public static boolean positive = true;
     public static int impact = 3;
     public static boolean active = false;
 
     @Override
     public void setActive(boolean active) {
-        EightHearts.active = active;
+        BonusHearts.active = active;
     }
 
     @Override

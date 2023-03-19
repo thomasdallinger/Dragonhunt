@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.game;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
-import com.tharox.dragonhunt.modifiers.classes.EightHearts;
+import com.tharox.dragonhunt.modifiers.classes.Heartbroken;
 import com.tharox.dragonhunt.respawn.SetRespawn;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
@@ -93,7 +93,7 @@ public class GameConfiguration {
             player.setLevel(0);   // resets Number
 
             // set the player's health to eight hearts if the modifier is active
-            if (EightHearts.active) {
+            if (Heartbroken.active) {
                 Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(16);
                 player.setHealth(16);
             }

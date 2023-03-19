@@ -38,9 +38,10 @@ public class ModifierSelection {
         highImpact.addAll(Arrays.asList(
                 new Diamonds(),
                 new NoPillagers(),
+                new BonusHearts(),
 
                 new Hunger(),
-                new EightHearts(),
+                new Heartbroken(),
                 new FireMobs(),
                 new PowerfulMobs()
         ));

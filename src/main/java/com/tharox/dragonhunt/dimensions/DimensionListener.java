@@ -18,6 +18,8 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.StructureSearchResult;
 
+import java.util.Random;
+
 public class DimensionListener implements Listener {
     /**
      * Give players Resistance 10 when changing worlds so they can't be damaged for the first 7 seconds.
@@ -66,10 +68,19 @@ public class DimensionListener implements Listener {
             if (worldFrom.getName().equals("world")) {
 
                 // No player has reached the NETHER before.
-                // Set the first NETHER PORTAL close to a fortress.
+                // Set the first NETHER PORTAL close to a fortress/bastion.
                 if (GameState.firstNetherEntry == null) {
-                    StructureSearchResult structureSearchResult = worldTo.locateNearestStructure(
-                            player.getLocation(), Structure.FORTRESS, 32, false);
+                    Random random = new Random();
+                    int number = random.nextInt(2);
+                    StructureSearchResult structureSearchResult;
+
+                    if (number == 0) {
+                        structureSearchResult = worldTo.locateNearestStructure(
+                                player.getLocation(), Structure.FORTRESS, 32, false);
+                    } else {
+                        structureSearchResult = worldTo.locateNearestStructure(
+                                player.getLocation(), Structure.BASTION_REMNANT, 32, false);
+                    }
 
                     if (structureSearchResult != null) {
                         event.setCanCreatePortal(true);

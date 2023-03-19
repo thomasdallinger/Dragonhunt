@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.modifiers.classes.SpeedyComback;
+import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -55,9 +56,20 @@ public class PlayerRespawnListener implements Listener {
     }
 
     private void deathTimerCountdown(Player player) {
+        Timer timer = Main.getInstance().getTimer();
+
         new BukkitRunnable() {
             @Override
             public void run() {
+                // If the game ends before the player respawns
+                if (!timer.isRunning()) {
+                    player.setWalkSpeed(0.2f);
+                    player.setFlySpeed(0.1f);
+                    player.setFreezeTicks(0);
+                    this.cancel();
+                    return;
+                }
+
                 if (deathTimer.get(player) <= 0) {
                     // Set default values.
                     player.teleport(respawnLocation.get(player));

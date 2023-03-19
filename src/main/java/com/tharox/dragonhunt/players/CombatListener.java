@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
@@ -27,7 +28,7 @@ public class CombatListener implements Listener {
     // contains the UUID of players who are in combat
     public static HashMap<UUID, Integer> combatList = new HashMap<>();
 
-    static BossBar bossBar = Bukkit.createBossBar(HexColor.RED + "You are currently in Combat!",
+    public static BossBar bossBar = Bukkit.createBossBar(HexColor.RED + "You are currently in Combat!",
             BarColor.RED, BarStyle.SEGMENTED_10);
 
     public CombatListener() {

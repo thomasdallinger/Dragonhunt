@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.grappler.GrappleListener;
 import com.tharox.dragonhunt.kits.classes.Grappler;
 import com.tharox.dragonhunt.modifiers.classes.FireWeakness;
+import com.tharox.dragonhunt.modifiers.classes.Frozen;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.AbstractArrow;
@@ -68,6 +69,19 @@ public class EntityDamageListener implements Listener {
                     livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100, 0));
                     livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 100, 0));
                 }
+            }
+        }
+
+        // if a living entity is blinded and the modifier is active, freeze it
+        if (Frozen.active) {
+            if (entity instanceof LivingEntity) {
+                LivingEntity livingEntity = (LivingEntity) entity;
+
+                Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
+                    if (livingEntity.hasPotionEffect(PotionEffectType.BLINDNESS)) {
+                        livingEntity.setFreezeTicks(livingEntity.getMaxFreezeTicks());
+                    }
+                }, 5L);
             }
         }
     }

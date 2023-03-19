@@ -17,25 +17,28 @@ public class ModifierSelection {
     int negative = 0; // needs to be 1 after modifier selection
 
     public ModifierSelection() {
-        // PowderOnly -> Remove
         lowImpact.addAll(Arrays.asList(
-                new SpeedyMobs(),
-                new ExplosiveCreepers(),
-                new CaveSpiders(),
-                new SpeedyComback(),
-                new EndlessNight()));
+                new Frozen()
+                //new SpeedyMobs(),
+                //new ExplosiveCreepers(),
+                //new CaveSpiders(),
+                //new SpeedyComback(),
+                //new EndlessNight()
+        ));
         mediumImpact.addAll(Arrays.asList(
                 new FireWeakness(),
                 new MoreXP(),
                 new WitherSkeletons(),
                 new ImmuneSkeletons(),
-                new EnhancedArrowEffects()));
+                new EnhancedArrowEffects()
+        ));
         highImpact.addAll(Arrays.asList(
                 new Hunger(),
                 new Diamonds(),
                 new EightHearts(),
                 new FireMobs(),
-                new PowerfulMobs()));
+                new PowerfulMobs()
+        ));
 
         Random rand = new Random();
         int random = rand.nextInt(lowImpact.size()); // generates random value from 0 to list size - 1

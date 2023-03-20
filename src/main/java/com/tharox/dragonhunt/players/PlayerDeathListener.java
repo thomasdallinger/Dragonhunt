@@ -5,15 +5,12 @@ import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -51,12 +48,12 @@ public class PlayerDeathListener implements Listener {
             killer.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + "You are no longer in combat.");
 
             Coins.addXP(killer, Coins.playerXP);
+            killer.sendMessage(Prefixes.getCoinPrefix(Coins.playerXP) + "You have killed "
+                    + ChatColor.WHITE + player.getName() + ChatColor.GRAY + ".");
 
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
-            GameState.putItemInInventory(killer, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
-
-            killer.sendMessage(ChatColor.GRAY + "1x " + ChatColor.LIGHT_PURPLE + "Enchanted Golden Apple");
-            killer.sendMessage(ChatColor.GRAY + "1x " + ChatColor.LIGHT_PURPLE + "Regeneration 2 (0:10)");
+            killer.sendMessage(HexColor.GREEN + "You received " + ChatColor.DARK_GREEN + "Regeneration 2"
+                    + HexColor.GREEN + " for " + ChatColor.DARK_GREEN + "10" + HexColor.GREEN + " seconds.");
 
             addPlayerKill(killer, player);
         }

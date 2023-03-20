@@ -92,27 +92,8 @@ public class Timer {
                     return;
                 }
 
-                if (getTime() % 600 == 0) {
+                if (getTime() % 300 == 0) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        if (getTime() == 1200) { // 20 minutes played
-                            int coinsToAdd = 30;
-                            Coins.addCoins(player, coinsToAdd);
-
-                            GameState.putItemInInventory(player, new ItemStack(Material.NETHERITE_INGOT));
-                            GameState.putItemInInventory(player, new ItemStack(Material.ENCHANTED_GOLDEN_APPLE));
-                            GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE, 2));
-                            GameState.putItemInInventory(player, new ItemStack(Material.COOKED_BEEF, 6));
-
-                            player.sendMessage(Prefixes.getCoinPrefix(coinsToAdd)
-                                    + HexColor.HIGHLIGHT + ChatColor.BOLD + "Bonus resources delivered.");
-                            player.sendMessage(ChatColor.GRAY + "1x " + ChatColor.DARK_PURPLE + "Netherite Ingot");
-                            player.sendMessage(ChatColor.GRAY + "1x " + ChatColor.LIGHT_PURPLE + "Enchanted Golden Apple");
-                            player.sendMessage(ChatColor.GRAY + "2x " + ChatColor.GOLD + "Golden Apple");
-                            player.sendMessage(ChatColor.GRAY + "6x " + ChatColor.RED + "Cooked Beef");
-
-                            player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-                        }
-
                         player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.GRAY + "The game ends in "
                                 + ChatColor.YELLOW + (2100 / 60 - getTime() / 60) + ChatColor.GRAY + " minutes.");
                     }

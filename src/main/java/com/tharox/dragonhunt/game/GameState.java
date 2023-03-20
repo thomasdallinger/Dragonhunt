@@ -66,17 +66,18 @@ public class GameState {
      * Sets messages displaying the loot a player got from clicking a chest / minecart.
      */
     public static void setChestLootMessages(Player player) {
+        player.sendMessage(ChatColor.DARK_GRAY + "ᴄʜᴇꜱᴛ ʟᴏᴏᴛ");
+
         if (DoubleChestLoot.active) {
-            player.sendMessage(HexColor.GREEN + "Double Chest Loot active.");
-            player.sendMessage(HexColor.GREEN + "4x " + ChatColor.DARK_PURPLE + "Obsidian");
-            player.sendMessage(HexColor.GREEN + "4x " + ChatColor.AQUA + "Diamond");
-            player.sendMessage(HexColor.GREEN + "12x " + ChatColor.GOLD + "Gold Ingot");
-            player.sendMessage(HexColor.GREEN + "12x " + ChatColor.WHITE + "Iron Ingot");
+            player.sendMessage(HexColor.GREEN + "+4 " + ChatColor.LIGHT_PURPLE + "Obsidian");
+            player.sendMessage(HexColor.GREEN + "+4 " + ChatColor.LIGHT_PURPLE + "Diamonds");
+            player.sendMessage(HexColor.GREEN + "+12 " + ChatColor.LIGHT_PURPLE + "Gold Ingots");
+            player.sendMessage(HexColor.GREEN + "+12 " + ChatColor.LIGHT_PURPLE + "Iron Ingots");
         } else {
-            player.sendMessage(ChatColor.GRAY + "2x " + ChatColor.DARK_PURPLE + "Obsidian");
-            player.sendMessage(ChatColor.GRAY + "2x " + ChatColor.AQUA + "Diamond");
-            player.sendMessage(ChatColor.GRAY + "6x " + ChatColor.GOLD + "Gold Ingot");
-            player.sendMessage(ChatColor.GRAY + "6x " + ChatColor.WHITE + "Iron Ingot");
+            player.sendMessage(ChatColor.GRAY + "+2 " + ChatColor.LIGHT_PURPLE + "Obsidian");
+            player.sendMessage(ChatColor.GRAY + "+2 " + ChatColor.LIGHT_PURPLE + "Diamonds");
+            player.sendMessage(ChatColor.GRAY + "+6 " + ChatColor.LIGHT_PURPLE + "Gold Ingots");
+            player.sendMessage(ChatColor.GRAY + "+6 " + ChatColor.LIGHT_PURPLE + "Iron Ingots");
         }
     }
 

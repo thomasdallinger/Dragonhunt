@@ -9,6 +9,7 @@ import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,6 +37,16 @@ public class AdvancementListener implements Listener {
             case "minecraft:story/enter_the_nether":
                 advancementName = "Enter Nether";
 
+                int coinsToAdd = 20;
+                Coins.addCoins(player, coinsToAdd);
+                GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE, 2));
+                GameState.putItemInInventory(player, new ItemStack(Material.COOKED_BEEF, 6));
+
+                player.sendMessage(ChatColor.DARK_GRAY + "ɴᴇᴛʜᴇʀ ʀᴇᴀᴄʜᴇᴅ");
+                player.sendMessage(ChatColor.GRAY + "+20 " + ChatColor.LIGHT_PURPLE + "⛃");
+                player.sendMessage(ChatColor.GRAY + "+2 " + ChatColor.LIGHT_PURPLE + "Golden Apples");
+                player.sendMessage(ChatColor.GRAY + "+6 " + ChatColor.LIGHT_PURPLE + "Cooked Beef");
+
                 if (GameState.firstNetherEntry == null) {
                     GameState.firstNetherEntry = player.getLocation();
                     addBonusXP(player, "Nether");
@@ -55,11 +66,14 @@ public class AdvancementListener implements Listener {
                 advancementName = "Enter End";
                 if (!GameState.playersReachedEnd) {
                     GameState.playersReachedEnd = true;
+                    addBonusXP(player, "End");
 
                     GameState.putItemInInventory(player, new ItemStack(Material.NETHERITE_INGOT));
-                    player.sendMessage(ChatColor.GRAY + "1x " + ChatColor.DARK_PURPLE + "Netherite Ingot");
+                    GameState.putItemInInventory(player, new ItemStack(Material.DIAMOND, 4));
 
-                    addBonusXP(player, "End");
+                    player.sendMessage(ChatColor.DARK_GRAY + "ꜰɪʀꜱᴛ ɪɴ ᴇɴᴅ");
+                    player.sendMessage(ChatColor.GRAY + "+1 " + ChatColor.LIGHT_PURPLE + "Netherite Ingot");
+                    player.sendMessage(ChatColor.GRAY + "+4 " + ChatColor.LIGHT_PURPLE + "Diamonds");
 
                     for (Player online : Bukkit.getOnlinePlayers()) {
                         online.sendMessage(Prefixes.getImportantPrefix()
@@ -79,7 +93,8 @@ public class AdvancementListener implements Listener {
             Coins.addXP(player, Coins.advancementXP);
 
             for (Player online : Bukkit.getOnlinePlayers()) {
-                online.sendMessage(Prefixes.getAdvancementPrefix() + ChatColor.WHITE + player.getName()
+                online.sendMessage(Prefixes.getAdvancementPrefix()
+                        + Prefixes.getCoinPrefix(Coins.advancementXP) + ChatColor.WHITE + player.getName()
                         + ChatColor.AQUA + " has made the advancement "
                         + ChatColor.DARK_AQUA + advancementName + ChatColor.AQUA + " (#1).");
             }
@@ -92,6 +107,7 @@ public class AdvancementListener implements Listener {
         Coins.addXP(player, Coins.advancementXP * 2);
         player.sendMessage(Prefixes.getXPPrefix(Coins.advancementXP) + "First in the "
                 + HexColor.HIGHLIGHT + dimension + ChatColor.GRAY + " dimension.");
+        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
     }
 
     public void addAdvancement(Player player, String advancement) {

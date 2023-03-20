@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.KitClass;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -16,6 +17,7 @@ import java.util.Collection;
  */
 public class DamageAdjustmentListener implements Listener {
     public static double assassinDamageBuff = 1.25;
+    public static double mutantDamageBuff = 2;
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
@@ -40,6 +42,12 @@ public class DamageAdjustmentListener implements Listener {
             // Assassins passive: Buff all damage by 25%
             if (KitClass.assassins.contains(damager)) {
                 damage = damage * assassinDamageBuff;
+            }
+
+            if (GameState.selectedKit.containsKey(damager)) {
+                if (GameState.selectedKit.get(damager).contains("Mutant")) {
+                    damage = damage + assassinDamageBuff;
+                }
             }
         }
 

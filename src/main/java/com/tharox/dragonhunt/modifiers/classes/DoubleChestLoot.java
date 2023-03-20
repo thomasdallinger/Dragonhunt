@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.modifiers.classes;
 
 import org.bukkit.Material;
 
+@DragonhuntModifier
 public class DoubleChestLoot extends Modifier {
     public static String title = "Sweet Loot";
     public static String lore = "Chests drop double loot.";

@@ -23,7 +23,7 @@ public class ModifierInventory {
     }
 
     public void createInventory() {
-        Inventory inv = Bukkit.createInventory(null, 18, HexColor.HIGHLIGHT + "Modifiers");
+        Inventory inv = Bukkit.createInventory(null, 27, HexColor.HIGHLIGHT + "Modifiers");
         AtomicInteger index = new AtomicInteger();
 
         Reflections reflections = new Reflections("com.tharox.dragonhunt");

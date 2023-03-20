@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameState {
-    public static int gracePeriodTime = 60;
+    public static int gracePeriodTime = 30;
 
     // modifier inventory can be closed after the first 15 seconds before the game starts
     public static boolean modifierInventoryClose = false;

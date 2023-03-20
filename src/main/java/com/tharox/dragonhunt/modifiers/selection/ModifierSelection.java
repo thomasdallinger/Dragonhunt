@@ -30,6 +30,7 @@ public class ModifierSelection {
         mediumImpact.addAll(Arrays.asList(
                 new MoreFood(),
                 new EnhancedArrowEffects(),
+                new Iron(),
 
                 new FireWeakness(),
                 new WitherSkeletons(),

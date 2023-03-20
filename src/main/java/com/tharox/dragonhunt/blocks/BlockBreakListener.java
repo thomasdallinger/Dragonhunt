@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.Diamonds;
+import com.tharox.dragonhunt.modifiers.classes.Iron;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -107,7 +108,6 @@ public class BlockBreakListener implements Listener {
     protected void changeDrops(Block block, Player player) {
         // a HashMap with the old drops as materials and new drops as ItemStacks
         HashMap<Material, ItemStack> materials = new HashMap<>();
-        materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
         materials.put(Material.RAW_COPPER, new ItemStack(Material.GOLD_INGOT, 1));
         materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 3));
         materials.put(Material.GOLD_NUGGET, new ItemStack(Material.GOLD_INGOT, 2)); // Nether Gold Ore
@@ -123,6 +123,12 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.SWEET_BERRIES, new ItemStack(Material.APPLE));
         materials.put(Material.GLOW_BERRIES, new ItemStack(Material.APPLE));
 
+        if (Iron.active) {
+            materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 5));
+        } else {
+            materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
+        }
+
         if (Diamonds.active) {
             materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 5));
         } else {
@@ -136,6 +142,15 @@ public class BlockBreakListener implements Listener {
                 block.setType(Material.AIR);
 
                 block.getWorld().dropItemNaturally(block.getLocation(), materials.get(item.getType()));
+            }
+
+            if (item.getType() == Material.RAW_IRON && Iron.active) {
+                Random random = new Random();
+                int number = random.nextInt(3);
+                int amount = random.nextInt(3) + 1;
+
+                if (number == 0)
+                    block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(Material.GOLD_INGOT, amount));
             }
 
             // instead of dropping the following items, give the player a certain amount of XP

@@ -107,7 +107,7 @@ public class BlockBreakListener implements Listener {
     protected void changeDrops(Block block, Player player) {
         // a HashMap with the old drops as materials and new drops as ItemStacks
         HashMap<Material, ItemStack> materials = new HashMap<>();
-        materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 3));
+        materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
         materials.put(Material.RAW_COPPER, new ItemStack(Material.GOLD_INGOT, 1));
         materials.put(Material.RAW_GOLD, new ItemStack(Material.GOLD_INGOT, 3));
         materials.put(Material.GOLD_NUGGET, new ItemStack(Material.GOLD_INGOT, 2)); // Nether Gold Ore
@@ -124,7 +124,7 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.GLOW_BERRIES, new ItemStack(Material.APPLE));
 
         if (Diamonds.active) {
-            materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND_BLOCK));
+            materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 5));
         } else {
             materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 2));
         }

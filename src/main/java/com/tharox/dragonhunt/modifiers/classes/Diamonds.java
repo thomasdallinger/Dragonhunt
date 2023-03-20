@@ -5,7 +5,7 @@ import org.bukkit.Material;
 @DragonhuntModifier
 public class Diamonds extends Modifier {
     public static String title = "Diamonds, Diamonds, Diamonds!";
-    public static String lore = "Diamond ores drop diamond blocks.";
+    public static String lore = "Diamond ores drop 5 diamonds.";
     public static Material material = Material.DIAMOND;
     public static boolean positive = true;
     public static int impact = 3;

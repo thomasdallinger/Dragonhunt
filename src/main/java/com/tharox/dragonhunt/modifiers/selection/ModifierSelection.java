@@ -39,6 +39,7 @@ public class ModifierSelection {
                 new Diamonds(),
                 new NoPillagers(),
                 new BonusHearts(),
+                new DoubleChestLoot(),
 
                 new Hunger(),
                 new Heartbroken(),

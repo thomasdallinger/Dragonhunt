@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.modifiers.classes.DoubleChestLoot;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -49,11 +50,14 @@ public class GameState {
      * @return a list that contains chest and minecart loot
      */
     public static ArrayList<ItemStack> getChestLoot() {
+        int multiplier = 1;
+        if (DoubleChestLoot.active) multiplier = 2;
+
         ArrayList<ItemStack> chestLoot = new ArrayList<>();
-        chestLoot.add(new ItemStack(Material.OBSIDIAN, 2));
-        chestLoot.add(new ItemStack(Material.DIAMOND, 2));
-        chestLoot.add(new ItemStack(Material.GOLD_INGOT, 6));
-        chestLoot.add(new ItemStack(Material.IRON_INGOT, 6));
+        chestLoot.add(new ItemStack(Material.OBSIDIAN, 2 * multiplier));
+        chestLoot.add(new ItemStack(Material.DIAMOND, 2 * multiplier));
+        chestLoot.add(new ItemStack(Material.GOLD_INGOT, 6 * multiplier));
+        chestLoot.add(new ItemStack(Material.IRON_INGOT, 6 * multiplier));
 
         return chestLoot;
     }
@@ -62,10 +66,18 @@ public class GameState {
      * Sets messages displaying the loot a player got from clicking a chest / minecart.
      */
     public static void setChestLootMessages(Player player) {
-        player.sendMessage(ChatColor.GRAY + "2x " + ChatColor.DARK_PURPLE + "Obsidian");
-        player.sendMessage(ChatColor.GRAY + "2x " + ChatColor.AQUA + "Diamond");
-        player.sendMessage(ChatColor.GRAY + "6x " + ChatColor.GOLD + "Gold Ingot");
-        player.sendMessage(ChatColor.GRAY + "6x " + ChatColor.WHITE + "Iron Ingot");
+        if (DoubleChestLoot.active) {
+            player.sendMessage(HexColor.GREEN + "Double Chest Loot active.");
+            player.sendMessage(HexColor.GREEN + "4x " + ChatColor.DARK_PURPLE + "Obsidian");
+            player.sendMessage(HexColor.GREEN + "4x " + ChatColor.AQUA + "Diamond");
+            player.sendMessage(HexColor.GREEN + "12x " + ChatColor.GOLD + "Gold Ingot");
+            player.sendMessage(HexColor.GREEN + "12x " + ChatColor.WHITE + "Iron Ingot");
+        } else {
+            player.sendMessage(ChatColor.GRAY + "2x " + ChatColor.DARK_PURPLE + "Obsidian");
+            player.sendMessage(ChatColor.GRAY + "2x " + ChatColor.AQUA + "Diamond");
+            player.sendMessage(ChatColor.GRAY + "6x " + ChatColor.GOLD + "Gold Ingot");
+            player.sendMessage(ChatColor.GRAY + "6x " + ChatColor.WHITE + "Iron Ingot");
+        }
     }
 
     /**

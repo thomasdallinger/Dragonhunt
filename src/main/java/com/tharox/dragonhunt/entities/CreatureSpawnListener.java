@@ -65,13 +65,13 @@ public class CreatureSpawnListener implements Listener {
 
             if (PowerfulMobs.active) {
                 if (entity.getEquipment() != null) { // entity can have equipment
-                    // armor
+                    // Armor
                     entity.getEquipment().setHelmet(new ItemStack(Material.GOLDEN_HELMET, 1));
                     entity.getEquipment().setChestplate(new ItemStack(Material.IRON_CHESTPLATE, 1));
                     entity.getEquipment().setLeggings(new ItemStack(Material.GOLDEN_LEGGINGS, 1));
                     entity.getEquipment().setBoots(new ItemStack(Material.GOLDEN_BOOTS, 1));
 
-                    //weapon
+                    // Weapon
                     if (entity instanceof Skeleton) {
                         ItemStack bow = new ItemStack(Material.BOW);
                         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
@@ -121,12 +121,29 @@ public class CreatureSpawnListener implements Listener {
 
             if (WitherSkeletons.active) {
                 if (entity instanceof WitherSkeleton) {
-                    // not possible if the entity can't have any equipment
                     if (entity.getEquipment() != null) {
                         ItemStack sword = new ItemStack(Material.NETHERITE_SWORD);
                         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
                         entity.getEquipment().setItemInMainHand(sword);
                     }
+                }
+            }
+
+            if (BrutalBrutes.active) {
+                if (entity instanceof PiglinBrute) {
+                    if (entity.getEquipment() != null) {
+                        ItemStack sword = new ItemStack(Material.NETHERITE_AXE);
+                        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+                        entity.getEquipment().setItemInMainHand(sword);
+                    }
+                }
+            }
+
+            if (BrutalBlazes.active) {
+                if (entity instanceof Blaze) {
+                    Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
+                            .setBaseValue(entity.getHealth() * 3);
+                    entity.setHealth(entity.getHealth() * 3);
                 }
             }
         }

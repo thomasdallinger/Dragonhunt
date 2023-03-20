@@ -12,16 +12,16 @@ import org.bukkit.potion.PotionEffectType;
 
 @DragonhuntKit
 public class Mutant extends Kit {
-    static int duration = 8;
-    static int cooldown = 72;
+    static int duration = 7;
+    static int cooldown = 40;
 
     public static final String title = HexColor.TANK + KitClass.TANK + " Mutant";
     public static final String lore = ChatColor.DARK_GRAY.toString()
             + ChatColor.ITALIC + "Become Overpowered\n\n"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "On activation you receive: \n"
-            + ChatColor.WHITE + "+30%" + ChatColor.GRAY + " Attack Speed\n"
-            + ChatColor.WHITE + "+60%" + ChatColor.GRAY + " Mining Speed\n"
+            + ChatColor.WHITE + "+50%" + ChatColor.GRAY + " Attack Speed\n"
+            + ChatColor.WHITE + "+100%" + ChatColor.GRAY + " Mining Speed\n"
             + ChatColor.WHITE + "+" + DamageAdjustmentListener.mutantDamageBuff + " ❤"
             + ChatColor.GRAY + " Attack Damage\n"
             + ChatColor.WHITE + "+6 Absorption ❤\n"
@@ -44,7 +44,7 @@ public class Mutant extends Kit {
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
         player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, duration * 20, 0));
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, duration * 20, 2));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, duration * 20, 4));
         player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, duration * 20, 2));
 
         this.runKitAbility(2, duration, null, null);

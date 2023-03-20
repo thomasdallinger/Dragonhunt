@@ -36,9 +36,14 @@ public class KitClass implements Listener {
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     if (tanks.contains(player)) {
-                        if (Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue() < 20.0) {
-                            Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(24.0);
-                            player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+                        double maxHealth = Objects.requireNonNull(
+                                player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
+                        double heartsToAdd = 2;
+
+                        if (maxHealth <= 20) {
+                            Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(
+                                    maxHealth + heartsToAdd * 2);
+                            player.setHealth(maxHealth + heartsToAdd * 2);
                         }
                         continue;
                     }

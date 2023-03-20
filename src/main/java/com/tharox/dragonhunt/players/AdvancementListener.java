@@ -94,7 +94,7 @@ public class AdvancementListener implements Listener {
 
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(Prefixes.getAdvancementPrefix()
-                        + Prefixes.getCoinPrefix(Coins.advancementXP) + ChatColor.WHITE + player.getName()
+                        + Prefixes.getXPPrefix(Coins.advancementXP) + ChatColor.WHITE + player.getName()
                         + ChatColor.AQUA + " has made the advancement "
                         + ChatColor.DARK_AQUA + advancementName + ChatColor.AQUA + " (#1).");
             }

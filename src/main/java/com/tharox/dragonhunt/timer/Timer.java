@@ -123,7 +123,7 @@ public class Timer {
                         online.sendMessage(Prefixes.getImportantPrefix()
                                 + HexColor.HIGHLIGHT + PlayerEndTeleport.getEyesNeeded()
                                 + " Eyes of Ender " + ChatColor.GRAY + "needed to get the "
-                                + ChatColor.LIGHT_PURPLE + " End Teleporter"
+                                + ChatColor.LIGHT_PURPLE + "End Teleporter"
                                 + ChatColor.GRAY + ".");
                     }
                 }

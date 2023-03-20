@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.modifiers.classes;
 
 import org.bukkit.Material;
 
+@DragonhuntModifier
 public class BonusHearts extends Modifier {
     public static String title = "The More, The Better";
     public static String lore = "+6 Absorption ❤";

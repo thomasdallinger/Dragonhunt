@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.modifiers.classes;
 
 import org.bukkit.Material;
 
+@DragonhuntModifier
 public class NoPillagers extends Modifier {
     public static String title = "No Pillagers";
     public static String lore = "The End contains no pillagers.";

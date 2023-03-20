@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.modifiers.classes;
 
 import org.bukkit.Material;
 
+@DragonhuntModifier
 public class MoreFood extends Modifier {
     public static String title = "Yummy";
     public static String lore = "Animals drop more food.";

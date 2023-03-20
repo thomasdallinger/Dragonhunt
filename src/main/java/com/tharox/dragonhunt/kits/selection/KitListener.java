@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.kits.selection;
 
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.DragonhuntKit;
@@ -71,18 +70,5 @@ public class KitListener implements Listener {
         GameState.selectedKit.put(player, (String) kitClass.getField("title").get(null));
         GameState.kitInventoryClose.put(player, true);
         player.closeInventory();
-
-        //addKit(player, name); --> related to db
     }
-
-    /*private void addKit(Player player, String name) {
-        DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "UPDATE Plays SET kit = '" + name.substring(2) + "' " +
-                    "WHERE GameID = '" + DbValues.getGameID() + "' AND Player = '" + player.getName() + "'";
-
-            Statement stmt = con.createStatement();
-            stmt.execute(query);
-            stmt.close();
-        });
-    }*/
 }

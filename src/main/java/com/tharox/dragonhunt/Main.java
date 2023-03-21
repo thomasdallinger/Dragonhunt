@@ -8,7 +8,7 @@ import com.tharox.dragonhunt.brewing.BrewingListener;
 import com.tharox.dragonhunt.chat.ChatListener;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.LevelUp;
-import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.commands.DateCommand;
 import com.tharox.dragonhunt.commands.HubCommand;
 import com.tharox.dragonhunt.commands.PositionCommand;

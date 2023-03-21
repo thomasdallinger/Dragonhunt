@@ -19,8 +19,8 @@ public class DateCommand implements CommandExecutor {
         } else return false;
 
         Date date = new Date();
-        player.sendMessage(ChatColor.YELLOW + "☻" + ChatColor.DARK_GRAY + " | "
-                + ChatColor.GRAY + date.toString());
+        player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + ChatColor.BOLD + "DATE"
+                + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + date.toString());
 
         return true;
     }

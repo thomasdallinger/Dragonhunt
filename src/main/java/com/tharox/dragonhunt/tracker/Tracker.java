@@ -2,7 +2,7 @@ package com.tharox.dragonhunt.tracker;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
-import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;

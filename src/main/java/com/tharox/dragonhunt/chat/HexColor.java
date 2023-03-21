@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.colors;
+package com.tharox.dragonhunt.chat;
 
 import net.md_5.bungee.api.ChatColor;
 

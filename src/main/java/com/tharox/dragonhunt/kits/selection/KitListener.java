@@ -1,6 +1,6 @@
 package com.tharox.dragonhunt.kits.selection;
 
-import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.DragonhuntKit;
 import com.tharox.dragonhunt.kits.classes.Kit;

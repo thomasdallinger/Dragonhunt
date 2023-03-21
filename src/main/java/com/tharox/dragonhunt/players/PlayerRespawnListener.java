@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.modifiers.classes.SpeedyComback;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;

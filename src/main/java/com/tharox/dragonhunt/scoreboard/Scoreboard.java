@@ -2,7 +2,7 @@ package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.coins.Coins;
-import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.game.GameState;

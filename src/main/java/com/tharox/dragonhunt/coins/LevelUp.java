@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.coins;
 
 import com.tharox.dragonhunt.chat.Prefixes;
-import com.tharox.dragonhunt.colors.HexColor;
+import com.tharox.dragonhunt.chat.HexColor;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;

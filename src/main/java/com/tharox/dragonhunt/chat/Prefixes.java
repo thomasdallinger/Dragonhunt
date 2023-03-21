@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.chat;
 
-import com.tharox.dragonhunt.colors.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;

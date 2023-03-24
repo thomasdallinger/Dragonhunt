@@ -101,7 +101,7 @@ public class BrewingListener implements Listener {
         // not enough coins to purchase the effect
         if (Coins.getCoins(player) < BrewingInventory.effectCost.get(effectName)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + "You don't have enough coins! Need "
+            player.sendMessage(Prefixes.getErrorPrefix() + "You do not have enough ⛃! Need "
                     + HexColor.RED + (BrewingInventory.effectCost.get(effectName) - Coins.getCoins(player))
                     + ChatColor.RED + " more.");
             return;

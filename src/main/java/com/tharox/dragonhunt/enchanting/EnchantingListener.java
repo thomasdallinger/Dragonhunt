@@ -59,7 +59,7 @@ public class EnchantingListener implements Listener {
         // ERROR: not enough points to purchase the enchantment
         if (Coins.getCoins(player) < EnchantingInventory.enchantmentCost.get(enchantment)) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + "You don't have enough coins! Need "
+            player.sendMessage(Prefixes.getErrorPrefix() + "You do not have enough ⛃! Need "
                     + HexColor.RED + (EnchantingInventory.enchantmentCost.get(enchantment) - Coins.getCoins(player))
                     + ChatColor.RED + " more.");
             return;

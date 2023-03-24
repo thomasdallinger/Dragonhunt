@@ -35,7 +35,7 @@ public class KitListener implements Listener {
         String name = item.getItemMeta().getDisplayName();
 
         // player clicked a kit class
-        if (name.contains("Assasin") || name.contains("Tank")
+        if (name.contains("Assassin") || name.contains("Tank")
                 || name.contains("Support") || name.contains("Mobility")) return;
 
         Kit kit = null;

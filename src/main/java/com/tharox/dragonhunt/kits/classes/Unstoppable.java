@@ -23,7 +23,7 @@ public class Unstoppable extends Kit {
             + ChatColor.GRAY + "You will be glowing while the ability is active.\n\n"
             + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " sec\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
-    public static final Material material = Material.BARRIER;
+    public static final Material material = Material.BEDROCK;
     public static final int slot = 11;
 
     public Unstoppable(Player player) {

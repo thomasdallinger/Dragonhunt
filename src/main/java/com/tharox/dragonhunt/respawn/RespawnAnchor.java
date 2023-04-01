@@ -81,6 +81,8 @@ public class RespawnAnchor implements Listener {
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
             }
+
+            return; // if it was Left-Click, no need to check Right-Click
         }
 
         if (e.equals(EquipmentSlot.HAND)

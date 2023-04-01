@@ -20,11 +20,11 @@ public class Mutant extends Kit {
             + ChatColor.ITALIC + "Become Overpowered\n\n"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "On activation you receive: \n"
-            + ChatColor.WHITE + "+50%" + ChatColor.GRAY + " Attack Speed\n"
-            + ChatColor.WHITE + "+100%" + ChatColor.GRAY + " Mining Speed\n"
+            + ChatColor.WHITE + "+40%" + ChatColor.GRAY + " Attack Speed\n"
+            + ChatColor.WHITE + "+80%" + ChatColor.GRAY + " Mining Speed\n"
             + ChatColor.WHITE + "+" + DamageAdjustmentListener.mutantDamageBuff + " ❤"
             + ChatColor.GRAY + " Attack Damage\n"
-            + ChatColor.WHITE + "+6 Absorption ❤\n"
+            + ChatColor.WHITE + "+4 Absorption ❤\n"
             + ChatColor.GRAY + "You will be glowing while the ability is active.\n\n"
             + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " sec\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
@@ -44,8 +44,8 @@ public class Mutant extends Kit {
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
         player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, duration * 20, 0));
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, duration * 20, 4));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, duration * 20, 2));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, duration * 20, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, duration * 20, 1));
 
         this.runKitAbility(2, duration, null, null);
     }

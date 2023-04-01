@@ -17,7 +17,7 @@ import java.util.Collection;
  */
 public class DamageAdjustmentListener implements Listener {
     public static double assassinDamageBuff = 1.25;
-    public static double mutantDamageBuff = 2;
+    public static double mutantDamageBuff = 1.0;
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
@@ -44,9 +44,10 @@ public class DamageAdjustmentListener implements Listener {
                 damage = damage * assassinDamageBuff;
             }
 
+            // Mutant Attack Damage increase
             if (GameState.selectedKit.containsKey(damager)) {
                 if (GameState.selectedKit.get(damager).contains("Mutant")) {
-                    damage = damage + assassinDamageBuff;
+                    damage = damage + mutantDamageBuff;
                 }
             }
         }

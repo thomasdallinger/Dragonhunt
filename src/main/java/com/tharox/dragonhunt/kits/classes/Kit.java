@@ -157,7 +157,9 @@ public abstract class Kit implements Listener {
                     everySecondExecutor.executeEverySecond();
                 }
 
-                durationLeft = durationLeft - (double) ticks / 20;
+                if (player.isDead()) { //without a executor
+                    this.cancel();
+                }
 
                 if (durationLeft <= 0) {
                     kitAbilityActive = false;
@@ -176,9 +178,7 @@ public abstract class Kit implements Listener {
                         ChatColor.GOLD.toString() + ChatColor.BOLD + String.format("%1.1f", durationLeft)
                                 + ChatColor.YELLOW + ChatColor.BOLD + " SECONDS LEFT"));
 
-                if (player.isDead()) { //without a executor
-                    this.cancel();
-                }
+                durationLeft = durationLeft - (double) ticks / 20;
             }
         }.runTaskTimer(Main.getInstance(), ticks, ticks);
     }

@@ -22,6 +22,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class RespawnAnchor implements Listener {
 
@@ -56,6 +57,7 @@ public class RespawnAnchor implements Listener {
                     player.sendMessage(Prefixes.getErrorPrefix()
                             + ChatColor.GRAY + "This feature is blocked while in combat.");
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                    return;
                 }
 
                 // Player has to have more than 5 hearts.
@@ -69,6 +71,8 @@ public class RespawnAnchor implements Listener {
 
                 if (player.getBedSpawnLocation() != null) {
                     player.teleport(player.getBedSpawnLocation());
+                } else {
+                    player.teleport(Objects.requireNonNull(Bukkit.getWorld("world")).getSpawnLocation());
                 }
 
                 player.setHealth(player.getHealth() - 10.0);

@@ -6,7 +6,7 @@ import org.bukkit.Material;
 public class Iron extends Modifier {
     public static String title = "Too Many Resources";
     public static String lore = "Iron ores drop 5 iron, chance to drop gold.";
-    public static Material material = Material.DIAMOND;
+    public static Material material = Material.IRON_INGOT;
     public static boolean positive = true;
     public static int impact = 2;
     public static boolean active = false;

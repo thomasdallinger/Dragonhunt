@@ -71,10 +71,6 @@ public class Effects {
                     if (Hunger.active) {
                         player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 40, 0));
                     }
-
-                    if (BonusHearts.active) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 40, 2));
-                    }
                 }
             }
         }.runTaskTimer(Main.getInstance(), 0, 20);

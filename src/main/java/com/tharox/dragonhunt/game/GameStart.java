@@ -3,10 +3,11 @@ package com.tharox.dragonhunt.game;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.brewing.Effects;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.enchanting.Enchantments;
 import com.tharox.dragonhunt.kits.selection.KitInventory;
+import com.tharox.dragonhunt.modifiers.classes.BonusHearts;
 import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
 import com.tharox.dragonhunt.modifiers.selection.ModifierInventory;
 import com.tharox.dragonhunt.movement.ElytraSwapRunnable;
@@ -19,6 +20,8 @@ import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class GameStart extends GameConfiguration {
     Timer timer = Main.getInstance().getTimer();
@@ -129,6 +132,10 @@ public class GameStart extends GameConfiguration {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
                 player.teleport(startLocation);
                 player.setGameMode(GameMode.SURVIVAL);
+
+                if (BonusHearts.active) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 2100, 2));
+                }
 
                 player.sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + "RACE TO VICTORY");
                 player.sendMessage(ChatColor.GOLD + "Whoever kills the Ender Dragon wins.");

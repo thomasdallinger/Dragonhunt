@@ -27,8 +27,8 @@ public class CombatListener implements Listener {
     // contains the UUID of players who are in combat
     public static HashMap<UUID, Integer> combatList = new HashMap<>();
 
-    public static BossBar bossBar = Bukkit.createBossBar(HexColor.RED + "You are currently in Combat!",
-            BarColor.RED, BarStyle.SEGMENTED_10);
+    public static BossBar bossBar = Bukkit.createBossBar(ChatColor.YELLOW + "You are currently in Combat!",
+            BarColor.YELLOW, BarStyle.SEGMENTED_10);
 
     public CombatListener() {
         new BukkitRunnable() {

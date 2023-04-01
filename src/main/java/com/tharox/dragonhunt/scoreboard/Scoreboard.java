@@ -55,7 +55,7 @@ public class Scoreboard extends ScoreboardBuilder {
                 + "☠ " + DbValues.getKills(player, true) + " "
                 + "✟ " + DbValues.getKills(player, false), 6);
 
-        if (timer.getTime() <= 1500) {
+        if (timer.getTime() <= 1200) {
             setScore(ChatColor.WHITE + "✮ " + ChatColor.DARK_PURPLE + PlayerEndTeleport.getEyesNeeded()
                     + ChatColor.DARK_GRAY + " » "
                     + ChatColor.WHITE + countdownFormat(1500 - timer.getTime()), 4);

@@ -149,7 +149,7 @@ public class DbValues {
                     currentWorld = "Nether";
                     break;
                 case "world_the_end":
-                    currentWorld = "End";
+                    currentWorld = "The End";
                     break;
             }
         }

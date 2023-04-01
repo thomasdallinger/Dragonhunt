@@ -1,8 +1,8 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
-import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatColor;
@@ -39,7 +39,9 @@ public class PlayerDeathListener implements Listener {
 
         event.setDeathMessage(Prefixes.getDeathPrefix()
                 + HexColor.RED + event.getDeathMessage().substring(0, player.getName().length())
-                + ChatColor.GRAY + event.getDeathMessage().substring(player.getName().length()));
+                + ChatColor.GRAY + event.getDeathMessage().substring(player.getName().length())
+                + ChatColor.DARK_GRAY + " (" + DbValues.getCurrentWorld(player.getLocation())
+                + ChatColor.DARK_GRAY + ")");
 
         // if the player has been killed by another player, give the killer regeneration, XP and other rewards
         if (killer != null) {

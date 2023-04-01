@@ -100,9 +100,9 @@ public class EnderDragonDamageListener implements Listener {
 
                     player.setHealth(0);
                     player.sendMessage(Prefixes.getDeathPrefix()
-                            + ChatColor.RED + "You did not damage the Ender Dragon in time.");
-                    player.sendMessage(Prefixes.getDeathPrefix()
                             + ChatColor.RED + "The Ender Dragon killed you.");
+                    player.sendMessage(Prefixes.getDeathPrefix()
+                            + ChatColor.RED + "You did not damage the Ender Dragon in time.");
                 }
 
                 bossBar.setVisible(true);

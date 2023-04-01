@@ -105,7 +105,7 @@ public class PlayerEndTeleport implements Listener {
             eyesNeeded = 6;
         } else {
             if (GameState.playersReachedEnd) {
-                eyesNeeded = 10;
+                eyesNeeded = 9;
             }
         }
 

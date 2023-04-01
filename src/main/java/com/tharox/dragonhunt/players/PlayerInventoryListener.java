@@ -91,7 +91,7 @@ public class PlayerInventoryListener implements Listener {
                 || displayName.contains(KitClass.TANK)
                 || displayName.contains(KitClass.SUPPORT)
                 || displayName.contains(KitClass.MOBILITY)
-                || displayName.contains("Teleport » End Dimension")
+                || displayName.contains("Enter The End")
                 || displayName.contains("Generated Arrow"))
             event.setCancelled(true);
 
@@ -114,7 +114,7 @@ public class PlayerInventoryListener implements Listener {
                 || displayName.contains(KitClass.TANK)
                 || displayName.contains(KitClass.SUPPORT)
                 || displayName.contains(KitClass.MOBILITY)
-                || displayName.contains("Teleport » End Dimension")) {
+                || displayName.contains("Enter The End")) {
             // Generated Arrows can't be swapped: not in the hotbar, no checking needed
             event.setCancelled(true);
         }

@@ -43,8 +43,8 @@ public class PlayerEndTeleport implements Listener {
 
         if (e.equals(EquipmentSlot.HAND)
                 && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().equals(ChatColor.LIGHT_PURPLE + "Teleport » End Dimension")) {
-                event.setCancelled(true); // do not place the end stone block
+            if (item.getItemMeta().getDisplayName().contains("Enter The End")) {
+                event.setCancelled(true); // Do not place the block.
 
                 if (world.getName().equals("world_the_end")) {
                     player.sendMessage(Prefixes.getErrorPrefix() + "Already in the End dimension.");
@@ -52,7 +52,7 @@ public class PlayerEndTeleport implements Listener {
                 }
 
                 if (CombatListener.combatList.containsKey(player.getUniqueId())) {
-                    player.sendMessage(Prefixes.getErrorPrefix() + "This teleporter is blocked while in combat.");
+                    player.sendMessage(Prefixes.getErrorPrefix() + "You cannot teleport while in combat.");
                     return;
                 }
 
@@ -82,9 +82,10 @@ public class PlayerEndTeleport implements Listener {
                             // replace the Tracker with the END TELEPORTER item
                             inventory.setItem(7, createEndTeleport());
                             player.sendMessage(Prefixes.getImportantPrefix() + HexColor.HIGHLIGHT + ChatColor.BOLD
-                                    + "Teleport to the End dimension unlocked.");
-                            player.sendMessage(HexColor.GREEN + "Right-Click"
-                                    + ChatColor.GRAY + " the Endstone to teleport.");
+                                    + "You can now enter the End dimension.");
+                            player.sendMessage(ChatColor.WHITE + "Right-Click" + ChatColor.GRAY + " the "
+                                    + ChatColor.LIGHT_PURPLE + "End Portal Frame"
+                                    + ChatColor.GRAY + " in your inventory to teleport.");
                         }
                     }
                 }
@@ -95,16 +96,16 @@ public class PlayerEndTeleport implements Listener {
     /**
      * Used in the scoreboard.
      *
-     * @return the amount of ender eyes needed to get the "Teleport » End Dimension" item
+     * @return the amount of ender eyes needed to be able to enter the End
      */
     public static int getEyesNeeded() {
-        int eyesNeeded = 10;
+        int eyesNeeded = 12;
 
-        if (Main.getInstance().getTimer().getTime() >= 1500) { // last 10 minutes of the game
+        if (Main.getInstance().getTimer().getTime() >= 1200) { // last 15 minutes of the game
             eyesNeeded = 6;
         } else {
             if (GameState.playersReachedEnd) {
-                eyesNeeded = 8;
+                eyesNeeded = 10;
             }
         }
 
@@ -112,19 +113,19 @@ public class PlayerEndTeleport implements Listener {
     }
 
     private ItemStack createEndTeleport() {
-        ItemStack item = new ItemStack(Material.END_STONE);
+        ItemStack item = new ItemStack(Material.END_PORTAL_FRAME);
         item.addUnsafeEnchantment(Enchantment.DIG_SPEED, 1);
 
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Teleport » End Dimension");
+        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Enter The End" + ChatColor.GRAY + " (Right-Click)");
         meta.setLore(Arrays.asList(
                 ChatColor.WHITE + "Right-Click: " + ChatColor.LIGHT_PURPLE + "Teleports you to the spawn platform",
-                ChatColor.LIGHT_PURPLE + "in the END dimension.",
+                ChatColor.LIGHT_PURPLE + "in the End dimension.",
                 "",
-                HexColor.RED + "ONLY WAY BACK IS DYING"));
+                HexColor.RED + "The only way back is dying."));
         item.setItemMeta(meta);
 
         return item;

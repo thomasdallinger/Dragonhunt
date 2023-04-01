@@ -55,7 +55,7 @@ public class RespawnAnchor implements Listener {
 
                 if (CombatListener.combatList.containsKey(player.getUniqueId())) {
                     player.sendMessage(Prefixes.getErrorPrefix()
-                            + ChatColor.GRAY + "This feature is blocked while in combat.");
+                            + ChatColor.GRAY + "You cannot teleport while in combat.");
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                     return;
                 }

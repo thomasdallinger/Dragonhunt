@@ -54,10 +54,12 @@ public class Platformer extends Kit {
         Location offsetLocation;
 
         for (int offsetY = -1; offsetY != 2; offsetY++) {
-
             Material material = Material.AIR;
-            if (offsetY == -1)
+
+            if (offsetY == -1) {
                 material = Material.PINK_STAINED_GLASS;
+            }
+
             for (int offsetX = -1; offsetX != 2; offsetX++) {
                 for (int offsetZ = -1; offsetZ != 2; offsetZ++) {
                     offsetLocation = new Location(playerLocation.getWorld(),

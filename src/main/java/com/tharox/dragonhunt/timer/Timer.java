@@ -52,7 +52,7 @@ public class Timer {
 
             if (item.getItemMeta() != null) {
                 if (item.getItemMeta().getDisplayName().contains("Tracker")
-                        || item.getItemMeta().getDisplayName().contains("Set Respawn Point"))
+                        || item.getItemMeta().getDisplayName().contains("Respawn Anchor"))
                     continue;
 
                 // Grappler shows the Timer - has no cooldown to display

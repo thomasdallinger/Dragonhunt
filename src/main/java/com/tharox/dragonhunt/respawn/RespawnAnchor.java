@@ -1,11 +1,10 @@
 package com.tharox.dragonhunt.respawn;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.players.CombatListener;
-import com.tharox.dragonhunt.players.PlayerDeathListener;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -24,9 +23,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
 
-public class SetRespawn implements Listener {
+public class RespawnAnchor implements Listener {
 
-    public SetRespawn() {
+    public RespawnAnchor() {
         run();
     }
 
@@ -43,13 +42,56 @@ public class SetRespawn implements Listener {
             return;
 
         if (e.equals(EquipmentSlot.HAND)
-                && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().contains("Set Respawn Point")) {
+                && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
+            if (item.getItemMeta().getDisplayName().contains("Respawn Anchor")) {
                 event.setCancelled(true); // Avoid block placement.
 
                 if (world.getName().equals("world_the_end")) {
+                    player.sendMessage(Prefixes.getErrorPrefix() + "This feature is disabled in the End dimension.");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                    return;
+                }
+
+                if (CombatListener.combatList.containsKey(player.getUniqueId())) {
                     player.sendMessage(Prefixes.getErrorPrefix()
-                            + ChatColor.GRAY + "Respawn point cannot be set in the End dimension.");
+                            + ChatColor.GRAY + "This feature is blocked while in combat.");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                }
+
+                // Player has to have more than 5 hearts.
+                // Players lose 5 hearts upon setting the respawn point.
+                if (player.getHealth() < 10.0) {
+                    player.sendMessage(Prefixes.getErrorPrefix() + "You need to have more than 5 ❤ " +
+                            "to teleport to your respawn point.");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                    return;
+                }
+
+                if (player.getBedSpawnLocation() != null) {
+                    player.teleport(player.getBedSpawnLocation());
+                }
+
+                player.setHealth(player.getHealth() - 10.0);
+                player.sendMessage(HexColor.GREEN + "Teleported to your Respawn Point.");
+                player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤");
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
+            }
+        }
+
+        if (e.equals(EquipmentSlot.HAND)
+                && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+            if (item.getItemMeta().getDisplayName().contains("Respawn Anchor")) {
+                event.setCancelled(true); // Avoid block placement.
+
+                if (world.getName().equals("world_the_end")) {
+                    player.sendMessage(Prefixes.getErrorPrefix() + "Respawn point cannot be set in the End dimension.");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                    return;
+                }
+
+                if (CombatListener.combatList.containsKey(player.getUniqueId())) {
+                    player.sendMessage(Prefixes.getErrorPrefix() + "You cannot set your respawn point while in combat.");
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                     return;
                 }
@@ -59,12 +101,6 @@ public class SetRespawn implements Listener {
                 if (player.getHealth() < 10.0) {
                     player.sendMessage(Prefixes.getErrorPrefix() + "You need to have more than 5 ❤ " +
                             "to set your respawn point.");
-                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                    return;
-                }
-
-                if (CombatListener.combatList.containsKey(player.getUniqueId())) {
-                    player.sendMessage(Prefixes.getErrorPrefix() + "You cannot set your respawn point while in combat.");
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                     return;
                 }
@@ -86,35 +122,17 @@ public class SetRespawn implements Listener {
 
     public void sendActionBar(Player player) {
         ItemStack item = player.getInventory().getItemInMainHand();
-        int distance;
 
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
 
-        if (item.getItemMeta().getDisplayName().contains("Set Respawn Point")) {
-            try {
-                if (PlayerDeathListener.deathLocation.containsKey(player)) {
-                    distance = (int) player.getLocation().distance(PlayerDeathListener.deathLocation.get(player));
-
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new ComponentBuilder("LAST DEATH").color(HexColor.RED).bold(true)
-                                    .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                    .append(String.valueOf(distance)).color(ChatColor.GRAY)
-                                    .append(" Blocks away").color(ChatColor.GRAY).create());
-                } else {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new ComponentBuilder("LAST DEATH").color(HexColor.RED).bold(true)
-                                    .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                    .append("0 ✟").color(ChatColor.RED).create());
-                }
-            } catch (IllegalArgumentException ex) {
-                // Different dimension.
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                        new ComponentBuilder("LAST DEATH").color(ChatColor.GOLD).bold(true)
-                                .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                .append(DbValues.getCurrentWorld(PlayerDeathListener.deathLocation.get(player)))
-                                .color(HexColor.RED).create());
-            }
+        if (item.getItemMeta().getDisplayName().contains("Respawn Anchor")) {
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                    new ComponentBuilder("TP TO RESPAWN").color(ChatColor.DARK_PURPLE).bold(true)
+                            .append(" (Left-Click)").color(ChatColor.GRAY).bold(false)
+                            .append(" | ").color(ChatColor.DARK_GRAY)
+                            .append("SET RESPAWN").color(ChatColor.LIGHT_PURPLE).bold(true)
+                            .append(" (Right-Click)").color(ChatColor.GRAY).bold(false).create());
         }
     }
 
@@ -143,11 +161,14 @@ public class SetRespawn implements Listener {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
-        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Set Respawn Point" + ChatColor.GRAY + " (Right-Click)");
+        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Respawn Anchor");
         meta.setLore(Arrays.asList(
-                ChatColor.GRAY + "Sets your respawn point",
-                ChatColor.GRAY + "at your current location.",
-                ChatColor.GRAY + "Costs " + ChatColor.WHITE + "5 ❤" + ChatColor.GRAY + "."));
+                ChatColor.GRAY + "Set a new respawn point",
+                ChatColor.GRAY + "or teleport to it.",
+                ChatColor.GRAY + "Costs " + ChatColor.WHITE + "5 ❤" + ChatColor.GRAY + ".",
+                "",
+                ChatColor.GRAY + "Left-Click: " + ChatColor.DARK_PURPLE + "Teleport to Respawn Point",
+                ChatColor.GRAY + "Right-Click: " + ChatColor.LIGHT_PURPLE + "Set Respawn Point"));
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

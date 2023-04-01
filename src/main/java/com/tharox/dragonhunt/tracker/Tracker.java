@@ -1,10 +1,11 @@
 package com.tharox.dragonhunt.tracker;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.players.PlayerDeathListener;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -76,9 +77,15 @@ public class Tracker implements Listener {
             }
         }
 
-        // locate a Ruined Portal in the OVERWORLD and the NETHER (Tracker not available in the End)
+        // Locate a Ruined Portal in both dimensions.
         addStructureTypeToLists(player, StructureType.RUINED_PORTAL, "Ruined Portal", structureList,
                 locationList);
+
+        // Display the last death location in both dimensions.
+        if (PlayerDeathListener.deathLocation.containsKey(player)) {
+            structureList.add("Last Death");
+            locationList.add(PlayerDeathListener.deathLocation.get(player));
+        }
 
         if (e.equals(EquipmentSlot.HAND)
                 && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {

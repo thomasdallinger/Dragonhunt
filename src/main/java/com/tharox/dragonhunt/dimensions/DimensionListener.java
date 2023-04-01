@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.dimensions;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.players.EnderDragonDamageListener;
-import com.tharox.dragonhunt.respawn.SetRespawn;
+import com.tharox.dragonhunt.respawn.RespawnAnchor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -37,7 +37,7 @@ public class DimensionListener implements Listener {
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 9));
 
         if (!event.getFrom().getEnvironment().equals(World.Environment.THE_END)) {
-            player.getInventory().setItem(6, SetRespawn.createItem(player));
+            player.getInventory().setItem(6, RespawnAnchor.createItem(player));
         }
     }
 

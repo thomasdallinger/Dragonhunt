@@ -85,7 +85,7 @@ public class PlayerInventoryListener implements Listener {
 
         String displayName = item.getItemMeta().getDisplayName();
 
-        if (displayName.contains("Set Respawn Point")
+        if (displayName.contains("Respawn Anchor")
                 || displayName.contains("Tracker")
                 || displayName.contains(KitClass.ASSASSIN)
                 || displayName.contains(KitClass.TANK)
@@ -108,7 +108,7 @@ public class PlayerInventoryListener implements Listener {
         if (offHandItem.getItemMeta() == null) return;
 
         String displayName = offHandItem.getItemMeta().getDisplayName();
-        if (displayName.contains("Set Respawn Point")
+        if (displayName.contains("Respawn Anchor")
                 || displayName.contains("Tracker")
                 || displayName.contains(KitClass.ASSASSIN)
                 || displayName.contains(KitClass.TANK)

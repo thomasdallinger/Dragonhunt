@@ -31,6 +31,7 @@ public class ModifierSelection {
                 new MoreFood(),
                 new EnhancedArrowEffects(),
                 new Iron(),
+                new NoBrutes(),
 
                 new FireWeakness(),
                 new WitherSkeletons(),

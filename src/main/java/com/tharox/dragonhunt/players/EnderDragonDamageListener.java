@@ -1,8 +1,8 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -28,6 +28,7 @@ public class EnderDragonDamageListener implements Listener {
 
     // contains the UUID of players who are forced to damage the Ender Dragon
     public static HashMap<UUID, Integer> timeLeft = new HashMap<>();
+    public static HashMap<UUID, BossBar> bossBars = new HashMap<>();
 
     public static BossBar bossBar = Bukkit.createBossBar(HexColor.RED + "Damage the Ender Dragon or you die!",
             BarColor.RED, BarStyle.SEGMENTED_10);
@@ -70,9 +71,7 @@ public class EnderDragonDamageListener implements Listener {
         } else return;
 
         timeLeft.put(player.getUniqueId(), time);
-
-        if (!bossBar.getPlayers().contains(player))
-            bossBar.addPlayer(player);
+        bossBars.put(player.getUniqueId(), bossBar);
     }
 
     public void onInterval() {
@@ -85,7 +84,7 @@ public class EnderDragonDamageListener implements Listener {
 
                 if (player.isDead() || player.getWorld().getEnvironment() != World.Environment.THE_END) {
                     temp.remove(id);
-                    bossBar.removePlayer(player);
+                    bossBars.remove(id);
                     continue;
                 }
 
@@ -93,10 +92,10 @@ public class EnderDragonDamageListener implements Listener {
 
                 if (timer > 0) {
                     temp.put(id, timer);
-                    bossBar.setProgress(timer / (time + 1D));
+                    bossBars.get(id).setProgress(timer / (time + 1D));
                 } else {
                     temp.remove(id);
-                    bossBar.removePlayer(player);
+                    bossBars.remove(id);
 
                     player.setHealth(0);
                     player.sendMessage(Prefixes.getDeathPrefix()
@@ -105,7 +104,7 @@ public class EnderDragonDamageListener implements Listener {
                             + ChatColor.RED + "You did not damage the Ender Dragon in time.");
                 }
 
-                bossBar.setVisible(true);
+                bossBars.get(player.getUniqueId()).setVisible(true);
             }
         } catch (ConcurrentModificationException exception) {
             // do nothing

@@ -69,9 +69,9 @@ public class GameEnd {
             player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 1);
 
             EnderDragonDamageListener.timeLeft.remove(player.getUniqueId());
-            EnderDragonDamageListener.bossBar.removePlayer(player);
+            EnderDragonDamageListener.bossBars.remove(player.getUniqueId());
             CombatListener.combatList.remove(player.getUniqueId());
-            CombatListener.bossBar.removePlayer(player);
+            CombatListener.bossBars.remove(player.getUniqueId());
 
             // no winner != null check because the else block still executes if the winner is null
             if (player == winner) {

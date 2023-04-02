@@ -26,6 +26,7 @@ import java.util.*;
 public class CombatListener implements Listener {
     // contains the UUID of players who are in combat
     public static HashMap<UUID, Integer> combatList = new HashMap<>();
+    public static HashMap<UUID, BossBar> bossBars = new HashMap<>();
 
     public static BossBar bossBar = Bukkit.createBossBar(ChatColor.YELLOW + "You are currently in Combat!",
             BarColor.YELLOW, BarStyle.SEGMENTED_10);
@@ -85,8 +86,8 @@ public class CombatListener implements Listener {
         combatList.put(target.getUniqueId(), 30);
         combatList.put(damager.getUniqueId(), 30);
 
-        bossBar.addPlayer(target);
-        bossBar.addPlayer(damager);
+        bossBars.put(target.getUniqueId(), bossBar);
+        bossBars.put(damager.getUniqueId(), bossBar);
 
     }
 
@@ -100,7 +101,7 @@ public class CombatListener implements Listener {
 
                 if (player.isDead()) {
                     temp.remove(id);
-                    bossBar.removePlayer(player);
+                    bossBars.remove(id);
                     continue;
                 }
 
@@ -108,15 +109,15 @@ public class CombatListener implements Listener {
 
                 if (timer > 0) {
                     temp.put(id, timer);
-                    bossBar.setProgress(timer / 31D);
+                    bossBars.get(id).setProgress(timer / 31D);
                 } else {
                     temp.remove(id);
-                    bossBar.removePlayer(player);
+                    bossBars.remove(id);
 
                     player.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + "You are no longer in combat.");
                 }
 
-                bossBar.setVisible(true);
+                bossBars.get(player.getUniqueId()).setVisible(true);
             }
         } catch (ConcurrentModificationException exception) {
             // do nothing

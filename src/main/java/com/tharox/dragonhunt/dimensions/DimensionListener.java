@@ -97,7 +97,7 @@ public class DimensionListener implements Listener {
             // 15 Second delay
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
                 EnderDragonDamageListener.timeLeft.put(player.getUniqueId(), EnderDragonDamageListener.time);
-                EnderDragonDamageListener.bossBar.addPlayer(player);
+                EnderDragonDamageListener.bossBars.put(player.getUniqueId(), EnderDragonDamageListener.bossBar);
             }, 300L);
         }
     }

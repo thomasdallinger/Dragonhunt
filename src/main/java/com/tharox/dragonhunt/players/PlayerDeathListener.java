@@ -46,7 +46,7 @@ public class PlayerDeathListener implements Listener {
         // if the player has been killed by another player, give the killer regeneration, XP and other rewards
         if (killer != null) {
             CombatListener.combatList.remove(killer.getUniqueId());
-            CombatListener.bossBar.removePlayer(killer);
+            CombatListener.bossBars.remove(killer.getUniqueId());
             killer.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + "You are no longer in combat.");
 
             Coins.addXP(killer, Coins.playerXP);
@@ -62,7 +62,7 @@ public class PlayerDeathListener implements Listener {
 
         // Set dead player out of combat
         CombatListener.combatList.remove(player.getUniqueId());
-        CombatListener.bossBar.removePlayer(player);
+        CombatListener.bossBars.remove(player.getUniqueId());
 
         // Drop no XP
         event.setDroppedExp(0);

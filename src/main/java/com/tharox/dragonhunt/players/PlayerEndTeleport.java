@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.enchantments.Enchantment;
@@ -35,6 +36,7 @@ public class PlayerEndTeleport implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         World world = player.getWorld();
 
+        if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
 
         EquipmentSlot e = event.getHand(); //Get the hand of the event and set it to 'e'.

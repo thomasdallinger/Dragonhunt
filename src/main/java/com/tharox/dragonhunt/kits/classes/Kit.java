@@ -57,6 +57,7 @@ public abstract class Kit implements Listener {
         Player p = event.getPlayer();
         ItemStack item = p.getInventory().getItemInMainHand();
 
+        if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
         if (item.getItemMeta() == null) return;
         if (item.getItemMeta().getDisplayName().contains("Grappler")) return;
 

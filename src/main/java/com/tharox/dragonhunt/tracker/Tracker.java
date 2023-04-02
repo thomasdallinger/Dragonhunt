@@ -49,6 +49,7 @@ public class Tracker implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         World world = player.getWorld();
 
+        if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
 
         int index = playerTracksIndex.getOrDefault(player, 0);

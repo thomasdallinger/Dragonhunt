@@ -36,6 +36,7 @@ public class RespawnAnchor implements Listener {
         ItemStack item = player.getInventory().getItemInMainHand();
         World world = player.getWorld();
 
+        if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
 
         EquipmentSlot e = event.getHand(); //Get the hand of the event and set it to 'e'.
@@ -44,6 +45,48 @@ public class RespawnAnchor implements Listener {
 
         if (e.equals(EquipmentSlot.HAND)
                 && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
+            if (item.getItemMeta().getDisplayName().contains("Respawn Anchor")) {
+                event.setCancelled(true); // Avoid block placement.
+
+                if (world.getName().equals("world_the_end")) {
+                    player.sendMessage(Prefixes.getErrorPrefix() + "Respawn point cannot be set in the End dimension.");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                    return;
+                }
+
+                if (CombatListener.combatList.containsKey(player.getUniqueId())) {
+                    player.sendMessage(Prefixes.getErrorPrefix() + "You cannot set your respawn point while in combat.");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                    return;
+                }
+
+                // Player has to have more than 5 hearts.
+                // Players lose 5 hearts upon setting the respawn point.
+                if (player.getHealth() < 10.0) {
+                    player.sendMessage(Prefixes.getErrorPrefix() + "You need to have more than 5 ❤ " +
+                            "to set your respawn point.");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                    return;
+                }
+
+                player.setBedSpawnLocation(player.getLocation(), true);
+                player.setHealth(player.getHealth() - 10.0);
+                player.sendMessage(HexColor.GREEN + "Respawn Point set at "
+                        + ChatColor.DARK_GREEN + "[" + DbValues.getCurrentWorld(player.getLocation())
+                        + ", x: " + (int) player.getLocation().getX()
+                        + ", y: " + (int) player.getLocation().getY()
+                        + ", z: " + (int) player.getLocation().getZ() + "]"
+                        + HexColor.GREEN + ".");
+                player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤");
+                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
+            }
+
+            return; // if it was Left-Click, no need to check Right-Click
+        }
+
+        if (e.equals(EquipmentSlot.HAND)
+                && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().contains("Respawn Anchor")) {
                 event.setCancelled(true); // Avoid block placement.
 
@@ -81,48 +124,6 @@ public class RespawnAnchor implements Listener {
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
             }
-
-            return; // if it was Left-Click, no need to check Right-Click
-        }
-
-        if (e.equals(EquipmentSlot.HAND)
-                && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().contains("Respawn Anchor")) {
-                event.setCancelled(true); // Avoid block placement.
-
-                if (world.getName().equals("world_the_end")) {
-                    player.sendMessage(Prefixes.getErrorPrefix() + "Respawn point cannot be set in the End dimension.");
-                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                    return;
-                }
-
-                if (CombatListener.combatList.containsKey(player.getUniqueId())) {
-                    player.sendMessage(Prefixes.getErrorPrefix() + "You cannot set your respawn point while in combat.");
-                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                    return;
-                }
-
-                // Player has to have more than 5 hearts.
-                // Players lose 5 hearts upon setting the respawn point.
-                if (player.getHealth() < 10.0) {
-                    player.sendMessage(Prefixes.getErrorPrefix() + "You need to have more than 5 ❤ " +
-                            "to set your respawn point.");
-                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                    return;
-                }
-
-                player.setBedSpawnLocation(player.getLocation(), true);
-                player.setHealth(player.getHealth() - 10.0);
-                player.sendMessage(HexColor.GREEN + "Respawn Point set at "
-                        + ChatColor.DARK_GREEN + "[" + DbValues.getCurrentWorld(player.getLocation())
-                        + ", x: " + (int) player.getLocation().getX()
-                        + ", y: " + (int) player.getLocation().getY()
-                        + ", z: " + (int) player.getLocation().getZ() + "]"
-                        + HexColor.GREEN + ".");
-                player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤");
-                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
-            }
         }
     }
 
@@ -134,10 +135,10 @@ public class RespawnAnchor implements Listener {
 
         if (item.getItemMeta().getDisplayName().contains("Respawn Anchor")) {
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                    new ComponentBuilder("TP TO RESPAWN").color(ChatColor.DARK_PURPLE).bold(true)
+                    new ComponentBuilder("SET RESPAWN").color(ChatColor.YELLOW).bold(true)
                             .append(" (Left-Click)").color(ChatColor.GRAY).bold(false)
                             .append(" | ").color(ChatColor.DARK_GRAY)
-                            .append("SET RESPAWN").color(ChatColor.LIGHT_PURPLE).bold(true)
+                            .append("TP TO RESPAWN").color(ChatColor.YELLOW).bold(true)
                             .append(" (Right-Click)").color(ChatColor.GRAY).bold(false).create());
         }
     }
@@ -173,8 +174,8 @@ public class RespawnAnchor implements Listener {
                 ChatColor.GRAY + "or teleport to it.",
                 ChatColor.GRAY + "Costs " + ChatColor.WHITE + "5 ❤" + ChatColor.GRAY + ".",
                 "",
-                ChatColor.GRAY + "Left-Click: " + ChatColor.DARK_PURPLE + "Teleport to Respawn Point",
-                ChatColor.GRAY + "Right-Click: " + ChatColor.LIGHT_PURPLE + "Set Respawn Point"));
+                ChatColor.GRAY + "Left-Click: " + ChatColor.YELLOW + "Set Respawn Point at current location",
+                ChatColor.GRAY + "Right-Click: " + ChatColor.YELLOW + "Teleport to your Respawn Point"));
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

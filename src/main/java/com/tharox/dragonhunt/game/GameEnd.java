@@ -1,12 +1,12 @@
 package com.tharox.dragonhunt.game;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.players.CombatListener;
-import com.tharox.dragonhunt.players.EnderDragonDamageListener;
+import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
@@ -68,15 +68,20 @@ public class GameEnd {
             player.setGameMode(GameMode.SPECTATOR);
             player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 1);
 
-            EnderDragonDamageListener.timeLeft.remove(player.getUniqueId());
-            EnderDragonDamageListener.bossBars.remove(player.getUniqueId());
-            CombatListener.combatList.remove(player.getUniqueId());
-            CombatListener.bossBars.remove(player.getUniqueId());
+            if (PointsListener.scorePerPlayer.containsKey(player.getUniqueId())) {
+                PointsListener.scorePerPlayer.remove(player.getUniqueId());
+                PointsListener.bossBars.get(player.getUniqueId()).removePlayer(player);
+            }
+
+            if (CombatListener.combatList.containsKey(player.getUniqueId())) {
+                CombatListener.combatList.remove(player.getUniqueId());
+                CombatListener.bossBars.get(player.getUniqueId()).removePlayer(player);
+            }
 
             // no winner != null check because the else block still executes if the winner is null
             if (player == winner) {
                 player.sendTitle(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "YOU WON",
-                        HexColor.GREEN + "You defeated the Ender Dragon.", 10, 90, 20);
+                        HexColor.GREEN + "You scored " + PointsListener.threshold + " Points first", 10, 90, 20);
                 addWinnerAndXPLevel(player, true);
             } else {
                 player.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "YOU LOST",
@@ -85,7 +90,7 @@ public class GameEnd {
             }
 
             if (winner != null) {
-                player.sendMessage(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + winner.getName()
+                player.sendMessage(ChatColor.WHITE.toString() + ChatColor.BOLD + winner.getName()
                         + HexColor.GREEN + " has won the Dragonhunt.");
             } else {
                 player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "Time is up.");

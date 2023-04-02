@@ -1,8 +1,8 @@
 package com.tharox.dragonhunt.game;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.modifiers.classes.Heartbroken;
 import com.tharox.dragonhunt.respawn.RespawnAnchor;
 import org.bukkit.*;

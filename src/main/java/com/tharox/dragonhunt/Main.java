@@ -225,13 +225,13 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new DamageAdjustmentListener(), this);
         pluginManager.registerEvents(new ItemConsumeListener(), this);
         pluginManager.registerEvents(new PlayerDamageListener(), this);
-        pluginManager.registerEvents(new EnderDragonDamageListener(), this);
         pluginManager.registerEvents(new PlayerBedEnterListener(), this);
         pluginManager.registerEvents(new PlayerDeathListener(), this);
         pluginManager.registerEvents(new PlayerEndTeleport(), this);
         pluginManager.registerEvents(new PlayerInteractListener(), this);
         pluginManager.registerEvents(new PlayerInventoryListener(), this);
         pluginManager.registerEvents(new PlayerRespawnListener(), this);
+        pluginManager.registerEvents(new PointsListener(), this);
 
         pluginManager.registerEvents(tracker, this);
         pluginManager.registerEvents(respawn, this);

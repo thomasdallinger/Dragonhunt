@@ -1,10 +1,8 @@
 package com.tharox.dragonhunt.dimensions;
 
-import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.players.EnderDragonDamageListener;
+import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.respawn.RespawnAnchor;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -94,11 +92,14 @@ public class DimensionListener implements Listener {
         }
 
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.END_PORTAL) {
-            // 15 Second delay
-            Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
-                EnderDragonDamageListener.timeLeft.put(player.getUniqueId(), EnderDragonDamageListener.time);
-                EnderDragonDamageListener.bossBars.put(player.getUniqueId(), EnderDragonDamageListener.bossBar);
-            }, 300L);
+            // Check if the player has not been in The End yet.
+            if (!PointsListener.scorePerPlayer.containsKey(player.getUniqueId())) {
+                PointsListener.scorePerPlayer.put(player.getUniqueId(), 0);
+                PointsListener.bossBars.put(player.getUniqueId(), PointsListener.bossBar);
+                PointsListener.bossBars.get(player.getUniqueId()).addPlayer(player);
+                PointsListener.bossBars.get(player.getUniqueId()).setProgress(0);
+                PointsListener.bossBars.get(player.getUniqueId()).setVisible(true);
+            }
         }
     }
 }

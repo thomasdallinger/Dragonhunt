@@ -43,7 +43,7 @@ public class Demolitionist extends Kit {
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration * 20, 9));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20, 9));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, duration * 20, 100));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, duration * 20, 200));
 
         Location location = player.getLocation();
 

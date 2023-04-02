@@ -22,9 +22,6 @@ public class EntityDeathListener implements Listener {
         if (mob instanceof Player) return;
 
         if (killer != null) {
-            if (event.getEntity().getName().equals("Ender Dragon"))
-                new GameEnd(killer);
-
             if (mob instanceof Monster) {
                 Coins.addXP(killer, Coins.monsterXP);
             }

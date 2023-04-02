@@ -28,8 +28,8 @@ public class CombatListener implements Listener {
     public static HashMap<UUID, Integer> combatList = new HashMap<>();
     public static HashMap<UUID, BossBar> bossBars = new HashMap<>();
 
-    public static BossBar bossBar = Bukkit.createBossBar(ChatColor.YELLOW + "You are currently in Combat!",
-            BarColor.YELLOW, BarStyle.SEGMENTED_10);
+    public static BossBar bossBar = Bukkit.createBossBar(HexColor.RED + "You are currently in Combat!",
+            BarColor.RED, BarStyle.SEGMENTED_10);
 
     public CombatListener() {
         new BukkitRunnable() {
@@ -87,7 +87,9 @@ public class CombatListener implements Listener {
         combatList.put(damager.getUniqueId(), 30);
 
         bossBars.put(target.getUniqueId(), bossBar);
+        bossBars.get(target.getUniqueId()).addPlayer(target);
         bossBars.put(damager.getUniqueId(), bossBar);
+        bossBars.get(damager.getUniqueId()).addPlayer(damager);
 
     }
 
@@ -101,7 +103,7 @@ public class CombatListener implements Listener {
 
                 if (player.isDead()) {
                     temp.remove(id);
-                    bossBars.remove(id);
+                    bossBars.get(player.getUniqueId()).removePlayer(player);
                     continue;
                 }
 
@@ -112,7 +114,7 @@ public class CombatListener implements Listener {
                     bossBars.get(id).setProgress(timer / 31D);
                 } else {
                     temp.remove(id);
-                    bossBars.remove(id);
+                    bossBars.get(player.getUniqueId()).removePlayer(player);
 
                     player.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + "You are no longer in combat.");
                 }

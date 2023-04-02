@@ -12,6 +12,7 @@ import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
 import com.tharox.dragonhunt.modifiers.selection.ModifierInventory;
 import com.tharox.dragonhunt.movement.ElytraSwapRunnable;
 import com.tharox.dragonhunt.players.PlayerDamageListener;
+import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
@@ -134,11 +135,14 @@ public class GameStart extends GameConfiguration {
                 player.setGameMode(GameMode.SURVIVAL);
 
                 if (BonusHearts.active) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 2100, 2));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
+                            2100 * 20, 2));
                 }
 
-                player.sendMessage(ChatColor.GOLD.toString() + ChatColor.BOLD + "RACE TO VICTORY");
-                player.sendMessage(ChatColor.GOLD + "Whoever kills the Ender Dragon wins.");
+                player.sendMessage(ChatColor.WHITE.toString() + ChatColor.BOLD + ChatColor.ITALIC + "RACE TO VICTORY");
+                player.sendMessage(ChatColor.LIGHT_PURPLE + "Whoever reaches "
+                        + HexColor.HIGHLIGHT + PointsListener.threshold + " Points"
+                        + ChatColor.LIGHT_PURPLE + " first wins.");
                 player.sendMessage(ChatColor.YELLOW + "/pos [name]"
                         + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + "mark locations");
                 player.sendMessage(ChatColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "

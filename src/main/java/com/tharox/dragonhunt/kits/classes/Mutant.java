@@ -28,7 +28,7 @@ public class Mutant extends Kit {
             + ChatColor.GRAY + "You will be glowing while the ability is active.\n\n"
             + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " sec\n"
             + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
-    public static final Material material = Material.NETHER_STAR;
+    public static final Material material = Material.DIAMOND_CHESTPLATE;
     public static final int slot = 12;
 
     public Mutant(Player player) {

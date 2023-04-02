@@ -1,8 +1,8 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
-import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
@@ -94,8 +94,8 @@ public class AdvancementListener implements Listener {
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(Prefixes.getAdvancementPrefix()
                         + Prefixes.getXPPrefix(Coins.advancementXP) + ChatColor.WHITE + player.getName()
-                        + ChatColor.AQUA + " has made the advancement "
-                        + ChatColor.DARK_AQUA + advancementName + ChatColor.AQUA + " (#1).");
+                        + ChatColor.AQUA + " has made the advancement " + ChatColor.DARK_AQUA + advancementName
+                        + ChatColor.AQUA + " (#" + DbValues.getAdvancementRank(player, advancementName) + ").");
             }
         }
 

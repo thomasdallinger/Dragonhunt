@@ -123,6 +123,36 @@ public class DbValues {
         return amount[0];
     }
 
+    /**
+     * @return the rank of the player for the specific advancement
+     */
+    public static int getAdvancementRank(Player player, String advancementName) {
+        final String[] playerWhoMadeAdvancement = {""};
+        final int[] rank = new int[1];
+
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "SELECT Player FROM Advancements WHERE GameID = '" + getGameID() + "' "
+                    + "AND advancement = '" + advancementName + "' ORDER BY id ASC";
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            int columns = rs.getMetaData().getColumnCount();
+
+            while (rs.next()) {
+                for (int i = 1; i <= columns; i++) {
+                    playerWhoMadeAdvancement[0] = rs.getString(i);
+                    if (playerWhoMadeAdvancement[0].equals(player.getName())) {
+                        rank[0] = i;
+                    }
+                }
+            }
+            rs.close();
+            stmt.close();
+        });
+
+        return rank[0];
+    }
+
     public static String getTimestamp() {
         Timer timer = Main.getInstance().getTimer();
         String minutes = "";

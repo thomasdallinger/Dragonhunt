@@ -141,8 +141,10 @@ public class DbValues {
             while (rs.next()) {
                 for (int i = 1; i <= columns; i++) {
                     playerWhoMadeAdvancement[0] = rs.getString(i);
+
                     if (playerWhoMadeAdvancement[0].equals(player.getName())) {
                         rank[0] = i;
+                        break;
                     }
                 }
             }

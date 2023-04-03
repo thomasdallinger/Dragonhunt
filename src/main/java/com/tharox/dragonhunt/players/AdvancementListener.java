@@ -51,7 +51,7 @@ public class AdvancementListener implements Listener {
                 advancementName = "Find Bastion";
                 break;
             case "minecraft:story/enter_the_end":
-                advancementName = "Enter End";
+                advancementName = "Enter The End";
 
                 if (!GameState.playersReachedEnd) {
                     GameState.playersReachedEnd = true;
@@ -68,10 +68,9 @@ public class AdvancementListener implements Listener {
                 break;
         }
 
-        if (advancementName.equals("")) {
-            return;
-        } else {
+        if (!advancementName.equals("")) {
             Coins.addXP(player, Coins.advancementXP);
+            addAdvancement(player, advancementName);
 
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(Prefixes.getAdvancementPrefix()
@@ -80,8 +79,6 @@ public class AdvancementListener implements Listener {
                         + ChatColor.AQUA + " (#" + DbValues.getAdvancementRank(player, advancementName) + ").");
             }
         }
-
-        addAdvancement(player, advancementName);
     }
 
     public void addBonusXP(Player player, String dimension) {

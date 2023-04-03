@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.modifiers.classes;
 
 import org.bukkit.Material;
 
+@DragonhuntModifier
 public class BrutalBrutes extends Modifier {
     public static String title = "Brutal Brutes";
     public static String lore = "Piglin Brutes have enchanted Netherite Axes.";

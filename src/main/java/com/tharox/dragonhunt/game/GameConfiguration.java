@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.modifiers.classes.Heartbroken;
+import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.respawn.RespawnAnchor;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
@@ -81,6 +82,9 @@ public class GameConfiguration {
         for (Player player : Bukkit.getOnlinePlayers()) {
             // non of the players has selected a kit yet
             GameState.kitInventoryClose.put(player, false);
+
+            // give the player a score of 0
+            PointsListener.scorePerPlayer.put(player.getUniqueId(), 0);
 
             // removes all active potion effects players may have
             for (PotionEffect effect : player.getActivePotionEffects())

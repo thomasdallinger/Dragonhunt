@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.arrows;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.brewing.Effects;
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.modifiers.classes.EnhancedArrowEffects;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -94,8 +95,8 @@ public class Arrows {
         meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Generated Arrow");
         meta.setLore(Arrays.asList(
                 "",
-                ChatColor.GRAY + "Effect duration: " + ChatColor.YELLOW + (duration / 20) + " sec",
-                ChatColor.GRAY + "Effect level: " + ChatColor.YELLOW + (amplifier + 1)
+                ChatColor.GRAY + "Duration: " + ChatColor.WHITE + (duration / 20) + " seconds",
+                ChatColor.GRAY + "Level: " + ChatColor.WHITE + (amplifier + 1)
         ));
         item.setItemMeta(meta);
 

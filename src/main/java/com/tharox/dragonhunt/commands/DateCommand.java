@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.commands;
 
+import com.tharox.dragonhunt.chat.HexColor;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,7 +20,7 @@ public class DateCommand implements CommandExecutor {
         } else return false;
 
         Date date = new Date();
-        player.sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.YELLOW + ChatColor.BOLD + "DATE"
+        player.sendMessage(ChatColor.DARK_GRAY + "[" + HexColor.YELLOW + ChatColor.BOLD + "DATE"
                 + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + date.toString());
 
         return true;

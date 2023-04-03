@@ -9,6 +9,7 @@ import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
@@ -122,18 +123,20 @@ public abstract class Kit implements Listener {
             // Check if on Cooldown
             if (cooldownEnds > timer.getTime()) {
                 timeLeft = cooldownEnds - timer.getTime();
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(ChatColor.DARK_RED.toString()
-                        + ChatColor.BOLD + "COOLDOWN: " + ChatColor.WHITE + timeLeft + " sec"));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                        new ComponentBuilder("COOLDOWN").color(HexColor.RED).bold(true)
+                                .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                .append(timeLeft + " seconds").color(ChatColor.GRAY).create());
                 return;
             }
 
             // Otherwise Ability is ready to use
             if (timer.getTime() % 2 == 0)
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
-                        ChatColor.GOLD.toString() + ChatColor.BOLD + "ABILITY READY"));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                        new ComponentBuilder("ABILITY READY").color(HexColor.YELLOW).bold(true).create());
             else
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
-                        ChatColor.WHITE.toString() + ChatColor.BOLD + "ABILITY READY"));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                        new ComponentBuilder("ABILITY READY").color(ChatColor.WHITE).bold(true).create());
         }
     }
 
@@ -176,9 +179,10 @@ public abstract class Kit implements Listener {
                 }
 
                 // Displaying the duration left in the action bar
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
-                        ChatColor.GOLD.toString() + ChatColor.BOLD + String.format("%1.1f", durationLeft)
-                                + ChatColor.YELLOW + ChatColor.BOLD + " SECONDS LEFT"));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                        new ComponentBuilder("DURATION").color(HexColor.YELLOW).bold(true)
+                                .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                .append(String.format("%1.1f", durationLeft) + " seconds").color(ChatColor.GRAY).create());
 
                 durationLeft = durationLeft - (double) ticks / 20;
             }

@@ -21,7 +21,7 @@ public class Grappler extends Kit {
             + ChatColor.GRAY + "Arrows shot cannot do damage.\n"
             + ChatColor.GRAY + "Be aware of fall damage.\n\n"
             + ChatColor.GRAY + "Max. Arrow Distance: " + ChatColor.WHITE + GrappleListener.maxArrowDistance + " Blocks\n"
-            + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
+            + ChatColor.GRAY + "Cooldown: " + ChatColor.WHITE + cooldown + " seconds\n";
     public static final Material material = Material.CROSSBOW;
     public static final int slot = 29;
 

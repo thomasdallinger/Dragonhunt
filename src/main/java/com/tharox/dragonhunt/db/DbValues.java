@@ -169,6 +169,19 @@ public class DbValues {
         return minutes + ":" + seconds;
     }
 
+    public static String getTime(int time) {
+        String minutes = "";
+        String seconds = "";
+        if ((time / 60) % 60 < 10)
+            minutes = "0";
+        minutes += (time / 60) % 60;
+        if (time % 60 < 10)
+            seconds = "0";
+        seconds += time % 60;
+
+        return minutes + ":" + seconds;
+    }
+
     public static String getCurrentWorld(Location location) {
         String currentWorld = "Unknown";
 

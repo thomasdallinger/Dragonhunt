@@ -93,8 +93,7 @@ public class DimensionListener implements Listener {
 
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.END_PORTAL) {
             // Check if the player has not been in The End yet.
-            if (!PointsListener.scorePerPlayer.containsKey(player.getUniqueId())) {
-                PointsListener.scorePerPlayer.put(player.getUniqueId(), 0);
+            if (!PointsListener.bossBars.containsKey(player.getUniqueId())) {
                 PointsListener.bossBars.put(player.getUniqueId(), PointsListener.bossBar);
                 PointsListener.bossBars.get(player.getUniqueId()).addPlayer(player);
                 PointsListener.bossBars.get(player.getUniqueId()).setProgress(0);

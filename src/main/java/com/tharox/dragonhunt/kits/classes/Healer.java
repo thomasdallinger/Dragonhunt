@@ -20,7 +20,7 @@ public class Healer extends Kit {
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "On activation you get " + ChatColor.WHITE + heartsToAdd + " ❤"
             + ChatColor.GRAY + ".\n\n"
-            + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
+            + ChatColor.GRAY + "Cooldown: " + ChatColor.WHITE + cooldown + " seconds\n";
     public static final Material material = Material.POTION;
     public static final int slot = 20;
 

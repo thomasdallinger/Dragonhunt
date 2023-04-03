@@ -53,7 +53,7 @@ public class TopCommand implements CommandExecutor {
         player.teleport(new Location(world, x, world.getHighestBlockYAt((int) x, (int) z) + 1, z));
 
         player.sendMessage(HexColor.GREEN + "Teleported to the surface.");
-        player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤");
+        player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤ Penalty");
 
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);

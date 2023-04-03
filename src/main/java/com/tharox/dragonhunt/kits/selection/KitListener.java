@@ -68,6 +68,7 @@ public class KitListener implements Listener {
                 + HexColor.HIGHLIGHT + name + ChatColor.GRAY + " Kit.");
 
         GameState.selectedKit.put(player, (String) kitClass.getField("title").get(null));
+        GameState.kitAbilityActive.put(player, false);
         GameState.kitInventoryClose.put(player, true);
         player.closeInventory();
     }

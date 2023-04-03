@@ -51,7 +51,7 @@ public class ResetScoreboardCountdown {
                         Coins.XPIncrease = 0; // reset
 
                         for (Player player : Bukkit.getOnlinePlayers()) {
-                            player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.RED
+                            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED
                                     + "XP increase has ended.");
                         }
                     }

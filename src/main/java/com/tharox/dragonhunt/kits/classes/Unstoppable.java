@@ -21,8 +21,8 @@ public class Unstoppable extends Kit {
             + ChatColor.GRAY + "On activation you become " + ChatColor.WHITE + "invulnerable\n"
             + ChatColor.GRAY + "to all incoming damage.\n"
             + ChatColor.GRAY + "You will be glowing while the ability is active.\n\n"
-            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " sec\n"
-            + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
+            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " seconds\n"
+            + ChatColor.GRAY + "Cooldown: " + ChatColor.WHITE + cooldown + " seconds\n";
     public static final Material material = Material.BEDROCK;
     public static final int slot = 11;
 

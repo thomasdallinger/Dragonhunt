@@ -69,7 +69,7 @@ public class GameStart extends GameConfiguration {
             scoreboardCountdown.setRunning(true);
 
             gracePeriodCountdown = new Countdown(true, GameState.gracePeriodTime, this::onGracePeriodCountdown);
-            bossBar = Bukkit.createBossBar("", BarColor.GREEN, BarStyle.SEGMENTED_10);
+            bossBar = Bukkit.createBossBar("", BarColor.YELLOW, BarStyle.SEGMENTED_10);
             PlayerDamageListener.gracePeriodActive = true;
 
             new Arrows(); // start arrow generation
@@ -143,9 +143,9 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(ChatColor.LIGHT_PURPLE + "Whoever reaches "
                         + HexColor.HIGHLIGHT + PointsListener.threshold + " Points"
                         + ChatColor.LIGHT_PURPLE + " first wins.");
-                player.sendMessage(ChatColor.YELLOW + "/pos [name]"
+                player.sendMessage(HexColor.YELLOW + "/pos [name]"
                         + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + "mark locations");
-                player.sendMessage(ChatColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
+                player.sendMessage(HexColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "get to the surface quickly");
             }
         }
@@ -158,8 +158,8 @@ public class GameStart extends GameConfiguration {
      * @param time time of the countdown
      */
     public void onGracePeriodCountdown(int time) {
-        bossBar.setTitle(HexColor.GREEN + "Grace Period ends in " + ChatColor.DARK_GREEN
-                + ChatColor.BOLD + gracePeriodCountdown.getTime() + HexColor.GREEN + " seconds");
+        bossBar.setTitle(ChatColor.WHITE + "Grace Period ends in " + HexColor.YELLOW
+                + ChatColor.BOLD + gracePeriodCountdown.getTime() + ChatColor.WHITE + " seconds");
         bossBar.setProgress(time / 31D);
         bossBar.setVisible(true);
 
@@ -176,7 +176,7 @@ public class GameStart extends GameConfiguration {
                     (gracePeriodCountdown.getTime() <= 5 && gracePeriodCountdown.getTime() > 0)) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
                 player.sendMessage(ChatColor.GRAY + "The Grace Period ends in "
-                        + HexColor.GREEN + gracePeriodCountdown.getTime() + ChatColor.GRAY + " seconds.");
+                        + HexColor.YELLOW + gracePeriodCountdown.getTime() + ChatColor.GRAY + " seconds.");
             }
 
             if (gracePeriodCountdown.getTime() == 0) {

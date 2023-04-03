@@ -24,8 +24,8 @@ public class Demolitionist extends Kit {
             + ChatColor.WHITE + "TNT" + ChatColor.GRAY + " will spawn around you.\n"
             + ChatColor.GRAY + "You cannot take any damage from the explosion.\n"
             + ChatColor.GRAY + "You cannot move while the explosion occurs.\n\n"
-            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " sec\n"
-            + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
+            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " seconds\n"
+            + ChatColor.GRAY + "Cooldown: " + ChatColor.WHITE + cooldown + " seconds\n";
     public static final Material material = Material.TNT;
     public static final int slot = 3;
 

@@ -23,8 +23,8 @@ public class Vanisher extends Kit {
             + ChatColor.GRAY + " and " + ChatColor.WHITE + "Invisibility" + ChatColor.GRAY + ".\n"
             + ChatColor.GRAY + "You cannot take any damage and your inventory\n"
             + ChatColor.GRAY + "will disappear while your ability is active.\n\n"
-            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " sec\n"
-            + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
+            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " seconds\n"
+            + ChatColor.GRAY + "Cooldown: " + ChatColor.WHITE + cooldown + " seconds\n";
     public static final Material material = Material.ENDER_PEARL;
     public static final int slot = 2;
 

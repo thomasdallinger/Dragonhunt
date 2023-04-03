@@ -24,8 +24,8 @@ public class Platformer extends Kit {
             + ChatColor.GRAY + "making it possible to walk everywhere. \n"
             + ChatColor.GRAY + "You can go up, down and through walls. \n"
             + ChatColor.GRAY + "You will be glowing while the ability is active.\n\n"
-            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " sec\n"
-            + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
+            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " seconds\n"
+            + ChatColor.GRAY + "Cooldown: " + ChatColor.WHITE + cooldown + " seconds\n";
     public static final Material material = Material.PINK_STAINED_GLASS;
     public static final int slot = 30;
 

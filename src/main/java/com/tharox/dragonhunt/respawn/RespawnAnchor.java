@@ -77,7 +77,7 @@ public class RespawnAnchor implements Listener {
                         + ", y: " + (int) player.getLocation().getY()
                         + ", z: " + (int) player.getLocation().getZ() + "]"
                         + HexColor.GREEN + ".");
-                player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤");
+                player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤ Penalty");
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
             }
@@ -120,7 +120,7 @@ public class RespawnAnchor implements Listener {
 
                 player.setHealth(player.getHealth() - 10.0);
                 player.sendMessage(HexColor.GREEN + "Teleported to your Respawn Point.");
-                player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤");
+                player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤ Penalty");
                 player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
                 player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
             }
@@ -135,10 +135,10 @@ public class RespawnAnchor implements Listener {
 
         if (item.getItemMeta().getDisplayName().contains("Respawn Anchor")) {
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                    new ComponentBuilder("SET RESPAWN").color(ChatColor.YELLOW).bold(true)
+                    new ComponentBuilder("SET RESPAWN").color(HexColor.YELLOW).bold(true)
                             .append(" (Left-Click)").color(ChatColor.GRAY).bold(false)
                             .append(" | ").color(ChatColor.DARK_GRAY)
-                            .append("TP TO RESPAWN").color(ChatColor.YELLOW).bold(true)
+                            .append("TP TO RESPAWN").color(HexColor.YELLOW).bold(true)
                             .append(" (Right-Click)").color(ChatColor.GRAY).bold(false).create());
         }
     }
@@ -171,11 +171,12 @@ public class RespawnAnchor implements Listener {
         meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Respawn Anchor");
         meta.setLore(Arrays.asList(
                 ChatColor.GRAY + "Set a new respawn point",
+                ChatColor.GRAY + "at your current location",
                 ChatColor.GRAY + "or teleport to it.",
                 ChatColor.GRAY + "Costs " + ChatColor.WHITE + "5 ❤" + ChatColor.GRAY + ".",
                 "",
-                ChatColor.GRAY + "Left-Click: " + ChatColor.YELLOW + "Set Respawn Point at current location",
-                ChatColor.GRAY + "Right-Click: " + ChatColor.YELLOW + "Teleport to your Respawn Point"));
+                ChatColor.GRAY + "Left-Click: " + HexColor.YELLOW + "Set Respawn Point",
+                ChatColor.GRAY + "Right-Click: " + HexColor.YELLOW + "TP to Respawn Point"));
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

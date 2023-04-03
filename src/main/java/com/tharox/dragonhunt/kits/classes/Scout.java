@@ -19,8 +19,8 @@ public class Scout extends Kit {
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "On activation you will be put in "
             + ChatColor.WHITE + "Spectator Mode" + ChatColor.GRAY + ".\n\n"
-            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " sec\n"
-            + ChatColor.GRAY + "Cooldown: " + HexColor.RED + cooldown + " sec\n";
+            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " seconds\n"
+            + ChatColor.GRAY + "Cooldown: " + ChatColor.WHITE + cooldown + " seconds\n";
     public static final Material material = Material.ENDER_EYE;
     public static final int slot = 21;
 

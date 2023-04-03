@@ -97,7 +97,7 @@ public class GameEnd {
             }
 
             player.sendMessage(ChatColor.GRAY + "Time played: "
-                    + ChatColor.YELLOW + DbValues.getTimestamp());
+                    + HexColor.YELLOW + DbValues.getTimestamp());
             //TODO: Game Stats messages?
         }
     }

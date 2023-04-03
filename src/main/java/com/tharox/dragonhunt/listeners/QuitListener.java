@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.listeners;
 
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatColor;
@@ -24,7 +25,7 @@ public class QuitListener implements Listener {
         }
 
         for (Player p : Bukkit.getOnlinePlayers()) {
-            p.sendMessage(Prefixes.getLeavePrefix() + ChatColor.YELLOW
+            p.sendMessage(Prefixes.getLeavePrefix() + HexColor.RED
                     + (Bukkit.getOnlinePlayers().size() - 1) + ChatColor.GRAY + " player(s) remaining.");
             // - 1 because the player that left is still included in the OnlinePlayers list at that time
         }

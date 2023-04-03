@@ -70,14 +70,17 @@ public class Timer {
 
             // display the time
             // if the last 10 minutes have arrived, the time will get displayed in red
-            ChatColor color = ChatColor.GOLD;
+            ChatColor color = HexColor.YELLOW;
 
             if (getTime() >= 1500) {
                 color = HexColor.RED;
             }
 
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                    new ComponentBuilder(DbValues.getTimestamp()).color(color).bold(true).create());
+                    new ComponentBuilder(DbValues.getTimestamp()).color(color).bold(true)
+                            .append(" (").color(ChatColor.GRAY).bold(false)
+                            .append(DbValues.getTime(2100 - getTime())).color(ChatColor.GRAY)
+                            .append(")").color(ChatColor.GRAY).create());
         }
     }
 
@@ -92,7 +95,7 @@ public class Timer {
                 if (getTime() % 300 == 0) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.GRAY + "The game ends in "
-                                + ChatColor.YELLOW + (2100 / 60 - getTime() / 60) + ChatColor.GRAY + " minutes.");
+                                + HexColor.YELLOW + (2100 / 60 - getTime() / 60) + ChatColor.GRAY + " minutes.");
                     }
                 }
 

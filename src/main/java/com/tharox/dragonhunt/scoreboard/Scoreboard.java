@@ -1,12 +1,12 @@
 package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.players.PlayerEndTeleport;
+import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
@@ -16,6 +16,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class Scoreboard extends ScoreboardBuilder {
     Timer timer = Main.getInstance().getTimer();
@@ -32,8 +33,9 @@ public class Scoreboard extends ScoreboardBuilder {
         LocalDateTime now = LocalDateTime.now();
 
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
-                + DbValues.getServerID() + "]", 10);
-        setScore(ChatColor.WHITE + "12x1" + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE + "Casual", 9);
+                + DbValues.getServerID() + "]", 11);
+        setScore(ChatColor.WHITE + "12x1" + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE + "Casual", 10);
+        setScore("", 9);
         setScore("", 8);
         setScore("", 7);
         setScore("", 6);
@@ -48,38 +50,53 @@ public class Scoreboard extends ScoreboardBuilder {
     @Override
     public void update(Player player, Countdown countdown) {
         if (GameState.selectedKit.containsKey(player)) {
-            setScore(GameState.selectedKit.get(player), 7);
+            setScore(GameState.selectedKit.get(player), 8);
         }
 
         setScore("☻ " + Bukkit.getOnlinePlayers().size() + " "
                 + "☠ " + DbValues.getKills(player, true) + " "
-                + "✟ " + DbValues.getKills(player, false), 6);
-
-        if (timer.getTime() <= 1200) {
-            setScore(ChatColor.WHITE + "✮ " + ChatColor.DARK_PURPLE + PlayerEndTeleport.getEyesNeeded()
-                    + ChatColor.DARK_GRAY + " » "
-                    + ChatColor.WHITE + countdownFormat(1500 - timer.getTime()), 4);
-        } else {
-            setScore(ChatColor.WHITE + "✮ " + ChatColor.DARK_PURPLE + PlayerEndTeleport.getEyesNeeded(),
-                    4);
-        }
+                + "✟ " + DbValues.getKills(player, false), 7);
 
         if (Coins.XPIncrease == 0) {
             setScore(ChatColor.WHITE + "⛃ " + HexColor.HIGHLIGHT + Coins.getCoins(player)
-                    + ChatColor.DARK_GRAY + " » " + ChatColor.WHITE + countdownFormat(countdown.getTime()), 3);
+                    + ChatColor.DARK_GRAY + " » " + ChatColor.WHITE + countdownFormat(countdown.getTime()), 5);
         } else { // XP Increase is active
             setScore(ChatColor.WHITE + "⛃ " + HexColor.HIGHLIGHT + Coins.getCoins(player)
                     + ChatColor.DARK_GRAY + " » " + HexColor.GREEN + countdownFormat(countdown.getTime())
-                    + ChatColor.DARK_GREEN + " +" + Coins.XPIncrease, 3);
+                    + ChatColor.DARK_GREEN + " +" + Coins.XPIncrease, 5);
         }
 
-        if (player.getWorld().getName().equals("world_nether")) {
-            setScore(ChatColor.WHITE + "♦ " + ChatColor.DARK_GRAY + EntityDropListener.nextDrop, 2);
-        } else {
-            setScore("", 2);
+        List<UUID> sortedKeys = sortPlayersByPoints(PointsListener.scorePerPlayer);
+        boolean containsPlayer = false;
+        int rankOfPlayer = 1;
+
+        for (int index = 0; index < sortedKeys.size(); index++) {
+            Player p = Bukkit.getPlayer(sortedKeys.get(index));
+            if (p == null) continue;
+
+            if (index < 3) {
+                if (p == player) {
+                    containsPlayer = true;
+                    setScore(ChatColor.GRAY + "#" + (index + 1) + " "
+                            + ChatColor.DARK_AQUA + p.getName() + " "
+                            + ChatColor.AQUA + PointsListener.scorePerPlayer.get(p.getUniqueId()), 3 - index);
+                } else {
+                    setScore(ChatColor.GRAY + "#" + (index + 1) + " "
+                            + ChatColor.WHITE + p.getName() + " "
+                            + ChatColor.AQUA + PointsListener.scorePerPlayer.get(p.getUniqueId()), 3 - index);
+                }
+            }
+            // Player is not in the top 3
+            else {
+                if (p == player) rankOfPlayer = index;
+            }
         }
 
-        setScore(ChatColor.GOLD + "ᴘʟᴀʏᴅʀᴀɢᴏɴʜᴜɴᴛ", 0);
+        if (!containsPlayer) {
+            setScore(ChatColor.GRAY + "#" + rankOfPlayer + " "
+                    + ChatColor.DARK_AQUA + player.getName() + " "
+                    + ChatColor.AQUA + PointsListener.scorePerPlayer.get(player.getUniqueId()), 0);
+        }
     }
 
     private void run(Player player, Countdown countdown) {
@@ -103,5 +120,24 @@ public class Scoreboard extends ScoreboardBuilder {
         seconds += time % 60;
 
         return minutes + ":" + seconds;
+    }
+
+    private List<UUID> sortPlayersByPoints(HashMap<UUID, Integer> map) {
+        // Create a list of Map.Entry objects from the HashMap
+        List<Map.Entry<UUID, Integer>> list = new ArrayList<>(map.entrySet());
+
+        // Sort the list using a custom Comparator
+        list.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
+
+        // Create a new ArrayList to store the sorted keys
+        List<UUID> sortedKeys = new ArrayList<>();
+
+        // Add the sorted keys to the ArrayList
+        for (Map.Entry<UUID, Integer> entry : list) {
+            sortedKeys.add(entry.getKey());
+        }
+
+        // Return the sorted keys
+        return sortedKeys;
     }
 }

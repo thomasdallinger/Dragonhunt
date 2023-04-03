@@ -1,8 +1,8 @@
 package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
@@ -114,6 +114,12 @@ public abstract class Kit implements Listener {
                 || item.getItemMeta().getDisplayName().contains(KitClass.TANK)
                 || item.getItemMeta().getDisplayName().contains(KitClass.SUPPORT)
                 || item.getItemMeta().getDisplayName().contains(KitClass.MOBILITY)) {
+
+            // Kit ability is active - time left is being displayed
+            if (kitAbilityActive) {
+                return;
+            }
+
             // Check if on Cooldown
             if (cooldownEnds > timer.getTime()) {
                 timeLeft = cooldownEnds - timer.getTime();
@@ -122,10 +128,7 @@ public abstract class Kit implements Listener {
                 return;
             }
 
-            if (kitAbilityActive) { // Kit ability is active - time left is being displayed
-                return;
-            }
-
+            // Otherwise Ability is ready to use
             if (timer.getTime() % 2 == 0)
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
                         ChatColor.GOLD.toString() + ChatColor.BOLD + "ABILITY READY"));

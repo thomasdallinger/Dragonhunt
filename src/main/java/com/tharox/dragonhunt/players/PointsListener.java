@@ -29,7 +29,7 @@ public class PointsListener implements Listener {
     public static HashMap<UUID, BossBar> bossBars = new HashMap<>();
 
     public static BossBar bossBar = Bukkit.createBossBar(ChatColor.AQUA + "0 / " + threshold + " Points",
-            BarColor.BLUE, BarStyle.SEGMENTED_10);
+            BarColor.BLUE, BarStyle.SOLID);
 
     /**
      * Target: Ender Dragon, Ender Crystal
@@ -64,12 +64,12 @@ public class PointsListener implements Listener {
             scorePerPlayer.put(id, scorePerPlayer.get(id) + damage);
 
             // Ender Dragon never looses health.
-            EnderDragon dragon = ((EnderDragon) target);
+            EnderDragon dragon = (EnderDragon) target;
             double maxHealth = Objects.requireNonNull(
                     dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
             dragon.setHealth(maxHealth);
         } else {
-            scorePerPlayer.put(id, scorePerPlayer.get(id) + 10);
+            scorePerPlayer.put(id, scorePerPlayer.get(id) + 7);
         }
 
         if (scorePerPlayer.get(id) >= threshold) {

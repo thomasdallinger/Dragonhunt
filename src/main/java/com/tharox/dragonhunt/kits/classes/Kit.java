@@ -38,7 +38,6 @@ public abstract class Kit implements Listener {
 
     Timer timer = Main.getInstance().getTimer();
     int cooldownEnds;
-    private boolean kitAbilityActive = false;
 
     public Kit(Player player) {
         this.player = player;
@@ -86,7 +85,7 @@ public abstract class Kit implements Listener {
 
                 executeAbility();
                 addKitAbilityUsageToDB(player);
-                kitAbilityActive = true;
+                GameState.kitAbilityActive.put(player, true);
                 setCooldownEnds();
             }
         }
@@ -116,7 +115,7 @@ public abstract class Kit implements Listener {
                 || item.getItemMeta().getDisplayName().contains(KitClass.MOBILITY)) {
 
             // Kit ability is active - time left is being displayed
-            if (kitAbilityActive) {
+            if (GameState.kitAbilityActive.get(player)) {
                 return;
             }
 
@@ -166,8 +165,7 @@ public abstract class Kit implements Listener {
                 }
 
                 if (durationLeft <= 0) {
-                    kitAbilityActive = false;
-                    GameState.actionBarNeededForKitAbility.put(player, false);
+                    GameState.kitAbilityActive.put(player, false);
 
                     if (executor != null) {
                         executor.execute();

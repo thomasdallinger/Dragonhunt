@@ -63,8 +63,8 @@ public class Timer {
                         && !item.getItemMeta().getDisplayName().contains("Grappler"))
                     continue;
 
-                if (GameState.actionBarNeededForKitAbility.containsKey(player)) {
-                    if (GameState.actionBarNeededForKitAbility.get(player)) continue;
+                if (GameState.kitAbilityActive.containsKey(player)) {
+                    if (GameState.kitAbilityActive.get(player)) continue;
                 }
             }
 

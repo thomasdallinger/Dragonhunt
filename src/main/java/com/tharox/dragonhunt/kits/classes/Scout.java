@@ -32,7 +32,7 @@ public class Scout extends Kit {
 
     @Override
     public void executeAbility() {
-        GameState.actionBarNeededForKitAbility.put(player, true);
+        GameState.kitAbilityActive.put(player, true);
         new Spectate(player);
         player.sendMessage(title + ChatColor.GRAY + " Kit Ability is active.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);

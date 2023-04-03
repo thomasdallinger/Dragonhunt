@@ -36,7 +36,6 @@ public class Vanisher extends Kit {
 
     @Override
     public void executeAbility() {
-        GameState.actionBarNeededForKitAbility.put(player, true);
         player.sendMessage(title + ChatColor.GRAY + " Kit Ability is active.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 

@@ -28,7 +28,7 @@ public class CombatListener implements Listener {
     public static HashMap<UUID, Integer> combatList = new HashMap<>();
     public static HashMap<UUID, BossBar> bossBars = new HashMap<>();
 
-    public static BossBar bossBar = Bukkit.createBossBar(HexColor.RED + "You are currently in Combat!",
+    public static BossBar bossBar = Bukkit.createBossBar(ChatColor.WHITE + "You are currently in Combat!",
             BarColor.RED, BarStyle.SEGMENTED_10);
 
     public CombatListener() {
@@ -74,7 +74,7 @@ public class CombatListener implements Listener {
         if (Main.getInstance().getTimer().getTime() < GameState.gracePeriodTime) return;
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "INSERT INTO InCombat (GameID, Target, Damager, timestamp) " +
+            String query = "INSERT INTO in_combat (game_id, target, damager, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + target.getName() + "', '"
                     + damager.getName() + "', '" + DbValues.getTimestamp() + "')";
 
@@ -111,6 +111,8 @@ public class CombatListener implements Listener {
 
                 if (timer > 0) {
                     temp.put(id, timer);
+                    bossBars.get(id).setTitle(ChatColor.WHITE + "In Combat for "
+                            + HexColor.RED + ChatColor.BOLD + combatList.get(id) + ChatColor.WHITE + " seconds");
                     bossBars.get(id).setProgress(timer / 31D);
                 } else {
                     temp.remove(id);

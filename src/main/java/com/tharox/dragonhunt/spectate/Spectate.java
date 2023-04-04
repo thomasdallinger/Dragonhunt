@@ -1,10 +1,12 @@
 package com.tharox.dragonhunt.spectate;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.Kit;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -48,9 +50,11 @@ public class Spectate {
                     cancel();
                 }
 
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
-                        ChatColor.GOLD.toString() + ChatColor.BOLD + String.format("%1.1f", timeLeft)
-                                + ChatColor.YELLOW + ChatColor.BOLD + " SECONDS LEFT"));
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                        new ComponentBuilder("DURATION").color(HexColor.YELLOW).bold(true)
+                                .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                .append(String.format("%1.1f", timeLeft) + " seconds").color(ChatColor.GRAY)
+                                .create());
 
                 if (timeLeft % 1 == 0) {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);

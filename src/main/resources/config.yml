@@ -132,21 +132,21 @@ enchanting:
     slot: 7
     name: "Thorns I"
     cost: 5
-    lore: "Reflects damage at the cost of durability. Chance: 15%"
+    lore: "Reflects damage (15% Chance)."
   19:
     material: CHAINMAIL_CHESTPLATE
     amount: 2
     slot: 16
     name: "Thorns II"
     cost: 10
-    lore: "Reflects damage at the cost of durability. Chance: 30%"
+    lore: "Reflects damage (30% Chance)."
   20:
     material: CHAINMAIL_CHESTPLATE
     amount: 3
     slot: 25
     name: "Thorns III"
     cost: 15
-    lore: "Reflects damage at the cost of durability. Chance: 45%"
+    lore: "Reflects damage (45% Chance)."
   21:
     material: NETHERITE_BOOTS
     amount: 1

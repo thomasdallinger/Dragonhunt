@@ -19,8 +19,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 public class GameState {
     public static int gracePeriodTime = 30;
@@ -45,6 +44,28 @@ public class GameState {
 
     // location of the END spawn platform (always has the same coordinates)
     public static Location endPlatform = new Location(Bukkit.getWorld("world_the_end"), 100, 50, 0);
+
+    /**
+     * @return a list of UUIDs ordered by the points each player has descending
+     */
+    public static List<UUID> sortPlayersByPoints(HashMap<UUID, Integer> map) {
+        // Create a list of Map.Entry objects from the HashMap
+        List<Map.Entry<UUID, Integer>> list = new ArrayList<>(map.entrySet());
+
+        // Sort the list using a custom Comparator
+        list.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
+
+        // Create a new ArrayList to store the sorted keys
+        List<UUID> sortedKeys = new ArrayList<>();
+
+        // Add the sorted keys to the ArrayList
+        for (Map.Entry<UUID, Integer> entry : list) {
+            sortedKeys.add(entry.getKey());
+        }
+
+        // Return the sorted keys
+        return sortedKeys;
+    }
 
     /**
      * @return a list that contains chest and minecart loot

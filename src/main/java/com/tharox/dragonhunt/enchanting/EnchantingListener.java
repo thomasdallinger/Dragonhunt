@@ -23,7 +23,7 @@ public class EnchantingListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
 
-        if (!event.getView().getTitle().contains("Enchant"))
+        if (!event.getView().getTitle().contains("ENCHANTING"))
             return;
         event.setCancelled(true);
 
@@ -45,7 +45,7 @@ public class EnchantingListener implements Listener {
         // ERROR: enchantment already bought
         if (enchantment.contains("ᴜɴʟᴏᴄᴋᴇᴅ")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + "You have already bought this enchantment!");
+            player.sendMessage(Prefixes.getErrorPrefix() + "You have already purchased this enchantment!");
             return;
         }
 
@@ -94,12 +94,12 @@ public class EnchantingListener implements Listener {
      */
     private void purchaseEnchantment(Player player, String enchantment) {
         player.playSound(player.getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1, 1);
-        Coins.removeCoins(player, EnchantingInventory.enchantmentCost.get(enchantment), enchantment);
+        Coins.removeCoins(player, EnchantingInventory.enchantmentCost.get(enchantment));
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            // Substring 4 from enchantment to remove formatting
-            String query = "INSERT INTO Purchases (GameID, Player, purchasedObject, coinsBefore, cost, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + enchantment.substring(4)
+            // Substring 16 from enchantment to remove formatting
+            String query = "INSERT INTO purchases (game_id, player, purchased_item, coins_before, cost, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + enchantment.substring(16)
                     + "', '" + (Coins.getCoins(player) + EnchantingInventory.enchantmentCost.get(enchantment))
                     + "', '" + EnchantingInventory.enchantmentCost.get(enchantment)
                     + "', '" + DbValues.getTimestamp() + "')";

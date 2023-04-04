@@ -72,14 +72,14 @@ public class Timer {
             // if the last 10 minutes have arrived, the time will get displayed in red
             ChatColor color = HexColor.YELLOW;
 
-            if (getTime() >= 1500) {
+            if (getTime() >= 1200) {
                 color = HexColor.RED;
             }
 
             player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
                     new ComponentBuilder(DbValues.getTimestamp()).color(color).bold(true)
                             .append(" (").color(ChatColor.GRAY).bold(false)
-                            .append(DbValues.getTime(2100 - getTime())).color(ChatColor.GRAY)
+                            .append(DbValues.getTime(1800 - getTime())).color(ChatColor.GRAY)
                             .append(")").color(ChatColor.GRAY).create());
         }
     }
@@ -95,21 +95,22 @@ public class Timer {
                 if (getTime() % 300 == 0) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.GRAY + "The game ends in "
-                                + HexColor.YELLOW + (2100 / 60 - getTime() / 60) + ChatColor.GRAY + " minutes.");
+                                + HexColor.YELLOW + (1800 / 60 - getTime() / 60) + ChatColor.GRAY + " minutes.");
                     }
                 }
 
                 if (getTime() == 1200) {
                     for (Player online : Bukkit.getOnlinePlayers()) {
                         online.sendMessage(Prefixes.getImportantPrefix()
-                                + HexColor.HIGHLIGHT + PlayerEndTeleport.getEyesNeeded()
+                                + HexColor.YELLOW + PlayerEndTeleport.getEyesNeeded()
                                 + " Eyes of Ender " + ChatColor.GRAY + "needed to be able to enter"
-                                + ChatColor.LIGHT_PURPLE + "The End" + ChatColor.GRAY + ".");
+                                + ChatColor.WHITE + "The End" + ChatColor.GRAY + ".");
                     }
                 }
 
-                // once the timer hits 35 minutes, the game will end without a winner
-                if (getTime() == 2100) {
+                // once the timer hits 30 minutes, the game ends
+                // winner: player with the highest score
+                if (getTime() == 1800) {
                     new GameEnd();
                     setRunning(false);
                 }

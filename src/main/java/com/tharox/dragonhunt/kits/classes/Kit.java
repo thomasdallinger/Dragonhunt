@@ -182,7 +182,8 @@ public abstract class Kit implements Listener {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
                         new ComponentBuilder("DURATION").color(HexColor.YELLOW).bold(true)
                                 .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                .append(String.format("%1.1f", durationLeft) + " seconds").color(ChatColor.GRAY).create());
+                                .append(String.format("%1.1f", durationLeft) + " seconds").color(ChatColor.GRAY)
+                                .create());
 
                 durationLeft = durationLeft - (double) ticks / 20;
             }
@@ -191,7 +192,7 @@ public abstract class Kit implements Listener {
 
     private void addKitAbilityUsageToDB(Player player) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "INSERT INTO KitAbility (GameID, Player, dimension, timestamp) " +
+            String query = "INSERT INTO kit_abilities (game_id, player, dimension, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" +
                     DbValues.getCurrentWorld(player.getLocation()) + "', '" + DbValues.getTimestamp() + "')";
 

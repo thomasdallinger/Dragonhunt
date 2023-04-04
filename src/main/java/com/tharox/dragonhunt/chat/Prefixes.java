@@ -8,25 +8,29 @@ public class Prefixes {
 
     // IMPORTANT: used for important messages
     public static String getImportantPrefix() {
-        return ChatColor.DARK_GRAY + "[" + ChatColor.RED + ChatColor.BOLD + "!!!" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+        return ChatColor.DARK_GRAY + "[" + HexColor.RED + ChatColor.BOLD + "!!!"
+                + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
     // XP: used for messages related to XP gains
     public static String getXPPrefix(int xp) {
-        return ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + "+" + xp + HexColor.GREEN + " XP" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+        return ChatColor.DARK_GRAY + "[" + HexColor.GREEN + "+" + xp + ChatColor.WHITE + " XP"
+                + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
     // COINS: used for messages related to coins
     public static String getCoinPrefix(int coins) {
         if (coins > 0)
-            return ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + "+" + coins + HexColor.GREEN + " ⛃" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+            return ChatColor.DARK_GRAY + "[" + HexColor.GREEN + "+" + coins + ChatColor.WHITE + " ⛃"
+                    + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
         else
-            return ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + coins + HexColor.RED + " ⛃" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+            return ChatColor.DARK_GRAY + "[" + HexColor.RED + coins + ChatColor.WHITE + " ⛃"
+                    + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
     // TRACKING: used for messages related to the tracker or positions
     public static String getTrackingPrefix() {
-        return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_GREEN + "↑↑↑" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+        return ChatColor.DARK_GRAY + "[" + HexColor.YELLOW + "◄ ►" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
     // MODIFIER: used for messages related to modifiers

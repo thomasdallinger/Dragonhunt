@@ -100,7 +100,7 @@ public class Tracker implements Listener {
                 playerTracksName.put(player, structureList.get(index));
                 playerTracksLocation.put(player, locationList.get(index));
                 player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
-                        + ChatColor.GOLD + playerTracksName.get(player) + ChatColor.GRAY + ".");
+                        + HexColor.YELLOW + playerTracksName.get(player) + ChatColor.GRAY + ".");
 
                 playerTracksIndex.replace(player, index);
             }
@@ -146,7 +146,7 @@ public class Tracker implements Listener {
                             new ComponentBuilder("PLAYER").color(ChatColor.WHITE).bold(true)
                                     .append(" (Left-Click)").color(ChatColor.GRAY).bold(false)
                                     .append(" | ").color(ChatColor.DARK_GRAY)
-                                    .append("STRUCTURE").color(ChatColor.GOLD).bold(true)
+                                    .append("STRUCTURE").color(HexColor.YELLOW).bold(true)
                                     .append(" (Right-Click)").color(ChatColor.GRAY).bold(false).create());
                     return;
                 }
@@ -158,9 +158,6 @@ public class Tracker implements Listener {
                     // Update the distance to other players constantly since they are moving
                     trackedLocation = Objects.requireNonNull(
                             Bukkit.getPlayer(trackedObject.substring(4))).getLocation();
-                } else {
-                    trackedObjectName = ChatColor.GOLD.toString() + ChatColor.BOLD + trackedObject.toUpperCase()
-                            + ChatColor.DARK_GRAY + " » ";
                 }
 
                 distance = (int) player.getLocation().distance(trackedLocation);
@@ -171,8 +168,10 @@ public class Tracker implements Listener {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(trackedObjectName)
                             .append("In close proximity").color(HexColor.GREEN).create());
                 } else {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(trackedObjectName)
-                            .append(distance + " Blocks away").color(ChatColor.GRAY).create());
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                            new ComponentBuilder(trackedObject.toUpperCase()).color(HexColor.YELLOW).bold(true)
+                                    .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                    .append(distance + " Blocks away").color(ChatColor.GRAY).create());
                 }
 
                 // set the compass target (where to point the needle)
@@ -252,7 +251,7 @@ public class Tracker implements Listener {
                 ChatColor.GRAY + "tracked location.",
                 "",
                 ChatColor.GRAY + "Left-Click: " + ChatColor.WHITE + "Track Player",
-                ChatColor.GRAY + "Right-Click: " + ChatColor.GOLD + "Track Structure"));
+                ChatColor.GRAY + "Right-Click: " + HexColor.YELLOW + "Track Structure"));
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

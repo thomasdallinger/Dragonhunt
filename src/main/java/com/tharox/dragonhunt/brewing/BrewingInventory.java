@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.brewing;
 
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.coins.Coins;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -45,11 +45,13 @@ public class BrewingInventory {
 
         Inventory inv;
         if (!category.equals("brewing")) {
-            inv = Bukkit.createInventory(null, 27, HexColor.HIGHLIGHT + "Brewing Stand "
-                    + ChatColor.DARK_GRAY + Coins.getCoins(player) + " ⛃");
+            inv = Bukkit.createInventory(null, 27,
+                    HexColor.PURPLE.toString() + ChatColor.BOLD + "BREWING "
+                            + ChatColor.DARK_GRAY + Coins.getCoins(player) + " ⛃");
             addBackToMenuItem(inv);
         } else {
-            inv = Bukkit.createInventory(null, 27, HexColor.HIGHLIGHT + "Brewing Stand Menu");
+            inv = Bukkit.createInventory(null, 27,
+                    HexColor.PURPLE.toString() + ChatColor.BOLD + "BREWING MENU");
         }
 
         for (BrewingItem item : itemList) {
@@ -70,7 +72,7 @@ public class BrewingInventory {
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return;
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-        meta.setDisplayName(HexColor.RED + "Back To Menu");
+        meta.setDisplayName(HexColor.RED + "Back to Menu");
         item.setItemMeta(meta);
 
         inventory.setItem(26, item);

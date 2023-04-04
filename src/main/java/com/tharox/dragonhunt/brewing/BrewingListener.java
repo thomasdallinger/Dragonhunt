@@ -27,7 +27,7 @@ public class BrewingListener implements Listener {
         Player player = (Player) event.getWhoClicked();
         BrewingInventory brewingInventory = new BrewingInventory(Main.getInstance().getConfig(), player);
 
-        if (!event.getView().getTitle().contains("Brewing Stand"))
+        if (!event.getView().getTitle().contains("BREWING"))
             return;
         event.setCancelled(true);
 
@@ -38,7 +38,7 @@ public class BrewingListener implements Listener {
         String effectName = item.getItemMeta().getDisplayName();
 
         // inventory is the brewing stand menu
-        if (event.getView().getTitle().contains("Brewing Stand Menu")) {
+        if (event.getView().getTitle().contains("BREWING MENU")) {
             player.closeInventory();
             player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
 
@@ -61,7 +61,7 @@ public class BrewingListener implements Listener {
         if (event.getClick() == ClickType.NUMBER_KEY) return;
 
         // back to menu functionality
-        if (effectName.equals(HexColor.RED + "Back To Menu")) {
+        if (effectName.equals(HexColor.RED + "Back to Menu")) {
             player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASEDRUM, 1, 1);
             player.closeInventory();
             player.openInventory(brewingInventory.menu);
@@ -71,7 +71,7 @@ public class BrewingListener implements Listener {
         // effect already bought
         if (effectName.contains("ᴜɴʟᴏᴄᴋᴇᴅ")) {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + "You have already bought this effect!");
+            player.sendMessage(Prefixes.getErrorPrefix() + "You have already purchased this effect!");
             return;
         }
 
@@ -142,14 +142,14 @@ public class BrewingListener implements Listener {
      */
     private void purchaseEffect(Player player, String effectName) {
         player.playSound(player.getLocation(), Sound.BLOCK_BREWING_STAND_BREW, 1, 1);
-        Coins.removeCoins(player, BrewingInventory.effectCost.get(effectName), effectName);
+        Coins.removeCoins(player, BrewingInventory.effectCost.get(effectName));
         player.sendMessage(Prefixes.getCoinPrefix(-BrewingInventory.effectCost.get(effectName))
                 + ChatColor.GRAY + "Purchased " + effectName + ChatColor.GRAY + ".");
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            // Substring 4 from effectName to remove formatting
-            String query = "INSERT INTO Purchases (GameID, Player, purchasedObject, coinsBefore, cost, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + effectName.substring(4)
+            // Substring 16 from effectName to remove Hex-formatting
+            String query = "INSERT INTO purchases (game_id, player, purchased_item, coins_before, cost, timestamp) " +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + effectName.substring(16)
                     + "', '" + (Coins.getCoins(player) + BrewingInventory.effectCost.get(effectName))
                     + "', '" + BrewingInventory.effectCost.get(effectName)
                     + "', '" + DbValues.getTimestamp() + "')";

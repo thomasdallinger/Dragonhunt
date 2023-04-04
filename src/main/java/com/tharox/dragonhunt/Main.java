@@ -141,7 +141,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
                 timeLeft--;
 
                 for (Player online : Bukkit.getOnlinePlayers()) {
-                    online.sendTitle(Main.getTitle(), HexColor.HIGHLIGHT + "PLAYERS ARE JOINING",
+                    online.sendTitle(Main.getTitle(), HexColor.PURPLE + "Players are joining",
                             0, 25, 0);
                 }
 

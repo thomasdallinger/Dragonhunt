@@ -24,7 +24,7 @@ public class KitListener implements Listener {
             InvocationTargetException, InstantiationException, NoSuchFieldException {
         Player player = (Player) event.getWhoClicked();
 
-        if (!event.getView().getTitle().contains("Kit Selection"))
+        if (!event.getView().getTitle().contains("PICK A KIT"))
             return;
         event.setCancelled(true);
 
@@ -64,8 +64,7 @@ public class KitListener implements Listener {
                         (String) kitClass.getField("lore").get(null)));
 
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        player.sendMessage(ChatColor.GRAY + "You have selected the "
-                + HexColor.HIGHLIGHT + name + ChatColor.GRAY + " Kit.");
+        player.sendMessage(ChatColor.GRAY + "You have selected the " + name + ChatColor.GRAY + " Kit.");
 
         GameState.selectedKit.put(player, (String) kitClass.getField("title").get(null));
         GameState.kitAbilityActive.put(player, false);

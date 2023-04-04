@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.game.GameEnd;
 import net.md_5.bungee.api.ChatColor;
@@ -28,8 +29,9 @@ public class PointsListener implements Listener {
     public static HashMap<UUID, Integer> scorePerPlayer = new HashMap<>();
     public static HashMap<UUID, BossBar> bossBars = new HashMap<>();
 
-    public static BossBar bossBar = Bukkit.createBossBar(ChatColor.AQUA + "0 / " + threshold + " Points",
-            BarColor.BLUE, BarStyle.SOLID);
+    public static BossBar bossBar = Bukkit.createBossBar(HexColor.YELLOW.toString() + ChatColor.BOLD
+            + "0" + ChatColor.WHITE + " / " + threshold + " Points",
+            BarColor.YELLOW, BarStyle.SOLID);
 
     /**
      * Target: Ender Dragon, Ender Crystal
@@ -73,20 +75,20 @@ public class PointsListener implements Listener {
         }
 
         if (scorePerPlayer.get(id) >= threshold) {
-            new GameEnd(player);
+            new GameEnd();
             return;
         }
 
-        bossBars.get(id).setTitle(ChatColor.AQUA.toString()
-                + scorePerPlayer.get(id) + " / " + threshold + " Points");
+        bossBars.get(id).setTitle(HexColor.YELLOW.toString() + ChatColor.BOLD
+                + scorePerPlayer.get(id) + ChatColor.WHITE + " / " + threshold + " Points");
         bossBars.get(id).setProgress(scorePerPlayer.get(id) / (threshold + 1D));
 
-        if ((threshold - scorePerPlayer.get(id)) <= 30) {
+        if ((threshold - scorePerPlayer.get(id)) <= 25) {
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(Prefixes.getImportantPrefix() + ChatColor.WHITE + player.getName()
-                        + ChatColor.AQUA + " needs "
-                        + ChatColor.DARK_AQUA + (threshold - scorePerPlayer.get(id))
-                        + ChatColor.AQUA + " more points to win.");
+                        + ChatColor.GRAY + " needs "
+                        + HexColor.YELLOW + (threshold - scorePerPlayer.get(id))
+                        + ChatColor.GRAY + " more points to win.");
             }
         }
     }

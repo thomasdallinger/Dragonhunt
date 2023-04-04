@@ -36,7 +36,7 @@ public class ResetScoreboardCountdown {
                             Coins.XPIncrease = random.nextInt(4) + 1; // 1-4
                         } else if (timer.getTime() > 600 && timer.getTime() <= 1200) {
                             Coins.XPIncrease = random.nextInt(5) + 2; // 2-6
-                        } else if (timer.getTime() > 1200 && timer.getTime() <= 2100) {
+                        } else if (timer.getTime() > 1200 && timer.getTime() <= 1800) {
                             Coins.XPIncrease = random.nextInt(6) + 3; // 3-7
                         }
 

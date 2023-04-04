@@ -22,7 +22,8 @@ public class KitInventory {
     }
 
     public void createInventory() {
-        Inventory inv = Bukkit.createInventory(null, 36, HexColor.HIGHLIGHT + "Kit Selection");
+        Inventory inv = Bukkit.createInventory(null, 36,
+                HexColor.PURPLE.toString() + ChatColor.BOLD + "PICK A KIT");
 
         // Set the kit classes
         inv.setItem(0, Kit.getDisplayItem(HexColor.ASSASSIN.toString() + ChatColor.BOLD

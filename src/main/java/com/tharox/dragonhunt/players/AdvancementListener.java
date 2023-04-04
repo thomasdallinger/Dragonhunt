@@ -59,9 +59,9 @@ public class AdvancementListener implements Listener {
 
                     for (Player online : Bukkit.getOnlinePlayers()) {
                         online.sendMessage(Prefixes.getImportantPrefix()
-                                + HexColor.HIGHLIGHT + PlayerEndTeleport.getEyesNeeded()
+                                + HexColor.YELLOW + PlayerEndTeleport.getEyesNeeded()
                                 + " Eyes of Ender " + ChatColor.GRAY + "needed to be able to enter"
-                                + ChatColor.LIGHT_PURPLE + "The End" + ChatColor.GRAY + ".");
+                                + ChatColor.WHITE + "The End" + ChatColor.GRAY + ".");
                     }
                 }
 
@@ -75,8 +75,8 @@ public class AdvancementListener implements Listener {
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(Prefixes.getAdvancementPrefix()
                         + Prefixes.getXPPrefix(Coins.advancementXP) + ChatColor.WHITE + player.getName()
-                        + ChatColor.AQUA + " has made the advancement " + ChatColor.DARK_AQUA + advancementName
-                        + ChatColor.AQUA + " (#" + DbValues.getAdvancementRank(player, advancementName) + ").");
+                        + ChatColor.GRAY + " has made the advancement " + ChatColor.AQUA + advancementName
+                        + ChatColor.DARK_GRAY + " (#" + DbValues.getAdvancementRank(player, advancementName) + ").");
             }
         }
     }
@@ -84,13 +84,13 @@ public class AdvancementListener implements Listener {
     public void addBonusXP(Player player, String dimension) {
         Coins.addXP(player, Coins.advancementXP * 2);
         player.sendMessage(Prefixes.getXPPrefix(Coins.advancementXP) + "First in the "
-                + HexColor.HIGHLIGHT + dimension + ChatColor.GRAY + " dimension.");
+                + HexColor.YELLOW + dimension + ChatColor.GRAY + " dimension.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
     }
 
     public void addAdvancement(Player player, String advancement) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "INSERT INTO Advancements (GameID, Player, advancement, timestamp) " +
+            String query = "INSERT INTO advancements (game_id, player, advancement, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + advancement +
                     "', '" + DbValues.getTimestamp() + "')";
 

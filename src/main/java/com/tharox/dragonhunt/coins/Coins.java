@@ -31,26 +31,13 @@ public class Coins {
         coins.put(player, coinsToSet);
     }
 
-    // used in: LevelUp, Timer (last 10 minutes), ResetScoreboardCountdown
+    // used in: LevelUp, Timer (last 10 minutes)
     public static void addCoins(Player player, int coinsToAdd) {
         coins.put(player, coins.get(player) + coinsToAdd);
     }
 
-    public static void removeCoins(Player player, int coinsToRemove, String objectName) {
+    public static void removeCoins(Player player, int coinsToRemove) {
         coins.put(player, coins.get(player) - coinsToRemove);
-
-        /* TODO: update db
-        // add ShopAccess
-        DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "INSERT INTO ShopAccess (GameID, Player, purchasedObject, coinsBefore, cost, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + objectName.substring(4)
-                    + "', '" + Coins.getCoins(player) + "', '" + ShopInventory.objectCost.get(objectName)
-                    + "', '" + DbValues.getTimestamp() + "')";
-
-            Statement stmt = con.createStatement();
-            stmt.execute(query);
-            stmt.close();
-        });*/
     }
 
     public static void addXP(Player player, int xpToAdd) {
@@ -58,7 +45,7 @@ public class Coins {
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
         int currentXPPoints = (int) (player.getExpToLevel() * (player.getExp() * 100) / 100);
-        player.sendTitle("", ChatColor.WHITE + "+" + (xpToAdd + XPIncrease) + HexColor.GREEN + " XP "
+        player.sendTitle("", HexColor.GREEN + "+" + (xpToAdd + XPIncrease) + ChatColor.WHITE + " XP "
                         + ChatColor.DARK_GRAY + "[" + currentXPPoints + "/" + player.getExpToLevel() + "]",
                 0, 30, 10);
     }

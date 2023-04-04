@@ -31,7 +31,7 @@ public class LevelUp implements Listener {
         }
 
         Coins.addCoins(player, coinsToAdd);
-        player.sendMessage(Prefixes.getCoinPrefix(coinsToAdd) + HexColor.HIGHLIGHT + ChatColor.BOLD + "Level "
-                + ChatColor.WHITE + ChatColor.BOLD + level + HexColor.HIGHLIGHT + ChatColor.BOLD + " reached.");
+        player.sendMessage(Prefixes.getCoinPrefix(coinsToAdd) + HexColor.GREEN + ChatColor.BOLD + "Level "
+                + ChatColor.DARK_GREEN + ChatColor.BOLD + level + HexColor.GREEN + ChatColor.BOLD + " reached.");
     }
 }

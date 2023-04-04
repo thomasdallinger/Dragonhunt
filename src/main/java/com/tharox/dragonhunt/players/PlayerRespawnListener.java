@@ -86,7 +86,7 @@ public class PlayerRespawnListener implements Listener {
                     return;
                 }
 
-                player.sendTitle(HexColor.HIGHLIGHT + "Respawning in",
+                player.sendTitle(HexColor.PURPLE + "Respawning in",
                         ChatColor.WHITE.toString() + ChatColor.BOLD + "» "
                                 + String.format("%1.1f", deathTimer.get(player)) + " «",
                         0, 25, 0);

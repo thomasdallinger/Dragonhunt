@@ -10,7 +10,7 @@ import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.TextComponent;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Sound;
@@ -18,6 +18,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.sql.Statement;
+import java.util.List;
+import java.util.UUID;
 
 public class GameEnd {
     static Player winner;
@@ -28,6 +30,7 @@ public class GameEnd {
         // TIMER and SCOREBOARD COUNTDOWN are no longer running after the game ends
         timer.setRunning(false);
         scoreboardCountdown.setRunning(false);
+        winner = Bukkit.getPlayer(GameState.sortPlayersByPoints(PointsListener.scorePerPlayer).get(0));
 
         updateGame();
         configureGameEnd();
@@ -35,19 +38,11 @@ public class GameEnd {
     }
 
     /**
-     * Only used when there is a winner, meaning the time didn't run out
-     */
-    public GameEnd(Player winner) {
-        GameEnd.winner = winner;
-        new GameEnd();
-    }
-
-    /**
      * Adds certain values to the database, which usually cannot be added before the game ended.
      */
     private void updateGame() {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "UPDATE Game SET duration = '" + DbValues.getTimestamp()
+            String query = "UPDATE games SET duration = '" + DbValues.getTimestamp()
                     + "' WHERE id = '" + DbValues.getGameID() + "'";
 
             Statement stmt = con.createStatement();
@@ -63,62 +58,60 @@ public class GameEnd {
      */
     private void configureGameEnd() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.GOLD + ChatColor.BOLD + "GAME OVER.");
+            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.YELLOW + ChatColor.BOLD + "GAME OVER.");
 
             player.setGameMode(GameMode.SPECTATOR);
             player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 1);
-
-            if (PointsListener.scorePerPlayer.containsKey(player.getUniqueId())) {
-                PointsListener.scorePerPlayer.remove(player.getUniqueId());
-                PointsListener.bossBars.get(player.getUniqueId()).removePlayer(player);
-            }
 
             if (CombatListener.combatList.containsKey(player.getUniqueId())) {
                 CombatListener.combatList.remove(player.getUniqueId());
                 CombatListener.bossBars.get(player.getUniqueId()).removePlayer(player);
             }
 
-            // no winner != null check because the else block still executes if the winner is null
-            if (player == winner) {
-                player.sendTitle(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + "YOU WON",
-                        HexColor.GREEN + "You scored " + PointsListener.threshold + " Points first", 10, 90, 20);
-                addWinnerAndXPLevel(player, true);
-            } else {
-                player.sendTitle(ChatColor.DARK_RED.toString() + ChatColor.BOLD + "YOU LOST",
-                        HexColor.RED + "Try again next time.", 10, 90, 20);
-                addWinnerAndXPLevel(player, false);
-            }
-
-            if (winner != null) {
-                player.sendMessage(ChatColor.WHITE.toString() + ChatColor.BOLD + winner.getName()
-                        + HexColor.GREEN + " has won the Dragonhunt.");
-            } else {
-                player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "Time is up.");
-            }
+            player.sendMessage(ChatColor.WHITE.toString() + ChatColor.BOLD + winner.getName()
+                    + HexColor.GREEN + " has won the Dragonhunt.");
 
             player.sendMessage(ChatColor.GRAY + "Time played: "
                     + HexColor.YELLOW + DbValues.getTimestamp());
-            //TODO: Game Stats messages?
+
+            player.sendMessage(ChatColor.DARK_GRAY + "\nꜰɪɴᴀʟ ꜱᴛᴀɴᴅɪɴɢꜱ");
+
+            List<UUID> sortedKeys = GameState.sortPlayersByPoints(PointsListener.scorePerPlayer);
+
+            for (int index = 0; index < sortedKeys.size(); index++) {
+                Player p = Bukkit.getPlayer(sortedKeys.get(index));
+                if (p == null) continue;
+
+                if (p == player) {
+                    player.sendMessage(ChatColor.GRAY + "#" + (index + 1) + " "
+                            + ChatColor.DARK_AQUA + p.getName() + " "
+                            + ChatColor.AQUA + PointsListener.scorePerPlayer.get(p.getUniqueId()));
+
+                    player.sendTitle(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + "#" + (index + 1),
+                            ChatColor.AQUA + "You scored " + PointsListener.scorePerPlayer.get(p.getUniqueId())
+                                    + " Points",
+                            10, 90, 20);
+
+                    addDataToPlaysTable(player, (index + 1));
+                } else {
+                    player.sendMessage(ChatColor.GRAY + "#" + (index + 1) + " "
+                            + ChatColor.WHITE + p.getName() + " "
+                            + ChatColor.AQUA + PointsListener.scorePerPlayer.get(p.getUniqueId()));
+                }
+            }
         }
     }
 
     /**
      * Adds certain values to the database, which cannot be added before the game ended.
-     *
-     * @param player player who played the game
-     * @param hasWon whether this player has won or not
      */
-    private void addWinnerAndXPLevel(Player player, boolean hasWon) {
+    private void addDataToPlaysTable(Player player, int position) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query;
-
-            if (hasWon) {
-                query = "UPDATE Plays SET hasWon = true, XPLevel = '" + player.getLevel() + "'" +
-                        "WHERE GameID = '" + DbValues.getGameID() + "' AND Player = '" + player.getName() + "'";
-            } else {
-                query = "UPDATE Plays SET hasWon = false, XPLevel = '" + player.getLevel() + "'" +
-                        "WHERE GameID = '" + DbValues.getGameID() + "' AND Player = '" + player.getName() + "'";
-            }
+            String query = "UPDATE plays SET position = '" + position + "', "
+                    + "points = '" + PointsListener.scorePerPlayer.get(player.getUniqueId()) + "', "
+                    + "xp_level = '" + player.getLevel() + "'"
+                    + "WHERE game_id = '" + DbValues.getGameID() + "' AND player = '" + player.getName() + "'";
+            ;
 
             Statement stmt = con.createStatement();
             stmt.execute(query);
@@ -126,8 +119,8 @@ public class GameEnd {
 
             if (GameState.selectedKit.containsKey(player)) {
                 // Substring 14 from kit name to remove HEX formatting
-                query = "UPDATE Plays SET Kit = '" + GameState.selectedKit.get(player).substring(14) + "'" +
-                        "WHERE GameID = '" + DbValues.getGameID() + "' AND Player = '" + player.getName() + "'";
+                query = "UPDATE plays SET kit = '" + GameState.selectedKit.get(player).substring(14) + "'" +
+                        "WHERE game_id = '" + DbValues.getGameID() + "' AND player = '" + player.getName() + "'";
             }
 
             stmt = con.createStatement();
@@ -158,10 +151,11 @@ public class GameEnd {
                 }
 
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(
-                            ChatColor.YELLOW.toString() + ChatColor.BOLD + "BACK TO LOBBY IN "
-                                    + ChatColor.GOLD + ChatColor.BOLD + duration[0]
-                                    + ChatColor.YELLOW + ChatColor.BOLD + " SECONDS"));
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                            new ComponentBuilder("BACK TO LOBBY").color(HexColor.YELLOW).bold(true)
+                                    .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                    .append(duration[0] + " seconds").color(ChatColor.GRAY)
+                                    .create());
                 }
                 duration[0]--;
             }

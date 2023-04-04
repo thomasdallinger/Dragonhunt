@@ -100,13 +100,13 @@ public class GameStart extends GameConfiguration {
             }*/
 
             if (startCountdown.getTime() <= 20 && startCountdown.getTime() > 3) {
-                player.sendTitle(HexColor.HIGHLIGHT + "Starting in",
+                player.sendTitle(HexColor.PURPLE + "Starting in",
                         ChatColor.WHITE.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
                         , 0, 25, 0);
             }
 
             if (startCountdown.getTime() == 3) {
-                player.sendTitle(HexColor.HIGHLIGHT + "Starting in",
+                player.sendTitle(HexColor.PURPLE + "Starting in",
                         HexColor.RED.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
                         , 0, 25, 0);
 
@@ -114,15 +114,15 @@ public class GameStart extends GameConfiguration {
             }
 
             if (startCountdown.getTime() == 2) {
-                player.sendTitle(HexColor.HIGHLIGHT + "Starting in",
-                        ChatColor.GOLD.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
+                player.sendTitle(HexColor.PURPLE + "Starting in",
+                        HexColor.YELLOW.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
                         , 0, 25, 0);
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
             }
 
             if (startCountdown.getTime() == 1) {
-                player.sendTitle(HexColor.HIGHLIGHT + "Starting in",
+                player.sendTitle(HexColor.PURPLE + "Starting in",
                         HexColor.GREEN.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
                         , 0, 25, 0);
 
@@ -136,14 +136,14 @@ public class GameStart extends GameConfiguration {
 
                 if (BonusHearts.active) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
-                            2100 * 20, 2));
+                            1800 * 20, 2));
                 }
 
-                player.sendMessage(ChatColor.WHITE.toString() + ChatColor.BOLD + ChatColor.ITALIC + "RACE TO VICTORY");
-                player.sendMessage(ChatColor.LIGHT_PURPLE + "Whoever reaches "
-                        + HexColor.HIGHLIGHT + PointsListener.threshold + " Points"
-                        + ChatColor.LIGHT_PURPLE + " first wins.");
-                player.sendMessage(HexColor.YELLOW + "/pos [name]"
+                player.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "\nRACE TO VICTORY");
+                player.sendMessage(ChatColor.GRAY + "Whoever reaches "
+                        + ChatColor.WHITE + PointsListener.threshold + " Points"
+                        + ChatColor.GRAY + " first wins.");
+                player.sendMessage(HexColor.YELLOW + "\n/pos [name]"
                         + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + "mark locations");
                 player.sendMessage(HexColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
                         + ChatColor.GRAY + "get to the surface quickly");

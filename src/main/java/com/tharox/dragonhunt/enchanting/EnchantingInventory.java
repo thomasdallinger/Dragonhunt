@@ -2,8 +2,8 @@ package com.tharox.dragonhunt.enchanting;
 
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.chat.HexColor;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -37,7 +37,8 @@ public class EnchantingInventory {
             itemList.add(new EnchantingItem(section));
         }
 
-        Inventory inv = Bukkit.createInventory(null, 36, HexColor.HIGHLIGHT + "Enchant "
+        Inventory inv = Bukkit.createInventory(null, 36,
+                HexColor.PURPLE.toString() + ChatColor.BOLD + "ENCHANTING "
                 + ChatColor.DARK_GRAY + Coins.getCoins(player) + " ⛃");
 
         for (EnchantingItem item : itemList) {

@@ -83,8 +83,8 @@ public class PlayerEndTeleport implements Listener {
 
                             // replace the Tracker with the END TELEPORTER item
                             inventory.setItem(7, createEndTeleport());
-                            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.HIGHLIGHT + ChatColor.BOLD
-                                    + "You can now enter the End dimension.");
+                            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + ChatColor.BOLD
+                                    + "You can now enter The End.");
                             player.sendMessage(ChatColor.WHITE + "Right-Click" + ChatColor.GRAY + " the "
                                     + ChatColor.LIGHT_PURPLE + "End Portal Frame"
                                     + ChatColor.GRAY + " in your inventory to teleport.");
@@ -103,7 +103,7 @@ public class PlayerEndTeleport implements Listener {
     public static int getEyesNeeded() {
         int eyesNeeded = 10;
 
-        if (Main.getInstance().getTimer().getTime() >= 1200) { // last 15 minutes of the game
+        if (Main.getInstance().getTimer().getTime() >= 1200) { // last 10 minutes of the game
             eyesNeeded = 6;
         } else {
             if (GameState.playersReachedEnd) {

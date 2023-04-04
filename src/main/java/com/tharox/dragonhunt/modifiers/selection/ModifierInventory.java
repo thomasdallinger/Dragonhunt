@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.modifiers.selection;
 
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.modifiers.classes.DragonhuntModifier;
 import com.tharox.dragonhunt.modifiers.classes.Modifier;
 import net.md_5.bungee.api.ChatColor;
@@ -23,7 +23,8 @@ public class ModifierInventory {
     }
 
     public void createInventory() {
-        Inventory inv = Bukkit.createInventory(null, 27, HexColor.HIGHLIGHT + "Modifiers");
+        Inventory inv = Bukkit.createInventory(null, 27,
+                HexColor.PURPLE.toString() + ChatColor.BOLD + "MODIFIERS");
         AtomicInteger index = new AtomicInteger();
 
         Reflections reflections = new Reflections("com.tharox.dragonhunt");

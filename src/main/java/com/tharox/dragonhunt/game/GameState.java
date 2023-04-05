@@ -75,10 +75,10 @@ public class GameState {
         if (DoubleChestLoot.active) multiplier = 2;
 
         ArrayList<ItemStack> chestLoot = new ArrayList<>();
+        chestLoot.add(new ItemStack(Material.DIAMOND, multiplier));
         chestLoot.add(new ItemStack(Material.OBSIDIAN, 2 * multiplier));
-        chestLoot.add(new ItemStack(Material.DIAMOND, 2 * multiplier));
-        chestLoot.add(new ItemStack(Material.GOLD_INGOT, 6 * multiplier));
         chestLoot.add(new ItemStack(Material.IRON_INGOT, 6 * multiplier));
+        chestLoot.add(new ItemStack(Material.GOLD_INGOT, 9 * multiplier));
 
         return chestLoot;
     }
@@ -90,15 +90,15 @@ public class GameState {
         player.sendMessage(ChatColor.DARK_GRAY + "ᴄʜᴇꜱᴛ ʟᴏᴏᴛ");
 
         if (DoubleChestLoot.active) {
-            player.sendMessage(HexColor.GREEN + "+4 " + ChatColor.LIGHT_PURPLE + "Obsidian");
-            player.sendMessage(HexColor.GREEN + "+4 " + ChatColor.LIGHT_PURPLE + "Diamonds");
-            player.sendMessage(HexColor.GREEN + "+12 " + ChatColor.LIGHT_PURPLE + "Gold Ingots");
-            player.sendMessage(HexColor.GREEN + "+12 " + ChatColor.LIGHT_PURPLE + "Iron Ingots");
+            player.sendMessage(HexColor.GREEN + "+2 " + ChatColor.WHITE + "Diamonds");
+            player.sendMessage(HexColor.GREEN + "+4 " + ChatColor.WHITE + "Obsidian");
+            player.sendMessage(HexColor.GREEN + "+12 " + ChatColor.WHITE + "Iron Ingots");
+            player.sendMessage(HexColor.GREEN + "+18 " + ChatColor.WHITE + "Gold Ingots");
         } else {
-            player.sendMessage(ChatColor.GRAY + "+2 " + ChatColor.LIGHT_PURPLE + "Obsidian");
-            player.sendMessage(ChatColor.GRAY + "+2 " + ChatColor.LIGHT_PURPLE + "Diamonds");
-            player.sendMessage(ChatColor.GRAY + "+6 " + ChatColor.LIGHT_PURPLE + "Gold Ingots");
-            player.sendMessage(ChatColor.GRAY + "+6 " + ChatColor.LIGHT_PURPLE + "Iron Ingots");
+            player.sendMessage(ChatColor.GRAY + "+1 " + ChatColor.WHITE + "Diamonds");
+            player.sendMessage(ChatColor.GRAY + "+2 " + ChatColor.WHITE + "Obsidian");
+            player.sendMessage(ChatColor.GRAY + "+6 " + ChatColor.WHITE + "Iron Ingots");
+            player.sendMessage(ChatColor.GRAY + "+9 " + ChatColor.WHITE + "Gold Ingots");
         }
     }
 

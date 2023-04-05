@@ -143,10 +143,8 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(ChatColor.GRAY + "Whoever reaches "
                         + ChatColor.WHITE + PointsListener.threshold + " Points"
                         + ChatColor.GRAY + " first wins.");
-                player.sendMessage(HexColor.YELLOW + "\n/pos [name]"
-                        + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + "mark locations");
-                player.sendMessage(HexColor.YELLOW + "/top" + ChatColor.DARK_GRAY + ": "
-                        + ChatColor.GRAY + "get to the surface quickly");
+                player.sendMessage(ChatColor.GRAY + "\nUse " + HexColor.YELLOW + "/top"
+                        + ChatColor.GRAY + " to teleport to the surface");
             }
         }
     }

@@ -28,7 +28,7 @@ public class Prefixes {
                     + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
-    // TRACKING: used for messages related to the tracker or positions
+    // TRACKING: used for messages related to the tracker
     public static String getTrackingPrefix() {
         return ChatColor.DARK_GRAY + "[" + HexColor.YELLOW + "◄ ►" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }

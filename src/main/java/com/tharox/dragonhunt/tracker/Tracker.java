@@ -162,7 +162,7 @@ public class Tracker implements Listener {
 
                 distance = (int) player.getLocation().distance(trackedLocation);
 
-                // do not show "In close proximity" when tracking a position
+                // do not show "In close proximity" when tracking a player
                 // but still needed to make it easier to find structures since the coords provided are not very accurate
                 if (distance < 75 && !trackedObject.contains("[P]")) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(trackedObjectName)

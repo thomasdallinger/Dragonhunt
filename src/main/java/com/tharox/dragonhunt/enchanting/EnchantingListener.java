@@ -96,7 +96,7 @@ public class EnchantingListener implements Listener {
      * @param player player who purchased an enchantment
      */
     private void purchaseEnchantment(Player player, String enchantment) {
-        player.sendMessage(Prefixes.getCoinPrefix(-BrewingInventory.effectCost.get(enchantment))
+        player.sendMessage(Prefixes.getCoinPrefix(-EnchantingInventory.enchantmentCost.get(enchantment))
                 + ChatColor.GRAY + "Purchased " + HexColor.YELLOW + enchantment.substring(16) + ChatColor.GRAY + ".");
         player.playSound(player.getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1, 1);
         Coins.removeCoins(player, EnchantingInventory.enchantmentCost.get(enchantment));

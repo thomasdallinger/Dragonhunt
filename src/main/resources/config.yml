@@ -433,9 +433,9 @@ negativeEffects:
     color: 0x484848
   5:
     slot: 24
-    name: "Arrow of Hunger"
-    lore: "Hunger bar depletes faster than normal."
+    name: "Arrow of Levitation"
+    lore: "Causes entities to levitate."
     material: TIPPED_ARROW
     amount: 1
-    effect: HUNGER
-    color: 0x647845
+    effect: LEVITATION
+    color: 0xCEFFFF

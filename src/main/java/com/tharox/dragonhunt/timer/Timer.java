@@ -92,9 +92,17 @@ public class Timer {
                     return;
                 }
 
-                if (getTime() % 300 == 0) {
+                // once the timer hits 30 minutes, the game ends
+                // winner: player with the highest score
+                if (getTime() == 1800) {
+                    new GameEnd();
+                    setRunning(false);
+                }
+
+                // every 5 minutes
+                if (getTime() % 300 == 0 && getTime() != 0) {
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.GRAY + "The game ends in "
+                        player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.GRAY + "The Game ends in "
                                 + HexColor.YELLOW + (1800 / 60 - getTime() / 60) + ChatColor.GRAY + " minutes.");
                     }
                 }
@@ -106,13 +114,6 @@ public class Timer {
                                 + " Eyes of Ender " + ChatColor.GRAY + "needed to be able to enter"
                                 + ChatColor.WHITE + "The End" + ChatColor.GRAY + ".");
                     }
-                }
-
-                // once the timer hits 30 minutes, the game ends
-                // winner: player with the highest score
-                if (getTime() == 1800) {
-                    new GameEnd();
-                    setRunning(false);
                 }
 
                 setTime(getTime() + 1);

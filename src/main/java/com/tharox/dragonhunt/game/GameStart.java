@@ -171,7 +171,7 @@ public class GameStart extends GameConfiguration {
             }
 
             if ((gracePeriodCountdown.getTime() % 10 == 0 && gracePeriodCountdown.getTime() != 0) ||
-                    (gracePeriodCountdown.getTime() <= 5 && gracePeriodCountdown.getTime() > 0)) {
+                    (gracePeriodCountdown.getTime() <= 3 && gracePeriodCountdown.getTime() > 0)) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
                 player.sendMessage(ChatColor.GRAY + "The Grace Period ends in "
                         + HexColor.YELLOW + gracePeriodCountdown.getTime() + ChatColor.GRAY + " seconds.");

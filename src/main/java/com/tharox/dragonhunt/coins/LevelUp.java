@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.coins;
 
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -17,21 +17,14 @@ public class LevelUp implements Listener {
         int level = event.getNewLevel();
 
         // Following check needed to avoid an issue where the first player that joined on the server gets
-        // 20 coins for reaching level 0 once a second player joins.
+        // 10 coins for reaching level 0 once a second player joins.
         if (level == 0) return;
 
-        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
-
-        int coinsToAdd;
-
-        if (level % 5 == 0) {
-            coinsToAdd = 20;
-        } else {
-            coinsToAdd = 10;
-        }
-
+        int coinsToAdd = 10;
         Coins.addCoins(player, coinsToAdd);
+
         player.sendMessage(Prefixes.getCoinPrefix(coinsToAdd) + HexColor.GREEN + ChatColor.BOLD + "Level "
                 + ChatColor.DARK_GREEN + ChatColor.BOLD + level + HexColor.GREEN + ChatColor.BOLD + " reached.");
+        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
     }
 }

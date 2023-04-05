@@ -16,7 +16,7 @@ import java.util.Collection;
  * The first damage assignment resets the vanilla values.
  */
 public class DamageAdjustmentListener implements Listener {
-    public static double assassinDamageBuff = 1.25;
+    public static double assassinDamageBuff = 0.5;
     public static double mutantDamageBuff = 1.0;
 
     @EventHandler
@@ -34,14 +34,14 @@ public class DamageAdjustmentListener implements Listener {
                 for (PotionEffect effect : pe) {
                     if (effect.getType().equals(PotionEffectType.INCREASE_DAMAGE)) {
                         damage = damage - effect.getAmplifier() * 1.5; // Remove default damage increase.
-                        damage = damage + effect.getAmplifier();
+                        damage = damage + effect.getAmplifier() * 0.5; // Add new damage increase.
                     }
                 }
             }
 
-            // Assassins passive: Buff all damage by 25%
+            // Assassins Passive
             if (KitClass.assassins.contains(damager)) {
-                damage = damage * assassinDamageBuff;
+                damage = damage + assassinDamageBuff;
             }
 
             // Mutant Attack Damage increase

@@ -279,30 +279,46 @@ permanentEffects:
     color: 0x13D4E8
     cost: 9
   3:
+    slot: 28
+    name: "Speed IV"
+    lore: "Increases walking speed by 80%."
+    material: POTION
+    amount: 4
+    color: 0x13D4E8
+    cost: 9
+  4:
     slot: 2
     name: "Jump Boost I"
-    lore: "Adds 50% to the base jump height."
+    lore: "Adds 100% to the base jump height."
     material: POTION
     amount: 1
     color: 0x22FF4C
     cost: 5
-  4:
+  5:
     slot: 11
     name: "Jump Boost II"
-    lore: "Adds 100% to the base jump height."
+    lore: "Adds 150% to the base jump height."
     material: POTION
     amount: 2
     color: 0x22FF4C
     cost: 7
-  5:
+  6:
     slot: 20
     name: "Jump Boost III"
-    lore: "Adds 150% to the base jump height."
+    lore: "Adds 200% to the base jump height."
     material: POTION
     amount: 3
     color: 0x22FF4C
     cost: 9
-  6:
+  7:
+    slot: 29
+    name: "Jump Boost IV"
+    lore: "Adds 250% to the base jump height."
+    material: POTION
+    amount: 4
+    color: 0x22FF4C
+    cost: 9
+  8:
     slot: 3
     name: "Resistance I"
     lore: "Reduces incoming damage by 10%."
@@ -310,7 +326,7 @@ permanentEffects:
     amount: 1
     color: 0xEA773C
     cost: 9
-  7:
+  9:
     slot: 12
     name: "Resistance II"
     lore: "Reduces incoming damage by 20%."
@@ -318,7 +334,7 @@ permanentEffects:
     amount: 2
     color: 0xEA773C
     cost: 13
-  8:
+  10:
     slot: 21
     name: "Resistance III"
     lore: "Reduces incoming damage by 30%."
@@ -326,55 +342,47 @@ permanentEffects:
     amount: 3
     color: 0xEA773C
     cost: 17
-  9:
+  11:
+    slot: 30
+    name: "Resistance IV"
+    lore: "Reduces incoming damage by 40%."
+    material: POTION
+    amount: 4
+    color: 0xEA773C
+    cost: 17
+  12:
     slot: 4
     name: "Strength I"
-    lore: "Increases damage by 1 ❤."
+    lore: "Increases damage by 0.5 ❤."
     material: POTION
     amount: 1
     color: 0xE22627
     cost: 9
-  10:
+  13:
     slot: 13
     name: "Strength II"
-    lore: "Increases damage by 2 ❤."
+    lore: "Increases damage by 1 ❤."
     material: POTION
     amount: 2
     color: 0xE22627
     cost: 13
-  11:
+  14:
     slot: 22
     name: "Strength III"
-    lore: "Increases damage by 3 ❤."
+    lore: "Increases damage by 1.5 ❤."
     material: POTION
     amount: 3
     color: 0xE22627
     cost: 17
-  12:
-    slot: 5
-    name: "Regeneration I"
-    lore: "Heals half a heart every 2.5 seconds."
-    material: POTION
-    amount: 1
-    color: 0xAE34CD
-    cost: 15
-  13:
-    slot: 14
-    name: "Regeneration II"
-    lore: "Heals half a heart every 1.25 seconds."
-    material: POTION
-    amount: 2
-    color: 0xAE34CD
-    cost: 20
-  14:
-    slot: 23
-    name: "Regeneration III"
-    lore: "Heals half a heart every 0.6 seconds."
-    material: POTION
-    amount: 3
-    color: 0xAE34CD
-    cost: 25
   15:
+    slot: 31
+    name: "Strength IV"
+    lore: "Increases damage by 2 ❤."
+    material: POTION
+    amount: 4
+    color: 0xE22627
+    cost: 17
+  16:
     slot: 6
     name: "Extra Hearts ʀᴇ-ᴘᴜʀᴄʜᴀꜱᴇᴀʙʟᴇ"
     lore: "+1 ❤ and +5 ⛃ cost per purchase."
@@ -384,7 +392,7 @@ permanentEffects:
     cost: 10 # +5 will be applied to this value
 negativeEffects:
   0:
-    slot: 4
+    slot: 13
     name: "Unlock Arrow Effects"
     lore: "Select one of the effects available below when unlocked."
     material: TIPPED_ARROW
@@ -392,7 +400,7 @@ negativeEffects:
     color: 0xF1F5F8
     cost: 25
   1:
-    slot: 11
+    slot: 20
     name: "Arrow of Mining Fatigue"
     lore: "Reduces attack and heavily reduces mining speed."
     material: TIPPED_ARROW
@@ -400,7 +408,7 @@ negativeEffects:
     effect: SLOW_DIGGING
     color: 0x894E2E
   2:
-    slot: 12
+    slot: 21
     name: "Arrow of Poison"
     lore: "Inflicts damage over time, but cannot kill."
     material: TIPPED_ARROW
@@ -408,7 +416,7 @@ negativeEffects:
     effect: POISON
     color: 0x366622
   3:
-    slot: 13
+    slot: 22
     name: "Arrow of Blindness"
     lore: "Impairs the player's vision."
     material: TIPPED_ARROW
@@ -416,7 +424,7 @@ negativeEffects:
     effect: BLINDNESS
     color: 0x000000
   4:
-    slot: 14
+    slot: 23
     name: "Arrow of Weakness"
     lore: "Heavily decreases attack power."
     material: TIPPED_ARROW
@@ -424,7 +432,7 @@ negativeEffects:
     effect: WEAKNESS
     color: 0x484848
   5:
-    slot: 15
+    slot: 24
     name: "Arrow of Hunger"
     lore: "Hunger bar depletes faster than normal."
     material: TIPPED_ARROW

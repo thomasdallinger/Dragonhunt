@@ -30,14 +30,14 @@ public class KitInventory {
                         + KitClass.ASSASSIN + " Assassin" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_SWORD,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.WHITE + "+" + (int) (DamageAdjustmentListener.assassinDamageBuff * 100 - 100) + "%"
-                        + ChatColor.GRAY + " Damage"));
+                        + ChatColor.WHITE + "+" + (int) (DamageAdjustmentListener.assassinDamageBuff) + "❤"
+                        + ChatColor.GRAY + " Attack Damage"));
 
         inv.setItem(9, Kit.getDisplayItem(HexColor.TANK.toString() + ChatColor.BOLD
                         + KitClass.TANK + " Tank" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_CHESTPLATE,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.WHITE + "+2 " + ChatColor.GRAY + "❤"));
+                        + ChatColor.WHITE + "+2 ❤" + ChatColor.GRAY + " Total Health"));
 
         inv.setItem(18, Kit.getDisplayItem(HexColor.SUPPORT.toString() + ChatColor.BOLD
                         + KitClass.SUPPORT + " Support" + ChatColor.GRAY + " (Class)",

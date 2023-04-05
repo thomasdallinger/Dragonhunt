@@ -45,12 +45,12 @@ public class BrewingInventory {
 
         Inventory inv;
         if (!category.equals("brewing")) {
-            inv = Bukkit.createInventory(null, 27,
+            inv = Bukkit.createInventory(null, 36,
                     HexColor.PURPLE.toString() + ChatColor.BOLD + "BREWING "
                             + ChatColor.DARK_GRAY + Coins.getCoins(player) + " ⛃");
             addBackToMenuItem(inv);
         } else {
-            inv = Bukkit.createInventory(null, 27,
+            inv = Bukkit.createInventory(null, 36,
                     HexColor.PURPLE.toString() + ChatColor.BOLD + "BREWING MENU");
         }
 
@@ -75,6 +75,6 @@ public class BrewingInventory {
         meta.setDisplayName(HexColor.RED + "Back to Menu");
         item.setItemMeta(meta);
 
-        inventory.setItem(26, item);
+        inventory.setItem(35, item);
     }
 }

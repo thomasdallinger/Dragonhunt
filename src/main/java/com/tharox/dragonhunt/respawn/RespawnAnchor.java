@@ -19,12 +19,18 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class RespawnAnchor implements Listener {
+
+    private List<Player> playerUsesTeleport = new ArrayList<>();
 
     public RespawnAnchor() {
         run();
@@ -90,6 +96,13 @@ public class RespawnAnchor implements Listener {
             if (item.getItemMeta().getDisplayName().contains("Respawn Anchor")) {
                 event.setCancelled(true); // Avoid block placement.
 
+                if (playerUsesTeleport.contains(player)) {
+                    player.sendMessage(HexColor.RED + "Cancelling teleportation...");
+                    player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
+                    playerUsesTeleport.remove(player);
+                    return;
+                }
+
                 if (world.getName().equals("world_the_end")) {
                     player.sendMessage(Prefixes.getErrorPrefix() + "This feature is disabled in the End dimension.");
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
@@ -112,17 +125,38 @@ public class RespawnAnchor implements Listener {
                     return;
                 }
 
-                if (player.getBedSpawnLocation() != null) {
-                    player.teleport(player.getBedSpawnLocation());
-                } else {
-                    player.teleport(Objects.requireNonNull(Bukkit.getWorld("world")).getSpawnLocation());
-                }
+                int delay = 4;
 
-                player.setHealth(player.getHealth() - 10.0);
-                player.sendMessage(HexColor.GREEN + "Teleported to your Respawn Point.");
-                player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤ Penalty");
-                player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-                player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
+                player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, delay * 20, 0));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, delay * 20, 9));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, delay * 20,
+                        9));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, delay * 20, 200));
+
+                player.sendMessage(HexColor.GREEN + "Teleporting in " + ChatColor.DARK_GREEN + delay
+                        + HexColor.GREEN + " seconds.");
+                player.sendMessage(ChatColor.WHITE + "Right-Click again" + ChatColor.GRAY + " to cancel the teleport.");
+                player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_AMBIENT, 1, 1);
+                playerUsesTeleport.add(player);
+
+                Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
+                    if (playerUsesTeleport.contains(player)) {
+
+                        if (player.getBedSpawnLocation() != null) {
+                            player.teleport(player.getBedSpawnLocation());
+                        } else {
+                            player.teleport(Objects.requireNonNull(Bukkit.getWorld("world")).getSpawnLocation());
+                        }
+
+                        player.setHealth(player.getHealth() - 10.0);
+                        player.sendMessage(HexColor.GREEN + "Teleported to your Respawn Point.");
+                        player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤ Penalty");
+                        player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 0.5f, 1);
+                        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
+
+                        playerUsesTeleport.remove(player);
+                    }
+                }, delay * 20L);
             }
         }
     }
@@ -176,7 +210,8 @@ public class RespawnAnchor implements Listener {
                 ChatColor.GRAY + "Costs " + ChatColor.WHITE + "5 ❤" + ChatColor.GRAY + ".",
                 "",
                 ChatColor.GRAY + "Left-Click: " + HexColor.YELLOW + "Set Respawn Point",
-                ChatColor.GRAY + "Right-Click: " + HexColor.YELLOW + "TP to Respawn Point"));
+                ChatColor.GRAY + "Right-Click: " + HexColor.YELLOW + "TP to Respawn Point",
+                ChatColor.GRAY + "Right-Click again: " + HexColor.RED + "Cancel TP"));
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

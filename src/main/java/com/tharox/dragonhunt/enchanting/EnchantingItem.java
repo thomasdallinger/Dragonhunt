@@ -59,6 +59,8 @@ public class EnchantingItem {
         if (NAME != null) {
             if (NAME.contains("Sharpness"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.Sharpness.get(player));
+            else if (NAME.contains("Knockback"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.Knockback.get(player));
             else if (NAME.contains("Fire Aspect"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.FireAspect.get(player));
 

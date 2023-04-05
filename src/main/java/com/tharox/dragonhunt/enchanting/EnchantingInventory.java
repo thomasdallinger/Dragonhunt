@@ -37,7 +37,7 @@ public class EnchantingInventory {
             itemList.add(new EnchantingItem(section));
         }
 
-        Inventory inv = Bukkit.createInventory(null, 36,
+        Inventory inv = Bukkit.createInventory(null, 45,
                 HexColor.PURPLE.toString() + ChatColor.BOLD + "ENCHANTING "
                 + ChatColor.DARK_GRAY + Coins.getCoins(player) + " ⛃");
 

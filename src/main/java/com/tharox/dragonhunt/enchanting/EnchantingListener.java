@@ -68,6 +68,8 @@ public class EnchantingListener implements Listener {
         // SUCCESS: enchantment can be purchased - raise the level by 1
         if (enchantment.contains("Sharpness")) {
             Enchantments.Sharpness.put(player, Enchantments.Sharpness.get(player) + 1);
+        } else if (enchantment.contains("Knockback")) {
+            Enchantments.Knockback.put(player, Enchantments.Knockback.get(player) + 1);
         } else if (enchantment.contains("Fire Aspect")) {
             Enchantments.FireAspect.put(player, Enchantments.FireAspect.get(player) + 1);
         } else if (enchantment.contains("Power")) {

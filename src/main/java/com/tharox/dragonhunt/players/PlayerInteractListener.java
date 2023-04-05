@@ -51,7 +51,8 @@ public class PlayerInteractListener implements Listener {
                     if (block.getType() == Material.ENCHANTING_TABLE) {
                         event.setCancelled(true);
 
-                        EnchantingInventory enchantingInventory = new EnchantingInventory(Main.getInstance().getConfig(), player);
+                        EnchantingInventory enchantingInventory
+                                = new EnchantingInventory(Main.getInstance().getConfig(), player);
                         player.openInventory(enchantingInventory.enchant);
                         return;
                     }
@@ -60,7 +61,8 @@ public class PlayerInteractListener implements Listener {
                     if (block.getType() == Material.BREWING_STAND) {
                         event.setCancelled(true);
 
-                        BrewingInventory brewingInventory = new BrewingInventory(Main.getInstance().getConfig(), player);
+                        BrewingInventory brewingInventory
+                                = new BrewingInventory(Main.getInstance().getConfig(), player);
                         player.openInventory(brewingInventory.menu);
                         return;
                     }

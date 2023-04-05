@@ -21,6 +21,7 @@ public class Enchantments {
 
     // Swords
     public static HashMap<Player, Integer> Sharpness = new HashMap<>();
+    public static HashMap<Player, Integer> Knockback = new HashMap<>();
     public static HashMap<Player, Integer> FireAspect = new HashMap<>();
 
     // Bows
@@ -40,6 +41,7 @@ public class Enchantments {
         // set default values: level 1 can be purchased
         for (Player player : Bukkit.getOnlinePlayers()) {
             Sharpness.put(player, 1);
+            Knockback.put(player, 1);
             FireAspect.put(player, 1);
             Power.put(player, 1);
             Punch.put(player, 1);
@@ -75,6 +77,9 @@ public class Enchantments {
                             if (Sharpness.get(player) > 1)
                                 item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, Sharpness.get(player) - 1);
 
+                            if (Knockback.get(player) > 1)
+                                item.addUnsafeEnchantment(Enchantment.KNOCKBACK, Knockback.get(player) - 1);
+
                             if (FireAspect.get(player) > 1)
                                 item.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, FireAspect.get(player) - 1);
                         }
@@ -82,19 +87,19 @@ public class Enchantments {
                         // Bows
                         if (item.getType().equals(Material.BOW)) {
                             if (Power.get(player) > 1)
-                                item.addEnchantment(Enchantment.ARROW_DAMAGE, Power.get(player) - 1);
+                                item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, Power.get(player) - 1);
 
                             if (Punch.get(player) > 1)
-                                item.addEnchantment(Enchantment.ARROW_KNOCKBACK, Punch.get(player) - 1);
+                                item.addUnsafeEnchantment(Enchantment.ARROW_KNOCKBACK, Punch.get(player) - 1);
 
                             if (Flame.get(player) > 1)
-                                item.addEnchantment(Enchantment.ARROW_FIRE, Flame.get(player) - 1);
+                                item.addUnsafeEnchantment(Enchantment.ARROW_FIRE, Flame.get(player) - 1);
                         }
 
                         // Crossbows
                         if (item.getType().equals(Material.CROSSBOW)) {
                             if (Multishot.get(player) > 1)
-                                item.addEnchantment(Enchantment.MULTISHOT, Multishot.get(player) - 1);
+                                item.addUnsafeEnchantment(Enchantment.MULTISHOT, Multishot.get(player) - 1);
                         }
                     }
 
@@ -107,7 +112,8 @@ public class Enchantments {
                         if (armorPiece == null) continue;
 
                         if (Protection.get(player) > 1) {
-                            armorPiece.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, Protection.get(player) - 1);
+                            armorPiece.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL,
+                                    Protection.get(player) - 1);
                         }
 
                         if (Thorns.get(player) > 1) {
@@ -118,7 +124,8 @@ public class Enchantments {
                     // boots only
                     if (boots != null) {
                         if (FeatherFalling.get(player) > 1) {
-                            boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL, FeatherFalling.get(player) - 1);
+                            boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL,
+                                    FeatherFalling.get(player) - 1);
                         }
                     }
                 }

@@ -49,22 +49,29 @@ public class Effects {
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     if (Speed.get(player) > 1)
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, Speed.get(player) - 2));
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40,
+                                Speed.get(player) - 2));
 
-                    if (JumpBoost.get(player) > 1) // Higher amplifier than any other permanent effect due to Jump Boost 1 being very weak.
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 40, JumpBoost.get(player)));
+                    if (JumpBoost.get(player) > 1)
+                        // Higher amplifier than any other permanent effect due to Jump Boost 1 being very weak.
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 40,
+                                JumpBoost.get(player) - 1));
 
                     if (Resistance.get(player) > 1)
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 40, Resistance.get(player) - 2));
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,
+                                40, Resistance.get(player) - 2));
 
                     if (Strength.get(player) > 1)
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 40, Strength.get(player) - 2));
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,
+                                40, Strength.get(player) - 2));
 
                     if (Regeneration.get(player) > 1)
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 40, Regeneration.get(player) - 2));
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,
+                                40, Regeneration.get(player) - 2));
 
                     if (player.getWorld().getName().equals("world")) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 400, 0));
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION,
+                                400, 0));
                         // Duration needs to be longer to avoid flashing.
                     }
 

@@ -8,7 +8,7 @@ public class Prefixes {
 
     // IMPORTANT: used for important messages
     public static String getImportantPrefix() {
-        return ChatColor.DARK_GRAY + "[" + HexColor.RED + ChatColor.BOLD + "!!!"
+        return ChatColor.DARK_GRAY + "[" + ChatColor.RED + ChatColor.BOLD + "!!!"
                 + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 

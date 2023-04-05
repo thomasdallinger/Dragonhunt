@@ -1,174 +1,237 @@
 # menu item: no cost!
 enchanting:
   0:
-    material: DIAMOND_SWORD
+    material: DIAMOND_AXE
     amount: 1
     slot: 0
     name: "Sharpness I"
     cost: 5
     lore: "Adds 1 attack damage."
   1:
-    material: DIAMOND_SWORD
+    material: DIAMOND_AXE
     amount: 2
     slot: 9
     name: "Sharpness II"
     cost: 7
     lore: "Adds 1.5 attack damage."
   2:
-    material: DIAMOND_SWORD
+    material: DIAMOND_AXE
     amount: 3
     slot: 18
     name: "Sharpness III"
     cost: 9
     lore: "Adds 2 attack damage."
   3:
-    material: DIAMOND_SWORD
+    material: DIAMOND_AXE
     amount: 4
     slot: 27
     name: "Sharpness IV"
     cost: 11
     lore: "Adds 2.5 attack damage."
   4:
-    material: FLINT_AND_STEEL
+    material: DIAMOND_AXE
+    amount: 5
+    slot: 36
+    name: "Sharpness V"
+    cost: 11
+    lore: "Adds 3 attack damage."
+  5:
+    material: IRON_SWORD
     amount: 1
     slot: 1
+    name: "Knockback I"
+    cost: 15
+    lore: "105% increase in knockback."
+  6:
+    material: IRON_SWORD
+    amount: 2
+    slot: 10
+    name: "Knockback II"
+    cost: 10
+    lore: "190% increase in knockback."
+  7:
+    material: IRON_SWORD
+    amount: 3
+    slot: 19
+    name: "Knockback III"
+    cost: 10
+    lore: "190%+ increase in knockback."
+  8:
+    material: FLINT_AND_STEEL
+    amount: 1
+    slot: 2
     name: "Fire Aspect I"
     cost: 15
     lore: "Sets entities on fire for 4 seconds."
-  5:
+  9:
     material: FLINT_AND_STEEL
     amount: 2
-    slot: 10
+    slot: 11
     name: "Fire Aspect II"
     cost: 10
     lore: "Sets entities on fire for 8 seconds."
-  6:
+  10:
+    material: FLINT_AND_STEEL
+    amount: 3
+    slot: 20
+    name: "Fire Aspect III"
+    cost: 10
+    lore: "Sets entities on fire for 12 seconds."
+  11:
     material: BOW
     amount: 1
-    slot: 2
+    slot: 3
     name: "Power I"
     cost: 5
     lore: "Increases arrow damage by 50%."
-  7:
+  12:
     material: BOW
     amount: 2
-    slot: 11
+    slot: 12
     name: "Power II"
     cost: 7
     lore: "Increases arrow damage by 75%."
-  8:
+  13:
     material: BOW
     amount: 3
-    slot: 20
+    slot: 21
     name: "Power III"
     cost: 9
     lore: "Increases arrow damage by 100%."
-  9:
+  14:
     material: BOW
     amount: 4
-    slot: 29
+    slot: 30
     name: "Power IV"
     cost: 11
     lore: "Increases arrow damage by 125%."
-  10:
+  15:
+    material: BOW
+    amount: 5
+    slot: 39
+    name: "Power V"
+    cost: 11
+    lore: "Increases arrow damage by 150%."
+  16:
     material: ARROW
     amount: 1
-    slot: 3
+    slot: 4
     name: "Punch I"
     cost: 10
     lore: "Adds 3 blocks of knockback distance."
-  11:
+  17:
     material: ARROW
     amount: 2
-    slot: 12
+    slot: 13
     name: "Punch II"
     cost: 10
     lore: "Adds 6 blocks of knockback distance."
-  12:
+  18:
+    material: ARROW
+    amount: 3
+    slot: 22
+    name: "Punch III"
+    cost: 10
+    lore: "Adds 9 blocks of knockback distance."
+  19:
     material: FIRE_CHARGE
     amount: 1
-    slot: 4
+    slot: 5
     name: "Flame"
     cost: 15
     lore: "Arrows set the target on fire."
-  13:
+  20:
     material: CROSSBOW
     amount: 1
-    slot: 5
+    slot: 14
     name: "Multishot"
     cost: 10
     lore: "Shoots three arrows on each shot."
-  14:
+  21:
     material: IRON_CHESTPLATE
     amount: 1
     slot: 6
     name: "Protection I"
     cost: 5
     lore: "4% damage reduction for each armor piece."
-  15:
+  22:
     material: IRON_CHESTPLATE
     amount: 2
     slot: 15
     name: "Protection II"
     cost: 7
     lore: "8% damage reduction for each armor piece."
-  16:
+  23:
     material: IRON_CHESTPLATE
     amount: 3
     slot: 24
     name: "Protection III"
     cost: 9
     lore: "12% damage reduction for each armor piece."
-  17:
+  24:
     material: IRON_CHESTPLATE
     amount: 4
     slot: 33
     name: "Protection IV"
     cost: 11
     lore: "16% damage reduction for each armor piece."
-  18:
+  25:
+    material: IRON_CHESTPLATE
+    amount: 5
+    slot: 42
+    name: "Protection V"
+    cost: 11
+    lore: "20% damage reduction for each armor piece."
+  26:
     material: CHAINMAIL_CHESTPLATE
     amount: 1
     slot: 7
     name: "Thorns I"
     cost: 5
     lore: "Reflects damage (15% Chance)."
-  19:
+  27:
     material: CHAINMAIL_CHESTPLATE
     amount: 2
     slot: 16
     name: "Thorns II"
     cost: 10
     lore: "Reflects damage (30% Chance)."
-  20:
+  28:
     material: CHAINMAIL_CHESTPLATE
     amount: 3
     slot: 25
     name: "Thorns III"
     cost: 15
     lore: "Reflects damage (45% Chance)."
-  21:
+  29:
+    material: CHAINMAIL_CHESTPLATE
+    amount: 4
+    slot: 34
+    name: "Thorns IV"
+    cost: 15
+    lore: "Reflects damage (60% Chance)."
+  30:
     material: NETHERITE_BOOTS
     amount: 1
     slot: 8
     name: "Feather Falling I"
     cost: 6
     lore: "Reduces fall damage by 12%."
-  22:
+  31:
     material: NETHERITE_BOOTS
     amount: 2
     slot: 17
     name: "Feather Falling II"
     cost: 9
     lore: "Reduces fall damage by 24%."
-  23:
+  32:
     material: NETHERITE_BOOTS
     amount: 3
     slot: 26
     name: "Feather Falling III"
     cost: 12
     lore: "Reduces fall damage by 36%."
-  24:
+  33:
     material: NETHERITE_BOOTS
     amount: 4
     slot: 35

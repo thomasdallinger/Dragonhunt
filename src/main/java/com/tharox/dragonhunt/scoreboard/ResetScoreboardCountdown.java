@@ -42,10 +42,9 @@ public class ResetScoreboardCountdown {
 
                         for (Player player : Bukkit.getOnlinePlayers()) {
                             player.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + "XP increased by "
-                                    + ChatColor.DARK_GREEN + ChatColor.BOLD + Coins.XPIncrease
-                                    + HexColor.GREEN + " XP Points for the next "
-                                    + ChatColor.DARK_GREEN + ChatColor.BOLD + "3 minutes"
-                                    + HexColor.GREEN + ".");
+                                    + ChatColor.DARK_GREEN + Coins.XPIncrease
+                                    + HexColor.GREEN + " XP Points for the next " + ChatColor.DARK_GREEN + "3"
+                                    + HexColor.GREEN + " minutes.");
                         }
                     } else {
                         Coins.XPIncrease = 0; // reset

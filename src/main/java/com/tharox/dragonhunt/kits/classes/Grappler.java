@@ -10,7 +10,6 @@ import java.util.HashMap;
 
 @DragonhuntKit
 public class Grappler extends Kit {
-    public static HashMap<Player, Integer> grapplerCooldown = new HashMap<>();
     static int cooldown = GrappleListener.cooldown / 20;
 
     public static final String title = HexColor.MOBILITY + KitClass.MOBILITY + " Grappler";

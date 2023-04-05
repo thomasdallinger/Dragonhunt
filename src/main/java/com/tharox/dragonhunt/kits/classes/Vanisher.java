@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 @DragonhuntKit
 public class Vanisher extends Kit {
     static int duration = 10;
-    static int cooldown = 90;
+    static int cooldown = 60;
 
     public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Vanisher";
     public static final String lore = ChatColor.DARK_GRAY.toString()

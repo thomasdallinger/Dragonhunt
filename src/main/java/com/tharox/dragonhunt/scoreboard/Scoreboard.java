@@ -34,8 +34,9 @@ public class Scoreboard extends ScoreboardBuilder {
         LocalDateTime now = LocalDateTime.now();
 
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
-                + DbValues.getServerID() + "]", 12);
-        setScore(ChatColor.WHITE + "12x1" + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE + "Casual", 11);
+                + DbValues.getServerID() + "]", 13);
+        setScore(ChatColor.WHITE + "12x1" + ChatColor.DARK_GRAY + " | " + ChatColor.WHITE + "Casual", 12);
+        setScore("", 11);
         setScore("", 10);
         setScore("", 9);
         setScore("", 8);
@@ -52,28 +53,31 @@ public class Scoreboard extends ScoreboardBuilder {
     @Override
     public void update(Player player, Countdown countdown) {
         if (GameState.selectedKit.containsKey(player)) {
-            setScore(GameState.selectedKit.get(player), 9);
+            setScore(GameState.selectedKit.get(player), 10);
         }
 
         setScore("☻ " + Bukkit.getOnlinePlayers().size() + " "
                 + "☠ " + DbValues.getKills(player, true) + " "
-                + "✟ " + DbValues.getKills(player, false), 8);
+                + "✟ " + DbValues.getKills(player, false), 9);
 
         if (timer.getTime() <= 1200) {
             setScore(PlayerEndTeleport.getEyesNeeded() + " Eyes" + ChatColor.DARK_GRAY + " » "
-                    + ChatColor.GRAY + countdownFormat(1200 - timer.getTime()), 6);
+                    + ChatColor.GRAY + countdownFormat(1200 - timer.getTime()), 7);
         } else {
-            setScore(PlayerEndTeleport.getEyesNeeded() + " Eyes", 6);
+            setScore(PlayerEndTeleport.getEyesNeeded() + " Eyes", 7);
         }
 
         if (Coins.XPIncrease == 0) {
             setScore(Coins.getCoins(player) + " ⛃" + ChatColor.DARK_GRAY + " » "
-                    + ChatColor.GRAY + countdownFormat(countdown.getTime()), 5);
+                    + ChatColor.GRAY + countdownFormat(countdown.getTime()), 6);
         } else { // XP Increase is active
             setScore(Coins.getCoins(player) + " ⛃" + ChatColor.DARK_GRAY + " » "
                     + HexColor.GREEN + countdownFormat(countdown.getTime())
-                    + ChatColor.DARK_GREEN + " +" + Coins.XPIncrease, 5);
+                    + ChatColor.DARK_GREEN + " +" + Coins.XPIncrease, 6);
         }
+
+        setScore(HexColor.GREEN + "-" + GameState.kitCooldownReduction.get(player) + " sec"
+                + ChatColor.WHITE + " Cooldown", 5);
 
         List<UUID> sortedKeys = GameState.sortPlayersByPoints(PointsListener.scorePerPlayer);
         boolean containsPlayer = false;

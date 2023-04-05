@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 @DragonhuntKit
 public class Scout extends Kit {
     static int duration = (int) Spectate.getDuration();
-    static int cooldown = 200;
+    static int cooldown = 70;
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Scout";
     public static final String lore = ChatColor.DARK_GRAY.toString()

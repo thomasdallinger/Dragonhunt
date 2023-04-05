@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.grappler.GrappleListener;
 import com.tharox.dragonhunt.kits.classes.Grappler;
 import com.tharox.dragonhunt.modifiers.classes.FireWeakness;
@@ -47,17 +48,18 @@ public class EntityDamageListener implements Listener {
             arrow.remove();
             event.setCancelled(true);
 
+            int cooldownToApply = GrappleListener.cooldown - 20 * GameState.kitCooldownReduction.get(player);
+
             // put the GRAPPLER on cooldown
-            player.setCooldown(Material.CROSSBOW,
-                    Grappler.grapplerCooldown.getOrDefault(player, GrappleListener.cooldown));
+            if (cooldownToApply >= 0) {
+                player.setCooldown(Material.CROSSBOW, cooldownToApply);
+            }
 
             // after the cooldown ends, add the next charged projectile
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
                 CrossbowMeta crossbowMeta = (CrossbowMeta) itemInMainHand.getItemMeta();
                 crossbowMeta.addChargedProjectile(new ItemStack(Material.ARROW, 1));
                 itemInMainHand.setItemMeta(crossbowMeta);
-
-                Grappler.grapplerCooldown.getOrDefault(player, GrappleListener.cooldown);
             }, 5L);
         }
 

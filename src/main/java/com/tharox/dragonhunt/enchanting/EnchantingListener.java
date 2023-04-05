@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.enchanting;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.brewing.BrewingInventory;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.chat.HexColor;
@@ -95,6 +96,8 @@ public class EnchantingListener implements Listener {
      * @param player player who purchased an enchantment
      */
     private void purchaseEnchantment(Player player, String enchantment) {
+        player.sendMessage(Prefixes.getCoinPrefix(-BrewingInventory.effectCost.get(enchantment))
+                + ChatColor.GRAY + "Purchased " + HexColor.YELLOW + enchantment.substring(16) + ChatColor.GRAY + ".");
         player.playSound(player.getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1, 1);
         Coins.removeCoins(player, EnchantingInventory.enchantmentCost.get(enchantment));
 

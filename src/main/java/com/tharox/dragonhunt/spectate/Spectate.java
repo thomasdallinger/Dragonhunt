@@ -18,7 +18,7 @@ import java.util.HashMap;
 
 public class Spectate {
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
-    private static final double duration = 20;
+    private static final double duration = 10;
     public double timeLeft = duration;
 
     public Spectate(Player player) {

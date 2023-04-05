@@ -12,8 +12,8 @@ import org.bukkit.potion.PotionEffectType;
 
 @DragonhuntKit
 public class Platformer extends Kit {
-    static int duration = 20;
-    static int cooldown = 180;
+    static int duration = 10;
+    static int cooldown = 70;
 
     public static final String title = HexColor.MOBILITY + KitClass.MOBILITY + " Platformer";
     public static final String lore = ChatColor.DARK_GRAY.toString()

@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.grappler;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.kits.classes.Grappler;
+import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.*;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Player;
@@ -19,7 +19,7 @@ import java.util.Objects;
 public class GrappleListener implements Listener {
 
     public static int maxArrowDistance = 20; // Blocks
-    public static int cooldown = 200; // Ticks
+    public static int cooldown = 400; // Ticks
 
     @EventHandler
     public void grappleEvent(EntityShootBowEvent event) {
@@ -37,17 +37,18 @@ public class GrappleListener implements Listener {
 
             arrow.setVelocity(arrow.getVelocity().multiply(2D));
 
+            int cooldownToApply = GrappleListener.cooldown - 20 * GameState.kitCooldownReduction.get(player);
+
             // put the GRAPPLER on cooldown
-            player.setCooldown(Material.CROSSBOW,
-                    Grappler.grapplerCooldown.getOrDefault(player, cooldown));
+            if (cooldownToApply >= 0) {
+                player.setCooldown(Material.CROSSBOW, cooldownToApply);
+            }
 
             // after the cooldown ends, add the next charged projectile
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
                 CrossbowMeta crossbowMeta = (CrossbowMeta) bow.getItemMeta();
                 crossbowMeta.addChargedProjectile(new ItemStack(Material.ARROW, 1));
                 bow.setItemMeta(crossbowMeta);
-
-                Grappler.grapplerCooldown.getOrDefault(player, cooldown);
             }, 5L);
 
             new BukkitRunnable() {

@@ -141,10 +141,10 @@ public class BrewingListener implements Listener {
      * @param player player that purchased an effect
      */
     private void purchaseEffect(Player player, String effectName) {
+        player.sendMessage(Prefixes.getCoinPrefix(-BrewingInventory.effectCost.get(effectName))
+                + ChatColor.GRAY + "Purchased " + HexColor.YELLOW + effectName.substring(16) + ChatColor.GRAY + ".");
         player.playSound(player.getLocation(), Sound.BLOCK_BREWING_STAND_BREW, 1, 1);
         Coins.removeCoins(player, BrewingInventory.effectCost.get(effectName));
-        player.sendMessage(Prefixes.getCoinPrefix(-BrewingInventory.effectCost.get(effectName))
-                + ChatColor.GRAY + "Purchased " + effectName + ChatColor.GRAY + ".");
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             // Substring 16 from effectName to remove Hex-formatting

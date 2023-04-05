@@ -38,7 +38,7 @@ public abstract class Kit implements Listener {
     public static final int slot = 0;
 
     Timer timer = Main.getInstance().getTimer();
-    int cooldownEnds;
+    int cooldownEnds = 30; // no Kit Abilities in the first 30 seconds of a game
 
     public Kit(Player player) {
         this.player = player;
@@ -93,12 +93,12 @@ public abstract class Kit implements Listener {
     }
 
     public void setCooldownEnds() {
-        cooldownEnds = getCooldown() + timer.getTime();
+        cooldownEnds = (getCooldown() - GameState.kitCooldownReduction.get(player)) + timer.getTime();
 
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
             player.sendMessage(Prefixes.getImportantPrefix() + GameState.selectedKit.get(player) + ChatColor.GRAY
                     + " Kit Ability is " + HexColor.GREEN + "ready" + ChatColor.GRAY + ".");
-        }, getCooldown() * 20L);
+        }, (getCooldown() - GameState.kitCooldownReduction.get(player)) * 20L);
     }
 
     public void sendActionBar(Player player) {

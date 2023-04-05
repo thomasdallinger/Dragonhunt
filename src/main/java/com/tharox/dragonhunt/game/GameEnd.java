@@ -83,20 +83,21 @@ public class GameEnd {
                 if (p == null) continue;
 
                 if (p == player) {
-                    player.sendMessage(ChatColor.GRAY + "#" + (index + 1) + " "
-                            + ChatColor.DARK_AQUA + p.getName() + " "
-                            + ChatColor.AQUA + PointsListener.scorePerPlayer.get(p.getUniqueId()));
+                    player.sendMessage(HexColor.YELLOW + "#" + (index + 1) + " "
+                            + ChatColor.WHITE + p.getName() + " "
+                            + HexColor.YELLOW + PointsListener.scorePerPlayer.get(p.getUniqueId()));
 
-                    player.sendTitle(ChatColor.DARK_AQUA.toString() + ChatColor.BOLD + "#" + (index + 1),
-                            ChatColor.AQUA + "You scored " + PointsListener.scorePerPlayer.get(p.getUniqueId())
-                                    + " Points",
+                    player.sendTitle(HexColor.YELLOW + "#" + (index + 1),
+                            ChatColor.WHITE + "You scored "
+                                    + HexColor.YELLOW + PointsListener.scorePerPlayer.get(p.getUniqueId())
+                                    + ChatColor.WHITE + " Points",
                             10, 90, 20);
 
                     addDataToPlaysTable(player, (index + 1));
                 } else {
-                    player.sendMessage(ChatColor.GRAY + "#" + (index + 1) + " "
-                            + ChatColor.WHITE + p.getName() + " "
-                            + ChatColor.AQUA + PointsListener.scorePerPlayer.get(p.getUniqueId()));
+                    player.sendMessage(ChatColor.WHITE + "#" + (index + 1) + " "
+                            + ChatColor.GRAY + p.getName() + " "
+                            + ChatColor.WHITE + PointsListener.scorePerPlayer.get(p.getUniqueId()));
                 }
             }
         }

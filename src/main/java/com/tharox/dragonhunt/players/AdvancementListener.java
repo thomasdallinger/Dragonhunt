@@ -60,7 +60,7 @@ public class AdvancementListener implements Listener {
                     for (Player online : Bukkit.getOnlinePlayers()) {
                         online.sendMessage(Prefixes.getImportantPrefix()
                                 + HexColor.YELLOW + PlayerEndTeleport.getEyesNeeded()
-                                + " Eyes of Ender " + ChatColor.GRAY + "needed to be able to enter"
+                                + " Eyes of Ender " + ChatColor.GRAY + "needed to be able to enter "
                                 + ChatColor.WHITE + "The End" + ChatColor.GRAY + ".");
                     }
                 }

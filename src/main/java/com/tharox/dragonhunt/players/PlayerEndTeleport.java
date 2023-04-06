@@ -1,14 +1,11 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -58,10 +55,14 @@ public class PlayerEndTeleport implements Listener {
                     return;
                 }
 
-                player.getLocation().getBlock().setType(Material.END_PORTAL);
+                // Save the player's current location so the block can be reset later
+                // when the player is already in The End.
+                Location location = player.getLocation();
+
+                location.getBlock().setType(Material.END_PORTAL);
 
                 Bukkit.getScheduler().runTaskLater(Main.getInstance(),
-                        task -> player.getLocation().getBlock().setType(Material.AIR), 5L);
+                        task -> location.getBlock().setType(Material.AIR), 5L);
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.dimensions;
 
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.respawn.RespawnAnchor;
@@ -20,8 +21,6 @@ import org.bukkit.generator.structure.Structure;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.StructureSearchResult;
-
-import java.util.Random;
 
 public class DimensionListener implements Listener {
     /**
@@ -71,19 +70,10 @@ public class DimensionListener implements Listener {
             if (worldFrom.getName().equals("world")) {
 
                 // No player has reached the NETHER before.
-                // Set the first NETHER PORTAL close to a fortress/bastion.
+                // Set the first NETHER PORTAL close to a Fortress.
                 if (GameState.firstNetherEntry == null) {
-                    Random random = new Random();
-                    int number = random.nextInt(2);
-                    StructureSearchResult structureSearchResult;
-
-                    if (number == 0) {
-                        structureSearchResult = worldTo.locateNearestStructure(
-                                player.getLocation(), Structure.FORTRESS, 32, false);
-                    } else {
-                        structureSearchResult = worldTo.locateNearestStructure(
-                                player.getLocation(), Structure.BASTION_REMNANT, 32, false);
-                    }
+                    StructureSearchResult structureSearchResult = worldTo.locateNearestStructure(
+                            player.getLocation(), Structure.FORTRESS, 32, false);
 
                     if (structureSearchResult != null) {
                         event.setCanCreatePortal(true);
@@ -93,6 +83,15 @@ public class DimensionListener implements Listener {
                     event.setCanCreatePortal(false);
                     event.setTo(GameState.firstNetherEntry);
                 }
+
+                // Force set the Respawn Point to the Nether Portals location
+                player.setBedSpawnLocation(event.getFrom(), true);
+                player.sendMessage(HexColor.GREEN + "Respawn Point set at "
+                        + ChatColor.DARK_GREEN + "[" + DbValues.getCurrentWorld(event.getFrom())
+                        + ", x: " + (int) event.getFrom().getX()
+                        + ", y: " + (int) event.getFrom().getY()
+                        + ", z: " + (int) event.getFrom().getZ() + "]"
+                        + HexColor.GREEN + ".");
             }
         }
 
@@ -101,8 +100,8 @@ public class DimensionListener implements Listener {
             if (!PointsListener.bossBars.containsKey(player.getUniqueId())) {
                 PointsListener.bossBars.put(player.getUniqueId(),
                         Bukkit.createBossBar(HexColor.YELLOW.toString() + ChatColor.BOLD
-                                + "0" + ChatColor.WHITE + " / " + PointsListener.threshold + " Points",
-                        BarColor.YELLOW, BarStyle.SOLID));
+                                        + "0" + ChatColor.WHITE + " / " + PointsListener.threshold + " Points",
+                                BarColor.YELLOW, BarStyle.SOLID));
                 PointsListener.bossBars.get(player.getUniqueId()).addPlayer(player);
                 PointsListener.bossBars.get(player.getUniqueId()).setProgress(0);
                 PointsListener.bossBars.get(player.getUniqueId()).setVisible(true);

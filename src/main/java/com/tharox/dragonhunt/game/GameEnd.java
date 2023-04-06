@@ -83,8 +83,8 @@ public class GameEnd {
                 if (p == null) continue;
 
                 if (p == player) {
-                    player.sendMessage(HexColor.YELLOW + "#" + (index + 1) + " "
-                            + ChatColor.WHITE + p.getName() + " "
+                    player.sendMessage(ChatColor.GRAY+ "#" + (index + 1) + " "
+                            + HexColor.YELLOW + p.getName() + " "
                             + HexColor.YELLOW + PointsListener.scorePerPlayer.get(p.getUniqueId()));
 
                     player.sendTitle(HexColor.YELLOW + "#" + (index + 1),
@@ -95,9 +95,9 @@ public class GameEnd {
 
                     addDataToPlaysTable(player, (index + 1));
                 } else {
-                    player.sendMessage(ChatColor.WHITE + "#" + (index + 1) + " "
-                            + ChatColor.GRAY + p.getName() + " "
-                            + ChatColor.WHITE + PointsListener.scorePerPlayer.get(p.getUniqueId()));
+                    player.sendMessage(ChatColor.GRAY + "#" + (index + 1) + " "
+                            + ChatColor.WHITE + p.getName() + " "
+                            + HexColor.YELLOW + PointsListener.scorePerPlayer.get(p.getUniqueId()));
                 }
             }
         }

@@ -4,7 +4,6 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.players.PlayerEndTeleport;
 import com.tharox.dragonhunt.players.PointsListener;
@@ -17,7 +16,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
 
 public class Scoreboard extends ScoreboardBuilder {
     Timer timer = Main.getInstance().getTimer();
@@ -80,8 +80,6 @@ public class Scoreboard extends ScoreboardBuilder {
                 + ChatColor.WHITE + " Cooldown", 5);
 
         List<UUID> sortedKeys = GameState.sortPlayersByPoints(PointsListener.scorePerPlayer);
-        boolean containsPlayer = false;
-        int rankOfPlayer = 1;
 
         for (int index = 0; index < sortedKeys.size(); index++) {
             Player p = Bukkit.getPlayer(sortedKeys.get(index));
@@ -89,26 +87,23 @@ public class Scoreboard extends ScoreboardBuilder {
 
             if (index < 3) {
                 if (p == player) {
-                    containsPlayer = true;
-                    setScore(HexColor.YELLOW + "#" + (index + 1) + " "
-                            + ChatColor.WHITE + p.getName() + " "
+                    setScore(ChatColor.GRAY + "#" + (index + 1) + " "
+                            + HexColor.YELLOW + p.getName() + " "
                             + HexColor.YELLOW + PointsListener.scorePerPlayer.get(p.getUniqueId()), 3 - index);
                 } else {
-                    setScore(ChatColor.WHITE + "#" + (index + 1) + " "
-                            + ChatColor.GRAY + p.getName() + " "
-                            + ChatColor.WHITE + PointsListener.scorePerPlayer.get(p.getUniqueId()), 3 - index);
+                    setScore(ChatColor.GRAY + "#" + (index + 1) + " "
+                            + ChatColor.WHITE + p.getName() + " "
+                            + HexColor.YELLOW + PointsListener.scorePerPlayer.get(p.getUniqueId()), 3 - index);
                 }
             }
             // Player is not in the top 3
             else {
-                if (p == player) rankOfPlayer = index;
+                if (p == player) {
+                    setScore(ChatColor.GRAY + "#" + (index + 1) + " "
+                            + HexColor.YELLOW + player.getName() + " "
+                            + HexColor.YELLOW + PointsListener.scorePerPlayer.get(player.getUniqueId()), 0);
+                }
             }
-        }
-
-        if (!containsPlayer) {
-            setScore(HexColor.YELLOW + "#" + rankOfPlayer + " "
-                    + ChatColor.WHITE + player.getName() + " "
-                    + HexColor.YELLOW + PointsListener.scorePerPlayer.get(player.getUniqueId()), 0);
         }
     }
 

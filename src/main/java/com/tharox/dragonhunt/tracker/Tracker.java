@@ -151,27 +151,38 @@ public class Tracker implements Listener {
                     return;
                 }
 
-                if (trackedObject.contains("[P]")) {
-                    trackedObjectName = ChatColor.WHITE.toString() + ChatColor.BOLD
-                            + trackedObject.substring(4).toUpperCase() + ChatColor.DARK_GRAY + " » ";
-
-                    // Update the distance to other players constantly since they are moving
-                    trackedLocation = Objects.requireNonNull(
-                            Bukkit.getPlayer(trackedObject.substring(4))).getLocation();
-                }
-
                 distance = (int) player.getLocation().distance(trackedLocation);
 
                 // do not show "In close proximity" when tracking a player
                 // but still needed to make it easier to find structures since the coords provided are not very accurate
-                if (distance < 75 && !trackedObject.contains("[P]")) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(trackedObjectName)
-                            .append("In close proximity").color(HexColor.GREEN).create());
-                } else {
+                if (trackedObject.contains("[P]")) {
+                    trackedObjectName = trackedObject.substring(4).toUpperCase();
+
+                    // Update the distance to other players constantly since they are moving
+                    trackedLocation = Objects.requireNonNull(
+                            Bukkit.getPlayer(trackedObject.substring(4))).getLocation();
+
+                    // Calculate new distance
+                    distance = (int) player.getLocation().distance(trackedLocation);
+
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new ComponentBuilder(trackedObject.toUpperCase()).color(HexColor.YELLOW).bold(true)
+                            new ComponentBuilder(trackedObjectName).color(ChatColor.WHITE).bold(true)
                                     .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
                                     .append(distance + " Blocks away").color(ChatColor.GRAY).create());
+                } else {
+                    trackedObjectName = trackedObject.toUpperCase();
+
+                    if (distance < 50) {
+                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                new ComponentBuilder(trackedObjectName).color(HexColor.YELLOW).bold(true)
+                                        .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                        .append("In close proximity").color(HexColor.GREEN).create());
+                    } else {
+                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                new ComponentBuilder(trackedObjectName).color(HexColor.YELLOW).bold(true)
+                                        .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                        .append(distance + " Blocks away").color(ChatColor.GRAY).create());
+                    }
                 }
 
                 // set the compass target (where to point the needle)
@@ -186,8 +197,10 @@ public class Tracker implements Listener {
             } catch (IllegalArgumentException ex) {
                 // Different dimension.
                 if (trackedObject != null) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder(trackedObjectName)
-                            .append(DbValues.getCurrentWorld(trackedLocation)).color(HexColor.RED).create());
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                            new ComponentBuilder(trackedObjectName).color(HexColor.YELLOW).bold(true)
+                                    .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                    .append(DbValues.getCurrentWorld(trackedLocation)).color(HexColor.RED).create());
                 }
             }
         }

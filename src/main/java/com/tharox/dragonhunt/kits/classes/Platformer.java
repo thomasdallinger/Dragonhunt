@@ -52,7 +52,7 @@ public class Platformer extends Kit {
         Location playerLocation = player.getLocation();
         Location offsetLocation;
 
-        for (int offsetY = -1; offsetY != 2; offsetY++) {
+        for (int offsetY = -1; offsetY != 3; offsetY++) {
             Material material = Material.AIR;
 
             if (offsetY == -1) {

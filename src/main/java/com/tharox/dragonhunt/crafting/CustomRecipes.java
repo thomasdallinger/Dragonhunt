@@ -22,24 +22,32 @@ public class CustomRecipes {
         changePickaxeRecipe(Material.IRON_PICKAXE, "gold_pickaxe", Material.GOLD_INGOT);
         changePickaxeRecipe(Material.IRON_PICKAXE, "stone_pickaxe", Material.COBBLESTONE);
         changePickaxeRecipe(Material.IRON_PICKAXE, "blackstone_pickaxe", Material.BLACKSTONE);
+        changePickaxeRecipe(Material.IRON_PICKAXE, "deepslate_pickaxe", Material.COBBLED_DEEPSLATE);
+        changePickaxeRecipe(Material.IRON_PICKAXE, "iron_pickaxe", Material.IRON_INGOT);
         changePickaxeRecipe(Material.DIAMOND_PICKAXE, "diamond_pickaxe", Material.DIAMOND);
 
         changeAxeRecipe(Material.IRON_AXE, "wood_axe", Material.OAK_PLANKS);
         changeAxeRecipe(Material.IRON_AXE, "gold_axe", Material.GOLD_INGOT);
         changeAxeRecipe(Material.IRON_AXE, "stone_axe", Material.COBBLESTONE);
         changeAxeRecipe(Material.IRON_AXE, "blackstone_axe", Material.BLACKSTONE);
+        changeAxeRecipe(Material.IRON_AXE, "deepslate_axe", Material.COBBLED_DEEPSLATE);
+        changeAxeRecipe(Material.IRON_AXE, "iron_axe", Material.IRON_INGOT);
         changeAxeRecipe(Material.DIAMOND_AXE, "diamond_axe", Material.DIAMOND);
 
         changeHoeRecipe(Material.IRON_HOE, "wood_hoe", Material.OAK_PLANKS);
         changeHoeRecipe(Material.IRON_HOE, "gold_hoe", Material.GOLD_INGOT);
         changeHoeRecipe(Material.IRON_HOE, "stone_hoe", Material.COBBLESTONE);
         changeHoeRecipe(Material.IRON_HOE, "blackstone_hoe", Material.BLACKSTONE);
+        changeHoeRecipe(Material.IRON_HOE, "deepslate_hoe", Material.COBBLED_DEEPSLATE);
+        changeHoeRecipe(Material.IRON_HOE, "iron_hoe", Material.IRON_INGOT);
         changeHoeRecipe(Material.DIAMOND_HOE, "diamond_hoe", Material.DIAMOND);
 
         changeShovelRecipe(Material.IRON_SHOVEL, "wood_shovel", Material.OAK_PLANKS);
         changeShovelRecipe(Material.IRON_SHOVEL, "gold_shovel", Material.GOLD_INGOT);
         changeShovelRecipe(Material.IRON_SHOVEL, "stone_shovel", Material.COBBLESTONE);
         changeShovelRecipe(Material.IRON_SHOVEL, "blackstone_shovel", Material.BLACKSTONE);
+        changeShovelRecipe(Material.IRON_SHOVEL, "deepslate_shovel", Material.COBBLED_DEEPSLATE);
+        changeShovelRecipe(Material.IRON_SHOVEL, "iron_shovel", Material.IRON_INGOT);
         changeShovelRecipe(Material.DIAMOND_SHOVEL, "diamond_shovel", Material.DIAMOND);
 
         changeSwordRecipe(new ItemStack(Material.IRON_SWORD), "wood_sword", Material.OAK_PLANKS);

@@ -1,12 +1,13 @@
 package com.tharox.dragonhunt.timer;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.KitClass;
+import com.tharox.dragonhunt.players.CombatListener;
 import com.tharox.dragonhunt.players.PlayerEndTeleport;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
@@ -68,19 +69,27 @@ public class Timer {
                 }
             }
 
-            // display the time
-            // if the last 10 minutes have arrived, the time will get displayed in red
+            // Display the time (with or without in combat alert)
             ChatColor color = HexColor.YELLOW;
 
-            if (getTime() >= 1200) {
-                color = HexColor.RED;
+            if (CombatListener.combatList.containsKey(player.getUniqueId())) {
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                        new ComponentBuilder(DbValues.getTimestamp()).color(color).bold(true)
+                                .append(" (").color(ChatColor.GRAY).bold(false)
+                                .append(DbValues.getTime(1800 - getTime())).color(ChatColor.GRAY)
+                                .append(")").color(ChatColor.GRAY)
+                                .append(" » ").color(ChatColor.DARK_GRAY)
+                                .append("In Combat for ").color(ChatColor.GRAY)
+                                .append(String.valueOf(CombatListener.combatList.get(player.getUniqueId())))
+                                .color(HexColor.RED).bold(true)
+                                .append(" seconds").color(ChatColor.GRAY).bold(false).create());
+            } else {
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                        new ComponentBuilder(DbValues.getTimestamp()).color(color).bold(true)
+                                .append(" (").color(ChatColor.GRAY).bold(false)
+                                .append(DbValues.getTime(1800 - getTime())).color(ChatColor.GRAY)
+                                .append(")").color(ChatColor.GRAY).create());
             }
-
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                    new ComponentBuilder(DbValues.getTimestamp()).color(color).bold(true)
-                            .append(" (").color(ChatColor.GRAY).bold(false)
-                            .append(DbValues.getTime(1800 - getTime())).color(ChatColor.GRAY)
-                            .append(")").color(ChatColor.GRAY).create());
         }
     }
 

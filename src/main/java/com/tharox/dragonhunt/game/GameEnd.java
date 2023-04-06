@@ -63,10 +63,7 @@ public class GameEnd {
             player.setGameMode(GameMode.SPECTATOR);
             player.playSound(player.getLocation(), Sound.ENTITY_WITHER_DEATH, 1, 1);
 
-            if (CombatListener.combatList.containsKey(player.getUniqueId())) {
-                CombatListener.combatList.remove(player.getUniqueId());
-                CombatListener.bossBars.get(player.getUniqueId()).removePlayer(player);
-            }
+            CombatListener.combatList.remove(player.getUniqueId());
 
             player.sendMessage(ChatColor.WHITE.toString() + ChatColor.BOLD + winner.getName()
                     + HexColor.GREEN + " has won the Dragonhunt.");

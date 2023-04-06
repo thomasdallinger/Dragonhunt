@@ -13,15 +13,15 @@ import org.bukkit.potion.PotionEffectType;
 
 @DragonhuntKit
 public class Demolitionist extends Kit {
-    static int duration = 35;
-    static int cooldown = 180;
+    static int duration = 30;
+    static int cooldown = 120;
 
     public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Demolitionist";
     public static final String lore = ChatColor.DARK_GRAY.toString()
             + ChatColor.ITALIC + "Explosions Everywhere\n\n"
             + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "On activation " + ChatColor.WHITE + "3" + ChatColor.GRAY + " layers of "
-            + ChatColor.WHITE + "TNT" + ChatColor.GRAY + " will spawn around you.\n"
+            + ChatColor.GRAY + "On activation " + ChatColor.WHITE + "4" + ChatColor.GRAY + " layers of "
+            + ChatColor.WHITE + "TNT" + ChatColor.GRAY + " will spawn below your location.\n"
             + ChatColor.GRAY + "You cannot take any damage from the explosion.\n"
             + ChatColor.GRAY + "You cannot move while the explosion occurs.\n\n"
             + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " seconds\n"
@@ -48,25 +48,30 @@ public class Demolitionist extends Kit {
 
         if (location.getWorld() == null) return;
 
-        for (int offsetX = -25; offsetX < 26; offsetX += 3) {
-            for (int offsetZ = -25; offsetZ < 26; offsetZ += 3) {
+        for (int offsetX = -15; offsetX < 16; offsetX += 3) {
+            for (int offsetZ = -15; offsetZ < 16; offsetZ += 3) {
                 if (Math.abs(offsetX) < 6 && Math.abs(offsetZ) < 6)
                     continue;
 
                 Location tntLocation = new Location(location.getWorld(),
-                        location.getX() + offsetX, location.getY() + 2, location.getZ() + offsetZ);
+                        location.getX() + offsetX, location.getY() - 1, location.getZ() + offsetZ);
                 tntLocation.getBlock().setType(Material.AIR);
                 location.getWorld().spawn(tntLocation, TNTPrimed.class);
 
                 Location tntLocation2 = new Location(location.getWorld(),
-                        location.getX() + offsetX, location.getY(), location.getZ() + offsetZ);
+                        location.getX() + offsetX, location.getY() - 4, location.getZ() + offsetZ);
                 tntLocation2.getBlock().setType(Material.AIR);
                 location.getWorld().spawn(tntLocation2, TNTPrimed.class);
 
                 Location tntLocation3 = new Location(location.getWorld(),
-                        location.getX() + offsetX, location.getY() - 2, location.getZ() + offsetZ);
+                        location.getX() + offsetX, location.getY() - 7, location.getZ() + offsetZ);
                 tntLocation3.getBlock().setType(Material.AIR);
                 location.getWorld().spawn(tntLocation3, TNTPrimed.class);
+
+                Location tntLocation4 = new Location(location.getWorld(),
+                        location.getX() + offsetX, location.getY() - 10, location.getZ() + offsetZ);
+                tntLocation4.getBlock().setType(Material.AIR);
+                location.getWorld().spawn(tntLocation4, TNTPrimed.class);
             }
         }
 

@@ -1,10 +1,15 @@
 package com.tharox.dragonhunt.dimensions;
 
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.respawn.RespawnAnchor;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -94,7 +99,10 @@ public class DimensionListener implements Listener {
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.END_PORTAL) {
             // Check if the player has not been in The End yet.
             if (!PointsListener.bossBars.containsKey(player.getUniqueId())) {
-                PointsListener.bossBars.put(player.getUniqueId(), PointsListener.bossBar);
+                PointsListener.bossBars.put(player.getUniqueId(),
+                        Bukkit.createBossBar(HexColor.YELLOW.toString() + ChatColor.BOLD
+                                + "0" + ChatColor.WHITE + " / " + PointsListener.threshold + " Points",
+                        BarColor.YELLOW, BarStyle.SOLID));
                 PointsListener.bossBars.get(player.getUniqueId()).addPlayer(player);
                 PointsListener.bossBars.get(player.getUniqueId()).setProgress(0);
                 PointsListener.bossBars.get(player.getUniqueId()).setVisible(true);

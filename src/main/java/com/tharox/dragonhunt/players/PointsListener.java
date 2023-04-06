@@ -29,10 +29,6 @@ public class PointsListener implements Listener {
     public static HashMap<UUID, Integer> scorePerPlayer = new HashMap<>();
     public static HashMap<UUID, BossBar> bossBars = new HashMap<>();
 
-    public static BossBar bossBar = Bukkit.createBossBar(HexColor.YELLOW.toString() + ChatColor.BOLD
-            + "0" + ChatColor.WHITE + " / " + threshold + " Points",
-            BarColor.YELLOW, BarStyle.SOLID);
-
     /**
      * Target: Ender Dragon, Ender Crystal
      * Damager: Player
@@ -74,7 +70,12 @@ public class PointsListener implements Listener {
             scorePerPlayer.put(id, scorePerPlayer.get(id) + 7);
         }
 
+        // Player has won
         if (scorePerPlayer.get(id) >= threshold) {
+            scorePerPlayer.put(id, threshold); // points cannot be above the threshold
+            bossBars.get(id).setTitle(HexColor.YELLOW.toString() + ChatColor.BOLD
+                    + threshold + ChatColor.WHITE + " / " + threshold + " Points");
+            bossBars.get(id).setProgress(1);
             new GameEnd();
             return;
         }

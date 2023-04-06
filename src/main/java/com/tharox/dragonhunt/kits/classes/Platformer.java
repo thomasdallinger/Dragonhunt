@@ -66,7 +66,8 @@ public class Platformer extends Kit {
                             playerLocation.getY() + offsetY,
                             playerLocation.getZ() + offsetZ);
                     if (offsetLocation.getBlock().getType() != Material.OBSIDIAN
-                            && offsetLocation.getBlock().getType() != Material.BEDROCK) {
+                            && offsetLocation.getBlock().getType() != Material.BEDROCK
+                            && offsetLocation.getBlock().getType() != Material.SPAWNER) {
                         offsetLocation.getBlock().setType(material);
                     }
                 }

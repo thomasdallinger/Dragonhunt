@@ -66,10 +66,10 @@ public class CreatureSpawnListener implements Listener {
             if (PowerfulMobs.active) {
                 if (entity.getEquipment() != null) { // entity can have equipment
                     // Armor
-                    entity.getEquipment().setHelmet(new ItemStack(Material.GOLDEN_HELMET, 1));
+                    entity.getEquipment().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET, 1));
                     entity.getEquipment().setChestplate(new ItemStack(Material.IRON_CHESTPLATE, 1));
-                    entity.getEquipment().setLeggings(new ItemStack(Material.GOLDEN_LEGGINGS, 1));
-                    entity.getEquipment().setBoots(new ItemStack(Material.GOLDEN_BOOTS, 1));
+                    entity.getEquipment().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS, 1));
+                    entity.getEquipment().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS, 1));
 
                     // Weapon
                     if (entity instanceof Skeleton) {
@@ -80,10 +80,6 @@ public class CreatureSpawnListener implements Listener {
                         entity.getEquipment().setItemInMainHand(new ItemStack(Material.IRON_AXE, 1));
                     }
                 }
-
-                Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
-                        .setBaseValue(entity.getHealth() + 6); // set max health to a higher value
-                entity.setHealth(entity.getHealth() + 6);
             }
 
             if (FireMobs.active) {
@@ -98,10 +94,6 @@ public class CreatureSpawnListener implements Listener {
                         entity.getEquipment().setItemInMainHand(sword);
                     }
                 }
-
-                Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
-                        .setBaseValue(entity.getHealth() + 6);
-                entity.setHealth(entity.getHealth() + 6);
             }
 
             // SKELETONS and WITHER SKELETONS are invulnerable if the modifier is active

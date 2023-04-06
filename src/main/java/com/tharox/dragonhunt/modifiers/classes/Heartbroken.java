@@ -5,7 +5,7 @@ import org.bukkit.Material;
 @DragonhuntModifier
 public class Heartbroken extends Modifier {
     public static String title = "Heartbroken";
-    public static String lore = "-2 ❤";
+    public static String lore = "-2 ❤ Total Health";
     public static Material material = Material.BARRIER;
     public static boolean positive = false;
     public static int impact = 3;

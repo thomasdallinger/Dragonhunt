@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 
 @DragonhuntKit
 public class Demolitionist extends Kit {
-    static int duration = 30;
+    static int duration = 25;
     static int cooldown = 120;
 
     public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Demolitionist";

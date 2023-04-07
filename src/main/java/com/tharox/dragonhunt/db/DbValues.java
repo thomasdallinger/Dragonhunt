@@ -136,16 +136,15 @@ public class DbValues {
 
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            int columns = rs.getMetaData().getColumnCount();
+            int rowCount = 0;
 
             while (rs.next()) {
-                for (int i = 1; i <= columns; i++) {
-                    playerWhoMadeAdvancement[0] = rs.getString(i);
+                rowCount++;
+                playerWhoMadeAdvancement[0] = rs.getString(1); // only 1 column each row
 
-                    if (playerWhoMadeAdvancement[0].equals(player.getName())) {
-                        rank[0] = i;
-                        break;
-                    }
+                if (playerWhoMadeAdvancement[0].equals(player.getName())) {
+                    rank[0] = rowCount;
+                    break;
                 }
             }
             rs.close();

@@ -71,12 +71,14 @@ public class AdvancementListener implements Listener {
         if (!advancementName.equals("")) {
             Coins.addXP(player, Coins.advancementXP);
             addAdvancement(player, advancementName);
+            int rank = DbValues.getAdvancementRank(player, advancementName);
 
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(Prefixes.getAdvancementPrefix()
                         + Prefixes.getXPPrefix(Coins.advancementXP) + ChatColor.WHITE + player.getName()
                         + ChatColor.GRAY + " has made the advancement " + ChatColor.AQUA + advancementName
-                        + ChatColor.DARK_GRAY + " (#" + DbValues.getAdvancementRank(player, advancementName) + ").");
+                        + ChatColor.DARK_GRAY + " (#" + rank + ")"
+                        + ChatColor.GRAY + ".");
             }
         }
     }

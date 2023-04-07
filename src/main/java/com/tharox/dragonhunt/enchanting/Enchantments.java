@@ -65,11 +65,18 @@ public class Enchantments {
 
                         // Make all items that are can break unbreakable (if they are not unbreakable already).
                         ItemMeta meta = item.getItemMeta();
+                        if (meta == null) continue;
 
-                        if (meta != null && !meta.isUnbreakable() && item.getType().getMaxDurability() > 0) {
+                        if (!meta.isUnbreakable() && item.getType().getMaxDurability() > 0) {
                             meta.setUnbreakable(true);
                             meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
                             item.setItemMeta(meta);
+                        }
+
+                        // Remove all arrows in a players inventory that are not generated
+                        if ((item.getType() == Material.ARROW || item.getType() == Material.TIPPED_ARROW)
+                                && !meta.getDisplayName().contains("Generated Arrow")) {
+                            item.setType(Material.AIR);
                         }
 
                         // Swords
@@ -97,7 +104,7 @@ public class Enchantments {
                         }
 
                         // Crossbows
-                        if (item.getType().equals(Material.CROSSBOW)) {
+                        if (item.getType().equals(Material.CROSSBOW) && !meta.getDisplayName().contains("Grappler")) {
                             if (Multishot.get(player) > 1)
                                 item.addUnsafeEnchantment(Enchantment.MULTISHOT, Multishot.get(player) - 1);
                         }
@@ -121,7 +128,7 @@ public class Enchantments {
                         }
                     }
 
-                    // boots only
+                    // Boots only
                     if (boots != null) {
                         if (FeatherFalling.get(player) > 1) {
                             boots.addUnsafeEnchantment(Enchantment.PROTECTION_FALL,

@@ -5,6 +5,7 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -55,6 +56,10 @@ public class PlayerDeathListener implements Listener {
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
             killer.sendMessage(HexColor.GREEN + "You received " + ChatColor.DARK_GREEN + "Regeneration 2"
                     + HexColor.GREEN + " for " + ChatColor.DARK_GREEN + "10" + HexColor.GREEN + " seconds.");
+
+            player.sendMessage(ChatColor.DARK_GRAY + "ᴋɪʟʟ ʀᴇᴡᴀʀᴅꜱ");
+            GameState.putItemInInventory(killer, GameState.createRockets(3));
+            player.sendMessage(HexColor.GREEN + "+3 " + ChatColor.WHITE + "Firework Rockets");
 
             addPlayerKill(killer, player);
         }

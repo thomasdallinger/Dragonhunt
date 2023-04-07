@@ -3,19 +3,17 @@ package com.tharox.dragonhunt.game;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.modifiers.classes.DoubleChestLoot;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -143,6 +141,22 @@ public class GameState {
 
         item.setItemMeta(meta);
         return item;
+    }
+
+    public static ItemStack createRockets(int amount) {
+        ItemStack rockets = new ItemStack(Material.FIREWORK_ROCKET, amount);
+
+        FireworkMeta meta = (FireworkMeta) rockets.getItemMeta();
+        if (meta == null) return null;
+
+        for (int i = 0; i < 7; i++) {
+            meta.addEffect(FireworkEffect.builder().withColor(Color.RED).withColor(Color.ORANGE).
+                    with(FireworkEffect.Type.BALL).build());
+        }
+
+        meta.setPower(1);
+        rockets.setItemMeta(meta);
+        return rockets;
     }
 
     /**

@@ -38,7 +38,7 @@ public class Arrows {
 
                     if (arrowStack == null
                             || (arrowStack.getType() != Material.ARROW && arrowStack.getType() != Material.TIPPED_ARROW)
-                            || arrowStack.getAmount() <= 64) {
+                            || arrowStack.getAmount() <= 15) {
 
                         // if arrow effects have been unlocked AND one of the available arrow effects has been selected
                         if (Effects.ArrowEffectsUnlocked.get(player) && Effects.ArrowEffectType.get(player).getType() == Material.TIPPED_ARROW) {
@@ -59,7 +59,7 @@ public class Arrows {
                     }
                 }
             }
-        }.runTaskTimer(Main.getInstance(), 0, 200);
+        }.runTaskTimer(Main.getInstance(), 0, 100);
     }
 
     private ItemStack createArrow() {

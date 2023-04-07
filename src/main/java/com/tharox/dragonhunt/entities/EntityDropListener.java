@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.entities;
 
+import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -65,7 +66,7 @@ public class EntityDropListener implements Listener {
                 itemToDrop = new ItemStack(Material.BOW);
                 break;
             case 10:
-                itemToDrop = new ItemStack(Material.NETHERITE_SCRAP, 2);
+                itemToDrop = GameState.createRockets(3);
                 break;
             default:
                 // Unexpected Value.

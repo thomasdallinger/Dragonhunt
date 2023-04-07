@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.coins.Coins;
-import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.MoreFood;
 import org.bukkit.Material;
@@ -11,6 +10,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.Objects;
 
 public class EntityDeathListener implements Listener {
 
@@ -49,15 +50,7 @@ public class EntityDeathListener implements Listener {
             case "Pillager":
                 ItemStack crossbow = new ItemStack(Material.CROSSBOW);
                 crossbow.addEnchantment(Enchantment.QUICK_CHARGE, 3);
-
-                if (killer != null) {
-                    if (killer.getInventory().contains(Material.CROSSBOW)) {
-                        mob.getWorld().dropItemNaturally(mob.getLocation(),
-                                new ItemStack(Material.IRON_INGOT, 3));
-                    } else {
-                        mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(crossbow));
-                    }
-                }
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(crossbow));
                 break;
             case "Hoglin":
             case "Piglin":
@@ -87,9 +80,15 @@ public class EntityDeathListener implements Listener {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 8));
                 break;
             case "Evoker":
+            case "Wither Skeleton":
+                mob.getWorld().dropItemNaturally(mob.getLocation(),
+                        Objects.requireNonNull(GameState.createRockets(3)));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.NETHERITE_SCRAP, 2));
+                break;
             case "Ravager":
             case "Piglin Brute":
-            case "Wither Skeleton":
+                mob.getWorld().dropItemNaturally(mob.getLocation(),
+                        Objects.requireNonNull(GameState.createRockets(3)));
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.NETHERITE_INGOT));
                 break;
             default:

@@ -4,7 +4,6 @@ import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.kits.classes.DragonhuntKit;
 import com.tharox.dragonhunt.kits.classes.Kit;
 import com.tharox.dragonhunt.kits.classes.KitClass;
-import com.tharox.dragonhunt.players.DamageAdjustmentListener;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -30,8 +29,7 @@ public class KitInventory {
                         + KitClass.ASSASSIN + " Assassin" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_SWORD,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.WHITE + "+" + (int) (DamageAdjustmentListener.assassinDamageBuff) + "❤"
-                        + ChatColor.GRAY + " Attack Damage"));
+                        + ChatColor.WHITE + "+2 ⛃" + ChatColor.GRAY + " per Level Up"));
 
         inv.setItem(9, Kit.getDisplayItem(HexColor.TANK.toString() + ChatColor.BOLD
                         + KitClass.TANK + " Tank" + ChatColor.GRAY + " (Class)",

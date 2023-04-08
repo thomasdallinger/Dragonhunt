@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.enchanting.Enchantments;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.KitClass;
+import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +18,6 @@ import java.util.Collection;
  * The first damage assignment resets the vanilla values.
  */
 public class DamageAdjustmentListener implements Listener {
-    public static double assassinDamageBuff = 0.5;
     public static double mutantDamageBuff = 1.0;
 
     @EventHandler
@@ -40,11 +40,6 @@ public class DamageAdjustmentListener implements Listener {
                 }
             }
 
-            // Assassins Passive
-            if (KitClass.assassins.contains(damager)) {
-                damage = damage + assassinDamageBuff;
-            }
-
             // Kit Ability: Attack Damage increase
             if (GameState.selectedKit.containsKey(damager) && GameState.kitAbilityActive.get(damager) > 0) {
                 if (GameState.selectedKit.get(damager).contains("Mutant")) {
@@ -55,6 +50,14 @@ public class DamageAdjustmentListener implements Listener {
                     if (damager.getItemInUse() != null
                             && Enchantments.meleeWeapons.contains(damager.getItemInUse().getType())) {
                         damage = damage * 2;
+                    }
+                }
+
+                if (GameState.selectedKit.get(damager).contains("Sniper")) {
+                    if (damager.getItemInUse() != null
+                            && (damager.getItemInUse().getType().equals(Material.BOW)
+                            || damager.getItemInUse().getType().equals(Material.CROSSBOW))) {
+                        damage = damage * 3;
                     }
                 }
             }

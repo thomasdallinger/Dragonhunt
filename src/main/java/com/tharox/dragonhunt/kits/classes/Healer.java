@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.players.DamageAdjustmentListener;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -15,12 +16,13 @@ public class Healer extends Kit {
     static int cooldown = 70;
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Healer";
-    public static final String lore = ChatColor.DARK_GRAY.toString()
-            + ChatColor.ITALIC + "Instantly Heal Yourself\n\n"
-            + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "On activation you get " + ChatColor.WHITE + heartsToAdd + " ❤"
-            + ChatColor.GRAY + ".\n\n"
-            + ChatColor.GRAY + "Cooldown: " + ChatColor.WHITE + cooldown + " seconds\n";
+    public static final String lore = ""
+            + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
+            + ChatColor.GRAY + "Instantly heal yourself " + ChatColor.WHITE + heartsToAdd + " ❤\n\n"
+            + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
+            + ChatColor.GRAY + ChatColor.WHITE + "Instantly\n\n"
+            + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
+            + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.POTION;
     public static final int slot = 20;
 
@@ -42,6 +44,11 @@ public class Healer extends Kit {
         } else {
             player.setHealth(player.getHealth() + heartsToAdd * 2);
         }
+    }
+
+    @Override
+    public int getDuration() {
+        return 0;
     }
 
     @Override

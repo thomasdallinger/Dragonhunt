@@ -6,11 +6,7 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -37,16 +33,13 @@ public abstract class Kit implements Listener {
     public static final String lore = null;
     public static final int slot = 0;
 
-    Timer timer = Main.getInstance().getTimer();
-    int cooldownEnds = 30; // no Kit Abilities in the first 30 seconds of a game
-
     public Kit(Player player) {
         this.player = player;
 
         Bukkit.getPluginManager().registerEvents(this, Main.getInstance());
-
-        runActionBar();
     }
+
+    public abstract int getDuration();
 
     public abstract int getCooldown();
 
@@ -68,7 +61,21 @@ public abstract class Kit implements Listener {
         if (e == null)
             return;
 
-        if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+        // Do nothing on Left-Click: cancel event
+        if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.LEFT_CLICK_AIR
+                || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
+            if (item.getItemMeta().getDisplayName().contains(KitClass.ASSASSIN)
+                    || item.getItemMeta().getDisplayName().contains(KitClass.TANK)
+                    || item.getItemMeta().getDisplayName().contains(KitClass.SUPPORT)
+                    || item.getItemMeta().getDisplayName().contains(KitClass.MOBILITY)) {
+
+                event.setCancelled(true);
+            }
+        }
+
+        // Execute Kit Ability on Right-Click (if not on cooldown)
+        if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.RIGHT_CLICK_AIR
+                || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().contains(KitClass.ASSASSIN)
                     || item.getItemMeta().getDisplayName().contains(KitClass.TANK)
                     || item.getItemMeta().getDisplayName().contains(KitClass.SUPPORT)
@@ -78,77 +85,35 @@ public abstract class Kit implements Listener {
                 event.setCancelled(true);
 
                 // Check if the Player is on Cooldown
-                if (cooldownEnds > timer.getTime()) {
-                    player.sendMessage(Prefixes.getErrorPrefix() + "Your ability is on cooldown.");
+                if (player.getCooldown(Material.NETHER_STAR) > 0) {
+                    player.sendMessage(Prefixes.getErrorPrefix() + "Your ability is on cooldown for "
+                            + HexColor.RED + (player.getCooldown(Material.NETHER_STAR) / 20)
+                            + ChatColor.RED + " seconds.");
                     player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                     return;
                 }
 
                 executeAbility();
                 addKitAbilityUsageToDB(player);
-                GameState.kitAbilityActive.put(player, true);
+
+                // Cooldown
+                GameState.kitAbilityActive.put(player, getDuration());
                 setCooldownEnds();
             }
         }
     }
 
     public void setCooldownEnds() {
-        cooldownEnds = (getCooldown() - GameState.kitCooldownReduction.get(player)) + timer.getTime();
+        int cooldownToApply = getCooldown() - GameState.kitCooldownReduction.get(player);
+
+        if (cooldownToApply >= 0) {
+            player.setCooldown(Material.NETHER_STAR, cooldownToApply * 20);
+        }
 
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
             player.sendMessage(Prefixes.getImportantPrefix() + GameState.selectedKit.get(player) + ChatColor.GRAY
                     + " Kit Ability is " + HexColor.GREEN + "ready" + ChatColor.GRAY + ".");
         }, (getCooldown() - GameState.kitCooldownReduction.get(player)) * 20L);
-    }
-
-    public void sendActionBar(Player player) {
-        ItemStack item = player.getInventory().getItemInMainHand();
-
-        if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
-        if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
-        if (item.getItemMeta().getDisplayName().contains("Grappler")) return;
-
-        int timeLeft;
-
-        if (item.getItemMeta().getDisplayName().contains(KitClass.ASSASSIN)
-                || item.getItemMeta().getDisplayName().contains(KitClass.TANK)
-                || item.getItemMeta().getDisplayName().contains(KitClass.SUPPORT)
-                || item.getItemMeta().getDisplayName().contains(KitClass.MOBILITY)) {
-
-            // Kit ability is active - time left is being displayed
-            if (GameState.kitAbilityActive.get(player)) {
-                return;
-            }
-
-            // Check if on Cooldown
-            if (cooldownEnds > timer.getTime()) {
-                timeLeft = cooldownEnds - timer.getTime();
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                        new ComponentBuilder("COOLDOWN").color(HexColor.RED).bold(true)
-                                .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                .append(timeLeft + " seconds").color(ChatColor.GRAY).create());
-                return;
-            }
-
-            // Otherwise Ability is ready to use
-            if (timer.getTime() % 2 == 0)
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                        new ComponentBuilder("ABILITY READY").color(HexColor.YELLOW).bold(true).create());
-            else
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                        new ComponentBuilder("ABILITY READY").color(ChatColor.WHITE).bold(true).create());
-        }
-    }
-
-    protected void runActionBar() {
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-
-                sendActionBar(player);
-
-            }
-        }.runTaskTimer(Main.getInstance(), 20, 20);
     }
 
     protected void runKitAbility(int ticks, int duration, CustomKitAbilityExecutor executor,
@@ -167,9 +132,7 @@ public abstract class Kit implements Listener {
                     this.cancel();
                 }
 
-                if (durationLeft <= 0) {
-                    GameState.kitAbilityActive.put(player, false);
-
+                if (durationLeft <= 0.0) {
                     if (executor != null) {
                         executor.execute();
                     }
@@ -178,14 +141,12 @@ public abstract class Kit implements Listener {
                     this.cancel();
                 }
 
-                // Displaying the duration left in the action bar
-                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                        new ComponentBuilder("DURATION").color(HexColor.YELLOW).bold(true)
-                                .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                .append(String.format("%1.1f", durationLeft) + " seconds").color(ChatColor.GRAY)
-                                .create());
+                if (durationLeft % 1 == 0) {
+                    player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+                }
 
                 durationLeft = durationLeft - (double) ticks / 20;
+                GameState.kitAbilityActive.put(player, (int) durationLeft);
             }
         }.runTaskTimer(Main.getInstance(), ticks, ticks);
     }
@@ -200,6 +161,34 @@ public abstract class Kit implements Listener {
             stmt.execute(query);
             stmt.close();
         });
+    }
+
+    /**
+     * Without material but with nether star used to apply the item cooldown.
+     */
+    public static ItemStack getDisplayItem(String title, String lore) {
+        ItemStack item;
+
+        if (title.contains("Grappler")) {
+            item = new ItemStack(Material.CROSSBOW);
+        } else {
+            item = new ItemStack(Material.NETHER_STAR);
+        }
+
+        item.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return null;
+
+        meta.setDisplayName(title);
+        meta.setLore(Arrays.asList(lore.split("\n")));
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+
+        item.setItemMeta(meta);
+
+        return item;
     }
 
     public static ItemStack getDisplayItem(String title, Material material, String lore) {

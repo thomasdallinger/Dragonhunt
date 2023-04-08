@@ -15,7 +15,7 @@ import java.util.List;
 
 public class Enchantments {
     // a list of all weapons affected by melee weapon enchantments
-    protected static List<Material> meleeWeapons = List.of(
+    public static List<Material> meleeWeapons = List.of(
             Material.IRON_SWORD, Material.DIAMOND_SWORD, Material.NETHERITE_SWORD,
             Material.IRON_AXE, Material.DIAMOND_AXE, Material.NETHERITE_AXE);
 

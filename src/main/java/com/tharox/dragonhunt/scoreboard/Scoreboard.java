@@ -77,8 +77,11 @@ public class Scoreboard extends ScoreboardBuilder {
                     + ChatColor.DARK_GREEN + " +" + Coins.XPIncrease, 6);
         }
 
-        setScore(HexColor.GREEN + "-" + GameState.kitCooldownReduction.get(player) + " sec"
-                + ChatColor.WHITE + " Cooldown", 5);
+        // Kit Cooldown Reduction is null before all players joined
+        if (GameState.kitCooldownReduction.get(player) != null) {
+            setScore(HexColor.GREEN + "-" + GameState.kitCooldownReduction.get(player) + " sec"
+                    + ChatColor.WHITE + " Cooldown", 5);
+        }
 
         List<UUID> sortedKeys = GameState.sortPlayersByPoints(PointsListener.scorePerPlayer);
 

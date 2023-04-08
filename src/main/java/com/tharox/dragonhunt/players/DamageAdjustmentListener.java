@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.enchanting.Enchantments;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.KitClass;
 import org.bukkit.entity.Entity;
@@ -44,10 +45,17 @@ public class DamageAdjustmentListener implements Listener {
                 damage = damage + assassinDamageBuff;
             }
 
-            // Mutant Attack Damage increase
-            if (GameState.selectedKit.containsKey(damager)) {
+            // Kit Ability: Attack Damage increase
+            if (GameState.selectedKit.containsKey(damager) && GameState.kitAbilityActive.get(damager) > 0) {
                 if (GameState.selectedKit.get(damager).contains("Mutant")) {
                     damage = damage + mutantDamageBuff;
+                }
+
+                if (GameState.selectedKit.get(damager).contains("Warrior")) {
+                    if (damager.getItemInUse() != null
+                            && Enchantments.meleeWeapons.contains(damager.getItemInUse().getType())) {
+                        damage = damage * 2;
+                    }
                 }
             }
         }

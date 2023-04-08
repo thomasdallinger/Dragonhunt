@@ -47,20 +47,6 @@ public class EntityDamageListener implements Listener {
         if (itemInMainHand.getItemMeta().getDisplayName().contains("Grappler")) {
             arrow.remove();
             event.setCancelled(true);
-
-            int cooldownToApply = GrappleListener.cooldown - 20 * GameState.kitCooldownReduction.get(player);
-
-            // put the GRAPPLER on cooldown
-            if (cooldownToApply >= 0) {
-                player.setCooldown(Material.CROSSBOW, cooldownToApply);
-            }
-
-            // after the cooldown ends, add the next charged projectile
-            Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
-                CrossbowMeta crossbowMeta = (CrossbowMeta) itemInMainHand.getItemMeta();
-                crossbowMeta.addChargedProjectile(new ItemStack(Material.ARROW, 1));
-                itemInMainHand.setItemMeta(crossbowMeta);
-            }, 5L);
         }
 
         // if a living entity is on fire and the modifier is active, let it glow and give weakness to the entity

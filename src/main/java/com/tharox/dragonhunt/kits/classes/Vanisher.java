@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.chat.HexColor;
-import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -16,15 +15,17 @@ public class Vanisher extends Kit {
     static int cooldown = 60;
 
     public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Vanisher";
-    public static final String lore = ChatColor.DARK_GRAY.toString()
-            + ChatColor.ITALIC + "Become Invisible\n\n"
-            + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "On activation you get " + ChatColor.WHITE + "Speed 3"
-            + ChatColor.GRAY + " and " + ChatColor.WHITE + "Invisibility" + ChatColor.GRAY + ".\n"
-            + ChatColor.GRAY + "You cannot take any damage and your inventory\n"
-            + ChatColor.GRAY + "will disappear while your ability is active.\n\n"
-            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " seconds\n"
-            + ChatColor.GRAY + "Cooldown: " + ChatColor.WHITE + cooldown + " seconds\n";
+    public static final String lore = ""
+            + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
+            + ChatColor.GRAY + "Get " + ChatColor.WHITE + "Speed 3" + ChatColor.GRAY + " and become\n"
+            + ChatColor.WHITE + "invisible" + ChatColor.GRAY + " and " + ChatColor.WHITE + "invulnerable"
+            + ChatColor.GRAY + ".\n"
+            + ChatColor.GRAY + "Your inventory will disappear\n"
+            + ChatColor.GRAY + "for the abilities duration.\n\n"
+            + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
+            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
+            + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
+            + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.ENDER_PEARL;
     public static final int slot = 2;
 
@@ -36,7 +37,7 @@ public class Vanisher extends Kit {
 
     @Override
     public void executeAbility() {
-        player.sendMessage(title + ChatColor.GRAY + " Kit Ability is active.");
+        player.sendMessage(title + HexColor.GREEN + " Kit Ability activated.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, duration * 20, 0));
@@ -45,11 +46,16 @@ public class Vanisher extends Kit {
 
         ItemStack[] items = player.getInventory().getContents();
 
-        this.runKitAbility(2, duration, () -> {
+        this.runKitAbility(20, duration, () -> {
             player.getInventory().setContents(items);
         }, () -> {
             player.getInventory().clear();
         });
+    }
+
+    @Override
+    public int getDuration() {
+        return duration;
     }
 
     @Override

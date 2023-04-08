@@ -1,6 +1,8 @@
 package com.tharox.dragonhunt.grappler;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.*;
 import org.bukkit.entity.AbstractArrow;
@@ -38,6 +40,15 @@ public class GrappleListener implements Listener {
             if (meta == null) return;
 
             if (!meta.getDisplayName().contains("Grappler")) return;
+
+            // Check if the Player is on Cooldown
+            if (player.getCooldown(Material.CROSSBOW) > 0) {
+                player.sendMessage(Prefixes.getErrorPrefix() + "Your ability is on cooldown for "
+                        + HexColor.RED + (player.getCooldown(Material.CROSSBOW) / 20)
+                        + ChatColor.RED + " seconds.");
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                return;
+            }
 
             arrow.setVelocity(arrow.getVelocity().multiply(2D));
 

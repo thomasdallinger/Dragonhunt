@@ -31,10 +31,10 @@ public class GameState {
     // which player has selected which kit
     public static HashMap<Player, String> selectedKit = new HashMap<>();
 
-    // which player has an active kit ability
-    public static HashMap<Player, Boolean> kitAbilityActive = new HashMap<>();
+    // which player has an active kit ability (value: duration in seconds)
+    public static HashMap<Player, Integer> kitAbilityActive = new HashMap<>();
 
-    // stores the cooldown reduction acquired by each player
+    // stores the cooldown reduction in seconds acquired by each player
     public static HashMap<Player, Integer> kitCooldownReduction = new HashMap<>();
 
     // location of the first player entering the NETHER (null as long as no player enters the NETHER)

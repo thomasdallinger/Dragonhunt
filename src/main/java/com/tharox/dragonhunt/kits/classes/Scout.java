@@ -10,17 +10,17 @@ import org.bukkit.entity.Player;
 
 @DragonhuntKit
 public class Scout extends Kit {
-    static int duration = (int) Spectate.getDuration();
+    static int duration = Spectate.getDuration();
     static int cooldown = 70;
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Scout";
-    public static final String lore = ChatColor.DARK_GRAY.toString()
-            + ChatColor.ITALIC + "Use Spectator Mode\n\n"
-            + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "On activation you will be put in "
-            + ChatColor.WHITE + "Spectator Mode" + ChatColor.GRAY + ".\n\n"
-            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " seconds\n"
-            + ChatColor.GRAY + "Cooldown: " + ChatColor.WHITE + cooldown + " seconds\n";
+    public static final String lore = ""
+            + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
+            + ChatColor.GRAY + "Use" + ChatColor.WHITE + " Spectator Mode\n\n"
+            + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
+            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
+            + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
+            + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.ENDER_EYE;
     public static final int slot = 21;
 
@@ -32,10 +32,16 @@ public class Scout extends Kit {
 
     @Override
     public void executeAbility() {
-        GameState.kitAbilityActive.put(player, true);
+        GameState.kitAbilityActive.put(player, getDuration());
         new Spectate(player);
-        player.sendMessage(title + ChatColor.GRAY + " Kit Ability is active.");
+
+        player.sendMessage(title + HexColor.GREEN + " Kit Ability activated.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+    }
+
+    @Override
+    public int getDuration() {
+        return duration;
     }
 
     @Override

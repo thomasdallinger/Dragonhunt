@@ -13,8 +13,10 @@ import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class Timer {
@@ -47,25 +49,63 @@ public class Timer {
     public void sendActionBar() {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            // if the player has his/her Tracker in the main hand, the time wont get displayed
-            // if the player has his/her Kit Ability in the main hand, the time wont get displayed
             ItemStack item = player.getInventory().getItemInMainHand();
+            ItemMeta meta = item.getItemMeta();
 
-            if (item.getItemMeta() != null) {
-                if (item.getItemMeta().getDisplayName().contains("Tracker")
-                        || item.getItemMeta().getDisplayName().contains("Respawn Anchor"))
-                    continue;
+            if (meta != null) {
+                String title = meta.getDisplayName();
+                Material materialToCheck = null;
 
-                // Grappler shows the Timer - has no cooldown to display
-                if ((item.getItemMeta().getDisplayName().contains(KitClass.ASSASSIN)
-                        || item.getItemMeta().getDisplayName().contains(KitClass.TANK)
-                        || item.getItemMeta().getDisplayName().contains(KitClass.SUPPORT)
-                        || item.getItemMeta().getDisplayName().contains(KitClass.MOBILITY))
-                        && !item.getItemMeta().getDisplayName().contains("Grappler"))
-                    continue;
-
+                // Kit Ability - active Kit Ability overrules everything else in the action bar
                 if (GameState.kitAbilityActive.containsKey(player)) {
-                    if (GameState.kitAbilityActive.get(player)) continue;
+                    // Kit Ability is active
+                    if (GameState.kitAbilityActive.get(player) > 0) {
+                        // Displaying the duration left in the action bar
+                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                new ComponentBuilder("DURATION").color(HexColor.YELLOW).bold(true)
+                                        .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                        .append(GameState.kitAbilityActive.get(player) + " seconds")
+                                        .color(ChatColor.GRAY).create());
+                        continue;
+                    }
+                }
+
+                if (title.contains("Tracker") || title.contains("Respawn Anchor"))
+                    continue;
+
+                // Kit item
+                if (title.contains(KitClass.ASSASSIN) || title.contains(KitClass.TANK)
+                        || title.contains(KitClass.SUPPORT) || title.contains(KitClass.MOBILITY)) {
+
+                    if (player.getCooldown(Material.CROSSBOW) > 0) {
+                        materialToCheck = Material.CROSSBOW;
+                    } else if (player.getCooldown(Material.NETHER_STAR) > 0) {
+                        materialToCheck = Material.NETHER_STAR;
+                    }
+
+                    // Cooldown is active
+                    if (materialToCheck != null) {
+                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                new ComponentBuilder("COOLDOWN").color(HexColor.RED).bold(true)
+                                        .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                        .append(String.valueOf((player.getCooldown(materialToCheck) / 20)))
+                                        .color(ChatColor.GRAY)
+                                        .append(" seconds").color(ChatColor.GRAY).create());
+                    }
+                    // Ability is ready
+                    else {
+                        if (getTime() % 2 == 0) {
+                            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                    new ComponentBuilder("ABILITY READY").color(HexColor.YELLOW).bold(true)
+                                            .create());
+                        } else {
+                            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                    new ComponentBuilder("ABILITY READY").color(ChatColor.WHITE).bold(true)
+                                            .create());
+                        }
+                    }
+
+                    continue;
                 }
             }
 

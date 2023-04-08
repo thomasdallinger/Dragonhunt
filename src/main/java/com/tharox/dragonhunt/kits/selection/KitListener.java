@@ -60,14 +60,13 @@ public class KitListener implements Listener {
 
         player.getInventory().setItem(8,
                 Kit.getDisplayItem((String) kitClass.getField("title").get(null),
-                        (Material) kitClass.getField("material").get(null),
                         (String) kitClass.getField("lore").get(null)));
 
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         player.sendMessage(ChatColor.GRAY + "You have selected the " + name + ChatColor.GRAY + " Kit.");
 
         GameState.selectedKit.put(player, (String) kitClass.getField("title").get(null));
-        GameState.kitAbilityActive.put(player, false);
+        GameState.kitAbilityActive.put(player, 0);
         GameState.kitInventoryClose.put(player, true);
         player.closeInventory();
     }

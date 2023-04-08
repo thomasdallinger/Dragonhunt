@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.kits.classes;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -17,15 +18,18 @@ public class Demolitionist extends Kit {
     static int cooldown = 120;
 
     public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Demolitionist";
-    public static final String lore = ChatColor.DARK_GRAY.toString()
-            + ChatColor.ITALIC + "Explosions Everywhere\n\n"
-            + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
+    public static final String lore = ""
+            + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "On activation " + ChatColor.WHITE + "4" + ChatColor.GRAY + " layers of "
-            + ChatColor.WHITE + "TNT" + ChatColor.GRAY + " will spawn below your location.\n"
-            + ChatColor.GRAY + "You cannot take any damage from the explosion.\n"
-            + ChatColor.GRAY + "You cannot move while the explosion occurs.\n\n"
-            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " seconds\n"
-            + ChatColor.GRAY + "Cooldown: " + ChatColor.WHITE + cooldown + " seconds\n";
+            + ChatColor.WHITE + "TNT\n"
+            + ChatColor.GRAY + "will spawn below you.\n"
+            + ChatColor.GRAY + "During the explosion you are invulnerable\n"
+            + ChatColor.GRAY + "to damage and you cannot move.\n"
+            + HexColor.RED + "» Glow and Alert on Activation\n\n"
+            + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
+            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
+            + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
+            + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.TNT;
     public static final int slot = 3;
 
@@ -37,8 +41,14 @@ public class Demolitionist extends Kit {
 
     @Override
     public void executeAbility() {
-        player.sendMessage(title + ChatColor.GRAY + " Kit Ability is active.");
+        player.sendMessage(title + HexColor.GREEN + " Kit Ability activated.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, duration * 20, 0));
+
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            online.sendMessage(ChatColor.WHITE + player.getName() + ChatColor.GRAY
+                    + " uses the " + title + ChatColor.GRAY + " Kit Ability.");
+        }
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration * 20, 9));
         player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20, 9));
@@ -75,7 +85,12 @@ public class Demolitionist extends Kit {
             }
         }
 
-        this.runKitAbility(2, duration, null, null);
+        this.runKitAbility(20, duration, null, null);
+    }
+
+    @Override
+    public int getDuration() {
+        return duration;
     }
 
     @Override

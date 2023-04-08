@@ -1,8 +1,8 @@
 package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.chat.HexColor;
-import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -16,16 +16,17 @@ public class Platformer extends Kit {
     static int cooldown = 70;
 
     public static final String title = HexColor.MOBILITY + KitClass.MOBILITY + " Platformer";
-    public static final String lore = ChatColor.DARK_GRAY.toString()
-            + ChatColor.ITALIC + "Walk Anywhere\n\n"
-            + ChatColor.DARK_GRAY + "ᴋɪᴛ ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "On activation you receive " + ChatColor.WHITE + "Speed 3" + ChatColor.GRAY + ".\n"
-            + ChatColor.GRAY + "Every second blocks will spawn below you \n"
+    public static final String lore = ""
+            + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
+            + ChatColor.GRAY + "Every second blocks will spawn below you\n"
             + ChatColor.GRAY + "making it possible to walk everywhere. \n"
-            + ChatColor.GRAY + "You can go up, down and through walls. \n"
-            + ChatColor.GRAY + "You will be glowing while the ability is active.\n\n"
-            + ChatColor.GRAY + "Duration: " + ChatColor.WHITE + duration + " seconds\n"
-            + ChatColor.GRAY + "Cooldown: " + ChatColor.WHITE + cooldown + " seconds\n";
+            + ChatColor.GRAY + "You can go up, down and through (most) blocks. \n"
+            + ChatColor.GRAY + "You receive " + ChatColor.WHITE + "Speed 3" + ChatColor.GRAY + ".\n"
+            + HexColor.RED + "» Glow and Alert on Activation\n\n"
+            + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
+            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
+            + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
+            + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.PINK_STAINED_GLASS;
     public static final int slot = 30;
 
@@ -37,13 +38,18 @@ public class Platformer extends Kit {
 
     @Override
     public void executeAbility() {
-        player.sendMessage(title + ChatColor.GRAY + " Kit Ability is active.");
+        player.sendMessage(title + HexColor.GREEN + " Kit Ability activated.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration * 20, 1));
         player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, duration * 20, 0));
 
-        this.runKitAbility(2, duration, null, () -> {
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            online.sendMessage(ChatColor.WHITE + player.getName() + ChatColor.GRAY
+                    + " uses the " + title + ChatColor.GRAY + " Kit Ability.");
+        }
+
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, duration * 20, 1));
+
+        this.runKitAbility(5, duration, null, () -> {
             setBlocksBelowPlayer(player);
         });
     }
@@ -73,6 +79,11 @@ public class Platformer extends Kit {
                 }
             }
         }
+    }
+
+    @Override
+    public int getDuration() {
+        return duration;
     }
 
     @Override

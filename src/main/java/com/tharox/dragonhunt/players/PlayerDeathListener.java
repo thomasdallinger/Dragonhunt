@@ -49,19 +49,22 @@ public class PlayerDeathListener implements Listener {
             CombatListener.combatList.remove(killer.getUniqueId());
             killer.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + "You are no longer in combat.");
 
-            Coins.addXP(killer, Coins.playerXP);
-            killer.sendMessage(Prefixes.getCoinPrefix(Coins.playerXP) + "You have killed "
-                    + ChatColor.WHITE + player.getName() + ChatColor.GRAY + ".");
+            // Player did not kill himself/herself
+            if (!killer.equals(player)) {
+                Coins.addXP(killer, Coins.playerXP);
+                killer.sendMessage(Prefixes.getCoinPrefix(Coins.playerXP) + "You have killed "
+                        + ChatColor.WHITE + player.getName() + ChatColor.GRAY + ".");
 
-            killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
-            killer.sendMessage(HexColor.GREEN + "You received " + ChatColor.DARK_GREEN + "Regeneration 2"
-                    + HexColor.GREEN + " for " + ChatColor.DARK_GREEN + "10" + HexColor.GREEN + " seconds.");
+                killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
+                killer.sendMessage(HexColor.GREEN + "You received " + ChatColor.DARK_GREEN + "Regeneration 2"
+                        + HexColor.GREEN + " for " + ChatColor.DARK_GREEN + "10" + HexColor.GREEN + " seconds.");
 
-            player.sendMessage(ChatColor.DARK_GRAY + "ᴋɪʟʟ ʀᴇᴡᴀʀᴅꜱ");
-            GameState.putItemInInventory(killer, GameState.createRockets(3));
-            player.sendMessage(HexColor.GREEN + "+3 " + ChatColor.WHITE + "Firework Rockets");
+                player.sendMessage(ChatColor.DARK_GRAY + "ᴋɪʟʟ ʀᴇᴡᴀʀᴅꜱ");
+                GameState.putItemInInventory(killer, GameState.createRockets(3));
+                player.sendMessage(HexColor.GREEN + "+3 " + ChatColor.WHITE + "Firework Rockets");
 
-            addPlayerKill(killer, player);
+                addPlayerKill(killer, player);
+            }
         }
 
         // Set dead player out of combat

@@ -1,9 +1,10 @@
 package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
-import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.scout.Scout;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
@@ -27,6 +28,16 @@ public class ResetScoreboardCountdown {
             public void run() {
                 if (countdown.getTime() == 0) {
                     countdown.setTime(180);
+
+                    // Make a new scout available
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        Scout.scoutAvailable.put(player, true);
+                        player.sendMessage(Prefixes.getImportantPrefix() + HexColor.YELLOW + "/scout"
+                                + ChatColor.GRAY + " is now " + HexColor.GREEN + "available"
+                                + ChatColor.GRAY + " for all players.");
+                    }
+
+                    // XP increase
                     increaseXP = !increaseXP;
 
                     if (increaseXP) {

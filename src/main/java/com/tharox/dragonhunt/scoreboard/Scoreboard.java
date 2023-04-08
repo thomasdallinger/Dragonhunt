@@ -7,6 +7,7 @@ import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.players.PlayerEndTeleport;
 import com.tharox.dragonhunt.players.PointsListener;
+import com.tharox.dragonhunt.scout.Scout;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
@@ -34,9 +35,10 @@ public class Scoreboard extends ScoreboardBuilder {
         LocalDateTime now = LocalDateTime.now();
 
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
-                + DbValues.getServerID() + "]", 13);
-        setScore(ChatColor.WHITE + "8 Solos" + ChatColor.DARK_GRAY + " | "
-                + ChatColor.WHITE + "Casual", 12);
+                + DbValues.getServerID() + "]", 14);
+        setScore(ChatColor.WHITE + "Classic" + ChatColor.DARK_GRAY + " | "
+                + ChatColor.WHITE + "Casual", 13);
+        setScore("", 12);
         setScore("", 11);
         setScore("", 10);
         setScore("", 9);
@@ -54,12 +56,20 @@ public class Scoreboard extends ScoreboardBuilder {
     @Override
     public void update(Player player, Countdown countdown) {
         if (GameState.selectedKit.containsKey(player)) {
-            setScore(GameState.selectedKit.get(player), 10);
+            setScore(GameState.selectedKit.get(player), 11);
         }
 
         setScore("☻ " + Bukkit.getOnlinePlayers().size() + " "
                 + "☠ " + DbValues.getKills(player, true) + " "
-                + "✟ " + DbValues.getKills(player, false), 9);
+                + "✟ " + DbValues.getKills(player, false), 10);
+
+        if (Scout.scoutAvailable.containsKey(player)) {
+            if (Scout.scoutAvailable.get(player)) {
+                setScore(HexColor.GREEN + "/scout" + ChatColor.WHITE + " available", 8);
+            } else {
+                setScore(HexColor.RED + "/scout" + ChatColor.WHITE + " unavailable", 8);
+            }
+        }
 
         if (timer.getTime() <= 1200) {
             setScore(PlayerEndTeleport.getEyesNeeded() + " Eyes" + ChatColor.DARK_GRAY + " » "

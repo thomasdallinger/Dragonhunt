@@ -11,6 +11,7 @@ import com.tharox.dragonhunt.coins.LevelUp;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.commands.DateCommand;
 import com.tharox.dragonhunt.commands.HubCommand;
+import com.tharox.dragonhunt.commands.ScoutCommand;
 import com.tharox.dragonhunt.commands.TopCommand;
 import com.tharox.dragonhunt.crafting.CustomRecipes;
 import com.tharox.dragonhunt.db.DbValues;
@@ -239,6 +240,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     private void commandRegistration() {
         getCommand("date").setExecutor(new DateCommand());
         getCommand("top").setExecutor(new TopCommand());
+        getCommand("scout").setExecutor(new ScoutCommand());
         getCommand("hub").setExecutor(new HubCommand());
         getCommand("lobby").setExecutor(new HubCommand());
         getCommand("l").setExecutor(new HubCommand());

@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.players.DamageAdjustmentListener;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -43,6 +44,11 @@ public class Mutant extends Kit {
         player.sendMessage(title + HexColor.GREEN + " Kit Ability activated.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
         player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, duration * 20, 0));
+
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            online.sendMessage(ChatColor.WHITE + player.getName() + ChatColor.GRAY
+                    + " uses the " + title + ChatColor.GRAY + " Kit Ability.");
+        }
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, duration * 20, 3));
         player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, duration * 20, 1));

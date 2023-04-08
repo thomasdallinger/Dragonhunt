@@ -143,8 +143,12 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(ChatColor.GRAY + "Whoever reaches "
                         + ChatColor.WHITE + PointsListener.threshold + " Points"
                         + ChatColor.GRAY + " first wins.");
+
                 player.sendMessage(ChatColor.GRAY + "\nUse " + HexColor.YELLOW + "/top"
-                        + ChatColor.GRAY + " to teleport to the surface");
+                        + ChatColor.GRAY + " to teleport to the surface.");
+                player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/scout"
+                        + ChatColor.GRAY + " to view the world in " + ChatColor.WHITE + "Spectator Mode"
+                        + ChatColor.GRAY + "for a short time.");
             }
         }
     }

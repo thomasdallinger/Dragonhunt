@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.modifiers.classes.Heartbroken;
 import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.respawn.RespawnAnchor;
+import com.tharox.dragonhunt.scout.Scout;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
@@ -88,6 +89,9 @@ public class GameConfiguration {
 
             // give the player a score of 0
             PointsListener.scorePerPlayer.put(player.getUniqueId(), 0);
+
+            // when the game starts, players won't have the ability to scout
+            Scout.scoutAvailable.put(player, false);
 
             // removes all active potion effects players may have
             for (PotionEffect effect : player.getActivePotionEffects())

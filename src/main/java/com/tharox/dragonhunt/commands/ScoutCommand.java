@@ -3,15 +3,19 @@ package com.tharox.dragonhunt.commands;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.scout.Scout;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class ScoutCommand implements CommandExecutor {
 
@@ -30,9 +34,42 @@ public class ScoutCommand implements CommandExecutor {
             return false;
         }
 
+        // Check if the player has an active Scout
         if (Scout.spectateLocation.containsKey(player)) {
+            Location location = player.getLocation();
+
+            // Seeker Kit Ability: Teleport the player
+            if (args[0].equalsIgnoreCase("tp")) {
+                if (GameState.selectedKit.containsKey(player)) {
+                    if (GameState.selectedKit.get(player).contains("Seeker")) {
+                        if (!location.getWorld().equals(Scout.spectateLocation.get(player).getWorld())) {
+                            player.sendMessage(Prefixes.getErrorPrefix()
+                                    + "You cannot be teleported between dimensions.");
+                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                            return false;
+
+                        } else {
+                            Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
+                                player.teleport(location);
+                                player.addPotionEffect(new PotionEffect(
+                                        PotionEffectType.WEAKNESS, 10 * 20, 2));
+                                player.addPotionEffect(new PotionEffect(
+                                        PotionEffectType.SLOW, 10 * 20, 1));
+                                player.sendMessage(HexColor.GREEN + "Successfully teleported to your Scout location.");
+                            }, 40L);
+                        }
+
+                    } else {
+                        player.sendMessage(Prefixes.getErrorPrefix() + "You have not selected the Seeker Kit.");
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                        return false;
+                    }
+                }
+            }
+
             // Cancel the currently active scout
             Scout.scoutAvailable.put(player, false);
+
             return true;
         }
 

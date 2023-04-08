@@ -16,15 +16,11 @@ import java.util.HashMap;
 public class Scout {
     public static HashMap<Player, Boolean> scoutAvailable = new HashMap<>();
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
-    private static final int duration = 25;
+    private static final int duration = 30;
     public int timeLeft = duration;
 
     public Scout(Player player) {
         activateSpectate(player);
-    }
-
-    public static int getDuration() {
-        return duration;
     }
 
     private void activateSpectate(Player player) {

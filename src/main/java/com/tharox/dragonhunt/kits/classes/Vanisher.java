@@ -26,7 +26,7 @@ public class Vanisher extends Kit {
             + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
-    public static final Material material = Material.ENDER_PEARL;
+    public static final Material material = Material.ENDER_EYE;
     public static final int slot = 2;
 
     public Vanisher(Player player) {

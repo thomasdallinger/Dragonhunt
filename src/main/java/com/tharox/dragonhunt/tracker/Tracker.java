@@ -89,24 +89,6 @@ public class Tracker implements Listener {
         }
 
         if (e.equals(EquipmentSlot.HAND)
-                && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().contains("Tracker")) {
-
-                index++;    // switch the located structure
-
-                if (index > locationList.size() - 1)
-                    index = 0;
-
-                playerTracksName.put(player, structureList.get(index));
-                playerTracksLocation.put(player, locationList.get(index));
-                player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
-                        + HexColor.YELLOW + playerTracksName.get(player) + ChatColor.GRAY + ".");
-
-                playerTracksIndex.replace(player, index);
-            }
-        }
-
-        if (e.equals(EquipmentSlot.HAND)
                 && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().contains("Tracker")) {
                 LinkedList<Player> playerList = new LinkedList<>(Bukkit.getServer().getOnlinePlayers());
@@ -122,6 +104,26 @@ public class Tracker implements Listener {
                 playerTracksLocation.put(player, allOtherPlayers.get(index).getLocation());
                 player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
                         + ChatColor.WHITE + playerTracksName.get(player).substring(4) + ChatColor.GRAY + ".");
+
+                playerTracksIndex.replace(player, index);
+            }
+        }
+
+        if (e.equals(EquipmentSlot.HAND)
+                && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+            if (item.getItemMeta().getDisplayName().contains("Tracker")) {
+
+                if (player.getWorld().getEnvironment() == World.Environment.THE_END) return;
+
+                index++;    // switch the located structure
+
+                if (index > locationList.size() - 1)
+                    index = 0;
+
+                playerTracksName.put(player, structureList.get(index));
+                playerTracksLocation.put(player, locationList.get(index));
+                player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
+                        + HexColor.YELLOW + playerTracksName.get(player) + ChatColor.GRAY + ".");
 
                 playerTracksIndex.replace(player, index);
             }
@@ -142,12 +144,19 @@ public class Tracker implements Listener {
         if (item.getItemMeta().getDisplayName().contains("Tracker")) {
             try {
                 if (trackedObject == null) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new ComponentBuilder("PLAYER").color(ChatColor.WHITE).bold(true)
-                                    .append(" (Left-Click)").color(ChatColor.GRAY).bold(false)
-                                    .append(" | ").color(ChatColor.DARK_GRAY)
-                                    .append("STRUCTURE").color(HexColor.YELLOW).bold(true)
-                                    .append(" (Right-Click)").color(ChatColor.GRAY).bold(false).create());
+                    if (player.getWorld().getEnvironment() == World.Environment.THE_END) {
+                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                new ComponentBuilder("PLAYER").color(ChatColor.WHITE).bold(true)
+                                        .append(" (Left-Click)").color(ChatColor.GRAY).bold(false).create());
+                    } else {
+                        player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                                new ComponentBuilder("PLAYER").color(ChatColor.WHITE).bold(true)
+                                        .append(" (Left-Click)").color(ChatColor.GRAY).bold(false)
+                                        .append(" | ").color(ChatColor.DARK_GRAY)
+                                        .append("STRUCTURE").color(HexColor.YELLOW).bold(true)
+                                        .append(" (Right-Click)").color(ChatColor.GRAY).bold(false).create());
+                    }
+
                     return;
                 }
 

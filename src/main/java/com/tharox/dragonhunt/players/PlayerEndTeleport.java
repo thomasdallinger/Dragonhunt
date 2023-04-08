@@ -115,7 +115,7 @@ public class PlayerEndTeleport implements Listener {
         return eyesNeeded;
     }
 
-    private ItemStack createEndTeleport() {
+    public static ItemStack createEndTeleport() {
         ItemStack item = new ItemStack(Material.END_PORTAL_FRAME);
         item.addUnsafeEnchantment(Enchantment.DIG_SPEED, 1);
 

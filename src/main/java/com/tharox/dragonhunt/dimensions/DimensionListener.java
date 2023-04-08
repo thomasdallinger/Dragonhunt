@@ -1,10 +1,11 @@
 package com.tharox.dragonhunt.dimensions;
 
+import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.players.PlayerEndTeleport;
 import com.tharox.dragonhunt.players.PointsListener;
-import com.tharox.dragonhunt.respawn.RespawnAnchor;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -27,8 +28,8 @@ public class DimensionListener implements Listener {
      * Give players Resistance 10 when changing worlds so they can't be damaged for the first 7 seconds.
      * Removes the Tracker from a player's inventory in the END. Returns the Tracker when changing to a different
      * world again.
-     * Updated the item material for the respawn item.
-     * If the player was in the End already, the slot remains free to use.
+     *
+     * End Teleporter: when changing worlds from The End to the Overworld or Nether.
      */
     @EventHandler
     public void onWorldChange(PlayerChangedWorldEvent event) {
@@ -38,8 +39,8 @@ public class DimensionListener implements Listener {
             player.removePotionEffect(effect.getType());
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 9));
 
-        if (!event.getFrom().getEnvironment().equals(World.Environment.THE_END)) {
-            player.getInventory().setItem(6, RespawnAnchor.createItem(player));
+        if (event.getFrom().getEnvironment().equals(World.Environment.THE_END)) {
+            player.getInventory().setItem(7, PlayerEndTeleport.createEndTeleport());
         }
     }
 
@@ -96,6 +97,9 @@ public class DimensionListener implements Listener {
         }
 
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.END_PORTAL) {
+            // Give the player the tracker back in The End
+            player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
+
             // Check if the player has not been in The End yet.
             if (!PointsListener.bossBars.containsKey(player.getUniqueId())) {
                 PointsListener.bossBars.put(player.getUniqueId(),

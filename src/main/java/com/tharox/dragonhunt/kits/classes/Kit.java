@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
@@ -120,6 +121,7 @@ public abstract class Kit implements Listener {
                                  EverySecondKitAbilityExecutor everySecondExecutor) {
         new BukkitRunnable() {
             double durationLeft = duration;
+            Timer timer = Main.getInstance().getTimer();
 
             @Override
             public void run() {
@@ -128,7 +130,7 @@ public abstract class Kit implements Listener {
                     everySecondExecutor.executeEverySecond();
                 }
 
-                if (player.isDead()) { //without a executor
+                if (player.isDead() || !timer.isRunning()) { // without a executor
                     this.cancel();
                 }
 

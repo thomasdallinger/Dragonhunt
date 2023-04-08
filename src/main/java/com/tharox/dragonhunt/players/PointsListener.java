@@ -23,7 +23,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class PointsListener implements Listener {
-    public static int threshold = 100;
+    public static int threshold = 120;
 
     // contains the UUID of players who are forced to damage the Ender Dragon
     public static HashMap<UUID, Integer> scorePerPlayer = new HashMap<>();
@@ -67,7 +67,7 @@ public class PointsListener implements Listener {
                     dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
             dragon.setHealth(maxHealth);
         } else {
-            scorePerPlayer.put(id, scorePerPlayer.get(id) + 7);
+            scorePerPlayer.put(id, scorePerPlayer.get(id) + 5);
         }
 
         // Player has won

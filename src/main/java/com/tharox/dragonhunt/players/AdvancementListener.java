@@ -24,6 +24,7 @@ public class AdvancementListener implements Listener {
         Player player = event.getPlayer();
         Advancement advancement = event.getAdvancement();
         String advancementName = "";
+        int pointsToAdd = 10;
 
         switch (advancement.getKey().toString()) {
             case "minecraft:story/smelt_iron":
@@ -37,8 +38,12 @@ public class AdvancementListener implements Listener {
 
                 if (GameState.firstNetherEntry == null) {
                     GameState.firstNetherEntry = player.getLocation();
-                    addBonusXP(player, "Nether");
+                    pointsToAdd = 15;
+                    bonusPointsNotification(player, "Nether");
                 }
+
+                PointsListener.scorePerPlayer.put(player.getUniqueId(),
+                        PointsListener.scorePerPlayer.get(player.getUniqueId()) + pointsToAdd);
 
                 break;
             case "minecraft:nether/distract_piglin":
@@ -55,7 +60,8 @@ public class AdvancementListener implements Listener {
 
                 if (!GameState.playersReachedEnd) {
                     GameState.playersReachedEnd = true;
-                    addBonusXP(player, "End");
+                    pointsToAdd = 15;
+                    bonusPointsNotification(player, "End");
 
                     for (Player online : Bukkit.getOnlinePlayers()) {
                         online.sendMessage(Prefixes.getImportantPrefix()
@@ -63,6 +69,9 @@ public class AdvancementListener implements Listener {
                                 + " Eyes of Ender " + ChatColor.GRAY + "needed to be able to enter "
                                 + ChatColor.WHITE + "The End" + ChatColor.GRAY + ".");
                     }
+
+                    PointsListener.scorePerPlayer.put(player.getUniqueId(),
+                            PointsListener.scorePerPlayer.get(player.getUniqueId()) + pointsToAdd);
                 }
 
                 break;
@@ -83,10 +92,9 @@ public class AdvancementListener implements Listener {
         }
     }
 
-    public void addBonusXP(Player player, String dimension) {
-        Coins.addXP(player, Coins.advancementXP * 2);
-        player.sendMessage(Prefixes.getXPPrefix(Coins.advancementXP) + "First in the "
-                + HexColor.YELLOW + dimension + ChatColor.GRAY + " dimension.");
+    public void bonusPointsNotification(Player player, String dimension) {
+        player.sendMessage(ChatColor.GRAY + "First in the " + HexColor.YELLOW + dimension
+                + ChatColor.GRAY + " dimension.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
     }
 

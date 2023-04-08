@@ -69,12 +69,14 @@ public class EntityDeathListener implements Listener {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COBWEB));
                 break;
             case "Enderman":
-                if (killer != null)
+                if (killer != null) {
                     GameState.putItemInInventory(killer, new ItemStack(Material.ENDER_PEARL, 2));
+                }
                 break;
             case "Blaze":
-                if (killer != null)
+                if (killer != null) {
                     GameState.putItemInInventory(killer, new ItemStack(Material.BLAZE_ROD));
+                }
                 break;
             case "Iron Golem":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 8));

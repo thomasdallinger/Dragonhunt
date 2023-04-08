@@ -61,7 +61,6 @@ public class PlayerDeathListener implements Listener {
 
                 player.sendMessage(ChatColor.DARK_GRAY + "ᴋɪʟʟ ʀᴇᴡᴀʀᴅꜱ");
                 GameState.putItemInInventory(killer, GameState.createRockets(3));
-                player.sendMessage(HexColor.GREEN + "+3 " + ChatColor.WHITE + "Firework Rockets");
 
                 addPlayerKill(killer, player);
             }

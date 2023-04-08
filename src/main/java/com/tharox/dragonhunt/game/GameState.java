@@ -71,7 +71,7 @@ public class GameState {
     /**
      * @return a list that contains chest and minecart loot
      */
-    public static ArrayList<ItemStack> getChestLoot() {
+    public static ArrayList<ItemStack> getChestLoot(Player player) {
         int multiplier = 1;
         if (DoubleChestLoot.active) multiplier = 2;
 
@@ -81,30 +81,16 @@ public class GameState {
         chestLoot.add(new ItemStack(Material.IRON_INGOT, 6 * multiplier));
         chestLoot.add(new ItemStack(Material.GOLD_INGOT, 9 * multiplier));
 
+        for (ItemStack item : chestLoot) {
+            printItemReceivedMessage(player, item);
+        }
+
         return chestLoot;
     }
 
     /**
-     * Sets messages displaying the loot a player got from clicking a chest / minecart.
-     */
-    public static void setChestLootMessages(Player player) {
-        player.sendMessage(ChatColor.DARK_GRAY + "ᴄʜᴇꜱᴛ ʟᴏᴏᴛ");
-
-        if (DoubleChestLoot.active) {
-            player.sendMessage(HexColor.GREEN + "+2 " + ChatColor.WHITE + "Diamonds");
-            player.sendMessage(HexColor.GREEN + "+4 " + ChatColor.WHITE + "Obsidian");
-            player.sendMessage(HexColor.GREEN + "+12 " + ChatColor.WHITE + "Iron Ingots");
-            player.sendMessage(HexColor.GREEN + "+18 " + ChatColor.WHITE + "Gold Ingots");
-        } else {
-            player.sendMessage(ChatColor.GRAY + "+1 " + ChatColor.WHITE + "Diamonds");
-            player.sendMessage(ChatColor.GRAY + "+2 " + ChatColor.WHITE + "Obsidian");
-            player.sendMessage(ChatColor.GRAY + "+6 " + ChatColor.WHITE + "Iron Ingots");
-            player.sendMessage(ChatColor.GRAY + "+9 " + ChatColor.WHITE + "Gold Ingots");
-        }
-    }
-
-    /**
-     * Used in LevelUp.
+     * addItem(item) returns a HashMap<Integer, ItemStack> containing items
+     * that did not fit in the player's inventory.
      *
      * @param player player who is supposed to get the item
      * @param item   item the player should get
@@ -118,7 +104,34 @@ public class GameState {
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             player.sendMessage(Prefixes.getErrorPrefix() + HexColor.RED + "Inventory full! "
                     + ChatColor.RED + "Item dropped on the ground.");
+            return;
         }
+
+        // Print every item except wood from trees
+        if (item.getType() != Material.OAK_LOG) {
+            printItemReceivedMessage(player, item);
+        }
+    }
+
+    /**
+     * Notify the player that he/she received an item.
+     */
+    public static void printItemReceivedMessage(Player player, ItemStack item) {
+
+        String lowercaseString = item.getType().toString().replace("_", " ").toLowerCase();
+        String capitalizedString = "";
+
+        // Split the string into an array of words, using any whitespace characters as delimiters.
+        String[] words = lowercaseString.split("\\s+");
+
+        for (String word : words) {
+            String firstLetter = word.substring(0, 1);
+            String restOfWord = word.substring(1);
+            capitalizedString += firstLetter.toUpperCase() + restOfWord + " ";
+        }
+
+        player.sendMessage(HexColor.GREEN + "+" + item.getAmount() + " "
+                + ChatColor.WHITE + capitalizedString.trim());
     }
 
     /**

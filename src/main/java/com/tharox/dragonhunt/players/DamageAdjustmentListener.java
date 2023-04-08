@@ -41,8 +41,6 @@ public class DamageAdjustmentListener implements Listener {
             damager = (Player) event.getDamager();
         } else return;
 
-        damager.sendMessage("Pre Damage: " + damage);
-
         // Nerf strength.
         if (damager.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE)) {
             Collection<PotionEffect> pe = damager.getActivePotionEffects();
@@ -71,7 +69,6 @@ public class DamageAdjustmentListener implements Listener {
                 if (damager.getInventory().getItemInMainHand().getType().equals(Material.BOW)
                         || damager.getInventory().getItemInMainHand().getType().equals(Material.CROSSBOW)) {
                     damage = damage * 3;
-                    damager.sendMessage("Damage: " + damage);
                 }
             }
         }

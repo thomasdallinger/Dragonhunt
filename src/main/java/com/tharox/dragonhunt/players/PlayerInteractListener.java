@@ -43,11 +43,11 @@ public class PlayerInteractListener implements Listener {
                     event.setCancelled(true);
                     block.setType(Material.AIR);
 
-                    for (ItemStack loot : GameState.getChestLoot()) {
+                    player.sendMessage(ChatColor.DARK_GRAY + "ᴄʜᴇꜱᴛ ʟᴏᴏᴛ");
+                    for (ItemStack loot : GameState.getChestLoot(player)) {
                         block.getWorld().dropItemNaturally(block.getLocation(), loot);
                     }
 
-                    GameState.setChestLootMessages(player);
                     return;
                 }
 

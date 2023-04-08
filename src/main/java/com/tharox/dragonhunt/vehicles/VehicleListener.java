@@ -2,7 +2,7 @@ package com.tharox.dragonhunt.vehicles;
 
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameState;
-import org.bukkit.ChatColor;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -32,13 +32,12 @@ public class VehicleListener implements Listener {
             StorageMinecart mc = ((StorageMinecart) entity);
             mc.getInventory().clear();
 
-            for (ItemStack loot : GameState.getChestLoot()) {
+            player.sendMessage(ChatColor.DARK_GRAY + "ᴍɪɴᴇᴄᴀʀᴛ ʟᴏᴏᴛ");
+            for (ItemStack loot : GameState.getChestLoot(player)) {
                 mc.getInventory().addItem(loot);
             }
 
             entity.remove();
-
-            GameState.setChestLootMessages(player);
         }
     }
 

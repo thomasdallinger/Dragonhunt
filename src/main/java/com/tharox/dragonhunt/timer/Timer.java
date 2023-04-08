@@ -156,6 +156,14 @@ public class Timer {
                     }
                 }
 
+                // last minute
+                if (getTime() == 1740 || getTime() >= 1785) {
+                    for (Player player : Bukkit.getOnlinePlayers()) {
+                        player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.GRAY + "The Game ends in "
+                                + HexColor.YELLOW + (1800 - getTime()) + ChatColor.GRAY + " seconds.");
+                    }
+                }
+
                 if (getTime() == 1200) {
                     for (Player online : Bukkit.getOnlinePlayers()) {
                         online.sendMessage(Prefixes.getImportantPrefix()

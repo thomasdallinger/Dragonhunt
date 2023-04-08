@@ -23,6 +23,9 @@ public class ItemConsumeListener implements Listener {
 
             // Absorption 1 (2:00)
             // Regeneration 2 (0:05)
+            // Fire Resistance (0:15)
+
+            player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 300, 0));
         }
 
         if (item.getType() == Material.ENCHANTED_GOLDEN_APPLE) {

@@ -23,12 +23,14 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.StructureSearchResult;
 
+import java.util.UUID;
+
 public class DimensionListener implements Listener {
     /**
      * Give players Resistance 10 when changing worlds so they can't be damaged for the first 7 seconds.
      * Removes the Tracker from a player's inventory in the END. Returns the Tracker when changing to a different
      * world again.
-     *
+     * <p>
      * End Teleporter: when changing worlds from The End to the Overworld or Nether.
      */
     @EventHandler
@@ -100,15 +102,18 @@ public class DimensionListener implements Listener {
             // Give the player the tracker back in The End
             player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
 
+            UUID id = player.getUniqueId();
+
             // Check if the player has not been in The End yet.
-            if (!PointsListener.bossBars.containsKey(player.getUniqueId())) {
-                PointsListener.bossBars.put(player.getUniqueId(),
-                        Bukkit.createBossBar(HexColor.YELLOW.toString() + ChatColor.BOLD
-                                        + "0" + ChatColor.WHITE + " / " + PointsListener.threshold + " Points",
-                                BarColor.YELLOW, BarStyle.SOLID));
-                PointsListener.bossBars.get(player.getUniqueId()).addPlayer(player);
-                PointsListener.bossBars.get(player.getUniqueId()).setProgress(0);
-                PointsListener.bossBars.get(player.getUniqueId()).setVisible(true);
+            if (!PointsListener.bossBars.containsKey(id)) {
+                PointsListener.bossBars.put(id, Bukkit.createBossBar(HexColor.YELLOW.toString() + ChatColor.BOLD
+                                + PointsListener.scorePerPlayer.get(id)
+                                + ChatColor.WHITE + " / " + PointsListener.threshold + " Points",
+                        BarColor.YELLOW, BarStyle.SOLID));
+                PointsListener.bossBars.get(id).addPlayer(player);
+                PointsListener.bossBars.get(id).setProgress(
+                        PointsListener.scorePerPlayer.get(id) / (PointsListener.threshold + 1D));
+                PointsListener.bossBars.get(id).setVisible(true);
             }
         }
     }

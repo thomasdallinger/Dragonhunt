@@ -8,6 +8,7 @@ import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
@@ -26,6 +27,9 @@ public class AdvancementListener implements Listener {
         Advancement advancement = event.getAdvancement();
         String advancementName = "";
         int pointsToAdd = 10;
+
+        // Block spectating players from getting advancements (such as "Enter Nether").
+        if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
 
         switch (advancement.getKey().toString()) {
             case "minecraft:story/smelt_iron":

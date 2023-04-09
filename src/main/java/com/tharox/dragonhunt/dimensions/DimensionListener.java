@@ -101,20 +101,6 @@ public class DimensionListener implements Listener {
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.END_PORTAL) {
             // Give the player the tracker back in The End
             player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
-
-            UUID id = player.getUniqueId();
-
-            // Check if the player has not been in The End yet.
-            if (!PointsListener.bossBars.containsKey(id)) {
-                PointsListener.bossBars.put(id, Bukkit.createBossBar(HexColor.YELLOW.toString() + ChatColor.BOLD
-                                + PointsListener.scorePerPlayer.get(id)
-                                + ChatColor.WHITE + " / " + PointsListener.threshold + " Points",
-                        BarColor.YELLOW, BarStyle.SOLID));
-                PointsListener.bossBars.get(id).addPlayer(player);
-                PointsListener.bossBars.get(id).setProgress(
-                        PointsListener.scorePerPlayer.get(id) / (PointsListener.threshold + 1D));
-                PointsListener.bossBars.get(id).setVisible(true);
-            }
         }
     }
 }

@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
 import java.sql.Statement;
+import java.util.UUID;
 
 public class AdvancementListener implements Listener {
 
@@ -42,9 +43,7 @@ public class AdvancementListener implements Listener {
                     bonusPointsNotification(player, "Nether");
                 }
 
-                PointsListener.scorePerPlayer.put(player.getUniqueId(),
-                        PointsListener.scorePerPlayer.get(player.getUniqueId()) + pointsToAdd);
-
+                addPoints(player.getUniqueId(), pointsToAdd);
                 break;
             case "minecraft:nether/distract_piglin":
                 advancementName = "Piglin Trading";
@@ -69,11 +68,9 @@ public class AdvancementListener implements Listener {
                                 + " Eyes of Ender " + ChatColor.GRAY + "needed to be able to enter "
                                 + ChatColor.WHITE + "The End" + ChatColor.GRAY + ".");
                     }
-
-                    PointsListener.scorePerPlayer.put(player.getUniqueId(),
-                            PointsListener.scorePerPlayer.get(player.getUniqueId()) + pointsToAdd);
                 }
 
+                addPoints(player.getUniqueId(), pointsToAdd);
                 break;
         }
 
@@ -92,13 +89,22 @@ public class AdvancementListener implements Listener {
         }
     }
 
-    public void bonusPointsNotification(Player player, String dimension) {
+    private void addPoints(UUID id, int pointsToAdd) {
+        PointsListener.scorePerPlayer.put(id, PointsListener.scorePerPlayer.get(id) + pointsToAdd);
+        PointsListener.bossBars.get(id).setTitle(
+                HexColor.YELLOW.toString() + ChatColor.BOLD + PointsListener.scorePerPlayer.get(id)
+                        + ChatColor.WHITE + " / " + PointsListener.threshold + " Points");
+        PointsListener.bossBars.get(id).setProgress(
+                PointsListener.scorePerPlayer.get(id) / (PointsListener.threshold + 1D));
+    }
+
+    private void bonusPointsNotification(Player player, String dimension) {
         player.sendMessage(ChatColor.GRAY + "First in the " + HexColor.YELLOW + dimension
                 + ChatColor.GRAY + " dimension.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
     }
 
-    public void addAdvancement(Player player, String advancement) {
+    private void addAdvancement(Player player, String advancement) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO advancements (game_id, player, advancement, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + advancement +

@@ -24,6 +24,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.UUID;
+
 public class GameStart extends GameConfiguration {
     Timer timer = Main.getInstance().getTimer();
     Countdown startCountdown, gracePeriodCountdown;
@@ -194,6 +196,18 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(HexColor.GREEN + "The Grace Period has ended.");
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);
+
+                // Add the Points Boss Bar to all players
+                UUID id = player.getUniqueId();
+
+                PointsListener.bossBars.put(id, Bukkit.createBossBar(
+                        HexColor.YELLOW.toString() + ChatColor.BOLD + PointsListener.scorePerPlayer.get(id)
+                                + ChatColor.WHITE + " / " + PointsListener.threshold + " Points",
+                        BarColor.YELLOW, BarStyle.SOLID));
+                PointsListener.bossBars.get(id).addPlayer(player);
+                PointsListener.bossBars.get(id).setProgress(
+                        PointsListener.scorePerPlayer.get(id) / (PointsListener.threshold + 1D));
+                PointsListener.bossBars.get(id).setVisible(true);
             }
         }
     }

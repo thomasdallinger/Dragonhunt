@@ -1,9 +1,10 @@
 package com.tharox.dragonhunt.commands;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.timer.Timer;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
@@ -24,7 +25,7 @@ public class TopCommand implements CommandExecutor {
             player = (Player) sender;
         } else return false;
 
-        if (!timer.isRunning()) {
+        if (!timer.isRunning() || player.getGameMode().equals(GameMode.SPECTATOR)) {
             player.sendMessage(Prefixes.getErrorPrefix() + "This feature is currently disabled.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return false;

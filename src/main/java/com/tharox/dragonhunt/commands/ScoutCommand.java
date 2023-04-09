@@ -8,6 +8,7 @@ import com.tharox.dragonhunt.scout.Scout;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -71,6 +72,13 @@ public class ScoutCommand implements CommandExecutor {
             Scout.scoutAvailable.put(player, false);
 
             return true;
+
+        } else {
+            if (player.getGameMode().equals(GameMode.SPECTATOR)) {
+                player.sendMessage(Prefixes.getErrorPrefix() + "You cannot scout while in Spectator Mode.");
+                player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                return false;
+            }
         }
 
         if (!Scout.scoutAvailable.get(player)) {

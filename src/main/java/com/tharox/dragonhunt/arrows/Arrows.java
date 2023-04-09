@@ -38,7 +38,7 @@ public class Arrows {
 
                     if (arrowStack == null
                             || (arrowStack.getType() != Material.ARROW && arrowStack.getType() != Material.TIPPED_ARROW)
-                            || arrowStack.getAmount() <= 15) {
+                            || arrowStack.getAmount() <= 31) {
 
                         // if arrow effects have been unlocked AND one of the available arrow effects has been selected
                         if (Effects.ArrowEffectsUnlocked.get(player) && Effects.ArrowEffectType.get(player).getType() == Material.TIPPED_ARROW) {

@@ -1,29 +1,24 @@
 package com.tharox.dragonhunt.players;
 
-import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.game.GameEnd;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarStyle;
 import org.bukkit.boss.BossBar;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.projectiles.ProjectileSource;
-import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ConcurrentModificationException;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.UUID;
 
 public class PointsListener implements Listener {
-    public static int threshold = 120;
+    public static int threshold = 300;
 
     // contains the UUID of players who are forced to damage the Ender Dragon
     public static HashMap<UUID, Integer> scorePerPlayer = new HashMap<>();

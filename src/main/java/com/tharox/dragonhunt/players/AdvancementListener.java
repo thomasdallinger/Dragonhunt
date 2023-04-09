@@ -9,7 +9,6 @@ import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Sound;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -26,7 +25,7 @@ public class AdvancementListener implements Listener {
         Player player = event.getPlayer();
         Advancement advancement = event.getAdvancement();
         String advancementName = "";
-        int pointsToAdd = 10;
+        int pointsToAdd = 16;
 
         // Block spectating players from getting advancements (such as "Enter Nether").
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
@@ -39,32 +38,30 @@ public class AdvancementListener implements Listener {
                 advancementName = "Acquire Diamonds";
                 break;
             case "minecraft:story/enter_the_nether":
-                advancementName = "Enter Nether";
+                advancementName = "Enter the Nether";
 
                 if (GameState.firstNetherEntry == null) {
                     GameState.firstNetherEntry = player.getLocation();
-                    pointsToAdd = 15;
-                    bonusPointsNotification(player, "Nether");
                 }
 
-                addPoints(player.getUniqueId(), pointsToAdd);
                 break;
             case "minecraft:nether/distract_piglin":
-                advancementName = "Piglin Trading";
+                advancementName = "Trade with Piglins";
                 break;
-            case "minecraft:nether/find_fortress":
-                advancementName = "Find Fortress";
+            case "minecraft:nether/obtain_blaze_rod":
+                advancementName = "Obtain Blaze Rods";
                 break;
             case "minecraft:nether/find_bastion":
-                advancementName = "Find Bastion";
+                advancementName = "Find a Bastion";
+                break;
+            case "minecraft:nether/netherite_armor":
+                advancementName = "Acquire full Netherite Armor";
                 break;
             case "minecraft:story/enter_the_end":
-                advancementName = "Enter The End";
+                advancementName = "Enter the End";
 
                 if (!GameState.playersReachedEnd) {
                     GameState.playersReachedEnd = true;
-                    pointsToAdd = 15;
-                    bonusPointsNotification(player, "End");
 
                     for (Player online : Bukkit.getOnlinePlayers()) {
                         online.sendMessage(Prefixes.getImportantPrefix()
@@ -74,7 +71,6 @@ public class AdvancementListener implements Listener {
                     }
                 }
 
-                addPoints(player.getUniqueId(), pointsToAdd);
                 break;
         }
 
@@ -82,14 +78,22 @@ public class AdvancementListener implements Listener {
             Coins.addXP(player, Coins.advancementXP);
             addAdvancement(player, advancementName);
             int rank = DbValues.getAdvancementRank(player, advancementName);
+            pointsToAdd = pointsToAdd - (rank - 1) * 2;
 
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(Prefixes.getAdvancementPrefix()
                         + Prefixes.getXPPrefix(Coins.advancementXP) + ChatColor.WHITE + player.getName()
                         + ChatColor.GRAY + " has made the advancement " + ChatColor.AQUA + advancementName
-                        + ChatColor.DARK_GRAY + " (#" + rank + ")"
+                        + ChatColor.GRAY + " at " + ChatColor.AQUA + DbValues.getTimestamp()
+                        + ChatColor.GRAY + " as " + ChatColor.AQUA + ChatColor.BOLD + " #" + rank
                         + ChatColor.GRAY + ".");
             }
+
+            addPoints(player.getUniqueId(), pointsToAdd);
+            // #1 = 16 Points, #2 = 14 Points, #3 = 12 Points, ... #8 = 2 Points
+
+            player.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "+" + pointsToAdd
+                    + ChatColor.WHITE + " Points");
         }
     }
 
@@ -100,12 +104,6 @@ public class AdvancementListener implements Listener {
                         + ChatColor.WHITE + " / " + PointsListener.threshold + " Points");
         PointsListener.bossBars.get(id).setProgress(
                 PointsListener.scorePerPlayer.get(id) / (PointsListener.threshold + 1D));
-    }
-
-    private void bonusPointsNotification(Player player, String dimension) {
-        player.sendMessage(ChatColor.GRAY + "First in the " + HexColor.YELLOW + dimension
-                + ChatColor.GRAY + " dimension.");
-        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
     }
 
     private void addAdvancement(Player player, String advancement) {

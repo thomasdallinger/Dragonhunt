@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 
 @DragonhuntKit
 public class Mutant extends Kit {
-    static int duration = 7;
+    static int duration = 8;
     static int cooldown = 50;
 
     public static final String title = HexColor.TANK + KitClass.TANK + " Mutant";

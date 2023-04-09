@@ -22,7 +22,7 @@ import java.util.Objects;
 public class GrappleListener implements Listener {
 
     public static int maxArrowDistance = 20; // Blocks
-    public static int cooldown = 400; // Ticks
+    public static int cooldown = 200; // Ticks
 
     @EventHandler
     public void grappleEvent(EntityShootBowEvent event) {

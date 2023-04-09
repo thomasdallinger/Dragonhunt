@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 
 @DragonhuntKit
 public class Warrior extends Kit {
-    static int duration = 9;
+    static int duration = 12;
     static int cooldown = 60;
 
     public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Warrior";

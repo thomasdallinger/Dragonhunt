@@ -12,8 +12,8 @@ import java.util.Objects;
 
 @DragonhuntKit
 public class Healer extends Kit {
-    static int heartsToAdd = 5;
-    static int cooldown = 70;
+    static int heartsToAdd = 8;
+    static int cooldown = 50;
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Healer";
     public static final String lore = ""

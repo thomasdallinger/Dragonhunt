@@ -41,12 +41,12 @@ public class KitInventory {
                         + KitClass.SUPPORT + " Support" + ChatColor.GRAY + " (Class)",
                 Material.POTION,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.WHITE + "+20%" + ChatColor.GRAY + " Healing",
+                        + ChatColor.WHITE + "Double" + ChatColor.GRAY + " Health Regeneration",
                 Color.fromRGB(0x1F1F23)));
 
         inv.setItem(27, Kit.getDisplayItem(HexColor.MOBILITY.toString() + ChatColor.BOLD
                         + KitClass.MOBILITY + " Mobility" + ChatColor.GRAY + " (Class)",
-                Material.NETHERITE_BOOTS,
+                Material.RECOVERY_COMPASS,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
                         + ChatColor.WHITE + "+20%" + ChatColor.GRAY + " Attack Speed,\n"
                         + ChatColor.WHITE + "+40%" + ChatColor.GRAY + " Mining Speed"));

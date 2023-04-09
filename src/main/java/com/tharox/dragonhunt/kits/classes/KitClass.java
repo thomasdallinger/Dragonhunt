@@ -71,7 +71,7 @@ public class KitClass implements Listener {
                 || event.getRegainReason() == EntityRegainHealthEvent.RegainReason.EATING
                 || event.getRegainReason() == EntityRegainHealthEvent.RegainReason.MAGIC
                 || event.getRegainReason() == EntityRegainHealthEvent.RegainReason.MAGIC_REGEN) {
-            event.setAmount(event.getAmount() * 1.2);
+            event.setAmount(event.getAmount() * 2);
         }
     }
 }

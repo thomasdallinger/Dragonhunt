@@ -59,7 +59,7 @@ public class PlayerDeathListener implements Listener {
                 killer.sendMessage(HexColor.GREEN + "You received " + ChatColor.DARK_GREEN + "Regeneration 2"
                         + HexColor.GREEN + " for " + ChatColor.DARK_GREEN + "10" + HexColor.GREEN + " seconds.");
 
-                player.sendMessage(ChatColor.DARK_GRAY + "ᴋɪʟʟ ʀᴇᴡᴀʀᴅꜱ");
+                killer.sendMessage(ChatColor.DARK_GRAY + "ᴋɪʟʟ ʀᴇᴡᴀʀᴅꜱ");
                 GameState.putItemInInventory(killer, GameState.createRockets(3));
 
                 addPlayerKill(killer, player);

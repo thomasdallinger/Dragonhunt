@@ -47,6 +47,7 @@ public class EntityDeathListener implements Listener {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.TNT, 1));
                 break;
             case "Skeleton":
+            case "Stray":
             case "Pillager":
                 ItemStack crossbow = new ItemStack(Material.CROSSBOW);
                 crossbow.addEnchantment(Enchantment.QUICK_CHARGE, 3);

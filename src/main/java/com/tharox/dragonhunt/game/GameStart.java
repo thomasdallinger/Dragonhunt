@@ -89,7 +89,7 @@ public class GameStart extends GameConfiguration {
                 player.openInventory(modifierInventory.modifiers);
             }
 
-            if (startCountdown.getTime() == 20) {
+            if (startCountdown.getTime() == 15) {
                 GameState.modifierInventoryClose = true;
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
@@ -97,11 +97,7 @@ public class GameStart extends GameConfiguration {
                 player.openInventory(kitInventory.kits);
             }
 
-            /*if (startCountdown.getTime() == 5) {
-                player.closeInventory();
-            }*/
-
-            if (startCountdown.getTime() <= 20 && startCountdown.getTime() > 3) {
+            if (startCountdown.getTime() <= 15 && startCountdown.getTime() > 3) {
                 player.sendTitle(HexColor.PURPLE + "Starting in",
                         ChatColor.WHITE.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
                         , 0, 25, 0);

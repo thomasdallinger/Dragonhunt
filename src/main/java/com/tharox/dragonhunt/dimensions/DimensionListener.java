@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.modifiers.classes.Bastion;
 import com.tharox.dragonhunt.players.PlayerEndTeleport;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
@@ -69,8 +70,15 @@ public class DimensionListener implements Listener {
                 // No player has reached the NETHER before.
                 // Set the first NETHER PORTAL close to a Fortress.
                 if (GameState.firstNetherEntry == null) {
-                    StructureSearchResult structureSearchResult = worldTo.locateNearestStructure(
-                            player.getLocation(), Structure.FORTRESS, 32, false);
+                    StructureSearchResult structureSearchResult;
+
+                    if (Bastion.active) {
+                        structureSearchResult = worldTo.locateNearestStructure(
+                                player.getLocation(), Structure.BASTION_REMNANT, 32, false);
+                    } else {
+                        structureSearchResult = worldTo.locateNearestStructure(
+                                player.getLocation(), Structure.FORTRESS, 32, false);
+                    }
 
                     if (structureSearchResult != null) {
                         event.setCanCreatePortal(true);

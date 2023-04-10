@@ -51,7 +51,8 @@ public class ModifierSelection {
                 new ForeverHunger(),
                 new Heartbroken(),
                 new FireMobs(),
-                new PowerfulMobs()
+                new PowerfulMobs(),
+                new Bastion()
         ));
 
         Random rand = new Random();

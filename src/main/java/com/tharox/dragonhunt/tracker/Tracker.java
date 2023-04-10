@@ -58,14 +58,49 @@ public class Tracker implements Listener {
         if (e == null)
             return;
 
+        // Left-Click: Track Player
+        if (e.equals(EquipmentSlot.HAND)
+                && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
+            if (item.getItemMeta().getDisplayName().contains("Tracker")) {
+                LinkedList<Player> playerList = new LinkedList<>(Bukkit.getServer().getOnlinePlayers());
+                List<Player> allOtherPlayers = playerList.stream().filter(o -> !(o.getName().equals(player.getName())))
+                        .collect(Collectors.toList());
+
+                index++;    // switch the located player
+
+                if (index > allOtherPlayers.size() - 1)
+                    index = 0;
+
+                playerTracksName.put(player, "[P] " + allOtherPlayers.get(index).getName());
+                playerTracksLocation.put(player, allOtherPlayers.get(index).getLocation());
+                player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
+                        + ChatColor.WHITE + playerTracksName.get(player).substring(4) + ChatColor.GRAY + ".");
+
+                playerTracksIndex.replace(player, index);
+                return;
+            }
+        }
+
         // a list of all structures (and locations) trackable in the world the player is in
         LinkedList<String> structureList = new LinkedList<>();
         LinkedList<Location> locationList = new LinkedList<>();
 
         if (world.getName().equals("world")) {
-            addStructureToLists(player, Structure.ANCIENT_CITY, "Ancient City", structureList,
-                    locationList);
             addStructureToLists(player, Structure.MINESHAFT, "Mineshaft", structureList,
+                    locationList);
+            addStructureToLists(player, Structure.VILLAGE_PLAINS, "Plains Village", structureList,
+                    locationList);
+            addStructureToLists(player, Structure.VILLAGE_DESERT, "Desert Village", structureList,
+                    locationList);
+            addStructureToLists(player, Structure.VILLAGE_SAVANNA, "Savanna Village", structureList,
+                    locationList);
+            addStructureToLists(player, Structure.VILLAGE_SNOWY, "Snowy Village", structureList,
+                    locationList);
+            addStructureToLists(player, Structure.VILLAGE_TAIGA, "Taiga Village", structureList,
+                    locationList);
+            addStructureToLists(player, Structure.DESERT_PYRAMID, "Desert Pyramid", structureList,
+                    locationList);
+            addStructureToLists(player, Structure.ANCIENT_CITY, "Ancient City", structureList,
                     locationList);
 
         } else if (world.getName().equals("world_nether")) {
@@ -86,27 +121,6 @@ public class Tracker implements Listener {
         if (PlayerDeathListener.deathLocation.containsKey(player)) {
             structureList.add("Last Death");
             locationList.add(PlayerDeathListener.deathLocation.get(player));
-        }
-
-        if (e.equals(EquipmentSlot.HAND)
-                && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().contains("Tracker")) {
-                LinkedList<Player> playerList = new LinkedList<>(Bukkit.getServer().getOnlinePlayers());
-                List<Player> allOtherPlayers = playerList.stream().filter(o -> !(o.getName().equals(player.getName())))
-                        .collect(Collectors.toList());
-
-                index++;    // switch the located player
-
-                if (index > allOtherPlayers.size() - 1)
-                    index = 0;
-
-                playerTracksName.put(player, "[P] " + allOtherPlayers.get(index).getName());
-                playerTracksLocation.put(player, allOtherPlayers.get(index).getLocation());
-                player.sendMessage(Prefixes.getTrackingPrefix() + ChatColor.GRAY + "Tracking "
-                        + ChatColor.WHITE + playerTracksName.get(player).substring(4) + ChatColor.GRAY + ".");
-
-                playerTracksIndex.replace(player, index);
-            }
         }
 
         if (e.equals(EquipmentSlot.HAND)
@@ -204,10 +218,11 @@ public class Tracker implements Listener {
                 }
 
             } catch (IllegalArgumentException ex) {
-                // Different dimension.
+                // Different dimension (can only be a player).
                 if (trackedObject != null) {
                     player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new ComponentBuilder(trackedObjectName).color(HexColor.YELLOW).bold(true)
+                            new ComponentBuilder(trackedObject.substring(4).toUpperCase())
+                                    .color(ChatColor.WHITE).bold(true)
                                     .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
                                     .append(DbValues.getCurrentWorld(trackedLocation)).color(HexColor.RED).create());
                 }
@@ -235,9 +250,21 @@ public class Tracker implements Listener {
             LinkedList<String> structureList, LinkedList<Location> locationList) {
         StructureSearchResult structureSearchResult;
 
+        // Params: player location, structure to search for, radius in chunks, search for unlooted only
         structureSearchResult = player.getWorld().locateNearestStructure(
-                player.getLocation(), structure, 32, false);
+                player.getLocation(), structure, 16, false);
+
         if (structureSearchResult != null) {
+
+            // Check if the located structure is outside the Overworld border
+            Location center = Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().getCenter();
+            if ((center.getX() + 1000) < structureSearchResult.getLocation().getX()
+                    || (center.getX() - 1000) > structureSearchResult.getLocation().getX()
+                    || (center.getZ() + 1000) < structureSearchResult.getLocation().getZ()
+                    || (center.getZ() - 1000) > structureSearchResult.getLocation().getZ()) {
+                return;
+            }
+
             structureList.add(structureName);
             locationList.add(structureSearchResult.getLocation());
         }

@@ -5,13 +5,9 @@ import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.players.PlayerEndTeleport;
-import com.tharox.dragonhunt.players.PointsListener;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.boss.BarColor;
-import org.bukkit.boss.BarStyle;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,8 +18,6 @@ import org.bukkit.generator.structure.Structure;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.StructureSearchResult;
-
-import java.util.UUID;
 
 public class DimensionListener implements Listener {
     /**
@@ -86,6 +80,9 @@ public class DimensionListener implements Listener {
                     event.setCanCreatePortal(false);
                     event.setTo(GameState.firstNetherEntry);
                 }
+
+                // Give the player a fresh (reset) tracker
+                player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
 
                 // Force set the Respawn Point to the Nether Portals location
                 player.setBedSpawnLocation(event.getFrom(), true);

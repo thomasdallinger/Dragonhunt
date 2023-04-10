@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -23,15 +24,15 @@ public class DamageAdjustmentListener implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-        AbstractArrow arrow;
+        Projectile projectile; // includes all types of arrows and fireworks
         ProjectileSource shooter;
         Player damager;
         Entity entity = event.getEntity();
         double damage = event.getDamage();
 
-        if (event.getDamager() instanceof AbstractArrow) {
-            arrow = (AbstractArrow) event.getDamager();
-            shooter = arrow.getShooter();
+        if (event.getDamager() instanceof Projectile) {
+            projectile = (Projectile) event.getDamager();
+            shooter = projectile.getShooter();
 
             if (shooter instanceof Player) {
                 damager = (Player) shooter;

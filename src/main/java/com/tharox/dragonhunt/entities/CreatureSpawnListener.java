@@ -47,7 +47,7 @@ public class CreatureSpawnListener implements Listener {
                 Random random = new Random();
                 int chance = random.nextInt(20) + 1;
 
-                if (chance == 1) {
+                if (chance == 1 && entity instanceof Monster) {
                     event.setCancelled(true);
                     world.spawnEntity(location, EntityType.ENDERMAN);
                 }

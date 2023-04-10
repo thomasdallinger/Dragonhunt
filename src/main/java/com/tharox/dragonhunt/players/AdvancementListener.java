@@ -25,7 +25,7 @@ public class AdvancementListener implements Listener {
         Player player = event.getPlayer();
         Advancement advancement = event.getAdvancement();
         String advancementName = "";
-        int pointsToAdd = 16;
+        int pointsToAdd = 20;
 
         // Block spectating players from getting advancements (such as "Enter Nether").
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
@@ -78,7 +78,7 @@ public class AdvancementListener implements Listener {
             Coins.addXP(player, Coins.advancementXP);
             addAdvancement(player, advancementName);
             int rank = DbValues.getAdvancementRank(player, advancementName);
-            pointsToAdd = pointsToAdd - (rank - 1) * 2;
+            pointsToAdd = pointsToAdd - (rank - 1) * 4;
 
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(Prefixes.getAdvancementPrefix()
@@ -89,11 +89,12 @@ public class AdvancementListener implements Listener {
                         + ChatColor.DARK_GRAY + " (" + DbValues.getTimestamp() + ")" + ChatColor.GRAY + ".");
             }
 
-            addPoints(player.getUniqueId(), pointsToAdd);
-            // #1 = 16 Points, #2 = 14 Points, #3 = 12 Points, ... #8 = 2 Points
-
-            player.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "+" + pointsToAdd
-                    + ChatColor.WHITE + " Points");
+            // #1 = 20 Points, #2 = 16 Points, #3 = 12 Points, ... #8 = 0 Points
+            if (pointsToAdd > 0) {
+                addPoints(player.getUniqueId(), pointsToAdd);
+                player.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "+" + pointsToAdd
+                        + ChatColor.WHITE + " Points");
+            }
         }
     }
 

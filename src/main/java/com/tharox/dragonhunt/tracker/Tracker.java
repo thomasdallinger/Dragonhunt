@@ -81,53 +81,53 @@ public class Tracker implements Listener {
             }
         }
 
-        // a list of all structures (and locations) trackable in the world the player is in
-        LinkedList<String> structureList = new LinkedList<>();
-        LinkedList<Location> locationList = new LinkedList<>();
-
-        if (world.getName().equals("world")) {
-            addStructureToLists(player, Structure.MINESHAFT, "Mineshaft", structureList,
-                    locationList);
-            addStructureToLists(player, Structure.VILLAGE_PLAINS, "Plains Village", structureList,
-                    locationList);
-            addStructureToLists(player, Structure.VILLAGE_DESERT, "Desert Village", structureList,
-                    locationList);
-            addStructureToLists(player, Structure.VILLAGE_SAVANNA, "Savanna Village", structureList,
-                    locationList);
-            addStructureToLists(player, Structure.VILLAGE_SNOWY, "Snowy Village", structureList,
-                    locationList);
-            addStructureToLists(player, Structure.VILLAGE_TAIGA, "Taiga Village", structureList,
-                    locationList);
-            addStructureToLists(player, Structure.DESERT_PYRAMID, "Desert Pyramid", structureList,
-                    locationList);
-            addStructureToLists(player, Structure.ANCIENT_CITY, "Ancient City", structureList,
-                    locationList);
-
-        } else if (world.getName().equals("world_nether")) {
-            addStructureToLists(player, Structure.BASTION_REMNANT, "Bastion", structureList,
-                    locationList);
-
-            if (GameState.firstNetherEntry != null) {
-                structureList.add("Nether Portal");
-                locationList.add(GameState.firstNetherEntry);
-            }
-        }
-
-        // Locate a Ruined Portal in both dimensions.
-        addStructureTypeToLists(player, StructureType.RUINED_PORTAL, "Ruined Portal", structureList,
-                locationList);
-
-        // Display the last death location in both dimensions.
-        if (PlayerDeathListener.deathLocation.containsKey(player)) {
-            structureList.add("Last Death");
-            locationList.add(PlayerDeathListener.deathLocation.get(player));
-        }
-
         if (e.equals(EquipmentSlot.HAND)
                 && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
             if (item.getItemMeta().getDisplayName().contains("Tracker")) {
 
                 if (player.getWorld().getEnvironment() == World.Environment.THE_END) return;
+
+                // a list of all structures (and locations) trackable in the world the player is in
+                LinkedList<String> structureList = new LinkedList<>();
+                LinkedList<Location> locationList = new LinkedList<>();
+
+                if (world.getName().equals("world")) {
+                    addStructureToLists(player, Structure.MINESHAFT, "Mineshaft", structureList,
+                            locationList);
+                    addStructureToLists(player, Structure.VILLAGE_PLAINS, "Plains Village", structureList,
+                            locationList);
+                    addStructureToLists(player, Structure.VILLAGE_DESERT, "Desert Village", structureList,
+                            locationList);
+                    addStructureToLists(player, Structure.VILLAGE_SAVANNA, "Savanna Village", structureList,
+                            locationList);
+                    addStructureToLists(player, Structure.VILLAGE_SNOWY, "Snowy Village", structureList,
+                            locationList);
+                    addStructureToLists(player, Structure.VILLAGE_TAIGA, "Taiga Village", structureList,
+                            locationList);
+                    addStructureToLists(player, Structure.DESERT_PYRAMID, "Desert Pyramid", structureList,
+                            locationList);
+                    addStructureToLists(player, Structure.ANCIENT_CITY, "Ancient City", structureList,
+                            locationList);
+
+                } else if (world.getName().equals("world_nether")) {
+                    addStructureToLists(player, Structure.BASTION_REMNANT, "Bastion", structureList,
+                            locationList);
+
+                    if (GameState.firstNetherEntry != null) {
+                        structureList.add("Nether Portal");
+                        locationList.add(GameState.firstNetherEntry);
+                    }
+                }
+
+                // Locate a Ruined Portal in both dimensions.
+                addStructureTypeToLists(player, StructureType.RUINED_PORTAL, "Ruined Portal", structureList,
+                        locationList);
+
+                // Display the last death location in both dimensions.
+                if (PlayerDeathListener.deathLocation.containsKey(player)) {
+                    structureList.add("Last Death");
+                    locationList.add(PlayerDeathListener.deathLocation.get(player));
+                }
 
                 index++;    // switch the located structure
 
@@ -152,7 +152,7 @@ public class Tracker implements Listener {
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
 
-        String trackedObjectName = "";
+        String trackedObjectName;
         int distance;
 
         if (item.getItemMeta().getDisplayName().contains("Tracker")) {

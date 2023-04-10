@@ -101,10 +101,12 @@ public class Timer {
                         if (getTime() % 2 == 0) {
                             player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
                                     new ComponentBuilder("ABILITY READY").color(HexColor.YELLOW).bold(true)
+                                            .append(" (Right-Click)").color(ChatColor.GRAY).bold(false)
                                             .create());
                         } else {
                             player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
                                     new ComponentBuilder("ABILITY READY").color(ChatColor.WHITE).bold(true)
+                                            .append(" (Right-Click)").color(ChatColor.GRAY).bold(false)
                                             .create());
                         }
                     }

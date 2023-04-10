@@ -120,7 +120,7 @@ public class CombatListener implements Listener {
     @EventHandler
     public void onCmd(PlayerCommandPreprocessEvent event) {
         if (combatList.containsKey(event.getPlayer().getUniqueId())) {
-            List<String> commands = Arrays.asList("/pos", "/date", "/top", "/hub", "/l", "/lobby");
+            List<String> commands = Arrays.asList("/date", "/scout", "/top", "/hub", "/l", "/lobby");
 
             String[] parts = event.getMessage().split(" ");
             String cmd = parts[0].toLowerCase();

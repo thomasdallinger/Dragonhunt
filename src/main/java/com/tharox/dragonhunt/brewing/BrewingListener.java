@@ -1,9 +1,9 @@
 package com.tharox.dragonhunt.brewing;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
-import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatColor;
@@ -82,8 +82,11 @@ public class BrewingListener implements Listener {
             return;
         }
 
+        // unlock arrow effects
         if (item.getType() == Material.TIPPED_ARROW) {
             if (effectName.contains("Unlock Arrow Effects")) {
+                if (!checkIfEnoughCoins(player, effectName)) return;
+
                 Effects.ArrowEffectsUnlocked.put(player, true);
                 purchaseEffect(player, effectName);
                 brewingInventory = new BrewingInventory(Main.getInstance().getConfig(), player);
@@ -98,14 +101,7 @@ public class BrewingListener implements Listener {
             return;
         }
 
-        // not enough coins to purchase the effect
-        if (Coins.getCoins(player) < BrewingInventory.effectCost.get(effectName)) {
-            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-            player.sendMessage(Prefixes.getErrorPrefix() + "You do not have enough ⛃! Need "
-                    + HexColor.RED + (BrewingInventory.effectCost.get(effectName) - Coins.getCoins(player))
-                    + ChatColor.RED + " more.");
-            return;
-        }
+        if (!checkIfEnoughCoins(player, effectName)) return;
 
         // effect can be purchased - raise the level by 1
         if (effectName.contains("Speed")) {
@@ -135,6 +131,19 @@ public class BrewingListener implements Listener {
         // so all data (Locked / Unlocked / Coins) updates after a purchase
         brewingInventory = new BrewingInventory(Main.getInstance().getConfig(), player);
         player.openInventory(brewingInventory.permanentEffects);
+    }
+
+    private boolean checkIfEnoughCoins(Player player, String effectName) {
+        if (Coins.getCoins(player) < BrewingInventory.effectCost.get(effectName)) {
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+            player.sendMessage(Prefixes.getErrorPrefix() + "You do not have enough ⛃! Need "
+                    + HexColor.RED + (BrewingInventory.effectCost.get(effectName) - Coins.getCoins(player))
+                    + ChatColor.RED + " more.");
+
+            return false;
+        }
+
+        return true;
     }
 
     /**

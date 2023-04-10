@@ -57,7 +57,13 @@ public class ScoutCommand implements CommandExecutor {
                                 player.addPotionEffect(new PotionEffect(
                                         PotionEffectType.SLOW, 10 * 20, 1));
                                 player.sendMessage(HexColor.GREEN + "Successfully teleported to your Scout location.");
-                            }, 40L);
+
+                                for (Player online : Bukkit.getOnlinePlayers()) {
+                                    online.sendMessage(ChatColor.WHITE + player.getName() + ChatColor.GRAY
+                                            + " teleported using " + HexColor.YELLOW + "/scout tp"
+                                            + ChatColor.GRAY + ".");
+                                }
+                            }, 20L);
                         }
 
                     } else {

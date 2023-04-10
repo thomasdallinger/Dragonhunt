@@ -145,7 +145,7 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(ChatColor.GRAY + "Whoever reaches "
                         + ChatColor.WHITE + PointsListener.threshold + " Points"
                         + ChatColor.GRAY + " first wins.");
-                player.sendMessage(ChatColor.GRAY + "Score points by completing " + ChatColor.WHITE + "advancements"
+                player.sendMessage(ChatColor.GRAY + "Score points by completing " + ChatColor.WHITE + "Advancements"
                         + ChatColor.GRAY + ", destroying " + ChatColor.WHITE + "End Crystals" + ChatColor.GRAY + " and "
                         + "doing damage to the " + ChatColor.WHITE + "Ender Dragon" + ChatColor.GRAY + ".");
 

@@ -52,8 +52,8 @@ public class PlayerDeathListener implements Listener {
             // Player did not kill himself/herself
             if (!killer.equals(player)) {
                 Coins.addXP(killer, Coins.playerXP);
-                killer.sendMessage(Prefixes.getCoinPrefix(Coins.playerXP) + "You have killed "
-                        + HexColor.RED + player.getName() + ChatColor.GRAY + ".");
+                killer.sendMessage(ChatColor.GRAY + "You have killed "
+                        + ChatColor.WHITE + player.getName() + ChatColor.GRAY + ".");
 
                 killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
                 killer.sendMessage(HexColor.GREEN + "You received " + ChatColor.DARK_GREEN + "Regeneration 2"

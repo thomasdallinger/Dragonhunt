@@ -5,6 +5,7 @@ import com.google.common.io.ByteStreams;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.modifiers.classes.DoubleChestLoot;
 import net.md_5.bungee.api.ChatColor;
@@ -72,14 +73,15 @@ public class GameState {
      * @return a list that contains chest and minecart loot
      */
     public static ArrayList<ItemStack> getChestLoot(Player player) {
+        Coins.addXP(player, Coins.chestXP);
+
         int multiplier = 1;
         if (DoubleChestLoot.active) multiplier = 2;
 
         ArrayList<ItemStack> chestLoot = new ArrayList<>();
-        chestLoot.add(new ItemStack(Material.DIAMOND, multiplier));
+        chestLoot.add(new ItemStack(Material.DIAMOND, 2 * multiplier));
         chestLoot.add(new ItemStack(Material.OBSIDIAN, 2 * multiplier));
-        chestLoot.add(new ItemStack(Material.IRON_INGOT, 6 * multiplier));
-        chestLoot.add(new ItemStack(Material.GOLD_INGOT, 9 * multiplier));
+        chestLoot.add(new ItemStack(Material.IRON_INGOT, 4 * multiplier));
 
         for (ItemStack item : chestLoot) {
             printItemReceivedMessage(player, item);

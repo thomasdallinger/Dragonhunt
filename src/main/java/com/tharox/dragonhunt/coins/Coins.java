@@ -17,6 +17,7 @@ public class Coins {
     public static int XPIncrease = 0;
     public static int advancementXP = 9; // XP awarded for advancements
     public static int playerXP = 18; // XP awarded for killing players
+    public static int chestXP = 6; // XP awarded for opening chests and minecarts
     public static int oreXP = 3; // XP awarded for mining ores that are not dropping resources
     public static int animalXP = 2; // XP awarded for killing animals
     public static int monsterXP = 4; // XP awarded for killing monsters

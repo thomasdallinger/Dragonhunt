@@ -70,6 +70,9 @@ public class CombatListener implements Listener {
         // Once the grace period has ended, the in combat feature comes into effect.
         if (Main.getInstance().getTimer().getTime() < GameState.gracePeriodTime) return;
 
+        // If the player damaged himself/herself, do nothing.
+        if(target == damager) return;
+
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO in_combat (game_id, target, damager, timestamp) " +
                     "VALUES ('" + DbValues.getGameID() + "', '" + target.getName() + "', '"

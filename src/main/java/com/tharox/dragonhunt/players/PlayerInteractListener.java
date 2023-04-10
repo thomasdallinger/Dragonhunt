@@ -10,6 +10,7 @@ import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.enchanting.EnchantingInventory;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.modifiers.classes.EnhancedCooldownReduction;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -77,6 +78,10 @@ public class PlayerInteractListener implements Listener {
                         event.setCancelled(true);
                         int cost = 10;
                         int reduction = 5;
+
+                        if (EnhancedCooldownReduction.active)
+                            reduction = 10;
+
                         String name = "Kit Cooldown Reduction";
 
                         GameState.kitCooldownReduction.put(player,
@@ -99,8 +104,9 @@ public class PlayerInteractListener implements Listener {
                         player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1);
 
                         DatabaseExecutor.executeDatabaseHandler((con) -> {
-                            String query = "INSERT INTO purchases (game_id, player, purchased_item, coins_before, cost, timestamp) " +
-                                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + name
+                            String query = "INSERT INTO purchases (game_id, player, purchased_item, coins_before, cost,"
+                                    + " timestamp) VALUES ('" + DbValues.getGameID() + "', '" + player.getName()
+                                    + "', '" + name
                                     + "', '" + (Coins.getCoins(player) + cost)
                                     + "', '" + cost
                                     + "', '" + DbValues.getTimestamp() + "')";

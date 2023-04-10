@@ -96,16 +96,6 @@ public class Tracker implements Listener {
                             locationList);
                     addStructureToLists(player, Structure.VILLAGE_PLAINS, "Plains Village", structureList,
                             locationList);
-                    addStructureToLists(player, Structure.VILLAGE_DESERT, "Desert Village", structureList,
-                            locationList);
-                    addStructureToLists(player, Structure.VILLAGE_SAVANNA, "Savanna Village", structureList,
-                            locationList);
-                    addStructureToLists(player, Structure.VILLAGE_SNOWY, "Snowy Village", structureList,
-                            locationList);
-                    addStructureToLists(player, Structure.VILLAGE_TAIGA, "Taiga Village", structureList,
-                            locationList);
-                    addStructureToLists(player, Structure.DESERT_PYRAMID, "Desert Pyramid", structureList,
-                            locationList);
                     addStructureToLists(player, Structure.ANCIENT_CITY, "Ancient City", structureList,
                             locationList);
 

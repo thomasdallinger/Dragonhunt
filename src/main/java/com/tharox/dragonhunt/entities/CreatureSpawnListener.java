@@ -43,8 +43,14 @@ public class CreatureSpawnListener implements Listener {
                 }
             }
 
-            if (SpeedyMobs.active) {
-                entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50000, 0));
+            if (EndermanParty.active) {
+                Random random = new Random();
+                int chance = random.nextInt(20) + 1;
+
+                if (chance == 1) {
+                    event.setCancelled(true);
+                    world.spawnEntity(location, EntityType.ENDERMAN);
+                }
             }
 
             if (CaveSpiders.active) {
@@ -54,6 +60,10 @@ public class CreatureSpawnListener implements Listener {
                         world.spawnEntity(location, EntityType.CAVE_SPIDER);
                     }
                 }
+            }
+
+            if (SpeedyMobs.active) {
+                entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50000, 0));
             }
 
             if (ExplosiveCreepers.active) {

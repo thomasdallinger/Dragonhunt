@@ -46,6 +46,7 @@ public class ModifierSelection {
                 new NoPillagers(),
                 new BonusHearts(),
                 new DoubleChestLoot(),
+                new EndermanParty(),
 
                 new BrutalBlazes(),
                 new ForeverHunger(),

@@ -89,8 +89,10 @@ public class DimensionListener implements Listener {
                     event.setTo(GameState.firstNetherEntry);
                 }
 
-                // Give the player a fresh (reset) tracker
-                player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
+                // Give the player a Tracker reset
+                // Why? update player locations and no longer display structures from the Overworld
+                Main.getInstance().getTracker().playerTracksName.put(player, null);
+                Main.getInstance().getTracker().playerTracksIndex.put(player, null);
 
                 // Force set the Respawn Point to the Nether Portals location
                 player.setBedSpawnLocation(event.getFrom(), true);

@@ -185,7 +185,7 @@ public class Tracker implements Listener {
                 } else {
                     trackedObjectName = trackedObject.toUpperCase();
 
-                    if (distance < 50) {
+                    if (distance < 50 && !trackedObjectName.contains("LAST DEATH")) {
                         player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
                                 new ComponentBuilder(trackedObjectName).color(HexColor.YELLOW).bold(true)
                                         .append(" » ").color(ChatColor.DARK_GRAY).bold(false)

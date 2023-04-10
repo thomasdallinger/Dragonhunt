@@ -145,14 +145,9 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(ChatColor.GRAY + "Whoever reaches "
                         + ChatColor.WHITE + PointsListener.threshold + " Points"
                         + ChatColor.GRAY + " first wins.");
-
-                player.sendMessage(ChatColor.DARK_GRAY + "\nꜱᴄᴏʀɪɴɢ ᴘᴏɪɴᴛꜱ");
-                player.sendMessage(HexColor.YELLOW + "+10" + ChatColor.GRAY + " Enter Nether");
-                player.sendMessage(HexColor.YELLOW + "+5" + ChatColor.GRAY + " Enter Nether First");
-                player.sendMessage(HexColor.YELLOW + "+10" + ChatColor.GRAY + " Enter The End");
-                player.sendMessage(HexColor.YELLOW + "+5" + ChatColor.GRAY + " Enter The End First");
-                player.sendMessage(HexColor.YELLOW + "+5" + ChatColor.GRAY + " Destroy an End Crystal");
-                player.sendMessage(HexColor.YELLOW + "+ Amount of Damage on Ender Dragon");
+                player.sendMessage(ChatColor.GRAY + "Score points by completing " + ChatColor.WHITE + "advancements"
+                        + ChatColor.GRAY + ", destroying " + ChatColor.WHITE + "End Crystals" + ChatColor.GRAY + " and "
+                        + "doing damage to the " + ChatColor.WHITE + "Ender Dragon" + ChatColor.GRAY + ".");
 
                 player.sendMessage(ChatColor.GRAY + "\nUse " + HexColor.YELLOW + "/top"
                         + ChatColor.GRAY + " to teleport to the surface.");

@@ -54,7 +54,9 @@ public class PointsListener implements Listener {
         UUID id = player.getUniqueId();
 
         if (target instanceof EnderDragon) {
-            scorePerPlayer.put(id, scorePerPlayer.get(id) + damage);
+            if (damage > 0) {
+                scorePerPlayer.put(id, scorePerPlayer.get(id) + damage);
+            }
 
             // Ender Dragon never looses health.
             EnderDragon dragon = (EnderDragon) target;

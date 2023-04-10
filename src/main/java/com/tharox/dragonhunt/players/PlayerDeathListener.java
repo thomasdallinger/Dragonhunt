@@ -53,7 +53,7 @@ public class PlayerDeathListener implements Listener {
             if (!killer.equals(player)) {
                 Coins.addXP(killer, Coins.playerXP);
                 killer.sendMessage(Prefixes.getCoinPrefix(Coins.playerXP) + "You have killed "
-                        + ChatColor.WHITE + player.getName() + ChatColor.GRAY + ".");
+                        + HexColor.RED + player.getName() + ChatColor.GRAY + ".");
 
                 killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
                 killer.sendMessage(HexColor.GREEN + "You received " + ChatColor.DARK_GREEN + "Regeneration 2"
@@ -63,8 +63,13 @@ public class PlayerDeathListener implements Listener {
                 GameState.putItemInInventory(killer, GameState.createRockets(3));
 
                 addPlayerKill(killer, player);
+
+                player.sendMessage(Prefixes.getDeathPrefix() + ChatColor.GRAY + "You have been killed by "
+                        + HexColor.RED + killer.getName()
+                        + ChatColor.WHITE + " (" + (killer.getHealth() / 2) + " ❤" + ")" + ChatColor.GRAY + ".");
             }
         }
+
 
         // Set dead player out of combat
         CombatListener.combatList.remove(player.getUniqueId());

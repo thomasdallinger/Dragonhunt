@@ -1,8 +1,7 @@
 package com.tharox.dragonhunt.brewing;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.modifiers.classes.BonusHearts;
-import com.tharox.dragonhunt.modifiers.classes.Hunger;
+import com.tharox.dragonhunt.modifiers.classes.ForeverHunger;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -75,8 +74,8 @@ public class Effects {
                         // Duration needs to be longer to avoid flashing.
                     }
 
-                    if (Hunger.active) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 40, 0));
+                    if (ForeverHunger.active) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 40, 1));
                     }
                 }
             }

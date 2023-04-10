@@ -21,6 +21,7 @@ public class ModifierSelection {
                 new Frozen(),
                 new NoGhasts(),
                 new SpeedyComback(),
+                new NeverHungry(),
 
                 new SpeedyMobs(),
                 new ExplosiveCreepers(),
@@ -46,7 +47,7 @@ public class ModifierSelection {
                 new DoubleChestLoot(),
 
                 new BrutalBlazes(),
-                new Hunger(),
+                new ForeverHunger(),
                 new Heartbroken(),
                 new FireMobs(),
                 new PowerfulMobs()

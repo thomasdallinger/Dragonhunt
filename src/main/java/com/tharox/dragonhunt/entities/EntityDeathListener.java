@@ -54,25 +54,25 @@ public class EntityDeathListener implements Listener {
 
         switch (mob.getName()) {
             case "Creeper":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.TNT, 1));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.TNT, 3));
                 break;
             case "Skeleton":
             case "Stray":
-            case "Pillager":
                 ItemStack crossbow = new ItemStack(Material.CROSSBOW);
                 crossbow.addEnchantment(Enchantment.QUICK_CHARGE, 3);
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(crossbow));
                 break;
-            case "Hoglin":
             case "Piglin":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.LEATHER, 1));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 3));
+                break;
+            case "Witch":
+            case "Pillager":
             case "Zombie":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.GOLD_INGOT, 3));
                 break;
-            case "Witch":
+            case "Hoglin":
             case "Vindicator":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.DIAMOND, 3));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.DIAMOND, 2));
                 break;
             case "Spider":
             case "Cave Spider":

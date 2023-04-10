@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.entities;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.MoreFood;
+import com.tharox.dragonhunt.modifiers.classes.RevivedMobs;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
@@ -12,6 +13,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Objects;
+import java.util.Random;
 
 public class EntityDeathListener implements Listener {
 
@@ -25,6 +27,14 @@ public class EntityDeathListener implements Listener {
         if (killer != null) {
             if (mob instanceof Monster) {
                 Coins.addXP(killer, Coins.monsterXP);
+
+                if (RevivedMobs.active) {
+                    Random random = new Random();
+                    int chance = random.nextInt(8) + 1;
+
+                    if (chance == 1)
+                        mob.getWorld().spawnEntity(mob.getLocation(), mob.getType());
+                }
             }
 
             if (mob instanceof Animals || mob instanceof WaterMob) {

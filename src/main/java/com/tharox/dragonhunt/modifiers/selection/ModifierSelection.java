@@ -36,7 +36,8 @@ public class ModifierSelection {
                 new FireWeakness(),
                 new WitherSkeletons(),
                 new ImmuneSkeletons(),
-                new BrutalBrutes()
+                new BrutalBrutes(),
+                new RevivedMobs()
         ));
         highImpact.addAll(Arrays.asList(
                 new Diamonds(),

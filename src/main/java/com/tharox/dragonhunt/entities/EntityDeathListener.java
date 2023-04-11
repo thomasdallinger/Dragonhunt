@@ -53,8 +53,6 @@ public class EntityDeathListener implements Listener {
         event.setDroppedExp(0); // no natural XP orbs
         event.getDrops().clear(); // clear all natural drops
 
-        Bukkit.broadcastMessage(mob.getName());
-
         switch (mob.getName()) {
             case "Creeper":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.TNT, 3));

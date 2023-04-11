@@ -5,35 +5,35 @@ enchanting:
     amount: 1
     slot: 0
     name: "Sharpness I"
-    cost: 4
+    cost: 6
     lore: "Adds 1 attack damage."
   1:
     material: DIAMOND_AXE
     amount: 2
     slot: 9
     name: "Sharpness II"
-    cost: 6
+    cost: 9
     lore: "Adds 1.5 attack damage."
   2:
     material: DIAMOND_AXE
     amount: 3
     slot: 18
     name: "Sharpness III"
-    cost: 8
+    cost: 12
     lore: "Adds 2 attack damage."
   3:
     material: DIAMOND_AXE
     amount: 4
     slot: 27
     name: "Sharpness IV"
-    cost: 10
+    cost: 15
     lore: "Adds 2.5 attack damage."
   4:
     material: DIAMOND_AXE
     amount: 5
     slot: 36
     name: "Sharpness V"
-    cost: 12
+    cost: 18
     lore: "Adds 3 attack damage."
   5:
     material: IRON_SWORD
@@ -365,7 +365,7 @@ permanentEffects:
     material: POTION
     amount: 2
     color: 0xE22627
-    cost: 12
+    cost: 13
   14:
     slot: 22
     name: "Strength III"
@@ -373,7 +373,7 @@ permanentEffects:
     material: POTION
     amount: 3
     color: 0xE22627
-    cost: 18
+    cost: 20
   15:
     slot: 31
     name: "Strength IV"
@@ -381,7 +381,7 @@ permanentEffects:
     material: POTION
     amount: 4
     color: 0xE22627
-    cost: 24
+    cost: 27
   16:
     slot: 6
     name: "Extra Hearts ʀᴇ-ᴘᴜʀᴄʜᴀꜱᴇᴀʙʟᴇ"

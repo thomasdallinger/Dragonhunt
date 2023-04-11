@@ -18,7 +18,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class PointsListener implements Listener {
-    public static int threshold = 300;
+    public static int threshold = 400;
 
     // contains the UUID of players who are forced to damage the Ender Dragon
     public static HashMap<UUID, Integer> scorePerPlayer = new HashMap<>();
@@ -32,7 +32,7 @@ public class PointsListener implements Listener {
     public void onDamage(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
         Entity target = event.getEntity();
-        int damage = (int) event.getFinalDamage();
+        double damage = event.getFinalDamage();
         Projectile projectile;
         ProjectileSource shooter;
         Player player;
@@ -50,14 +50,14 @@ public class PointsListener implements Listener {
 
         } else if (damager instanceof Player) {
             player = (Player) damager;
-            damage = damage / 2;
+            damage = damage * 0.75;
         } else return;
 
         UUID id = player.getUniqueId();
 
         if (target instanceof EnderDragon) {
             if (damage > 0) {
-                scorePerPlayer.put(id, scorePerPlayer.get(id) + damage);
+                scorePerPlayer.put(id, scorePerPlayer.get(id) + (int) damage);
             }
 
             // Ender Dragon never looses health.

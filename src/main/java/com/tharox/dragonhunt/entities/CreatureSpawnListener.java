@@ -32,10 +32,10 @@ public class CreatureSpawnListener implements Listener {
 
             if (world.getName().equals("world_the_end") && !NoPillagers.active) {
                 Random random = new Random();
-                int spawnEnderman = random.nextInt(3) + 1; // values 1-3
+                int spawnEnderman = random.nextInt(9) + 1;
 
                 if (entity instanceof Enderman) {
-                    if (spawnEnderman == 3) {
+                    if (spawnEnderman == 1) {
                         event.setCancelled(true);
                         spawnEndCreatures(world, location);
                     }
@@ -157,11 +157,11 @@ public class CreatureSpawnListener implements Listener {
 
         EntityType entityType = EntityType.ENDERMAN;
 
-        if (type <= 5) { // 50%
+        if (type <= 4) { // 40%
             entityType = EntityType.PILLAGER;
         }
 
-        if (type >= 6 && type <= 7) { // 20%
+        if (type >= 5 && type <= 7) { // 30%
             entityType = EntityType.VINDICATOR;
         }
 

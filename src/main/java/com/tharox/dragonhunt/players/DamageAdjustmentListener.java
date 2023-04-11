@@ -84,16 +84,16 @@ public class DamageAdjustmentListener implements Listener {
                     if (effect.getType().equals(PotionEffectType.DAMAGE_RESISTANCE)) {
                         if (effect.getAmplifier() == 0) {
                             damage = damage / 0.80;
-                            damage = damage * 0.95;
+                            damage = damage * 0.90;
                         } else if (effect.getAmplifier() == 1) {
                             damage = damage / 0.60;
-                            damage = damage * 0.90;
+                            damage = damage * 0.85;
                         } else if (effect.getAmplifier() == 2) {
                             damage = damage / 0.40;
-                            damage = damage * 0.85;
+                            damage = damage * 0.80;
                         } else if (effect.getAmplifier() == 3) {
                             damage = damage / 0.20;
-                            damage = damage * 0.80;
+                            damage = damage * 0.75;
                         }
                     }
                 }

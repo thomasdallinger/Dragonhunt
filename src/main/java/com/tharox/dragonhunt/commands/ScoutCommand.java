@@ -39,6 +39,12 @@ public class ScoutCommand implements CommandExecutor {
         if (Scout.spectateLocation.containsKey(player)) {
             Location location = player.getLocation();
 
+            if (args.length == 0) {
+                // Cancel the currently active scout
+                Scout.scoutAvailable.put(player, false);
+                return true;
+            }
+
             // Seeker Kit Ability: Teleport the player
             if (args[0].equalsIgnoreCase("tp")) {
                 if (GameState.selectedKit.containsKey(player)) {
@@ -50,6 +56,9 @@ public class ScoutCommand implements CommandExecutor {
                             return false;
 
                         } else {
+                            // Cancel the currently active scout
+                            Scout.scoutAvailable.put(player, false);
+
                             Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
                                 player.teleport(location);
                                 player.addPotionEffect(new PotionEffect(
@@ -73,12 +82,6 @@ public class ScoutCommand implements CommandExecutor {
                     }
                 }
             }
-
-            // Cancel the currently active scout
-            Scout.scoutAvailable.put(player, false);
-
-            return true;
-
         } else {
             if (player.getGameMode().equals(GameMode.SPECTATOR)) {
                 player.sendMessage(Prefixes.getErrorPrefix() + "You cannot scout while in Spectator Mode.");

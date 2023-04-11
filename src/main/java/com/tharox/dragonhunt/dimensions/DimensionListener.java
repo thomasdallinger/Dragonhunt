@@ -44,7 +44,7 @@ public class DimensionListener implements Listener {
         // Why? update player locations and no longer display structures from the other world
         Main.getInstance().getTracker().playerTracksName.put(player, null);
         Main.getInstance().getTracker().playerTracksLocation.put(player, null);
-        Main.getInstance().getTracker().playerTracksIndex.put(player, null);
+        Main.getInstance().getTracker().playerTracksIndex.put(player, 0);
     }
 
     /**

@@ -66,7 +66,8 @@ public class PlayerDeathListener implements Listener {
 
                 player.sendMessage(Prefixes.getDeathPrefix() + ChatColor.GRAY + "You have been killed by "
                         + HexColor.RED + killer.getName()
-                        + ChatColor.WHITE + " (" + (killer.getHealth() / 2) + " ❤" + ")" + ChatColor.GRAY + ".");
+                        + ChatColor.WHITE + " (" + String.format("%1.1f", (killer.getHealth() / 2)) + " ❤" + ")"
+                        + ChatColor.GRAY + ".");
             }
         }
 

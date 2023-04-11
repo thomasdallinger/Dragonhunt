@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.MoreFood;
 import com.tharox.dragonhunt.modifiers.classes.RevivedMobs;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
@@ -52,6 +53,8 @@ public class EntityDeathListener implements Listener {
         event.setDroppedExp(0); // no natural XP orbs
         event.getDrops().clear(); // clear all natural drops
 
+        Bukkit.broadcastMessage(mob.getName());
+
         switch (mob.getName()) {
             case "Creeper":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.TNT, 3));
@@ -63,6 +66,7 @@ public class EntityDeathListener implements Listener {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(crossbow));
                 break;
             case "Piglin":
+            case "Zombified Piglin":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 3));
                 break;
             case "Witch":
@@ -71,6 +75,7 @@ public class EntityDeathListener implements Listener {
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.GOLD_INGOT, 3));
                 break;
             case "Hoglin":
+            case "Zoglin":
             case "Vindicator":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.DIAMOND, 2));
                 break;

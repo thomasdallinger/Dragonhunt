@@ -25,8 +25,13 @@ public class CreatureSpawnListener implements Listener {
         Location location = event.getLocation();
         World world = entity.getWorld();
 
+        /* return; statements are avoided so it can be assured that every active modifier is in use */
         if (entity instanceof Mob) {
             if (entity instanceof Ghast && NoGhasts.active) {
+                event.setCancelled(true);
+            }
+
+            if (entity instanceof PiglinBrute && NoBrutes.active) {
                 event.setCancelled(true);
             }
 

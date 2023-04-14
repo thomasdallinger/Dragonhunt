@@ -57,6 +57,7 @@ public class CustomRecipes {
 
         changeShieldRecipe();
         changeCrossbowRecipe();
+        changeBucketRecipe();
 
         addGoldDiamondRecipe();
         addEnchantedGoldenAppleRecipe();
@@ -216,6 +217,19 @@ public class CustomRecipes {
         recipe.setIngredient('I', Material.IRON_INGOT);
         recipe.setIngredient('T', Material.STRING);
         recipe.setIngredient('H', Material.TRIPWIRE_HOOK);
+
+        Bukkit.addRecipe(recipe);
+    }
+
+    /**
+     * Updates the existing bukkit bucket recipe.
+     */
+    private void changeBucketRecipe() {
+        NamespacedKey key = new NamespacedKey(Main.getInstance(), "bucket");
+
+        ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.WATER_BUCKET));
+        recipe.shape("I I", " I ");
+        recipe.setIngredient('I', Material.IRON_INGOT);
 
         Bukkit.addRecipe(recipe);
     }

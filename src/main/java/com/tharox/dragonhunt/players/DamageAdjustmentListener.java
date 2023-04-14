@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.enchanting.Enchantments;
 import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.Material;
-import org.bukkit.entity.AbstractArrow;
+import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -48,7 +48,11 @@ public class DamageAdjustmentListener implements Listener {
             for (PotionEffect effect : pe) {
                 if (effect.getType().equals(PotionEffectType.INCREASE_DAMAGE)) {
                     damage = damage - effect.getAmplifier() * 1.5; // Remove default damage increase.
-                    damage = damage + effect.getAmplifier() * 0.5; // Add new damage increase.
+
+                    // The strength effect is not applied when damaging the Ender Dragon.
+                    if (!(entity instanceof EnderDragon)) {
+                        damage = damage + effect.getAmplifier() * 0.5; // Add new damage increase.
+                    }
                 }
             }
         }

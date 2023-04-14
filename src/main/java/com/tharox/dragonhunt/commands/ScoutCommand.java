@@ -73,6 +73,8 @@ public class ScoutCommand implements CommandExecutor {
                                             + ChatColor.GRAY + ".");
                                 }
                             }, 20L);
+
+                            return true;
                         }
 
                     } else {

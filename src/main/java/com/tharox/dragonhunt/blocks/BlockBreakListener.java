@@ -1,9 +1,9 @@
 package com.tharox.dragonhunt.blocks;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
-import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.Diamonds;
 import com.tharox.dragonhunt.modifiers.classes.Iron;
@@ -42,6 +42,9 @@ public class BlockBreakListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
+        // Drop no XP from breaking blocks (sculk blocks, ...)
+        event.setExpToDrop(0);
+
         // prevent players from breaking obsidian close to the NETHER portal inside the NETHER
         if (GameState.firstNetherEntry != null && player.getWorld().getName().equals("world_nether")) {
             if ((int) player.getLocation().distance(GameState.firstNetherEntry) < 15 &&
@@ -62,8 +65,9 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
-        // on top of dropping amethysts, give the player XP
-        if (block.getType() == Material.AMETHYST_CLUSTER) {
+        // award XP + drops (no drops for Sculk)
+        if (block.getType() == Material.AMETHYST_CLUSTER
+                || block.getType() == Material.SCULK) {
             Coins.addXP(player, Coins.oreXP);
         }
 

@@ -40,7 +40,7 @@ public class GameStart extends GameConfiguration {
     // used if the highest block at x: 0 and z: 0 is within 55 blocks of the startLocation
 
     public GameStart() {
-        startCountdown = new Countdown(true, 30, this::onCountdown);
+        startCountdown = new Countdown(true, 35, this::onCountdown);
         modifierInventory = new ModifierInventory();
         highestY = overworld.getHighestBlockYAt((int) x, (int) z);
         startLocation = new Location(overworld, x, highestY + 55, z);
@@ -48,7 +48,7 @@ public class GameStart extends GameConfiguration {
         configureOverworld(x, z);
         configureNether();
         configureEnd();
-        configurePlayer();
+        configurePlayer(startLocation);
 
         new Enchantments(); // start the runnable
         new Effects(); // start the runnable
@@ -76,28 +76,25 @@ public class GameStart extends GameConfiguration {
 
             new Arrows(); // start arrow generation
             new ElytraSwapRunnable().runTaskTimer(Main.getInstance(), 0, 5);
-
-            if (!EndlessNight.active)
-                overworld.setTime(0);
-            else
-                new PermanentNight();
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (startCountdown.getTime() == 30) {
+            if (startCountdown.getTime() == 35) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
                 player.openInventory(modifierInventory.modifiers);
             }
 
-            if (startCountdown.getTime() == 15) {
+            if (startCountdown.getTime() == 20) {
                 GameState.modifierInventoryClose = true;
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
+            }
 
+            if (startCountdown.getTime() == 15) {
                 player.openInventory(kitInventory.kits);
             }
 
-            if (startCountdown.getTime() <= 15 && startCountdown.getTime() > 3) {
+            if (startCountdown.getTime() <= 20 && startCountdown.getTime() > 3) {
                 player.sendTitle(HexColor.PURPLE + "Starting in",
                         ChatColor.WHITE.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
                         , 0, 25, 0);
@@ -129,8 +126,8 @@ public class GameStart extends GameConfiguration {
 
             if (startCountdown.getTime() == 0) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-                player.teleport(startLocation);
                 player.setGameMode(GameMode.SURVIVAL);
+                player.setFlySpeed(0.1f);
 
                 if (BonusHearts.active) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,

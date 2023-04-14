@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.game;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
 import com.tharox.dragonhunt.modifiers.classes.Heartbroken;
 import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.respawn.RespawnAnchor;
@@ -30,6 +31,11 @@ public class GameConfiguration {
         overworld.setDifficulty(Difficulty.NORMAL);
         overworld.setGameRule(GameRule.KEEP_INVENTORY, true);
         overworld.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
+
+        if (!EndlessNight.active)
+            overworld.setTime(0);
+        else
+            new PermanentNight();
 
         WorldBorder worldBorder = overworld.getWorldBorder();
         worldBorder.setCenter(new Location(overworld, x, 0, z));
@@ -79,8 +85,11 @@ public class GameConfiguration {
     /**
      * Sets different parameters for each PLAYER.
      */
-    public void configurePlayer() {
+    public void configurePlayer(Location startLocation) {
         for (Player player : Bukkit.getOnlinePlayers()) {
+            // teleport the player
+            player.teleport(startLocation);
+
             // non of the players has selected a kit yet
             GameState.kitInventoryClose.put(player, false);
 

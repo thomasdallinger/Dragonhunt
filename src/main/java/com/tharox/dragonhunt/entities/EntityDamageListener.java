@@ -1,13 +1,9 @@
 package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.grappler.GrappleListener;
-import com.tharox.dragonhunt.kits.classes.Grappler;
 import com.tharox.dragonhunt.modifiers.classes.FireWeakness;
 import com.tharox.dragonhunt.modifiers.classes.Frozen;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -16,7 +12,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.CrossbowMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
@@ -49,13 +44,12 @@ public class EntityDamageListener implements Listener {
             event.setCancelled(true);
         }
 
-        // if a living entity is on fire and the modifier is active, let it glow and give weakness to the entity
+        // if a living entity is on fire and the modifier is active give weakness to the entity
         if (FireWeakness.active) {
             if (entity instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity) entity;
                 if (livingEntity.getFireTicks() > 20) {
-                    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100, 0));
-                    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 100, 0));
+                    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 100, 1));
                 }
             }
         }

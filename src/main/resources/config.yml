@@ -176,62 +176,55 @@ enchanting:
     cost: 24
     lore: "16% damage reduction for each armor piece."
   25:
-    material: IRON_CHESTPLATE
-    amount: 5
-    slot: 42
-    name: "Protection V"
-    cost: 30
-    lore: "20% damage reduction for each armor piece."
-  26:
     material: CHAINMAIL_CHESTPLATE
     amount: 1
     slot: 7
     name: "Thorns I"
     cost: 3
     lore: "Reflects damage (15% Chance)."
-  27:
+  26:
     material: CHAINMAIL_CHESTPLATE
     amount: 2
     slot: 16
     name: "Thorns II"
     cost: 6
     lore: "Reflects damage (30% Chance)."
-  28:
+  27:
     material: CHAINMAIL_CHESTPLATE
     amount: 3
     slot: 25
     name: "Thorns III"
     cost: 9
     lore: "Reflects damage (45% Chance)."
-  29:
+  28:
     material: CHAINMAIL_CHESTPLATE
     amount: 4
     slot: 34
     name: "Thorns IV"
     cost: 12
     lore: "Reflects damage (60% Chance)."
-  30:
+  29:
     material: NETHERITE_BOOTS
     amount: 1
     slot: 8
     name: "Feather Falling I"
     cost: 4
     lore: "Reduces fall damage by 12%."
-  31:
+  30:
     material: NETHERITE_BOOTS
     amount: 2
     slot: 17
     name: "Feather Falling II"
     cost: 8
     lore: "Reduces fall damage by 24%."
-  32:
+  31:
     material: NETHERITE_BOOTS
     amount: 3
     slot: 26
     name: "Feather Falling III"
     cost: 12
     lore: "Reduces fall damage by 36%."
-  33:
+  32:
     material: NETHERITE_BOOTS
     amount: 4
     slot: 35
@@ -385,11 +378,11 @@ permanentEffects:
   16:
     slot: 6
     name: "Extra Hearts ʀᴇ-ᴘᴜʀᴄʜᴀꜱᴇᴀʙʟᴇ"
-    lore: "+1 ❤ and +5 ⛃ cost per purchase."
+    lore: "+0.5 ❤ and +5 ⛃ cost per purchase."
     material: SPLASH_POTION
     amount: 1
     color: 0xF3CA54
-    cost: 5 # +5 will be applied to this value
+    cost: 0 # +5 will be applied to this value
 negativeEffects:
   0:
     slot: 13

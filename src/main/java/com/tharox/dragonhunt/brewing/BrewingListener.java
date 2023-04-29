@@ -122,7 +122,7 @@ public class BrewingListener implements Listener {
         } else if (effectName.contains("Extra Hearts")) {
             Effects.ExtraHearts.put(player, Effects.ExtraHearts.get(player) + 1);
             Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH))
-                    .setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + 2.0);
+                    .setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + 1.0);
             player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
             purchaseEffect(player, effectName);
         }

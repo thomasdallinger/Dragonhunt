@@ -152,35 +152,35 @@ enchanting:
     amount: 1
     slot: 6
     name: "Protection I"
-    cost: 4
+    cost: 6
     lore: "4% damage reduction for each armor piece."
   22:
     material: IRON_CHESTPLATE
     amount: 2
     slot: 15
     name: "Protection II"
-    cost: 8
+    cost: 12
     lore: "8% damage reduction for each armor piece."
   23:
     material: IRON_CHESTPLATE
     amount: 3
     slot: 24
     name: "Protection III"
-    cost: 12
+    cost: 18
     lore: "12% damage reduction for each armor piece."
   24:
     material: IRON_CHESTPLATE
     amount: 4
     slot: 33
     name: "Protection IV"
-    cost: 16
+    cost: 24
     lore: "16% damage reduction for each armor piece."
   25:
     material: IRON_CHESTPLATE
     amount: 5
     slot: 42
     name: "Protection V"
-    cost: 20
+    cost: 30
     lore: "20% damage reduction for each armor piece."
   26:
     material: CHAINMAIL_CHESTPLATE

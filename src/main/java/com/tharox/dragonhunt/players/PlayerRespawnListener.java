@@ -86,6 +86,9 @@ public class PlayerRespawnListener implements Listener {
                     return;
                 }
 
+                // Prevent players from starting flying.
+                player.setFlySpeed(0f);
+
                 player.sendTitle(HexColor.PURPLE + "Respawning in",
                         ChatColor.WHITE.toString() + ChatColor.BOLD + "» "
                                 + String.format("%1.1f", deathTimer.get(player)) + " «",

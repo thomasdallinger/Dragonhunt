@@ -23,6 +23,9 @@ import java.util.*;
 public class GameState {
     public static int gracePeriodTime = 30;
 
+    // prevent all players from flying away at the start of the game
+    public static boolean flySpeedZero = true;
+
     // modifier inventory can be closed after the first 15 seconds before the game starts
     public static boolean modifierInventoryClose = false;
 
@@ -46,6 +49,21 @@ public class GameState {
 
     // location of the END spawn platform (always has the same coordinates)
     public static Location endPlatform = new Location(Bukkit.getWorld("world_the_end"), 100, 50, 0);
+
+    public static void preventFlying() {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if (!flySpeedZero) {
+                    this.cancel();
+                }
+
+                for (Player player : Bukkit.getOnlinePlayers()) {
+                    player.setFlySpeed(0f);
+                }
+            }
+        }.runTaskTimer(Main.getInstance(), 0, 2);
+    }
 
     /**
      * @return a list of UUIDs ordered by the points each player has descending

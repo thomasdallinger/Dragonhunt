@@ -127,6 +127,9 @@ public class GameStart extends GameConfiguration {
             if (startCountdown.getTime() == 0) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
                 player.setGameMode(GameMode.SURVIVAL);
+
+                // Allow players to fly normally in Spectator Mode from now.
+                GameState.flySpeedZero = false;
                 player.setFlySpeed(0.1f);
 
                 if (BonusHearts.active) {

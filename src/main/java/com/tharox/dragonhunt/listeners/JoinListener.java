@@ -26,7 +26,6 @@ public class JoinListener implements Listener {
         event.setJoinMessage(null);
         player.teleport(new Location(Bukkit.getServer().getWorld("world"), 0, 15000, 0));
         player.setGameMode(GameMode.SPECTATOR);
-        player.setFlySpeed(0f);
 
         Coins.setCoins(player, 0);
         new Scoreboard(player);

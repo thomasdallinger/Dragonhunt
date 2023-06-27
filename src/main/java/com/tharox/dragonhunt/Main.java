@@ -6,9 +6,9 @@ import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
 import com.tharox.dragonhunt.brewing.BrewingListener;
 import com.tharox.dragonhunt.chat.ChatListener;
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.LevelUp;
-import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.commands.DateCommand;
 import com.tharox.dragonhunt.commands.HubCommand;
 import com.tharox.dragonhunt.commands.ScoutCommand;
@@ -79,6 +79,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         tablistManager = new TablistManager();
         new CustomRecipes(); // adds all custom recipes to the game
         setWorldTime();
+        GameState.preventFlying();
 
         listenerRegistration();
         commandRegistration();

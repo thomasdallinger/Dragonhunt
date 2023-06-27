@@ -110,7 +110,7 @@ public class AdvancementListener implements Listener {
     private void addAdvancement(Player player, String advancement) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO advancements (game_id, player, advancement, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + advancement +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getUniqueId() + "', '" + advancement +
                     "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();

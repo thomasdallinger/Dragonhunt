@@ -45,7 +45,7 @@ public class JoinListener implements Listener {
             // if a player joining is not allowed to play
             // or is trying to rejoin after the game already started,
             // send the player back to the lobby
-            if (!DbValues.playersAllowedToPlay.contains(player.getName())
+            if (!DbValues.playersAllowedToPlay.contains(player.getUniqueId().toString())
                     || Main.getInstance().getTimer().isRunning()) {
                 ByteArrayDataOutput out = ByteStreams.newDataOutput();
                 out.writeUTF("Connect");
@@ -56,7 +56,7 @@ public class JoinListener implements Listener {
             }
 
             // if the player is allowed to play, remove the player from the list
-            DbValues.playersAllowedToPlay.remove(player.getName());
+            DbValues.playersAllowedToPlay.remove(player.getUniqueId().toString());
 
             // if there are no more playerNames in the list, start the game
             if (DbValues.playersAllowedToPlay.size() == 0) {

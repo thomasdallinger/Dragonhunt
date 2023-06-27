@@ -158,7 +158,8 @@ public class BrewingListener implements Listener {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             // Substring 16 from effectName to remove Hex-formatting
             String query = "INSERT INTO purchases (game_id, player, purchased_item, coins_before, cost, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" + effectName.substring(16)
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getUniqueId()
+                    + "', '" + effectName.substring(16)
                     + "', '" + (Coins.getCoins(player) + BrewingInventory.effectCost.get(effectName))
                     + "', '" + BrewingInventory.effectCost.get(effectName)
                     + "', '" + DbValues.getTimestamp() + "')";

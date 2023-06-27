@@ -80,7 +80,7 @@ public class GameEnd {
                 if (p == null) continue;
 
                 if (p == player) {
-                    player.sendMessage(ChatColor.GRAY+ "#" + (index + 1) + " "
+                    player.sendMessage(ChatColor.GRAY + "#" + (index + 1) + " "
                             + HexColor.YELLOW + p.getName() + " "
                             + HexColor.YELLOW + PointsListener.scorePerPlayer.get(p.getUniqueId()));
 
@@ -97,6 +97,11 @@ public class GameEnd {
                             + HexColor.YELLOW + PointsListener.scorePerPlayer.get(p.getUniqueId()));
                 }
             }
+
+            // Give the player credits only after the game ended. The amount is determined by the points scored.
+            DbValues.addCredits(player, PointsListener.scorePerPlayer.get(player.getUniqueId()));
+            player.sendMessage(ChatColor.GRAY + "You have earned " + HexColor.YELLOW + ChatColor.BOLD
+                    + DbValues.getCredits(player) + " Credits" + ChatColor.GRAY + ".");
         }
     }
 
@@ -108,7 +113,7 @@ public class GameEnd {
             String query = "UPDATE plays SET position = '" + position + "', "
                     + "points = '" + PointsListener.scorePerPlayer.get(player.getUniqueId()) + "', "
                     + "xp_level = '" + player.getLevel() + "'"
-                    + "WHERE game_id = '" + DbValues.getGameID() + "' AND player = '" + player.getName() + "'";
+                    + "WHERE game_id = '" + DbValues.getGameID() + "' AND player = '" + player.getUniqueId() + "'";
             ;
 
             Statement stmt = con.createStatement();
@@ -118,7 +123,7 @@ public class GameEnd {
             if (GameState.selectedKit.containsKey(player)) {
                 // Substring 14 from kit name to remove HEX formatting
                 query = "UPDATE plays SET kit = '" + GameState.selectedKit.get(player).substring(14) + "'" +
-                        "WHERE game_id = '" + DbValues.getGameID() + "' AND player = '" + player.getName() + "'";
+                        "WHERE game_id = '" + DbValues.getGameID() + "' AND player = '" + player.getUniqueId() + "'";
             }
 
             stmt = con.createStatement();

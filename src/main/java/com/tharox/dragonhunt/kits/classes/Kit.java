@@ -156,7 +156,7 @@ public abstract class Kit implements Listener {
     private void addKitAbilityUsageToDB(Player player) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO kit_abilities (game_id, player, dimension, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getName() + "', '" +
+                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getUniqueId() + "', '" +
                     DbValues.getCurrentWorld(player.getLocation()) + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();

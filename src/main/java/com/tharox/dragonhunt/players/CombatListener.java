@@ -75,8 +75,8 @@ public class CombatListener implements Listener {
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO in_combat (game_id, target, damager, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + target.getName() + "', '"
-                    + damager.getName() + "', '" + DbValues.getTimestamp() + "')";
+                    "VALUES ('" + DbValues.getGameID() + "', '" + target.getUniqueId() + "', '"
+                    + damager.getUniqueId() + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();
             stmt.execute(query);

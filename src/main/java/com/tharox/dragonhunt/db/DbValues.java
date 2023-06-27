@@ -101,10 +101,10 @@ public class DbValues {
             String query = "";
             if (kills) {
                 query = "SELECT COUNT(*) FROM kills WHERE game_id = '" + getGameID() + "' " +
-                        "AND killer = '" + player.getName() + "'";
+                        "AND killer = '" + player.getUniqueId() + "'";
             } else {
                 query = "SELECT COUNT(*) FROM deaths WHERE game_id = '" + getGameID() + "' " +
-                        "AND player = '" + player.getName() + "'";
+                        "AND player = '" + player.getUniqueId() + "'";
             }
 
             Statement stmt = con.createStatement();
@@ -142,7 +142,7 @@ public class DbValues {
                 rowCount++;
                 playerWhoMadeAdvancement[0] = rs.getString(1); // only 1 column each row
 
-                if (playerWhoMadeAdvancement[0].equals(player.getName())) {
+                if (playerWhoMadeAdvancement[0].equals(player.getUniqueId().toString())) {
                     rank[0] = rowCount;
                     break;
                 }
@@ -199,5 +199,46 @@ public class DbValues {
         }
 
         return currentWorld;
+    }
+
+    /**
+     * @return the amount of credits of the specific player
+     */
+    public static int getCredits(Player player) {
+        final int[] amount = {0};
+
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+
+            String query = "SELECT credits FROM players WHERE uuid = '" + player.getUniqueId() + "'";
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            int columns = rs.getMetaData().getColumnCount();
+
+            while (rs.next()) {
+                for (int i = 1; i <= columns; i++) {
+                    amount[0] = rs.getInt(i);
+                }
+            }
+            rs.close();
+            stmt.close();
+        });
+
+        return amount[0];
+    }
+
+    /**
+     * Adds the amount of credits specified to the player.
+     */
+    public static void addCredits(Player player, int credits) {
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+
+            String query = "UPDATE players SET credits = '" + getCredits(player) + credits
+                    + "' WHERE uuid = '" + player.getUniqueId() + "'";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
     }
 }

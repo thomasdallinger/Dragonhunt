@@ -105,7 +105,7 @@ public class PlayerInteractListener implements Listener {
 
                         DatabaseExecutor.executeDatabaseHandler((con) -> {
                             String query = "INSERT INTO purchases (game_id, player, purchased_item, coins_before, cost,"
-                                    + " timestamp) VALUES ('" + DbValues.getGameID() + "', '" + player.getName()
+                                    + " timestamp) VALUES ('" + DbValues.getGameID() + "', '" + player.getUniqueId()
                                     + "', '" + name
                                     + "', '" + (Coins.getCoins(player) + cost)
                                     + "', '" + cost

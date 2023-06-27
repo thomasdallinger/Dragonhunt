@@ -24,7 +24,7 @@ public class Warrior extends Kit {
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.DIAMOND_SWORD;
-    public static final int slot = 4;
+    public static final int slot = 2;
 
     public Warrior(Player player) {
         super(player);

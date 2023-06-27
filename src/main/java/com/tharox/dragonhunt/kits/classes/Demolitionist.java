@@ -31,7 +31,7 @@ public class Demolitionist extends Kit {
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.TNT;
-    public static final int slot = 3;
+    public static final int slot = 4;
 
     public Demolitionist(Player player) {
         super(player);

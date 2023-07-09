@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.kits.selection;
 
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.kits.classes.DragonhuntKit;
 import com.tharox.dragonhunt.kits.classes.Kit;
 import com.tharox.dragonhunt.kits.classes.KitClass;
@@ -8,6 +9,7 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.reflections.Reflections;
 
@@ -16,11 +18,11 @@ import java.util.Set;
 public class KitInventory {
     public Inventory kits;
 
-    public KitInventory() {
-        createInventory();
+    public KitInventory(Player player) {
+        createInventory(player);
     }
 
-    public void createInventory() {
+    public void createInventory(Player player) {
         Inventory inv = Bukkit.createInventory(null, 36,
                 HexColor.PURPLE.toString() + ChatColor.BOLD + "PICK A KIT");
 
@@ -59,10 +61,16 @@ public class KitInventory {
                 (kitClass) -> {
                     if (Kit.class.isAssignableFrom(kitClass)) {
                         try {
-                            inv.setItem((Integer) kitClass.getField("slot").get(null),
-                                    Kit.getDisplayItem((String) kitClass.getField("title").get(null),
-                                            (Material) kitClass.getField("material").get(null),
-                                            (String) kitClass.getField("lore").get(null)));
+                            // Check if the player unlocked the kit.
+                            // IMPORTANT: substring(17) needed to remove HexColor + Symbol
+                            if (DbValues.getUnlockedKits(player).contains(
+                                    ((String) kitClass.getField("title").get(null)).substring(17))) {
+                                inv.setItem((Integer) kitClass.getField("slot").get(null),
+                                        Kit.getDisplayItem((String) kitClass.getField("title").get(null),
+                                                (Material) kitClass.getField("material").get(null),
+                                                (String) kitClass.getField("lore").get(null)));
+                            }
+
                             //get(null) because static
                         } catch (NoSuchFieldException | IllegalAccessException e) {
                             e.printStackTrace();

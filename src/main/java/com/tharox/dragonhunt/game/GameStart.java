@@ -31,7 +31,6 @@ public class GameStart extends GameConfiguration {
     Countdown startCountdown, gracePeriodCountdown;
     Countdown scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
     ModifierInventory modifierInventory;
-    KitInventory kitInventory = new KitInventory();
     BossBar bossBar;
     World overworld = Bukkit.getServer().getWorld("world");
     Location startLocation;
@@ -91,6 +90,8 @@ public class GameStart extends GameConfiguration {
             }
 
             if (startCountdown.getTime() == 15) {
+                // Each player has a different kits inventory due to kit unlocks.
+                KitInventory kitInventory = new KitInventory(player);
                 player.openInventory(kitInventory.kits);
             }
 

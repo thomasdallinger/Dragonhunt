@@ -154,6 +154,29 @@ public class DbValues {
         return rank[0];
     }
 
+    public static String getUnlockedKits(Player player) {
+        final String[] kits = new String[1]; // array size 1: only expecting one value
+
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+
+            String query = "SELECT kits FROM players WHERE uuid = '" + player.getUniqueId() + "'";
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            int columns = rs.getMetaData().getColumnCount();
+
+            while (rs.next()) {
+                for (int i = 1; i <= columns; i++) {
+                    kits[0] = rs.getString(i);
+                }
+            }
+            rs.close();
+            stmt.close();
+        });
+
+        return kits[0];
+    }
+
     public static String getTimestamp() {
         Timer timer = Main.getInstance().getTimer();
         String minutes = "";

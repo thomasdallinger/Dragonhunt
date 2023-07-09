@@ -15,9 +15,9 @@ public class Grappler extends Kit {
     public static final String title = HexColor.MOBILITY + KitClass.MOBILITY + " Grappler";
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "Pull yourself to different locations\n"
-            + ChatColor.GRAY + "with your Grappling Hook.\n"
-            + ChatColor.GRAY + "Arrows shot cannot do damage.\n"
+            + ChatColor.GRAY + "Utilize your " + ChatColor.WHITE + "Grappling Hook\n"
+            + ChatColor.GRAY + "to traverse through the world.\n"
+            + ChatColor.GRAY + "Arrows shot won't deal damage.\n"
             + ChatColor.GRAY + "Be aware of fall damage.\n\n"
             + ChatColor.GRAY + "Max. Arrow Distance: "
             + ChatColor.WHITE + GrappleListener.maxArrowDistance + " Blocks\n\n"

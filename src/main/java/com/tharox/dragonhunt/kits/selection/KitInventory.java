@@ -64,7 +64,9 @@ public class KitInventory {
                             // Check if the player unlocked the kit.
                             // IMPORTANT: substring(17) needed to remove HexColor + Symbol
                             if (DbValues.getUnlockedKits(player).contains(
-                                    ((String) kitClass.getField("title").get(null)).substring(17))) {
+                                    ((String) kitClass.getField("title").get(null)).substring(17))
+                                    || (DbValues.getRole(player).equals("Premium")
+                                    || DbValues.getRole(player).equals("VIP"))) {
                                 inv.setItem((Integer) kitClass.getField("slot").get(null),
                                         Kit.getDisplayItem((String) kitClass.getField("title").get(null),
                                                 (Material) kitClass.getField("material").get(null),

@@ -154,6 +154,29 @@ public class DbValues {
         return rank[0];
     }
 
+    public static String getRole(Player player) {
+        final String[] role = new String[1]; // array size 1: only expecting one value
+
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+
+            String query = "SELECT role FROM players WHERE uuid = '" + player.getUniqueId() + "'";
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            int columns = rs.getMetaData().getColumnCount();
+
+            while (rs.next()) {
+                for (int i = 1; i <= columns; i++) {
+                    role[0] = rs.getString(i);
+                }
+            }
+            rs.close();
+            stmt.close();
+        });
+
+        return role[0];
+    }
+
     public static String getUnlockedKits(Player player) {
         final String[] kits = new String[1]; // array size 1: only expecting one value
 

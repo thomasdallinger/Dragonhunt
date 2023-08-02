@@ -66,6 +66,12 @@ public class Tracker implements Listener {
                 List<Player> allOtherPlayers = playerList.stream().filter(o -> !(o.getName().equals(player.getName())))
                         .collect(Collectors.toList());
 
+                if (allOtherPlayers.size() == 0) {
+                    player.sendMessage(Prefixes.getErrorPrefix() + "No other players found.");
+                    player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+                    return;
+                }
+
                 index++;    // switch the located player
 
                 if (index > allOtherPlayers.size() - 1)

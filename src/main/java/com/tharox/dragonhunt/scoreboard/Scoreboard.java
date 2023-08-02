@@ -37,7 +37,7 @@ public class Scoreboard extends ScoreboardBuilder {
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
                 + DbValues.getServerID() + "]", 14);
         setScore(ChatColor.WHITE + "Classic" + ChatColor.DARK_GRAY + " | "
-                + ChatColor.WHITE + "v1.0.6", 13);
+                + ChatColor.WHITE + DbValues.getVersion(), 13);
         setScore("", 12);
         setScore("", 11);
         setScore("", 10);

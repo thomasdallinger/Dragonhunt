@@ -79,6 +79,24 @@ public class DbValues {
         return id[0];
     }
 
+    public static String getVersion() {
+        final String[] version = new String[1];
+
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "SELECT version FROM games WHERE id = '" + getGameID() + "'";
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            rs.next();
+            version[0] = rs.getString(1);
+            rs.close();
+            stmt.close();
+        });
+
+        return version[0];
+    }
+
     public static void updateServerStatus() {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "UPDATE servers SET is_running = false WHERE id = '" + DbValues.getServerID() + "'";

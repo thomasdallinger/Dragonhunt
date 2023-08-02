@@ -19,9 +19,10 @@ public class QuitListener implements Listener {
         event.setQuitMessage(Prefixes.getLeavePrefix() + ChatColor.WHITE + player.getName()
                 + ChatColor.GRAY + " has left.");
 
-        if (Bukkit.getOnlinePlayers().size() == 1) {
+        if (Bukkit.getOnlinePlayers().size() == 0) {
             DbValues.updateServerStatus();
             Bukkit.getServer().shutdown();
+            return;
         }
 
         for (Player p : Bukkit.getOnlinePlayers()) {

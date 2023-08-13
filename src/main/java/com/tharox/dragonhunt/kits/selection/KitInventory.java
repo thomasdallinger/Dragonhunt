@@ -65,9 +65,12 @@ public class KitInventory {
                             // IMPORTANT: substring(17) needed to remove HexColor + Symbol
                             if (DbValues.getUnlockedKits(player).contains(
                                     ((String) kitClass.getField("title").get(null)).substring(17))
+                                    || DbValues.getFreeKit().contains(
+                                            ((String) kitClass.getField("title").get(null)).substring(17))
                                     || DbValues.getRole(player).equals("Premium")
                                     || DbValues.getRole(player).equals("VIP")
                                     || DbValues.getRole(player).equals("Admin")) {
+
                                 inv.setItem((Integer) kitClass.getField("slot").get(null),
                                         Kit.getDisplayItem((String) kitClass.getField("title").get(null),
                                                 (Material) kitClass.getField("material").get(null),

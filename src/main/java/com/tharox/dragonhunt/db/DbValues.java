@@ -97,6 +97,24 @@ public class DbValues {
         return version[0];
     }
 
+    public static String getFreeKit() {
+        final String[] freeKit = new String[1];
+
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "SELECT free_kit FROM games WHERE id = '" + getGameID() + "'";
+
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+
+            rs.next();
+            freeKit[0] = rs.getString(1);
+            rs.close();
+            stmt.close();
+        });
+
+        return freeKit[0];
+    }
+
     public static void updateServerStatus() {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "UPDATE servers SET is_running = false WHERE id = '" + DbValues.getServerID() + "'";

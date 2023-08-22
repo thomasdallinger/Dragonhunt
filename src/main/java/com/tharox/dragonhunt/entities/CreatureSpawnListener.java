@@ -24,6 +24,7 @@ public class CreatureSpawnListener implements Listener {
         LivingEntity entity = event.getEntity();
         Location location = event.getLocation();
         World world = entity.getWorld();
+        Random random = new Random();
 
         /* return; statements are avoided so it can be assured that every active modifier is in use */
         if (entity instanceof Mob) {
@@ -36,7 +37,6 @@ public class CreatureSpawnListener implements Listener {
             }
 
             if (world.getName().equals("world_the_end") && !NoPillagers.active) {
-                Random random = new Random();
                 int spawnEnderman = random.nextInt(9) + 1;
 
                 if (entity instanceof Enderman) {
@@ -48,14 +48,18 @@ public class CreatureSpawnListener implements Listener {
                 }
             }
 
-            if (EndermanParty.active) {
-                Random random = new Random();
-                int chance = random.nextInt(20) + 1;
+            // Spawn additional Endermans.
+            int chance;
 
-                if (chance == 1 && entity instanceof Monster) {
-                    event.setCancelled(true);
-                    world.spawnEntity(location, EntityType.ENDERMAN);
-                }
+            if (EndermanParty.active) {
+                chance = random.nextInt(15) + 1;
+            } else {
+                chance = random.nextInt(25) + 1;
+            }
+
+            if (chance == 1 && entity instanceof Monster) {
+                event.setCancelled(true);
+                world.spawnEntity(location, EntityType.ENDERMAN);
             }
 
             if (CaveSpiders.active) {
@@ -154,6 +158,10 @@ public class CreatureSpawnListener implements Listener {
                 }
             }
         }
+    }
+
+    private void spawnAdditionalEndermans() {
+
     }
 
     private LivingEntity spawnEndCreatures(World world, Location location) {

@@ -53,10 +53,12 @@ public class PointsListener implements Listener {
         } else return;
 
         UUID id = player.getUniqueId();
+        int pointsToAdd = 0;
 
         if (target instanceof EnderDragon) {
             if (damage > 0) {
-                scorePerPlayer.put(id, scorePerPlayer.get(id) + (int) damage);
+                pointsToAdd = (int) damage;
+                scorePerPlayer.put(id, scorePerPlayer.get(id) + pointsToAdd);
             }
 
             // Ender Dragon never looses health.
@@ -65,8 +67,13 @@ public class PointsListener implements Listener {
                     dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
             dragon.setHealth(maxHealth);
         } else {
-            scorePerPlayer.put(id, scorePerPlayer.get(id) + 5);
+            pointsToAdd = 5;
+            scorePerPlayer.put(id, scorePerPlayer.get(id) + pointsToAdd);
         }
+
+        if (pointsToAdd > 0)
+            player.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "+" + pointsToAdd
+                    + ChatColor.WHITE + " Points");
 
         // Player has won
         if (scorePerPlayer.get(id) >= threshold) {

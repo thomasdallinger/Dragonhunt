@@ -151,6 +151,8 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/scout"
                         + ChatColor.GRAY + " to view the world in " + ChatColor.WHITE + "Spectator Mode"
                         + ChatColor.GRAY + " for a short time.");
+
+                player.sendMessage(HexColor.RED + "\nTeaming is not allowed.");
             }
         }
     }

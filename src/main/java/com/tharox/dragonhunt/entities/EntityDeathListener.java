@@ -59,21 +59,30 @@ public class EntityDeathListener implements Listener {
                 break;
             case "Skeleton":
             case "Stray":
-                ItemStack crossbow = new ItemStack(Material.CROSSBOW);
-                crossbow.addEnchantment(Enchantment.QUICK_CHARGE, 3);
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(crossbow));
+                Random random = new Random();
+
+                if (random.nextBoolean()) {
+                    ItemStack crossbow = new ItemStack(Material.CROSSBOW);
+                    crossbow.addEnchantment(Enchantment.QUICK_CHARGE, 3);
+                    mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(crossbow));
+                } else {
+                    mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.IRON_INGOT, 3));
+                }
                 break;
+            case "Zombie":
             case "Piglin":
             case "Zombified Piglin":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 3));
                 break;
             case "Witch":
             case "Pillager":
-            case "Zombie":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.GOLD_INGOT, 3));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.GOLD_INGOT, 4));
                 break;
             case "Hoglin":
             case "Zoglin":
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 3));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.GOLD_INGOT, 4));
+                break;
             case "Vindicator":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.DIAMOND, 2));
                 break;

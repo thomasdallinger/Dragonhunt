@@ -25,7 +25,7 @@ public class AdvancementListener implements Listener {
         Player player = event.getPlayer();
         Advancement advancement = event.getAdvancement();
         String advancementName = "";
-        int pointsToAdd = 20;
+        int pointsToAdd = 32;
 
         // Block spectating players from getting advancements (such as "Enter Nether").
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
@@ -89,7 +89,7 @@ public class AdvancementListener implements Listener {
                         + ChatColor.DARK_GRAY + " (" + DbValues.getTimestamp() + ")" + ChatColor.GRAY + ".");
             }
 
-            // #1 = 20 Points, #2 = 16 Points, #3 = 12 Points, ... #8 = 0 Points
+            // #1 = 32 Points, #2 = 28 Points, #3 = 24 Points, ... #8 = 4 Points
             if (pointsToAdd > 0) {
                 addPoints(player.getUniqueId(), pointsToAdd);
                 player.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "+" + pointsToAdd

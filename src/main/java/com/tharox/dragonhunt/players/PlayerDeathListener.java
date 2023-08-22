@@ -1,11 +1,13 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -17,6 +19,7 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.sql.Statement;
 import java.util.HashMap;
+import java.util.UUID;
 
 public class PlayerDeathListener implements Listener {
 
@@ -30,6 +33,8 @@ public class PlayerDeathListener implements Listener {
         Player player = event.getEntity();
         Player killer = event.getEntity().getKiller();
         deathLocation.put(player, player.getLocation());
+        Timer timer = Main.getInstance().getTimer();
+        int pointsToAdd = 10;
 
         if (event.getDeathMessage() == null) return;
         // character "'" in some death messages causes SQL error
@@ -64,6 +69,12 @@ public class PlayerDeathListener implements Listener {
 
                 addPlayerKill(killer, player);
 
+                // Add one extra point for a kill per minute played.
+                pointsToAdd = pointsToAdd + (timer.getTime() / 60);
+                addPoints(killer.getUniqueId(), pointsToAdd);
+                killer.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "+" + pointsToAdd
+                        + ChatColor.WHITE + " Points");
+
                 player.sendMessage(Prefixes.getDeathPrefix() + ChatColor.GRAY + "You have been killed by "
                         + HexColor.RED + killer.getName()
                         + ChatColor.WHITE + " (" + String.format("%1.1f", (killer.getHealth() / 2)) + " ❤" + ")"
@@ -78,6 +89,15 @@ public class PlayerDeathListener implements Listener {
         // Drop no XP
         event.setDroppedExp(0);
         event.setKeepLevel(true);
+    }
+
+    private void addPoints(UUID id, int pointsToAdd) {
+        PointsListener.scorePerPlayer.put(id, PointsListener.scorePerPlayer.get(id) + pointsToAdd);
+        PointsListener.bossBars.get(id).setTitle(
+                HexColor.YELLOW.toString() + ChatColor.BOLD + PointsListener.scorePerPlayer.get(id)
+                        + ChatColor.WHITE + " / " + PointsListener.threshold + " Points");
+        PointsListener.bossBars.get(id).setProgress(
+                PointsListener.scorePerPlayer.get(id) / (PointsListener.threshold + 1D));
     }
 
     private void addPlayerDeath(Player player, String deathmessage) {

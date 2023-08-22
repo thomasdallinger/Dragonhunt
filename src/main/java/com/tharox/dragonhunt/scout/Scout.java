@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 public class Scout {
     public static HashMap<Player, Boolean> scoutAvailable = new HashMap<>();
+    // Location the player started the scout from.
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
     private static final int duration = 30;
     public int timeLeft = duration;

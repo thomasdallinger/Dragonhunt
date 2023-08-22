@@ -16,8 +16,7 @@ import java.util.Random;
 
 public class ResetScoreboardCountdown {
     /**
-     * Resets the scoreboard countdown and gives the same amount of XP
-     * to all players once the countdown hits zero.
+     * Resets the scoreboard countdown which has different effects (XP increase, new scout available)
      */
     public static void countdownHitsZero(Countdown countdown) {
         new BukkitRunnable() {
@@ -32,7 +31,7 @@ public class ResetScoreboardCountdown {
                     // Make a new scout available
                     for (Player player : Bukkit.getOnlinePlayers()) {
                         Scout.scoutAvailable.put(player, true);
-                        player.sendMessage(Prefixes.getImportantPrefix() + HexColor.YELLOW + "/scout"
+                        player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.WHITE + "/scout"
                                 + ChatColor.GRAY + " is now " + HexColor.GREEN + "available"
                                 + ChatColor.GRAY + " for all players.");
                     }
@@ -46,9 +45,9 @@ public class ResetScoreboardCountdown {
                         if (timer.getTime() <= 600) {
                             Coins.XPIncrease = random.nextInt(4) + 1; // 1-4
                         } else if (timer.getTime() > 600 && timer.getTime() <= 1200) {
-                            Coins.XPIncrease = random.nextInt(5) + 2; // 2-6
+                            Coins.XPIncrease = random.nextInt(4) + 2; // 2-5
                         } else if (timer.getTime() > 1200 && timer.getTime() <= 1800) {
-                            Coins.XPIncrease = random.nextInt(6) + 3; // 3-7
+                            Coins.XPIncrease = random.nextInt(4) + 3; // 3-6
                         }
 
                         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -58,7 +57,8 @@ public class ResetScoreboardCountdown {
                                     + HexColor.GREEN + " minutes.");
                         }
                     } else {
-                        Coins.XPIncrease = 0; // reset
+                        // Reset the XP increase.
+                        Coins.XPIncrease = 0;
 
                         for (Player player : Bukkit.getOnlinePlayers()) {
                             player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED

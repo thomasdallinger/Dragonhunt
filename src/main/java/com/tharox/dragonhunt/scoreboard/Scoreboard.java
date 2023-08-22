@@ -35,10 +35,9 @@ public class Scoreboard extends ScoreboardBuilder {
         LocalDateTime now = LocalDateTime.now();
 
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
-                + DbValues.getServerID() + "]", 14);
+                + DbValues.getServerID() + "]", 13);
         setScore(ChatColor.WHITE + "Classic" + ChatColor.DARK_GRAY + " | "
-                + ChatColor.WHITE + DbValues.getVersion(), 13);
-        setScore("", 12);
+                + ChatColor.WHITE + DbValues.getVersion(), 12);
         setScore("", 11);
         setScore("", 10);
         setScore("", 9);
@@ -56,41 +55,40 @@ public class Scoreboard extends ScoreboardBuilder {
     @Override
     public void update(Player player, Countdown countdown) {
         if (GameState.selectedKit.containsKey(player)) {
-            setScore(GameState.selectedKit.get(player), 11);
+            setScore(GameState.selectedKit.get(player), 10);
         }
 
         setScore("☻ " + Bukkit.getOnlinePlayers().size() + " "
                 + "☠ " + DbValues.getKills(player, true) + " "
-                + "✟ " + DbValues.getKills(player, false), 10);
+                + "✟ " + DbValues.getKills(player, false), 9);
 
         if (Scout.scoutAvailable.containsKey(player)) {
             if (Scout.scoutAvailable.get(player)) {
-                setScore(HexColor.GREEN + "/scout" + ChatColor.WHITE + " available", 8);
-            } else {
-                setScore(HexColor.RED + "/scout" + ChatColor.WHITE + " unavailable", 8);
+                if (timer.getTime() % 2 == 0) {
+                    setScore( "»» " + HexColor.YELLOW + "/scout" + ChatColor.WHITE + " available ««", 7);
+                } else {
+                    setScore(ChatColor.GOLD + "»» " + HexColor.YELLOW + "/scout"
+                            + ChatColor.WHITE + "available" + ChatColor.GOLD + " ««", 7);
+                }
             }
+
+            setScore("", 7);
         }
 
         if (timer.getTime() <= 1200) {
             setScore(PlayerEndTeleport.getEyesNeeded() + " Eyes" + ChatColor.DARK_GRAY + " » "
-                    + ChatColor.GRAY + countdownFormat(1200 - timer.getTime()), 7);
+                    + ChatColor.GRAY + countdownFormat(1200 - timer.getTime()), 6);
         } else {
-            setScore(PlayerEndTeleport.getEyesNeeded() + " Eyes", 7);
+            setScore(PlayerEndTeleport.getEyesNeeded() + " Eyes", 6);
         }
 
         if (Coins.XPIncrease == 0) {
             setScore(Coins.getCoins(player) + " ⛃" + ChatColor.DARK_GRAY + " » "
-                    + ChatColor.GRAY + countdownFormat(countdown.getTime()), 6);
+                    + ChatColor.GRAY + countdownFormat(countdown.getTime()), 5);
         } else { // XP Increase is active
             setScore(Coins.getCoins(player) + " ⛃" + ChatColor.DARK_GRAY + " » "
                     + HexColor.GREEN + countdownFormat(countdown.getTime())
-                    + ChatColor.DARK_GREEN + " +" + Coins.XPIncrease, 6);
-        }
-
-        // Kit Cooldown Reduction is null before all players joined
-        if (GameState.kitCooldownReduction.get(player) != null) {
-            setScore(HexColor.GREEN + "-" + GameState.kitCooldownReduction.get(player) + " sec"
-                    + ChatColor.WHITE + " Cooldown", 5);
+                    + ChatColor.DARK_GREEN + " +" + Coins.XPIncrease, 5);
         }
 
         List<UUID> sortedKeys = GameState.sortPlayersByPoints(PointsListener.scorePerPlayer);

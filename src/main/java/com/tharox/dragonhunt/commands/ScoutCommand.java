@@ -45,42 +45,39 @@ public class ScoutCommand implements CommandExecutor {
                 return true;
             }
 
-            // Seeker Kit Ability: Teleport the player
+            // Teleport the player
             if (args[0].equalsIgnoreCase("tp")) {
                 if (GameState.selectedKit.containsKey(player)) {
-                    if (GameState.selectedKit.get(player).contains("Seeker")) {
-                        if (!location.getWorld().equals(Scout.spectateLocation.get(player).getWorld())) {
-                            player.sendMessage(Prefixes.getErrorPrefix()
-                                    + "You cannot be teleported between dimensions.");
-                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                            return false;
-
-                        } else {
-                            // Cancel the currently active scout
-                            Scout.scoutAvailable.put(player, false);
-
-                            Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
-                                player.teleport(location);
-                                player.addPotionEffect(new PotionEffect(
-                                        PotionEffectType.WEAKNESS, 10 * 20, 2));
-                                player.addPotionEffect(new PotionEffect(
-                                        PotionEffectType.SLOW, 10 * 20, 1));
-                                player.sendMessage(HexColor.GREEN + "Successfully teleported to your Scout location.");
-
-                                for (Player online : Bukkit.getOnlinePlayers()) {
-                                    online.sendMessage(ChatColor.WHITE + player.getName() + ChatColor.GRAY
-                                            + " teleported using " + HexColor.YELLOW + "/scout tp"
-                                            + ChatColor.GRAY + ".");
-                                }
-                            }, 20L);
-
-                            return true;
-                        }
-
-                    } else {
-                        player.sendMessage(Prefixes.getErrorPrefix() + "You have not selected the Seeker Kit.");
+                    if (!location.getWorld().equals(Scout.spectateLocation.get(player).getWorld())) {
+                        player.sendMessage(Prefixes.getErrorPrefix()
+                                + "You cannot be teleported between dimensions.");
                         player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                         return false;
+
+                    } else {
+                        // Cancel the currently active scout
+                        Scout.scoutAvailable.put(player, false);
+
+                        Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
+                            player.teleport(location);
+                            player.addPotionEffect(new PotionEffect(
+                                    PotionEffectType.WEAKNESS, 10 * 20, 2));
+                            player.addPotionEffect(new PotionEffect(
+                                    PotionEffectType.SLOW, 10 * 20, 1));
+                            player.sendMessage(HexColor.GREEN + "Successfully teleported to your scouted location.");
+                            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "Weakness 3 "
+                                    + ChatColor.GRAY + "applied.");
+                            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "Slowness 2 "
+                                    + ChatColor.GRAY + "applied.");
+
+                            for (Player online : Bukkit.getOnlinePlayers()) {
+                                online.sendMessage(Prefixes.getImportantPrefix()
+                                        + ChatColor.WHITE + player.getName() + ChatColor.GRAY + " teleported using "
+                                        + HexColor.YELLOW + "/scout tp" + ChatColor.GRAY + ".");
+                            }
+                        }, 20L);
+
+                        return true;
                     }
                 }
             }
@@ -110,8 +107,11 @@ public class ScoutCommand implements CommandExecutor {
         player.setHealth(player.getHealth() - 10.0);
         new Scout(player);
 
-        player.sendMessage(HexColor.GREEN + "Scout active.");
-        player.sendMessage(ChatColor.GRAY + "Cancel the Scout using /scout again.");
+        player.sendMessage(HexColor.GREEN + "Scout activated.");
+        player.sendMessage(ChatColor.GRAY + "Cancel the Scout using "
+                + ChatColor.WHITE + "/scout" + ChatColor.GRAY + " again.");
+        player.sendMessage(ChatColor.GRAY + "Teleport to your desired location using "
+                + ChatColor.WHITE + "/scout tp" + ChatColor.GRAY + ".");
         player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤ Penalty");
 
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);

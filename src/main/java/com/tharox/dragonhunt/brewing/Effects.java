@@ -69,9 +69,12 @@ public class Effects {
                                 40, Regeneration.get(player) - 2));
 
                     if (player.getWorld().getName().equals("world")) {
+                        // Duration of Night Vision needs to be longer to avoid flashing.
                         player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION,
                                 400, 0));
-                        // Duration needs to be longer to avoid flashing.
+
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.DOLPHINS_GRACE,
+                                40, 0));
                     }
 
                     if (ForeverHunger.active) {

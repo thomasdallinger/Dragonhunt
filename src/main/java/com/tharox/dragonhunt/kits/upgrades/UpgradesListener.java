@@ -34,7 +34,8 @@ public class UpgradesListener implements Listener {
         if (item.getItemMeta().getLore() == null) return;
 
         String upgrade = item.getItemMeta().getDisplayName();
-        String lore = item.getItemMeta().getLore().get(0);
+        // Remove the gray color from the lore (7 = gray = number)
+        String lore = item.getItemMeta().getLore().get(0).substring(2);
         int value = getValueFromLore(lore);
 
         // event.getInventory() ... top inventory = upgrades

@@ -37,7 +37,7 @@ public class Scoreboard extends ScoreboardBuilder {
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
                 + DbValues.getServerID() + "]", 13);
         setScore(ChatColor.WHITE + "Classic" + ChatColor.DARK_GRAY + " | "
-                + ChatColor.WHITE + DbValues.getVersion(), 12);
+                + ChatColor.WHITE + "v" + DbValues.getVersion(), 12);
         setScore("", 11);
         setScore("", 10);
         setScore("", 9);
@@ -65,14 +65,13 @@ public class Scoreboard extends ScoreboardBuilder {
         if (Scout.scoutAvailable.containsKey(player)) {
             if (Scout.scoutAvailable.get(player)) {
                 if (timer.getTime() % 2 == 0) {
-                    setScore( "»» " + HexColor.YELLOW + "/scout" + ChatColor.WHITE + " available ««", 7);
+                    setScore("/scout available", 7);
                 } else {
-                    setScore(ChatColor.GOLD + "»» " + HexColor.YELLOW + "/scout"
-                            + ChatColor.WHITE + "available" + ChatColor.GOLD + " ««", 7);
+                    setScore(ChatColor.GOLD + "/scout" + ChatColor.WHITE + " available", 7);
                 }
+            } else {
+                setScore("", 7);
             }
-
-            setScore("", 7);
         }
 
         if (timer.getTime() <= 1200) {

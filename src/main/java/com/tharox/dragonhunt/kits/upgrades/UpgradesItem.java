@@ -43,7 +43,8 @@ public class UpgradesItem {
         this.cost = section.getInt("cost");
 
         if (LORE != null) {
-            this.value = getValueFromLore(LORE);
+            // Remove the gray color from the lore (7 = gray = number)
+            this.value = getValueFromLore(LORE.substring(2));
         } else {
             this.value = 0;
         }

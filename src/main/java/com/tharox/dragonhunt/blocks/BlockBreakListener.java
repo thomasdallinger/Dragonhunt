@@ -5,6 +5,7 @@ import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kits.upgrades.Upgrades;
 import com.tharox.dragonhunt.modifiers.classes.Diamonds;
 import com.tharox.dragonhunt.modifiers.classes.Iron;
 import net.md_5.bungee.api.ChatColor;
@@ -126,10 +127,23 @@ public class BlockBreakListener implements Listener {
             materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
         }
 
+        // Blacksmith Kit Effectiveness
+        int bonusDiamondsChance = 0, bonusDiamond = 0;
+
+        if (Upgrades.Effectiveness.getOrDefault(player, 0) != 0
+                && GameState.selectedKit.getOrDefault(player, "").contains("Blacksmith")) {
+            bonusDiamondsChance = Upgrades.Effectiveness.get(player);
+        }
+
+        Random rand = new Random();
+        int diamond = rand.nextInt(100) + 1;
+        if (diamond <= bonusDiamondsChance)
+            bonusDiamond = 1;
+
         if (Diamonds.active) {
-            materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 6));
+            materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 6 + bonusDiamond));
         } else {
-            materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 3));
+            materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 3 + bonusDiamond));
         }
 
         // loop through all drops and check if they have to be changed
@@ -159,7 +173,15 @@ public class BlockBreakListener implements Listener {
                 block.getDrops().clear();
                 block.setType(Material.AIR);
 
-                Coins.addXP(player, Coins.oreXP);
+                // Wizard Kit Effectiveness
+                int bonusXP = 0;
+
+                if (Upgrades.Effectiveness.getOrDefault(player, 0) != 0
+                        && GameState.selectedKit.getOrDefault(player, "").contains("Wizard")) {
+                    bonusXP = Upgrades.Effectiveness.get(player);
+                }
+
+                Coins.addXP(player, Coins.oreXP + bonusXP);
             }
         }
     }

@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kits.upgrades.Upgrades;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -43,16 +44,16 @@ public class Demolitionist extends Kit {
     public void executeAbility() {
         player.sendMessage(title + HexColor.GREEN + " Kit Ability activated.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, duration * 20, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, getDuration() * 20, 0));
 
         for (Player online : Bukkit.getOnlinePlayers()) {
             online.sendMessage(ChatColor.WHITE + player.getName() + ChatColor.GRAY
                     + " uses the " + title + ChatColor.GRAY + " Kit Ability.");
         }
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, duration * 20, 9));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, duration * 20, 9));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, duration * 20, 200));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, getDuration() * 20, 9));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, getDuration() * 20, 9));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, getDuration() * 20, 200));
 
         Location location = player.getLocation();
 
@@ -85,16 +86,16 @@ public class Demolitionist extends Kit {
             }
         }
 
-        this.runKitAbility(20, duration, null, null);
+        this.runKitAbility(20, getDuration(), null, null);
     }
 
     @Override
     public int getDuration() {
-        return duration;
+        return duration + Upgrades.Duration.getOrDefault(player, 0);
     }
 
     @Override
     public int getCooldown() {
-        return cooldown;
+        return cooldown - Upgrades.Cooldown.getOrDefault(player, 0);
     }
 }

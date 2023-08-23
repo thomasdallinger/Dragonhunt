@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kits.upgrades.Upgrades;
 import com.tharox.dragonhunt.modifiers.classes.MoreFood;
 import com.tharox.dragonhunt.modifiers.classes.RevivedMobs;
 import org.bukkit.Bukkit;
@@ -25,9 +26,17 @@ public class EntityDeathListener implements Listener {
 
         if (mob instanceof Player) return;
 
+        // Cleric Kit Effectiveness
+        int bonusXP = 0;
+
+        if (Upgrades.Effectiveness.getOrDefault(killer, 0) != 0
+                && GameState.selectedKit.getOrDefault(killer, "").contains("Cleric")) {
+            bonusXP = Upgrades.Effectiveness.get(killer);
+        }
+
         if (killer != null) {
             if (mob instanceof Monster) {
-                Coins.addXP(killer, Coins.monsterXP);
+                Coins.addXP(killer, Coins.monsterXP + bonusXP);
 
                 if (RevivedMobs.active) {
                     Random random = new Random();
@@ -46,7 +55,7 @@ public class EntityDeathListener implements Listener {
                 }
 
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.LEATHER, 1));
-                Coins.addXP(killer, Coins.animalXP);
+                Coins.addXP(killer, Coins.animalXP + bonusXP);
             }
         }
 
@@ -125,6 +134,13 @@ public class EntityDeathListener implements Listener {
         // Extra Drops (on top of food drops)
         if (mob.getName().equals("Sheep")) { // for crafting beds, bows
             mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.STRING, 8));
+        }
+
+        // Blacksmith Kit Effectiveness
+        if (Upgrades.Effectiveness.getOrDefault(killer, 0) != 0
+                && GameState.selectedKit.getOrDefault(killer, "").contains("Blacksmith")) {
+            mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.GOLD_INGOT,
+                    Upgrades.Effectiveness.get(killer)));
         }
     }
 }

@@ -432,3 +432,351 @@ negativeEffects:
     amount: 1
     effect: LEVITATION
     color: 0xCEFFFF
+Berserker:
+  0:
+    slot: 3
+    name: "Enraged I"
+    lore: "Ability Cooldown: -5 seconds"
+    material: MAGMA_BLOCK
+    amount: 1
+    cost: 10
+  1:
+    slot: 12
+    name: "Enraged II"
+    lore: "Ability Cooldown: -10 seconds."
+    material: MAGMA_BLOCK
+    amount: 2
+    cost: 15
+  2:
+    slot: 21
+    name: "Enraged III"
+    lore: "Ability Cooldown: -15 seconds."
+    material: MAGMA_BLOCK
+    amount: 3
+    cost: 20
+  3:
+    slot: 5
+    name: "Unstoppable I"
+    lore: "Ability Duration: +2 seconds."
+    material: POTION
+    amount: 1
+    cost: 8
+  4:
+    slot: 14
+    name: "Unstoppable II"
+    lore: "Ability Duration: +4 seconds."
+    material: POTION
+    amount: 2
+    cost: 12
+  5:
+    slot: 23
+    name: "Unstoppable III"
+    lore: "Ability Duration: +6 seconds."
+    material: POTION
+    amount: 3
+    cost: 16
+Blacksmith:
+  0:
+    slot: 3
+    name: "Miner I"
+    lore: "Gold Ingots per mob kill: +1"
+    material: GOLD_INGOT
+    amount: 1
+    cost: 6
+  1:
+    slot: 12
+    name: "Miner II"
+    lore: "Gold Ingots per mob kill: +2"
+    material: GOLD_INGOT
+    amount: 2
+    cost: 12
+  2:
+    slot: 21
+    name: "Miner III"
+    lore: "Gold Ingots per mob kill: +3"
+    material: GOLD_INGOT
+    amount: 3
+    cost: 18
+  3:
+    slot: 5
+    name: "Precious Resource I"
+    lore: "Chance for extra diamond per diamond ore: +33%"
+    material: DIAMOND
+    amount: 1
+    cost: 6
+  4:
+    slot: 14
+    name: "Precious Resource II"
+    lore: "Chance for extra diamond per diamond ore: +67%"
+    material: DIAMOND
+    amount: 2
+    cost: 12
+  5:
+    slot: 23
+    name: "Precious Resource III"
+    lore: "Chance for extra diamond per diamond ore: +100%"
+    material: DIAMOND
+    amount: 3
+    cost: 18
+Cleric:
+  0:
+    slot: 4
+    name: "Experienced I"
+    lore: "XP Points on mob kill: +1"
+    material: EXPERIENCE_BOTTLE
+    amount: 1
+    cost: 5
+  1:
+    slot: 13
+    name: "Experienced II"
+    lore: "XP Points on mob kill: +2"
+    material: EXPERIENCE_BOTTLE
+    amount: 2
+    cost: 8
+  2:
+    slot: 22
+    name: "Experienced III"
+    lore: "XP Points on mob kill: +3"
+    material: EXPERIENCE_BOTTLE
+    amount: 3
+    cost: 11
+Demolitionist:
+  0:
+    slot: 4
+    name: "Explosive I"
+    lore: "Ability Cooldown: -10 seconds"
+    material: TNT
+    amount: 1
+    cost: 10
+  1:
+    slot: 13
+    name: "Explosive II"
+    lore: "Ability Cooldown: -20 seconds."
+    material: TNT
+    amount: 2
+    cost: 15
+  2:
+    slot: 22
+    name: "Explosive III"
+    lore: "Ability Cooldown: -30 seconds."
+    material: TNT
+    amount: 3
+    cost: 20
+Grappler:
+  0:
+    slot: 4
+    name: "Reload Master I"
+    lore: "Ability Cooldown: -3 seconds"
+    material: ARROW
+    amount: 1
+    cost: 7
+  1:
+    slot: 13
+    name: "Reload Master II"
+    lore: "Ability Cooldown: -6 seconds."
+    material: ARROW
+    amount: 2
+    cost: 12
+  2:
+    slot: 22
+    name: "Reload Master III"
+    lore: "Ability Cooldown: -10 seconds."
+    material: ARROW
+    amount: 3
+    cost: 20
+Healer:
+  0:
+    slot: 3
+    name: "Quick Help I"
+    lore: "Ability Cooldown: -5 seconds"
+    material: CLOCK
+    amount: 1
+    cost: 6
+  1:
+    slot: 12
+    name: "Quick Help II"
+    lore: "Ability Cooldown: -10 seconds."
+    material: CLOCK
+    amount: 2
+    cost: 11
+  2:
+    slot: 21
+    name: "Quick Help III"
+    lore: "Ability Cooldown: -15 seconds."
+    material: CLOCK
+    amount: 3
+    cost: 16
+  3:
+    slot: 5
+    name: "Big Help I"
+    lore: "Ability Heal: +1 ❤"
+    material: GOLDEN_APPLE
+    amount: 1
+    cost: 10
+  4:
+    slot: 14
+    name: "Big Help II"
+    lore: "Ability Heal: +2 ❤"
+    material: GOLDEN_APPLE
+    amount: 2
+    cost: 15
+  5:
+    slot: 23
+    name: "Big Help III"
+    lore: "Ability Heal: +3 ❤"
+    material: GOLDEN_APPLE
+    amount: 3
+    cost: 20
+Mutant:
+  0:
+    slot: 4
+    name: "More Power I"
+    lore: "Ability Duration: +2 seconds."
+    material: POTION
+    amount: 1
+    cost: 8
+  1:
+    slot: 13
+    name: "More Power II"
+    lore: "Ability Duration: +4 seconds."
+    material: POTION
+    amount: 2
+    cost: 13
+  2:
+    slot: 22
+    name: "More Power III"
+    lore: "Ability Duration: +6 seconds."
+    material: POTION
+    amount: 3
+    cost: 18
+Platformer:
+  0:
+    slot: 4
+    name: "Builder I"
+    lore: "Ability Duration: +3 seconds."
+    material: PINK_STAINED_GLASS
+    amount: 1
+    cost: 7
+  1:
+    slot: 13
+    name: "Builder II"
+    lore: "Ability Duration: +6 seconds."
+    material: PINK_STAINED_GLASS
+    amount: 2
+    cost: 12
+  2:
+    slot: 22
+    name: "Builder III"
+    lore: "Ability Duration: +10 seconds."
+    material: PINK_STAINED_GLASS
+    amount: 3
+    cost: 20
+Sniper:
+  0:
+    slot: 4
+    name: "Concentration I"
+    lore: "Ability Duration: +1 second."
+    material: TARGET
+    amount: 1
+    cost: 7
+  1:
+    slot: 13
+    name: "Concentration II"
+    lore: "Ability Duration: +2 seconds."
+    material: TARGET
+    amount: 2
+    cost: 12
+  2:
+    slot: 22
+    name: "Concentration III"
+    lore: "Ability Duration: +3 seconds."
+    material: TARGET
+    amount: 3
+    cost: 17
+Vanisher:
+  0:
+    slot: 4
+    name: "Faster I"
+    lore: "Ability Speed: +1 level."
+    material: POTION
+    amount: 1
+    cost: 6
+  1:
+    slot: 13
+    name: "Faster II"
+    lore: "Ability Speed: +2 levels."
+    material: POTION
+    amount: 2
+    cost: 10
+  2:
+    slot: 22
+    name: "Faster III"
+    lore: "Ability Speed: +3 levels."
+    material: POTION
+    amount: 3
+    cost: 14
+Warrior:
+  0:
+    slot: 4
+    name: "Perseverance I"
+    lore: "Ability Duration: +1 second."
+    material: DIAMOND_SWORD
+    amount: 1
+    cost: 6
+  1:
+    slot: 13
+    name: "Perseverance II"
+    lore: "Ability Duration: +2 seconds."
+    material: DIAMOND_SWORD
+    amount: 2
+    cost: 11
+  2:
+    slot: 22
+    name: "Perseverance III"
+    lore: "Ability Duration: +3 seconds."
+    material: DIAMOND_SWORD
+    amount: 3
+    cost: 16
+Wizard:
+  0:
+    slot: 3
+    name: "Cave Explorer I"
+    lore: "XP Points on ore mined: +1"
+    material: EXPERIENCE_BOTTLE
+    amount: 1
+    cost: 6
+  1:
+    slot: 12
+    name: "Cave Explorer II"
+    lore: "XP Points on ore mined: +2"
+    material: EXPERIENCE_BOTTLE
+    amount: 2
+    cost: 10
+  2:
+    slot: 21
+    name: "Cave Explorer III"
+    lore: "XP Points on ore mined: +3"
+    material: EXPERIENCE_BOTTLE
+    amount: 3
+    cost: 14
+  3:
+    slot: 5
+    name: "Enchanted I"
+    lore: "Enchant anything to get 1 Golden Apple"
+    material: GOLDEN_APPLE
+    amount: 1
+    cost: 20
+  4:
+    slot: 14
+    name: "Enchanted II"
+    lore: "Enchant anything to get 2 Golden Apples"
+    material: GOLDEN_APPLE
+    amount: 2
+    cost: 25
+  5:
+    slot: 23
+    name: "Enchanted III"
+    lore: "Enchant anything to get 3 Golden Apples"
+    material: GOLDEN_APPLE
+    amount: 3
+    cost: 30

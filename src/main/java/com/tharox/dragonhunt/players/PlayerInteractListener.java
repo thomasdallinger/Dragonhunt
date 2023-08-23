@@ -10,6 +10,7 @@ import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.enchanting.EnchantingInventory;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kits.upgrades.UpgradesInventory;
 import com.tharox.dragonhunt.modifiers.classes.EnhancedCooldownReduction;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -53,7 +54,7 @@ public class PlayerInteractListener implements Listener {
                 }
 
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    // clicking on an enchanting table opens the enchant inventory
+                    // Clicking on an enchanting table opens the enchant inventory.
                     if (block.getType() == Material.ENCHANTING_TABLE) {
                         event.setCancelled(true);
 
@@ -63,7 +64,7 @@ public class PlayerInteractListener implements Listener {
                         return;
                     }
 
-                    // clicking on a brewing stand opens the brewing stand inventory
+                    // Clicking on a brewing stand opens the brewing stand inventory.
                     if (block.getType() == Material.BREWING_STAND) {
                         event.setCancelled(true);
 
@@ -73,48 +74,17 @@ public class PlayerInteractListener implements Listener {
                         return;
                     }
 
-                    // clicking on an anvil reduces the Kit cooldown
+                    // Clicking on an anvil opens the kit upgrades inventory.
                     if (block.getType() == Material.ANVIL) {
                         event.setCancelled(true);
-                        int cost = 10;
-                        int reduction = 5;
 
-                        if (EnhancedCooldownReduction.active)
-                            reduction = 10;
+                        UpgradesInventory upgradesInventory
+                                = new UpgradesInventory(Main.getInstance().getConfig(), player);
 
-                        String name = "Kit Cooldown Reduction";
-
-                        GameState.kitCooldownReduction.put(player,
-                                GameState.kitCooldownReduction.get(player) + reduction);
-
-                        // ERROR: not enough points to purchase a cooldown reduction
-                        if (Coins.getCoins(player) < cost) {
-                            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                            player.sendMessage(Prefixes.getErrorPrefix() + "You do not have enough ⛃! Need "
-                                    + HexColor.RED + (cost - Coins.getCoins(player))
-                                    + ChatColor.RED + " more.");
-                            return;
-                        }
-
-                        Coins.removeCoins(player, cost);
-                        player.sendMessage(Prefixes.getCoinPrefix(-cost)
-                                + ChatColor.GRAY + "Purchased " + HexColor.YELLOW + name + ChatColor.GRAY + ".");
-                        player.sendMessage(HexColor.GREEN + "Kit Cooldown reduced by "
-                                + ChatColor.DARK_GREEN + reduction + HexColor.GREEN + " seconds.");
-                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1);
-
-                        DatabaseExecutor.executeDatabaseHandler((con) -> {
-                            String query = "INSERT INTO purchases (game_id, player, purchased_item, coins_before, cost,"
-                                    + " timestamp) VALUES ('" + DbValues.getGameID() + "', '" + player.getUniqueId()
-                                    + "', '" + name
-                                    + "', '" + (Coins.getCoins(player) + cost)
-                                    + "', '" + cost
-                                    + "', '" + DbValues.getTimestamp() + "')";
-
-                            Statement stmt = con.createStatement();
-                            stmt.execute(query);
-                            stmt.close();
-                        });
+                        // Throws an exception if the inventory is null.
+                        try {
+                            player.openInventory(upgradesInventory.upgrades);
+                        } catch (Exception exception) {}
                     }
 
                     if (BlockBreakListener.woods.contains(block.getType())) { // can not strip wood logs

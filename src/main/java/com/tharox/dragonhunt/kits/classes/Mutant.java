@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kits.upgrades.Upgrades;
 import com.tharox.dragonhunt.players.DamageAdjustmentListener;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -43,26 +44,26 @@ public class Mutant extends Kit {
     public void executeAbility() {
         player.sendMessage(title + HexColor.GREEN + " Kit Ability activated.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, duration * 20, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, getDuration() * 20, 0));
 
         for (Player online : Bukkit.getOnlinePlayers()) {
             online.sendMessage(ChatColor.WHITE + player.getName() + ChatColor.GRAY
                     + " uses the " + title + ChatColor.GRAY + " Kit Ability.");
         }
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, duration * 20, 3));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, duration * 20, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, getDuration() * 20, 3));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, getDuration() * 20, 1));
 
-        this.runKitAbility(20, duration, null, null);
+        this.runKitAbility(20, getDuration(), null, null);
     }
 
     @Override
     public int getDuration() {
-        return duration;
+        return duration + Upgrades.Duration.getOrDefault(player, 0);
     }
 
     @Override
     public int getCooldown() {
-        return cooldown;
+        return cooldown - Upgrades.Cooldown.getOrDefault(player, 0);
     }
 }

@@ -7,6 +7,7 @@ import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.enchanting.Enchantments;
 import com.tharox.dragonhunt.kits.selection.KitInventory;
+import com.tharox.dragonhunt.kits.upgrades.Upgrades;
 import com.tharox.dragonhunt.modifiers.classes.BonusHearts;
 import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
 import com.tharox.dragonhunt.modifiers.selection.ModifierInventory;

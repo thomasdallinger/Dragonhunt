@@ -7,7 +7,10 @@ import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kits.upgrades.Upgrades;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -100,6 +103,13 @@ public class EnchantingListener implements Listener {
                 + ChatColor.GRAY + "Purchased " + HexColor.YELLOW + enchantment.substring(16) + ChatColor.GRAY + ".");
         player.playSound(player.getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1, 1);
         Coins.removeCoins(player, EnchantingInventory.enchantmentCost.get(enchantment));
+
+        // Wizard Kit Effectiveness
+        if (Upgrades.Effectiveness.getOrDefault(player, 0) != 0
+                && GameState.selectedKit.getOrDefault(player, "").contains("Wizard")) {
+            GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE,
+                    Upgrades.Effectiveness.get(player)));
+        }
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             // Substring 16 from enchantment to remove formatting

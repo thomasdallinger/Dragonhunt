@@ -25,6 +25,7 @@ import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.grappler.GrappleListener;
 import com.tharox.dragonhunt.kits.classes.KitClass;
 import com.tharox.dragonhunt.kits.selection.KitListener;
+import com.tharox.dragonhunt.kits.upgrades.UpgradesListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.players.*;
@@ -207,6 +208,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new LevelUp(), this);
         pluginManager.registerEvents(new EnchantingListener(), this);
         pluginManager.registerEvents(new BrewingListener(), this);
+        pluginManager.registerEvents(new UpgradesListener(), this);
 
         pluginManager.registerEvents(new BlockBreakListener(), this);
         pluginManager.registerEvents(new BlockExplodeListener(), this);

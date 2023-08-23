@@ -1,7 +1,8 @@
 package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.chat.HexColor;
-import com.tharox.dragonhunt.players.DamageAdjustmentListener;
+import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kits.upgrades.Upgrades;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -12,7 +13,7 @@ import java.util.Objects;
 
 @DragonhuntKit
 public class Healer extends Kit {
-    static int heartsToAdd = 8;
+    static int heartsToAdd = 6;
     static int cooldown = 50;
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Healer";
@@ -34,15 +35,23 @@ public class Healer extends Kit {
 
     @Override
     public void executeAbility() {
+        // Healer Kit Effectiveness
+        int bonusHearts = 0;
+
+        if (Upgrades.Effectiveness.getOrDefault(player, 0) != 0
+                && GameState.selectedKit.getOrDefault(player, "").contains("Healer")) {
+            bonusHearts = Upgrades.Effectiveness.get(player);
+        }
+
         double maxHealth = Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
 
         player.sendMessage(title + ChatColor.GRAY + " Kit Ability used.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 
-        if ((player.getHealth() + heartsToAdd * 2) > maxHealth) {
+        if ((player.getHealth() + (heartsToAdd + bonusHearts) * 2) > maxHealth) {
             player.setHealth(maxHealth);
         } else {
-            player.setHealth(player.getHealth() + heartsToAdd * 2);
+            player.setHealth(player.getHealth() + (heartsToAdd + bonusHearts) * 2);
         }
     }
 
@@ -53,6 +62,6 @@ public class Healer extends Kit {
 
     @Override
     public int getCooldown() {
-        return cooldown;
+        return cooldown - Upgrades.Cooldown.getOrDefault(player, 0);
     }
 }

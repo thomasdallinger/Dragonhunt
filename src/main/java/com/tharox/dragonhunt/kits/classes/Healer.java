@@ -1,9 +1,11 @@
 package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.upgrades.Upgrades;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
@@ -19,7 +21,8 @@ public class Healer extends Kit {
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Healer";
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "Instantly heal yourself " + ChatColor.WHITE + heartsToAdd + " ❤\n\n"
+            + ChatColor.GRAY + "Instantly heal yourself " + ChatColor.WHITE + heartsToAdd + " ❤\n"
+            + HexColor.RED + "» Alert on Activation\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + "Instantly\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
@@ -52,6 +55,11 @@ public class Healer extends Kit {
             player.setHealth(maxHealth);
         } else {
             player.setHealth(player.getHealth() + (heartsToAdd + bonusHearts) * 2);
+        }
+
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            online.sendMessage(Prefixes.getImportantPrefix() + Prefixes.getKitAbilityPrefix() + ChatColor.WHITE
+                    + player.getName() + ChatColor.GRAY + " used the " + title + ChatColor.GRAY + " Kit Ability.");
         }
     }
 

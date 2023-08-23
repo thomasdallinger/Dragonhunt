@@ -44,6 +44,11 @@ public class Prefixes {
         return ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "✦✦✦" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
+    // KIT ABILITY: used for the kit ability used alert
+    public static String getKitAbilityPrefix() {
+        return ChatColor.DARK_GRAY + "[" + HexColor.YELLOW + "✦" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
+    }
+
     // ERROR: when a player is not allowed to do something or is doing something wrong
     public static String getErrorPrefix() {
         return ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "✖✖✖" + ChatColor.DARK_GRAY + "] " + ChatColor.RED;

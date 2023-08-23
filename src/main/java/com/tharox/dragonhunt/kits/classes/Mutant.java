@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.upgrades.Upgrades;
 import com.tharox.dragonhunt.players.DamageAdjustmentListener;
@@ -47,8 +48,8 @@ public class Mutant extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, getDuration() * 20, 0));
 
         for (Player online : Bukkit.getOnlinePlayers()) {
-            online.sendMessage(ChatColor.WHITE + player.getName() + ChatColor.GRAY
-                    + " uses the " + title + ChatColor.GRAY + " Kit Ability.");
+            online.sendMessage(Prefixes.getImportantPrefix() + Prefixes.getKitAbilityPrefix() + ChatColor.WHITE
+                    + player.getName() + ChatColor.GRAY + " uses the " + title + ChatColor.GRAY + " Kit Ability.");
         }
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, getDuration() * 20, 3));

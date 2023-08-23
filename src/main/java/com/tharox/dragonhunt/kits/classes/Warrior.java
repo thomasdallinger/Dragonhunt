@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.kits.upgrades.Upgrades;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -40,8 +41,8 @@ public class Warrior extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, getDuration() * 20, 0));
 
         for (Player online : Bukkit.getOnlinePlayers()) {
-            online.sendMessage(ChatColor.WHITE + player.getName() + ChatColor.GRAY
-                    + " uses the " + title + ChatColor.GRAY + " Kit Ability.");
+            online.sendMessage(Prefixes.getImportantPrefix() + Prefixes.getKitAbilityPrefix() + ChatColor.WHITE
+                    + player.getName() + ChatColor.GRAY + " uses the " + title + ChatColor.GRAY + " Kit Ability.");
         }
 
         this.runKitAbility(20, getDuration(), null, null);

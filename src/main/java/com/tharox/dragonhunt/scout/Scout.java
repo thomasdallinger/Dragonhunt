@@ -14,11 +14,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 
 public class Scout {
+    // Used to determine if a scout is currently active, too.
     public static HashMap<Player, Boolean> scoutAvailable = new HashMap<>();
     // Location the player started the scout from.
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
-    private static final int duration = 30;
-    public int timeLeft = duration;
+    private static int timeLeft = 25;
 
     public Scout(Player player) {
         activateSpectate(player);

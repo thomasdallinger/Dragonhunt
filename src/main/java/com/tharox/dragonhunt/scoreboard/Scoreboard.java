@@ -75,10 +75,12 @@ public class Scoreboard extends ScoreboardBuilder {
         }
 
         if (timer.getTime() <= 1200) {
-            setScore(PlayerEndTeleport.getEyesNeeded() + " Eyes" + ChatColor.DARK_GRAY + " » "
+            setScore(ChatColor.BOLD.toString() + PlayerEndTeleport.getEyesNeeded()
+                    + ChatColor.WHITE + " Eyes" + ChatColor.DARK_GRAY + " » "
                     + ChatColor.GRAY + countdownFormat(1200 - timer.getTime()), 6);
         } else {
-            setScore(PlayerEndTeleport.getEyesNeeded() + " Eyes", 6);
+            setScore(HexColor.GREEN.toString() + ChatColor.BOLD + PlayerEndTeleport.getEyesNeeded()
+                    + ChatColor.WHITE + " Eyes", 6);
         }
 
         if (Coins.XPIncrease == 0) {

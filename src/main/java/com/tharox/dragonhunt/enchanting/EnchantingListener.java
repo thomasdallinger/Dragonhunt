@@ -104,13 +104,6 @@ public class EnchantingListener implements Listener {
         player.playSound(player.getLocation(), Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1, 1);
         Coins.removeCoins(player, EnchantingInventory.enchantmentCost.get(enchantment));
 
-        // Wizard Kit Effectiveness
-        if (Upgrades.Effectiveness.getOrDefault(player, 0) != 0
-                && GameState.selectedKit.getOrDefault(player, "").contains("Wizard")) {
-            GameState.putItemInInventory(player, new ItemStack(Material.GOLDEN_APPLE,
-                    Upgrades.Effectiveness.get(player)));
-        }
-
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             // Substring 16 from enchantment to remove formatting
             String query = "INSERT INTO purchases (game_id, player, purchased_item, coins_before, cost, timestamp) " +

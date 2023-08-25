@@ -738,24 +738,3 @@ Wizard:
     material: EXPERIENCE_BOTTLE
     amount: 3
     cost: 14
-  3:
-    slot: 5
-    name: "Enchanted I"
-    lore: "Enchant anything to get 1 Golden Apple"
-    material: GOLDEN_APPLE
-    amount: 1
-    cost: 20
-  4:
-    slot: 14
-    name: "Enchanted II"
-    lore: "Enchant anything to get 2 Golden Apples"
-    material: GOLDEN_APPLE
-    amount: 2
-    cost: 25
-  5:
-    slot: 23
-    name: "Enchanted III"
-    lore: "Enchant anything to get 3 Golden Apples"
-    material: GOLDEN_APPLE
-    amount: 3
-    cost: 30

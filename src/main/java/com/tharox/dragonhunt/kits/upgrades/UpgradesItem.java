@@ -67,11 +67,14 @@ public class UpgradesItem {
 
         if (LORE != null) {
             if (LORE.contains("Cooldown"))
-                itemToCreate = checkIfUnlocked(itemToCreate, Upgrades.Cooldown.getOrDefault(player, 0));
+                itemToCreate = checkIfUnlocked(itemToCreate,
+                        Upgrades.CooldownUpgradeLvl.getOrDefault(player, 1));
             else if (LORE.contains("Duration"))
-                itemToCreate = checkIfUnlocked(itemToCreate, Upgrades.Duration.getOrDefault(player, 0));
+                itemToCreate = checkIfUnlocked(itemToCreate,
+                        Upgrades.DurationUpgradeLvl.getOrDefault(player, 1));
             else if (LORE.contains("Effectiveness"))
-                itemToCreate = checkIfUnlocked(itemToCreate, Upgrades.Effectiveness.getOrDefault(player, 0));
+                itemToCreate = checkIfUnlocked(itemToCreate,
+                        Upgrades.EffectivenessUpgradeLvl.getOrDefault(player, 1));
         }
 
         if (itemToCreate == null) return null;
@@ -133,27 +136,19 @@ public class UpgradesItem {
         return itemToCreate;
     }
 
-    private ItemStack checkIfUnlocked(ItemStack itemStack, int upgradeValue) {
+    private ItemStack checkIfUnlocked(ItemStack itemStack, int playerUpgradeLevel) {
         ItemMeta meta = itemStack.getItemMeta();
         if (meta == null) return null;
 
         // item has already been purchased
-        if (upgradeValue >= value) {
+        if (playerUpgradeLevel > AMOUNT) {
             meta.setDisplayName(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + NAME +
                     HexColor.GREEN + " ᴜɴʟᴏᴄᴋᴇᴅ");
             itemStack.setItemMeta(meta);
             return itemStack;
         }
-        // item lvl 1 is purchasable
-        else if (upgradeValue >= 0 && AMOUNT == 1) {
-            return (setEnchantmentAndName(itemStack));
-        }
-        // item lvl 2 is purchasable
-        else if (upgradeValue >= 0 && AMOUNT == 2) {
-            return (setEnchantmentAndName(itemStack));
-        }
-        // item lvl 3 is purchasable
-        else if (upgradeValue >= 0 && AMOUNT == 3) {
+        // item is purchasable
+        else if (playerUpgradeLevel == AMOUNT) {
             return (setEnchantmentAndName(itemStack));
         }
         // item has not been unlocked yet

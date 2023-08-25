@@ -477,45 +477,24 @@ Berserker:
     cost: 16
 Blacksmith:
   0:
-    slot: 3
+    slot: 4
     name: "Miner I"
     lore: "Gold Ingots per mob kill: +1"
     material: GOLD_INGOT
     amount: 1
     cost: 6
   1:
-    slot: 12
+    slot: 13
     name: "Miner II"
     lore: "Gold Ingots per mob kill: +2"
     material: GOLD_INGOT
     amount: 2
     cost: 12
   2:
-    slot: 21
+    slot: 22
     name: "Miner III"
     lore: "Gold Ingots per mob kill: +3"
     material: GOLD_INGOT
-    amount: 3
-    cost: 18
-  3:
-    slot: 5
-    name: "Precious Resource I"
-    lore: "Chance for extra diamond per diamond ore: +33%"
-    material: DIAMOND
-    amount: 1
-    cost: 6
-  4:
-    slot: 14
-    name: "Precious Resource II"
-    lore: "Chance for extra diamond per diamond ore: +67%"
-    material: DIAMOND
-    amount: 2
-    cost: 12
-  5:
-    slot: 23
-    name: "Precious Resource III"
-    lore: "Chance for extra diamond per diamond ore: +100%"
-    material: DIAMOND
     amount: 3
     cost: 18
 Cleric:

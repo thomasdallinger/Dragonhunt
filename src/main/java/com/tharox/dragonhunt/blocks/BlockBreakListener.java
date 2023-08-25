@@ -127,23 +127,10 @@ public class BlockBreakListener implements Listener {
             materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
         }
 
-        // Blacksmith Kit Effectiveness
-        int bonusDiamondsChance = 0, bonusDiamond = 0;
-
-        if (Upgrades.Effectiveness.getOrDefault(player, 0) != 0
-                && GameState.selectedKit.getOrDefault(player, "").contains("Blacksmith")) {
-            bonusDiamondsChance = Upgrades.Effectiveness.get(player);
-        }
-
-        Random rand = new Random();
-        int diamond = rand.nextInt(100) + 1;
-        if (diamond <= bonusDiamondsChance)
-            bonusDiamond = 1;
-
         if (Diamonds.active) {
-            materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 6 + bonusDiamond));
+            materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 6));
         } else {
-            materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 3 + bonusDiamond));
+            materials.put(Material.DIAMOND, new ItemStack(Material.DIAMOND, 3));
         }
 
         // loop through all drops and check if they have to be changed

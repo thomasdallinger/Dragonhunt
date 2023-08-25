@@ -73,10 +73,16 @@ public class UpgradesListener implements Listener {
         // SUCCESS: upgrade can be purchased - increase the value
         if (lore.contains("Cooldown")) {
             Upgrades.Cooldown.put(player, value);
+            Upgrades.CooldownUpgradeLvl.put(
+                    player, Upgrades.CooldownUpgradeLvl.getOrDefault(player, 1) + 1);
         } else if (lore.contains("Duration")) {
             Upgrades.Duration.put(player, value);
+            Upgrades.DurationUpgradeLvl.put(
+                    player, Upgrades.DurationUpgradeLvl.getOrDefault(player, 1) + 1);
         } else if (lore.contains("Effectiveness")) {
             Upgrades.Effectiveness.put(player, value);
+            Upgrades.EffectivenessUpgradeLvl.put(
+                    player, Upgrades.EffectivenessUpgradeLvl.getOrDefault(player, 1) + 1);
         }
 
         purchaseUpgrade(player, upgrade);

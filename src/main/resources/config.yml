@@ -479,21 +479,21 @@ Blacksmith:
   0:
     slot: 4
     name: "Miner I"
-    lore: "Effect: 1 Gold on mob kill"
+    lore: "Effect: 1 Gold on Mob kill"
     material: GOLD_INGOT
     amount: 1
     cost: 6
   1:
     slot: 13
     name: "Miner II"
-    lore: "Effect: 2 Gold on mob kill"
+    lore: "Effect: 2 Gold on Mob kill"
     material: GOLD_INGOT
     amount: 2
     cost: 12
   2:
     slot: 22
     name: "Miner III"
-    lore: "Effect: 3 Gold on mob kill"
+    lore: "Effect: 3 Gold on Mob kill"
     material: GOLD_INGOT
     amount: 3
     cost: 18
@@ -501,21 +501,21 @@ Cleric:
   0:
     slot: 4
     name: "Experienced I"
-    lore: "Effect: +1 XP Point on mob kill"
+    lore: "Effect: +1 XP Point on Mob kill"
     material: EXPERIENCE_BOTTLE
     amount: 1
     cost: 5
   1:
     slot: 13
     name: "Experienced II"
-    lore: "Effect: +2 XP Points on mob kill"
+    lore: "Effect: +2 XP Points on Mob kill"
     material: EXPERIENCE_BOTTLE
     amount: 2
     cost: 8
   2:
     slot: 22
     name: "Experienced III"
-    lore: "Effect: +3 XP Points on mob kill"
+    lore: "Effect: +3 XP Points on Mob kill"
     material: EXPERIENCE_BOTTLE
     amount: 3
     cost: 11
@@ -676,21 +676,21 @@ Vanisher:
   0:
     slot: 4
     name: "Faster I"
-    lore: "Ability Effect: +1 Speed level."
+    lore: "Ability Effect: +1 Speed Level."
     material: POTION
     amount: 1
     cost: 6
   1:
     slot: 13
     name: "Faster II"
-    lore: "Ability Effect: +2 Speed levels."
+    lore: "Ability Effect: +2 Speed Levels."
     material: POTION
     amount: 2
     cost: 10
   2:
     slot: 22
     name: "Faster III"
-    lore: "Ability Effect: +3 Speed levels."
+    lore: "Ability Effect: +3 Speed Levels."
     material: POTION
     amount: 3
     cost: 14
@@ -720,21 +720,21 @@ Wizard:
   0:
     slot: 3
     name: "Cave Explorer I"
-    lore: "Effect: +1 XP Point on ore mined"
+    lore: "Effect: +1 XP Point on Ore mined"
     material: EXPERIENCE_BOTTLE
     amount: 1
     cost: 6
   1:
     slot: 12
     name: "Cave Explorer II"
-    lore: "Effect: +2 XP Points on ore mined"
+    lore: "Effect: +2 XP Points on Ore mined"
     material: EXPERIENCE_BOTTLE
     amount: 2
     cost: 10
   2:
     slot: 21
     name: "Cave Explorer III"
-    lore: "Effect: +3 XP Points on ore mined"
+    lore: "Effect: +3 XP Points on Ore mined"
     material: EXPERIENCE_BOTTLE
     amount: 3
     cost: 14

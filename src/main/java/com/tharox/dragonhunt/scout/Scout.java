@@ -18,7 +18,8 @@ public class Scout {
     public static HashMap<Player, Boolean> scoutAvailable = new HashMap<>();
     // Location the player started the scout from.
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
-    private static int timeLeft = 25;
+    private static final int duration = 30;
+    private int timeLeft = duration;
 
     public Scout(Player player) {
         activateSpectate(player);

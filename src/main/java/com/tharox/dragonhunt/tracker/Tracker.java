@@ -248,17 +248,14 @@ public class Tracker implements Listener {
 
         // Params: player location, structure to search for, radius in chunks, search for unlooted only
         structureSearchResult = player.getWorld().locateNearestStructure(
-                player.getLocation(), structure, 16, false);
+                player.getLocation(), structure, 32, false);
 
         if (structureSearchResult != null) {
-
-            // Check if the located structure is outside the Overworld border
-            Location center = Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().getCenter();
-            if ((center.getX() + 1000) < structureSearchResult.getLocation().getX()
-                    || (center.getX() - 1000) > structureSearchResult.getLocation().getX()
-                    || (center.getZ() + 1000) < structureSearchResult.getLocation().getZ()
-                    || (center.getZ() - 1000) > structureSearchResult.getLocation().getZ()) {
-                return;
+            if (Objects.requireNonNull(structureSearchResult.getLocation().getWorld())
+                    .getEnvironment().equals(World.Environment.NORMAL)) {
+                if (isOutsideOverworldBorder(structureSearchResult)) return;
+            } else {
+                if (isOutsideNetherBorder(structureSearchResult)) return;
             }
 
             structureList.add(structureName);
@@ -280,6 +277,22 @@ public class Tracker implements Listener {
             structureList.add(structureName);
             locationList.add(structureSearchResult.getLocation());
         }
+    }
+
+    private boolean isOutsideOverworldBorder(StructureSearchResult structureSearchResult) {
+        Location center = Objects.requireNonNull(Bukkit.getWorld("world")).getWorldBorder().getCenter();
+        return (center.getX() + 1000) < structureSearchResult.getLocation().getX()
+                || (center.getX() - 1000) > structureSearchResult.getLocation().getX()
+                || (center.getZ() + 1000) < structureSearchResult.getLocation().getZ()
+                || (center.getZ() - 1000) > structureSearchResult.getLocation().getZ();
+    }
+
+    private boolean isOutsideNetherBorder(StructureSearchResult structureSearchResult) {
+        Location center = Objects.requireNonNull(Bukkit.getWorld("world_nether")).getWorldBorder().getCenter();
+        return (center.getX() + 2000) < structureSearchResult.getLocation().getX()
+                || (center.getX() - 2000) > structureSearchResult.getLocation().getX()
+                || (center.getZ() + 2000) < structureSearchResult.getLocation().getZ()
+                || (center.getZ() - 2000) > structureSearchResult.getLocation().getZ();
     }
 
     public ItemStack createTracker() {

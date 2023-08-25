@@ -105,15 +105,13 @@ public abstract class Kit implements Listener {
     }
 
     public void setCooldownEnds() {
-        int cooldownToApply = getCooldown() - GameState.kitCooldownReduction.get(player);
-
-        if (cooldownToApply > 0) {
-            player.setCooldown(Material.NETHER_STAR, cooldownToApply * 20);
+        if (getCooldown() > 0) {
+            player.setCooldown(Material.NETHER_STAR, getCooldown() * 20);
 
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
                 player.sendMessage(Prefixes.getImportantPrefix() + GameState.selectedKit.get(player) + ChatColor.GRAY
                         + " Kit Ability is " + HexColor.GREEN + "ready" + ChatColor.GRAY + ".");
-            }, cooldownToApply * 20L);
+            }, getCooldown() * 20L);
         }
     }
 

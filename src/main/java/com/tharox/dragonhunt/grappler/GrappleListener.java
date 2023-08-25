@@ -52,11 +52,9 @@ public class GrappleListener implements Listener {
 
             arrow.setVelocity(arrow.getVelocity().multiply(2D));
 
-            int cooldownToApply = GrappleListener.cooldown - 20 * GameState.kitCooldownReduction.get(player);
-
             // put the GRAPPLER on cooldown
-            if (cooldownToApply >= 0) {
-                player.setCooldown(Material.CROSSBOW, cooldownToApply);
+            if (GrappleListener.cooldown >= 0) {
+                player.setCooldown(Material.CROSSBOW, GrappleListener.cooldown);
             }
 
             // after the cooldown ends, add the next charged projectile

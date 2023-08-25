@@ -38,9 +38,6 @@ public class GameState {
     // which player has an active kit ability (value: duration in seconds)
     public static HashMap<Player, Integer> kitAbilityActive = new HashMap<>();
 
-    // stores the cooldown reduction in seconds acquired by each player
-    public static HashMap<Player, Integer> kitCooldownReduction = new HashMap<>();
-
     // location of the first player entering the NETHER (null as long as no player enters the NETHER)
     public static Location firstNetherEntry = null;
 

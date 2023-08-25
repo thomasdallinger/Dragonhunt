@@ -93,9 +93,6 @@ public class GameConfiguration {
             // non of the players has selected a kit yet
             GameState.kitInventoryClose.put(player, false);
 
-            // default cooldown
-            GameState.kitCooldownReduction.put(player, 0);
-
             // give the player a score of 0
             PointsListener.scorePerPlayer.put(player.getUniqueId(), 0);
 

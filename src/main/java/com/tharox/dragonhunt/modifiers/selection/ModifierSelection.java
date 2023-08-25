@@ -31,7 +31,6 @@ public class ModifierSelection {
         mediumImpact.addAll(Arrays.asList(
                 new MoreFood(),
                 new EnhancedArrowEffects(),
-                new EnhancedCooldownReduction(),
                 new Iron(),
                 new NoBrutes(),
 

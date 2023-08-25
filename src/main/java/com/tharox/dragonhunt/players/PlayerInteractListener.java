@@ -3,18 +3,11 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.brewing.BrewingInventory;
-import com.tharox.dragonhunt.chat.HexColor;
-import com.tharox.dragonhunt.chat.Prefixes;
-import com.tharox.dragonhunt.coins.Coins;
-import com.tharox.dragonhunt.db.DatabaseExecutor;
-import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.enchanting.EnchantingInventory;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.upgrades.UpgradesInventory;
-import com.tharox.dragonhunt.modifiers.classes.EnhancedCooldownReduction;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,8 +16,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-
-import java.sql.Statement;
 
 public class PlayerInteractListener implements Listener {
 

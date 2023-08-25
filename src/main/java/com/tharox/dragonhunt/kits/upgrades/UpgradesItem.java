@@ -72,7 +72,7 @@ public class UpgradesItem {
             else if (LORE.contains("Duration"))
                 itemToCreate = checkIfUnlocked(itemToCreate,
                         Upgrades.DurationUpgradeLvl.getOrDefault(player, 1));
-            else if (LORE.contains("Effectiveness"))
+            else if (LORE.contains("Effect"))
                 itemToCreate = checkIfUnlocked(itemToCreate,
                         Upgrades.EffectivenessUpgradeLvl.getOrDefault(player, 1));
         }

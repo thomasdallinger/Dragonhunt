@@ -79,7 +79,7 @@ public class UpgradesListener implements Listener {
             Upgrades.Duration.put(player, value);
             Upgrades.DurationUpgradeLvl.put(
                     player, Upgrades.DurationUpgradeLvl.getOrDefault(player, 1) + 1);
-        } else if (lore.contains("Effectiveness")) {
+        } else if (lore.contains("Effect")) {
             Upgrades.Effectiveness.put(player, value);
             Upgrades.EffectivenessUpgradeLvl.put(
                     player, Upgrades.EffectivenessUpgradeLvl.getOrDefault(player, 1) + 1);

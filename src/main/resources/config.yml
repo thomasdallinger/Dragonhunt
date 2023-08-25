@@ -479,21 +479,21 @@ Blacksmith:
   0:
     slot: 4
     name: "Miner I"
-    lore: "Gold Ingots per mob kill: +1"
+    lore: "Effect: 1 Gold on mob kill"
     material: GOLD_INGOT
     amount: 1
     cost: 6
   1:
     slot: 13
     name: "Miner II"
-    lore: "Gold Ingots per mob kill: +2"
+    lore: "Effect: 2 Gold on mob kill"
     material: GOLD_INGOT
     amount: 2
     cost: 12
   2:
     slot: 22
     name: "Miner III"
-    lore: "Gold Ingots per mob kill: +3"
+    lore: "Effect: 3 Gold on mob kill"
     material: GOLD_INGOT
     amount: 3
     cost: 18
@@ -501,21 +501,21 @@ Cleric:
   0:
     slot: 4
     name: "Experienced I"
-    lore: "XP Points on mob kill: +1"
+    lore: "Effect: +1 XP Point on mob kill"
     material: EXPERIENCE_BOTTLE
     amount: 1
     cost: 5
   1:
     slot: 13
     name: "Experienced II"
-    lore: "XP Points on mob kill: +2"
+    lore: "Effect: +2 XP Points on mob kill"
     material: EXPERIENCE_BOTTLE
     amount: 2
     cost: 8
   2:
     slot: 22
     name: "Experienced III"
-    lore: "XP Points on mob kill: +3"
+    lore: "Effect: +3 XP Points on mob kill"
     material: EXPERIENCE_BOTTLE
     amount: 3
     cost: 11
@@ -588,21 +588,21 @@ Healer:
   3:
     slot: 5
     name: "Big Help I"
-    lore: "Ability Heal: +1 ❤"
+    lore: "Ability Effect: +1 ❤ Heal"
     material: GOLDEN_APPLE
     amount: 1
     cost: 10
   4:
     slot: 14
     name: "Big Help II"
-    lore: "Ability Heal: +2 ❤"
+    lore: "Ability Effect: +2 ❤ Heal"
     material: GOLDEN_APPLE
     amount: 2
     cost: 15
   5:
     slot: 23
     name: "Big Help III"
-    lore: "Ability Heal: +3 ❤"
+    lore: "Ability Effect: +3 ❤ Heal"
     material: GOLDEN_APPLE
     amount: 3
     cost: 20
@@ -676,21 +676,21 @@ Vanisher:
   0:
     slot: 4
     name: "Faster I"
-    lore: "Ability Speed: +1 level."
+    lore: "Ability Effect: +1 Speed level."
     material: POTION
     amount: 1
     cost: 6
   1:
     slot: 13
     name: "Faster II"
-    lore: "Ability Speed: +2 levels."
+    lore: "Ability Effect: +2 Speed levels."
     material: POTION
     amount: 2
     cost: 10
   2:
     slot: 22
     name: "Faster III"
-    lore: "Ability Speed: +3 levels."
+    lore: "Ability Effect: +3 Speed levels."
     material: POTION
     amount: 3
     cost: 14
@@ -720,21 +720,21 @@ Wizard:
   0:
     slot: 3
     name: "Cave Explorer I"
-    lore: "XP Points on ore mined: +1"
+    lore: "Effect: +1 XP Point on ore mined"
     material: EXPERIENCE_BOTTLE
     amount: 1
     cost: 6
   1:
     slot: 12
     name: "Cave Explorer II"
-    lore: "XP Points on ore mined: +2"
+    lore: "Effect: +2 XP Points on ore mined"
     material: EXPERIENCE_BOTTLE
     amount: 2
     cost: 10
   2:
     slot: 21
     name: "Cave Explorer III"
-    lore: "XP Points on ore mined: +3"
+    lore: "Effect: +3 XP Points on ore mined"
     material: EXPERIENCE_BOTTLE
     amount: 3
     cost: 14

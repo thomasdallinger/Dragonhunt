@@ -23,9 +23,6 @@ import java.util.*;
 public class GameState {
     public static int gracePeriodTime = 30;
 
-    // prevent all players from flying away at the start of the game
-    public static boolean flySpeedZero = true;
-
     // modifier inventory can be closed after the first 15 seconds before the game starts
     public static boolean modifierInventoryClose = false;
 
@@ -37,6 +34,9 @@ public class GameState {
 
     // which player has an active kit ability (value: duration in seconds)
     public static HashMap<Player, Integer> kitAbilityActive = new HashMap<>();
+
+    // prevent all players from flying away at the start of the game and when dead
+    public static HashMap<Player, Boolean> flySpeedZero = new HashMap<>();
 
     // location of the first player entering the NETHER (null as long as no player enters the NETHER)
     public static Location firstNetherEntry = null;
@@ -51,15 +51,15 @@ public class GameState {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if (!flySpeedZero) {
-                    this.cancel();
-                }
-
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    player.setFlySpeed(0f);
+                    if (!flySpeedZero.getOrDefault(player, true)) {
+                        player.setFlySpeed(0.1f);
+                    } else {
+                        player.setFlySpeed(0.0f);
+                    }
                 }
             }
-        }.runTaskTimer(Main.getInstance(), 0, 2);
+        }.runTaskTimer(Main.getInstance(), 0, 0);
     }
 
     /**

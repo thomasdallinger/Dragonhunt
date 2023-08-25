@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.SpeedyComback;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
@@ -40,7 +41,8 @@ public class PlayerRespawnListener implements Listener {
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
             player.setGameMode(GameMode.SPECTATOR);
             player.setWalkSpeed(0f);
-            player.setFlySpeed(0f);
+            // Prevent players from starting flying.
+            GameState.flySpeedZero.put(player, true);
             player.setFreezeTicks(player.getMaxFreezeTicks());
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT_FREEZE, 1, 1);
 
@@ -64,7 +66,7 @@ public class PlayerRespawnListener implements Listener {
                 // If the game ends before the player respawns
                 if (!timer.isRunning()) {
                     player.setWalkSpeed(0.2f);
-                    player.setFlySpeed(0.1f);
+                    GameState.flySpeedZero.put(player, false);
                     player.setFreezeTicks(0);
                     this.cancel();
                     return;
@@ -75,7 +77,7 @@ public class PlayerRespawnListener implements Listener {
                     player.teleport(respawnLocation.get(player));
                     player.setGameMode(GameMode.SURVIVAL);
                     player.setWalkSpeed(0.2f);
-                    player.setFlySpeed(0.1f);
+                    GameState.flySpeedZero.put(player, false);
                     player.setFreezeTicks(0);
                     player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 9));
 
@@ -85,9 +87,6 @@ public class PlayerRespawnListener implements Listener {
                     this.cancel();
                     return;
                 }
-
-                // Prevent players from starting flying.
-                player.setFlySpeed(0f);
 
                 player.sendTitle(HexColor.PURPLE + "Respawning in",
                         ChatColor.WHITE.toString() + ChatColor.BOLD + "» "

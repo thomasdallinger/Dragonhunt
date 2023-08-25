@@ -131,8 +131,7 @@ public class GameStart extends GameConfiguration {
                 player.setGameMode(GameMode.SURVIVAL);
 
                 // Allow players to fly normally in Spectator Mode from now.
-                GameState.flySpeedZero = false;
-                player.setFlySpeed(0.1f);
+                GameState.flySpeedZero.put(player, false);
 
                 if (BonusHearts.active) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,

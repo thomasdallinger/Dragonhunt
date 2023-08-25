@@ -52,12 +52,13 @@ public class CreatureSpawnListener implements Listener {
             int chance;
 
             if (EndermanParty.active) {
-                chance = random.nextInt(15) + 1;
+                chance = random.nextInt(10) + 1;
             } else {
-                chance = random.nextInt(25) + 1;
+                chance = random.nextInt(20) + 1;
             }
 
-            if (chance == 1 && !(entity instanceof Enderman)) {
+            // Endermans can replace all other mobs including Animals (but except water mobs)
+            if (chance == 1 && !(entity instanceof Enderman) && !(entity instanceof WaterMob)) {
                 event.setCancelled(true);
                 world.spawnEntity(location, EntityType.ENDERMAN);
             }

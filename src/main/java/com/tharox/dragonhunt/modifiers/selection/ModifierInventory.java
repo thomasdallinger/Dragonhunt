@@ -23,7 +23,7 @@ public class ModifierInventory {
     }
 
     public void createInventory() {
-        Inventory inv = Bukkit.createInventory(null, 36,
+        Inventory inv = Bukkit.createInventory(null, 45,
                 HexColor.PURPLE.toString() + ChatColor.BOLD + "MODIFIERS");
         AtomicInteger index = new AtomicInteger();
 

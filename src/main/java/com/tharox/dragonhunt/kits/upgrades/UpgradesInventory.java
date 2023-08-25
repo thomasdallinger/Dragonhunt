@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.kits.upgrades;
 
-import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameState;
@@ -43,8 +42,7 @@ public class UpgradesInventory {
         }
 
         Inventory inv = Bukkit.createInventory(null, 27,
-                 GameState.selectedKit.get(player) + HexColor.PURPLE + ChatColor.BOLD
-                         + " UPGRADES " + ChatColor.DARK_GRAY + Coins.getCoins(player) + " ⛃");
+                GameState.selectedKit.get(player) + " " + ChatColor.DARK_GRAY + Coins.getCoins(player) + " ⛃");
 
         for (UpgradesItem item : itemList) {
             // Create the itemStack for each item in the list.

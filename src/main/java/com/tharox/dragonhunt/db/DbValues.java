@@ -316,7 +316,7 @@ public class DbValues {
     public static void addCredits(Player player, int credits) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
 
-            String query = "UPDATE players SET credits = '" + getCredits(player) + credits
+            String query = "UPDATE players SET credits = '" + (getCredits(player) + credits)
                     + "' WHERE uuid = '" + player.getUniqueId() + "'";
 
             Statement stmt = con.createStatement();

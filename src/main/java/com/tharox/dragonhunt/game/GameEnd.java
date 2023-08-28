@@ -101,7 +101,7 @@ public class GameEnd {
             // Give the player credits only after the game ended. The amount is determined by the points scored.
             DbValues.addCredits(player, PointsListener.scorePerPlayer.get(player.getUniqueId()));
             player.sendMessage(ChatColor.GRAY + "You have earned " + HexColor.YELLOW + ChatColor.BOLD
-                    + DbValues.getCredits(player) + " Credits" + ChatColor.GRAY + ".");
+                    + PointsListener.scorePerPlayer.get(player.getUniqueId()) + " Credits" + ChatColor.GRAY + ".");
         }
     }
 

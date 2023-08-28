@@ -43,7 +43,7 @@ public class GameEnd {
     private void updateGame() {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "UPDATE games SET duration = '" + DbValues.getTimestamp()
-                    + "' WHERE id = '" + DbValues.getGameID() + "'";
+                    + "' WHERE id = '" + GameState.gameID + "'";
 
             Statement stmt = con.createStatement();
             stmt.execute(query);
@@ -116,7 +116,7 @@ public class GameEnd {
             String query = "UPDATE plays SET position = '" + position + "', "
                     + "points = '" + PointsListener.scorePerPlayer.get(player.getUniqueId()) + "', "
                     + "xp_level = '" + player.getLevel() + "'"
-                    + "WHERE game_id = '" + DbValues.getGameID() + "' AND player = '" + player.getUniqueId() + "'";
+                    + "WHERE game_id = '" + GameState.gameID + "' AND player = '" + player.getUniqueId() + "'";
             ;
 
             Statement stmt = con.createStatement();
@@ -126,7 +126,7 @@ public class GameEnd {
             if (GameState.selectedKit.containsKey(player)) {
                 // Substring 14 from kit name to remove HEX formatting
                 query = "UPDATE plays SET kit = '" + GameState.selectedKit.get(player).substring(14) + "'" +
-                        "WHERE game_id = '" + DbValues.getGameID() + "' AND player = '" + player.getUniqueId() + "'";
+                        "WHERE game_id = '" + GameState.gameID + "' AND player = '" + player.getUniqueId() + "'";
             }
 
             stmt = con.createStatement();

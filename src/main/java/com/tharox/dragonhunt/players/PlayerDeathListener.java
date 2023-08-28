@@ -103,7 +103,7 @@ public class PlayerDeathListener implements Listener {
     private void addPlayerDeath(Player player, String deathmessage) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO deaths (game_id, player, death_message, dimension, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getUniqueId() + "', '" + deathmessage
+                    "VALUES ('" + GameState.gameID + "', '" + player.getUniqueId() + "', '" + deathmessage
                     + "', '" + DbValues.getCurrentWorld(player.getLocation())
                     + "', '" + DbValues.getTimestamp() + "')";
 
@@ -116,7 +116,7 @@ public class PlayerDeathListener implements Listener {
     private void addPlayerKill(Player killer, Player killed) {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "INSERT INTO kills (game_id, killer, killed, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + killer.getUniqueId() + "', '" + killed.getUniqueId()
+                    "VALUES ('" + GameState.gameID + "', '" + killer.getUniqueId() + "', '" + killed.getUniqueId()
                     + "', '" + DbValues.getTimestamp() + "')";
 
             Statement stmt = con.createStatement();

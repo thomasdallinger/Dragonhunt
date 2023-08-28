@@ -6,6 +6,7 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -158,7 +159,7 @@ public class BrewingListener implements Listener {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             // Substring 16 from effectName to remove Hex-formatting
             String query = "INSERT INTO purchases (game_id, player, purchased_item, coins_before, cost, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getUniqueId()
+                    "VALUES ('" + GameState.gameID + "', '" + player.getUniqueId()
                     + "', '" + effectName.substring(16)
                     + "', '" + (Coins.getCoins(player) + BrewingInventory.effectCost.get(effectName))
                     + "', '" + BrewingInventory.effectCost.get(effectName)

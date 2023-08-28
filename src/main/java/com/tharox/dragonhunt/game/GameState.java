@@ -21,6 +21,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.*;
 
 public class GameState {
+    public static int gameID = 0;
     public static int gracePeriodTime = 30;
 
     // modifier inventory can be closed after the first 15 seconds before the game starts

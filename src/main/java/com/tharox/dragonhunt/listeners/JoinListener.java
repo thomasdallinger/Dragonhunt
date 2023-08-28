@@ -7,6 +7,7 @@ import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameStart;
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.scoreboard.Scoreboard;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -22,6 +23,10 @@ public class JoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
+
+        if (GameState.gameID == 0) {
+            GameState.gameID = DbValues.getGameID();
+        }
 
         event.setJoinMessage(null);
         player.teleport(new Location(Bukkit.getServer().getWorld("world"), 0, 15000, 0));

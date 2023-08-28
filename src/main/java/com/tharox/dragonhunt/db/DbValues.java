@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.db;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.timer.Timer;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -23,7 +24,7 @@ public class DbValues {
         playersAllowedToPlay.clear();
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "SELECT player FROM plays WHERE game_id = '" + getGameID() + "'";
+            String query = "SELECT player FROM plays WHERE game_id = '" + GameState.gameID + "'";
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             int columns = rs.getMetaData().getColumnCount();
@@ -65,7 +66,7 @@ public class DbValues {
         final int[] id = {0};
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "SELECT server_id FROM games WHERE id = '" + getGameID() + "'";
+            String query = "SELECT server_id FROM games WHERE id = '" + GameState.gameID + "'";
 
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -83,7 +84,7 @@ public class DbValues {
         final String[] version = new String[1];
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "SELECT version FROM games WHERE id = '" + getGameID() + "'";
+            String query = "SELECT version FROM games WHERE id = '" + GameState.gameID + "'";
 
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -101,7 +102,7 @@ public class DbValues {
         final String[] freeKit = new String[1];
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "SELECT free_kit FROM games WHERE id = '" + getGameID() + "'";
+            String query = "SELECT free_kit FROM games WHERE id = '" + GameState.gameID + "'";
 
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -117,7 +118,7 @@ public class DbValues {
 
     public static void updateServerStatus() {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "UPDATE servers SET is_running = false WHERE id = '" + DbValues.getServerID() + "'";
+            String query = "UPDATE servers SET is_running = false WHERE id = '" + GameState.gameID + "'";
 
             Statement stmt = con.createStatement();
             stmt.execute(query);
@@ -136,10 +137,10 @@ public class DbValues {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "";
             if (kills) {
-                query = "SELECT COUNT(*) FROM kills WHERE game_id = '" + getGameID() + "' " +
+                query = "SELECT COUNT(*) FROM kills WHERE game_id = '" + GameState.gameID + "' " +
                         "AND killer = '" + player.getUniqueId() + "'";
             } else {
-                query = "SELECT COUNT(*) FROM deaths WHERE game_id = '" + getGameID() + "' " +
+                query = "SELECT COUNT(*) FROM deaths WHERE game_id = '" + GameState.gameID + "' " +
                         "AND player = '" + player.getUniqueId() + "'";
             }
 
@@ -167,7 +168,7 @@ public class DbValues {
         final int[] rank = new int[1];
 
         DatabaseExecutor.executeDatabaseHandler((con) -> {
-            String query = "SELECT player FROM advancements WHERE game_id = '" + getGameID() + "' "
+            String query = "SELECT player FROM advancements WHERE game_id = '" + GameState.gameID + "' "
                     + "AND advancement = '" + advancementName + "' ORDER BY id ASC";
 
             Statement stmt = con.createStatement();

@@ -101,7 +101,7 @@ public class UpgradesListener implements Listener {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             // Substring 16 from upgrade to remove formatting
             String query = "INSERT INTO purchases (game_id, player, purchased_item, coins_before, cost, timestamp) " +
-                    "VALUES ('" + DbValues.getGameID() + "', '" + player.getUniqueId()
+                    "VALUES ('" + GameState.gameID + "', '" + player.getUniqueId()
                     + "', '" + upgrade.substring(16)
                     + "', '" + (Coins.getCoins(player) + UpgradesInventory.upgradeCost.get(upgrade))
                     + "', '" + UpgradesInventory.upgradeCost.get(upgrade)

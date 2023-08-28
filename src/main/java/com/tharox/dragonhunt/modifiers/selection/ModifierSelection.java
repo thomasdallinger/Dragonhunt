@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.modifiers.selection;
 
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.*;
 
 import java.sql.Statement;
@@ -62,7 +63,7 @@ public class ModifierSelection {
         int finalRandom = random;
         DatabaseExecutor.executeDatabaseHandler((con) -> {
             String query = "UPDATE games SET modifier_low = '" + lowImpact.get(finalRandom).getTitle()
-                    + "' WHERE id = '" + DbValues.getGameID() + "'";
+                    + "' WHERE id = '" + GameState.gameID + "'";
 
             Statement stmt = con.createStatement();
             stmt.execute(query);
@@ -83,7 +84,7 @@ public class ModifierSelection {
             int finalRandom2 = random;
             DatabaseExecutor.executeDatabaseHandler((con) -> {
                 String query = "UPDATE games SET modifier_medium = '" + mediumImpact.get(finalRandom2).getTitle()
-                        + "' WHERE id = '" + DbValues.getGameID() + "'";
+                        + "' WHERE id = '" + GameState.gameID + "'";
 
                 Statement stmt = con.createStatement();
                 stmt.execute(query);
@@ -109,7 +110,7 @@ public class ModifierSelection {
             int finalRandom2 = random;
             DatabaseExecutor.executeDatabaseHandler((con) -> {
                 String query = "UPDATE games SET modifier_high = '" + highImpact.get(finalRandom2).getTitle()
-                        + "' WHERE id = '" + DbValues.getGameID() + "'";
+                        + "' WHERE id = '" + GameState.gameID + "'";
 
                 Statement stmt = con.createStatement();
                 stmt.execute(query);

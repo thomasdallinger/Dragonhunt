@@ -66,12 +66,6 @@ public class BlockBreakListener implements Listener {
             return;
         }
 
-        // award XP + drops (no drops for Sculk)
-        if (block.getType() == Material.AMETHYST_CLUSTER
-                || block.getType() == Material.SCULK) {
-            Coins.addXP(player, Coins.oreXP);
-        }
-
         // play the break wood sound for the amount of blocks destroyed
         final int[] blocksDestroyed = {10};
 
@@ -156,7 +150,8 @@ public class BlockBreakListener implements Listener {
                     || item.getType() == Material.LAPIS_LAZULI
                     || item.getType() == Material.EMERALD
                     || item.getType() == Material.REDSTONE
-                    || item.getType() == Material.QUARTZ) {
+                    || item.getType() == Material.QUARTZ
+                    || item.getType() == Material.AMETHYST_CLUSTER) {
                 block.getDrops().clear();
                 block.setType(Material.AIR);
 

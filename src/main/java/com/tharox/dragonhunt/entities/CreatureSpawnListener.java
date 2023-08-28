@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.modifiers.classes.*;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -26,14 +27,16 @@ public class CreatureSpawnListener implements Listener {
         World world = entity.getWorld();
         Random random = new Random();
 
-        /* return; statements are avoided so it can be assured that every active modifier is in use */
+        /* return; statements are mostly avoided so it can be assured that every active modifier is in use */
         if (entity instanceof Mob) {
             if (entity instanceof Ghast && NoGhasts.active) {
                 event.setCancelled(true);
+                return;
             }
 
             if (entity instanceof PiglinBrute && NoBrutes.active) {
                 event.setCancelled(true);
+                return;
             }
 
             if (world.getName().equals("world_the_end") && !NoPillagers.active) {
@@ -43,6 +46,7 @@ public class CreatureSpawnListener implements Listener {
                     if (spawnEnderman == 1) {
                         event.setCancelled(true);
                         spawnEndCreatures(world, location);
+                        return;
                     }
                     // else spawn the Enderman
                 }
@@ -61,6 +65,7 @@ public class CreatureSpawnListener implements Listener {
             if (chance == 1 && !(entity instanceof Enderman) && !(entity instanceof WaterMob)) {
                 event.setCancelled(true);
                 world.spawnEntity(location, EntityType.ENDERMAN);
+                return;
             }
 
             if (CaveSpiders.active) {
@@ -159,10 +164,6 @@ public class CreatureSpawnListener implements Listener {
                 }
             }
         }
-    }
-
-    private void spawnAdditionalEndermans() {
-
     }
 
     private LivingEntity spawnEndCreatures(World world, Location location) {

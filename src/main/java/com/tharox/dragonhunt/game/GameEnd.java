@@ -121,16 +121,6 @@ public class GameEnd {
             Statement stmt = con.createStatement();
             stmt.execute(query);
             stmt.close();
-
-            if (GameState.selectedKit.containsKey(player)) {
-                // Substring 14 from kit name to remove HEX formatting
-                query = "UPDATE plays SET kit = '" + GameState.selectedKit.get(player).substring(14) + "'" +
-                        "WHERE game_id = '" + GameState.gameID + "' AND player = '" + player.getUniqueId() + "'";
-            }
-
-            stmt = con.createStatement();
-            stmt.execute(query);
-            stmt.close();
         });
     }
 

@@ -1,11 +1,10 @@
 package com.tharox.dragonhunt.kits.selection;
 
-import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.DragonhuntKit;
 import com.tharox.dragonhunt.kits.classes.Kit;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Statement;
 import java.util.Set;
 
 public class KitListener implements Listener {
@@ -69,5 +69,24 @@ public class KitListener implements Listener {
         GameState.kitAbilityActive.put(player, 0);
         GameState.kitInventoryClose.put(player, true);
         player.closeInventory();
+
+        // Add selected kit to database.
+        addSelectedKit(player);
+    }
+
+    private void addSelectedKit(Player player) {
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "";
+
+            if (GameState.selectedKit.containsKey(player)) {
+                // Substring 14 from kit name to remove HEX formatting
+                query = "UPDATE plays SET kit = '" + GameState.selectedKit.get(player).substring(14) + "'" +
+                        "WHERE game_id = '" + GameState.gameID + "' AND player = '" + player.getUniqueId() + "'";
+            }
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
     }
 }

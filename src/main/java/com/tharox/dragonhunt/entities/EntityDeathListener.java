@@ -3,9 +3,9 @@ package com.tharox.dragonhunt.entities;
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.upgrades.Upgrades;
+import com.tharox.dragonhunt.modifiers.classes.ChristmasCookies;
 import com.tharox.dragonhunt.modifiers.classes.MoreFood;
 import com.tharox.dragonhunt.modifiers.classes.RevivedMobs;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
@@ -50,6 +50,8 @@ public class EntityDeathListener implements Listener {
             if (mob instanceof Animals || mob instanceof WaterMob) {
                 if (MoreFood.active) {
                     mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 4));
+                } else if (ChristmasCookies.active) {
+                    mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKIE, 2));
                 } else {
                     mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
                 }

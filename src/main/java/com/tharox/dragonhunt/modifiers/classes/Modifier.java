@@ -11,7 +11,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.Arrays;
 
 public abstract class Modifier {
-    public abstract void setActive(boolean active);
+    public abstract void setActive(boolean isActive);
 
     public abstract boolean isPositive();
 

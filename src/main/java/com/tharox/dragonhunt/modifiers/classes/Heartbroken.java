@@ -12,8 +12,8 @@ public class Heartbroken extends Modifier {
     public static boolean active = false;
 
     @Override
-    public void setActive(boolean active) {
-        Heartbroken.active = active;
+    public void setActive(boolean isActive) {
+        active = isActive;
     }
 
     @Override

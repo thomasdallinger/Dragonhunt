@@ -31,6 +31,7 @@ public class ModifierSelection {
         ));
         mediumImpact.addAll(Arrays.asList(
                 new MoreFood(),
+                new ChristmasCookies(),
                 new EnhancedArrowEffects(),
                 new Iron(),
                 new NoBrutes(),
@@ -47,6 +48,7 @@ public class ModifierSelection {
                 new BonusHearts(),
                 new DoubleChestLoot(),
                 new EndermanParty(),
+                new HotHealing(),
 
                 new BrutalBlazes(),
                 new ForeverHunger(),

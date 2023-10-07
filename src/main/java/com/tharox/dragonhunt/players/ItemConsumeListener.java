@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.modifiers.classes.ChristmasCookies;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -17,6 +18,13 @@ public class ItemConsumeListener implements Listener {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
         int amount = player.getInventory().getItemInMainHand().getAmount();
+
+        if (item.getType() == Material.COOKIE) {
+            if (ChristmasCookies.active) {
+                player.setFoodLevel(player.getFoodLevel() + 2);
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 140, 0));
+            }
+        }
 
         if (item.getType() == Material.APPLE) {
             player.setFoodLevel(player.getFoodLevel() + 2);

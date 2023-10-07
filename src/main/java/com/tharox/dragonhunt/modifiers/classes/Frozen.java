@@ -12,8 +12,8 @@ public class Frozen extends Modifier {
     public static boolean active = false;
 
     @Override
-    public void setActive(boolean active) {
-        Frozen.active = active;
+    public void setActive(boolean isActive) {
+        active = isActive;
     }
 
     @Override

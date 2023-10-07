@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.upgrades.Upgrades;
 import com.tharox.dragonhunt.modifiers.classes.ChristmasCookies;
+import com.tharox.dragonhunt.modifiers.classes.Fisher;
 import com.tharox.dragonhunt.modifiers.classes.MoreFood;
 import com.tharox.dragonhunt.modifiers.classes.RevivedMobs;
 import org.bukkit.Material;
@@ -53,7 +54,14 @@ public class EntityDeathListener implements Listener {
                 } else if (ChristmasCookies.active) {
                     mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKIE, 2));
                 } else {
-                    mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
+                    if (mob instanceof WaterMob && Fisher.active) {
+                        mob.getWorld().dropItemNaturally(
+                                mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 4));
+                        Coins.addXP(killer, Coins.animalXP + bonusXP);
+                    } else {
+                        mob.getWorld().dropItemNaturally(
+                                mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
+                    }
                 }
 
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.LEATHER, 1));

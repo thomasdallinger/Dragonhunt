@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.modifiers.classes.FireWeakness;
+import com.tharox.dragonhunt.modifiers.classes.WeakenedByFlames;
 import com.tharox.dragonhunt.modifiers.classes.Frozen;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.AbstractArrow;
@@ -45,7 +45,7 @@ public class ArrowDamageListener implements Listener {
         }
 
         // If a living entity is shot with flame and the modifier is active give weakness to the entity.
-        if (FireWeakness.active) {
+        if (WeakenedByFlames.active) {
             if (entity instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity) entity;
                 if (livingEntity.getFireTicks() > 20) {

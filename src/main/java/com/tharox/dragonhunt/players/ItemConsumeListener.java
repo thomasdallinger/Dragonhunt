@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.modifiers.classes.ChristmasCookies;
+import com.tharox.dragonhunt.modifiers.classes.FireResistance;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -23,6 +24,12 @@ public class ItemConsumeListener implements Listener {
             if (ChristmasCookies.active) {
                 player.setFoodLevel(player.getFoodLevel() + 2);
                 player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 140, 0));
+            }
+        }
+
+        if (item.getType() == Material.COOKED_BEEF) {
+            if (FireResistance.active) {
+                player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 140, 0));
             }
         }
 

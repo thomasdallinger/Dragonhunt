@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.modifiers.selection;
 
 import com.tharox.dragonhunt.db.DatabaseExecutor;
-import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.*;
 
@@ -23,6 +22,7 @@ public class ModifierSelection {
                 new NoGhasts(),
                 new SpeedyComback(),
                 new NeverHungry(),
+                new FireResistance(),
 
                 new SpeedyMobs(),
                 new ExplosiveCreepers(),
@@ -32,12 +32,13 @@ public class ModifierSelection {
         mediumImpact.addAll(Arrays.asList(
                 new MoreFood(),
                 new ChristmasCookies(),
+                new Fisher(),
                 new EnhancedArrowEffects(),
                 new FlyHigh(),
                 new Iron(),
                 new NoBrutes(),
 
-                new FireWeakness(),
+                new WeakenedByFlames(),
                 new WitherSkeletons(),
                 new ImmuneSkeletons(),
                 new BrutalBrutes(),

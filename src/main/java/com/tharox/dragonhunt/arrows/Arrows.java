@@ -79,7 +79,6 @@ public class Arrows {
 
         if (EnhancedArrowEffects.active) {
             duration = 180;
-            amplifier = 2;
         }
 
         ItemStack item = new ItemStack(Material.TIPPED_ARROW);

@@ -33,6 +33,7 @@ public class ModifierSelection {
                 new MoreFood(),
                 new ChristmasCookies(),
                 new EnhancedArrowEffects(),
+                new FlyHigh(),
                 new Iron(),
                 new NoBrutes(),
 
@@ -40,7 +41,8 @@ public class ModifierSelection {
                 new WitherSkeletons(),
                 new ImmuneSkeletons(),
                 new BrutalBrutes(),
-                new RevivedMobs()
+                new RevivedMobs(),
+                new PoisonousWater()
         ));
         highImpact.addAll(Arrays.asList(
                 new Diamonds(),
@@ -55,7 +57,8 @@ public class ModifierSelection {
                 new Heartbroken(),
                 new FireMobs(),
                 new PowerfulMobs(),
-                new Bastion()
+                new Bastion(),
+                new BadOmen()
         ));
 
         Random rand = new Random();

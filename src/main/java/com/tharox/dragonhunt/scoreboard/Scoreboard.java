@@ -34,10 +34,9 @@ public class Scoreboard extends ScoreboardBuilder {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yy");
         LocalDateTime now = LocalDateTime.now();
 
-        setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " ["
+        setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " v" + DbValues.getVersion() + " ["
                 + DbValues.getServerID() + "]", 13);
-        setScore(ChatColor.WHITE + "Classic" + ChatColor.DARK_GRAY + " | "
-                + ChatColor.WHITE + "v" + DbValues.getVersion(), 12);
+        setScore("", 12);
         setScore("", 11);
         setScore("", 10);
         setScore("", 9);
@@ -55,42 +54,38 @@ public class Scoreboard extends ScoreboardBuilder {
     @Override
     public void update(Player player, Countdown countdown) {
         if (GameState.selectedKit.containsKey(player)) {
-            setScore(GameState.selectedKit.get(player), 10);
+            setScore(GameState.selectedKit.get(player), 11);
         }
 
         setScore("☻ " + Bukkit.getOnlinePlayers().size() + " "
                 + "☠ " + DbValues.getKills(player, true) + " "
-                + "✟ " + DbValues.getKills(player, false), 9);
+                + "✟ " + DbValues.getKills(player, false), 10);
 
         if (Scout.scoutAvailable.containsKey(player)) {
             if (Scout.scoutAvailable.get(player)) {
                 if (timer.getTime() % 2 == 0) {
-                    setScore("/scout available", 7);
+                    setScore("/scout available", 8);
                 } else {
-                    setScore(ChatColor.GOLD + "/scout" + ChatColor.WHITE + " available", 7);
+                    setScore(ChatColor.GOLD + "/scout" + ChatColor.WHITE + " available", 8);
                 }
             } else {
-                setScore("", 7);
+                setScore("", 8);
             }
         }
 
-        if (timer.getTime() <= 1200) {
+        if (timer.getTime() <= 900 && !GameState.playersReachedEnd) {
             setScore(ChatColor.BOLD.toString() + PlayerEndTeleport.getEyesNeeded()
                     + ChatColor.WHITE + " Eyes" + ChatColor.DARK_GRAY + " » "
-                    + ChatColor.GRAY + countdownFormat(1200 - timer.getTime()), 6);
+                    + ChatColor.GRAY + countdownFormat(900 - timer.getTime()), 7);
         } else {
             setScore(HexColor.GREEN.toString() + ChatColor.BOLD + PlayerEndTeleport.getEyesNeeded()
-                    + ChatColor.WHITE + " Eyes", 6);
+                    + ChatColor.WHITE + " Eyes", 7);
         }
 
-        if (Coins.XPIncrease == 0) {
-            setScore(Coins.getCoins(player) + " ⛃" + ChatColor.DARK_GRAY + " » "
-                    + ChatColor.GRAY + countdownFormat(countdown.getTime()), 5);
-        } else { // XP Increase is active
-            setScore(Coins.getCoins(player) + " ⛃" + ChatColor.DARK_GRAY + " » "
-                    + HexColor.GREEN + countdownFormat(countdown.getTime())
-                    + ChatColor.DARK_GREEN + " +" + Coins.XPIncrease, 5);
-        }
+        setScore(Coins.getCoins(player) + " ⛃" + ChatColor.DARK_GRAY + " » "
+                + ChatColor.GRAY + "/shop", 6);
+
+        setScore( ChatColor.DARK_GRAY + "ꜱᴛᴀɴᴅɪɴɢꜱ", 4);
 
         List<UUID> sortedKeys = GameState.sortPlayersByPoints(PointsListener.scorePerPlayer);
 

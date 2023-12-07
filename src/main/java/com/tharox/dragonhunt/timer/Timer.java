@@ -170,7 +170,7 @@ public class Timer {
                     }
                 }
 
-                if (getTime() == 1200) {
+                if (getTime() == 900) {
                     for (Player online : Bukkit.getOnlinePlayers()) {
                         online.sendMessage(Prefixes.getImportantPrefix()
                                 + HexColor.YELLOW + PlayerEndTeleport.getEyesNeeded()

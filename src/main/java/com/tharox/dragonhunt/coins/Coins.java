@@ -14,7 +14,6 @@ import java.util.HashMap;
  * Note: Coal ores do not drop XP.
  */
 public class Coins {
-    public static int XPIncrease = 0;
     public static int advancementXP = 9; // XP awarded for advancements
     public static int playerXP = 12; // XP awarded for killing players
     public static int chestXP = 6; // XP awarded for opening chests and minecarts
@@ -42,11 +41,11 @@ public class Coins {
     }
 
     public static void addXP(Player player, int xpToAdd) {
-        player.giveExp(xpToAdd + XPIncrease);
+        player.giveExp(xpToAdd);
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
         int currentXPPoints = (int) (player.getExpToLevel() * (player.getExp() * 100) / 100);
-        player.sendTitle("", HexColor.GREEN + "+" + (xpToAdd + XPIncrease) + ChatColor.WHITE + " XP "
+        player.sendTitle("", HexColor.GREEN + "+" + (xpToAdd) + ChatColor.WHITE + " XP "
                         + ChatColor.DARK_GRAY + "[" + currentXPPoints + "/" + player.getExpToLevel() + "]",
                 0, 30, 10);
     }

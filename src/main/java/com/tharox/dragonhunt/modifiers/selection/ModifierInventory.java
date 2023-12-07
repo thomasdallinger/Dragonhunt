@@ -55,8 +55,7 @@ public class ModifierInventory {
 
                             for (Player player : Bukkit.getOnlinePlayers()) {
                                 if (title != null && lore != null) {
-                                    player.sendMessage(Prefixes.getModifierPrefix() + title
-                                            + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + lore);
+                                    player.sendMessage(title + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + lore);
                                     player.setPlayerListFooter(player.getPlayerListFooter() + title + "\n");
                                 }
                             }

@@ -33,12 +33,6 @@ public class Prefixes {
         return ChatColor.DARK_GRAY + "[" + HexColor.YELLOW + "◄ ►" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
-    // MODIFIER: used for messages related to modifiers
-    public static String getModifierPrefix() {
-        return ChatColor.DARK_GRAY + "[" + ChatColor.WHITE + ChatColor.BOLD + "▲▼▲" + ChatColor.DARK_GRAY + "] "
-                + ChatColor.GRAY;
-    }
-
     // ADVANCEMENT: used for messages related to advancements
     public static String getAdvancementPrefix() {
         return ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "✦✦✦" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;

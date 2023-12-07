@@ -47,9 +47,9 @@ public class PlayerRespawnListener implements Listener {
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT_FREEZE, 1, 1);
 
             if (SpeedyComback.active) {
-                deathTimer.put(player, (double) (player.getLevel() + 5));
+                deathTimer.put(player, 3 * Math.pow(1.07, player.getLevel()));
             } else {
-                deathTimer.put(player, (double) (player.getLevel() + 8));
+                deathTimer.put(player, 5 * Math.pow(1.07, player.getLevel()));
             }
 
             deathTimerCountdown(player);

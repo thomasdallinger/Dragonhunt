@@ -24,7 +24,7 @@ public class PointsListener implements Listener {
     public static HashMap<UUID, BossBar> bossBars = new HashMap<>();
 
     /**
-     * Target: Ender Dragon, Ender Crystal
+     * Target: Ender Dragon
      * Damager: Player
      */
     @EventHandler
@@ -66,9 +66,6 @@ public class PointsListener implements Listener {
             double maxHealth = Objects.requireNonNull(
                     dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
             dragon.setHealth(maxHealth);
-        } else {
-            pointsToAdd = 5;
-            scorePerPlayer.put(id, scorePerPlayer.get(id) + pointsToAdd);
         }
 
         if (pointsToAdd > 0)

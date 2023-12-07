@@ -11,15 +11,14 @@ import java.util.HashMap;
  * Used for/in: LevelUp, PlayerInteractListener, BlockBreakListener, EntityDeathListener, PlayerDeathListener,
  * GameStart, UpgradeListener, ResetScoreboardCountdown, AdvancementListener, VehicleListener
  * Coins of each player are displayed in the Scoreboard.
- * Note: Coal ores do not drop XP.
  */
 public class Coins {
-    public static int advancementXP = 9; // XP awarded for advancements
-    public static int playerXP = 12; // XP awarded for killing players
-    public static int chestXP = 6; // XP awarded for opening chests and minecarts
-    public static int oreXP = 3; // XP awarded for mining ores that are not dropping resources
-    public static int animalXP = 2; // XP awarded for killing animals
-    public static int monsterXP = 4; // XP awarded for killing monsters
+    public static int advancementXP = 16; // XP awarded for advancements
+    public static int playerXP = 8; // XP awarded for killing players
+    public static int chestXP = 8; // XP awarded for opening chests and minecarts
+    public static int oreXP = 2; // XP awarded for mining ores that are not dropping resources
+    public static int animalXP = 3; // XP awarded for killing animals
+    public static int monsterXP = 5; // XP awarded for killing monsters
 
     private static final HashMap<Player, Integer> coins = new HashMap<>();
 

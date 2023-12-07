@@ -25,7 +25,6 @@ public class AdvancementListener implements Listener {
         Player player = event.getPlayer();
         Advancement advancement = event.getAdvancement();
         String advancementName = "";
-        int pointsToAdd = 32;
 
         // Block spectating players from getting advancements (such as "Enter Nether").
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
@@ -75,10 +74,9 @@ public class AdvancementListener implements Listener {
         }
 
         if (!advancementName.equals("")) {
-            Coins.addXP(player, Coins.advancementXP);
             addAdvancement(player, advancementName);
             int rank = DbValues.getAdvancementRank(player, advancementName);
-            pointsToAdd = pointsToAdd - (rank - 1) * 4;
+            Coins.addXP(player, Coins.advancementXP - (rank - 1) * 2);
 
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(Prefixes.getAdvancementPrefix()
@@ -88,23 +86,7 @@ public class AdvancementListener implements Listener {
                         + ChatColor.GRAY + " as " + ChatColor.AQUA + "#" + rank
                         + ChatColor.DARK_GRAY + " (" + DbValues.getTimestamp() + ")" + ChatColor.GRAY + ".");
             }
-
-            // #1 = 32 Points, #2 = 28 Points, #3 = 24 Points, ... #8 = 4 Points
-            if (pointsToAdd > 0) {
-                addPoints(player.getUniqueId(), pointsToAdd);
-                player.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "+" + pointsToAdd
-                        + ChatColor.WHITE + " Points");
-            }
         }
-    }
-
-    private void addPoints(UUID id, int pointsToAdd) {
-        PointsListener.scorePerPlayer.put(id, PointsListener.scorePerPlayer.get(id) + pointsToAdd);
-        PointsListener.bossBars.get(id).setTitle(
-                HexColor.YELLOW.toString() + ChatColor.BOLD + PointsListener.scorePerPlayer.get(id)
-                        + ChatColor.WHITE + " / " + PointsListener.threshold + " Points");
-        PointsListener.bossBars.get(id).setProgress(
-                PointsListener.scorePerPlayer.get(id) / (PointsListener.threshold + 1D));
     }
 
     private void addAdvancement(Player player, String advancement) {

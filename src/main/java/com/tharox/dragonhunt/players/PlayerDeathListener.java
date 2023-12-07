@@ -56,7 +56,8 @@ public class PlayerDeathListener implements Listener {
 
             // Player did not kill himself/herself
             if (!killer.equals(player)) {
-                Coins.addXP(killer, Coins.playerXP);
+                // Add one extra XP point for a kill per minute played.
+                Coins.addXP(killer, Coins.playerXP + (timer.getTime() / 60));
                 killer.sendMessage(ChatColor.GRAY + "You have killed "
                         + ChatColor.WHITE + player.getName() + ChatColor.GRAY + ".");
 
@@ -68,12 +69,6 @@ public class PlayerDeathListener implements Listener {
                 GameState.putItemInInventory(killer, GameState.createRockets(3));
 
                 addPlayerKill(killer, player);
-
-                // Add one extra point for a kill per minute played.
-                pointsToAdd = pointsToAdd + (timer.getTime() / 60);
-                addPoints(killer.getUniqueId(), pointsToAdd);
-                killer.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "+" + pointsToAdd
-                        + ChatColor.WHITE + " Points");
 
                 player.sendMessage(Prefixes.getDeathPrefix() + ChatColor.GRAY + "You have been killed by "
                         + HexColor.RED + killer.getName()
@@ -89,15 +84,6 @@ public class PlayerDeathListener implements Listener {
         // Drop no XP
         event.setDroppedExp(0);
         event.setKeepLevel(true);
-    }
-
-    private void addPoints(UUID id, int pointsToAdd) {
-        PointsListener.scorePerPlayer.put(id, PointsListener.scorePerPlayer.get(id) + pointsToAdd);
-        PointsListener.bossBars.get(id).setTitle(
-                HexColor.YELLOW.toString() + ChatColor.BOLD + PointsListener.scorePerPlayer.get(id)
-                        + ChatColor.WHITE + " / " + PointsListener.threshold + " Points");
-        PointsListener.bossBars.get(id).setProgress(
-                PointsListener.scorePerPlayer.get(id) / (PointsListener.threshold + 1D));
     }
 
     private void addPlayerDeath(Player player, String deathmessage) {

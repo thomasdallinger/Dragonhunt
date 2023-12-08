@@ -23,7 +23,6 @@ public class Platformer extends Kit {
             + ChatColor.GRAY + "Every second blocks will spawn below you\n"
             + ChatColor.GRAY + "making it possible to walk everywhere. \n"
             + ChatColor.GRAY + "You can go up, down and through (most) blocks. \n"
-            + ChatColor.GRAY + "You receive " + ChatColor.WHITE + "Speed 3" + ChatColor.GRAY + ".\n"
             + HexColor.RED + "» Glow and Alert on Activation\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
@@ -48,8 +47,6 @@ public class Platformer extends Kit {
             online.sendMessage(Prefixes.getImportantPrefix() + Prefixes.getKitAbilityPrefix() + ChatColor.WHITE
                     + player.getName() + ChatColor.GRAY + " uses the " + title + ChatColor.GRAY + " Kit Ability.");
         }
-
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, getDuration() * 20, 1));
 
         this.runKitAbility(5, getDuration(), null, () -> {
             setBlocksBelowPlayer(player);

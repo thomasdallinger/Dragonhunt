@@ -8,7 +8,7 @@ public class NeverHungry extends Modifier {
     public static String lore = "Players never loose hunger.";
     public static Material material = Material.GOLDEN_CARROT;
     public static boolean positive = true;
-    public static int impact = 1;
+    public static int impact = 2;
     public static boolean active = false;
 
     @Override

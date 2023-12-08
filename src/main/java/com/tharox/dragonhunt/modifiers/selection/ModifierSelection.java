@@ -21,7 +21,7 @@ public class ModifierSelection {
                 new Frozen(),
                 new NoGhasts(),
                 new SpeedyComback(),
-                new NeverHungry(),
+                new FireResistance(),
 
                 new SpeedyMobs(),
                 new ExplosiveCreepers(),
@@ -29,15 +29,16 @@ public class ModifierSelection {
                 new EndlessNight()
         ));
         mediumImpact.addAll(Arrays.asList(
+                new NeverHungry(),
                 new MoreFood(),
                 new ChristmasCookies(),
-                new FireResistance(),
                 new Fisher(),
                 new EnhancedArrowEffects(),
                 new FlyHigh(),
                 new Iron(),
                 new NoBrutes(),
 
+                new ForeverHunger(),
                 new WeakenedByFlames(),
                 new WitherSkeletons(),
                 new ImmuneSkeletons(),
@@ -54,7 +55,6 @@ public class ModifierSelection {
                 new HotHealing(),
 
                 new BrutalBlazes(),
-                new ForeverHunger(),
                 new Heartbroken(),
                 new FireMobs(),
                 new PowerfulMobs(),

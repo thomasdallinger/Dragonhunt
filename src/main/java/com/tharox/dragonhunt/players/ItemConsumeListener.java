@@ -27,9 +27,9 @@ public class ItemConsumeListener implements Listener {
             }
         }
 
-        if (item.getType() == Material.COOKED_BEEF) {
+        if (item.getType().isEdible()) {
             if (FireResistance.active) {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 140, 0));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 120, 0));
             }
         }
 
@@ -71,11 +71,11 @@ public class ItemConsumeListener implements Listener {
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_BURP, 1, 1);
 
             // Absorption 3 (1:30)
-            // Regeneration 2 (0:10)
+            // Regeneration 2 (0:15)
 
             player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, 1800, 2));
             // = 4 yellow hearts
-            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 300, 1));
             // = heals 2 hearts every 5 seconds
         }
     }

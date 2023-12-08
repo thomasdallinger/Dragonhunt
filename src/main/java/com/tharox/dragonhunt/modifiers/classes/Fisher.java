@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.modifiers.classes;
 
 import org.bukkit.Material;
 
+@DragonhuntModifier
 public class Fisher extends Modifier {
     public static String title = "Fisher";
     public static String lore = "Water mobs drop double food and XP.";

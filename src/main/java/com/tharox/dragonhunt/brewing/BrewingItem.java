@@ -79,16 +79,16 @@ public class BrewingItem {
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Speed.get(player));
             else if (NAME.contains("Jump Boost"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.JumpBoost.get(player));
+            else if (NAME.contains("Haste"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Effects.Haste.get(player));
+            else if (NAME.contains("Dolphins Grace"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Effects.DolphinsGrace.get(player));
+            else if (NAME.contains("Fire Resistance"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Effects.FireResistance.get(player));
             else if (NAME.contains("Resistance"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Resistance.get(player));
             else if (NAME.contains("Strength"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Strength.get(player));
-            else if (NAME.contains("Regeneration"))
-                itemToCreate = checkIfUnlocked(itemToCreate, Effects.Regeneration.get(player));
-            else if (NAME.contains("Extra Hearts")) {
-                itemToCreate = checkIfUnlocked(itemToCreate, Effects.ExtraHearts.get(player));
-                this.cost = cost + (Effects.ExtraHearts.get(player) * 5);
-            }
 
             // Negative Effects
             else if (NAME.contains("Unlock Arrow Effects")) {

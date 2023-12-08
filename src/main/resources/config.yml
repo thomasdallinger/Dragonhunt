@@ -313,44 +313,84 @@ permanentEffects:
     cost: 16
   8:
     slot: 3
+    name: "Haste I"
+    lore: "+10% Attack Speed, +20% Mining Speed."
+    material: POTION
+    amount: 1
+    color: 0xEA773C
+    cost: 4
+  9:
+    slot: 12
+    name: "Haste II"
+    lore: "+20% Attack Speed, +40% Mining Speed."
+    material: POTION
+    amount: 2
+    color: 0xEA773C
+    cost: 8
+  10:
+    slot: 21
+    name: "Haste III"
+    lore: "+30% Attack Speed, +60% Mining Speed."
+    material: POTION
+    amount: 3
+    color: 0xEA773C
+    cost: 12
+  11:
+    slot: 30
+    name: "Haste IV"
+    lore: "+40% Attack Speed, +80% Mining Speed."
+    material: POTION
+    amount: 4
+    color: 0xEA773C
+    cost: 16
+  12:
+    slot: 4
+    name: "Dolphins Grace"
+    lore: "Swim a lot faster."
+    material: POTION
+    amount: 1
+    color: 0x88A3BE
+    cost: 16
+  13:
+    slot: 5
+    name: "Fire Resistance"
+    lore: "Be immune to fire damage."
+    material: POTION
+    amount: 1
+    color: 0xF3CA54
+    cost: 30
+  14:
+    slot: 6
     name: "Resistance I"
     lore: "Reduces incoming damage by 20%."
     material: POTION
     amount: 1
-    color: 0xEA773C
-    cost: 8
-  9:
-    slot: 12
+    color: 0x8F45ED
+    cost: 10
+  15:
+    slot: 15
     name: "Resistance II"
     lore: "Reduces incoming damage by 40%."
     material: POTION
     amount: 2
-    color: 0xEA773C
-    cost: 16
-  10:
-    slot: 4
+    color: 0x8F45ED
+    cost: 20
+  16:
+    slot: 7
     name: "Strength I"
     lore: "Increases damage by 1.5 ❤."
     material: POTION
     amount: 1
     color: 0xE22627
     cost: 18
-  11:
-    slot: 13
+  17:
+    slot: 16
     name: "Strength II"
     lore: "Increases damage by 3 ❤."
     material: POTION
     amount: 2
     color: 0xE22627
     cost: 36
-  12:
-    slot: 6
-    name: "Extra Hearts ʀᴇ-ᴘᴜʀᴄʜᴀꜱᴇᴀʙʟᴇ"
-    lore: "+0.5 ❤ and +5 ⛃ cost per purchase."
-    material: SPLASH_POTION
-    amount: 1
-    color: 0xF3CA54
-    cost: 0 # +5 will be applied to this value
 negativeEffects:
   0:
     slot: 13

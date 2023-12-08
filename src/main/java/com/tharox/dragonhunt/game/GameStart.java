@@ -13,6 +13,7 @@ import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
 import com.tharox.dragonhunt.modifiers.selection.ModifierInventory;
 import com.tharox.dragonhunt.movement.ElytraSwapRunnable;
 import com.tharox.dragonhunt.players.PlayerDamageListener;
+import com.tharox.dragonhunt.players.PlayerEndTeleport;
 import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
@@ -139,13 +140,15 @@ public class GameStart extends GameConfiguration {
                 }
 
                 player.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "\nRACE TO VICTORY");
-                player.sendMessage(ChatColor.GRAY + "Whoever reaches "
-                        + ChatColor.WHITE + PointsListener.threshold + " Points"
-                        + ChatColor.GRAY + " first wins.");
-                player.sendMessage(ChatColor.GRAY + "Score points by completing " + ChatColor.WHITE + "Advancements"
-                        + ChatColor.GRAY + ", destroying " + ChatColor.WHITE + "End Crystals" + ChatColor.GRAY + " and "
-                        + "doing damage to the " + ChatColor.WHITE + "Ender Dragon" + ChatColor.GRAY + ".");
+                player.sendMessage(ChatColor.GRAY + "Whoever deals "
+                        + ChatColor.WHITE + PointsListener.threshold + " Damage"
+                        + ChatColor.GRAY + " to the Ender Dragon first wins.");
+                player.sendMessage(ChatColor.GRAY + "You need " + ChatColor.WHITE + PlayerEndTeleport.getEyesNeeded()
+                        + " Eyes of Ender " + ChatColor.GRAY + "to receive an" + ChatColor.WHITE + " End Teleporter "
+                        + ChatColor.GRAY + ".");
 
+                player.sendMessage(ChatColor.GRAY + "\nUse " + HexColor.YELLOW + "/shop"
+                        + ChatColor.GRAY + " to purchase enchantments and effects.");
                 player.sendMessage(ChatColor.GRAY + "\nUse " + HexColor.YELLOW + "/top"
                         + ChatColor.GRAY + " to teleport to the surface.");
                 player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/scout"

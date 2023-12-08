@@ -111,20 +111,20 @@ public class BrewingListener implements Listener {
         } else if (effectName.contains("Jump Boost")) {
             Effects.JumpBoost.put(player, Effects.JumpBoost.get(player) + 1);
             purchaseEffect(player, effectName);
+        } else if (effectName.contains("Haste")) {
+            Effects.Haste.put(player, Effects.Haste.get(player) + 1);
+            purchaseEffect(player, effectName);
+        } else if (effectName.contains("Dolphins Grace")) {
+            Effects.DolphinsGrace.put(player, Effects.DolphinsGrace.get(player) + 1);
+            purchaseEffect(player, effectName);
+        } else if (effectName.contains("Fire Resistance")) {
+            Effects.FireResistance.put(player, Effects.FireResistance.get(player) + 1);
+            purchaseEffect(player, effectName);
         } else if (effectName.contains("Resistance")) {
             Effects.Resistance.put(player, Effects.Resistance.get(player) + 1);
             purchaseEffect(player, effectName);
         } else if (effectName.contains("Strength")) {
             Effects.Strength.put(player, Effects.Strength.get(player) + 1);
-            purchaseEffect(player, effectName);
-        } else if (effectName.contains("Regeneration")) {
-            Effects.Regeneration.put(player, Effects.Regeneration.get(player) + 1);
-            purchaseEffect(player, effectName);
-        } else if (effectName.contains("Extra Hearts")) {
-            Effects.ExtraHearts.put(player, Effects.ExtraHearts.get(player) + 1);
-            Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH))
-                    .setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue() + 1.0);
-            player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
             purchaseEffect(player, effectName);
         }
 

@@ -17,7 +17,7 @@ public class Platformer extends Kit {
     static int duration = 16;
     static int cooldown = 70;
 
-    public static final String title = HexColor.MOBILITY + KitClass.MOBILITY + " Platformer";
+    public static final String title = HexColor.MOBILITY + KitClass.FLANKER + " Platformer";
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "Every second blocks will spawn below you\n"
@@ -35,7 +35,7 @@ public class Platformer extends Kit {
     public Platformer(Player player) {
         super(player);
 
-        KitClass.mobilities.add(player);
+        KitClass.flankers.add(player);
     }
 
     @Override

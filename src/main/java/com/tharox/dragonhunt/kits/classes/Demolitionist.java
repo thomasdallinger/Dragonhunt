@@ -19,7 +19,7 @@ public class Demolitionist extends Kit {
     static int duration = 25;
     static int cooldown = 120;
 
-    public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Demolitionist";
+    public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Demolitionist";
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "On activation " + ChatColor.WHITE + "4" + ChatColor.GRAY + " layers of "
@@ -33,12 +33,12 @@ public class Demolitionist extends Kit {
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.TNT;
-    public static final int slot = 4;
+    public static final int slot = 21;
 
     public Demolitionist(Player player) {
         super(player);
 
-        KitClass.assassins.add(player);
+        KitClass.supports.add(player);
     }
 
     @Override

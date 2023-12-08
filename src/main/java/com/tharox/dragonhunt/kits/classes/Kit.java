@@ -68,7 +68,7 @@ public abstract class Kit implements Listener {
             if (item.getItemMeta().getDisplayName().contains(KitClass.ASSASSIN)
                     || item.getItemMeta().getDisplayName().contains(KitClass.TANK)
                     || item.getItemMeta().getDisplayName().contains(KitClass.SUPPORT)
-                    || item.getItemMeta().getDisplayName().contains(KitClass.MOBILITY)) {
+                    || item.getItemMeta().getDisplayName().contains(KitClass.FLANKER)) {
 
                 event.setCancelled(true);
             }
@@ -80,7 +80,7 @@ public abstract class Kit implements Listener {
             if (item.getItemMeta().getDisplayName().contains(KitClass.ASSASSIN)
                     || item.getItemMeta().getDisplayName().contains(KitClass.TANK)
                     || item.getItemMeta().getDisplayName().contains(KitClass.SUPPORT)
-                    || item.getItemMeta().getDisplayName().contains(KitClass.MOBILITY)) {
+                    || item.getItemMeta().getDisplayName().contains(KitClass.FLANKER)) {
 
                 // Not able to equip / place the item
                 event.setCancelled(true);

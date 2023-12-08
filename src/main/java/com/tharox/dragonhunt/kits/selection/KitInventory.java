@@ -7,7 +7,6 @@ import com.tharox.dragonhunt.kits.classes.Kit;
 import com.tharox.dragonhunt.kits.classes.KitClass;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
-import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -37,18 +36,19 @@ public class KitInventory {
                         + KitClass.TANK + " Tank" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_CHESTPLATE,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.WHITE + "+2 ❤" + ChatColor.GRAY + " Total Health"));
+                        + ChatColor.WHITE + "+3 ❤" + ChatColor.GRAY + " Total Health\n"
+                        + HexColor.RED + "Slowness I"));
 
         inv.setItem(18, Kit.getDisplayItem(HexColor.SUPPORT.toString() + ChatColor.BOLD
                         + KitClass.SUPPORT + " Support" + ChatColor.GRAY + " (Class)",
-                Material.POTION,
+                Material.RECOVERY_COMPASS,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.WHITE + "Double" + ChatColor.GRAY + " Health Regeneration",
-                Color.fromRGB(0x1F1F23)));
+                        + ChatColor.GRAY + "Permanent " + ChatColor.WHITE + "Regeneration I\n"
+                        + HexColor.RED + "-2 ❤ Total Health"));
 
         inv.setItem(27, Kit.getDisplayItem(HexColor.MOBILITY.toString() + ChatColor.BOLD
-                        + KitClass.MOBILITY + " Mobility" + ChatColor.GRAY + " (Class)",
-                Material.RECOVERY_COMPASS,
+                        + KitClass.FLANKER + " Flanker" + ChatColor.GRAY + " (Class)",
+                Material.NETHERITE_BOOTS,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
                         + ChatColor.WHITE + "+20%" + ChatColor.GRAY + " Attack Speed,\n"
                         + ChatColor.WHITE + "+40%" + ChatColor.GRAY + " Mining Speed"));

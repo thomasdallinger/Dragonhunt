@@ -7,13 +7,11 @@ import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-
 @DragonhuntKit
 public class Grappler extends Kit {
     static int cooldown = GrappleListener.cooldown / 20;
 
-    public static final String title = HexColor.MOBILITY + KitClass.MOBILITY + " Grappler";
+    public static final String title = HexColor.MOBILITY + KitClass.FLANKER + " Grappler";
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "Utilize your " + ChatColor.WHITE + "Grappling Hook\n"
@@ -32,7 +30,7 @@ public class Grappler extends Kit {
     public Grappler(Player player) {
         super(player);
 
-        KitClass.mobilities.add(player);
+        KitClass.flankers.add(player);
     }
 
     @Override

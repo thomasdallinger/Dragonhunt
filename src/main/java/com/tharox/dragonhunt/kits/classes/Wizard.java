@@ -21,7 +21,7 @@ public class Wizard extends Kit {
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.ENCHANTING_TABLE;
-    public static final int slot = 21;
+    public static final int slot = 22;
 
     public Wizard(Player player) {
         super(player);

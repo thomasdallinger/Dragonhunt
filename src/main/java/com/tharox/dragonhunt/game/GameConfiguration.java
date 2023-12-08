@@ -109,10 +109,11 @@ public class GameConfiguration {
             player.setExp(0);     // resets Bar
             player.setLevel(0);   // resets Number
 
-            // set the player's health to eight hearts if the modifier is active
+            // set the player's health to -2 hearts if the modifier is active
             if (Heartbroken.active) {
-                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(16);
-                player.setHealth(16);
+                Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).setBaseValue(
+                        Objects.requireNonNull(player.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getBaseValue() - 4.0);
+                player.setHealth(player.getHealth() - 4.0);
             }
 
             // clears the player's inventory

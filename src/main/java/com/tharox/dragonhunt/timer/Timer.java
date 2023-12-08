@@ -79,7 +79,7 @@ public class Timer {
 
                 // Kit item
                 if (title.contains(KitClass.ASSASSIN) || title.contains(KitClass.TANK)
-                        || title.contains(KitClass.SUPPORT) || title.contains(KitClass.MOBILITY)) {
+                        || title.contains(KitClass.SUPPORT) || title.contains(KitClass.FLANKER)) {
 
                     if (player.getCooldown(Material.CROSSBOW) > 0) {
                         materialToCheck = Material.CROSSBOW;

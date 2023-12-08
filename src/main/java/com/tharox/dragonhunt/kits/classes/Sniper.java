@@ -26,7 +26,7 @@ public class Sniper extends Kit {
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.BOW;
-    public static final int slot = 5;
+    public static final int slot = 4;
 
     public Sniper(Player player) {
         super(player);

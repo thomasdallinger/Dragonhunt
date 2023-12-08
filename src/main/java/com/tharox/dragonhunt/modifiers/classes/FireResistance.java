@@ -8,7 +8,7 @@ public class FireResistance extends Modifier {
     public static String lore = "Consuming Steaks grants short-term Fire Resistance.";
     public static Material material = Material.LAVA_CAULDRON;
     public static boolean positive = true;
-    public static int impact = 1;
+    public static int impact = 2;
     public static boolean active = false;
 
     @Override

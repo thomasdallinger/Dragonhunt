@@ -22,7 +22,6 @@ public class ModifierSelection {
                 new NoGhasts(),
                 new SpeedyComback(),
                 new NeverHungry(),
-                new FireResistance(),
 
                 new SpeedyMobs(),
                 new ExplosiveCreepers(),
@@ -32,6 +31,7 @@ public class ModifierSelection {
         mediumImpact.addAll(Arrays.asList(
                 new MoreFood(),
                 new ChristmasCookies(),
+                new FireResistance(),
                 new Fisher(),
                 new EnhancedArrowEffects(),
                 new FlyHigh(),

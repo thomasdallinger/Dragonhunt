@@ -49,7 +49,7 @@ public class PointsListener implements Listener {
 
         } else if (damager instanceof Player) {
             player = (Player) damager;
-            damage = damage * 0.75;
+            damage = damage * 0.5;
         } else return;
 
         UUID id = player.getUniqueId();
@@ -74,14 +74,14 @@ public class PointsListener implements Listener {
         if (scorePerPlayer.get(id) >= threshold) {
             scorePerPlayer.put(id, threshold); // points cannot be above the threshold
             bossBars.get(id).setTitle(HexColor.YELLOW.toString() + ChatColor.BOLD
-                    + threshold + ChatColor.WHITE + " / " + threshold + " Points");
+                    + threshold + ChatColor.WHITE + " / " + threshold + " Ender Dragon Damage");
             bossBars.get(id).setProgress(1);
             new GameEnd();
             return;
         }
 
         bossBars.get(id).setTitle(HexColor.YELLOW.toString() + ChatColor.BOLD
-                + scorePerPlayer.get(id) + ChatColor.WHITE + " / " + threshold + " Points");
+                + scorePerPlayer.get(id) + ChatColor.WHITE + " / " + threshold + " Ender Dragon Damage");
         bossBars.get(id).setProgress(scorePerPlayer.get(id) / (threshold + 1D));
 
         if ((threshold - scorePerPlayer.get(id)) <= 25) {

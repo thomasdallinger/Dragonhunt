@@ -196,7 +196,7 @@ public class GameStart extends GameConfiguration {
 
                 PointsListener.bossBars.put(id, Bukkit.createBossBar(
                         HexColor.YELLOW.toString() + ChatColor.BOLD + PointsListener.scorePerPlayer.get(id)
-                                + ChatColor.WHITE + " / " + PointsListener.threshold + " Points",
+                                + ChatColor.WHITE + " / " + PointsListener.threshold + " Ender Dragon Damage",
                         BarColor.YELLOW, BarStyle.SOLID));
                 PointsListener.bossBars.get(id).addPlayer(player);
                 PointsListener.bossBars.get(id).setProgress(

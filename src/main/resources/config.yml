@@ -314,68 +314,36 @@ permanentEffects:
   8:
     slot: 3
     name: "Resistance I"
-    lore: "Reduces incoming damage by 10%."
+    lore: "Reduces incoming damage by 20%."
     material: POTION
     amount: 1
     color: 0xEA773C
-    cost: 6
+    cost: 8
   9:
     slot: 12
     name: "Resistance II"
-    lore: "Reduces incoming damage by 15%."
+    lore: "Reduces incoming damage by 40%."
     material: POTION
     amount: 2
     color: 0xEA773C
-    cost: 12
+    cost: 16
   10:
-    slot: 21
-    name: "Resistance III"
-    lore: "Reduces incoming damage by 20%."
-    material: POTION
-    amount: 3
-    color: 0xEA773C
-    cost: 18
-  11:
-    slot: 30
-    name: "Resistance IV"
-    lore: "Reduces incoming damage by 25%."
-    material: POTION
-    amount: 4
-    color: 0xEA773C
-    cost: 24
-  12:
     slot: 4
     name: "Strength I"
-    lore: "Increases damage by 0.5 ❤."
+    lore: "Increases damage by 1.5 ❤."
     material: POTION
     amount: 1
     color: 0xE22627
-    cost: 6
-  13:
+    cost: 18
+  11:
     slot: 13
     name: "Strength II"
-    lore: "Increases damage by 1 ❤."
+    lore: "Increases damage by 3 ❤."
     material: POTION
     amount: 2
     color: 0xE22627
-    cost: 13
-  14:
-    slot: 22
-    name: "Strength III"
-    lore: "Increases damage by 1.5 ❤."
-    material: POTION
-    amount: 3
-    color: 0xE22627
-    cost: 20
-  15:
-    slot: 31
-    name: "Strength IV"
-    lore: "Increases damage by 2 ❤."
-    material: POTION
-    amount: 4
-    color: 0xE22627
-    cost: 27
-  16:
+    cost: 36
+  12:
     slot: 6
     name: "Extra Hearts ʀᴇ-ᴘᴜʀᴄʜᴀꜱᴇᴀʙʟᴇ"
     lore: "+0.5 ❤ and +5 ⛃ cost per purchase."

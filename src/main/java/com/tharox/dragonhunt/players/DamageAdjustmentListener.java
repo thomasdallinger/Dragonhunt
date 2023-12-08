@@ -42,21 +42,6 @@ public class DamageAdjustmentListener implements Listener {
             damager = (Player) event.getDamager();
         } else return;
 
-        // Nerf strength.
-        if (damager.hasPotionEffect(PotionEffectType.INCREASE_DAMAGE)) {
-            Collection<PotionEffect> pe = damager.getActivePotionEffects();
-            for (PotionEffect effect : pe) {
-                if (effect.getType().equals(PotionEffectType.INCREASE_DAMAGE)) {
-                    damage = damage - effect.getAmplifier() * 1.5; // Remove default damage increase.
-
-                    // The strength effect is not applied when damaging the Ender Dragon.
-                    if (!(entity instanceof EnderDragon)) {
-                        damage = damage + effect.getAmplifier() * 0.5; // Add new damage increase.
-                    }
-                }
-            }
-        }
-
         // Kit Ability: Attack Damage increase
         if (GameState.selectedKit.containsKey(damager) && GameState.kitAbilityActive.get(damager) > 0) {
             if (GameState.selectedKit.get(damager).contains("Mutant")) {
@@ -74,32 +59,6 @@ public class DamageAdjustmentListener implements Listener {
                 if (damager.getInventory().getItemInMainHand().getType().equals(Material.BOW)
                         || damager.getInventory().getItemInMainHand().getType().equals(Material.CROSSBOW)) {
                     damage = damage * 3;
-                }
-            }
-        }
-
-        // Nerf resistance.
-        if (entity instanceof Player) {
-            Player player = (Player) entity;
-
-            if (player.hasPotionEffect(PotionEffectType.DAMAGE_RESISTANCE)) {
-                Collection<PotionEffect> pe = player.getActivePotionEffects();
-                for (PotionEffect effect : pe) {
-                    if (effect.getType().equals(PotionEffectType.DAMAGE_RESISTANCE)) {
-                        if (effect.getAmplifier() == 0) {
-                            damage = damage / 0.80;
-                            damage = damage * 0.90;
-                        } else if (effect.getAmplifier() == 1) {
-                            damage = damage / 0.60;
-                            damage = damage * 0.85;
-                        } else if (effect.getAmplifier() == 2) {
-                            damage = damage / 0.40;
-                            damage = damage * 0.80;
-                        } else if (effect.getAmplifier() == 3) {
-                            damage = damage / 0.20;
-                            damage = damage * 0.75;
-                        }
-                    }
                 }
             }
         }

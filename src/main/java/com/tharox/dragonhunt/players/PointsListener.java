@@ -36,7 +36,7 @@ public class PointsListener implements Listener {
         ProjectileSource shooter;
         Player player;
 
-        if (!(target instanceof EnderDragon) && !(target instanceof EnderCrystal)) return;
+        if (!(target instanceof EnderDragon)) return;
 
         if (damager instanceof Projectile) {
             projectile = (Projectile) damager;
@@ -55,18 +55,16 @@ public class PointsListener implements Listener {
         UUID id = player.getUniqueId();
         int pointsToAdd = 0;
 
-        if (target instanceof EnderDragon) {
-            if (damage > 0) {
-                pointsToAdd = (int) damage;
-                scorePerPlayer.put(id, scorePerPlayer.get(id) + pointsToAdd);
-            }
-
-            // Ender Dragon never looses health.
-            EnderDragon dragon = (EnderDragon) target;
-            double maxHealth = Objects.requireNonNull(
-                    dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
-            dragon.setHealth(maxHealth);
+        if (damage > 0) {
+            pointsToAdd = (int) damage;
+            scorePerPlayer.put(id, scorePerPlayer.get(id) + pointsToAdd);
         }
+
+        // Ender Dragon never looses health.
+        EnderDragon dragon = (EnderDragon) target;
+        double maxHealth = Objects.requireNonNull(
+                dragon.getAttribute(Attribute.GENERIC_MAX_HEALTH)).getValue();
+        dragon.setHealth(maxHealth);
 
         if (pointsToAdd > 0)
             player.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "+" + pointsToAdd

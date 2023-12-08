@@ -149,13 +149,11 @@ public class GameStart extends GameConfiguration {
 
                 player.sendMessage(ChatColor.GRAY + "\nUse " + HexColor.YELLOW + "/shop"
                         + ChatColor.GRAY + " to purchase enchantments and effects.");
-                player.sendMessage(ChatColor.GRAY + "\nUse " + HexColor.YELLOW + "/top"
+                player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/top"
                         + ChatColor.GRAY + " to teleport to the surface.");
                 player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/scout"
                         + ChatColor.GRAY + " to view the world in " + ChatColor.WHITE + "Spectator Mode"
                         + ChatColor.GRAY + " for a short time.");
-
-                player.sendMessage(HexColor.RED + "\nTeaming is not allowed.");
             }
         }
     }

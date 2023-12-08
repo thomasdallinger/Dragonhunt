@@ -227,6 +227,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new CombatListener(), this);
         pluginManager.registerEvents(new FoodLevelChangeListener(), this);
         pluginManager.registerEvents(new DamageAdjustmentListener(), this);
+        pluginManager.registerEvents(new DoubleJumpListener(), this);
         pluginManager.registerEvents(new ItemConsumeListener(), this);
         pluginManager.registerEvents(new PlayerDamageListener(), this);
         pluginManager.registerEvents(new PlayerBedEnterListener(), this);

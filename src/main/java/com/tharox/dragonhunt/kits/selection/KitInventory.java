@@ -50,7 +50,8 @@ public class KitInventory {
                         + KitClass.FLANKER + " Flanker" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_BOOTS,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.WHITE + "+20%" + ChatColor.GRAY + " Attack Speed,\n"
+                        + ChatColor.WHITE + "Double Jump" + ChatColor.GRAY + " Ability\n"
+                        + ChatColor.WHITE + "+20%" + ChatColor.GRAY + " Attack Speed\n"
                         + ChatColor.WHITE + "+40%" + ChatColor.GRAY + " Mining Speed"));
 
         // Add the kits

@@ -1,26 +1,33 @@
 package com.tharox.dragonhunt.kits.classes;
 
-import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
-import com.tharox.dragonhunt.enchanting.EnchantingInventory;
 import com.tharox.dragonhunt.kits.upgrades.Upgrades;
 import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 @DragonhuntKit
 public class Wizard extends Kit {
-    static int cooldown = 0;
+    static int duration = 25;
+    static int cooldown = 90;
 
     public static final String title = HexColor.SUPPORT + KitClass.SUPPORT + " Wizard";
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "Opens the " + ChatColor.WHITE + "Enchanting" + ChatColor.GRAY + " Inventory.\n\n"
+            + ChatColor.GRAY + "All entities in a radius of " + ChatColor.WHITE + "25 Blocks\n"
+            + ChatColor.GRAY + "around you start " + ChatColor.WHITE + "levitating\n"
+            + ChatColor.GRAY + "and receive " + ChatColor.WHITE + "Poison" + ChatColor.GRAY + ".\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
-            + ChatColor.GRAY + ChatColor.WHITE + "Instantly\n\n"
+            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
-    public static final Material material = Material.ENCHANTING_TABLE;
+    public static final Material material = Material.BREWING_STAND;
     public static final int slot = 22;
 
     public Wizard(Player player) {
@@ -29,9 +36,33 @@ public class Wizard extends Kit {
         KitClass.supports.add(player);
     }
 
-    @Override
     public void executeAbility() {
-        player.openInventory(new EnchantingInventory(Main.getInstance().getConfig(), player).enchant);
+        int radius = 25;
+        int verticalRange = 20;
+
+        Location playerLocation = player.getLocation();
+
+        World world = playerLocation.getWorld();
+        if (world == null) return;
+
+        for (Entity entity : world.getNearbyEntities(playerLocation, radius, radius, radius)) {
+            if (entity instanceof LivingEntity && !entity.equals(player)) {
+                Location entityLocation = entity.getLocation();
+
+                // Check if the entity is within the vertical range
+                if (entityLocation.getY() >= playerLocation.getY() - verticalRange &&
+                        entityLocation.getY() <= playerLocation.getY() + verticalRange) {
+
+                    ((LivingEntity) entity).addPotionEffect(
+                            new PotionEffect(PotionEffectType.LEVITATION, duration * 20, 1)
+                    );
+
+                    ((LivingEntity) entity).addPotionEffect(
+                            new PotionEffect(PotionEffectType.POISON, duration * 20, 0)
+                    );
+                }
+            }
+        }
     }
 
     @Override

@@ -66,10 +66,6 @@ public class KitClass implements Listener {
 
                         continue;
                     }
-
-                    if (flankers.contains(player)) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 40, 1));
-                    }
                 }
             }
         }.runTaskTimer(Main.getInstance(), 0, 20);

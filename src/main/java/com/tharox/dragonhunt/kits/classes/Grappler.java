@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 public class Grappler extends Kit {
     static int cooldown = GrappleListener.cooldown / 20;
 
-    public static final String title = HexColor.MOBILITY + KitClass.FLANKER + " Grappler";
+    public static final String title = HexColor.FLANKER + KitClass.FLANKER + " Grappler";
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "Utilize your " + ChatColor.WHITE + "Grappling Hook\n"

@@ -11,5 +11,5 @@ public class HexColor {
     public static final ChatColor ASSASSIN = ChatColor.of("#FE4401");
     public static final ChatColor TANK = ChatColor.of("#B0EB0F");
     public static final ChatColor SUPPORT = ChatColor.of("#00CBE6");
-    public static final ChatColor MOBILITY = ChatColor.of("#00E07B");
+    public static final ChatColor FLANKER = ChatColor.of("#00E07B");
 }

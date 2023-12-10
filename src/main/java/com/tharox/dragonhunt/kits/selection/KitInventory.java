@@ -43,7 +43,7 @@ public class KitInventory {
                         + KitClass.SUPPORT + " Support" + ChatColor.GRAY + " (Class)",
                 Material.RECOVERY_COMPASS,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.GRAY + "Permanent " + ChatColor.WHITE + "Regeneration I\n"
+                        + ChatColor.WHITE + "Regeneration I\n"
                         + HexColor.RED + "-2 ❤ Total Health"));
 
         inv.setItem(27, Kit.getDisplayItem(HexColor.FLANKER.toString() + ChatColor.BOLD
@@ -51,7 +51,7 @@ public class KitInventory {
                 Material.NETHERITE_BOOTS,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
                         + ChatColor.WHITE + "Double Jump" + ChatColor.GRAY + " Ability\n"
-                        + ChatColor.WHITE + "No" + ChatColor.GRAY + " Fall Damage"));
+                        + ChatColor.WHITE + "No Fall Damage"));
 
         // Add the kits
         Reflections reflections = new Reflections("com.tharox.dragonhunt");

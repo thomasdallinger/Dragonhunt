@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class KitClass implements Listener {
     public static final String ASSASSIN = "⚔";
-    public static final String TANK = "\uD83D\uDEE1";
+    public static final String TANK = "★";
     public static final String SUPPORT = "❤";
     public static final String FLANKER = "▲";
 

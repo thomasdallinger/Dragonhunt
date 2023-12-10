@@ -26,32 +26,32 @@ public class KitInventory {
                 HexColor.PURPLE.toString() + ChatColor.BOLD + "PICK A KIT");
 
         // Set the kit classes
-        inv.setItem(0, Kit.getDisplayItem(HexColor.ASSASSIN.toString() + ChatColor.BOLD
+        inv.setItem(0, Kit.getNotEnchantedDisplayItem(HexColor.ASSASSIN.toString() + ChatColor.BOLD
                         + KitClass.ASSASSIN + " Assassin" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_SWORD,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
                         + ChatColor.WHITE + "+2 ⛃" + ChatColor.GRAY + " per Level Up"));
 
-        inv.setItem(9, Kit.getDisplayItem(HexColor.TANK.toString() + ChatColor.BOLD
+        inv.setItem(9, Kit.getNotEnchantedDisplayItem(HexColor.TANK.toString() + ChatColor.BOLD
                         + KitClass.TANK + " Tank" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_CHESTPLATE,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
                         + ChatColor.WHITE + "+3 ❤" + ChatColor.GRAY + " Total Health\n"
                         + HexColor.RED + "Slowness I"));
 
-        inv.setItem(18, Kit.getDisplayItem(HexColor.SUPPORT.toString() + ChatColor.BOLD
+        inv.setItem(18, Kit.getNotEnchantedDisplayItem(HexColor.SUPPORT.toString() + ChatColor.BOLD
                         + KitClass.SUPPORT + " Support" + ChatColor.GRAY + " (Class)",
                 Material.RECOVERY_COMPASS,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.WHITE + "Regeneration I\n"
+                        + ChatColor.GRAY + "Regeneration I\n"
                         + HexColor.RED + "-2 ❤ Total Health"));
 
-        inv.setItem(27, Kit.getDisplayItem(HexColor.FLANKER.toString() + ChatColor.BOLD
+        inv.setItem(27, Kit.getNotEnchantedDisplayItem(HexColor.FLANKER.toString() + ChatColor.BOLD
                         + KitClass.FLANKER + " Flanker" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_BOOTS,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.WHITE + "Double Jump" + ChatColor.GRAY + " Ability\n"
-                        + ChatColor.WHITE + "No Fall Damage"));
+                        + ChatColor.GRAY + "Double Jump Ability\n"
+                        + ChatColor.GRAY + "No Fall Damage"));
 
         // Add the kits
         Reflections reflections = new Reflections("com.tharox.dragonhunt");

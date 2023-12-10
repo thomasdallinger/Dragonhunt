@@ -222,6 +222,23 @@ public abstract class Kit implements Listener {
         return item;
     }
 
+    public static ItemStack getNotEnchantedDisplayItem(String title, Material material, String lore) {
+        ItemStack item = new ItemStack(material);
+
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return null;
+
+        meta.setDisplayName(title);
+        meta.setLore(Arrays.asList(lore.split("\n")));
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+
+        item.setItemMeta(meta);
+
+        return item;
+    }
+
     /**
      * Includes PotionMeta and Color for Potions, Splash Potions, Lingering Potions and Tipped Arrows.
      */

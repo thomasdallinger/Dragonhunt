@@ -128,7 +128,6 @@ public class EntityDeathListener implements Listener {
             case "Wither Skeleton":
                 mob.getWorld().dropItemNaturally(mob.getLocation(),
                         Objects.requireNonNull(GameState.createRockets(3)));
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.NETHERITE_SCRAP, 2));
                 break;
             case "Ravager":
             case "Piglin Brute":

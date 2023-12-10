@@ -1,20 +1,15 @@
 package com.tharox.dragonhunt.players;
 
-import com.tharox.dragonhunt.enchanting.Enchantments;
+import com.tharox.dragonhunt.shop.Enchantments;
 import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.Material;
-import org.bukkit.entity.EnderDragon;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
-
-import java.util.Collection;
 
 /**
  * The first damage assignment resets the vanilla values.

@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.brewing;
+package com.tharox.dragonhunt.shop;
 
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.chat.HexColor;
@@ -10,13 +10,14 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 
-public class BrewingItem {
+public class ShopItem {
     private final int SLOT;
     public final String NAME;
     private final String LORE;
@@ -25,8 +26,9 @@ public class BrewingItem {
     private final int COLOR;
     private PotionEffectType effectType;
     public int cost;
+    public int value;
 
-    public BrewingItem(ConfigurationSection section) {
+    public ShopItem(ConfigurationSection section) {
         Material material;
 
         try {
@@ -52,6 +54,13 @@ public class BrewingItem {
         } catch (Exception e) {
             effectType = null;
         }
+
+        if (LORE != null) {
+            // Remove the gray color from the lore (7 = gray = number)
+            this.value = getValueFromLore(LORE.substring(2));
+        } else {
+            this.value = 0;
+        }
     }
 
     /**
@@ -74,7 +83,32 @@ public class BrewingItem {
             if (NAME.contains("»"))
                 itemToCreate = setEnchantmentAndName(itemToCreate);
 
-                // Permanent Effects
+            // Enchantments
+            else if (NAME.contains("Sharpness"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.Sharpness.get(player));
+            else if (NAME.contains("Knockback"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.Knockback.get(player));
+            else if (NAME.contains("Fire Aspect"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.FireAspect.get(player));
+
+            else if (NAME.contains("Power"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.Power.get(player));
+            else if (NAME.contains("Punch"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.Punch.get(player));
+            else if (NAME.contains("Flame"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.Flame.get(player));
+
+            else if (NAME.contains("Multishot"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.Multishot.get(player));
+
+            else if (NAME.contains("Protection"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.Protection.get(player));
+            else if (NAME.contains("Thorns"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.Thorns.get(player));
+            else if (NAME.contains("Feather Falling"))
+                itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.FeatherFalling.get(player));
+
+            // Permanent Effects
             else if (NAME.contains("Speed"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Speed.get(player));
             else if (NAME.contains("Jump Boost"))
@@ -98,11 +132,36 @@ public class BrewingItem {
             }
         }
 
+        if (LORE != null) {
+            // The itemToCreate might be null here due to the Ifs above - set it to 'default' again
+            if (LORE.contains("Cooldown")) {
+                itemToCreate = new ItemStack(MATERIAL, AMOUNT);
+                itemToCreate = checkIfUnlocked(itemToCreate,
+                        Upgrades.CooldownUpgradeLvl.getOrDefault(player, 1));
+            }
+            else if (LORE.contains("Duration")) {
+                itemToCreate = new ItemStack(MATERIAL, AMOUNT);
+                itemToCreate = checkIfUnlocked(itemToCreate,
+                        Upgrades.DurationUpgradeLvl.getOrDefault(player, 1));
+            }
+            else if (LORE.contains("Effect")) {
+                itemToCreate = new ItemStack(MATERIAL, AMOUNT);
+                itemToCreate = checkIfUnlocked(itemToCreate,
+                        Upgrades.EffectivenessUpgradeLvl.getOrDefault(player, 1));
+            }
+        }
+
         if (itemToCreate == null) return null;
-        PotionMeta meta = (PotionMeta) itemToCreate.getItemMeta();
+        if (COLOR != 0) {
+            PotionMeta potionMeta = (PotionMeta) itemToCreate.getItemMeta();
+            if (potionMeta == null) return null;
+            potionMeta.setColor(Color.fromRGB(COLOR));
+            itemToCreate.setItemMeta(potionMeta);
+        }
+
+        ItemMeta meta = itemToCreate.getItemMeta();
         if (meta == null) return null;
 
-        meta.setColor(Color.fromRGB(COLOR));
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
@@ -166,7 +225,7 @@ public class BrewingItem {
     }
 
     private ItemStack checkIfUnlocked(ItemStack item, int level) {
-        PotionMeta meta = (PotionMeta) item.getItemMeta();
+        ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
         // item is purchasable
@@ -195,7 +254,7 @@ public class BrewingItem {
     }
 
     private ItemStack unlockArrowEffects(ItemStack item, Player player) {
-        PotionMeta meta = (PotionMeta) item.getItemMeta();
+        ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
         // can be unlocked
@@ -218,6 +277,7 @@ public class BrewingItem {
      * Applies a dummy effect so the PotionEffectType can be used later.
      */
     private ItemStack checkIfArrowEffectsUnlocked(ItemStack item, Player player) {
+        if(COLOR == 0) return null;
         PotionMeta meta = (PotionMeta) item.getItemMeta();
         if (meta == null) return null;
 
@@ -252,7 +312,7 @@ public class BrewingItem {
     }
 
     private ItemStack setEnchantmentAndName(ItemStack item) {
-        PotionMeta meta = (PotionMeta) item.getItemMeta();
+        ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
         meta.addEnchant(Enchantment.DURABILITY, 1, true);
@@ -261,5 +321,16 @@ public class BrewingItem {
         item.setItemMeta(meta);
 
         return item;
+    }
+
+    private int getValueFromLore(String lore) {
+        // Use a regex to get the first number of the string.
+        String stringNumber = lore.replaceAll("[^0-9]", "");
+        // Convert the string number into an integer.
+        if (!stringNumber.equals("")) {
+            return Integer.parseInt(stringNumber);
+        }
+
+        return 0;
     }
 }

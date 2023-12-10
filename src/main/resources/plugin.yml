@@ -8,6 +8,10 @@ description: Dragonhunt by Tharox
 commands:
   date:
     description: Shows the current date.
+  shop:
+    description: Opens the shop.
+  s:
+    description: Opens the shop.
   top:
     description: Teleports the player to the surface.
   scout:

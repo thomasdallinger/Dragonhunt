@@ -1,8 +1,7 @@
 package com.tharox.dragonhunt.arrows;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.brewing.Effects;
-import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.shop.Effects;
 import com.tharox.dragonhunt.modifiers.classes.EnhancedArrowEffects;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;

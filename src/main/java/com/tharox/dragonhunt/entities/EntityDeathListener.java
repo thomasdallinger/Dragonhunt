@@ -2,7 +2,7 @@ package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.kits.upgrades.Upgrades;
+import com.tharox.dragonhunt.shop.Upgrades;
 import com.tharox.dragonhunt.modifiers.classes.ChristmasCookies;
 import com.tharox.dragonhunt.modifiers.classes.Fisher;
 import com.tharox.dragonhunt.modifiers.classes.MoreFood;

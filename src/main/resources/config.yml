@@ -1,4 +1,31 @@
 # menu item: no cost!
+shop:
+  0:
+    slot: 19
+    name: "» Enchantments"
+    lore: "Upgrade your gear.                  "
+    material: ENCHANTED_BOOK
+    amount: 1
+  1:
+    slot: 21
+    name: "» Permanent Effects"
+    lore: "Unlock permanent positive effects.  "
+    material: POTION
+    amount: 1
+    color: 0x22FF4C
+  2:
+    slot: 23
+    name: "» Arrow Effects"
+    lore: "Unlock effects for arrows.          "
+    material: TIPPED_ARROW
+    amount: 1
+    color: 0x000000
+  3:
+    slot: 25
+    name: "» Kit Upgrades"
+    lore: "Upgrade your kit.                   "
+    material: NETHER_STAR
+    amount: 1
 enchanting:
   0:
     material: DIAMOND_AXE
@@ -231,21 +258,6 @@ enchanting:
     name: "Feather Falling IV"
     cost: 16
     lore: "Reduces fall damage by 48%."
-brewing:
-  0:
-    slot: 11
-    name: "» Permanent Effects"
-    lore: "Unlock permanent positive effects.  "
-    material: POTION
-    amount: 1
-    color: 0x22FF4C
-  1:
-    slot: 15
-    name: "» Arrow Effects"
-    lore: "Unlock effects for arrows.          "
-    material: TIPPED_ARROW
-    amount: 1
-    color: 0x000000
 permanentEffects:
   0:
     slot: 1
@@ -423,7 +435,7 @@ negativeEffects:
     material: TIPPED_ARROW
     amount: 1
     effect: BLINDNESS
-    color: 0x000000
+    color: 0x1F1F23
   4:
     slot: 23
     name: "Arrow of Weakness"
@@ -442,42 +454,42 @@ negativeEffects:
     color: 0xCEFFFF
 Berserker:
   0:
-    slot: 3
+    slot: 12
     name: "Enraged I"
     lore: "Ability Cooldown: -5 seconds"
     material: MAGMA_BLOCK
     amount: 1
     cost: 10
   1:
-    slot: 12
+    slot: 21
     name: "Enraged II"
     lore: "Ability Cooldown: -10 seconds."
     material: MAGMA_BLOCK
     amount: 2
     cost: 15
   2:
-    slot: 21
+    slot: 30
     name: "Enraged III"
     lore: "Ability Cooldown: -15 seconds."
     material: MAGMA_BLOCK
     amount: 3
     cost: 20
   3:
-    slot: 5
+    slot: 14
     name: "Unstoppable I"
     lore: "Ability Duration: +2 seconds."
     material: POTION
     amount: 1
     cost: 8
   4:
-    slot: 14
+    slot: 23
     name: "Unstoppable II"
     lore: "Ability Duration: +4 seconds."
     material: POTION
     amount: 2
     cost: 12
   5:
-    slot: 23
+    slot: 32
     name: "Unstoppable III"
     lore: "Ability Duration: +6 seconds."
     material: POTION
@@ -485,21 +497,21 @@ Berserker:
     cost: 16
 Blacksmith:
   0:
-    slot: 4
+    slot: 13
     name: "Miner I"
     lore: "Effect: 1 Gold on Mob kill"
     material: GOLD_INGOT
     amount: 1
     cost: 6
   1:
-    slot: 13
+    slot: 22
     name: "Miner II"
     lore: "Effect: 2 Gold on Mob kill"
     material: GOLD_INGOT
     amount: 2
     cost: 12
   2:
-    slot: 22
+    slot: 31
     name: "Miner III"
     lore: "Effect: 3 Gold on Mob kill"
     material: GOLD_INGOT
@@ -507,21 +519,21 @@ Blacksmith:
     cost: 18
 Cleric:
   0:
-    slot: 4
+    slot: 13
     name: "Experienced I"
     lore: "Effect: +1 XP Point on Mob kill"
     material: EXPERIENCE_BOTTLE
     amount: 1
     cost: 5
   1:
-    slot: 13
+    slot: 22
     name: "Experienced II"
     lore: "Effect: +2 XP Points on Mob kill"
     material: EXPERIENCE_BOTTLE
     amount: 2
     cost: 8
   2:
-    slot: 22
+    slot: 31
     name: "Experienced III"
     lore: "Effect: +3 XP Points on Mob kill"
     material: EXPERIENCE_BOTTLE
@@ -529,21 +541,21 @@ Cleric:
     cost: 11
 Demolitionist:
   0:
-    slot: 4
+    slot: 13
     name: "Explosive I"
     lore: "Ability Cooldown: -10 seconds"
     material: TNT
     amount: 1
     cost: 10
   1:
-    slot: 13
+    slot: 22
     name: "Explosive II"
     lore: "Ability Cooldown: -20 seconds."
     material: TNT
     amount: 2
     cost: 15
   2:
-    slot: 22
+    slot: 31
     name: "Explosive III"
     lore: "Ability Cooldown: -30 seconds."
     material: TNT
@@ -551,21 +563,21 @@ Demolitionist:
     cost: 20
 Grappler:
   0:
-    slot: 4
+    slot: 13
     name: "Reload Master I"
     lore: "Ability Cooldown: -3 seconds"
     material: ARROW
     amount: 1
     cost: 7
   1:
-    slot: 13
+    slot: 22
     name: "Reload Master II"
     lore: "Ability Cooldown: -6 seconds."
     material: ARROW
     amount: 2
     cost: 12
   2:
-    slot: 22
+    slot: 31
     name: "Reload Master III"
     lore: "Ability Cooldown: -10 seconds."
     material: ARROW
@@ -573,42 +585,42 @@ Grappler:
     cost: 20
 Healer:
   0:
-    slot: 3
+    slot: 12
     name: "Quick Help I"
     lore: "Ability Cooldown: -5 seconds"
     material: CLOCK
     amount: 1
     cost: 6
   1:
-    slot: 12
+    slot: 21
     name: "Quick Help II"
     lore: "Ability Cooldown: -10 seconds."
     material: CLOCK
     amount: 2
     cost: 11
   2:
-    slot: 21
+    slot: 30
     name: "Quick Help III"
     lore: "Ability Cooldown: -15 seconds."
     material: CLOCK
     amount: 3
     cost: 16
   3:
-    slot: 5
+    slot: 14
     name: "Big Help I"
     lore: "Ability Effect: +1 ❤ Heal"
     material: GOLDEN_APPLE
     amount: 1
     cost: 10
   4:
-    slot: 14
+    slot: 23
     name: "Big Help II"
     lore: "Ability Effect: +2 ❤ Heal"
     material: GOLDEN_APPLE
     amount: 2
     cost: 15
   5:
-    slot: 23
+    slot: 32
     name: "Big Help III"
     lore: "Ability Effect: +3 ❤ Heal"
     material: GOLDEN_APPLE
@@ -616,21 +628,21 @@ Healer:
     cost: 20
 Mutant:
   0:
-    slot: 4
+    slot: 13
     name: "More Power I"
     lore: "Ability Duration: +2 seconds."
     material: POTION
     amount: 1
     cost: 8
   1:
-    slot: 13
+    slot: 22
     name: "More Power II"
     lore: "Ability Duration: +4 seconds."
     material: POTION
     amount: 2
     cost: 13
   2:
-    slot: 22
+    slot: 31
     name: "More Power III"
     lore: "Ability Duration: +6 seconds."
     material: POTION
@@ -638,21 +650,21 @@ Mutant:
     cost: 18
 Platformer:
   0:
-    slot: 4
+    slot: 13
     name: "Builder I"
     lore: "Ability Duration: +3 seconds."
     material: PINK_STAINED_GLASS
     amount: 1
     cost: 7
   1:
-    slot: 13
+    slot: 22
     name: "Builder II"
     lore: "Ability Duration: +6 seconds."
     material: PINK_STAINED_GLASS
     amount: 2
     cost: 12
   2:
-    slot: 22
+    slot: 31
     name: "Builder III"
     lore: "Ability Duration: +10 seconds."
     material: PINK_STAINED_GLASS
@@ -660,21 +672,21 @@ Platformer:
     cost: 20
 Sniper:
   0:
-    slot: 4
+    slot: 13
     name: "Concentration I"
     lore: "Ability Duration: +1 second."
     material: TARGET
     amount: 1
     cost: 7
   1:
-    slot: 13
+    slot: 22
     name: "Concentration II"
     lore: "Ability Duration: +2 seconds."
     material: TARGET
     amount: 2
     cost: 12
   2:
-    slot: 22
+    slot: 31
     name: "Concentration III"
     lore: "Ability Duration: +3 seconds."
     material: TARGET
@@ -682,21 +694,21 @@ Sniper:
     cost: 17
 Vanisher:
   0:
-    slot: 4
+    slot: 13
     name: "Faster I"
     lore: "Ability Effect: +1 Speed Level."
     material: POTION
     amount: 1
     cost: 6
   1:
-    slot: 13
+    slot: 22
     name: "Faster II"
     lore: "Ability Effect: +2 Speed Levels."
     material: POTION
     amount: 2
     cost: 10
   2:
-    slot: 22
+    slot: 31
     name: "Faster III"
     lore: "Ability Effect: +3 Speed Levels."
     material: POTION
@@ -704,21 +716,21 @@ Vanisher:
     cost: 14
 Warrior:
   0:
-    slot: 4
+    slot: 13
     name: "Perseverance I"
     lore: "Ability Duration: +1 second."
     material: DIAMOND_SWORD
     amount: 1
     cost: 6
   1:
-    slot: 13
+    slot: 22
     name: "Perseverance II"
     lore: "Ability Duration: +2 seconds."
     material: DIAMOND_SWORD
     amount: 2
     cost: 11
   2:
-    slot: 22
+    slot: 31
     name: "Perseverance III"
     lore: "Ability Duration: +3 seconds."
     material: DIAMOND_SWORD
@@ -726,21 +738,21 @@ Warrior:
     cost: 16
 Wizard:
   0:
-    slot: 3
+    slot: 13
     name: "Cave Explorer I"
     lore: "Effect: +1 XP Point on Ore mined"
     material: EXPERIENCE_BOTTLE
     amount: 1
     cost: 6
   1:
-    slot: 12
+    slot: 22
     name: "Cave Explorer II"
     lore: "Effect: +2 XP Points on Ore mined"
     material: EXPERIENCE_BOTTLE
     amount: 2
     cost: 10
   2:
-    slot: 21
+    slot: 31
     name: "Cave Explorer III"
     lore: "Effect: +3 XP Points on Ore mined"
     material: EXPERIENCE_BOTTLE

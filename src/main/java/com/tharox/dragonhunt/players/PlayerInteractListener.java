@@ -1,13 +1,11 @@
 package com.tharox.dragonhunt.players;
 
-import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
-import com.tharox.dragonhunt.brewing.BrewingInventory;
-import com.tharox.dragonhunt.enchanting.EnchantingInventory;
+import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.kits.upgrades.UpgradesInventory;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -45,37 +43,13 @@ public class PlayerInteractListener implements Listener {
                 }
 
                 if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
-                    // Clicking on an enchanting table opens the enchant inventory.
-                    if (block.getType() == Material.ENCHANTING_TABLE) {
+                    if (block.getType() == Material.ENCHANTING_TABLE
+                            || block.getType() == Material.BREWING_STAND
+                            || block.getType() == Material.ANVIL) {
                         event.setCancelled(true);
-
-                        EnchantingInventory enchantingInventory
-                                = new EnchantingInventory(Main.getInstance().getConfig(), player);
-                        player.openInventory(enchantingInventory.enchant);
+                        player.sendMessage(Prefixes.getErrorPrefix() + "Block disabled.");
+                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
                         return;
-                    }
-
-                    // Clicking on a brewing stand opens the brewing stand inventory.
-                    if (block.getType() == Material.BREWING_STAND) {
-                        event.setCancelled(true);
-
-                        BrewingInventory brewingInventory
-                                = new BrewingInventory(Main.getInstance().getConfig(), player);
-                        player.openInventory(brewingInventory.menu);
-                        return;
-                    }
-
-                    // Clicking on an anvil opens the kit upgrades inventory.
-                    if (block.getType() == Material.ANVIL) {
-                        event.setCancelled(true);
-
-                        UpgradesInventory upgradesInventory
-                                = new UpgradesInventory(Main.getInstance().getConfig(), player);
-
-                        // Throws an exception if the inventory is null.
-                        try {
-                            player.openInventory(upgradesInventory.upgrades);
-                        } catch (Exception exception) {}
                     }
 
                     if (BlockBreakListener.woods.contains(block.getType())) { // can not strip wood logs

@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.brewing;
+package com.tharox.dragonhunt.shop;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.modifiers.classes.ForeverHunger;

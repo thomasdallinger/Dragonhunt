@@ -4,28 +4,23 @@ import com.tharox.dragonhunt.arrows.ProjectileHitListener;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
-import com.tharox.dragonhunt.brewing.BrewingListener;
+import com.tharox.dragonhunt.shop.ShopListener;
 import com.tharox.dragonhunt.chat.ChatListener;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.LevelUp;
-import com.tharox.dragonhunt.commands.DateCommand;
-import com.tharox.dragonhunt.commands.HubCommand;
-import com.tharox.dragonhunt.commands.ScoutCommand;
-import com.tharox.dragonhunt.commands.TopCommand;
+import com.tharox.dragonhunt.commands.*;
 import com.tharox.dragonhunt.crafting.CustomRecipes;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.dimensions.DimensionListener;
-import com.tharox.dragonhunt.enchanting.EnchantingListener;
-import com.tharox.dragonhunt.entities.CreatureSpawnListener;
 import com.tharox.dragonhunt.entities.ArrowDamageListener;
+import com.tharox.dragonhunt.entities.CreatureSpawnListener;
 import com.tharox.dragonhunt.entities.EntityDeathListener;
 import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.grappler.GrappleListener;
 import com.tharox.dragonhunt.kits.classes.KitClass;
 import com.tharox.dragonhunt.kits.selection.KitListener;
-import com.tharox.dragonhunt.kits.upgrades.UpgradesListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.players.*;
@@ -206,9 +201,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new KitListener(), this);
 
         pluginManager.registerEvents(new LevelUp(), this);
-        pluginManager.registerEvents(new EnchantingListener(), this);
-        pluginManager.registerEvents(new BrewingListener(), this);
-        pluginManager.registerEvents(new UpgradesListener(), this);
+        pluginManager.registerEvents(new ShopListener(), this);
 
         pluginManager.registerEvents(new BlockBreakListener(), this);
         pluginManager.registerEvents(new BlockExplodeListener(), this);
@@ -245,6 +238,8 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
     private void commandRegistration() {
         getCommand("date").setExecutor(new DateCommand());
+        getCommand("shop").setExecutor(new ShopCommand());
+        getCommand("s").setExecutor(new ShopCommand());
         getCommand("top").setExecutor(new TopCommand());
         getCommand("scout").setExecutor(new ScoutCommand());
         getCommand("hub").setExecutor(new HubCommand());

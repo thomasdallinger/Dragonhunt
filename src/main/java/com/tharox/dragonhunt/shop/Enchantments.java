@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.enchanting;
+package com.tharox.dragonhunt.shop;
 
 import com.tharox.dragonhunt.Main;
 import org.bukkit.Bukkit;

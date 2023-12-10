@@ -1,6 +1,5 @@
-package com.tharox.dragonhunt.kits.upgrades;
+package com.tharox.dragonhunt.shop;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;

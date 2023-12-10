@@ -102,6 +102,19 @@ public abstract class Kit implements Listener {
                 setCooldownEnds();
             }
         }
+
+        // Open the Shop on Left-Click (no matter the cooldown)
+        if (e.equals(EquipmentSlot.HAND) && (event.getAction() == Action.LEFT_CLICK_AIR
+                || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
+            if (item.getItemMeta().getDisplayName().contains(KitClass.ASSASSIN)
+                    || item.getItemMeta().getDisplayName().contains(KitClass.TANK)
+                    || item.getItemMeta().getDisplayName().contains(KitClass.SUPPORT)
+                    || item.getItemMeta().getDisplayName().contains(KitClass.FLANKER)) {
+
+                event.setCancelled(true);
+                player.performCommand("shop");
+            }
+        }
     }
 
     public void setCooldownEnds() {

@@ -61,7 +61,6 @@ public class CustomRecipes {
 
         addGoldDiamondRecipe();
         addEnchantedGoldenAppleRecipe();
-        addBookRecipe();
     }
 
     /**
@@ -256,18 +255,6 @@ public class CustomRecipes {
         recipe.setIngredient('D', Material.DIAMOND);
         recipe.setIngredient('G', Material.GOLDEN_APPLE);
 
-        Bukkit.addRecipe(recipe);
-    }
-
-    /**
-     * Adds a new QoL recipe: 1 leather = 1 book.
-     * Book needed to craft an enchanting table.
-     */
-    private void addBookRecipe() {
-        NamespacedKey key = new NamespacedKey(Main.getInstance(), "book");
-        ShapedRecipe recipe = new ShapedRecipe(key, new ItemStack(Material.BOOK));
-        recipe.shape("L");
-        recipe.setIngredient('L', Material.LEATHER);
         Bukkit.addRecipe(recipe);
     }
 }

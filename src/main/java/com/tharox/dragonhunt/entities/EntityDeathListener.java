@@ -64,7 +64,6 @@ public class EntityDeathListener implements Listener {
                     }
                 }
 
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.LEATHER, 1));
                 Coins.addXP(killer, Coins.animalXP + bonusXP);
             }
         }

@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.players;
 
+import com.tharox.dragonhunt.kits.classes.KitClass;
 import com.tharox.dragonhunt.modifiers.classes.BadOmen;
 import com.tharox.dragonhunt.modifiers.classes.HotHealing;
 import org.bukkit.World;
@@ -28,6 +29,12 @@ public class PlayerDamageListener implements Listener {
             if (gracePeriodActive) {
                 // Players cannot receive ANY damage.
                 event.setCancelled(true);
+            }
+
+            if (event.getCause() == EntityDamageEvent.DamageCause.FALL) {
+                if (KitClass.flankers.contains(player)) {
+                    event.setCancelled(true);
+                }
             }
 
             if (event.getCause() == EntityDamageEvent.DamageCause.FIRE) {

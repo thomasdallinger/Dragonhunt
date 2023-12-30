@@ -13,8 +13,6 @@ public class ModifierSelection {
     ArrayList<Modifier> lowImpact = new ArrayList<>();
     ArrayList<Modifier> mediumImpact = new ArrayList<>();
     ArrayList<Modifier> highImpact = new ArrayList<>();
-    int positive = 0; // needs to be 2 after modifier selection
-    int negative = 0; // needs to be 1 after modifier selection
 
     public ModifierSelection() {
         lowImpact.addAll(Arrays.asList(
@@ -76,69 +74,30 @@ public class ModifierSelection {
             stmt.close();
         });
 
-        if (lowImpact.get(random).isPositive()) {
-            positive++;
-        } else {
-            negative++;
-        }
+        random = rand.nextInt(mediumImpact.size());
+        mediumImpact.get(random).setActive(true);
 
-        // pos pos -> fine, pos neg -> fine, neg neg -> re-roll
-        do {
-            random = rand.nextInt(mediumImpact.size());
-            mediumImpact.get(random).setActive(true);
+        int finalRandom2 = random;
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "UPDATE games SET modifier_medium = '" + mediumImpact.get(finalRandom2).getTitle()
+                    + "' WHERE id = '" + GameState.gameID + "'";
 
-            int finalRandom2 = random;
-            DatabaseExecutor.executeDatabaseHandler((con) -> {
-                String query = "UPDATE games SET modifier_medium = '" + mediumImpact.get(finalRandom2).getTitle()
-                        + "' WHERE id = '" + GameState.gameID + "'";
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
 
-                Statement stmt = con.createStatement();
-                stmt.execute(query);
-                stmt.close();
-            });
+        random = rand.nextInt(highImpact.size());
+        highImpact.get(random).setActive(true);
 
-            if (!mediumImpact.get(random).isPositive()) {
-                negative++;
-                if (negative > 1) {
-                    mediumImpact.get(random).setActive(false);
-                }
-            } else {
-                positive++;
-                negative = 1;
-            }
-        } while (negative > 1);
+        int finalRandom3 = random;
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+            String query = "UPDATE games SET modifier_high = '" + highImpact.get(finalRandom3).getTitle()
+                    + "' WHERE id = '" + GameState.gameID + "'";
 
-        // 2 pos 1 neg -> fine, 1 pos 2 neg -> re-roll
-        do {
-            random = rand.nextInt(highImpact.size());
-            highImpact.get(random).setActive(true);
-
-            int finalRandom2 = random;
-            DatabaseExecutor.executeDatabaseHandler((con) -> {
-                String query = "UPDATE games SET modifier_high = '" + highImpact.get(finalRandom2).getTitle()
-                        + "' WHERE id = '" + GameState.gameID + "'";
-
-                Statement stmt = con.createStatement();
-                stmt.execute(query);
-                stmt.close();
-            });
-
-            if (!highImpact.get(random).isPositive()) {
-                negative++;
-                if (negative > 1) {
-                    highImpact.get(random).setActive(false);
-                } else {
-                    positive = 2;
-                }
-            } else {
-                positive++;
-                if (positive > 2) {
-                    highImpact.get(random).setActive(false);
-                    negative = 0;
-                } else {
-                    negative = 1;
-                }
-            }
-        } while (negative > 1 || positive > 2);
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
     }
 }

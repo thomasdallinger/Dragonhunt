@@ -28,7 +28,8 @@ public class Mutant extends Kit {
             + ChatColor.WHITE + "+4 Temporary ❤\n"
             + HexColor.RED + "» Glow and Alert on Activation\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
-            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
+            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n"
+            + HexColor.YELLOW + "» Duration can be increased\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.DIAMOND_CHESTPLATE;

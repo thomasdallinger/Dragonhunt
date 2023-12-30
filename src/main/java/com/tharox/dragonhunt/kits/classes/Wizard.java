@@ -22,7 +22,8 @@ public class Wizard extends Kit {
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "All entities in a radius of " + ChatColor.WHITE + "25 Blocks\n"
             + ChatColor.GRAY + "around you start " + ChatColor.WHITE + "levitating\n"
-            + ChatColor.GRAY + "and receive " + ChatColor.WHITE + "Poison" + ChatColor.GRAY + ".\n\n"
+            + ChatColor.GRAY + "and receive " + ChatColor.WHITE + "Poison" + ChatColor.GRAY + ".\n"
+            + HexColor.YELLOW + "» Levitation Effect can be increased\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
@@ -39,6 +40,7 @@ public class Wizard extends Kit {
     public void executeAbility() {
         int radius = 25;
         int verticalRange = 20;
+        int levitationLevel = Upgrades.Effectiveness.getOrDefault(player, 1);
 
         Location playerLocation = player.getLocation();
 
@@ -54,7 +56,8 @@ public class Wizard extends Kit {
                         entityLocation.getY() <= playerLocation.getY() + verticalRange) {
 
                     ((LivingEntity) entity).addPotionEffect(
-                            new PotionEffect(PotionEffectType.LEVITATION, duration * 20, 1)
+                            new PotionEffect(PotionEffectType.LEVITATION, duration * 20,
+                                    levitationLevel - 1)
                     );
 
                     ((LivingEntity) entity).addPotionEffect(

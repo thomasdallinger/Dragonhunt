@@ -10,6 +10,8 @@ import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.Objects;
 
@@ -23,11 +25,13 @@ public class Healer extends Kit {
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "Instantly heal yourself " + ChatColor.WHITE + heartsToAdd + " ❤"
             + ChatColor.GRAY + ".\n"
-            + HexColor.RED + "» Alert on Activation\n\n"
+            + HexColor.YELLOW + "» Heal can be increased\n"
+            + HexColor.RED + "» Glow and Alert on Activation\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + "Instantly\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
-            + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
+            + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n"
+            + HexColor.YELLOW + "» Cooldown can be reduced\n\n";
     public static final Material material = Material.POTION;
     public static final int slot = 20;
 
@@ -51,6 +55,7 @@ public class Healer extends Kit {
 
         player.sendMessage(title + ChatColor.GRAY + " Kit Ability used.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+        player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 100, 0));
 
         if ((player.getHealth() + (heartsToAdd + bonusHearts) * 2) > maxHealth) {
             player.setHealth(maxHealth);

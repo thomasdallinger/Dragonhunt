@@ -155,11 +155,11 @@ public class BlockBreakListener implements Listener {
                 block.getDrops().clear();
                 block.setType(Material.AIR);
 
-                // Wizard Kit Effectiveness
+                // Sniper Kit Effectiveness
                 int bonusXP = 0;
 
                 if (Upgrades.Effectiveness.getOrDefault(player, 0) != 0
-                        && GameState.selectedKit.getOrDefault(player, "").contains("Wizard")) {
+                        && GameState.selectedKit.getOrDefault(player, "").contains("Sniper")) {
                     bonusXP = Upgrades.Effectiveness.get(player);
                 }
 

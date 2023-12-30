@@ -21,9 +21,11 @@ public class Sniper extends Kit {
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "Deal " + ChatColor.WHITE + "3x" + ChatColor.GRAY + " Bow and Crossbow Damage\n"
             + ChatColor.GRAY + "for a short time.\n"
+            + HexColor.YELLOW + "» XP Gains can be increased\n"
             + HexColor.RED + "» Glow and Alert on Activation\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
-            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
+            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n"
+            + HexColor.YELLOW + "» Duration can be increased\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.BOW;

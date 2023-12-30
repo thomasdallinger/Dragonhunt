@@ -25,7 +25,8 @@ public class Platformer extends Kit {
             + ChatColor.GRAY + "You can go up, down and through (most) blocks. \n"
             + HexColor.RED + "» Glow and Alert on Activation\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
-            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
+            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n"
+            + HexColor.YELLOW + "» Duration can be increased\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.PINK_STAINED_GLASS;

@@ -19,8 +19,8 @@ public class Berserker extends Kit {
     public static final String title = HexColor.TANK + KitClass.TANK + " Berserker";
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "Become " + ChatColor.WHITE + "Invulnerable"
-            + ChatColor.GRAY + ".\n"
+            + ChatColor.GRAY + "Become " + ChatColor.WHITE + "invulnerable"
+            + ChatColor.GRAY + " for a short time.\n"
             + HexColor.RED + "» Glow and Alert on Activation\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"

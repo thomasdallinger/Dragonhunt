@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.grappler;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
-import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.shop.Upgrades;
 import org.bukkit.*;
 import org.bukkit.entity.AbstractArrow;
 import org.bukkit.entity.Firework;
@@ -53,8 +53,9 @@ public class GrappleListener implements Listener {
             arrow.setVelocity(arrow.getVelocity().multiply(2D));
 
             // put the GRAPPLER on cooldown
-            if (GrappleListener.cooldown >= 0) {
-                player.setCooldown(Material.CROSSBOW, GrappleListener.cooldown);
+            if ((GrappleListener.cooldown - Upgrades.Cooldown.getOrDefault(player, 0)) >= 0) {
+                player.setCooldown(Material.CROSSBOW,
+                        (GrappleListener.cooldown - Upgrades.Cooldown.getOrDefault(player, 0)));
             }
 
             // after the cooldown ends, add the next charged projectile

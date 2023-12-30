@@ -25,7 +25,7 @@ public class Mutant extends Kit {
             + ChatColor.WHITE + "+80%" + ChatColor.GRAY + " Mining Speed\n"
             + ChatColor.WHITE + "+" + DamageAdjustmentListener.mutantDamageBuff + " ❤"
             + ChatColor.GRAY + " Attack Damage\n"
-            + ChatColor.WHITE + "+4 Absorption ❤\n"
+            + ChatColor.WHITE + "+4 Temporary ❤\n"
             + HexColor.RED + "» Glow and Alert on Activation\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"

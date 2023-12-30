@@ -20,7 +20,7 @@ public class Platformer extends Kit {
     public static final String title = HexColor.FLANKER + KitClass.FLANKER + " Platformer";
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "Every second blocks will spawn below you\n"
+            + ChatColor.GRAY + "Blocks constantly spawn below you\n"
             + ChatColor.GRAY + "making it possible to walk everywhere. \n"
             + ChatColor.GRAY + "You can go up, down and through (most) blocks. \n"
             + HexColor.RED + "» Glow and Alert on Activation\n\n"

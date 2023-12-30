@@ -19,7 +19,8 @@ public class Warrior extends Kit {
     public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Warrior";
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "Deal " + ChatColor.WHITE + "Double" + ChatColor.GRAY + " Axe and Sword Damage.\n"
+            + ChatColor.GRAY + "Deal " + ChatColor.WHITE + "2x" + ChatColor.GRAY + " Axe and Sword Damage\n"
+            + ChatColor.GRAY + "for a short time.\n"
             + HexColor.RED + "» Glow and Alert on Activation\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"

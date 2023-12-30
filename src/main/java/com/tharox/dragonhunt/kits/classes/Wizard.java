@@ -5,6 +5,7 @@ import com.tharox.dragonhunt.shop.Upgrades;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -42,6 +43,9 @@ public class Wizard extends Kit {
         int verticalRange = 20;
         int levitationLevel = Upgrades.Effectiveness.getOrDefault(player, 1);
 
+        player.sendMessage(title + HexColor.GREEN + " Kit Ability activated.");
+        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+
         Location playerLocation = player.getLocation();
 
         World world = playerLocation.getWorld();
@@ -66,6 +70,8 @@ public class Wizard extends Kit {
                 }
             }
         }
+
+        this.runKitAbility(20, getDuration(), null, null);
     }
 
     @Override

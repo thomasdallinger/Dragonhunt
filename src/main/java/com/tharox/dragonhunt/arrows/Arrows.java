@@ -1,8 +1,8 @@
 package com.tharox.dragonhunt.arrows;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.shop.Effects;
 import com.tharox.dragonhunt.modifiers.classes.EnhancedArrowEffects;
+import com.tharox.dragonhunt.shop.Effects;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -35,16 +35,17 @@ public class Arrows {
                     ItemStack arrowStack = player.getInventory().getItem(17);
                     ItemStack generatedArrows;
 
-                    if (arrowStack == null
-                            || (arrowStack.getType() != Material.ARROW && arrowStack.getType() != Material.TIPPED_ARROW)
-                            || arrowStack.getAmount() <= 31) {
+                    if (arrowStack == null || (arrowStack.getType() != Material.ARROW
+                            && arrowStack.getType() != Material.TIPPED_ARROW)) {
 
                         // if arrow effects have been unlocked AND one of the available arrow effects has been selected
-                        if (Effects.ArrowEffectsUnlocked.get(player) && Effects.ArrowEffectType.get(player).getType() == Material.TIPPED_ARROW) {
+                        if (Effects.ArrowEffectsUnlocked.get(player)
+                                && Effects.ArrowEffectType.get(player).getType() == Material.TIPPED_ARROW) {
                             ItemStack arrowToUse = Effects.ArrowEffectType.get(player);
                             PotionMeta meta = (PotionMeta) arrowToUse.getItemMeta();
                             // index is always 0 since there is only one effect on the arrow at a time
-                            generatedArrows = createEffectArrow(meta.getCustomEffects().get(0).getType(), meta.getColor());
+                            generatedArrows = createEffectArrow(meta.getCustomEffects().get(0).getType(),
+                                    meta.getColor());
                         } else {
                             generatedArrows = createArrow();
                         }
@@ -101,10 +102,13 @@ public class Arrows {
         return item;
     }
 
+    /**
+     * Max amount of the arrow stack defined in this method.
+     */
     private void replaceCurrentArrowStack(ItemStack currentArrowStack, ItemStack generatedArrows, Player player) {
         int stackAmount = currentArrowStack.getAmount();
         int generatedAmount = generatedArrows.getAmount();
-        generatedArrows.setAmount(Math.min((stackAmount + generatedAmount), 64));
+        generatedArrows.setAmount(Math.min((stackAmount + generatedAmount), 32));
         player.getInventory().setItem(17, generatedArrows);
     }
 }

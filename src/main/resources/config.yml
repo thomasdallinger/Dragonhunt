@@ -539,6 +539,28 @@ Cleric:
     material: EXPERIENCE_BOTTLE
     amount: 3
     cost: 11
+Commander:
+  0:
+    slot: 13
+    name: "Commanding Strength I"
+    lore: "Effect: +5 Blocks Radius"
+    material: STONE
+    amount: 1
+    cost: 6
+  1:
+    slot: 22
+    name: "Commanding Strength II"
+    lore: "Effect: +10 Blocks Radius"
+    material: STONE
+    amount: 2
+    cost: 12
+  2:
+    slot: 31
+    name: "Commanding Strength III"
+    lore: "Effect: +15 Blocks Radius"
+    material: STONE
+    amount: 3
+    cost: 18
 Demolitionist:
   0:
     slot: 13

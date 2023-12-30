@@ -208,6 +208,7 @@ public class GameState {
                     DbValues.updateServerStatus();
                     Bukkit.getServer().shutdown();
                     this.cancel();
+                    return;
                 }
 
                 // move one player at every odd second

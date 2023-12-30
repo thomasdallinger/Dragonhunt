@@ -695,25 +695,25 @@ Sniper:
 Vanisher:
   0:
     slot: 13
-    name: "Faster I"
-    lore: "Ability Effect: +1 Speed Level."
+    name: "Vanish I"
+    lore: "Ability Duration: +1 second."
     material: POTION
     amount: 1
-    cost: 6
+    cost: 4
   1:
     slot: 22
-    name: "Faster II"
-    lore: "Ability Effect: +2 Speed Levels."
+    name: "Vanish II"
+    lore: "Ability Duration: +2 seconds."
     material: POTION
     amount: 2
-    cost: 10
+    cost: 8
   2:
     slot: 31
-    name: "Faster III"
-    lore: "Ability Effect: +3 Speed Levels."
+    name: "Vanish III"
+    lore: "Ability Duration: +3 seconds."
     material: POTION
     amount: 3
-    cost: 14
+    cost: 12
 Warrior:
   0:
     slot: 13

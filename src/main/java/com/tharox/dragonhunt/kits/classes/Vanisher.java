@@ -39,20 +39,10 @@ public class Vanisher extends Kit {
 
     @Override
     public void executeAbility() {
-        // Vanisher Kit Effectiveness
-        int bonusAmplifier = 0;
-
-        if (Upgrades.Effectiveness.getOrDefault(player, 0) != 0
-                && GameState.selectedKit.getOrDefault(player, "").contains("Vanisher")) {
-            bonusAmplifier = Upgrades.Effectiveness.get(player);
-        }
-
         player.sendMessage(title + HexColor.GREEN + " Kit Ability activated.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 
         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, getDuration() * 20, 0));
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, getDuration() * 20,
-                1 + bonusAmplifier));
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,
                 getDuration() * 20, 9));
 

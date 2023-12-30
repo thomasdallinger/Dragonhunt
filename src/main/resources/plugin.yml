@@ -22,3 +22,5 @@ commands:
     description: Brings you back to the lobby.
   l:
     description: Brings you back to the lobby.
+  stats:
+    description: Displays your stats or the stats of another player.

@@ -245,5 +245,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         getCommand("hub").setExecutor(new HubCommand());
         getCommand("lobby").setExecutor(new HubCommand());
         getCommand("l").setExecutor(new HubCommand());
+        getCommand("stats").setExecutor(new StatsCommand());
     }
 }

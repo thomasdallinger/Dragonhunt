@@ -6,7 +6,7 @@ import org.bukkit.Material;
 public class FlyHigh extends Modifier {
     public static String title = "Fly High";
     public static String lore = "Levitated enemies float longer.";
-    public static Material material = Material.BLUE_ICE;
+    public static Material material = Material.FEATHER;
     public static boolean positive = true;
     public static int impact = 2;
     public static boolean active = false;

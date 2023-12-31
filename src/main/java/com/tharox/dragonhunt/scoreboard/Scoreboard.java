@@ -54,7 +54,7 @@ public class Scoreboard extends ScoreboardBuilder {
     @Override
     public void update(Player player, Countdown countdown) {
         if (GameState.eloPerPlayer.getOrDefault(player, 0) >= 0) {
-            setScore(HexColor.GREEN.toString() + GameState.eloPerPlayer.getOrDefault(player, 0)
+            setScore(HexColor.GREEN + "+" + GameState.eloPerPlayer.getOrDefault(player, 0)
                     + ChatColor.WHITE + " ✪", 12);
         } else {
             setScore(HexColor.RED.toString() + GameState.eloPerPlayer.getOrDefault(player, 0)

@@ -207,7 +207,7 @@ public class RespawnAnchor implements Listener {
                 ChatColor.GRAY + "Set a new respawn point",
                 ChatColor.GRAY + "at your current location",
                 ChatColor.GRAY + "or teleport to it.",
-                ChatColor.GRAY + "Costs " + ChatColor.WHITE + "5 ❤" + ChatColor.GRAY + ".",
+                ChatColor.GRAY + "Deals " + ChatColor.WHITE + "5 ❤" + ChatColor.GRAY + " Damage.",
                 "",
                 ChatColor.GRAY + "Left-Click: " + HexColor.YELLOW + "Set Respawn Point",
                 ChatColor.GRAY + "Right-Click: " + HexColor.YELLOW + "TP to Respawn Point",

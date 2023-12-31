@@ -26,9 +26,9 @@ public class StatsCommand implements CommandExecutor {
                     + ChatColor.WHITE + ChatColor.BOLD + " Stats:");
 
             player.sendMessage("Rank: " + ChatColor.GOLD + DbValues.getRank(player)
-                    + ChatColor.GRAY + " (" + DbValues.getElo(player) + " Elo)");
+                    + ChatColor.GRAY + " (" + DbValues.getElo(player) + " ✪)");
 
-            player.sendMessage("Highest Elo: " + HexColor.YELLOW + DbValues.getHighestElo(player));
+            player.sendMessage("Highest Elo: " + HexColor.YELLOW + DbValues.getHighestElo(player) + " ✪");
 
             if (DbValues.getTotalKills(player, false) > 0) { // would be a division by 0
                 player.sendMessage("Kills: " + HexColor.YELLOW + DbValues.getTotalKills(player, true)
@@ -72,9 +72,9 @@ public class StatsCommand implements CommandExecutor {
                     + ChatColor.WHITE + ChatColor.BOLD + " Stats:");
 
             player.sendMessage("Rank: " + ChatColor.GOLD + DbValues.getRank(p)
-                    + ChatColor.GRAY + " (" + DbValues.getElo(p) + " Elo)");
+                    + ChatColor.GRAY + " (" + DbValues.getElo(p) + " ✪)");
 
-            player.sendMessage("Highest Elo: " + HexColor.YELLOW + DbValues.getHighestElo(p));
+            player.sendMessage("Highest Elo: " + HexColor.YELLOW + DbValues.getHighestElo(p) + " ✪");
 
             if (DbValues.getTotalKills(p, false) > 0) { // would be a division by 0
                 player.sendMessage("Kills: " + HexColor.YELLOW + DbValues.getTotalKills(p, true)

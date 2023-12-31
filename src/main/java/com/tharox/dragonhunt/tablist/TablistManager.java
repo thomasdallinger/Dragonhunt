@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.tablist;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.Prefixes;
+import com.tharox.dragonhunt.db.DbValues;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -45,6 +46,7 @@ public class TablistManager {
 
             team.setPrefix(Prefixes.getNamePrefix(target));
             team.addEntry(target.getName());
+            team.setSuffix(ChatColor.GRAY + " (" + DbValues.getElo(target) + " ✪)");
 
             playerCount++;
         }

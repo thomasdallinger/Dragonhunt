@@ -267,9 +267,12 @@ public class DbValues {
      * if elo < 0: remove elo
      */
     public static void updateElo(Player player, int elo) {
+        int difference = getElo(player) + elo;
+
         DatabaseExecutor.executeDatabaseHandler((con) -> {
 
-            String query = "UPDATE players SET elo = '" + getElo(player) + elo
+            // Player cannot get below 0 Elo
+            String query = "UPDATE players SET elo = '" + getElo(player) + Math.max(0, difference)
                     + "' WHERE uuid = '" + player.getUniqueId() + "'";
 
             Statement stmt = con.createStatement();

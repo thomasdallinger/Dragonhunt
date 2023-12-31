@@ -15,7 +15,6 @@ import java.util.HashMap;
 public class Coins {
     public static int advancementXP = 16; // XP awarded for advancements
     public static int playerXP = 8; // XP awarded for killing players
-    public static int chestXP = 8; // XP awarded for opening chests and minecarts
     public static int oreXP = 2; // XP awarded for mining ores that are not dropping resources
     public static int animalXP = 3; // XP awarded for killing animals
     public static int monsterXP = 5; // XP awarded for killing monsters

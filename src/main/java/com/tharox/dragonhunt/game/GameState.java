@@ -92,8 +92,6 @@ public class GameState {
      * @return a list that contains chest and minecart loot
      */
     public static ArrayList<ItemStack> getChestLoot(Player player) {
-        Coins.addXP(player, Coins.chestXP);
-
         int multiplier = 1;
         if (DoubleChestLoot.active) multiplier = 2;
 

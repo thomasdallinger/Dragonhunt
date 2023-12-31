@@ -170,8 +170,14 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/top"
                         + ChatColor.GRAY + " to teleport to the surface.");
                 player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/scout"
-                        + ChatColor.GRAY + " to view the world in " + ChatColor.WHITE + "Spectator Mode"
+                        + ChatColor.GRAY + " to go into " + ChatColor.WHITE + "Spectator Mode"
                         + ChatColor.GRAY + " for a short time.");
+                player.sendMessage(ChatColor.GRAY + "Use the " + HexColor.PURPLE + "Respawn Anchor"
+                        + ChatColor.GRAY + " to set a " + ChatColor.WHITE + "Respawn Point"
+                        + ChatColor.GRAY + " and teleport to it.");
+                player.sendMessage(ChatColor.GRAY + "Use the " + HexColor.PURPLE + "Tracker"
+                        + ChatColor.GRAY + " to track " + ChatColor.WHITE + "Players"
+                        + ChatColor.GRAY + " and " + ChatColor.WHITE + "Structures" + ChatColor.GRAY + ".");
             }
         }
     }
@@ -197,7 +203,8 @@ public class GameStart extends GameConfiguration {
                 bossBar.addPlayer(player);
             }
 
-            if ((gracePeriodCountdown.getTime() % 10 == 0 && gracePeriodCountdown.getTime() != 0) ||
+            if ((gracePeriodCountdown.getTime() % 10 == 0 && gracePeriodCountdown.getTime() != 0
+                    && gracePeriodCountdown.getTime() != 30) ||
                     (gracePeriodCountdown.getTime() <= 3 && gracePeriodCountdown.getTime() > 0)) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
                 player.sendMessage(ChatColor.GRAY + "The Grace Period ends in "

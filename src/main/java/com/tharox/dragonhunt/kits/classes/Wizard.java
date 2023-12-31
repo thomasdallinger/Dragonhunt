@@ -60,12 +60,12 @@ public class Wizard extends Kit {
                         entityLocation.getY() <= playerLocation.getY() + verticalRange) {
 
                     ((LivingEntity) entity).addPotionEffect(
-                            new PotionEffect(PotionEffectType.LEVITATION, duration * 20,
+                            new PotionEffect(PotionEffectType.LEVITATION, getDuration() * 20,
                                     levitationLevel - 1)
                     );
 
                     ((LivingEntity) entity).addPotionEffect(
-                            new PotionEffect(PotionEffectType.POISON, duration * 20, 0)
+                            new PotionEffect(PotionEffectType.POISON, getDuration() * 20, 0)
                     );
                 }
             }
@@ -76,7 +76,7 @@ public class Wizard extends Kit {
 
     @Override
     public int getDuration() {
-        return 0;
+        return duration + Upgrades.Duration.getOrDefault(player, 0);
     }
 
     @Override

@@ -736,6 +736,28 @@ Sniper:
     material: EXPERIENCE_BOTTLE
     amount: 3
     cost: 15
+Sonic:
+  0:
+    slot: 13
+    name: "Sonic Dash I"
+    lore: "Effect: +2 seconds"
+    material: STONE
+    amount: 1
+    cost: 8
+  1:
+    slot: 22
+    name: "Sonic Dash II"
+    lore: "Effect: +4 seconds"
+    material: STONE
+    amount: 2
+    cost: 16
+  2:
+    slot: 31
+    name: "Sonic Dash III"
+    lore: "Effect: +6 seconds"
+    material: STONE
+    amount: 3
+    cost: 24
 Vanisher:
   0:
     slot: 13

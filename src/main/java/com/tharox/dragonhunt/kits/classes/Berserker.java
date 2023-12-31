@@ -48,7 +48,8 @@ public class Berserker extends Kit {
                     + player.getName() + ChatColor.GRAY + " uses the " + title + ChatColor.GRAY + " Kit Ability.");
         }
 
-        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, getDuration() * 20, 9));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, getDuration() * 20,
+                9));
 
         this.runKitAbility(20, getDuration(), null, null);
     }

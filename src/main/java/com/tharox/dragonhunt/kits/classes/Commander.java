@@ -45,7 +45,7 @@ public class Commander extends Kit {
 
         player.sendMessage(title + HexColor.GREEN + " Kit Ability activated.");
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, duration * 20, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, getDuration() * 20, 0));
 
         for (Player online : Bukkit.getOnlinePlayers()) {
             online.sendMessage(Prefixes.getImportantPrefix() + Prefixes.getKitAbilityPrefix() + ChatColor.WHITE
@@ -53,7 +53,7 @@ public class Commander extends Kit {
         }
 
         // Apply Weakness 1 effect to entities in range
-        applyWeaknessEffect(radius, duration * 20);
+        applyWeaknessEffect(radius, getDuration() * 20);
 
         this.runKitAbility(20, getDuration(), null, () -> {
             boopEntities(radius, boopDistance);

@@ -96,14 +96,25 @@ public class GameEnd {
                             + ChatColor.WHITE + p.getName() + " "
                             + HexColor.YELLOW + PointsListener.scorePerPlayer.get(p.getUniqueId()));
                 }
+
+                // Add Elo based on placement (first 5 players)
+                if (index + 1 < 6)
+                    GameState.eloPerPlayer.put(player, GameState.eloPerPlayer.get(player) + 50 - index * 10);
             }
 
             // Give the player credits only after the game ended. The amount is determined by the points scored.
             DbValues.addCredits(player, PointsListener.scorePerPlayer.get(player.getUniqueId()));
-            player.sendMessage(ChatColor.GRAY + "\nYou have earned " + HexColor.YELLOW + ChatColor.BOLD
+            player.sendMessage(ChatColor.GRAY + "\nYou have earned " + HexColor.YELLOW
                     + PointsListener.scorePerPlayer.get(player.getUniqueId()) + " Credits" + ChatColor.GRAY + ".");
             player.sendMessage(ChatColor.GRAY + "You now have " + HexColor.YELLOW
-                    + DbValues.getCredits(player) + ChatColor.GRAY + " Credits" + ".");
+                    + DbValues.getCredits(player) + " Credits" + ChatColor.GRAY + ".\n\n");
+
+            // Update the player's elo only after the game ended.
+            DbValues.updateElo(player, GameState.eloPerPlayer.get(player));
+            player.sendMessage(ChatColor.GRAY + "\nYou have earned " + ChatColor.GOLD
+                    + GameState.eloPerPlayer.get(player) + " ✪" + ChatColor.GRAY + ".");
+            player.sendMessage(ChatColor.GRAY + "You now have " + ChatColor.GOLD
+                    + DbValues.getElo(player) + " ✪" + ChatColor.GRAY + ".");
         }
     }
 

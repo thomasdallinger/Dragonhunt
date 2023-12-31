@@ -68,6 +68,9 @@ public class PlayerDeathListener implements Listener {
                 killer.sendMessage(ChatColor.DARK_GRAY + "ᴋɪʟʟ ʀᴇᴡᴀʀᴅꜱ");
                 GameState.putItemInInventory(killer, GameState.createRockets(3));
 
+                // Add Elo per minute played
+                GameState.eloPerPlayer.put(player, GameState.eloPerPlayer.get(player) + (timer.getTime() / 60));
+
                 addPlayerKill(killer, player);
 
                 player.sendMessage(Prefixes.getDeathPrefix() + ChatColor.GRAY + "You have been killed by "

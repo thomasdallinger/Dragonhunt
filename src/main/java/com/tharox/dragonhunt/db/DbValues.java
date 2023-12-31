@@ -263,6 +263,22 @@ public class DbValues {
     }
 
     /**
+     * if elo > 0: add elo
+     * if elo < 0: remove elo
+     */
+    public static void updateElo(Player player, int elo) {
+        DatabaseExecutor.executeDatabaseHandler((con) -> {
+
+            String query = "UPDATE players SET elo = '" + getElo(player) + elo
+                    + "' WHERE uuid = '" + player.getUniqueId() + "'";
+
+            Statement stmt = con.createStatement();
+            stmt.execute(query);
+            stmt.close();
+        });
+    }
+
+    /**
      * @return amount of games the specific player has played
      */
     public static int getGamesPlayed(Player player) {

@@ -27,6 +27,9 @@ public class GameState {
     // modifier inventory can be closed after the first 15 seconds before the game starts
     public static boolean modifierInventoryClose = false;
 
+    // elo per player - works as cache before actual elo is updated at the end of a game
+    public static HashMap<Player, Integer> eloPerPlayer = new HashMap<>();
+
     // kit inventory can be closed after a kit has been selected
     public static HashMap<Player, Boolean> kitInventoryClose = new HashMap<>();
 

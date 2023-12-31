@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.game;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
+import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.shop.Effects;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
@@ -81,6 +82,25 @@ public class GameStart extends GameConfiguration {
             if (startCountdown.getTime() == 35) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
                 player.openInventory(modifierInventory.modifiers);
+
+                // Game officially started - elo match entry costs now come into effect
+                // If a player quits past this point elo is deducted
+                int elo = DbValues.getElo(player);
+                int entryCost;
+
+                if (elo < 200) {
+                    entryCost = 10;
+                } else if (elo < 400) {
+                    entryCost = 30;
+                } else if (elo < 600) {
+                    entryCost = 50;
+                } else if (elo < 800) {
+                    entryCost = 70;
+                } else {
+                    entryCost = 90;
+                }
+
+                GameState.eloPerPlayer.put(player, -entryCost);
             }
 
             if (startCountdown.getTime() == 20) {

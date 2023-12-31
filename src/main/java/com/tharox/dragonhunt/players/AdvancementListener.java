@@ -78,6 +78,9 @@ public class AdvancementListener implements Listener {
             int rank = DbValues.getAdvancementRank(player, advancementName);
             Coins.addXP(player, Coins.advancementXP - (rank - 1) * 2);
 
+            // Add 8 - (Rank - 1) Elo
+            GameState.eloPerPlayer.put(player, GameState.eloPerPlayer.get(player) + 8 - (rank - 1));
+
             for (Player online : Bukkit.getOnlinePlayers()) {
                 online.sendMessage(Prefixes.getAdvancementPrefix()
                         + ChatColor.AQUA + ChatColor.BOLD + "ADVANCEMENT MADE! "

@@ -53,39 +53,45 @@ public class Scoreboard extends ScoreboardBuilder {
 
     @Override
     public void update(Player player, Countdown countdown) {
+        if (GameState.eloPerPlayer.getOrDefault(player, 0) >= 0) {
+            setScore(HexColor.GREEN.toString() + GameState.eloPerPlayer.getOrDefault(player, 0)
+                    + ChatColor.WHITE + " ✪", 12);
+        } else {
+            setScore(HexColor.RED.toString() + GameState.eloPerPlayer.getOrDefault(player, 0)
+                    + ChatColor.WHITE + " ✪", 12);
+        }
+
         if (GameState.selectedKit.containsKey(player)) {
-            setScore(GameState.selectedKit.get(player), 11);
+            setScore(GameState.selectedKit.get(player), 10);
         }
 
         setScore("☻ " + Bukkit.getOnlinePlayers().size() + " "
                 + "☠ " + DbValues.getKills(player, true) + " "
-                + "✟ " + DbValues.getKills(player, false), 10);
+                + "✟ " + DbValues.getKills(player, false), 9);
 
         if (Scout.scoutAvailable.containsKey(player)) {
             if (Scout.scoutAvailable.get(player)) {
                 if (timer.getTime() % 2 == 0) {
-                    setScore("/scout available", 8);
+                    setScore("/scout available", 7);
                 } else {
-                    setScore(ChatColor.GOLD + "/scout" + ChatColor.WHITE + " available", 8);
+                    setScore(ChatColor.GOLD + "/scout" + ChatColor.WHITE + " available", 7);
                 }
             } else {
-                setScore("", 8);
+                setScore("", 7);
             }
         }
 
         if (timer.getTime() <= 900 && !GameState.playersReachedEnd) {
             setScore(ChatColor.BOLD.toString() + PlayerEndTeleport.getEyesNeeded()
                     + ChatColor.WHITE + " Eyes" + ChatColor.DARK_GRAY + " » "
-                    + ChatColor.GRAY + countdownFormat(900 - timer.getTime()), 7);
+                    + ChatColor.GRAY + countdownFormat(900 - timer.getTime()), 6);
         } else {
             setScore(HexColor.GREEN.toString() + ChatColor.BOLD + PlayerEndTeleport.getEyesNeeded()
-                    + ChatColor.WHITE + " Eyes", 7);
+                    + ChatColor.WHITE + " Eyes", 6);
         }
 
         setScore(Coins.getCoins(player) + " ⛃" + ChatColor.DARK_GRAY + " » "
-                + ChatColor.GRAY + "/shop", 6);
-
-        setScore( ChatColor.DARK_GRAY + "ꜱᴛᴀɴᴅɪɴɢꜱ", 4);
+                + ChatColor.GRAY + "/shop", 5);
 
         List<UUID> sortedKeys = GameState.sortPlayersByPoints(PointsListener.scorePerPlayer);
 

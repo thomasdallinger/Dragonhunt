@@ -10,10 +10,12 @@ import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
@@ -66,7 +68,7 @@ public class PlayerDeathListener implements Listener {
                         + HexColor.GREEN + " for " + ChatColor.DARK_GREEN + "10" + HexColor.GREEN + " seconds.");
 
                 killer.sendMessage(ChatColor.DARK_GRAY + "ᴋɪʟʟ ʀᴇᴡᴀʀᴅꜱ");
-                GameState.putItemInInventory(killer, GameState.createRockets(3));
+                GameState.putItemInInventory(killer, new ItemStack(Material.FIREWORK_ROCKET, 3));
 
                 // Add Elo per minute played
                 GameState.eloPerPlayer.put(player, GameState.eloPerPlayer.get(player) + (timer.getTime() / 60));

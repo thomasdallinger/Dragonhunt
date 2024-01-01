@@ -175,22 +175,6 @@ public class GameState {
         return item;
     }
 
-    public static ItemStack createRockets(int amount) {
-        ItemStack rockets = new ItemStack(Material.FIREWORK_ROCKET, amount);
-
-        FireworkMeta meta = (FireworkMeta) rockets.getItemMeta();
-        if (meta == null) return null;
-
-        for (int i = 0; i < 7; i++) {
-            meta.addEffect(FireworkEffect.builder().withColor(Color.RED).withColor(Color.ORANGE).
-                    with(FireworkEffect.Type.BALL).build());
-        }
-
-        meta.setPower(1);
-        rockets.setItemMeta(meta);
-        return rockets;
-    }
-
     /**
      * Moves all players on this server to the lobby server.
      * Updates the server status in the database (no longer running).

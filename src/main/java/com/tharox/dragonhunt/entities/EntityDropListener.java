@@ -66,7 +66,7 @@ public class EntityDropListener implements Listener {
                 itemToDrop = new ItemStack(Material.BOW);
                 break;
             case 10:
-                itemToDrop = GameState.createRockets(3);
+                itemToDrop = new ItemStack(Material.FIREWORK_ROCKET, 3);
                 break;
             default:
                 // Unexpected Value.

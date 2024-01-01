@@ -22,6 +22,10 @@ public class PlayerInventoryListener implements Listener {
     public void onInventoryClick(InventoryClickEvent event) {
         ItemStack item;
 
+        // Players cannot interact with the modifiers inv
+        if (event.getView().getTitle().contains("MODIFIERS"))
+            return;
+
         if (event.getAction().name().contains("HOTBAR") && event.getHotbarButton() != -1) {
             item = event.getView().getBottomInventory().getItem(event.getHotbarButton());
         } else {

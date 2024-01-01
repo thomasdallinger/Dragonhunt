@@ -12,6 +12,10 @@ commands:
     description: Opens the shop.
   s:
     description: Opens the shop.
+  modifiers:
+    description: Opens the modifiers inventory.
+  m:
+    description: Opens the modifiers inventory.
   top:
     description: Teleports the player to the surface.
   scout:

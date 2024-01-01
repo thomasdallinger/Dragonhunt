@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.modifiers.selection;
 
 import com.tharox.dragonhunt.chat.HexColor;
-import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.modifiers.classes.DragonhuntModifier;
 import com.tharox.dragonhunt.modifiers.classes.Modifier;
 import net.md_5.bungee.api.ChatColor;
@@ -17,8 +16,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class ModifierInventory {
     public Inventory modifiers;
 
-    public ModifierInventory() {
-        new ModifierSelection();
+    public ModifierInventory(boolean newSelection) {
+        if (newSelection) {
+            new ModifierSelection();
+        }
+
         createInventory();
     }
 

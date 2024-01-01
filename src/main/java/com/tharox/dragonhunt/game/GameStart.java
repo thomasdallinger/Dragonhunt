@@ -41,7 +41,7 @@ public class GameStart extends GameConfiguration {
 
     public GameStart() {
         startCountdown = new Countdown(true, 40, this::onCountdown);
-        modifierInventory = new ModifierInventory();
+        modifierInventory = new ModifierInventory(true);
         highestY = overworld.getHighestBlockYAt((int) x, (int) z);
         startLocation = new Location(overworld, x, highestY + 55, z);
 
@@ -172,6 +172,8 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/scout"
                         + ChatColor.GRAY + " to go into " + ChatColor.WHITE + "Spectator Mode"
                         + ChatColor.GRAY + " for a short time.");
+                player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/modifiers"
+                        + ChatColor.GRAY + " to see the active modifiers.");
                 player.sendMessage(ChatColor.GRAY + "Use the " + HexColor.PURPLE + "Respawn Anchor"
                         + ChatColor.GRAY + " to set a " + ChatColor.WHITE + "Respawn Point" + ChatColor.GRAY + ".");
                 player.sendMessage(ChatColor.GRAY + "Use the " + HexColor.PURPLE + "Tracker"

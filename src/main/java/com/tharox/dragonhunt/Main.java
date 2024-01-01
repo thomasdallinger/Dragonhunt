@@ -240,6 +240,8 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         getCommand("date").setExecutor(new DateCommand());
         getCommand("shop").setExecutor(new ShopCommand());
         getCommand("s").setExecutor(new ShopCommand());
+        getCommand("modifiers").setExecutor(new ModifiersCommand());
+        getCommand("m").setExecutor(new ModifiersCommand());
         getCommand("top").setExecutor(new TopCommand());
         getCommand("scout").setExecutor(new ScoutCommand());
         getCommand("hub").setExecutor(new HubCommand());

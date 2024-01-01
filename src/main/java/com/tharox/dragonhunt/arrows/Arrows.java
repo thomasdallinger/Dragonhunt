@@ -20,49 +20,67 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.Arrays;
 
 public class Arrows {
-    /**
-     * Arrow generation is started once the timer is running;
-     */
-    public Arrows() {
-        generateArrows();
-    }
+    private static BukkitRunnable arrowRunnable;
 
-    public void generateArrows() {
-        new BukkitRunnable() {
+    public static void initialize() {
+        arrowRunnable = new BukkitRunnable() {
             @Override
             public void run() {
-                for (Player player : Bukkit.getOnlinePlayers()) {
-                    ItemStack arrowStack = player.getInventory().getItem(17);
-                    ItemStack generatedArrows;
-
-                    if (arrowStack == null || (arrowStack.getType() != Material.ARROW
-                            && arrowStack.getType() != Material.TIPPED_ARROW)) {
-
-                        // if arrow effects have been unlocked AND one of the available arrow effects has been selected
-                        if (Effects.ArrowEffectsUnlocked.get(player)
-                                && Effects.ArrowEffectType.get(player).getType() == Material.TIPPED_ARROW) {
-                            ItemStack arrowToUse = Effects.ArrowEffectType.get(player);
-                            PotionMeta meta = (PotionMeta) arrowToUse.getItemMeta();
-                            // index is always 0 since there is only one effect on the arrow at a time
-                            generatedArrows = createEffectArrow(meta.getCustomEffects().get(0).getType(),
-                                    meta.getColor());
-                        } else {
-                            generatedArrows = createArrow();
-                        }
-                        if (generatedArrows != null)
-                            if (arrowStack != null && (arrowStack.getType() == Material.ARROW
-                                    || arrowStack.getType() == Material.TIPPED_ARROW))
-                                replaceCurrentArrowStack(arrowStack, generatedArrows, player);
-                            else
-                                // replaceCurrentStack -> currently not arrows or tipped arrows
-                                player.getInventory().setItem(17, generatedArrows);
-                    }
-                }
+                sharedLogic(true);
             }
-        }.runTaskTimer(Main.getInstance(), 0, 100);
+        };
+
+        // Start the runnable at the beginning of the game
+        startRunnable();
     }
 
-    private ItemStack createArrow() {
+    public static void startRunnable() {
+        arrowRunnable.runTaskTimer(Main.getInstance(), 0, 100);
+    }
+
+    // Static method to execute the logic immediately
+    public static void executeLogicImmediately() {
+        // Do not add an arrow but just change the effect of the arrow stack
+        sharedLogic(false);
+    }
+
+    // Logic that should be executed both periodically and immediately
+    private static void sharedLogic(boolean addArrow) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            ItemStack arrowStack = player.getInventory().getItem(17);
+            ItemStack generatedArrows;
+
+            // if arrow effects have been unlocked AND one of the available arrow effects has been selected
+            if (Effects.ArrowEffectsUnlocked.get(player)
+                    && Effects.ArrowEffectType.get(player).getType() == Material.TIPPED_ARROW) {
+                ItemStack arrowToUse = Effects.ArrowEffectType.get(player);
+                PotionMeta meta = (PotionMeta) arrowToUse.getItemMeta();
+                // index is always 0 since there is only one effect on the arrow at a time
+                generatedArrows = createEffectArrow(meta.getCustomEffects().get(0).getType(),
+                        meta.getColor());
+            } else {
+                generatedArrows = createArrow();
+            }
+
+            if (generatedArrows != null) {
+                if (arrowStack != null && (arrowStack.getType() == Material.ARROW
+                        || arrowStack.getType() == Material.TIPPED_ARROW)) {
+
+                    // Keep the arrow amount the same (-1 +1 means +0)
+                    if (!addArrow) {
+                        arrowStack.setAmount(arrowStack.getAmount() - 1);
+                    }
+
+                    replaceCurrentArrowStack(arrowStack, generatedArrows, player);
+                } else {
+                    // replace current stack -> currently not arrows or tipped arrows
+                    player.getInventory().setItem(17, generatedArrows);
+                }
+            }
+        }
+    }
+
+    private static ItemStack createArrow() {
         ItemStack item = new ItemStack(Material.ARROW);
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
@@ -73,7 +91,7 @@ public class Arrows {
         return item;
     }
 
-    private ItemStack createEffectArrow(PotionEffectType effect, Color color) {
+    private static ItemStack createEffectArrow(PotionEffectType effect, Color color) {
         int duration = 120; // In ticks.
         int amplifier = 1;
 
@@ -105,7 +123,7 @@ public class Arrows {
     /**
      * Max amount of the arrow stack defined in this method.
      */
-    private void replaceCurrentArrowStack(ItemStack currentArrowStack, ItemStack generatedArrows, Player player) {
+    private static void replaceCurrentArrowStack(ItemStack currentArrowStack, ItemStack generatedArrows, Player player) {
         int stackAmount = currentArrowStack.getAmount();
         int generatedAmount = generatedArrows.getAmount();
         generatedArrows.setAmount(Math.min((stackAmount + generatedAmount), 32));

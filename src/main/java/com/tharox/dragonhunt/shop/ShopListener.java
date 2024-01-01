@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.shop;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.coins.Coins;
@@ -105,7 +106,9 @@ public class ShopListener implements Listener {
             }
 
             Effects.ArrowEffectType.put(player, item);
+            Arrows.executeLogicImmediately();
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_USE, 1, 1);
+
             brewingInventory = new ShopInventory(Main.getInstance().getConfig(), player);
             player.openInventory(brewingInventory.arrowEffects);
             return;

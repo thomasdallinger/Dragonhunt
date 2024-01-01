@@ -74,7 +74,7 @@ public class GameStart extends GameConfiguration {
             bossBar = Bukkit.createBossBar("", BarColor.YELLOW, BarStyle.SEGMENTED_10);
             PlayerDamageListener.gracePeriodActive = true;
 
-            new Arrows(); // start arrow generation
+            Arrows.initialize(); // start arrow generation
             new ElytraSwapRunnable().runTaskTimer(Main.getInstance(), 0, 5);
         }
 

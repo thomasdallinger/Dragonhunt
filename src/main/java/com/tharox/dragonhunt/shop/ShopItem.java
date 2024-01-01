@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.shop;
 
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.coins.Coins;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -16,6 +16,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class ShopItem {
     private final int SLOT;
@@ -83,7 +84,7 @@ public class ShopItem {
             if (NAME.contains("»"))
                 itemToCreate = setEnchantmentAndName(itemToCreate);
 
-            // Enchantments
+                // Enchantments
             else if (NAME.contains("Sharpness"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.Sharpness.get(player));
             else if (NAME.contains("Knockback"))
@@ -108,7 +109,7 @@ public class ShopItem {
             else if (NAME.contains("Feather Falling"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Enchantments.FeatherFalling.get(player));
 
-            // Permanent Effects
+                // Permanent Effects
             else if (NAME.contains("Speed"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Speed.get(player));
             else if (NAME.contains("Jump Boost"))
@@ -124,7 +125,7 @@ public class ShopItem {
             else if (NAME.contains("Strength"))
                 itemToCreate = checkIfUnlocked(itemToCreate, Effects.Strength.get(player));
 
-            // Negative Effects
+                // Negative Effects
             else if (NAME.contains("Unlock Arrow Effects")) {
                 itemToCreate = unlockArrowEffects(itemToCreate, player);
             } else {
@@ -138,13 +139,11 @@ public class ShopItem {
                 itemToCreate = new ItemStack(MATERIAL, AMOUNT);
                 itemToCreate = checkIfUnlocked(itemToCreate,
                         Upgrades.CooldownUpgradeLvl.getOrDefault(player, 1));
-            }
-            else if (LORE.contains("Duration")) {
+            } else if (LORE.contains("Duration")) {
                 itemToCreate = new ItemStack(MATERIAL, AMOUNT);
                 itemToCreate = checkIfUnlocked(itemToCreate,
                         Upgrades.DurationUpgradeLvl.getOrDefault(player, 1));
-            }
-            else if (LORE.contains("Effect")) {
+            } else if (LORE.contains("Effect")) {
                 itemToCreate = new ItemStack(MATERIAL, AMOUNT);
                 itemToCreate = checkIfUnlocked(itemToCreate,
                         Upgrades.EffectivenessUpgradeLvl.getOrDefault(player, 1));
@@ -277,12 +276,34 @@ public class ShopItem {
      * Applies a dummy effect so the PotionEffectType can be used later.
      */
     private ItemStack checkIfArrowEffectsUnlocked(ItemStack item, Player player) {
-        if(COLOR == 0) return null;
+        if (COLOR == 0) return null;
         PotionMeta meta = (PotionMeta) item.getItemMeta();
         if (meta == null) return null;
 
         if (effectType != null) {
             meta.addCustomEffect(new PotionEffect(effectType, 0, 0), true);
+        }
+
+        ItemStack arrowStack = player.getInventory().getItem(17);
+        PotionMeta arrowStackMeta = null;
+
+        if (arrowStack != null && arrowStack.getType() == Material.TIPPED_ARROW) {
+            arrowStackMeta = (PotionMeta) arrowStack.getItemMeta();
+        }
+
+        // item is selected
+        if (arrowStackMeta != null && Objects.equals(arrowStackMeta.getCustomEffects().get(0).getType(),
+                meta.getCustomEffects().get(0).getType())) {
+            meta.setDisplayName(ChatColor.DARK_GREEN.toString() + ChatColor.BOLD + NAME +
+                    HexColor.GREEN + " ꜱᴇʟᴇᴄᴛᴇᴅ");
+            meta.setLore(Arrays.asList(
+                    ChatColor.GRAY + LORE,
+                    "",
+                    HexColor.GREEN + "Currently selected!"
+            ));
+            item.setItemMeta(meta);
+
+            return item;
         }
 
         // item is available

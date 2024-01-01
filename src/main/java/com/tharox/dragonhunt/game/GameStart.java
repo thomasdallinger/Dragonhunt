@@ -40,7 +40,7 @@ public class GameStart extends GameConfiguration {
     // used if the highest block at x: 0 and z: 0 is within 55 blocks of the startLocation
 
     public GameStart() {
-        startCountdown = new Countdown(true, 35, this::onCountdown);
+        startCountdown = new Countdown(true, 40, this::onCountdown);
         modifierInventory = new ModifierInventory();
         highestY = overworld.getHighestBlockYAt((int) x, (int) z);
         startLocation = new Location(overworld, x, highestY + 55, z);
@@ -79,7 +79,7 @@ public class GameStart extends GameConfiguration {
         }
 
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (startCountdown.getTime() == 35) {
+            if (startCountdown.getTime() == 40) {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
                 player.openInventory(modifierInventory.modifiers);
 
@@ -103,19 +103,19 @@ public class GameStart extends GameConfiguration {
                 GameState.eloPerPlayer.put(player, -entryCost);
             }
 
-            if (startCountdown.getTime() == 20) {
+            if (startCountdown.getTime() == 25) {
                 GameState.modifierInventoryClose = true;
                 player.closeInventory();
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
             }
 
-            if (startCountdown.getTime() == 15) {
+            if (startCountdown.getTime() == 20) {
                 // Each player has a different kits inventory due to kit unlocks.
                 KitInventory kitInventory = new KitInventory(player);
                 player.openInventory(kitInventory.kits);
             }
 
-            if (startCountdown.getTime() <= 20 && startCountdown.getTime() > 3) {
+            if (startCountdown.getTime() <= 25 && startCountdown.getTime() > 3) {
                 player.sendTitle(HexColor.PURPLE + "Starting in",
                         ChatColor.WHITE.toString() + ChatColor.BOLD + "» " + startCountdown.getTime() + " «"
                         , 0, 25, 0);
@@ -173,8 +173,7 @@ public class GameStart extends GameConfiguration {
                         + ChatColor.GRAY + " to go into " + ChatColor.WHITE + "Spectator Mode"
                         + ChatColor.GRAY + " for a short time.");
                 player.sendMessage(ChatColor.GRAY + "Use the " + HexColor.PURPLE + "Respawn Anchor"
-                        + ChatColor.GRAY + " to set a " + ChatColor.WHITE + "Respawn Point"
-                        + ChatColor.GRAY + " and teleport to it.");
+                        + ChatColor.GRAY + " to set a " + ChatColor.WHITE + "Respawn Point" + ChatColor.GRAY + ".");
                 player.sendMessage(ChatColor.GRAY + "Use the " + HexColor.PURPLE + "Tracker"
                         + ChatColor.GRAY + " to track " + ChatColor.WHITE + "Players"
                         + ChatColor.GRAY + " and " + ChatColor.WHITE + "Structures" + ChatColor.GRAY + ".");

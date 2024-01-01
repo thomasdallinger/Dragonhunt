@@ -60,6 +60,7 @@ public class PlayerEndTeleport implements Listener {
                 Location location = player.getLocation();
 
                 location.getBlock().setType(Material.END_PORTAL);
+                player.sendTitle("", HexColor.GREEN + "ᴛᴇʟᴇᴘᴏʀᴛᴇᴅ", 0, 30, 10);
 
                 Bukkit.getScheduler().runTaskLater(Main.getInstance(),
                         task -> location.getBlock().setType(Material.AIR), 5L);

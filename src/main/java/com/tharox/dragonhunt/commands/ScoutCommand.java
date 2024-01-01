@@ -64,6 +64,9 @@ public class ScoutCommand implements CommandExecutor {
                                     PotionEffectType.WEAKNESS, 10 * 20, 2));
                             player.addPotionEffect(new PotionEffect(
                                     PotionEffectType.SLOW, 10 * 20, 1));
+
+                            player.sendTitle("", HexColor.GREEN + "ᴛᴇʟᴇᴘᴏʀᴛᴇᴅ",
+                                    0, 30, 10);
                             player.sendMessage(HexColor.GREEN + "Successfully teleported to your scouted location.");
                             player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "Weakness 3 "
                                     + ChatColor.GRAY + "applied.");

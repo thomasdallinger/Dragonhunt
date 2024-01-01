@@ -149,8 +149,11 @@ public class RespawnAnchor implements Listener {
                         }
 
                         player.setHealth(player.getHealth() - 10.0);
+
                         player.sendMessage(HexColor.GREEN + "Teleported to your Respawn Point.");
                         player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤ Penalty");
+                        player.sendTitle("", HexColor.GREEN + "ᴛᴇʟᴇᴘᴏʀᴛᴇᴅ", 0, 30, 10);
+
                         player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 0.5f, 1);
                         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
 

@@ -272,7 +272,7 @@ public class DbValues {
         DatabaseExecutor.executeDatabaseHandler((con) -> {
 
             // Player cannot get below 0 Elo
-            String query = "UPDATE players SET elo = '" + getElo(player) + Math.max(0, difference)
+            String query = "UPDATE players SET elo = '" + (getElo(player) + Math.max(0, difference))
                     + "' WHERE uuid = '" + player.getUniqueId() + "'";
 
             Statement stmt = con.createStatement();

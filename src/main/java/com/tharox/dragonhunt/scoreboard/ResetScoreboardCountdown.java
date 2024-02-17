@@ -29,10 +29,7 @@ public class ResetScoreboardCountdown {
 
                     // Make a new scout available
                     for (Player player : Bukkit.getOnlinePlayers()) {
-                        Scout.scoutAvailable.put(player, true);
-                        player.sendMessage(Prefixes.getImportantPrefix() + ChatColor.WHITE + "/scout"
-                                + ChatColor.GRAY + " is now " + HexColor.GREEN + "available"
-                                + ChatColor.GRAY + " for all players.");
+                        // Currently unused
                     }
                 }
             }

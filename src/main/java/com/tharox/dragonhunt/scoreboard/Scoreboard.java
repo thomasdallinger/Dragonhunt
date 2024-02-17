@@ -69,8 +69,8 @@ public class Scoreboard extends ScoreboardBuilder {
                 + "☠ " + DbValues.getKills(player, true) + " "
                 + "✟ " + DbValues.getKills(player, false), 9);
 
-        if (Scout.scoutAvailable.containsKey(player)) {
-            if (Scout.scoutAvailable.get(player)) {
+        if (Scout.scoutCooldown.containsKey(player)) {
+            if (Scout.scoutCooldown.get(player) < timer.getTime()) {
                 if (timer.getTime() % 2 == 0) {
                     setScore("/scout available", 7);
                 } else {

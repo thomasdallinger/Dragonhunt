@@ -7,10 +7,7 @@ import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.scout.Scout;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -41,7 +38,8 @@ public class ScoutCommand implements CommandExecutor {
 
             if (args.length == 0) {
                 // Cancel the currently active scout
-                Scout.scoutAvailable.put(player, false);
+                Scout.scoutCooldown.put(player, timer.getTime() + 120);
+                player.setCooldown(Material.EMERALD, 120 * 20);
                 return true;
             }
 
@@ -56,7 +54,8 @@ public class ScoutCommand implements CommandExecutor {
 
                     } else {
                         // Cancel the currently active scout
-                        Scout.scoutAvailable.put(player, false);
+                        Scout.scoutCooldown.put(player, timer.getTime() + 120);
+                        player.setCooldown(Material.EMERALD, 120 * 20);
 
                         Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
                             player.teleport(location);
@@ -92,8 +91,8 @@ public class ScoutCommand implements CommandExecutor {
             }
         }
 
-        if (!Scout.scoutAvailable.get(player)) {
-            player.sendMessage(Prefixes.getErrorPrefix() + "You do not have a Scout available.");
+        if (Scout.scoutCooldown.get(player) >= timer.getTime()) {
+            player.sendMessage(Prefixes.getErrorPrefix() + "Your ability to scout is on cooldown.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return false;
         }
@@ -113,9 +112,7 @@ public class ScoutCommand implements CommandExecutor {
                 + ChatColor.WHITE + "/scout" + ChatColor.GRAY + " again.");
         player.sendMessage(ChatColor.GRAY + "Teleport to your desired location using "
                 + ChatColor.WHITE + "/scout tp" + ChatColor.GRAY + ".");
-
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
 
         for (Player online : Bukkit.getOnlinePlayers()) {
             online.sendMessage(ChatColor.WHITE + player.getName() + ChatColor.GRAY

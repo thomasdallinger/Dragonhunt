@@ -106,8 +106,6 @@ public class ScoutCommand implements CommandExecutor {
             return false;
         }
 
-        // Player loses 5 hearts before being put into Spectator Mode.
-        player.setHealth(player.getHealth() - 10.0);
         new Scout(player);
 
         player.sendMessage(HexColor.GREEN + "Scout activated.");
@@ -115,7 +113,6 @@ public class ScoutCommand implements CommandExecutor {
                 + ChatColor.WHITE + "/scout" + ChatColor.GRAY + " again.");
         player.sendMessage(ChatColor.GRAY + "Teleport to your desired location using "
                 + ChatColor.WHITE + "/scout tp" + ChatColor.GRAY + ".");
-        player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤ Penalty");
 
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
         player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);

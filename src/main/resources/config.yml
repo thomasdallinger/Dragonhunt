@@ -1,30 +1,60 @@
 # menu item: no cost!
 shop:
   0:
-    slot: 19
+    slot: 10
     name: "» Enchantments"
     lore: "Upgrade your gear.                  "
     material: ENCHANTED_BOOK
     amount: 1
   1:
-    slot: 21
+    slot: 11
     name: "» Permanent Effects"
     lore: "Unlock permanent positive effects.  "
     material: POTION
     amount: 1
     color: 0x22FF4C
   2:
-    slot: 23
+    slot: 19
     name: "» Arrow Effects"
     lore: "Unlock effects for arrows.          "
     material: TIPPED_ARROW
     amount: 1
     color: 0x000000
   3:
-    slot: 25
+    slot: 20
     name: "» Kit Upgrades"
     lore: "Upgrade your kit.                   "
     material: NETHER_STAR
+    amount: 1
+  4:
+    slot: 13
+    name: "» Scout"
+    lore: "Spectate and teleport.              "
+    material: EMERALD
+    amount: 1
+  5:
+    slot: 14
+    name: "» Set Respawn Point"
+    lore: "... at your current location.       "
+    material: RESPAWN_ANCHOR
+    amount: 1
+  6:
+    slot: 15
+    name: "» Teleport to Top"
+    lore: "Get to the surface quickly.         "
+    material: GRASS_BLOCK
+    amount: 1
+  7:
+    slot: 16
+    name: "» Show Modifiers"
+    lore: "See all active modifiers.           "
+    material: RED_CONCRETE
+    amount: 1
+  8:
+    slot: 23
+    name: "» Teleport to Respawn Point"
+    lore: "Instant teleportation.              "
+    material: ENDER_PEARL
     amount: 1
 enchanting:
   0:

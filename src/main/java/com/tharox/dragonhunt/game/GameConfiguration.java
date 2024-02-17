@@ -120,7 +120,7 @@ public class GameConfiguration {
             player.getInventory().clear();
 
             // adds general items to the player's inventory
-            player.getInventory().setItem(7, new ItemStack(Material.GRASS_BLOCK));
+            player.getInventory().setItem(7, GameState.getShopItem());
             player.getInventory().setItemInOffHand(GameState.addItem(new ItemStack(Material.SHIELD)));
         }
     }

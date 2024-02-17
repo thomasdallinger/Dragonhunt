@@ -43,7 +43,6 @@ public class TopCommand implements CommandExecutor {
         }
 
         // Player has to have more than 5 hearts.
-        // Players lose 5 hearts upon being teleported to the surface.
         if (player.getHealth() < 10.0) {
             player.sendMessage(Prefixes.getErrorPrefix() + "You need to have more than 5 ❤ " +
                     "to be able to teleport to the surface.");
@@ -51,15 +50,10 @@ public class TopCommand implements CommandExecutor {
             return false;
         }
 
-        player.setHealth(player.getHealth() - 10.0);
         player.teleport(new Location(world, x, world.getHighestBlockYAt((int) x, (int) z) + 1, z));
-
         player.sendMessage(HexColor.GREEN + "Teleported to the surface.");
-        player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "-5 ❤ Penalty");
         player.sendTitle("", HexColor.GREEN + "ᴛᴇʟᴇᴘᴏʀᴛᴇᴅ", 0, 30, 10);
-
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
-        player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT, 1, 1);
 
         return true;
     }

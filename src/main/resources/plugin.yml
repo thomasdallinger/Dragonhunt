@@ -20,6 +20,8 @@ commands:
     description: Teleports the player to the surface.
   scout:
     description: Players can be in Spectator Mode for a short time.
+  respawn:
+    description: Sets your respawn point at your current location.
   hub:
     description: Brings you back to the lobby.
   lobby:

@@ -104,7 +104,7 @@ public class DimensionListener implements Listener {
 
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.END_PORTAL) {
             // Give the player the tracker back in The End
-            player.getInventory().setItem(7, new ItemStack(Material.GRASS_BLOCK));
+            player.getInventory().setItem(7, GameState.getShopItem());
         }
     }
 }

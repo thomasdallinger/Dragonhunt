@@ -47,16 +47,29 @@ public class ShopListener implements Listener {
         // Inventory is the shop menu
         if (event.getView().getTitle().contains("SHOP MENU")) {
             player.closeInventory();
-            player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
 
             if (itemName.contains("Enchantments")) {
                 player.openInventory(brewingInventory.enchantments);
+                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
             } else if (itemName.contains("Permanent")) {
                 player.openInventory(brewingInventory.permanentEffects);
+                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
             } else if (itemName.contains("Arrow")) {
                 player.openInventory(brewingInventory.arrowEffects);
+                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
             } else if (itemName.contains("Kit")) {
                 player.openInventory(brewingInventory.kitUpgrades);
+                player.playSound(player.getLocation(), Sound.BLOCK_CHEST_OPEN, 1, 1);
+            } else if (itemName.contains("Scout")) {
+                player.performCommand("scout");
+            } else if (itemName.contains("Set Respawn Point")) {
+                player.performCommand("respawn");
+            } else if (itemName.contains("Teleport to Top")) {
+                player.performCommand("top");
+            } else if (itemName.contains("Show Modifiers")) {
+                player.performCommand("modifiers");
+            } else if (itemName.contains("Teleport to Respawn Point")) {
+                player.performCommand("respawn tp");
             }
 
             return;

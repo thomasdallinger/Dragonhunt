@@ -179,6 +179,25 @@ public class GameState {
         return item;
     }
 
+    public static ItemStack getShopItem() {
+        ItemStack item = new ItemStack(Material.EMERALD);
+        item.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
+        ItemMeta meta = item.getItemMeta();
+        if (meta == null) return null;
+
+        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Shop");
+        meta.setLore(Arrays.asList(
+                ChatColor.GRAY + "Left-Click: " + ChatColor.WHITE + "Use Scout",
+                ChatColor.GRAY + "Right-Click: " + HexColor.YELLOW + "Open Shop"));
+
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+
+        item.setItemMeta(meta);
+
+        return item;
+    }
+
     /**
      * Moves all players on this server to the lobby server.
      * Updates the server status in the database (no longer running).

@@ -39,7 +39,7 @@ public class GameConfiguration {
 
         WorldBorder worldBorder = overworld.getWorldBorder();
         worldBorder.setCenter(new Location(overworld, x, 0, z));
-        worldBorder.setSize(2000);
+        worldBorder.setSize(1000);
         worldBorder.setDamageAmount(0);
     }
 
@@ -61,7 +61,7 @@ public class GameConfiguration {
 
         WorldBorder worldBorder = nether.getWorldBorder();
         worldBorder.setCenter(new Location(nether, 0, 0, 0));
-        worldBorder.setSize(4000);
+        worldBorder.setSize(3000);
         worldBorder.setDamageAmount(0);
     }
 
@@ -80,6 +80,12 @@ public class GameConfiguration {
         end.setDifficulty(Difficulty.NORMAL);
         end.setGameRule(GameRule.KEEP_INVENTORY, true);
         end.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
+
+        // avoid players flying in the endless world with elytra and rockets
+        WorldBorder worldBorder = end.getWorldBorder();
+        worldBorder.setCenter(new Location(end, 0, 0, 0));
+        worldBorder.setSize(1000);
+        worldBorder.setDamageAmount(0);
     }
 
     /**

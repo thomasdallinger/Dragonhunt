@@ -98,8 +98,9 @@ public class GameState {
 
         ArrayList<ItemStack> chestLoot = new ArrayList<>();
         chestLoot.add(new ItemStack(Material.DIAMOND, 2 * multiplier));
-        chestLoot.add(new ItemStack(Material.OBSIDIAN, 2 * multiplier));
-        chestLoot.add(new ItemStack(Material.IRON_INGOT, 4 * multiplier));
+        chestLoot.add(new ItemStack(Material.GOLD_INGOT, 4 * multiplier));
+        chestLoot.add(new ItemStack(Material.IRON_INGOT, 5 * multiplier));
+        chestLoot.add(new ItemStack(Material.COOKED_BEEF, 2 * multiplier));
 
         for (ItemStack item : chestLoot) {
             printItemReceivedMessage(player, item);

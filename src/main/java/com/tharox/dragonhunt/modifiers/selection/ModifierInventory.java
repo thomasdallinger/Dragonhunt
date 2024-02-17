@@ -15,8 +15,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class ModifierInventory {
     public Inventory modifiers;
+    private boolean newSelection;
 
     public ModifierInventory(boolean newSelection) {
+        this.newSelection = newSelection;
+
         if (newSelection) {
             new ModifierSelection();
         }
@@ -55,10 +58,13 @@ public class ModifierInventory {
                                     (String) modifierClass.getField("lore").get(null),
                                     (Boolean) modifierClass.getField("active").get(null));
 
-                            for (Player player : Bukkit.getOnlinePlayers()) {
-                                if (title != null && lore != null) {
-                                    player.sendMessage(title + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + lore);
-                                    player.setPlayerListFooter(player.getPlayerListFooter() + title + "\n");
+                            // Display active modifiers in chat and tablist only at the start of the game.
+                            if (newSelection) {
+                                for (Player player : Bukkit.getOnlinePlayers()) {
+                                    if (title != null && lore != null) {
+                                        player.sendMessage(title + ChatColor.DARK_GRAY + ": " + ChatColor.GRAY + lore);
+                                        player.setPlayerListFooter(player.getPlayerListFooter() + title + "\n");
+                                    }
                                 }
                             }
 

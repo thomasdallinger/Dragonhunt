@@ -84,7 +84,7 @@ public class GameConfiguration {
         // avoid players flying in the endless world with elytra and rockets
         WorldBorder worldBorder = end.getWorldBorder();
         worldBorder.setCenter(new Location(end, 0, 0, 0));
-        worldBorder.setSize(1000);
+        worldBorder.setSize(400);
         worldBorder.setDamageAmount(0);
     }
 

@@ -39,7 +39,7 @@ public class EntityDropListener implements Listener {
 
         switch (dropIndex) {
             case 1:
-                itemToDrop = new ItemStack(Material.COOKED_BEEF, 2);
+                itemToDrop = new ItemStack(Material.COOKED_BEEF, 3);
                 break;
             case 2:
                 itemToDrop = new ItemStack(Material.GOLDEN_APPLE);
@@ -51,10 +51,10 @@ public class EntityDropListener implements Listener {
                 itemToDrop = new ItemStack(Material.DIAMOND);
                 break;
             case 5:
-                itemToDrop = new ItemStack(Material.BLACKSTONE, 12);
+                itemToDrop = new ItemStack(Material.BLACKSTONE, 16);
                 break;
             case 6:
-                itemToDrop = new ItemStack(Material.OBSIDIAN, 2);
+                itemToDrop = new ItemStack(Material.ENDER_PEARL, 2);
                 break;
             case 7:
                 itemToDrop = new ItemStack(Material.DIAMOND, 2);

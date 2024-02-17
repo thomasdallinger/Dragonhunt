@@ -38,8 +38,8 @@ public class ScoutCommand implements CommandExecutor {
 
             if (args.length == 0) {
                 // Cancel the currently active scout
-                Scout.scoutCooldown.put(player, timer.getTime() + 120);
-                player.setCooldown(Material.EMERALD, 120 * 20);
+                Scout.scoutCooldown.put(player, timer.getTime() + Scout.COOLDOWN);
+                player.setCooldown(Material.EMERALD, Scout.COOLDOWN * 20);
                 return true;
             }
 
@@ -54,8 +54,8 @@ public class ScoutCommand implements CommandExecutor {
 
                     } else {
                         // Cancel the currently active scout
-                        Scout.scoutCooldown.put(player, timer.getTime() + 120);
-                        player.setCooldown(Material.EMERALD, 120 * 20);
+                        Scout.scoutCooldown.put(player, timer.getTime() + Scout.COOLDOWN);
+                        player.setCooldown(Material.EMERALD, Scout.COOLDOWN * 20);
 
                         Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
                             player.teleport(location);

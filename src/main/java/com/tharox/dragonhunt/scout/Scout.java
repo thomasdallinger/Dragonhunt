@@ -16,8 +16,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 
 public class Scout {
+    public static final int COOLDOWN = 120;
     // Used to determine if a scout is currently active, too.
-    public static HashMap<Player, Boolean> scoutAvailable = new HashMap<>();
     public static HashMap<Player, Integer> scoutCooldown = new HashMap<>();
     // Location the player started the scout from.
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
@@ -48,8 +48,8 @@ public class Scout {
                     player.sendMessage(HexColor.RED + "Scout ended.");
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 
-                    scoutCooldown.put(player, timer.getTime() + 120);
-                    player.setCooldown(Material.EMERALD, 120 * 20);
+                    scoutCooldown.put(player, timer.getTime() + Scout.COOLDOWN);
+                    player.setCooldown(Material.EMERALD, Scout.COOLDOWN * 20);
                     spectateLocation.remove(player);
 
                     cancel();

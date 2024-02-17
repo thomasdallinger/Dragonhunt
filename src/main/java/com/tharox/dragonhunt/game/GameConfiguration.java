@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.game;
 
-import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
@@ -9,7 +8,6 @@ import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.scout.Scout;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -103,7 +101,7 @@ public class GameConfiguration {
             PointsListener.scorePerPlayer.put(player.getUniqueId(), 0);
 
             // when the game starts, players won't have the ability to scout
-            Scout.scoutCooldown.put(player, 120);
+            Scout.scoutCooldown.put(player, Scout.COOLDOWN);
 
             // removes all active potion effects players may have
             for (PotionEffect effect : player.getActivePotionEffects())

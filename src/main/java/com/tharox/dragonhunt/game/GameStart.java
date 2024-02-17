@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.game;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.scout.Scout;
 import com.tharox.dragonhunt.shop.Effects;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
@@ -153,7 +154,7 @@ public class GameStart extends GameConfiguration {
                 GameState.flySpeedZero.put(player, false);
 
                 // Set cooldown on Emerald to show scout cooldown
-                player.setCooldown(Material.EMERALD, 120 * 20);
+                player.setCooldown(Material.EMERALD, Scout.COOLDOWN * 20);
 
                 if (BonusHearts.active) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,

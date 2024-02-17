@@ -74,7 +74,7 @@ public class Timer {
                     }
                 }
 
-                if (title.contains("Tracker") || title.contains("Respawn Anchor"))
+                if (title.contains("Shop"))
                     continue;
 
                 // Kit item

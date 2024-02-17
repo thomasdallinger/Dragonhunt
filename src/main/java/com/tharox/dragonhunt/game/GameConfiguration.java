@@ -9,6 +9,7 @@ import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.scout.Scout;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
@@ -119,12 +120,8 @@ public class GameConfiguration {
             player.getInventory().clear();
 
             // adds general items to the player's inventory
-            player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
+            player.getInventory().setItem(7, new ItemStack(Material.GRASS_BLOCK));
             player.getInventory().setItemInOffHand(GameState.addItem(new ItemStack(Material.SHIELD)));
-
-            // set default TRACKER values, nobody is tracked when the player receives the TRACKER
-            Main.getInstance().getTracker().playerTracksName.put(player, null);
-            Main.getInstance().getTracker().playerTracksIndex.put(player, 0);
         }
     }
 }

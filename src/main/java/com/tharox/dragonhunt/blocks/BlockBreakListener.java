@@ -113,7 +113,6 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.GILDED_BLACKSTONE, new ItemStack(Material.GOLD_INGOT, 2));
         materials.put(Material.GRAVEL, new ItemStack(Material.FLINT)); // for Flint and Steel
         materials.put(Material.CLAY_BALL, new ItemStack(Material.FLINT)); // for Flint and Steel
-        materials.put(Material.GLOWSTONE_DUST, new ItemStack(Material.AIR)); // no way to craft Respawn Anchors
 
         if (Iron.active) {
             materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 5));

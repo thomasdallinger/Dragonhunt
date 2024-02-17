@@ -28,7 +28,6 @@ import com.tharox.dragonhunt.shop.ShopListener;
 import com.tharox.dragonhunt.tablist.TablistManager;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
-import com.tharox.dragonhunt.tracker.Tracker;
 import com.tharox.dragonhunt.vehicles.VehicleListener;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -49,7 +48,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
 
     public Timer timer;
     public Countdown scoreboardCountdown; // single countdown for all player scoreboards (started in GameStart)
-    public Tracker tracker; // single tracker for all players
     private TablistManager tablistManager;
 
     @Override
@@ -68,7 +66,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         timer = new Timer(false, 0);
         scoreboardCountdown = new Countdown(false, 180);
         ResetScoreboardCountdown.countdownHitsZero(Main.getInstance().getScoreboardCountdown());
-        tracker = new Tracker();
         tablistManager = new TablistManager();
         new CustomRecipes(); // adds all custom recipes to the game
         setWorldTime();
@@ -163,10 +160,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         return scoreboardCountdown;
     }
 
-    public Tracker getTracker() {
-        return tracker;
-    }
-
     public TablistManager getTablistManager() {
         return tablistManager;
     }
@@ -228,8 +221,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new PlayerMoveListener(), this);
         pluginManager.registerEvents(new PlayerRespawnListener(), this);
         pluginManager.registerEvents(new PointsListener(), this);
-
-        pluginManager.registerEvents(tracker, this);
     }
 
     private void commandRegistration() {

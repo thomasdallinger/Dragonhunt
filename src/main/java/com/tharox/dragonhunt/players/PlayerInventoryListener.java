@@ -32,7 +32,7 @@ public class PlayerInventoryListener implements Listener {
             item = event.getCurrentItem();
         }
 
-        // Tracker = 7, Grappler / END Teleport = 8, Generated Arrows = 17
+        // Shop = 7, Grappler / END Teleport = 8, Generated Arrows = 17
         if (event.getHotbarButton() == 7 || event.getHotbarButton() == 8
                 || event.getHotbarButton() == 17) {
             event.setCancelled(true);
@@ -89,7 +89,7 @@ public class PlayerInventoryListener implements Listener {
 
         String displayName = item.getItemMeta().getDisplayName();
 
-        if (displayName.contains("Tracker")
+        if (displayName.contains("Shop")
                 || displayName.contains(KitClass.ASSASSIN)
                 || displayName.contains(KitClass.TANK)
                 || displayName.contains(KitClass.SUPPORT)
@@ -111,7 +111,7 @@ public class PlayerInventoryListener implements Listener {
         if (offHandItem.getItemMeta() == null) return;
 
         String displayName = offHandItem.getItemMeta().getDisplayName();
-        if (displayName.contains("Tracker")
+        if (displayName.contains("Shop")
                 || displayName.contains(KitClass.ASSASSIN)
                 || displayName.contains(KitClass.TANK)
                 || displayName.contains(KitClass.SUPPORT)

@@ -83,7 +83,7 @@ public class PlayerEndTeleport implements Listener {
                         if (item.getType() == Material.ENDER_EYE && item.getAmount() >= getEyesNeeded()) {
                             inventory.remove(item);
 
-                            // replace the Tracker with the END TELEPORTER item
+                            // replace the Shop with the END TELEPORTER item
                             inventory.setItem(7, createEndTeleport());
                             player.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + ChatColor.BOLD
                                     + "You can now enter The End.");

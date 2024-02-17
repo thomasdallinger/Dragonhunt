@@ -8,6 +8,7 @@ import com.tharox.dragonhunt.modifiers.classes.Bastion;
 import com.tharox.dragonhunt.players.PlayerEndTeleport;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,6 +17,7 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.generator.structure.Structure;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.StructureSearchResult;
@@ -39,12 +41,6 @@ public class DimensionListener implements Listener {
         if (event.getFrom().getEnvironment().equals(World.Environment.THE_END)) {
             player.getInventory().setItem(7, PlayerEndTeleport.createEndTeleport());
         }
-
-        // Give the player a Tracker reset
-        // Why? update player locations and no longer display structures from the other world
-        Main.getInstance().getTracker().playerTracksName.put(player, null);
-        Main.getInstance().getTracker().playerTracksLocation.put(player, null);
-        Main.getInstance().getTracker().playerTracksIndex.put(player, 0);
     }
 
     /**
@@ -108,7 +104,7 @@ public class DimensionListener implements Listener {
 
         if (event.getCause() == PlayerTeleportEvent.TeleportCause.END_PORTAL) {
             // Give the player the tracker back in The End
-            player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
+            player.getInventory().setItem(7, new ItemStack(Material.GRASS_BLOCK));
         }
     }
 }

@@ -174,11 +174,6 @@ public class GameStart extends GameConfiguration {
                         + ChatColor.GRAY + " for a short time.");
                 player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/modifiers"
                         + ChatColor.GRAY + " to see the active modifiers.");
-                player.sendMessage(ChatColor.GRAY + "Use the " + HexColor.PURPLE + "Respawn Anchor"
-                        + ChatColor.GRAY + " to set a " + ChatColor.WHITE + "Respawn Point" + ChatColor.GRAY + ".");
-                player.sendMessage(ChatColor.GRAY + "Use the " + HexColor.PURPLE + "Tracker"
-                        + ChatColor.GRAY + " to track " + ChatColor.WHITE + "Players"
-                        + ChatColor.GRAY + " and " + ChatColor.WHITE + "Structures" + ChatColor.GRAY + ".");
             }
         }
     }

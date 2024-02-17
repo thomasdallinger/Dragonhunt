@@ -28,11 +28,6 @@ public class Prefixes {
                     + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
-    // TRACKING: used for messages related to the tracker
-    public static String getTrackingPrefix() {
-        return ChatColor.DARK_GRAY + "[" + HexColor.YELLOW + "◄ ►" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
-    }
-
     // ADVANCEMENT: used for messages related to advancements
     public static String getAdvancementPrefix() {
         return ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "✦✦✦" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;

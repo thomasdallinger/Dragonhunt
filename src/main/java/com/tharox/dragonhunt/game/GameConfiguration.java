@@ -6,7 +6,6 @@ import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.modifiers.classes.EndlessNight;
 import com.tharox.dragonhunt.modifiers.classes.Heartbroken;
 import com.tharox.dragonhunt.players.PointsListener;
-import com.tharox.dragonhunt.respawn.RespawnAnchor;
 import com.tharox.dragonhunt.scout.Scout;
 import org.bukkit.*;
 import org.bukkit.attribute.Attribute;
@@ -120,7 +119,6 @@ public class GameConfiguration {
             player.getInventory().clear();
 
             // adds general items to the player's inventory
-            player.getInventory().setItem(6, RespawnAnchor.createItem(player));
             player.getInventory().setItem(7, Main.getInstance().getTracker().createTracker());
             player.getInventory().setItemInOffHand(GameState.addItem(new ItemStack(Material.SHIELD)));
 

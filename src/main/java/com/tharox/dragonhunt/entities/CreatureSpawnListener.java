@@ -1,7 +1,6 @@
 package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.modifiers.classes.*;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -65,6 +64,20 @@ public class CreatureSpawnListener implements Listener {
             if (chance == 1 && !(entity instanceof Enderman) && !(entity instanceof WaterMob)) {
                 event.setCancelled(true);
                 world.spawnEntity(location, EntityType.ENDERMAN);
+                return;
+            }
+
+            // Spawn Piglins or Piglin Brutes instead of useless Zombified Piglins
+            if (entity instanceof PigZombie) {
+                event.setCancelled(true);
+                chance = random.nextInt(5) + 1;
+
+                if (chance == 1) {
+                    world.spawnEntity(location, EntityType.PIGLIN_BRUTE);
+                } else {
+                    world.spawnEntity(location, EntityType.PIGLIN);
+                }
+
                 return;
             }
 

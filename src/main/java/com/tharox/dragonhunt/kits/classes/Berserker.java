@@ -20,15 +20,14 @@ public class Berserker extends Kit {
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "Become " + ChatColor.WHITE + "invulnerable"
-            + ChatColor.GRAY + " for a short time.\n"
-            + HexColor.RED + "» Glow and Alert on Activation\n\n"
+            + ChatColor.GRAY + " for a short time.\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n"
-            + HexColor.YELLOW + "» Duration can be increased\n\n"
+            + HexColor.YELLOW + "⇡ Duration can be increased\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n"
-            + HexColor.YELLOW + "» Cooldown can be reduced\n\n";
-    public static final Material material = Material.BEDROCK;
+            + HexColor.YELLOW + "⇣ Cooldown can be reduced\n\n";
+    public static final Material material = Material.SHIELD;
     public static final int slot = 11;
 
     public Berserker(Player player) {

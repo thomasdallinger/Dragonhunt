@@ -25,13 +25,12 @@ public class Healer extends Kit {
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "Instantly heal yourself " + ChatColor.WHITE + heartsToAdd + " ❤"
             + ChatColor.GRAY + ".\n"
-            + HexColor.YELLOW + "» Heal can be increased\n"
-            + HexColor.RED + "» Glow and Alert on Activation\n\n"
+            + HexColor.YELLOW + "⇡ Heal can be increased\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + "Instantly\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n"
-            + HexColor.YELLOW + "» Cooldown can be reduced\n\n";
+            + HexColor.YELLOW + "⇣ Cooldown can be reduced\n\n";
     public static final Material material = Material.POTION;
     public static final int slot = 20;
 

@@ -23,7 +23,7 @@ public class Grappler extends Kit {
             + ChatColor.GRAY + ChatColor.WHITE + "Instantly\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n"
-            + HexColor.YELLOW + "» Cooldown can be reduced\n\n";
+            + HexColor.YELLOW + "⇣ Cooldown can be reduced\n\n";
     public static final Material material = Material.CROSSBOW;
     public static final int slot = 29;
 

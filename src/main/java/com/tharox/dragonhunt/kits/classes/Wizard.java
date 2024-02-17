@@ -24,7 +24,7 @@ public class Wizard extends Kit {
             + ChatColor.GRAY + "All entities in a radius of " + ChatColor.WHITE + "25 Blocks\n"
             + ChatColor.GRAY + "around you start " + ChatColor.WHITE + "levitating\n"
             + ChatColor.GRAY + "and receive " + ChatColor.WHITE + "Poison" + ChatColor.GRAY + ".\n"
-            + HexColor.YELLOW + "» Levitation Effect can be increased\n\n"
+            + HexColor.YELLOW + "⇡ Levitation Effect can be increased\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"

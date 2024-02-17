@@ -25,13 +25,12 @@ public class Demolitionist extends Kit {
             + ChatColor.WHITE + "TNT\n"
             + ChatColor.GRAY + "will spawn below you.\n"
             + ChatColor.GRAY + "During the explosion you are invulnerable\n"
-            + ChatColor.GRAY + "to damage and you cannot move.\n"
-            + HexColor.RED + "» Glow and Alert on Activation\n\n"
+            + ChatColor.GRAY + "to damage and you cannot move.\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n"
-            + HexColor.YELLOW + "» Cooldown can be reduced\n\n";
+            + HexColor.YELLOW + "⇣ Cooldown can be reduced\n\n";
     public static final Material material = Material.TNT;
     public static final int slot = 21;
 

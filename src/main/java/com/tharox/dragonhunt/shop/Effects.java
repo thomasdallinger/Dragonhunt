@@ -103,7 +103,7 @@ public class Effects {
                     }
 
                     if (ForeverHunger.active) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 40, 1));
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 40, 2));
                     }
                 }
             }

@@ -17,8 +17,7 @@ public class ModifierSelection {
     public ModifierSelection() {
         lowImpact.addAll(Arrays.asList(
                 new Frozen(),
-                new NoGhasts(),
-                new SpeedyComback(),
+                new FastComback(),
                 new FireResistance(),
 
                 new SpeedyMobs(),
@@ -31,10 +30,9 @@ public class ModifierSelection {
                 new MoreFood(),
                 new ChristmasCookies(),
                 new Fisher(),
-                new EnhancedArrowEffects(),
                 new FlyHigh(),
                 new Iron(),
-                new NoBrutes(),
+                new NoAnnoyingMobs(),
 
                 new ForeverHunger(),
                 new WeakenedByFlames(),
@@ -56,7 +54,6 @@ public class ModifierSelection {
                 new Heartbroken(),
                 new FireMobs(),
                 new PowerfulMobs(),
-                new Bastion(),
                 new BadOmen()
         ));
 

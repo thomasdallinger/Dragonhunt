@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.modifiers.classes.SpeedyComback;
+import com.tharox.dragonhunt.modifiers.classes.FastComback;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -46,8 +46,8 @@ public class PlayerRespawnListener implements Listener {
             player.setFreezeTicks(player.getMaxFreezeTicks());
             player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_HURT_FREEZE, 1, 1);
 
-            if (SpeedyComback.active) {
-                deathTimer.put(player, 3 * Math.pow(1.07, player.getLevel()));
+            if (FastComback.active) {
+                deathTimer.put(player, 2 * Math.pow(1.07, player.getLevel()));
             } else {
                 deathTimer.put(player, 5 * Math.pow(1.07, player.getLevel()));
             }

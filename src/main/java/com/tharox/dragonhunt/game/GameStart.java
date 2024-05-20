@@ -158,7 +158,7 @@ public class GameStart extends GameConfiguration {
 
                 if (BonusHearts.active) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
-                            1800 * 20, 2));
+                            1800 * 20, 3));
                 }
 
                 player.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "\nRACE TO VICTORY");

@@ -3,12 +3,12 @@ package com.tharox.dragonhunt.modifiers.classes;
 import org.bukkit.Material;
 
 @DragonhuntModifier
-public class Bastion extends Modifier {
-    public static String title = "Bastion Remnant";
-    public static String lore = "The Nether Spawn is a Bastion instead of a Fortress.";
-    public static Material material = Material.POLISHED_BLACKSTONE_BRICKS;
-    public static boolean positive = false;
-    public static int impact = 3;
+public class FastComback extends Modifier {
+    public static String title = "Fast Comeback";
+    public static String lore = "Respawn times are greatly decreased.";
+    public static Material material = Material.IRON_BARS;
+    public static boolean positive = true;
+    public static int impact = 1;
     public static boolean active = false;
 
     @Override

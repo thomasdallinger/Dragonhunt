@@ -10,6 +10,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -28,12 +29,7 @@ public class CreatureSpawnListener implements Listener {
 
         /* return; statements are mostly avoided so it can be assured that every active modifier is in use */
         if (entity instanceof Mob) {
-            if (entity instanceof Ghast && NoGhasts.active) {
-                event.setCancelled(true);
-                return;
-            }
-
-            if (entity instanceof PiglinBrute && NoBrutes.active) {
+            if ((entity instanceof Ghast || entity instanceof PiglinBrute) && NoAnnoyingMobs.active) {
                 event.setCancelled(true);
                 return;
             }
@@ -55,7 +51,7 @@ public class CreatureSpawnListener implements Listener {
             int chance;
 
             if (EndermanParty.active) {
-                chance = random.nextInt(10) + 1;
+                chance = random.nextInt(5) + 1;
             } else {
                 chance = random.nextInt(20) + 1;
             }
@@ -86,28 +82,34 @@ public class CreatureSpawnListener implements Listener {
                     if (!(entity instanceof CaveSpider)) {
                         event.setCancelled(true);
                         world.spawnEntity(location, EntityType.CAVE_SPIDER);
+                    } else {
+                        // Give all spawning Cave Spiders 3x health
+                        Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
+                                .setBaseValue(entity.getHealth() * 3);
+                        entity.setHealth(entity.getHealth() * 3);
                     }
                 }
             }
 
             if (SpeedyMobs.active) {
-                entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50000, 0));
+                entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 50000, 1));
             }
 
             if (ExplosiveCreepers.active) {
                 if (entity instanceof Creeper) {
                     Creeper creeper = (Creeper) entity;
                     creeper.setPowered(true);
+                    creeper.setExplosionRadius(8);
                 }
             }
 
             if (PowerfulMobs.active) {
                 if (entity.getEquipment() != null) { // entity can have equipment
                     // Armor
-                    entity.getEquipment().setHelmet(new ItemStack(Material.CHAINMAIL_HELMET, 1));
+                    entity.getEquipment().setHelmet(new ItemStack(Material.IRON_HELMET, 1));
                     entity.getEquipment().setChestplate(new ItemStack(Material.IRON_CHESTPLATE, 1));
-                    entity.getEquipment().setLeggings(new ItemStack(Material.CHAINMAIL_LEGGINGS, 1));
-                    entity.getEquipment().setBoots(new ItemStack(Material.CHAINMAIL_BOOTS, 1));
+                    entity.getEquipment().setLeggings(new ItemStack(Material.IRON_LEGGINGS, 1));
+                    entity.getEquipment().setBoots(new ItemStack(Material.IRON_BOOTS, 1));
 
                     // Weapon
                     if (entity instanceof Skeleton) {
@@ -128,7 +130,7 @@ public class CreatureSpawnListener implements Listener {
                         entity.getEquipment().setItemInMainHand(bow);
                     } else {
                         ItemStack sword = new ItemStack(Material.IRON_SWORD);
-                        sword.addEnchantment(Enchantment.FIRE_ASPECT, 1);
+                        sword.addEnchantment(Enchantment.FIRE_ASPECT, 2);
                         entity.getEquipment().setItemInMainHand(sword);
                     }
                 }
@@ -153,7 +155,9 @@ public class CreatureSpawnListener implements Listener {
                 if (entity instanceof WitherSkeleton) {
                     if (entity.getEquipment() != null) {
                         ItemStack sword = new ItemStack(Material.NETHERITE_SWORD);
-                        sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
+                        sword.addEnchantment(Enchantment.DAMAGE_ALL, 5);
+                        sword.addEnchantment(Enchantment.FIRE_ASPECT, 2);
+                        sword.addEnchantment(Enchantment.KNOCKBACK, 2);
                         entity.getEquipment().setItemInMainHand(sword);
                     }
                 }
@@ -165,6 +169,17 @@ public class CreatureSpawnListener implements Listener {
                         ItemStack sword = new ItemStack(Material.NETHERITE_AXE);
                         sword.addEnchantment(Enchantment.DAMAGE_ALL, 2);
                         entity.getEquipment().setItemInMainHand(sword);
+
+                        Material[] armorMaterials = {Material.NETHERITE_HELMET, Material.NETHERITE_CHESTPLATE,
+                                Material.NETHERITE_LEGGINGS, Material.NETHERITE_BOOTS};
+                        EquipmentSlot[] equipmentSlots = {EquipmentSlot.HEAD, EquipmentSlot.CHEST,
+                                EquipmentSlot.LEGS, EquipmentSlot.FEET};
+
+                        for (int i = 0; i < armorMaterials.length; i++) {
+                            ItemStack armorPiece = new ItemStack(armorMaterials[i]);
+                            armorPiece.addEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 2);
+                            entity.getEquipment().setItem(equipmentSlots[i], armorPiece);
+                        }
                     }
                 }
             }
@@ -172,8 +187,8 @@ public class CreatureSpawnListener implements Listener {
             if (BrutalBlazes.active) {
                 if (entity instanceof Blaze) {
                     Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
-                            .setBaseValue(entity.getHealth() * 3);
-                    entity.setHealth(entity.getHealth() * 3);
+                            .setBaseValue(entity.getHealth() * 5);
+                    entity.setHealth(entity.getHealth() * 5);
                 }
             }
         }

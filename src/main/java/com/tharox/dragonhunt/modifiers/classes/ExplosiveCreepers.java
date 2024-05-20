@@ -5,7 +5,7 @@ import org.bukkit.Material;
 @DragonhuntModifier
 public class ExplosiveCreepers extends Modifier {
     public static String title = "Explosive Creepers";
-    public static String lore = "Creepers are way more explosive than usual.";
+    public static String lore = "Creepers have a higher explosion radius and damage.";
     public static Material material = Material.TNT;
     public static boolean positive = false;
     public static int impact = 1;

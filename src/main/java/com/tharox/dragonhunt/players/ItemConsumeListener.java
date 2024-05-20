@@ -23,13 +23,13 @@ public class ItemConsumeListener implements Listener {
         if (item.getType() == Material.COOKIE) {
             if (ChristmasCookies.active) {
                 player.setFoodLevel(player.getFoodLevel() + 2);
-                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 140, 0));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 7 * 20, 1));
             }
         }
 
         if (item.getType().isEdible()) {
             if (FireResistance.active) {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 120, 0));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 20, 0));
             }
         }
 

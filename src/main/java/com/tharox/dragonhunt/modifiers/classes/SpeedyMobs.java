@@ -5,7 +5,7 @@ import org.bukkit.Material;
 @DragonhuntModifier
 public class SpeedyMobs extends Modifier {
     public static String title = "Speedy Mobs";
-    public static String lore = "All Mobs permanently have Speed 1.";
+    public static String lore = "All Mobs permanently have Speed 2.";
     public static Material material = Material.GOLDEN_BOOTS;
     public static boolean positive = false;
     public static int impact = 1;

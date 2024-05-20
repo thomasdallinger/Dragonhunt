@@ -1,14 +1,11 @@
 package com.tharox.dragonhunt.dimensions;
 
-import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.modifiers.classes.Bastion;
 import com.tharox.dragonhunt.players.PlayerEndTeleport;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -17,7 +14,6 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.generator.structure.Structure;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.StructureSearchResult;
@@ -72,15 +68,8 @@ public class DimensionListener implements Listener {
                 // No player has reached the NETHER before.
                 // Set the first NETHER PORTAL close to a Fortress.
                 if (GameState.firstNetherEntry == null) {
-                    StructureSearchResult structureSearchResult;
-
-                    if (Bastion.active) {
-                        structureSearchResult = worldTo.locateNearestStructure(
-                                player.getLocation(), Structure.BASTION_REMNANT, 32, false);
-                    } else {
-                        structureSearchResult = worldTo.locateNearestStructure(
-                                player.getLocation(), Structure.FORTRESS, 32, false);
-                    }
+                    StructureSearchResult structureSearchResult = worldTo.locateNearestStructure(
+                            player.getLocation(), Structure.FORTRESS, 32, false);
 
                     if (structureSearchResult != null) {
                         event.setCanCreatePortal(true);

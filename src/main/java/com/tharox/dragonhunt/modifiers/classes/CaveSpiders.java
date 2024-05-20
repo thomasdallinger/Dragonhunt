@@ -5,7 +5,7 @@ import org.bukkit.Material;
 @DragonhuntModifier
 public class CaveSpiders extends Modifier {
     public static String title = "Cave Spiders";
-    public static String lore = "All Spiders spawning are Cave Spiders.";
+    public static String lore = "All Spiders spawning are Cave Spiders with 3x health.";
     public static Material material = Material.SPIDER_EYE;
     public static boolean positive = false;
     public static int impact = 1;

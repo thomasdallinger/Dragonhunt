@@ -5,7 +5,7 @@ import org.bukkit.Material;
 @DragonhuntModifier
 public class FireMobs extends Modifier {
     public static String title = "On Fire, Literally";
-    public static String lore = "Mobs have Fire Aspect Swords and Flame Bows.";
+    public static String lore = "Mobs have Fire Aspect 2 Swords and Flame Bows.";
     public static Material material = Material.LAVA_BUCKET;
     public static boolean positive = false;
     public static int impact = 3;

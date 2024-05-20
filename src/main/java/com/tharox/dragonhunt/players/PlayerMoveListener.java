@@ -17,7 +17,7 @@ public class PlayerMoveListener implements Listener {
 
         if (player.getLocation().clone().add(0, -1, 0).getBlock().getType() == Material.WATER) {
             if (PoisonousWater.active) {
-                player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 80, 0));
+                player.addPotionEffect(new PotionEffect(PotionEffectType.POISON, 100, 1));
             }
         }
     }

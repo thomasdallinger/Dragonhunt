@@ -115,7 +115,7 @@ public class BlockBreakListener implements Listener {
         materials.put(Material.CLAY_BALL, new ItemStack(Material.FLINT)); // for Flint and Steel
 
         if (Iron.active) {
-            materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 5));
+            materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 6));
         } else {
             materials.put(Material.RAW_IRON, new ItemStack(Material.IRON_INGOT, 2));
         }
@@ -137,7 +137,7 @@ public class BlockBreakListener implements Listener {
 
             if (item.getType() == Material.RAW_IRON && Iron.active) {
                 Random random = new Random();
-                int number = random.nextInt(3);
+                int number = random.nextInt(2);
                 int amount = random.nextInt(3) + 1;
 
                 if (number == 0)

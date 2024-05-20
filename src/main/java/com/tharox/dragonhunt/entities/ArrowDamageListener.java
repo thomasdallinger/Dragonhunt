@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.Main;
+import com.tharox.dragonhunt.modifiers.classes.FlyHigh;
 import com.tharox.dragonhunt.modifiers.classes.WeakenedByFlames;
 import com.tharox.dragonhunt.modifiers.classes.Frozen;
 import org.bukkit.Bukkit;
@@ -49,33 +50,22 @@ public class ArrowDamageListener implements Listener {
             if (entity instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity) entity;
                 if (livingEntity.getFireTicks() > 20) {
-                    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 180, 1));
+                    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.WEAKNESS, 12 * 20, 2));
                 }
             }
         }
 
-        // If a living entity is blinded and the modifier is active, freeze it.
+        // If a living entity is shot with an effect arrow (except levitation) and the modifier is active, freeze it.
         if (Frozen.active) {
             if (entity instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity) entity;
 
                 Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
-                    if (livingEntity.hasPotionEffect(PotionEffectType.BLINDNESS)) {
+                    if (livingEntity.hasPotionEffect(PotionEffectType.BLINDNESS)
+                            || livingEntity.hasPotionEffect(PotionEffectType.WEAKNESS)
+                            || livingEntity.hasPotionEffect(PotionEffectType.SLOW_DIGGING)
+                            || livingEntity.hasPotionEffect(PotionEffectType.POISON)) {
                         livingEntity.setFreezeTicks(livingEntity.getMaxFreezeTicks());
-                    }
-                }, 5L);
-            }
-        }
-
-        // If a living entity is given levitation and the modifier is active, increase the levitation duration.
-        if (Frozen.active) {
-            if (entity instanceof LivingEntity) {
-                LivingEntity livingEntity = (LivingEntity) entity;
-
-                Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
-                    if (livingEntity.hasPotionEffect(PotionEffectType.LEVITATION)) {
-                        livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.LEVITATION,
-                                220, 1));
                     }
                 }, 5L);
             }

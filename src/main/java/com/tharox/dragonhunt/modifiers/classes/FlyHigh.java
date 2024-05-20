@@ -5,7 +5,7 @@ import org.bukkit.Material;
 @DragonhuntModifier
 public class FlyHigh extends Modifier {
     public static String title = "Fly High";
-    public static String lore = "Levitated enemies float longer.";
+    public static String lore = "Levitated enemies via Arrows float 2x longer.";
     public static Material material = Material.FEATHER;
     public static boolean positive = true;
     public static int impact = 2;

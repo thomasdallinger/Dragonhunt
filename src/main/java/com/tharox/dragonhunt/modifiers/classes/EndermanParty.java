@@ -5,7 +5,7 @@ import org.bukkit.Material;
 @DragonhuntModifier
 public class EndermanParty extends Modifier {
     public static String title = "Enderman Party";
-    public static String lore = "Greatly increased spawn rates for Enderman.";
+    public static String lore = "Endermans have greatly increased spawn rates.";
     public static Material material = Material.ENDER_PEARL;
     public static boolean positive = true;
     public static int impact = 3;

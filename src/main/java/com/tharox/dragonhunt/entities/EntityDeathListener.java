@@ -41,7 +41,7 @@ public class EntityDeathListener implements Listener {
 
                 if (RevivedMobs.active) {
                     Random random = new Random();
-                    int chance = random.nextInt(8) + 1;
+                    int chance = random.nextInt(5) + 1;
 
                     if (chance == 1)
                         mob.getWorld().spawnEntity(mob.getLocation(), mob.getType());
@@ -56,8 +56,8 @@ public class EntityDeathListener implements Listener {
                 } else {
                     if (mob instanceof WaterMob && Fisher.active) {
                         mob.getWorld().dropItemNaturally(
-                                mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 4));
-                        Coins.addXP(killer, Coins.animalXP + bonusXP);
+                                mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 6));
+                        Coins.addXP(killer, (Coins.animalXP + bonusXP) * 2);
                     } else {
                         mob.getWorld().dropItemNaturally(
                                 mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));

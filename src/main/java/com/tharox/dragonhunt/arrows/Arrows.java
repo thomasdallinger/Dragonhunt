@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.arrows;
 
 import com.tharox.dragonhunt.Main;
-import com.tharox.dragonhunt.modifiers.classes.EnhancedArrowEffects;
+import com.tharox.dragonhunt.modifiers.classes.FlyHigh;
 import com.tharox.dragonhunt.shop.Effects;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
@@ -108,6 +108,10 @@ public class Arrows {
 
     private static ItemStack createEffectArrow(PotionEffectType effect, Color color, int level) {
         int duration = 40 * level; // In ticks.
+
+        if (FlyHigh.active && effect.equals(PotionEffectType.LEVITATION)) {
+            duration *= 2;
+        }
 
         ItemStack item = new ItemStack(Material.TIPPED_ARROW);
         PotionMeta meta = (PotionMeta) item.getItemMeta();

@@ -95,7 +95,7 @@ public class Enchantments {
                                 item.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, FireAspect.get(player) - 1);
 
                             if (OPUpgrades.get(player))
-                                item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 4);
+                                item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 5);
                         }
 
                         // Bows
@@ -110,7 +110,7 @@ public class Enchantments {
                                 item.addUnsafeEnchantment(Enchantment.ARROW_FIRE, Flame.get(player) - 1);
 
                             if (OPUpgrades.get(player))
-                                item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 4);
+                                item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 5);
                         }
 
                         // Crossbows
@@ -138,7 +138,7 @@ public class Enchantments {
                         }
 
                         if (OPUpgrades.get(player))
-                            armorPiece.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
+                            armorPiece.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 5);
                     }
 
                     // Boots only

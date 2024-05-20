@@ -5,7 +5,7 @@ import org.bukkit.Material;
 @DragonhuntModifier
 public class DoubleChestLoot extends Modifier {
     public static String title = "Sweet Loot";
-    public static String lore = "Chests drop double loot.";
+    public static String lore = "Chests drop 2x loot.";
     public static Material material = Material.CHEST;
     public static boolean positive = true;
     public static int impact = 3;

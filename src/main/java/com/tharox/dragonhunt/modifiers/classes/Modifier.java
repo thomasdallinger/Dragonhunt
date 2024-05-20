@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 public abstract class Modifier {
     public abstract void setActive(boolean isActive);
@@ -20,7 +21,7 @@ public abstract class Modifier {
     /**
      * @return an item representing the modifier in the inventory shown to all players at the start of the game
      */
-    public static ItemStack getDisplayItem(String title, String lore, Material material, int impact, boolean positive,
+    public static ItemStack getDisplayItem(String title, String lore, Material material, boolean positive,
                                            boolean active) {
         String titleColor;
 
@@ -58,24 +59,8 @@ public abstract class Modifier {
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.setDisplayName(titleColor + title);
 
-        String impactLvl = "";
-        switch (impact) {
-            case 1:
-                impactLvl = "ʟᴏᴡ-ɪᴍᴘᴀᴄᴛ";
-                break;
-            case 2:
-                impactLvl = "ᴍᴇᴅɪᴜᴍ-ɪᴍᴘᴀᴄᴛ";
-                break;
-            case 3:
-                impactLvl = "ʜɪɢʜ-ɪᴍᴘᴀᴄᴛ";
-                break;
-        }
-
         // Set the modifier lore.
-        meta.setLore(Arrays.asList(
-                ChatColor.DARK_GRAY + impactLvl,
-                ChatColor.GRAY + lore));
-
+        meta.setLore(Collections.singletonList(ChatColor.GRAY + lore));
         item.setItemMeta(meta);
 
         return item;

@@ -8,7 +8,6 @@ public class ChristmasCookies extends Modifier {
     public static String lore = "Animals drop cookies which grant Regeneration 2.";
     public static Material material = Material.COOKIE;
     public static boolean positive = true;
-    public static int impact = 2;
     public static boolean active = false;
 
     @Override

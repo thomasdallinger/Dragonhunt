@@ -8,7 +8,6 @@ public class WeakenedByFlames extends Modifier {
     public static String lore = "Entities shot with a Flame Bow get Weakness 3.";
     public static Material material = Material.FIRE_CHARGE;
     public static boolean positive = true;
-    public static int impact = 2;
     public static boolean active = false;
 
     @Override

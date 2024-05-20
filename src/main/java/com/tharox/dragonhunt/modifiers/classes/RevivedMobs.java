@@ -8,7 +8,6 @@ public class RevivedMobs extends Modifier {
     public static String lore = "Mobs have a 20% chance of respawning after being killed.";
     public static Material material = Material.ZOMBIE_SPAWN_EGG;
     public static boolean positive = false;
-    public static int impact = 2;
     public static boolean active = false;
 
     @Override

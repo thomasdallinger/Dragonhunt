@@ -8,7 +8,6 @@ public class Fisher extends Modifier {
     public static String lore = "Water mobs drop 3x food and XP.";
     public static Material material = Material.TROPICAL_FISH;
     public static boolean positive = true;
-    public static int impact = 2;
     public static boolean active = false;
 
     @Override

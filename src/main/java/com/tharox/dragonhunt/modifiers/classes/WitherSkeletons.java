@@ -8,7 +8,6 @@ public class WitherSkeletons extends Modifier {
     public static String lore = "Wither Skeletons have deadly Netherite Swords.";
     public static Material material = Material.NETHERITE_SWORD;
     public static boolean positive = false;
-    public static int impact = 2;
     public static boolean active = false;
 
     @Override

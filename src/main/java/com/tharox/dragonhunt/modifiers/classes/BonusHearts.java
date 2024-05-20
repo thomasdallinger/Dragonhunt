@@ -8,7 +8,6 @@ public class BonusHearts extends Modifier {
     public static String lore = "+8 Absorption ❤";
     public static Material material = Material.GOLDEN_APPLE;
     public static boolean positive = true;
-    public static int impact = 3;
     public static boolean active = false;
 
     @Override

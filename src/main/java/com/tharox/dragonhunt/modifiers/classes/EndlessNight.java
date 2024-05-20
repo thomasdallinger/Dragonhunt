@@ -8,7 +8,6 @@ public class EndlessNight extends Modifier {
     public static String lore = "The sun does not rise.";
     public static Material material = Material.CLOCK;
     public static boolean positive = false;
-    public static int impact = 1;
     public static boolean active = false;
 
     @Override

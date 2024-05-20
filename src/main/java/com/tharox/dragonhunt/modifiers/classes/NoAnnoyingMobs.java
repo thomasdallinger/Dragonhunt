@@ -8,7 +8,6 @@ public class NoAnnoyingMobs extends Modifier {
     public static String lore = "Piglin Brutes and Ghasts do not spawn.";
     public static Material material = Material.GHAST_TEAR;
     public static boolean positive = true;
-    public static int impact = 2;
     public static boolean active = false;
 
     @Override

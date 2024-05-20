@@ -8,7 +8,6 @@ public class EndermanParty extends Modifier {
     public static String lore = "Endermans have greatly increased spawn rates.";
     public static Material material = Material.ENDER_PEARL;
     public static boolean positive = true;
-    public static int impact = 3;
     public static boolean active = false;
 
     @Override

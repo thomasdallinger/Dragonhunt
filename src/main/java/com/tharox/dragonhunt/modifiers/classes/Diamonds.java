@@ -8,7 +8,6 @@ public class Diamonds extends Modifier {
     public static String lore = "Diamond ores drop 2x diamonds.";
     public static Material material = Material.DIAMOND;
     public static boolean positive = true;
-    public static int impact = 3;
     public static boolean active = false;
 
     @Override

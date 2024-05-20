@@ -8,7 +8,6 @@ public class FireMobs extends Modifier {
     public static String lore = "Mobs have Fire Aspect 2 Swords and Flame Bows.";
     public static Material material = Material.LAVA_BUCKET;
     public static boolean positive = false;
-    public static int impact = 3;
     public static boolean active = false;
 
     @Override

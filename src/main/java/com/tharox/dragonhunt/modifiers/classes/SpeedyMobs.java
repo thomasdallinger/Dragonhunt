@@ -8,7 +8,6 @@ public class SpeedyMobs extends Modifier {
     public static String lore = "All Mobs permanently have Speed 2.";
     public static Material material = Material.GOLDEN_BOOTS;
     public static boolean positive = false;
-    public static int impact = 1;
     public static boolean active = false;
 
     @Override

@@ -8,7 +8,6 @@ public class BrutalBrutes extends Modifier {
     public static String lore = "Piglin Brutes have enchanted Netherite Axes and Armor.";
     public static Material material = Material.NETHERITE_AXE;
     public static boolean positive = false;
-    public static int impact = 2;
     public static boolean active = false;
 
     @Override

@@ -8,7 +8,6 @@ public class FireResistance extends Modifier {
     public static String lore = "Consuming food grants Fire Resistance.";
     public static Material material = Material.FLINT_AND_STEEL;
     public static boolean positive = true;
-    public static int impact = 1;
     public static boolean active = false;
 
     @Override

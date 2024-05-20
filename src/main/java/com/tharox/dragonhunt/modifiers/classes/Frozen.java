@@ -8,7 +8,6 @@ public class Frozen extends Modifier {
     public static String lore = "Effect Arrows freeze targets.";
     public static Material material = Material.BLUE_ICE;
     public static boolean positive = true;
-    public static int impact = 1;
     public static boolean active = false;
 
     @Override

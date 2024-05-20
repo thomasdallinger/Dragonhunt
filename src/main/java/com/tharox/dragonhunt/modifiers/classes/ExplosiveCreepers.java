@@ -8,7 +8,6 @@ public class ExplosiveCreepers extends Modifier {
     public static String lore = "Creepers have a higher explosion radius and damage.";
     public static Material material = Material.TNT;
     public static boolean positive = false;
-    public static int impact = 1;
     public static boolean active = false;
 
     @Override

@@ -8,7 +8,6 @@ public class HotHealing extends Modifier {
     public static String lore = "Fire heals 0.5 ❤ per second";
     public static Material material = Material.LAVA_BUCKET;
     public static boolean positive = true;
-    public static int impact = 3;
     public static boolean active = false;
 
     @Override

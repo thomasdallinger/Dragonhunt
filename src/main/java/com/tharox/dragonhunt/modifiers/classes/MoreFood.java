@@ -8,7 +8,6 @@ public class MoreFood extends Modifier {
     public static String lore = "Animals drop 2x food.";
     public static Material material = Material.COOKED_BEEF;
     public static boolean positive = true;
-    public static int impact = 2;
     public static boolean active = false;
 
     @Override

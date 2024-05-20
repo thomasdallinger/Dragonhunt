@@ -8,7 +8,6 @@ public class PowerfulMobs extends Modifier {
     public static String lore = "Equippable mobs have weapons and armor.";
     public static Material material = Material.IRON_AXE;
     public static boolean positive = false;
-    public static int impact = 3;
     public static boolean active = false;
 
     @Override

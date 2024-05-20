@@ -8,7 +8,6 @@ public class NoPillagers extends Modifier {
     public static String lore = "The End contains no pillagers.";
     public static Material material = Material.CROSSBOW;
     public static boolean positive = true;
-    public static int impact = 3;
     public static boolean active = false;
 
     @Override

@@ -8,7 +8,6 @@ public class Iron extends Modifier {
     public static String lore = "Iron ores drop 3x iron, 50% chance to drop gold too.";
     public static Material material = Material.IRON_INGOT;
     public static boolean positive = true;
-    public static int impact = 2;
     public static boolean active = false;
 
     @Override

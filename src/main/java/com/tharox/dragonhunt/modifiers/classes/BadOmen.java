@@ -8,7 +8,6 @@ public class BadOmen extends Modifier {
     public static String lore = "All Mobs in the Nether wither you.";
     public static Material material = Material.WITHER_SKELETON_SKULL;
     public static boolean positive = false;
-    public static int impact = 3;
     public static boolean active = false;
 
     @Override

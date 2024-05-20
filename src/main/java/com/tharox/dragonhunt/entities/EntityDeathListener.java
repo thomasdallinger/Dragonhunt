@@ -2,11 +2,11 @@ package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.shop.Upgrades;
 import com.tharox.dragonhunt.modifiers.classes.ChristmasCookies;
 import com.tharox.dragonhunt.modifiers.classes.Fisher;
 import com.tharox.dragonhunt.modifiers.classes.MoreFood;
 import com.tharox.dragonhunt.modifiers.classes.RevivedMobs;
+import com.tharox.dragonhunt.shop.Upgrades;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
@@ -15,7 +15,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Objects;
 import java.util.Random;
 
 public class EntityDeathListener implements Listener {
@@ -53,15 +52,15 @@ public class EntityDeathListener implements Listener {
                     mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 4));
                 } else if (ChristmasCookies.active) {
                     mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKIE, 2));
+                }
+
+                if (mob instanceof WaterMob && Fisher.active) {
+                    mob.getWorld().dropItemNaturally(
+                            mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 4));
+                    Coins.addXP(killer, (Coins.animalXP + bonusXP) * 2);
                 } else {
-                    if (mob instanceof WaterMob && Fisher.active) {
-                        mob.getWorld().dropItemNaturally(
-                                mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 6));
-                        Coins.addXP(killer, (Coins.animalXP + bonusXP) * 2);
-                    } else {
-                        mob.getWorld().dropItemNaturally(
-                                mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
-                    }
+                    mob.getWorld().dropItemNaturally(
+                            mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
                 }
 
                 Coins.addXP(killer, Coins.animalXP + bonusXP);

@@ -8,7 +8,6 @@ public class DoubleChestLoot extends Modifier {
     public static String lore = "Chests drop 2x loot.";
     public static Material material = Material.CHEST;
     public static boolean positive = true;
-    public static int impact = 3;
     public static boolean active = false;
 
     @Override

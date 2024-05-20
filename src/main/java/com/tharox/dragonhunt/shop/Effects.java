@@ -26,6 +26,16 @@ public class Effects {
     public static HashMap<Player, Boolean> ArrowEffectsUnlocked = new HashMap<>();
     public static HashMap<Player, ItemStack> ArrowEffectType = new HashMap<>();
 
+    // Arrow effects
+    public static HashMap<Player, Integer> ArrowMiningFatigue = new HashMap<>();
+    public static HashMap<Player, Integer> ArrowPoison = new HashMap<>();
+    public static HashMap<Player, Integer> ArrowBlindness = new HashMap<>();
+    public static HashMap<Player, Integer> ArrowWeakness = new HashMap<>();
+    public static HashMap<Player, Integer> ArrowLevitation = new HashMap<>();
+
+    // Special effects
+    public static HashMap<Player, Boolean> ResetLeadersUpgrades = new HashMap<>();
+
     public Effects() {
         // set default values: level 1 can be purchased
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -36,6 +46,14 @@ public class Effects {
             FireResistance.put(player, 1);
             Resistance.put(player, 1);
             Strength.put(player, 1);
+
+            ArrowMiningFatigue.put(player, 1);
+            ArrowPoison.put(player, 1);
+            ArrowBlindness.put(player, 1);
+            ArrowWeakness.put(player, 1);
+            ArrowLevitation.put(player, 1);
+
+            ResetLeadersUpgrades.put(player, false);
 
             ArrowEffectsUnlocked.put(player, false);
             ArrowEffectType.put(player, new ItemStack(Material.ARROW));

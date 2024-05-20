@@ -18,6 +18,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 
 public class Arrows {
     private static BukkitRunnable arrowRunnable;
@@ -50,14 +52,27 @@ public class Arrows {
             ItemStack arrowStack = player.getInventory().getItem(17);
             ItemStack generatedArrows;
 
-            // if arrow effects have been unlocked AND one of the available arrow effects has been selected
-            if (Effects.ArrowEffectsUnlocked.get(player)
-                    && Effects.ArrowEffectType.get(player).getType() == Material.TIPPED_ARROW) {
-                ItemStack arrowToUse = Effects.ArrowEffectType.get(player);
-                PotionMeta meta = (PotionMeta) arrowToUse.getItemMeta();
-                // index is always 0 since there is only one effect on the arrow at a time
-                generatedArrows = createEffectArrow(meta.getCustomEffects().get(0).getType(),
-                        meta.getColor());
+            // List of all arrow effects
+            List<HashMap<Player, Integer>> allArrowEffects = Arrays.asList(
+                    Effects.ArrowMiningFatigue, Effects.ArrowPoison, Effects.ArrowBlindness,
+                    Effects.ArrowWeakness, Effects.ArrowLevitation
+            );
+
+            // Find the arrow effect with the highest level
+            HashMap<Player, Integer> highestArrowEffect = null;
+            int highestLevel = 1;
+            for (HashMap<Player, Integer> arrowEffect : allArrowEffects) {
+                int level = arrowEffect.get(player);
+                if (level > highestLevel) {
+                    highestLevel = level;
+                    highestArrowEffect = arrowEffect;
+                }
+            }
+
+            // Check if the highest level is above 1
+            if (highestLevel > 1) {
+                generatedArrows = createEffectArrow(getArrowEffectType(highestArrowEffect),
+                        getArrowColor(highestArrowEffect), highestLevel - 1);
             } else {
                 generatedArrows = createArrow();
             }
@@ -91,13 +106,8 @@ public class Arrows {
         return item;
     }
 
-    private static ItemStack createEffectArrow(PotionEffectType effect, Color color) {
-        int duration = 120; // In ticks.
-        int amplifier = 1;
-
-        if (EnhancedArrowEffects.active) {
-            duration = 180;
-        }
+    private static ItemStack createEffectArrow(PotionEffectType effect, Color color, int level) {
+        int duration = 40 * level; // In ticks.
 
         ItemStack item = new ItemStack(Material.TIPPED_ARROW);
         PotionMeta meta = (PotionMeta) item.getItemMeta();
@@ -107,13 +117,13 @@ public class Arrows {
         meta.addEnchant(Enchantment.DURABILITY, 1, true);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 
-        meta.addCustomEffect(new PotionEffect(effect, duration, amplifier), true);
+        meta.addCustomEffect(new PotionEffect(effect, duration, level - 1), true);
         meta.setColor(color);
         meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Generated Arrow");
         meta.setLore(Arrays.asList(
                 "",
                 ChatColor.GRAY + "Duration: " + ChatColor.WHITE + (duration / 20) + " seconds",
-                ChatColor.GRAY + "Level: " + ChatColor.WHITE + (amplifier + 1)
+                ChatColor.GRAY + "Level: " + ChatColor.WHITE + level
         ));
         item.setItemMeta(meta);
 
@@ -128,5 +138,23 @@ public class Arrows {
         int generatedAmount = generatedArrows.getAmount();
         generatedArrows.setAmount(Math.min((stackAmount + generatedAmount), 32));
         player.getInventory().setItem(17, generatedArrows);
+    }
+
+    private static PotionEffectType getArrowEffectType(HashMap<Player, Integer> arrowEffect) {
+        if (arrowEffect == Effects.ArrowMiningFatigue) return PotionEffectType.SLOW_DIGGING;
+        if (arrowEffect == Effects.ArrowPoison) return PotionEffectType.POISON;
+        if (arrowEffect == Effects.ArrowBlindness) return PotionEffectType.BLINDNESS;
+        if (arrowEffect == Effects.ArrowWeakness) return PotionEffectType.WEAKNESS;
+        if (arrowEffect == Effects.ArrowLevitation) return PotionEffectType.LEVITATION;
+        return null;
+    }
+
+    private static Color getArrowColor(HashMap<Player, Integer> arrowEffect) {
+        if (arrowEffect == Effects.ArrowMiningFatigue) return Color.fromRGB(0x894E2E);
+        if (arrowEffect == Effects.ArrowPoison) return Color.fromRGB(0x366622);
+        if (arrowEffect == Effects.ArrowBlindness) return Color.fromRGB(0x1F1F23);
+        if (arrowEffect == Effects.ArrowWeakness) return Color.fromRGB(0x484848);
+        if (arrowEffect == Effects.ArrowLevitation) return Color.fromRGB(0xCEFFFF);
+        return null;
     }
 }

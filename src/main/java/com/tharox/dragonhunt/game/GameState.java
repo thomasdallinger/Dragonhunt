@@ -130,8 +130,9 @@ public class GameState {
             return;
         }
 
-        // Print every item except wood from trees
-        if (item.getType() != Material.OAK_LOG) {
+        // Print every item except wood from trees and golden apples from level ups
+        if (item.getType() != Material.OAK_LOG
+                && item.getType() != Material.GOLDEN_APPLE && item.getType() != Material.ENCHANTED_GOLDEN_APPLE) {
             printItemReceivedMessage(player, item);
         }
     }

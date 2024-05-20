@@ -37,6 +37,9 @@ public class Enchantments {
     public static HashMap<Player, Integer> Thorns = new HashMap<>();
     public static HashMap<Player, Integer> FeatherFalling = new HashMap<>();
 
+    // Special enchantments
+    public static HashMap<Player, Boolean> OPUpgrades = new HashMap<>();
+
     public Enchantments() {
         // set default values: level 1 can be purchased
         for (Player player : Bukkit.getOnlinePlayers()) {
@@ -50,6 +53,7 @@ public class Enchantments {
             Protection.put(player, 1);
             Thorns.put(player, 1);
             FeatherFalling.put(player, 1);
+            OPUpgrades.put(player, false);
         }
 
         enchantGear();
@@ -89,6 +93,9 @@ public class Enchantments {
 
                             if (FireAspect.get(player) > 1)
                                 item.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, FireAspect.get(player) - 1);
+
+                            if (OPUpgrades.get(player))
+                                item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 4);
                         }
 
                         // Bows
@@ -101,6 +108,9 @@ public class Enchantments {
 
                             if (Flame.get(player) > 1)
                                 item.addUnsafeEnchantment(Enchantment.ARROW_FIRE, Flame.get(player) - 1);
+
+                            if (OPUpgrades.get(player))
+                                item.addUnsafeEnchantment(Enchantment.ARROW_DAMAGE, 4);
                         }
 
                         // Crossbows
@@ -126,6 +136,9 @@ public class Enchantments {
                         if (Thorns.get(player) > 1) {
                             chestplate.addUnsafeEnchantment(Enchantment.THORNS, Thorns.get(player) - 1);
                         }
+
+                        if (OPUpgrades.get(player))
+                            armorPiece.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 4);
                     }
 
                     // Boots only

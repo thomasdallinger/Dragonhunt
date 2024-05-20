@@ -54,13 +54,15 @@ public class EntityDeathListener implements Listener {
                     mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.COOKIE, 2));
                 }
 
-                if (mob instanceof WaterMob && Fisher.active) {
-                    mob.getWorld().dropItemNaturally(
-                            mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 4));
-                    Coins.addXP(killer, (Coins.animalXP + bonusXP) * 2);
-                } else {
-                    mob.getWorld().dropItemNaturally(
-                            mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
+                if (mob instanceof WaterMob) {
+                    if (Fisher.active) {
+                        mob.getWorld().dropItemNaturally(
+                                mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 4));
+                        Coins.addXP(killer, (Coins.animalXP + bonusXP) * 2);
+                    } else {
+                        mob.getWorld().dropItemNaturally(
+                                mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
+                    }
                 }
 
                 Coins.addXP(killer, Coins.animalXP + bonusXP);

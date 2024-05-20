@@ -52,8 +52,17 @@ public class LevelUp implements Listener {
         int upgradeLevel = 1;
 
         do {
-            // Check if the player has 0 points and first player reached end -> player can get special upgrades
-            if (PointsListener.scorePerPlayer.get(player.getUniqueId()) == 0 && GameState.playersReachedEnd) {
+            // Check if at least 1 player has scored points
+            boolean hasPlayerScored = false;
+            for (Integer score : PointsListener.scorePerPlayer.values()) {
+                if (score > 0) {
+                    hasPlayerScored = true;
+                    break;
+                }
+            }
+
+            // Check if the player has 0 points and at least 1 player scored points -> player can get special upgrades
+            if (PointsListener.scorePerPlayer.get(player.getUniqueId()) == 0 && hasPlayerScored) {
                 int random = rand.nextInt(5);
 
                 if (random == 0) {

@@ -124,7 +124,7 @@ public class EntityDeathListener implements Listener {
                 break;
             case "Blaze":
                 if (killer != null) {
-                    GameState.putItemInInventory(killer, new ItemStack(Material.BLAZE_ROD));
+                    GameState.putItemInInventory(killer, new ItemStack(Material.BLAZE_POWDER));
                 }
                 break;
             case "Iron Golem":

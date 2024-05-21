@@ -84,7 +84,7 @@ public class Scoreboard extends ScoreboardBuilder {
         }
         // if the player has not got 8 blaze powder in his inventory
         else if (!hasItems(player, Material.BLAZE_POWDER, PlayerEndTeleport.getEyesNeeded())
-                && !hasDisplayNameItem(player, "Enter the End")
+                && !hasDisplayNameItem(player, "Enter The End")
                 && !player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
             setScore(ChatColor.GOLD + "Get " + PlayerEndTeleport.getEyesNeeded() + " Blaze Powder", 7);
 
@@ -96,10 +96,11 @@ public class Scoreboard extends ScoreboardBuilder {
         }
         // if the player has not got 8 ender pearls in his inventory
         else if (!hasItems(player, Material.ENDER_PEARL, PlayerEndTeleport.getEyesNeeded())
-                && !hasDisplayNameItem(player, "Enter the End")
+                && !hasDisplayNameItem(player, "Enter The End")
                 && !player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
             setScore(ChatColor.GOLD + "Get " + PlayerEndTeleport.getEyesNeeded() + " Ender Pearls", 7);
 
+            // The player gets the Bastion Teleporter, once it is no longer in the inventory means the TP has been used
             setScore((!hasDisplayNameItem(player, "Enter Bastion") ? HexColor.GREEN + "✔" : HexColor.RED + "✘")
                     + ChatColor.GRAY + " Use the " + ChatColor.WHITE + "Teleporter", 6);
 
@@ -107,21 +108,21 @@ public class Scoreboard extends ScoreboardBuilder {
                     + ChatColor.GRAY + " Trade " + ChatColor.WHITE + "Gold" + ChatColor.GRAY + " with " + ChatColor.WHITE + "Piglins", 5);
         }
         // if the player has not got the End Teleporter yet
-        else if (!hasDisplayNameItem(player, "Enter the End")
+        else if (!hasDisplayNameItem(player, "Enter The End")
                 && !player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
             setScore(ChatColor.GOLD + "Craft Ender Eyes", 7);
             setScore("", 6);
             setScore("", 5);
         }
-        // if the player has an item in his inventory that contains the displayname "Enter the End"
-        else if (hasDisplayNameItem(player, "Enter the End")) {
+        // if the player has an item in his inventory that contains the displayname "Enter The End"
+        else if (hasDisplayNameItem(player, "Enter The End")) {
             setScore(ChatColor.GOLD + "Enter the End", 7);
             setScore(HexColor.YELLOW + "»" + ChatColor.GRAY + " Use the " + ChatColor.WHITE + "Teleporter", 6);
             setScore("", 5);
         }
         // if the player is in the End
         else if (player.getWorld().getEnvironment() == World.Environment.THE_END) {
-            player.sendMessage(ChatColor.GOLD + "Damage the Dragon");
+            setScore(ChatColor.GOLD + "Damage the Dragon", 7);
             setScore("", 6);
             setScore("", 5);
         }
@@ -163,8 +164,7 @@ public class Scoreboard extends ScoreboardBuilder {
         }.runTaskTimer(Main.getInstance(), 0, 20);
     }
 
-    private String countdownFormat(int time) {
-
+    /*private String countdownFormat(int time) {
         String minutes = "";
         String seconds = "";
         if ((time / 60) % 60 < 10)
@@ -175,7 +175,7 @@ public class Scoreboard extends ScoreboardBuilder {
         seconds += time % 60;
 
         return minutes + ":" + seconds;
-    }
+    }*/
 
     private boolean hasItems(Player player, Material material, int amount) {
         return player.getInventory().contains(material, amount);
@@ -187,12 +187,7 @@ public class Scoreboard extends ScoreboardBuilder {
     }
 
     private boolean hasDisplayNameItem(Player player, String displayName) {
-        for (ItemStack item : player.getInventory().getContents()) {
-            if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()
-                    && item.getItemMeta().getDisplayName().contains(displayName)) {
-                return true;
-            }
-        }
-        return false;
+        return player.getInventory().getItem(7) != null &&
+                player.getInventory().getItem(7).getItemMeta().getDisplayName().contains(displayName);
     }
 }

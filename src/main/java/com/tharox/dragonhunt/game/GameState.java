@@ -189,9 +189,9 @@ public class GameState {
         meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Scout");
         meta.setLore(Arrays.asList(
                 ChatColor.GRAY + "Go into " + ChatColor.WHITE + "Spectator Mode" + ChatColor.GRAY + " for a short time.",
-                ChatColor.GRAY + "Scouting " + ChatColor.WHITE + "teleports" + ChatColor.GRAY + " you to",
-                ChatColor.GRAY + "your location in Spectator Mode.",
-                ChatColor.GRAY + "after the Scout ends.",
+                ChatColor.GRAY + "Scouting " + ChatColor.WHITE + "teleports" + ChatColor.GRAY + " you to your",
+                ChatColor.GRAY + "location in Spectator Mode after",
+                ChatColor.GRAY + "the Scout ends.",
                 "",
                 ChatColor.RED + "Cancel using " + HexColor.RED + "/scout" + ChatColor.RED + " while in a Scout."));
 

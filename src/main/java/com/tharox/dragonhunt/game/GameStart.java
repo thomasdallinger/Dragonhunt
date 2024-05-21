@@ -3,6 +3,7 @@ package com.tharox.dragonhunt.game;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.db.DbValues;
+import com.tharox.dragonhunt.players.BossBarManager;
 import com.tharox.dragonhunt.scout.Scout;
 import com.tharox.dragonhunt.shop.Effects;
 import com.tharox.dragonhunt.chat.HexColor;
@@ -218,18 +219,6 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(HexColor.GREEN + "The Grace Period has ended.");
                 bossBar.removePlayer(player);
                 bossBar.setVisible(false);
-
-                // Add the Points Boss Bar to all players
-                UUID id = player.getUniqueId();
-
-                PointsListener.bossBars.put(id, Bukkit.createBossBar(
-                        HexColor.YELLOW.toString() + ChatColor.BOLD + PointsListener.scorePerPlayer.get(id)
-                                + ChatColor.WHITE + " / " + PointsListener.threshold + " Ender Dragon Damage",
-                        BarColor.YELLOW, BarStyle.SOLID));
-                PointsListener.bossBars.get(id).addPlayer(player);
-                PointsListener.bossBars.get(id).setProgress(
-                        PointsListener.scorePerPlayer.get(id) / (PointsListener.threshold + 1D));
-                PointsListener.bossBars.get(id).setVisible(true);
             }
         }
     }

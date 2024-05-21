@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.players.BossBarManager;
 import com.tharox.dragonhunt.players.PlayerTeleport;
 import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.timer.Countdown;
@@ -14,6 +15,9 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
+import org.bukkit.boss.BarColor;
+import org.bukkit.boss.BarStyle;
+import org.bukkit.boss.BossBar;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -35,6 +39,7 @@ public class Scoreboard extends ScoreboardBuilder {
     public void createScoreboard() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yy");
         LocalDateTime now = LocalDateTime.now();
+        BossBarManager.addBossBar(player, createBossBar("Build a Nether Portal")); // Initialize Bossbar
 
         setScore(ChatColor.GRAY + dtf.format(now) + ChatColor.DARK_GRAY + " v" + DbValues.getVersion() + " ["
                 + DbValues.getServerID() + "]", 13);
@@ -55,6 +60,8 @@ public class Scoreboard extends ScoreboardBuilder {
 
     @Override
     public void update(Player player, Countdown countdown) {
+        UUID id = player.getUniqueId();
+
         if (GameState.eloPerPlayer.getOrDefault(player, 0) >= 0) {
             setScore(HexColor.GREEN + "+" + GameState.eloPerPlayer.getOrDefault(player, 0)
                     + ChatColor.WHITE + " ✪", 12);
@@ -80,6 +87,12 @@ public class Scoreboard extends ScoreboardBuilder {
                     + ChatColor.GRAY + " Get " + ChatColor.WHITE + "4 Iron" + ChatColor.GRAY + ", " + ChatColor.WHITE + "1 Flint", 6);
 
             setScore(HexColor.YELLOW + "»" + ChatColor.GRAY + " Find " + ChatColor.WHITE + "Lava", 5);
+
+            // Add the bossbar to the player
+            if (!BossBarManager.getBossBar(player).equals(createBossBar("Build a Nether Portal"))) {
+                BossBarManager.removeBossBar(player);
+                BossBarManager.addBossBar(player, createBossBar("Build a Nether Portal"));
+            }
         }
         // if the player has not got 8 blaze powder in his inventory
         else if (!hasItems(player, Material.BLAZE_POWDER, PlayerTeleport.getEyesNeeded())
@@ -92,6 +105,12 @@ public class Scoreboard extends ScoreboardBuilder {
 
             setScore((hasItems(player, Material.BLAZE_POWDER, 1) ? HexColor.GREEN + "✔" : HexColor.RED + "✘")
                     + ChatColor.GRAY + " Kill " + ChatColor.WHITE + "Blazes", 5);
+
+            // Add the bossbar to the player
+            if (!BossBarManager.getBossBar(player).equals(createBossBar("Get " + PlayerTeleport.getEyesNeeded() + " Blaze Powder"))) {
+                BossBarManager.removeBossBar(player);
+                BossBarManager.addBossBar(player, createBossBar("Get " + PlayerTeleport.getEyesNeeded() + " Blaze Powder"));
+            }
         }
         // if the player has not got 8 ender pearls in his inventory
         else if (!hasItems(player, Material.ENDER_PEARL, PlayerTeleport.getEyesNeeded())
@@ -105,6 +124,12 @@ public class Scoreboard extends ScoreboardBuilder {
 
             setScore((hasAdvancement(player, "nether/distract_piglin") ? HexColor.GREEN + "✔" : HexColor.RED + "✘")
                     + ChatColor.GRAY + " Trade " + ChatColor.WHITE + "Gold" + ChatColor.GRAY + " with " + ChatColor.WHITE + "Piglins", 5);
+
+            // Add the bossbar to the player
+            if (!BossBarManager.getBossBar(player).equals(createBossBar("Get " + PlayerTeleport.getEyesNeeded() + " Ender Pearls"))) {
+                BossBarManager.removeBossBar(player);
+                BossBarManager.addBossBar(player, createBossBar("Get " + PlayerTeleport.getEyesNeeded() + " Ender Pearls"));
+            }
         }
         // if the player has not got the End Teleporter yet
         else if (!hasDisplayNameItem(player, "Enter The End")
@@ -112,18 +137,48 @@ public class Scoreboard extends ScoreboardBuilder {
             setScore(ChatColor.GOLD + "Craft Ender Eyes", 7);
             setScore("", 6);
             setScore("", 5);
+
+            // Add the bossbar to the player
+            if (!BossBarManager.getBossBar(player).equals(createBossBar("Craft Ender Eyes"))) {
+                BossBarManager.removeBossBar(player);
+                BossBarManager.addBossBar(player, createBossBar("Craft Ender Eyes"));
+            }
         }
         // if the player has an item in his inventory that contains the displayname "Enter The End"
         else if (hasDisplayNameItem(player, "Enter The End")) {
             setScore(ChatColor.GOLD + "Enter The End", 7);
             setScore(HexColor.YELLOW + "»" + ChatColor.GRAY + " Use the " + ChatColor.WHITE + "Teleporter", 6);
             setScore("", 5);
+
+            // Add the bossbar to the player
+            if (!BossBarManager.getBossBar(player).equals(createBossBar("Enter The End"))) {
+                BossBarManager.removeBossBar(player);
+                PointsListener.bossBars.remove(id); // Remove player from Points Bossbar Hashmap so it can be added again
+                BossBarManager.addBossBar(player, createBossBar("Enter The End"));
+            }
         }
         // if the player is in the End
         else if (player.getWorld().getEnvironment() == World.Environment.THE_END) {
             setScore(ChatColor.GOLD + "Damage the Dragon", 7);
             setScore("", 6);
             setScore("", 5);
+
+            // Add the bossbar to the player
+            if (!PointsListener.bossBars.containsKey(id)) {
+                BossBarManager.removeBossBar(player);
+
+                // Create the bossbar
+                PointsListener.bossBars.put(id, Bukkit.createBossBar(
+                        HexColor.YELLOW.toString() + ChatColor.BOLD + PointsListener.scorePerPlayer.get(id)
+                                + ChatColor.WHITE + " / " + PointsListener.threshold + " Ender Dragon Damage",
+                        BarColor.YELLOW, BarStyle.SOLID));
+                // Add the bossbar to the player
+                BossBarManager.addBossBar(player, PointsListener.bossBars.get(id));
+                // Set the progress and visibility
+                PointsListener.bossBars.get(id).setProgress(
+                        PointsListener.scorePerPlayer.get(id) / (PointsListener.threshold + 1D));
+                PointsListener.bossBars.get(id).setVisible(true);
+            }
         }
 
         List<UUID> sortedKeys = GameState.sortPlayersByPoints(PointsListener.scorePerPlayer);
@@ -188,5 +243,12 @@ public class Scoreboard extends ScoreboardBuilder {
     private boolean hasDisplayNameItem(Player player, String displayName) {
         return player.getInventory().getItem(7) != null &&
                 player.getInventory().getItem(7).getItemMeta().getDisplayName().contains(displayName);
+    }
+
+    private BossBar createBossBar(String text) {
+        BossBar bossBar = Bukkit.createBossBar(ChatColor.GOLD + text, BarColor.YELLOW, BarStyle.SOLID);
+        bossBar.setProgress(1.0);
+        bossBar.setVisible(true);
+        return bossBar;
     }
 }

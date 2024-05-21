@@ -25,9 +25,9 @@ import org.bukkit.util.StructureSearchResult;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class PlayerEndTeleport implements Listener {
+public class PlayerTeleport implements Listener {
 
-    public PlayerEndTeleport() {
+    public PlayerTeleport() {
         run();
     }
 

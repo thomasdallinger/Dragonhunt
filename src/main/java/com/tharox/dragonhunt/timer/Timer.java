@@ -8,7 +8,7 @@ import com.tharox.dragonhunt.game.GameEnd;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.KitClass;
 import com.tharox.dragonhunt.players.CombatListener;
-import com.tharox.dragonhunt.players.PlayerEndTeleport;
+import com.tharox.dragonhunt.players.PlayerTeleport;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -173,7 +173,7 @@ public class Timer {
                 if (getTime() == 900 && !GameState.playersReachedEnd) {
                     for (Player online : Bukkit.getOnlinePlayers()) {
                         online.sendMessage(Prefixes.getImportantPrefix()
-                                + HexColor.YELLOW + PlayerEndTeleport.getEyesNeeded()
+                                + HexColor.YELLOW + PlayerTeleport.getEyesNeeded()
                                 + " Eyes of Ender " + ChatColor.GRAY + "needed to be able to enter "
                                 + ChatColor.WHITE + "The End" + ChatColor.GRAY + ".");
                     }

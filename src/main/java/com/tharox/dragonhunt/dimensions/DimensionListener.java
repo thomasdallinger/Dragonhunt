@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.dimensions;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.players.PlayerEndTeleport;
+import com.tharox.dragonhunt.players.PlayerTeleport;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -35,7 +35,7 @@ public class DimensionListener implements Listener {
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 9));
 
         if (event.getFrom().getEnvironment().equals(World.Environment.THE_END)) {
-            player.getInventory().setItem(7, PlayerEndTeleport.createEndTeleport());
+            player.getInventory().setItem(7, PlayerTeleport.createEndTeleport());
         }
     }
 

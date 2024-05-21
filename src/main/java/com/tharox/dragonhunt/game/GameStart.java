@@ -13,7 +13,7 @@ import com.tharox.dragonhunt.modifiers.classes.BonusHearts;
 import com.tharox.dragonhunt.modifiers.selection.ModifierInventory;
 import com.tharox.dragonhunt.movement.ElytraSwapRunnable;
 import com.tharox.dragonhunt.players.PlayerDamageListener;
-import com.tharox.dragonhunt.players.PlayerEndTeleport;
+import com.tharox.dragonhunt.players.PlayerTeleport;
 import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
@@ -165,7 +165,7 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(ChatColor.GRAY + "Whoever deals "
                         + ChatColor.WHITE + PointsListener.threshold + " Damage"
                         + ChatColor.GRAY + " to the Ender Dragon first wins.");
-                player.sendMessage(ChatColor.GRAY + "You need " + ChatColor.WHITE + PlayerEndTeleport.getEyesNeeded()
+                player.sendMessage(ChatColor.GRAY + "You need " + ChatColor.WHITE + PlayerTeleport.getEyesNeeded()
                         + " Eyes of Ender " + ChatColor.GRAY + "to receive an" + ChatColor.WHITE + " End Teleporter"
                         + ChatColor.GRAY + ".");
 

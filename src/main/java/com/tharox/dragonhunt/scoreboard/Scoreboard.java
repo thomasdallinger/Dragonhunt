@@ -4,7 +4,7 @@ import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.players.PlayerEndTeleport;
+import com.tharox.dragonhunt.players.PlayerTeleport;
 import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
@@ -15,7 +15,6 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.time.LocalDateTime;
@@ -83,10 +82,10 @@ public class Scoreboard extends ScoreboardBuilder {
             setScore(HexColor.YELLOW + "»" + ChatColor.GRAY + " Find " + ChatColor.WHITE + "Lava", 5);
         }
         // if the player has not got 8 blaze powder in his inventory
-        else if (!hasItems(player, Material.BLAZE_POWDER, PlayerEndTeleport.getEyesNeeded())
+        else if (!hasItems(player, Material.BLAZE_POWDER, PlayerTeleport.getEyesNeeded())
                 && !hasDisplayNameItem(player, "Enter The End")
                 && !player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
-            setScore(ChatColor.GOLD + "Get " + PlayerEndTeleport.getEyesNeeded() + " Blaze Powder", 7);
+            setScore(ChatColor.GOLD + "Get " + PlayerTeleport.getEyesNeeded() + " Blaze Powder", 7);
 
             setScore((hasAdvancement(player, "nether/find_fortress") ? HexColor.GREEN + "✔" : HexColor.RED + "✘")
                     + ChatColor.GRAY + " Enter the " + ChatColor.WHITE + "Fortress", 6);
@@ -95,10 +94,10 @@ public class Scoreboard extends ScoreboardBuilder {
                     + ChatColor.GRAY + " Kill " + ChatColor.WHITE + "Blazes", 5);
         }
         // if the player has not got 8 ender pearls in his inventory
-        else if (!hasItems(player, Material.ENDER_PEARL, PlayerEndTeleport.getEyesNeeded())
+        else if (!hasItems(player, Material.ENDER_PEARL, PlayerTeleport.getEyesNeeded())
                 && !hasDisplayNameItem(player, "Enter The End")
                 && !player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
-            setScore(ChatColor.GOLD + "Get " + PlayerEndTeleport.getEyesNeeded() + " Ender Pearls", 7);
+            setScore(ChatColor.GOLD + "Get " + PlayerTeleport.getEyesNeeded() + " Ender Pearls", 7);
 
             // The player gets the Bastion Teleporter, once it is no longer in the inventory means the TP has been used
             setScore((!hasDisplayNameItem(player, "Enter Bastion") ? HexColor.GREEN + "✔" : HexColor.RED + "✘")

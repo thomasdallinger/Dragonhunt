@@ -16,7 +16,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
 import java.sql.Statement;
-import java.util.UUID;
 
 public class AdvancementListener implements Listener {
 
@@ -64,7 +63,7 @@ public class AdvancementListener implements Listener {
 
                     for (Player online : Bukkit.getOnlinePlayers()) {
                         online.sendMessage(Prefixes.getImportantPrefix()
-                                + HexColor.YELLOW + PlayerEndTeleport.getEyesNeeded()
+                                + HexColor.YELLOW + PlayerTeleport.getEyesNeeded()
                                 + " Eyes of Ender " + ChatColor.GRAY + "needed to be able to enter "
                                 + ChatColor.WHITE + "The End" + ChatColor.GRAY + ".");
                     }

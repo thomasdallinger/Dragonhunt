@@ -41,7 +41,7 @@ public class EntityDropListener implements Listener {
                 itemToDrop = new ItemStack(Material.FIREWORK_ROCKET, amount.nextInt(6) + 1);
                 break;
             case 5:
-                itemToDrop = new ItemStack(Material.NETHERITE_INGOT);
+                itemToDrop = new ItemStack(Material.BOW);
                 break;
             default:
                 // Unexpected Value.

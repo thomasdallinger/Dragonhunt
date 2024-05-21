@@ -137,6 +137,7 @@ public class EntityDeathListener implements Listener {
             case "Evoker":
             case "Wither Skeleton":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.FIREWORK_ROCKET, 3));
+                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.DIAMOND));
                 break;
             case "Ravager":
             case "Piglin Brute":

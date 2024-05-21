@@ -77,6 +77,14 @@ public class CreatureSpawnListener implements Listener {
                 return;
             }
 
+            // All Wither Skeletons have 2x health and iron swords
+            if (entity instanceof WitherSkeleton) {
+                Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
+                        .setBaseValue(entity.getHealth() * 2);
+                entity.setHealth(entity.getHealth() * 2);
+                Objects.requireNonNull(entity.getEquipment()).setItemInMainHand(new ItemStack(Material.IRON_SWORD));
+            }
+
             if (CaveSpiders.active) {
                 if (entity instanceof Spider) {
                     if (!(entity instanceof CaveSpider)) {

@@ -24,8 +24,11 @@ import org.bukkit.util.StructureSearchResult;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class PlayerTeleport implements Listener {
+
+    private static HashMap<Player, Boolean> gotBastionTeleport = new HashMap<>();
 
     public PlayerTeleport() {
         run();
@@ -94,9 +97,12 @@ public class PlayerTeleport implements Listener {
                 // Remove the teleporter, replace with Scout item
                 player.getInventory().remove(Material.GILDED_BLACKSTONE);
                 Bukkit.getScheduler().runTaskLater(Main.getInstance(),
-                        task -> player.getInventory().setItem(7, GameState.getScoutItem()), 40L);
+                        task -> player.getInventory().setItem(7, GameState.getScoutItem()), 20L);
 
-                player.teleport(structureSearchResult.getLocation());
+                player.teleport(new Location(world,
+                        structureSearchResult.getLocation().getX(),
+                        100,
+                        structureSearchResult.getLocation().getZ()));
                 player.sendTitle("", HexColor.GREEN + "ᴛᴇʟᴇᴘᴏʀᴛᴇᴅ", 0, 30, 10);
                 player.playSound(player.getLocation(), Sound.BLOCK_PORTAL_TRAVEL, 1, 1);
             }
@@ -113,11 +119,11 @@ public class PlayerTeleport implements Listener {
                     boolean hasEnoughPowder = inventory.contains(Material.BLAZE_POWDER, getEyesNeeded());
                     Advancement advancement = Bukkit.getAdvancement(NamespacedKey.minecraft("nether/find_bastion"));
 
-                    // Give the player a Bastion Teleporter if he has never been in a Bastion and doesn't already have a teleporter
-                    if (hasEnoughPowder && !player.getAdvancementProgress(advancement).isDone()
-                            && !player.getInventory().contains(Material.GILDED_BLACKSTONE)) {
+                    // Give the player a Bastion Teleporter if he has never got one
+                    if (hasEnoughPowder && !gotBastionTeleport.getOrDefault(player, false)) {
                         // Replace the Scout with the BASTION TELEPORTER item
                         inventory.setItem(7, createBastionTeleport());
+                        gotBastionTeleport.put(player, true);
                         player.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + ChatColor.BOLD
                                 + "You can now enter a Bastion.");
                         player.sendMessage(ChatColor.WHITE + "Right-Click" + ChatColor.GRAY + " the "

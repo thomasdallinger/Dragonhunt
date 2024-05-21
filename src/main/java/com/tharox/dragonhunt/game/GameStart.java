@@ -153,8 +153,8 @@ public class GameStart extends GameConfiguration {
                 // Allow players to fly normally in Spectator Mode from now.
                 GameState.flySpeedZero.put(player, false);
 
-                // Set cooldown on Emerald to show scout cooldown
-                player.setCooldown(Material.EMERALD, Scout.COOLDOWN * 20);
+                // Set cooldown on Ender Eye to show scout cooldown
+                player.setCooldown(Material.ENDER_EYE, Scout.COOLDOWN * 20);
 
                 if (BonusHearts.active) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,

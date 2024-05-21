@@ -124,7 +124,7 @@ public class GameConfiguration {
             player.getInventory().clear();
 
             // adds general items to the player's inventory
-            player.getInventory().setItem(7, GameState.getShopItem());
+            player.getInventory().setItem(7, GameState.getScoutItem());
             player.getInventory().setItemInOffHand(GameState.addItem(new ItemStack(Material.SHIELD)));
         }
     }

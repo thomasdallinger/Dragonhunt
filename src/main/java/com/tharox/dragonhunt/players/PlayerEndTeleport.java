@@ -74,23 +74,28 @@ public class PlayerEndTeleport implements Listener {
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     Inventory inventory = player.getInventory();
+                    boolean hasEnoughEyes;
 
                     // The player never had a END TELEPORTER yet
-                    for (ItemStack item : inventory) {
-                        if (item == null) continue;
+                    if (inventory.getItem(7) != null
+                            && inventory.getItem(7).getType().equals(Material.ENDER_EYE)) {
+                        // The Scout item is an additional Ender Eye in the player's inventory
+                        hasEnoughEyes = inventory.contains(Material.ENDER_EYE, getEyesNeeded() + 1);
+                    } else {
+                        hasEnoughEyes = inventory.contains(Material.ENDER_EYE, getEyesNeeded());
+                    }
 
-                        // only returns true if both the type and amount of the ItemStack is correct
-                        if (item.getType() == Material.ENDER_EYE && item.getAmount() >= getEyesNeeded()) {
-                            inventory.remove(item);
+                    if (hasEnoughEyes) {
+                        // Remove all Ender Eyes
+                        inventory.remove(Material.ENDER_EYE);
 
-                            // replace the Shop with the END TELEPORTER item
-                            inventory.setItem(7, createEndTeleport());
-                            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + ChatColor.BOLD
-                                    + "You can now enter The End.");
-                            player.sendMessage(ChatColor.WHITE + "Right-Click" + ChatColor.GRAY + " the "
-                                    + ChatColor.LIGHT_PURPLE + "End Portal Frame"
-                                    + ChatColor.GRAY + " in your inventory to teleport.");
-                        }
+                        // Replace the Scout with the END TELEPORTER item
+                        inventory.setItem(7, createEndTeleport());
+                        player.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + ChatColor.BOLD
+                                + "You can now enter The End.");
+                        player.sendMessage(ChatColor.WHITE + "Right-Click" + ChatColor.GRAY + " the "
+                                + ChatColor.LIGHT_PURPLE + "End Portal Frame"
+                                + ChatColor.GRAY + " in your inventory to teleport.");
                     }
                 }
             }
@@ -126,8 +131,8 @@ public class PlayerEndTeleport implements Listener {
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Enter The End" + ChatColor.GRAY + " (Right-Click)");
         meta.setLore(Arrays.asList(
-                ChatColor.WHITE + "Right-Click: " + ChatColor.LIGHT_PURPLE + "Teleports you to the spawn platform",
-                ChatColor.LIGHT_PURPLE + "in the End dimension.",
+                ChatColor.WHITE + "Teleports" + ChatColor.GRAY + " you to the spawn platform",
+                ChatColor.GRAY + "in the End dimension.",
                 "",
                 HexColor.RED + "The only way back is dying."));
         item.setItemMeta(meta);

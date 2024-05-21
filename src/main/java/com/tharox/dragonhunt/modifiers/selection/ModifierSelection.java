@@ -32,11 +32,11 @@ public class ModifierSelection {
                 new DoubleChestLoot(),
                 new EndermanParty(),
                 new HotHealing(),
-                new FastComback()
+                new FastComback(),
+                new WeakenedByFlames()
         ));
         negPool1.addAll(Arrays.asList(
                 new ForeverHunger(),
-                new WeakenedByFlames(),
                 new WitherSkeletons(),
                 new ImmuneSkeletons(),
                 new BrutalBrutes(),

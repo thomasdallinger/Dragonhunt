@@ -74,7 +74,7 @@ public class Timer {
                     }
                 }
 
-                if (title.contains("Shop"))
+                if (title.contains("Scout"))
                     continue;
 
                 // Kit item
@@ -93,8 +93,8 @@ public class Timer {
                                 new ComponentBuilder("COOLDOWN").color(HexColor.RED).bold(true)
                                         .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
                                         .append(String.valueOf((player.getCooldown(materialToCheck) / 20)))
-                                        .color(ChatColor.GRAY)
-                                        .append(" seconds").color(ChatColor.GRAY).create());
+                                        .color(ChatColor.RED)
+                                        .append(" seconds").color(ChatColor.RED).create());
                     }
                     // Ability is ready
                     else {

@@ -39,7 +39,7 @@ public class ScoutCommand implements CommandExecutor {
             if (args.length == 0) {
                 // Cancel the currently active scout
                 Scout.scoutCooldown.put(player, timer.getTime() + Scout.COOLDOWN);
-                player.setCooldown(Material.EMERALD, Scout.COOLDOWN * 20);
+                player.setCooldown(Material.ENDER_EYE, Scout.COOLDOWN * 20);
                 return true;
             }
 
@@ -55,7 +55,7 @@ public class ScoutCommand implements CommandExecutor {
                     } else {
                         // Cancel the currently active scout
                         Scout.scoutCooldown.put(player, timer.getTime() + Scout.COOLDOWN);
-                        player.setCooldown(Material.EMERALD, Scout.COOLDOWN * 20);
+                        player.setCooldown(Material.ENDER_EYE, Scout.COOLDOWN * 20);
 
                         Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
                             player.teleport(location);
@@ -92,7 +92,9 @@ public class ScoutCommand implements CommandExecutor {
         }
 
         if (Scout.scoutCooldown.get(player) >= timer.getTime()) {
-            player.sendMessage(Prefixes.getErrorPrefix() + "Your ability to scout is on cooldown.");
+            player.sendMessage(Prefixes.getErrorPrefix() + "Scout is on cooldown for "
+                    + HexColor.RED + (player.getCooldown(Material.ENDER_EYE) / 20)
+                    + ChatColor.RED + " seconds.");
             player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
             return false;
         }

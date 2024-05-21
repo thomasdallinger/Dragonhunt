@@ -49,7 +49,7 @@ public class Scout {
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 
                     scoutCooldown.put(player, timer.getTime() + Scout.COOLDOWN);
-                    player.setCooldown(Material.EMERALD, Scout.COOLDOWN * 20);
+                    player.setCooldown(Material.ENDER_EYE, Scout.COOLDOWN * 20);
                     spectateLocation.remove(player);
 
                     cancel();

@@ -2,10 +2,13 @@ package com.tharox.dragonhunt.shop;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -24,7 +27,6 @@ public class ShopInteraction implements Listener {
     public void onInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         ItemStack item = player.getInventory().getItemInMainHand();
-        World world = player.getWorld();
 
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
@@ -34,9 +36,9 @@ public class ShopInteraction implements Listener {
             return;
 
         if (e.equals(EquipmentSlot.HAND)
-                && (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().contains("Shop")) {
-                event.setCancelled(true); // Avoid block placement.
+                && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
+            if (item.getItemMeta().getDisplayName().contains("Scout")) {
+                event.setCancelled(true); // Avoid item interaction.
                 player.performCommand("scout");
             }
 
@@ -54,17 +56,32 @@ public class ShopInteraction implements Listener {
 
     public void sendActionBar(Player player) {
         ItemStack item = player.getInventory().getItemInMainHand();
+        Timer timer = Main.getInstance().getTimer();
 
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
 
-        if (item.getItemMeta().getDisplayName().contains("Shop")) {
-            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                    new ComponentBuilder("SCOUT").color(HexColor.YELLOW).bold(true)
-                            .append(" (Left-Click)").color(ChatColor.GRAY).bold(false)
-                            .append(" | ").color(ChatColor.DARK_GRAY)
-                            .append("SHOP").color(HexColor.YELLOW).bold(true)
-                            .append(" (Right-Click)").color(ChatColor.GRAY).bold(false).create());
+        if (item.getItemMeta().getDisplayName().contains("Scout")) {
+            if (player.getCooldown(Material.ENDER_EYE) > 0) {
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                        new ComponentBuilder("COOLDOWN").color(HexColor.RED).bold(true)
+                                .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
+                                .append(String.valueOf((player.getCooldown(Material.ENDER_EYE) / 20)))
+                                .color(ChatColor.RED)
+                                .append(" seconds").color(ChatColor.RED).create());
+            } else {
+                if (timer.getTime() % 2 == 0) {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                            new ComponentBuilder("USE SCOUT").color(HexColor.YELLOW).bold(true)
+                                    .append(" (Right-Click)").color(ChatColor.GRAY).bold(false)
+                                    .create());
+                } else {
+                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                            new ComponentBuilder("USE SCOUT").color(ChatColor.WHITE).bold(true)
+                                    .append(" (Right-Click)").color(ChatColor.GRAY).bold(false)
+                                    .create());
+                }
+            }
         }
     }
 

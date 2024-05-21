@@ -2,17 +2,20 @@ package com.tharox.dragonhunt.scoreboard;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.players.PlayerEndTeleport;
 import com.tharox.dragonhunt.players.PointsListener;
-import com.tharox.dragonhunt.scout.Scout;
 import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.World;
+import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.time.LocalDateTime;
@@ -69,29 +72,59 @@ public class Scoreboard extends ScoreboardBuilder {
                 + "☠ " + DbValues.getKills(player, true) + " "
                 + "✟ " + DbValues.getKills(player, false), 9);
 
-        if (Scout.scoutCooldown.containsKey(player)) {
-            if (Scout.scoutCooldown.get(player) < timer.getTime()) {
-                if (timer.getTime() % 2 == 0) {
-                    setScore("/scout available", 7);
-                } else {
-                    setScore(ChatColor.GOLD + "/scout" + ChatColor.WHITE + " available", 7);
-                }
-            } else {
-                setScore("", 7);
-            }
-        }
+        // if the player has not got the Enter the nether advancement
+        if (!hasAdvancement(player, "story/enter_the_nether")) {
+            setScore(ChatColor.GOLD + "Build a Nether Portal", 7);
 
-        if (timer.getTime() <= 900 && !GameState.playersReachedEnd) {
-            setScore(ChatColor.BOLD.toString() + PlayerEndTeleport.getEyesNeeded()
-                    + ChatColor.WHITE + " Eyes" + ChatColor.DARK_GRAY + " » "
-                    + ChatColor.GRAY + countdownFormat(900 - timer.getTime()), 6);
-        } else {
-            setScore(HexColor.GREEN.toString() + ChatColor.BOLD + PlayerEndTeleport.getEyesNeeded()
-                    + ChatColor.WHITE + " Eyes", 6);
-        }
+            setScore(((hasItems(player, Material.IRON_INGOT, 4) && hasItems(player, Material.FLINT, 1))
+                    || (hasItems(player, Material.WATER_BUCKET, 1) && hasItems(player, Material.FLINT_AND_STEEL, 1)) ? HexColor.GREEN + "✔" : HexColor.RED + "✘")
+                    + ChatColor.GRAY + " Get " + ChatColor.WHITE + "4 Iron" + ChatColor.GRAY + ", " + ChatColor.WHITE + "1 Flint", 6);
 
-        setScore(Coins.getCoins(player) + " ⛃" + ChatColor.DARK_GRAY + " » "
-                + ChatColor.GRAY + "/shop", 5);
+            setScore(HexColor.YELLOW + "»" + ChatColor.GRAY + " Find " + ChatColor.WHITE + "Lava", 5);
+        }
+        // if the player has not got 8 blaze powder in his inventory
+        else if (!hasItems(player, Material.BLAZE_POWDER, PlayerEndTeleport.getEyesNeeded())
+                && !hasDisplayNameItem(player, "Enter the End")
+                && !player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
+            setScore(ChatColor.GOLD + "Get " + PlayerEndTeleport.getEyesNeeded() + " Blaze Powder", 7);
+
+            setScore((hasAdvancement(player, "nether/find_fortress") ? HexColor.GREEN + "✔" : HexColor.RED + "✘")
+                    + ChatColor.GRAY + " Enter the " + ChatColor.WHITE + "Fortress", 6);
+
+            setScore((hasItems(player, Material.BLAZE_POWDER, 1) ? HexColor.GREEN + "✔" : HexColor.RED + "✘")
+                    + ChatColor.GRAY + " Kill " + ChatColor.WHITE + "Blazes", 5);
+        }
+        // if the player has not got 8 ender pearls in his inventory
+        else if (!hasItems(player, Material.ENDER_PEARL, PlayerEndTeleport.getEyesNeeded())
+                && !hasDisplayNameItem(player, "Enter the End")
+                && !player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
+            setScore(ChatColor.GOLD + "Get " + PlayerEndTeleport.getEyesNeeded() + " Ender Pearls", 7);
+
+            setScore((!hasDisplayNameItem(player, "Enter Bastion") ? HexColor.GREEN + "✔" : HexColor.RED + "✘")
+                    + ChatColor.GRAY + " Use the " + ChatColor.WHITE + "Teleporter", 6);
+
+            setScore((hasAdvancement(player, "nether/distract_piglin") ? HexColor.GREEN + "✔" : HexColor.RED + "✘")
+                    + ChatColor.GRAY + " Trade " + ChatColor.WHITE + "Gold" + ChatColor.GRAY + " with " + ChatColor.WHITE + "Piglins", 5);
+        }
+        // if the player has not got the End Teleporter yet
+        else if (!hasDisplayNameItem(player, "Enter the End")
+                && !player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
+            setScore(ChatColor.GOLD + "Craft Ender Eyes", 7);
+            setScore("", 6);
+            setScore("", 5);
+        }
+        // if the player has an item in his inventory that contains the displayname "Enter the End"
+        else if (hasDisplayNameItem(player, "Enter the End")) {
+            setScore(ChatColor.GOLD + "Enter the End", 7);
+            setScore(HexColor.YELLOW + "»" + ChatColor.GRAY + " Use the " + ChatColor.WHITE + "Teleporter", 6);
+            setScore("", 5);
+        }
+        // if the player is in the End
+        else if (player.getWorld().getEnvironment() == World.Environment.THE_END) {
+            player.sendMessage(ChatColor.GOLD + "Damage the Dragon");
+            setScore("", 6);
+            setScore("", 5);
+        }
 
         List<UUID> sortedKeys = GameState.sortPlayersByPoints(PointsListener.scorePerPlayer);
 
@@ -142,5 +175,24 @@ public class Scoreboard extends ScoreboardBuilder {
         seconds += time % 60;
 
         return minutes + ":" + seconds;
+    }
+
+    private boolean hasItems(Player player, Material material, int amount) {
+        return player.getInventory().contains(material, amount);
+    }
+
+    private boolean hasAdvancement(Player player, String key) {
+        Advancement advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(key));
+        return player.getAdvancementProgress(advancement).isDone();
+    }
+
+    private boolean hasDisplayNameItem(Player player, String displayName) {
+        for (ItemStack item : player.getInventory().getContents()) {
+            if (item != null && item.hasItemMeta() && item.getItemMeta().hasDisplayName()
+                    && item.getItemMeta().getDisplayName().contains(displayName)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

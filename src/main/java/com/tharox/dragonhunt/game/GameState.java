@@ -180,16 +180,20 @@ public class GameState {
         return item;
     }
 
-    public static ItemStack getShopItem() {
-        ItemStack item = new ItemStack(Material.EMERALD);
+    public static ItemStack getScoutItem() {
+        ItemStack item = new ItemStack(Material.ENDER_EYE);
         item.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
-        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Shop");
+        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Scout");
         meta.setLore(Arrays.asList(
-                ChatColor.GRAY + "Left-Click: " + ChatColor.WHITE + "Use Scout",
-                ChatColor.GRAY + "Right-Click: " + HexColor.YELLOW + "Open Shop"));
+                ChatColor.GRAY + "Go into " + ChatColor.WHITE + "Spectator Mode" + ChatColor.GRAY + " for a short time.",
+                ChatColor.GRAY + "Scouting " + ChatColor.WHITE + "teleports" + ChatColor.GRAY + " you to",
+                ChatColor.GRAY + "your location in Spectator Mode.",
+                ChatColor.GRAY + "after the Scout ends.",
+                "",
+                ChatColor.RED + "Cancel using " + HexColor.RED + "/scout" + ChatColor.RED + " while in a Scout."));
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

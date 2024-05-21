@@ -116,7 +116,7 @@ public class Scoreboard extends ScoreboardBuilder {
         }
         // if the player has an item in his inventory that contains the displayname "Enter The End"
         else if (hasDisplayNameItem(player, "Enter The End")) {
-            setScore(ChatColor.GOLD + "Enter the End", 7);
+            setScore(ChatColor.GOLD + "Enter The End", 7);
             setScore(HexColor.YELLOW + "»" + ChatColor.GRAY + " Use the " + ChatColor.WHITE + "Teleporter", 6);
             setScore("", 5);
         }

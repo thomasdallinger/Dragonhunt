@@ -93,7 +93,8 @@ public class PlayerTeleport implements Listener {
 
                 // Remove the teleporter, replace with Scout item
                 player.getInventory().remove(Material.GILDED_BLACKSTONE);
-                player.getInventory().setItem(7, GameState.getScoutItem());
+                Bukkit.getScheduler().runTaskLater(Main.getInstance(),
+                        task -> player.getInventory().setItem(7, GameState.getScoutItem()), 40L);
 
                 player.teleport(structureSearchResult.getLocation());
                 player.sendTitle("", HexColor.GREEN + "ᴛᴇʟᴇᴘᴏʀᴛᴇᴅ", 0, 30, 10);
@@ -112,8 +113,9 @@ public class PlayerTeleport implements Listener {
                     boolean hasEnoughPowder = inventory.contains(Material.BLAZE_POWDER, getEyesNeeded());
                     Advancement advancement = Bukkit.getAdvancement(NamespacedKey.minecraft("nether/find_bastion"));
 
-                    // Give the player a Bastion Teleporter if he has never been in a Bastion
-                    if (hasEnoughPowder && player.getAdvancementProgress(advancement).isDone()) {
+                    // Give the player a Bastion Teleporter if he has never been in a Bastion and doesn't already have a teleporter
+                    if (hasEnoughPowder && !player.getAdvancementProgress(advancement).isDone()
+                            && !player.getInventory().contains(Material.GILDED_BLACKSTONE)) {
                         // Replace the Scout with the BASTION TELEPORTER item
                         inventory.setItem(7, createBastionTeleport());
                         player.sendMessage(Prefixes.getImportantPrefix() + HexColor.GREEN + ChatColor.BOLD

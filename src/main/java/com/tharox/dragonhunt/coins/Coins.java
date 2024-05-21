@@ -14,10 +14,10 @@ import java.util.HashMap;
  */
 public class Coins {
     public static int advancementXP = 16; // XP awarded for advancements
-    public static int playerXP = 8; // XP awarded for killing players
+    public static int playerXP = 9; // XP awarded for killing players
     public static int oreXP = 2; // XP awarded for mining ores that are not dropping resources
     public static int animalXP = 3; // XP awarded for killing animals
-    public static int monsterXP = 5; // XP awarded for killing monsters
+    public static int monsterXP = 6; // XP awarded for killing monsters
 
     private static final HashMap<Player, Integer> coins = new HashMap<>();
 

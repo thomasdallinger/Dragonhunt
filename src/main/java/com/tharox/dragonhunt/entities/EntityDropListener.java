@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.entities;
 
-import com.tharox.dragonhunt.game.GameState;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
@@ -9,64 +8,40 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Random;
+
 public class EntityDropListener implements Listener {
-    public Integer dropIndex = 0; // Starts at 0 but is incremented on the first event call.
-    public static String nextDrop = "GLOWSTONE"; // Drop with dropIndex 1.
 
     @EventHandler
     public void onMobDrop(EntityDropItemEvent event) {
         Entity mob = event.getEntity();
         Item item = event.getItemDrop();
+        Random random = new Random();
 
         if (mob.getName().equals("Piglin")) {
-            dropIndex++;
-            if (dropIndex > 10)
-                dropIndex = 1;
-
-            item.setItemStack(getDrop(dropIndex));
-
-            if ((dropIndex + 1) > 10) {
-                nextDrop = getDrop(dropIndex - 9).getType().toString().replace("_", " ");
-            } else {
-                nextDrop = getDrop(dropIndex + 1).getType().toString().replace("_", " ");
-            }
-
+            item.setItemStack(getDrop(random.nextInt(5) + 1));
         }
     }
 
     public ItemStack getDrop(int dropIndex) {
         ItemStack itemToDrop;
+        Random amount = new Random();
 
         switch (dropIndex) {
             case 1:
-                itemToDrop = new ItemStack(Material.COOKED_BEEF, 3);
+                itemToDrop = new ItemStack(Material.GOLDEN_APPLE, amount.nextInt(3) + 1);
                 break;
             case 2:
-                itemToDrop = new ItemStack(Material.GOLDEN_APPLE);
+                itemToDrop = new ItemStack(Material.ENDER_PEARL, amount.nextInt(3) + 2);
                 break;
             case 3:
-                itemToDrop = new ItemStack(Material.ENDER_PEARL);
+                itemToDrop = new ItemStack(Material.DIAMOND, amount.nextInt(3) + 1);
                 break;
             case 4:
-                itemToDrop = new ItemStack(Material.DIAMOND);
+                itemToDrop = new ItemStack(Material.FIREWORK_ROCKET, amount.nextInt(6) + 1);
                 break;
             case 5:
-                itemToDrop = new ItemStack(Material.BLACKSTONE, 16);
-                break;
-            case 6:
-                itemToDrop = new ItemStack(Material.ENDER_PEARL, 2);
-                break;
-            case 7:
-                itemToDrop = new ItemStack(Material.DIAMOND, 2);
-                break;
-            case 8:
-                itemToDrop = new ItemStack(Material.ENDER_PEARL, 2);
-                break;
-            case 9:
-                itemToDrop = new ItemStack(Material.BOW);
-                break;
-            case 10:
-                itemToDrop = new ItemStack(Material.FIREWORK_ROCKET, 3);
+                itemToDrop = new ItemStack(Material.NETHERITE_INGOT);
                 break;
             default:
                 // Unexpected Value.

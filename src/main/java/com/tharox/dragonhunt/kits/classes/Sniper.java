@@ -20,7 +20,7 @@ public class Sniper extends Kit {
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
             + ChatColor.GRAY + "Get " + ChatColor.WHITE + "1 Powershot" + ChatColor.GRAY + " for your next arrow\n"
-            + ChatColor.GRAY + "fired or until the time runs out.\n"
+            + ChatColor.GRAY + "hit or until the time runs out.\n"
             + ChatColor.GRAY + "The Powershot deals " + ChatColor.WHITE + "5x" + ChatColor.GRAY + " damage.\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"

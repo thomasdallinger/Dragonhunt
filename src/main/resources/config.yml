@@ -702,111 +702,80 @@ Mutant:
     cost: 18
 Platformer:
   0:
-    slot: 13
-    name: "Builder I"
-    lore: "Ability Duration: +3 seconds."
-    material: PINK_STAINED_GLASS
-    amount: 1
-    cost: 7
+    name: "Duration: +3 sec"
   1:
-    slot: 22
-    name: "Builder II"
-    lore: "Ability Duration: +6 seconds."
-    material: PINK_STAINED_GLASS
-    amount: 2
-    cost: 12
+    name: "Effect: Speed 1 during Ability"
   2:
-    slot: 31
-    name: "Builder III"
-    lore: "Ability Duration: +10 seconds."
-    material: PINK_STAINED_GLASS
-    amount: 3
-    cost: 20
-# increase platform radius
+    name: "Effect 2: +1 Block Platform Radius"
+  3:
+    name: "Duration: +6 sec"
+  4:
+    name: "Effect: Speed 2 during Ability"
+  5:
+    name: "Effect 2: +2 Blocks Platform Radius"
+  6:
+    name: "Duration: +10 sec"
+  7:
+    name: "Effect: Speed 3 during Ability"
+  8:
+    name: "Effect 2: +3 Blocks Platform Radius"
 Sniper:
   0:
-    slot: 12
-    name: "Concentration I"
-    lore: "Ability Duration: +1 second."
-    material: TARGET
-    amount: 1
-    cost: 7
+    name: "Duration: +1 sec"
   1:
-    slot: 21
-    name: "Concentration II"
-    lore: "Ability Duration: +2 seconds."
-    material: TARGET
-    amount: 2
-    cost: 12
+    name: "Cooldown: -4 sec"
   2:
-    slot: 30
-    name: "Concentration III"
-    lore: "Ability Duration: +3 seconds."
-    material: TARGET
-    amount: 3
-    cost: 17
+    name: "Effect: Powershots deal x6 Damage"
   3:
-    slot: 14
-    name: "Cave Explorer I"
-    lore: "Effect: +1 XP Point on Ore mined"
-    material: EXPERIENCE_BOTTLE
-    amount: 1
-    cost: 5
+    name: "Duration: +2 sec"
   4:
-    slot: 23
-    name: "Cave Explorer II"
-    lore: "Effect: +2 XP Points on Ore mined"
-    material: EXPERIENCE_BOTTLE
-    amount: 2
-    cost: 10
+    name: "Cooldown: -8 sec"
   5:
-    slot: 32
-    name: "Cave Explorer III"
-    lore: "Effect: +3 XP Points on Ore mined"
-    material: EXPERIENCE_BOTTLE
-    amount: 3
-    cost: 15
+    name: "Effect: Powershots deal x7 Damage"
+  6:
+    name: "Duration: +3 sec"
+  7:
+    name: "Cooldown: -12 sec"
+  8:
+    name: "Effect: Powershots deal x8 Damage"
 Sonic:
   0:
-    slot: 13
-    name: "Sonic Dash I"
-    lore: "Effect: +2 seconds"
-    material: STONE
-    amount: 1
-    cost: 8
+    name: "Duration: +2 sec"
   1:
-    slot: 22
-    name: "Sonic Dash II"
-    lore: "Effect: +4 seconds"
-    material: STONE
-    amount: 2
-    cost: 16
+    name: "Cooldown: -4 sec"
   2:
-    slot: 31
-    name: "Sonic Dash III"
-    lore: "Effect: +6 seconds"
-    material: STONE
-    amount: 3
-    cost: 24
+    name: "Effect: +2 sec Burst Duration"
+  3:
+    name: "Duration: +4 sec"
+  4:
+    name: "Cooldown: -8 sec"
+  5:
+    name: "Effect: +4 sec Burst Duration"
+  6:
+    name: "Duration: +6 sec"
+  7:
+    name: "Cooldown: -12 sec"
+  8:
+    name: "Effect: +6 sec Burst Duration"
 Vanisher:
   0:
     name: "Duration: +1 sec"
   1:
     name: "Cooldown: -2 sec"
   2:
-    name: "Effect: +1 Extra XP Point"
+    name: "Effect: Speed 1 during Ability"
   3:
     name: "Duration: +3 sec"
   4:
     name: "Cooldown: -5 sec"
   5:
-    name: "Effect: +2 Extra XP Points"
+    name: "Effect: Speed 2 during Ability"
   6:
     name: "Duration: +6 sec"
   7:
     name: "Cooldown: -10 sec"
   8:
-    name: "Effect: +3 Extra XP Points"
+    name: "Effect: Speed 3 during Ability"
 Warrior:
   0:
     slot: 13

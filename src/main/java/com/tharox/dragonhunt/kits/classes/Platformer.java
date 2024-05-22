@@ -43,6 +43,12 @@ public class Platformer extends Kit {
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
         player.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, getDuration() * 20, 0));
 
+        // Platformer Effectiveness
+        if (Upgrades.Effectiveness.getOrDefault(player, 0) > 0) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, getDuration() * 20,
+                    Upgrades.Effectiveness.get(player) - 1));
+        }
+
         for (Player online : Bukkit.getOnlinePlayers()) {
             online.sendMessage(Prefixes.getImportantPrefix() + Prefixes.getKitAbilityPrefix() + ChatColor.WHITE
                     + player.getName() + ChatColor.GRAY + " uses the " + title + ChatColor.GRAY + " Kit Ability.");
@@ -64,8 +70,8 @@ public class Platformer extends Kit {
                 material = Material.PINK_STAINED_GLASS;
             }
 
-            for (int offsetX = -1; offsetX != 2; offsetX++) {
-                for (int offsetZ = -1; offsetZ != 2; offsetZ++) {
+            for (int offsetX = -1; offsetX != (2 + Upgrades.Effectiveness2.getOrDefault(player, 0)); offsetX++) {
+                for (int offsetZ = -1; offsetZ != (2 + Upgrades.Effectiveness2.getOrDefault(player, 0)); offsetZ++) {
                     offsetLocation = new Location(playerLocation.getWorld(),
                             playerLocation.getX() + offsetX,
                             playerLocation.getY() + offsetY,

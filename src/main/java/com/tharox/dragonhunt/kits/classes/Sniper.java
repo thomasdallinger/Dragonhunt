@@ -19,12 +19,12 @@ public class Sniper extends Kit {
     public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Sniper";
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "Deal " + ChatColor.WHITE + "3x" + ChatColor.GRAY + " Bow and Crossbow Damage\n"
-            + ChatColor.GRAY + "for a short time.\n"
-            + HexColor.YELLOW + "⇡ XP Gains can be increased\n\n"
+            + ChatColor.GRAY + "Get " + ChatColor.WHITE + "1 Powershot" + ChatColor.GRAY + " for your next arrow\n"
+            + ChatColor.GRAY + "fired or until the time runs out.\n"
+            + ChatColor.GRAY + "The Powershot deals " + ChatColor.WHITE + "5x" + ChatColor.GRAY + " damage.\n"
+            + HexColor.RED + "The Ender Dragon is immune to Powershots.\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
-            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n"
-            + HexColor.YELLOW + "⇡ Duration can be increased\n\n"
+            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.BOW;

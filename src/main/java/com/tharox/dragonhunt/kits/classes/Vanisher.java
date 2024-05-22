@@ -47,6 +47,12 @@ public class Vanisher extends Kit {
         player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,
                 getDuration() * 20, 9));
 
+        // Vanisher Effectiveness
+        if (Upgrades.Effectiveness.getOrDefault(player, 0) > 0) {
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, getDuration() * 20,
+                    Upgrades.Effectiveness.get(player) - 1));
+        }
+
         ItemStack[] items = player.getInventory().getContents();
 
         this.runKitAbility(20, getDuration(), () -> {

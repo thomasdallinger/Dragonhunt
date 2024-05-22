@@ -1,9 +1,11 @@
 package com.tharox.dragonhunt.players;
 
-import com.tharox.dragonhunt.shop.Enchantments;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.shop.Enchantments;
+import com.tharox.dragonhunt.shop.Upgrades;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -53,7 +55,11 @@ public class DamageAdjustmentListener implements Listener {
             if (GameState.selectedKit.get(damager).contains("Sniper")) {
                 if (damager.getInventory().getItemInMainHand().getType().equals(Material.BOW)
                         || damager.getInventory().getItemInMainHand().getType().equals(Material.CROSSBOW)) {
-                    damage = damage * 3;
+                    if (!entity.getType().equals(EntityType.ENDER_DRAGON)) {
+                        damage = damage * Upgrades.Effectiveness.getOrDefault(damager, 5);
+                    }
+
+                    GameState.kitAbilityActive.put(damager, 0);
                 }
             }
         }

@@ -76,7 +76,8 @@ public class ShopInteraction implements Listener {
             } else {
                 ChatColor color;
 
-                if (Scout.scoutUsages.get(player) == Scout.USAGES) {
+                if (Scout.scoutUsages.get(player) == Scout.USAGES
+                        || Scout.scoutUsages.get(player) == (Scout.USAGES - 1)) {
                     color = HexColor.GREEN;
                 } else if (Scout.scoutUsages.get(player) == 1) {
                     color = HexColor.RED;

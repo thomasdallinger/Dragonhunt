@@ -4,6 +4,7 @@ import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.shop.Enchantments;
 import com.tharox.dragonhunt.shop.Upgrades;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -57,6 +58,8 @@ public class DamageAdjustmentListener implements Listener {
                     damage = damage * Upgrades.Effectiveness.getOrDefault(damager, 5);
                     // End the Kit ability
                     GameState.kitAbilityActive.put(damager, 0);
+                    damager.playSound(damager.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f);
+                    damager.playSound(damager.getLocation(), Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1.0f, 1.0f);
                 }
             }
         }

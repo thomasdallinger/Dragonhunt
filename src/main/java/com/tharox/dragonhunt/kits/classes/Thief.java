@@ -41,23 +41,37 @@ public class Thief extends Kit {
         Random random = new Random();
         List<Integer> slotsToProtect = Arrays.asList(7, 8, 17);
         int index;
-        ItemStack item;
+        ItemStack item = null;
         int itemsToSteal = 1 + Upgrades.Effectiveness.getOrDefault(player, 0);
 
         for (Player online : Bukkit.getOnlinePlayers()) {
             if (online != player) {
                 for (int i = 1; i <= itemsToSteal; i++) {
+                    int possibleTries = 20; // avoids endless while loop
+
                     do {
+                        if (possibleTries == 0) break;
+
+                        possibleTries--;
                         index = random.nextInt(41);
                         item = online.getInventory().getItem(index);
                     } while (!slotsToProtect.contains(index) && item != null && !item.getType().equals(Material.ELYTRA));
 
+                    if (item == null) continue;
+
                     online.getInventory().remove(item);
-                    GameState.putItemInInventory(player, item);
-                    online.sendMessage(Prefixes.getImportantPrefix() + Prefixes.getKitAbilityPrefix() + ChatColor.WHITE
-                            + player.getName() + ChatColor.RED + " stole " + HexColor.RED + itemsToSteal
-                            + ChatColor.RED + " random items from your inventory as a " + title + ChatColor.RED + ".");
+
+                    if (item.getAmount() > 1) {
+                        GameState.putItemInInventory(player, new ItemStack(item.getType(),
+                                item.getAmount() + Upgrades.Effectiveness2.getOrDefault(player, 0)));
+                    } else {
+                        GameState.putItemInInventory(player, item);
+                    }
                 }
+
+                online.sendMessage(Prefixes.getImportantPrefix() + Prefixes.getKitAbilityPrefix() + ChatColor.WHITE
+                        + player.getName() + ChatColor.RED + " stole " + HexColor.RED + itemsToSteal
+                        + ChatColor.RED + " random items from your inventory as a " + title + ChatColor.RED + ".");
             }
         }
 

@@ -6,10 +6,7 @@ import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.FastComback;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -83,6 +80,16 @@ public class PlayerRespawnListener implements Listener {
 
                     player.resetTitle();
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
+
+                    // If the player has a teleporter in the inventory display 'Teleport Available'
+                    if (player.getInventory().contains(Material.END_PORTAL_FRAME)
+                            || player.getInventory().contains(Material.GILDED_BLACKSTONE)) {
+                        Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
+                            player.sendTitle("", ChatColor.LIGHT_PURPLE
+                                    + "ᴛᴇʟᴇᴘᴏʀᴛ ᴀᴠᴀɪʟᴀʙʟᴇ", 0, 60, 20);
+                            player.playSound(player.getLocation(), Sound.ENTITY_FIREWORK_ROCKET_BLAST, 1, 1);
+                        }, 40L);
+                    }
 
                     this.cancel();
                     return;

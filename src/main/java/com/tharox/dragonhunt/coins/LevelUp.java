@@ -223,6 +223,8 @@ public class LevelUp implements Listener {
                 Effects.ArrowWeakness, Effects.ArrowLevitation
         );
 
+        if (level == 4) return false;
+
         for (HashMap<Player, Integer> arrowEffect : allArrowEffects) {
             if (arrowEffect.get(player) >= level) {
                 return true;

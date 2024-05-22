@@ -10,5 +10,6 @@ public class Upgrades {
     public static HashMap<Player, Integer> Duration = new HashMap<>();
     public static HashMap<Player, Integer> DurationUpgradeLvl = new HashMap<>();
     public static HashMap<Player, Integer> Effectiveness = new HashMap<>();
+    public static HashMap<Player, Integer> Effectiveness2 = new HashMap<>(); // Kits without a Duration have a second effect
     public static HashMap<Player, Integer> EffectivenessUpgradeLvl = new HashMap<>();
 }

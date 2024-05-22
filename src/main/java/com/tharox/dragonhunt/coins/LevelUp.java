@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.coins;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kits.classes.KitTalents;
 import com.tharox.dragonhunt.players.PointsListener;
 import com.tharox.dragonhunt.shop.Effects;
 import com.tharox.dragonhunt.shop.Enchantments;
@@ -29,6 +30,10 @@ public class LevelUp implements Listener {
         boolean resetLeadersUpgrades = false;
 
         if (level == 0) return;
+
+        if (level == 5 || level == 10 || level == 15) {
+            new KitTalents(player);
+        }
 
         // List of all upgrades
         allUpgrades.addAll(Arrays.asList(

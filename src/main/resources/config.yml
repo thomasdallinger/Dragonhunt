@@ -790,26 +790,23 @@ Sonic:
     cost: 24
 Vanisher:
   0:
-    slot: 13
-    name: "Vanish I"
-    lore: "Ability Duration: +1 second."
-    material: POTION
-    amount: 1
-    cost: 4
+    name: "Duration: +1 sec"
   1:
-    slot: 22
-    name: "Vanish II"
-    lore: "Ability Duration: +2 seconds."
-    material: POTION
-    amount: 2
-    cost: 8
+    name: "Cooldown: -2 sec"
   2:
-    slot: 31
-    name: "Vanish III"
-    lore: "Ability Duration: +3 seconds."
-    material: POTION
-    amount: 3
-    cost: 12
+    name: "Effect: +1 Extra XP Point"
+  3:
+    name: "Duration: +3 sec"
+  4:
+    name: "Cooldown: -5 sec"
+  5:
+    name: "Effect: +2 Extra XP Points"
+  6:
+    name: "Duration: +6 sec"
+  7:
+    name: "Cooldown: -10 sec"
+  8:
+    name: "Effect: +3 Extra XP Points"
 Warrior:
   0:
     slot: 13

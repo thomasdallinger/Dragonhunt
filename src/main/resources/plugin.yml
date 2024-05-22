@@ -30,3 +30,5 @@ commands:
     description: Brings you back to the lobby.
   stats:
     description: Displays your stats or the stats of another player.
+  talent:
+    description: Applies your selected kit talent option.

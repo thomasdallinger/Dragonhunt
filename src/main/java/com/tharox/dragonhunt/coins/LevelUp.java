@@ -35,6 +35,21 @@ public class LevelUp implements Listener {
             new KitTalents(player);
         }
 
+        // List of all arrow effects
+        List<HashMap<Player, Integer>> allArrowEffects = Arrays.asList(
+                Effects.ArrowMiningFatigue, Effects.ArrowPoison, Effects.ArrowBlindness,
+                Effects.ArrowWeakness, Effects.ArrowLevitation
+        );
+
+        // Check if the player has any level 4 arrows of any type
+        boolean hasLevel4Arrow = false;
+        for (HashMap<Player, Integer> arrowEffect : allArrowEffects) {
+            if (arrowEffect.get(player) == 5) {
+                hasLevel4Arrow = true;
+                break;
+            }
+        }
+
         // List of all upgrades
         allUpgrades.addAll(Arrays.asList(
                 Enchantments.Sharpness, Enchantments.Knockback, Enchantments.FireAspect,
@@ -42,10 +57,14 @@ public class LevelUp implements Listener {
                 Enchantments.Multishot, Enchantments.Protection, Enchantments.Thorns,
                 Enchantments.FeatherFalling, Effects.Speed, Effects.JumpBoost,
                 Effects.Haste, Effects.DolphinsGrace, Effects.FireResistance,
-                Effects.Resistance, Effects.Strength, Effects.ArrowMiningFatigue,
-                Effects.ArrowPoison, Effects.ArrowBlindness, Effects.ArrowWeakness,
-                Effects.ArrowLevitation
+                Effects.Resistance, Effects.Strength
         ));
+
+        // If the player has any level 4 arrows, remove all arrow effects from the available upgrades
+        if (!hasLevel4Arrow) {
+            allUpgrades.addAll(allArrowEffects);
+        }
+
         // Add the golden apple drops to the upgrade pool
         allUpgrades.add("Golden Apple");
         allUpgrades.add("Enchanted Golden Apple");
@@ -223,7 +242,8 @@ public class LevelUp implements Listener {
                 Effects.ArrowWeakness, Effects.ArrowLevitation
         );
 
-        if (level == 4) return false;
+        // If the arrow effects are not part of all upgrades, the player already has a level 4 arrow type
+        if (!allUpgrades.contains(allArrowEffects)) return false;
 
         for (HashMap<Player, Integer> arrowEffect : allArrowEffects) {
             if (arrowEffect.get(player) >= level) {

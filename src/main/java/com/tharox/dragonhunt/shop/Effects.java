@@ -72,9 +72,8 @@ public class Effects {
                                 Speed.get(player) - 2));
 
                     if (JumpBoost.get(player) > 1)
-                        // Higher amplifier than any other permanent effect due to Jump Boost 1 being very weak.
                         player.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 40,
-                                JumpBoost.get(player) - 1));
+                                JumpBoost.get(player) - 2));
 
                     if (Haste.get(player) > 1)
                         player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING,

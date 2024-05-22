@@ -7,6 +7,7 @@ import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.modifiers.classes.DoubleChestLoot;
+import com.tharox.dragonhunt.scout.Scout;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -180,13 +181,23 @@ public class GameState {
         return item;
     }
 
-    public static ItemStack getScoutItem() {
-        ItemStack item = new ItemStack(Material.ENDER_EYE);
+    public static ItemStack getScoutItem(Player player) {
+        ItemStack item;
+        ChatColor nameColor;
+
+        if (Scout.scoutUsages.get(player) == 0) {
+            item = new ItemStack(Material.BARRIER);
+            nameColor = HexColor.RED;
+        } else {
+            item = new ItemStack(Material.ENDER_EYE, Scout.scoutUsages.get(player));
+            nameColor = ChatColor.LIGHT_PURPLE;
+        }
+
         item.addUnsafeEnchantment(Enchantment.PROTECTION_ENVIRONMENTAL, 1);
         ItemMeta meta = item.getItemMeta();
         if (meta == null) return null;
 
-        meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Scout");
+        meta.setDisplayName(nameColor + "Scout");
         meta.setLore(Arrays.asList(
                 ChatColor.GRAY + "Go into " + ChatColor.WHITE + "Spectator Mode" + ChatColor.GRAY + " for a short time.",
                 ChatColor.GRAY + "Scouting " + ChatColor.WHITE + "teleports" + ChatColor.GRAY + " you to your",

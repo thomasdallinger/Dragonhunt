@@ -91,6 +91,12 @@ public class ScoutCommand implements CommandExecutor {
             }
         }
 
+        if (Scout.scoutUsages.get(player) == 0) {
+            player.sendMessage(Prefixes.getErrorPrefix() + "You have no Scout usages left.");
+            player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
+            return false;
+        }
+
         if (Scout.scoutCooldown.get(player) >= timer.getTime()) {
             player.sendMessage(Prefixes.getErrorPrefix() + "Scout is on cooldown for "
                     + HexColor.RED + (player.getCooldown(Material.ENDER_EYE) / 20)
@@ -108,6 +114,8 @@ public class ScoutCommand implements CommandExecutor {
         }
 
         new Scout(player);
+        Scout.scoutUsages.put(player, Scout.scoutUsages.get(player) - 1);
+        player.getInventory().setItem(7, GameState.getScoutItem(player));
 
         player.sendMessage(HexColor.GREEN + "Scout activated.");
         player.sendMessage(ChatColor.GRAY + "Cancel the Scout using "
@@ -118,7 +126,8 @@ public class ScoutCommand implements CommandExecutor {
 
         for (Player online : Bukkit.getOnlinePlayers()) {
             online.sendMessage(ChatColor.WHITE + player.getName() + ChatColor.GRAY
-                    + " uses " + HexColor.YELLOW + "/scout" + ChatColor.GRAY + ".");
+                    + " uses " + HexColor.YELLOW + "/scout" + ChatColor.GRAY + "."
+                    + ChatColor.DARK_GRAY + " (" + Scout.scoutUsages.get(player) + " Usages left)");
         }
 
         return true;

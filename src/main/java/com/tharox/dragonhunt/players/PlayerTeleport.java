@@ -97,7 +97,7 @@ public class PlayerTeleport implements Listener {
                 // Remove the teleporter, replace with Scout item
                 player.getInventory().remove(Material.GILDED_BLACKSTONE);
                 Bukkit.getScheduler().runTaskLater(Main.getInstance(),
-                        task -> player.getInventory().setItem(7, GameState.getScoutItem()), 20L);
+                        task -> player.getInventory().setItem(7, GameState.getScoutItem(player)), 20L);
 
                 player.teleport(new Location(world,
                         structureSearchResult.getLocation().getX(),

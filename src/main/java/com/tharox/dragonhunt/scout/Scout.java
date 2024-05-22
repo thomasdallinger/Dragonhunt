@@ -16,9 +16,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 
 public class Scout {
-    public static final int COOLDOWN = 120;
-    // Used to determine if a scout is currently active, too.
+    public static final int COOLDOWN = 10; // Seconds
+    public static final int USAGES = 5;
     public static HashMap<Player, Integer> scoutCooldown = new HashMap<>();
+    public static HashMap<Player, Integer> scoutUsages = new HashMap<>();
     // Location the player started the scout from.
     public static HashMap<Player, Location> spectateLocation = new HashMap<>();
     private static final int duration = 30;

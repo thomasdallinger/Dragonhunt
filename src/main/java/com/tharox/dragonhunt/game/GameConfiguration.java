@@ -100,8 +100,9 @@ public class GameConfiguration {
             // give the player a score of 0
             PointsListener.scorePerPlayer.put(player.getUniqueId(), 0);
 
-            // when the game starts, players won't have the ability to scout
+            // when the game starts, players won't instantly have the ability to scout
             Scout.scoutCooldown.put(player, Scout.COOLDOWN);
+            Scout.scoutUsages.put(player, Scout.USAGES);
 
             // removes all active potion effects players may have
             for (PotionEffect effect : player.getActivePotionEffects())
@@ -124,7 +125,7 @@ public class GameConfiguration {
             player.getInventory().clear();
 
             // adds general items to the player's inventory
-            player.getInventory().setItem(7, GameState.getScoutItem());
+            player.getInventory().setItem(7, GameState.getScoutItem(player));
             player.getInventory().setItemInOffHand(GameState.addItem(new ItemStack(Material.SHIELD)));
         }
     }

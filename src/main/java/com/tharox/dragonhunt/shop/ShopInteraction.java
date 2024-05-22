@@ -2,6 +2,7 @@ package com.tharox.dragonhunt.shop;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
+import com.tharox.dragonhunt.scout.Scout;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.ChatMessageType;
@@ -62,7 +63,10 @@ public class ShopInteraction implements Listener {
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
 
         if (item.getItemMeta().getDisplayName().contains("Scout")) {
-            if (player.getCooldown(Material.ENDER_EYE) > 0) {
+            if (item.getType().equals(Material.BARRIER)) {
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                        new ComponentBuilder("NO SCOUT USAGES LEFT").color(HexColor.RED).bold(true).create());
+            } else if (player.getCooldown(Material.ENDER_EYE) > 0) {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
                         new ComponentBuilder("COOLDOWN").color(HexColor.RED).bold(true)
                                 .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
@@ -70,17 +74,23 @@ public class ShopInteraction implements Listener {
                                 .color(ChatColor.RED)
                                 .append(" seconds").color(ChatColor.RED).create());
             } else {
-                if (timer.getTime() % 2 == 0) {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new ComponentBuilder("USE SCOUT").color(HexColor.YELLOW).bold(true)
-                                    .append(" (Right-Click)").color(ChatColor.GRAY).bold(false)
-                                    .create());
+                ChatColor color;
+
+                if (Scout.scoutUsages.get(player) == Scout.USAGES) {
+                    color = HexColor.GREEN;
+                } else if (Scout.scoutUsages.get(player) == 1) {
+                    color = HexColor.RED;
                 } else {
-                    player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
-                            new ComponentBuilder("USE SCOUT").color(ChatColor.WHITE).bold(true)
-                                    .append(" (Right-Click)").color(ChatColor.GRAY).bold(false)
-                                    .create());
+                    color = HexColor.YELLOW;
                 }
+
+                player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                        new ComponentBuilder("USE SCOUT").color(HexColor.YELLOW).bold(true)
+                                .append(" (Right-Click)").color(ChatColor.GRAY).bold(false)
+                                .append(" » ").color(ChatColor.DARK_GRAY)
+                                .append(String.valueOf(Scout.scoutUsages.get(player)))
+                                .color(color).bold(true)
+                                .append(" Usages left").color(ChatColor.GRAY).bold(false).create());
             }
         }
     }

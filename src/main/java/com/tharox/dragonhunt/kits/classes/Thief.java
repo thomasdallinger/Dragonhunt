@@ -62,6 +62,7 @@ public class Thief extends Kit {
                     online.getInventory().remove(item);
 
                     if (item.getAmount() > 1) {
+                        // Amount caps at max stack size anyway - no need to check
                         GameState.putItemInInventory(player, new ItemStack(item.getType(),
                                 item.getAmount() + Upgrades.Effectiveness2.getOrDefault(player, 0)));
                     } else {

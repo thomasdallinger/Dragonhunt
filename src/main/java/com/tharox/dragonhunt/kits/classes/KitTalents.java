@@ -36,22 +36,19 @@ public class KitTalents {
         int startOption = (level / 5 - 1) * 3;
 
         player.sendMessage("");
-        TextComponent c = new TextComponent(ChatColor.WHITE.toString() + ChatColor.BOLD + "CHOOSE A "
-                + HexColor.RED + ChatColor.BOLD + "T" + HexColor.ASSASSIN + ChatColor.BOLD + "A"
-                + HexColor.TANK + ChatColor.BOLD + "L" + HexColor.FLANKER + ChatColor.BOLD + "E"
-                + HexColor.SUPPORT + ChatColor.BOLD + "N" + ChatColor.DARK_PURPLE + "T"
-                + ChatColor.GRAY + "(Left-Click)\n");
+        TextComponent c = new TextComponent(ChatColor.WHITE.toString() + ChatColor.BOLD + "CHOOSE A KIT "
+                + ChatColor.GOLD + ChatColor.BOLD + "TALENT" + ChatColor.GRAY + " (Left-Click)\n");
 
         for (int i = startOption; i < startOption + 3; i++) {
             String optionName = itemsSection.getString(i + ".name");
             if (optionName == null) continue;
 
-            TextComponent effect = new TextComponent(ChatColor.AQUA + "[" + optionName + "]\n");
+            TextComponent effect = new TextComponent("» " + ChatColor.GOLD + "[" + optionName + "]\n");
             effect.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/talent "
                     + optionName.replace(" ", "")
                     + " " + key + " " + (startOption + 1)));
-            effect.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(ChatColor.AQUA
-                    + "Click to select")));
+            effect.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, TextComponent.fromLegacyText(ChatColor.WHITE
+                    + "Left-Click to select: " + ChatColor.GOLD + optionName)));
             c.addExtra(effect);
         }
 

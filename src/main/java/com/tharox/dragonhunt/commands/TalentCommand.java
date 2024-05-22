@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt.commands;
 
+import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.kits.classes.KitTalents;
 import com.tharox.dragonhunt.shop.Upgrades;
@@ -52,6 +53,8 @@ public class TalentCommand implements CommandExecutor {
         }
 
         KitTalents.selectedKitTalents.put(player, talentNumber);
+        player.sendMessage(HexColor.GREEN + "Kit Talent selected.");
+        player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 
         return true;
     }

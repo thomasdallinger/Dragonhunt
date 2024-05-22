@@ -5,7 +5,6 @@ import com.tharox.dragonhunt.shop.Enchantments;
 import com.tharox.dragonhunt.shop.Upgrades;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
@@ -55,10 +54,8 @@ public class DamageAdjustmentListener implements Listener {
             if (GameState.selectedKit.get(damager).contains("Sniper")) {
                 if (damager.getInventory().getItemInMainHand().getType().equals(Material.BOW)
                         || damager.getInventory().getItemInMainHand().getType().equals(Material.CROSSBOW)) {
-                    if (!entity.getType().equals(EntityType.ENDER_DRAGON)) {
-                        damage = damage * Upgrades.Effectiveness.getOrDefault(damager, 5);
-                    }
-
+                    damage = damage * Upgrades.Effectiveness.getOrDefault(damager, 5);
+                    // End the Kit ability
                     GameState.kitAbilityActive.put(damager, 0);
                 }
             }

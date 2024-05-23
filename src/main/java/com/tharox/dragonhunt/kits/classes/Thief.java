@@ -70,6 +70,7 @@ public class Thief extends Kit {
                     }
                 }
 
+                online.playSound(online.getLocation(), Sound.ENTITY_GLOW_ITEM_FRAME_REMOVE_ITEM, 1, 1);
                 online.sendMessage(Prefixes.getImportantPrefix() + Prefixes.getKitAbilityPrefix() + ChatColor.WHITE
                         + player.getName() + ChatColor.RED + " stole " + HexColor.RED + itemsToSteal
                         + ChatColor.RED + " random items from your inventory as a " + title + ChatColor.RED + ".");

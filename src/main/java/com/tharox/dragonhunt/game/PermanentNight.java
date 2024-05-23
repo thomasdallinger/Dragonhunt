@@ -26,6 +26,8 @@ public class PermanentNight {
                 }
 
                 world.setTime(14000);
+                world.setStorm(true);
+                world.setWeatherDuration(Integer.MAX_VALUE);
             }
         }.runTaskTimer(Main.getInstance(), 0, 20);
     }

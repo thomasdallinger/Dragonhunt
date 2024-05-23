@@ -4,8 +4,8 @@ import org.bukkit.Material;
 
 @DragonhuntModifier
 public class EndlessNight extends Modifier {
-    public static String title = "Endless Night";
-    public static String lore = "The sun does not rise.";
+    public static String title = "Bad Weather";
+    public static String lore = "Endless Night and Rain.";
     public static Material material = Material.CLOCK;
     public static boolean positive = false;
     public static boolean active = false;

@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt;
 
 import com.tharox.dragonhunt.arrows.ProjectileHitListener;
+import com.tharox.dragonhunt.arrows.WarperListener;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
 import com.tharox.dragonhunt.blocks.BlockExplodeListener;
 import com.tharox.dragonhunt.blocks.BlockPlaceListener;
@@ -17,7 +18,7 @@ import com.tharox.dragonhunt.entities.CreatureSpawnListener;
 import com.tharox.dragonhunt.entities.EntityDeathListener;
 import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.grappler.GrappleListener;
+import com.tharox.dragonhunt.arrows.GrapplerListener;
 import com.tharox.dragonhunt.kits.classes.KitClass;
 import com.tharox.dragonhunt.kits.selection.KitListener;
 import com.tharox.dragonhunt.listeners.JoinListener;
@@ -186,8 +187,8 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new QuitListener(), this);
         pluginManager.registerEvents(new ChatListener(), this);
 
-        pluginManager.registerEvents(new GrappleListener(), this);
-
+        pluginManager.registerEvents(new GrapplerListener(), this);
+        pluginManager.registerEvents(new WarperListener(), this);
         pluginManager.registerEvents(new ProjectileHitListener(), this);
 
         pluginManager.registerEvents(new KitClass(), this);

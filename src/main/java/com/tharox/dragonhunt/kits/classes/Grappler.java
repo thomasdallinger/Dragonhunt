@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.chat.HexColor;
-import com.tharox.dragonhunt.grappler.GrappleListener;
+import com.tharox.dragonhunt.arrows.GrapplerListener;
 import com.tharox.dragonhunt.shop.Upgrades;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Material;
@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 @DragonhuntKit
 public class Grappler extends Kit {
-    static int cooldown = GrappleListener.cooldown / 20;
+    static int cooldown = GrapplerListener.cooldown / 20;
 
     public static final String title = HexColor.FLANKER + KitClass.FLANKER + " Grappler";
     public static final String lore = ""
@@ -18,7 +18,7 @@ public class Grappler extends Kit {
             + ChatColor.GRAY + "with this Grappling Hook.\n"
             + ChatColor.GRAY + "Arrows shot deal no damage.\n\n"
             + ChatColor.GRAY + "Max. Arrow Distance: "
-            + ChatColor.WHITE + GrappleListener.maxArrowDistance + " Blocks\n\n"
+            + ChatColor.WHITE + GrapplerListener.maxArrowDistance + " Blocks\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + "Instantly\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"

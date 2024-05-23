@@ -54,6 +54,7 @@ public abstract class Kit implements Listener {
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;
         if (item.getItemMeta() == null) return;
         if (item.getItemMeta().getDisplayName().contains("Grappler")) return;
+        if (item.getItemMeta().getDisplayName().contains("Warper")) return;
 
         // Check if the Player has the Kit
         if (!p.equals(player)) return;
@@ -171,6 +172,8 @@ public abstract class Kit implements Listener {
 
         if (title.contains("Grappler")) {
             item = new ItemStack(Material.CROSSBOW);
+        } else if (title.contains("Warper")) {
+            item = new ItemStack(Material.BOW);
         } else {
             item = new ItemStack(Material.NETHER_STAR);
         }

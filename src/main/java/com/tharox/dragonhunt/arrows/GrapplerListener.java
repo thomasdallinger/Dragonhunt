@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.grappler;
+package com.tharox.dragonhunt.arrows;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
@@ -19,7 +19,7 @@ import org.bukkit.util.Vector;
 
 import java.util.Objects;
 
-public class GrappleListener implements Listener {
+public class GrapplerListener implements Listener {
 
     public static int maxArrowDistance = 20; // Blocks
     public static int cooldown = 200; // Ticks
@@ -53,9 +53,9 @@ public class GrappleListener implements Listener {
             arrow.setVelocity(arrow.getVelocity().multiply(2D));
 
             // put the GRAPPLER on cooldown
-            if ((GrappleListener.cooldown - Upgrades.Cooldown.getOrDefault(player, 0)) >= 0) {
+            if ((GrapplerListener.cooldown - Upgrades.Cooldown.getOrDefault(player, 0)) >= 0) {
                 player.setCooldown(Material.CROSSBOW,
-                        (GrappleListener.cooldown - Upgrades.Cooldown.getOrDefault(player, 0)));
+                        (GrapplerListener.cooldown - Upgrades.Cooldown.getOrDefault(player, 0)));
             }
 
             // after the cooldown ends, add the next charged projectile

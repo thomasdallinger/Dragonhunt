@@ -83,6 +83,8 @@ public class Timer {
 
                     if (player.getCooldown(Material.CROSSBOW) > 0) {
                         materialToCheck = Material.CROSSBOW;
+                    } else if (player.getCooldown(Material.BOW) > 0) {
+                        materialToCheck = Material.BOW;
                     } else if (player.getCooldown(Material.NETHER_STAR) > 0) {
                         materialToCheck = Material.NETHER_STAR;
                     }

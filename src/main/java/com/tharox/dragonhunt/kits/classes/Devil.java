@@ -61,7 +61,9 @@ public class Devil extends Kit {
                 if (entityLocation.getY() >= playerLocation.getY() - verticalRange &&
                         entityLocation.getY() <= playerLocation.getY() + verticalRange) {
 
-                    ((LivingEntity) entity).setHealth(health);
+                    // If the health is already lower than what it would set it to don't do anything
+                    if (((LivingEntity) entity).getHealth() > health)
+                        ((LivingEntity) entity).setHealth(health);
 
                     if (entity instanceof Player) {
                         Player p = (Player) entity;

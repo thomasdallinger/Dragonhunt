@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.commands;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
 import com.tharox.dragonhunt.kits.classes.KitTalents;
-import com.tharox.dragonhunt.shop.Upgrades;
+import com.tharox.dragonhunt.upgrades.Upgrades;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

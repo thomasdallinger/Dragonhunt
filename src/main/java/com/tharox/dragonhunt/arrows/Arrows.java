@@ -2,7 +2,7 @@ package com.tharox.dragonhunt.arrows;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.modifiers.classes.FlyHigh;
-import com.tharox.dragonhunt.shop.Effects;
+import com.tharox.dragonhunt.upgrades.Effects;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;

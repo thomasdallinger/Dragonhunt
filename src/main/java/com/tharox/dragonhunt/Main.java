@@ -1,5 +1,6 @@
 package com.tharox.dragonhunt;
 
+import com.tharox.dragonhunt.arrows.GrapplerListener;
 import com.tharox.dragonhunt.arrows.ProjectileHitListener;
 import com.tharox.dragonhunt.arrows.WarperListener;
 import com.tharox.dragonhunt.blocks.BlockBreakListener;
@@ -8,7 +9,6 @@ import com.tharox.dragonhunt.blocks.BlockPlaceListener;
 import com.tharox.dragonhunt.chat.ChatListener;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
-import com.tharox.dragonhunt.coins.LevelUp;
 import com.tharox.dragonhunt.commands.*;
 import com.tharox.dragonhunt.crafting.CustomRecipes;
 import com.tharox.dragonhunt.db.DbValues;
@@ -18,17 +18,14 @@ import com.tharox.dragonhunt.entities.CreatureSpawnListener;
 import com.tharox.dragonhunt.entities.EntityDeathListener;
 import com.tharox.dragonhunt.entities.EntityDropListener;
 import com.tharox.dragonhunt.game.GameState;
-import com.tharox.dragonhunt.arrows.GrapplerListener;
 import com.tharox.dragonhunt.kits.classes.KitClass;
 import com.tharox.dragonhunt.kits.selection.KitListener;
+import com.tharox.dragonhunt.leveling.LevelUp;
 import com.tharox.dragonhunt.listeners.JoinListener;
 import com.tharox.dragonhunt.listeners.QuitListener;
 import com.tharox.dragonhunt.players.*;
-import com.tharox.dragonhunt.scoreboard.ResetScoreboardCountdown;
-import com.tharox.dragonhunt.shop.ShopInteraction;
-import com.tharox.dragonhunt.shop.ShopListener;
+import com.tharox.dragonhunt.scout.ScoutInteraction;
 import com.tharox.dragonhunt.tablist.TablistManager;
-import com.tharox.dragonhunt.timer.Countdown;
 import com.tharox.dragonhunt.timer.Timer;
 import com.tharox.dragonhunt.vehicles.VehicleListener;
 import net.md_5.bungee.api.ChatColor;
@@ -49,9 +46,8 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
     public static boolean firstPlayerJoined = false;
 
     public Timer timer;
-    public Countdown scoreboardCountdown; // single countdown for all player scoreboards (started in GameStart)
     private TablistManager tablistManager;
-    public ShopInteraction shopInteraction;
+    public ScoutInteraction scoutInteraction;
 
     @Override
     public void onLoad() {
@@ -67,9 +63,7 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 
         timer = new Timer(false, 0);
-        scoreboardCountdown = new Countdown(false, 180);
-        ResetScoreboardCountdown.countdownHitsZero(Main.getInstance().getScoreboardCountdown());
-        shopInteraction = new ShopInteraction();
+        scoutInteraction = new ScoutInteraction();
         tablistManager = new TablistManager();
         new CustomRecipes(); // adds all custom recipes to the game
         setWorldTime();
@@ -160,10 +154,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         return timer;
     }
 
-    public Countdown getScoreboardCountdown() {
-        return scoreboardCountdown;
-    }
-
     public TablistManager getTablistManager() {
         return tablistManager;
     }
@@ -195,7 +185,6 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new KitListener(), this);
 
         pluginManager.registerEvents(new LevelUp(), this);
-        pluginManager.registerEvents(new ShopListener(), this);
 
         pluginManager.registerEvents(new BlockBreakListener(), this);
         pluginManager.registerEvents(new BlockExplodeListener(), this);
@@ -226,13 +215,11 @@ public final class Main extends JavaPlugin implements PluginMessageListener {
         pluginManager.registerEvents(new PlayerRespawnListener(), this);
         pluginManager.registerEvents(new PointsListener(), this);
 
-        pluginManager.registerEvents(shopInteraction, this);
+        pluginManager.registerEvents(scoutInteraction, this);
     }
 
     private void commandRegistration() {
         getCommand("date").setExecutor(new DateCommand());
-        getCommand("shop").setExecutor(new ShopCommand());
-        getCommand("s").setExecutor(new ShopCommand());
         getCommand("modifiers").setExecutor(new ModifiersCommand());
         getCommand("m").setExecutor(new ModifiersCommand());
         getCommand("top").setExecutor(new TopCommand());

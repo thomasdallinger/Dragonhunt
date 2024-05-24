@@ -3,12 +3,11 @@ package com.tharox.dragonhunt.game;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.arrows.Arrows;
 import com.tharox.dragonhunt.db.DbValues;
-import com.tharox.dragonhunt.players.BossBarManager;
 import com.tharox.dragonhunt.scout.Scout;
-import com.tharox.dragonhunt.shop.Effects;
+import com.tharox.dragonhunt.upgrades.Effects;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
-import com.tharox.dragonhunt.shop.Enchantments;
+import com.tharox.dragonhunt.upgrades.Enchantments;
 import com.tharox.dragonhunt.kits.selection.KitInventory;
 import com.tharox.dragonhunt.modifiers.classes.BonusHearts;
 import com.tharox.dragonhunt.modifiers.selection.ModifierInventory;
@@ -27,12 +26,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.UUID;
-
 public class GameStart extends GameConfiguration {
     Timer timer = Main.getInstance().getTimer();
     Countdown startCountdown, gracePeriodCountdown;
-    Countdown scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
     ModifierInventory modifierInventory;
     BossBar bossBar;
     World overworld = Bukkit.getServer().getWorld("world");
@@ -67,10 +63,9 @@ public class GameStart extends GameConfiguration {
             return;
         }
 
-        // once the countdown hits zero, start the TIMER and SCOREBOARD COUNTDOWN
+        // once the countdown hits zero, start the TIMER
         if (startCountdown.getTime() == 0) {
             timer.setRunning(true);
-            scoreboardCountdown.setRunning(true);
 
             gracePeriodCountdown = new Countdown(true, GameState.gracePeriodTime, this::onGracePeriodCountdown);
             bossBar = Bukkit.createBossBar("", BarColor.YELLOW, BarStyle.SEGMENTED_10);

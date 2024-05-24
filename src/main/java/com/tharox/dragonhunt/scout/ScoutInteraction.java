@@ -1,4 +1,4 @@
-package com.tharox.dragonhunt.shop;
+package com.tharox.dragonhunt.scout;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
@@ -19,8 +19,8 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
-public class ShopInteraction implements Listener {
-    public ShopInteraction() {
+public class ScoutInteraction implements Listener {
+    public ScoutInteraction() {
         run();
     }
 
@@ -42,22 +42,11 @@ public class ShopInteraction implements Listener {
                 event.setCancelled(true); // Avoid item interaction.
                 player.performCommand("scout");
             }
-
-            return; // if it was Left-Click, no need to check Right-Click
-        }
-
-        if (e.equals(EquipmentSlot.HAND)
-                && (event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK)) {
-            if (item.getItemMeta().getDisplayName().contains("Shop")) {
-                event.setCancelled(true); // Avoid block placement.
-                player.performCommand("shop");
-            }
         }
     }
 
     public void sendActionBar(Player player) {
         ItemStack item = player.getInventory().getItemInMainHand();
-        Timer timer = Main.getInstance().getTimer();
 
         if (item.getType() == Material.AIR || item.getItemMeta() == null) return;
         if (player.getGameMode().equals(GameMode.SPECTATOR)) return;

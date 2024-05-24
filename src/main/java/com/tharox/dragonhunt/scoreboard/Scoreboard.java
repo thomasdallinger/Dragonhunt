@@ -32,7 +32,7 @@ public class Scoreboard extends ScoreboardBuilder {
     public Scoreboard(Player player) {
         super(player, Main.getTitle());
 
-        run(player, Main.getInstance().getScoreboardCountdown());
+        run(player);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class Scoreboard extends ScoreboardBuilder {
     }
 
     @Override
-    public void update(Player player, Countdown countdown) {
+    public void update(Player player) {
         UUID id = player.getUniqueId();
 
         if (GameState.eloPerPlayer.getOrDefault(player, 0) >= 0) {
@@ -209,11 +209,11 @@ public class Scoreboard extends ScoreboardBuilder {
         }
     }
 
-    private void run(Player player, Countdown countdown) {
+    private void run(Player player) {
         new BukkitRunnable() {
             @Override
             public void run() {
-                update(player, countdown);
+                update(player);
             }
         }.runTaskTimer(Main.getInstance(), 0, 20);
     }

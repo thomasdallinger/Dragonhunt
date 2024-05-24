@@ -24,12 +24,10 @@ import java.util.UUID;
 public class GameEnd {
     static Player winner;
     Timer timer = Main.getInstance().getTimer();
-    Timer scoreboardCountdown = Main.getInstance().getScoreboardCountdown();
 
     public GameEnd() {
-        // TIMER and SCOREBOARD COUNTDOWN are no longer running after the game ends
+        // TIMER are no longer running after the game ends
         timer.setRunning(false);
-        scoreboardCountdown.setRunning(false);
         winner = Bukkit.getPlayer(GameState.sortPlayersByPoints(PointsListener.scorePerPlayer).get(0));
 
         updateGame();

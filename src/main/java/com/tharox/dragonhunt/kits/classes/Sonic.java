@@ -2,7 +2,7 @@ package com.tharox.dragonhunt.kits.classes;
 
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
-import com.tharox.dragonhunt.shop.Upgrades;
+import com.tharox.dragonhunt.upgrades.Upgrades;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.*;
 import org.bukkit.entity.Player;

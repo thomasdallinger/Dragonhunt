@@ -18,16 +18,6 @@ public class Prefixes {
                 + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
     }
 
-    // COINS: used for messages related to coins
-    public static String getCoinPrefix(int coins) {
-        if (coins > 0)
-            return ChatColor.DARK_GRAY + "[" + HexColor.GREEN + "+" + coins + ChatColor.WHITE + " ⛃"
-                    + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
-        else
-            return ChatColor.DARK_GRAY + "[" + HexColor.RED + coins + ChatColor.WHITE + " ⛃"
-                    + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;
-    }
-
     // ADVANCEMENT: used for messages related to advancements
     public static String getAdvancementPrefix() {
         return ChatColor.DARK_GRAY + "[" + ChatColor.AQUA + "✦✦✦" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY;

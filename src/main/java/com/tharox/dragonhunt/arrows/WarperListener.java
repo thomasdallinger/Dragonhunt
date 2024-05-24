@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.arrows;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
-import com.tharox.dragonhunt.shop.Upgrades;
+import com.tharox.dragonhunt.upgrades.Upgrades;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;

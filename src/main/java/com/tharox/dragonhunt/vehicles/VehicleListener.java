@@ -1,6 +1,5 @@
 package com.tharox.dragonhunt.vehicles;
 
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.game.GameState;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Entity;

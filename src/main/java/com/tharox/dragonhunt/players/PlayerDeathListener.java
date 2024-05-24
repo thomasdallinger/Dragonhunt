@@ -3,7 +3,7 @@ package com.tharox.dragonhunt.players;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
-import com.tharox.dragonhunt.coins.Coins;
+import com.tharox.dragonhunt.leveling.XPManager;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
@@ -21,7 +21,6 @@ import org.bukkit.potion.PotionEffectType;
 
 import java.sql.Statement;
 import java.util.HashMap;
-import java.util.UUID;
 
 public class PlayerDeathListener implements Listener {
 
@@ -59,7 +58,7 @@ public class PlayerDeathListener implements Listener {
             // Player did not kill himself/herself
             if (!killer.equals(player)) {
                 // Add one extra XP point for a kill per minute played.
-                Coins.addXP(killer, Coins.playerXP + (timer.getTime() / 60));
+                XPManager.addXP(killer, XPManager.playerXP + (timer.getTime() / 60));
                 killer.sendMessage(ChatColor.GRAY + "You have killed "
                         + ChatColor.WHITE + player.getName() + ChatColor.GRAY + ".");
 

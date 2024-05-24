@@ -2,7 +2,7 @@ package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.chat.HexColor;
 import com.tharox.dragonhunt.chat.Prefixes;
-import com.tharox.dragonhunt.coins.Coins;
+import com.tharox.dragonhunt.leveling.XPManager;
 import com.tharox.dragonhunt.db.DatabaseExecutor;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameState;
@@ -75,7 +75,7 @@ public class AdvancementListener implements Listener {
         if (!advancementName.equals("")) {
             addAdvancement(player, advancementName);
             int rank = DbValues.getAdvancementRank(player, advancementName);
-            Coins.addXP(player, Coins.advancementXP - (rank - 1) * 2);
+            XPManager.addXP(player, XPManager.advancementXP - (rank - 1) * 2);
 
             // Add 8 - (Rank - 1) Elo
             GameState.eloPerPlayer.put(player, GameState.eloPerPlayer.get(player) + 8 - (rank - 1));

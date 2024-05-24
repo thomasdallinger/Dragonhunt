@@ -36,7 +36,7 @@ public abstract class ScoreboardBuilder {
 
     public abstract void createScoreboard();
 
-    public abstract void update(Player player, Countdown countdown);
+    public abstract void update(Player player);
 
     public void setDisplayName(String displayName) {
         this.objective.setDisplayName(displayName);

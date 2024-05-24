@@ -1,12 +1,12 @@
 package com.tharox.dragonhunt.entities;
 
-import com.tharox.dragonhunt.coins.Coins;
+import com.tharox.dragonhunt.leveling.XPManager;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.modifiers.classes.ChristmasCookies;
 import com.tharox.dragonhunt.modifiers.classes.Fisher;
 import com.tharox.dragonhunt.modifiers.classes.MoreFood;
 import com.tharox.dragonhunt.modifiers.classes.RevivedMobs;
-import com.tharox.dragonhunt.shop.Upgrades;
+import com.tharox.dragonhunt.upgrades.Upgrades;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
@@ -36,7 +36,7 @@ public class EntityDeathListener implements Listener {
 
         if (killer != null) {
             if (mob instanceof Monster) {
-                Coins.addXP(killer, Coins.monsterXP + bonusXP);
+                XPManager.addXP(killer, XPManager.monsterXP + bonusXP);
 
                 if (RevivedMobs.active) {
                     Random random = new Random();
@@ -62,7 +62,7 @@ public class EntityDeathListener implements Listener {
                     noFoodModifier = false;
                     mob.getWorld().dropItemNaturally(
                             mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 6));
-                    Coins.addXP(killer, (Coins.animalXP + bonusXP) * 2);
+                    XPManager.addXP(killer, (XPManager.animalXP + bonusXP) * 2);
                 }
 
                 if (noFoodModifier) {
@@ -70,7 +70,7 @@ public class EntityDeathListener implements Listener {
                             mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
                 }
 
-                Coins.addXP(killer, Coins.animalXP + bonusXP);
+                XPManager.addXP(killer, XPManager.animalXP + bonusXP);
             }
         }
 

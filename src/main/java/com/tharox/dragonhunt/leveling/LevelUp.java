@@ -1,11 +1,11 @@
-package com.tharox.dragonhunt.coins;
+package com.tharox.dragonhunt.leveling;
 
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.KitTalents;
 import com.tharox.dragonhunt.players.PointsListener;
-import com.tharox.dragonhunt.shop.Effects;
-import com.tharox.dragonhunt.shop.Enchantments;
+import com.tharox.dragonhunt.upgrades.Effects;
+import com.tharox.dragonhunt.upgrades.Enchantments;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

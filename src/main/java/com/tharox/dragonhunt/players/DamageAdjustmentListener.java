@@ -2,8 +2,8 @@ package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.kits.classes.Poisoner;
-import com.tharox.dragonhunt.shop.Enchantments;
-import com.tharox.dragonhunt.shop.Upgrades;
+import com.tharox.dragonhunt.upgrades.Enchantments;
+import com.tharox.dragonhunt.upgrades.Upgrades;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;

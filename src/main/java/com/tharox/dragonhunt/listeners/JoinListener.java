@@ -4,7 +4,6 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.tharox.dragonhunt.Main;
 import com.tharox.dragonhunt.chat.HexColor;
-import com.tharox.dragonhunt.coins.Coins;
 import com.tharox.dragonhunt.db.DbValues;
 import com.tharox.dragonhunt.game.GameStart;
 import com.tharox.dragonhunt.game.GameState;
@@ -32,7 +31,6 @@ public class JoinListener implements Listener {
         player.teleport(new Location(Bukkit.getServer().getWorld("world"), 0, 15000, 0));
         player.setGameMode(GameMode.SPECTATOR);
 
-        Coins.setCoins(player, 0);
         new Scoreboard(player);
         Main.getInstance().getTablistManager().setPlayerList(player); // sets tablist header and footer
 

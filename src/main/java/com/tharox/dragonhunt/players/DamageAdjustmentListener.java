@@ -92,7 +92,6 @@ public class DamageAdjustmentListener implements Listener {
                 Location location = damager.getLocation();
                 world.spawnParticle(Particle.SPELL_MOB, entity.getLocation(), 10);
                 world.spawnParticle(Particle.END_ROD, entity.getLocation(), 50);
-                damager.playSound(location, Sound.ENTITY_SPIDER_AMBIENT, 1.0f, 1.0f);
                 damager.playSound(location, Sound.ENTITY_EVOKER_FANGS_ATTACK, 1.0f, 1.0f);
                 damager.playSound(location, Sound.ENTITY_GUARDIAN_HURT, 1.0f, 1.0f);
             }

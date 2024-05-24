@@ -12,11 +12,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.projectiles.ProjectileSource;
 
+import java.util.HashMap;
+
 /**
  * The first damage assignment resets the vanilla values.
  */
 public class DamageAdjustmentListener implements Listener {
     public static double mutantDamageBuff = 1.0;
+    public static HashMap<Player, Double> absorbedDamage = new HashMap<>();
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
@@ -69,6 +72,32 @@ public class DamageAdjustmentListener implements Listener {
             }
         }
 
+        // If an Absorber's Kit ability is not active
+        if (GameState.selectedKit.containsKey(damager) && GameState.selectedKit.get(damager).contains("Absorber")
+                && GameState.kitAbilityActive.get(damager) == 0) {
+            damage = damage + absorbedDamage.getOrDefault(damager, 0.0);
+            absorbedDamage.put(damager, 0.0); // Reset the absorbedDamage after applying it
+        }
+
         event.setDamage(damage);
+    }
+
+    @EventHandler
+    public void onPlayerTakesDamage(EntityDamageByEntityEvent event) {
+        Player player;
+        double damage = event.getDamage();
+
+        if (event.getEntity() instanceof Player) {
+            player = (Player) event.getEntity();
+        } else return;
+
+        if (GameState.selectedKit.containsKey(player) && GameState.kitAbilityActive.get(player) > 0) {
+            // Add damage to absorbedDamage while the ability is active
+            if (GameState.selectedKit.get(player).contains("Absorber")) {
+                damage = damage * Upgrades.Effectiveness.getOrDefault(player, 1);
+
+                absorbedDamage.put(player, absorbedDamage.getOrDefault(player, 0.0) + damage);
+            }
+        }
     }
 }

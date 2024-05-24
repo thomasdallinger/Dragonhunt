@@ -57,7 +57,8 @@ public class Frostmaster extends Kit {
 
                     if (distance <= radius && distance > radius - layers) {
                         Block block = player.getWorld().getBlockAt(position.toLocation(player.getWorld()));
-                        if (block.getType() != Material.BEDROCK && block.getType() != Material.OBSIDIAN) {
+                        if (block.getType() != Material.BEDROCK && block.getType() != Material.OBSIDIAN
+                                && block.getType() != Material.SPAWNER) {
                             block.setType(domeMaterial);
                         }
                     }

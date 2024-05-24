@@ -1,15 +1,19 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kits.classes.Poisoner;
 import com.tharox.dragonhunt.shop.Enchantments;
 import com.tharox.dragonhunt.shop.Upgrades;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
 
 import java.util.HashMap;
@@ -70,6 +74,28 @@ public class DamageAdjustmentListener implements Listener {
                     damager.playSound(location, Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1.0f, 1.0f);
                 }
             }
+
+            if (GameState.selectedKit.get(damager).contains("Poisoner")) {
+                int amplifier = Poisoner.EFFECTAMPLIFIER + Upgrades.Effectiveness.getOrDefault(damager, 0);
+                int duration = Poisoner.EFFECTDURATION + Upgrades.Effectiveness2.getOrDefault(damager, 0);
+
+                if (entity instanceof LivingEntity) {
+                    LivingEntity livingEntity = (LivingEntity) entity;
+                    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.POISON,
+                            duration * 20, amplifier - 1));
+                    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS,
+                            duration * 20, 0));
+                }
+
+                // Visuals & Audio
+                World world = damager.getWorld();
+                Location location = damager.getLocation();
+                world.spawnParticle(Particle.SPELL_MOB, entity.getLocation(), 10);
+                world.spawnParticle(Particle.END_ROD, entity.getLocation(), 50);
+                damager.playSound(location, Sound.ENTITY_SPIDER_AMBIENT, 1.0f, 1.0f);
+                damager.playSound(location, Sound.ENTITY_EVOKER_FANGS_ATTACK, 1.0f, 1.0f);
+                damager.playSound(location, Sound.ENTITY_GUARDIAN_HURT, 1.0f, 1.0f);
+            }
         }
 
         // If an Absorber's Kit ability is not active
@@ -77,6 +103,14 @@ public class DamageAdjustmentListener implements Listener {
                 && GameState.kitAbilityActive.get(damager) == 0) {
             damage = damage + absorbedDamage.getOrDefault(damager, 0.0);
             absorbedDamage.put(damager, 0.0); // Reset the absorbedDamage after applying it
+
+            // Visuals & Audio
+            World world = damager.getWorld();
+            Location location = damager.getLocation();
+            world.spawnParticle(Particle.EXPLOSION_LARGE, entity.getLocation(), 10);
+            world.spawnParticle(Particle.SMOKE_LARGE, entity.getLocation(), 50);
+            damager.playSound(location, Sound.ENTITY_GENERIC_EXPLODE, 1.0f, 1.0f);
+            damager.playSound(location, Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 1.0f, 1.0f);
         }
 
         event.setDamage(damage);

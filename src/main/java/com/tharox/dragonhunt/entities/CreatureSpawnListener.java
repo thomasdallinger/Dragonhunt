@@ -216,20 +216,16 @@ public class CreatureSpawnListener implements Listener {
 
         EntityType entityType = EntityType.ENDERMAN;
 
-        if (type <= 4) { // 40%
+        if (type <= 5) { // 50%
             entityType = EntityType.PILLAGER;
         }
 
-        if (type >= 5 && type <= 7) { // 30%
+        if (type >= 6 && type <= 8) { // 30%
             entityType = EntityType.VINDICATOR;
         }
 
-        if (type >= 8 && type <= 9) { // 20%
+        if (type >= 9) { // 20%
             entityType = EntityType.EVOKER;
-        }
-
-        if (type >= 10) { // 10%
-            entityType = EntityType.RAVAGER;
         }
 
         return (LivingEntity) world.spawnEntity(location, entityType);

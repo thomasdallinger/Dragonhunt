@@ -22,11 +22,9 @@ public class Berserker extends Kit {
             + ChatColor.GRAY + "Become " + ChatColor.WHITE + "invulnerable"
             + ChatColor.GRAY + " for a short time.\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
-            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n"
-            + HexColor.YELLOW + "⇡ Duration can be increased\n\n"
+            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
-            + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n"
-            + HexColor.YELLOW + "⇣ Cooldown can be reduced\n\n";
+            + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.SHIELD;
     public static final int slot = 11;
 

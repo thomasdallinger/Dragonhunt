@@ -22,8 +22,7 @@ public class Warrior extends Kit {
             + ChatColor.GRAY + "Deal " + ChatColor.WHITE + "2x" + ChatColor.GRAY + " Axe and Sword Damage\n"
             + ChatColor.GRAY + "for a short time.\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
-            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n"
-            + HexColor.YELLOW + "⇡ Duration can be increased\n\n"
+            + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"
             + ChatColor.DARK_GRAY + "ᴄᴏᴏʟᴅᴏᴡɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + cooldown + ChatColor.GRAY + " seconds\n\n";
     public static final Material material = Material.DIAMOND_SWORD;

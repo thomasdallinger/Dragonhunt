@@ -34,54 +34,11 @@ public class ScoutCommand implements CommandExecutor {
 
         // Check if the player has an active Scout
         if (Scout.spectateLocation.containsKey(player)) {
-            Location location = player.getLocation();
-
             if (args.length == 0) {
                 // Cancel the currently active scout
                 Scout.scoutCooldown.put(player, timer.getTime() + Scout.COOLDOWN);
                 player.setCooldown(Material.ENDER_EYE, Scout.COOLDOWN * 20);
                 return true;
-            }
-
-            // Teleport the player
-            if (args[0].equalsIgnoreCase("tp")) {
-                if (GameState.selectedKit.containsKey(player)) {
-                    if (!location.getWorld().equals(Scout.spectateLocation.get(player).getWorld())) {
-                        player.sendMessage(Prefixes.getErrorPrefix()
-                                + "You cannot be teleported between dimensions.");
-                        player.playSound(player.getLocation(), Sound.BLOCK_ANVIL_LAND, 1, 1);
-                        return false;
-
-                    } else {
-                        // Cancel the currently active scout
-                        Scout.scoutCooldown.put(player, timer.getTime() + Scout.COOLDOWN);
-                        player.setCooldown(Material.ENDER_EYE, Scout.COOLDOWN * 20);
-
-                        Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
-                            player.teleport(location);
-                            player.addPotionEffect(new PotionEffect(
-                                    PotionEffectType.WEAKNESS, 10 * 20, 2));
-                            player.addPotionEffect(new PotionEffect(
-                                    PotionEffectType.SLOW, 10 * 20, 1));
-
-                            player.sendTitle("", HexColor.GREEN + "ᴛᴇʟᴇᴘᴏʀᴛᴇᴅ",
-                                    0, 30, 10);
-                            player.sendMessage(HexColor.GREEN + "Successfully teleported to your scouted location.");
-                            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "Weakness 3 "
-                                    + ChatColor.GRAY + "applied.");
-                            player.sendMessage(Prefixes.getImportantPrefix() + HexColor.RED + "Slowness 2 "
-                                    + ChatColor.GRAY + "applied.");
-
-                            for (Player online : Bukkit.getOnlinePlayers()) {
-                                online.sendMessage(Prefixes.getImportantPrefix()
-                                        + ChatColor.WHITE + player.getName() + ChatColor.GRAY + " teleported using "
-                                        + HexColor.YELLOW + "/scout tp" + ChatColor.GRAY + ".");
-                            }
-                        }, 20L);
-
-                        return true;
-                    }
-                }
             }
         } else {
             if (player.getGameMode().equals(GameMode.SPECTATOR)) {
@@ -120,8 +77,6 @@ public class ScoutCommand implements CommandExecutor {
         player.sendMessage(HexColor.GREEN + "Scout activated.");
         player.sendMessage(ChatColor.GRAY + "Cancel the Scout using "
                 + ChatColor.WHITE + "/scout" + ChatColor.GRAY + " again.");
-        player.sendMessage(ChatColor.GRAY + "Teleport to your desired location using "
-                + ChatColor.WHITE + "/scout tp" + ChatColor.GRAY + ".");
         player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
 
         for (Player online : Bukkit.getOnlinePlayers()) {

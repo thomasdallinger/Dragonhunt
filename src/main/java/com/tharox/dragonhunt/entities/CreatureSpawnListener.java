@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.entities;
 
 import com.tharox.dragonhunt.modifiers.classes.*;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -26,6 +27,17 @@ public class CreatureSpawnListener implements Listener {
         Location location = event.getLocation();
         World world = entity.getWorld();
         Random random = new Random();
+
+        // High-Value Targets
+        int levelMob = random.nextInt(10);
+        if (levelMob == 0) {
+            Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
+                    .setBaseValue(entity.getHealth() * 2);
+            entity.setHealth(entity.getHealth() * 2);
+            entity.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 0));
+            entity.setCustomName(ChatColor.WHITE.toString() + ChatColor.BOLD + "High-Value Target");
+            entity.setCustomNameVisible(true);
+        }
 
         /* return; statements are mostly avoided so it can be assured that every active modifier is in use */
         if (entity instanceof Mob) {

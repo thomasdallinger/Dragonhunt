@@ -74,8 +74,10 @@ public class AdvancementListener implements Listener {
 
         if (!advancementName.equals("")) {
             addAdvancement(player, advancementName);
+
+            player.setLevel(player.getLevel() + 1);
             int rank = DbValues.getAdvancementRank(player, advancementName);
-            XPManager.addXP(player, XPManager.advancementXP - (rank - 1) * 2);
+            //XPManager.addXP(player, XPManager.advancementXP - (rank - 1) * 2);
 
             // Add 8 - (Rank - 1) Elo
             GameState.eloPerPlayer.put(player, GameState.eloPerPlayer.get(player) + 8 - (rank - 1));

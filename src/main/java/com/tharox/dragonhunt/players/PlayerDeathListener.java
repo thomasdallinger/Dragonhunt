@@ -58,7 +58,8 @@ public class PlayerDeathListener implements Listener {
             // Player did not kill himself/herself
             if (!killer.equals(player)) {
                 // Add one extra XP point for a kill per minute played.
-                XPManager.addXP(killer, XPManager.playerXP + (timer.getTime() / 60));
+                //XPManager.addXP(killer, XPManager.playerXP + (timer.getTime() / 60));
+                killer.setLevel(killer.getLevel() + 1);
                 killer.sendMessage(ChatColor.GRAY + "You have killed "
                         + ChatColor.WHITE + player.getName() + ChatColor.GRAY + ".");
 

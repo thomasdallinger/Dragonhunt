@@ -1,7 +1,7 @@
 package com.tharox.dragonhunt.entities;
 
-import com.tharox.dragonhunt.leveling.XPManager;
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.leveling.XPManager;
 import com.tharox.dragonhunt.modifiers.classes.ChristmasCookies;
 import com.tharox.dragonhunt.modifiers.classes.Fisher;
 import com.tharox.dragonhunt.modifiers.classes.MoreFood;
@@ -15,6 +15,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class EntityDeathListener implements Listener {
@@ -36,7 +37,9 @@ public class EntityDeathListener implements Listener {
 
         if (killer != null) {
             if (mob instanceof Monster) {
-                XPManager.addXP(killer, XPManager.monsterXP + bonusXP);
+                if (mob.getCustomName() != null && mob.getCustomName().contains("High-Value Target")) {
+                    killer.setLevel(killer.getLevel() + 1);
+                }
 
                 if (RevivedMobs.active) {
                     Random random = new Random();
@@ -62,7 +65,7 @@ public class EntityDeathListener implements Listener {
                     noFoodModifier = false;
                     mob.getWorld().dropItemNaturally(
                             mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 6));
-                    XPManager.addXP(killer, (XPManager.animalXP + bonusXP) * 2);
+                    //XPManager.addXP(killer, (XPManager.animalXP + bonusXP) * 2);
                 }
 
                 if (noFoodModifier) {
@@ -70,7 +73,11 @@ public class EntityDeathListener implements Listener {
                             mob.getLocation(), new ItemStack(Material.COOKED_BEEF, 2));
                 }
 
-                XPManager.addXP(killer, XPManager.animalXP + bonusXP);
+                if (mob.getCustomName() != null && mob.getCustomName().contains("High-Value Target")) {
+                    killer.setLevel(killer.getLevel() + 1);
+                }
+
+                //XPManager.addXP(killer, XPManager.animalXP + bonusXP);
             }
         }
 
@@ -138,11 +145,6 @@ public class EntityDeathListener implements Listener {
             case "Wither Skeleton":
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.FIREWORK_ROCKET, 3));
                 mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.DIAMOND));
-                break;
-            case "Ravager":
-            case "Piglin Brute":
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.FIREWORK_ROCKET, 3));
-                mob.getWorld().dropItemNaturally(mob.getLocation(), new ItemStack(Material.NETHERITE_INGOT));
                 break;
             default:
                 break;

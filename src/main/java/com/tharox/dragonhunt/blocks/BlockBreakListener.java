@@ -161,7 +161,7 @@ public class BlockBreakListener implements Listener {
                     bonusXP = Upgrades.Effectiveness.get(player);
                 }*/
 
-                XPManager.addXP(player, XPManager.oreXP + bonusXP);
+                //XPManager.addXP(player, XPManager.oreXP + bonusXP);
             }
         }
     }

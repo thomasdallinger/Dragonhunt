@@ -150,7 +150,12 @@ public class GameStart extends GameConfiguration {
                 GameState.flySpeedZero.put(player, false);
 
                 // Set cooldown on Ender Eye to show scout cooldown
-                player.setCooldown(Material.ENDER_EYE, Scout.COOLDOWN * 20);
+                player.setCooldown(Material.ENDER_EYE, Scout.scoutCooldown.get(player) * 20);
+
+                // Set Kit Cooldown, players won't instantly have their ability ready
+                player.setCooldown(Material.NETHER_STAR, 30 * 20);
+                player.setCooldown(Material.CROSSBOW, 30 * 20);
+                player.setCooldown(Material.BOW, 30 * 20);
 
                 if (BonusHearts.active) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION,
@@ -160,14 +165,14 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(HexColor.YELLOW.toString() + ChatColor.BOLD + "\nRACE TO VICTORY");
                 player.sendMessage(ChatColor.GRAY + "Whoever deals "
                         + ChatColor.WHITE + PointsListener.threshold + " Damage"
-                        + ChatColor.GRAY + " to the Ender Dragon first wins.");
+                        + ChatColor.GRAY + " to the " + ChatColor.WHITE + "Ender Dragon"
+                        + ChatColor.GRAY + " first wins.");
                 player.sendMessage(ChatColor.GRAY + "You need " + ChatColor.WHITE + PlayerTeleport.getEyesNeeded()
                         + " Eyes of Ender " + ChatColor.GRAY + "to receive an" + ChatColor.WHITE + " End Teleporter"
                         + ChatColor.GRAY + ".");
+                player.sendMessage(ChatColor.GOLD + "Follow the objective in your Scoreboard and Bossbar.");
 
-                player.sendMessage(ChatColor.GRAY + "\nUse " + HexColor.YELLOW + "/shop"
-                        + ChatColor.GRAY + " to purchase enchantments and effects.");
-                player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/top"
+                player.sendMessage(ChatColor.GRAY + "\nUse " + HexColor.YELLOW + "/top"
                         + ChatColor.GRAY + " to teleport to the surface.");
                 player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/scout"
                         + ChatColor.GRAY + " to go into " + ChatColor.WHITE + "Spectator Mode"

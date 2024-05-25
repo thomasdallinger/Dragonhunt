@@ -101,7 +101,7 @@ public class GameConfiguration {
             PointsListener.scorePerPlayer.put(player.getUniqueId(), 0);
 
             // when the game starts, players won't instantly have the ability to scout
-            Scout.scoutCooldown.put(player, Scout.COOLDOWN);
+            Scout.scoutCooldown.put(player, 30);
             Scout.scoutUsages.put(player, Scout.USAGES);
 
             // removes all active potion effects players may have

@@ -18,7 +18,6 @@ public class ModifierSelection {
                 new NeverHungry(),
                 new ChristmasCookies(),
                 new Fisher(),
-                new NoAnnoyingMobs(),
                 new Iron(),
                 new FlyHigh(),
                 new Frozen(),

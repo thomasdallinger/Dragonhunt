@@ -29,7 +29,7 @@ public class CreatureSpawnListener implements Listener {
 
         /* return; statements are mostly avoided so it can be assured that every active modifier is in use */
         if (entity instanceof Mob) {
-            if ((entity instanceof Ghast || entity instanceof PiglinBrute) && NoAnnoyingMobs.active) {
+            if ((entity instanceof Ghast || entity instanceof PiglinBrute)) {
                 event.setCancelled(true);
                 return;
             }
@@ -63,13 +63,13 @@ public class CreatureSpawnListener implements Listener {
                 return;
             }
 
-            // Spawn Piglins or Piglin Brutes instead of useless Zombified Piglins
+            // Spawn Piglins or Magma Cubes instead of useless Zombified Piglins
             if (entity instanceof PigZombie) {
                 event.setCancelled(true);
                 chance = random.nextInt(5) + 1;
 
                 if (chance == 1) {
-                    world.spawnEntity(location, EntityType.PIGLIN_BRUTE);
+                    world.spawnEntity(location, EntityType.MAGMA_CUBE);
                 } else {
                     world.spawnEntity(location, EntityType.PIGLIN);
                 }

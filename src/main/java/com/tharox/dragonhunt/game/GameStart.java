@@ -177,8 +177,6 @@ public class GameStart extends GameConfiguration {
                 player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/scout"
                         + ChatColor.GRAY + " to go into " + ChatColor.WHITE + "Spectator Mode"
                         + ChatColor.GRAY + " for a short time.");
-                player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/respawn"
-                        + ChatColor.GRAY + " to set your respawn point.");
                 player.sendMessage(ChatColor.GRAY + "Use " + HexColor.YELLOW + "/modifiers"
                         + ChatColor.GRAY + " to see the active modifiers.");
             }

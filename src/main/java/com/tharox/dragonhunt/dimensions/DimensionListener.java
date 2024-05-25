@@ -81,13 +81,13 @@ public class DimensionListener implements Listener {
                 }
 
                 // Force set the Respawn Point to the Nether Portals location
-                player.setBedSpawnLocation(event.getFrom(), true);
+                /*player.setBedSpawnLocation(event.getFrom(), true);
                 player.sendMessage(HexColor.GREEN + "Respawn Point set at "
                         + ChatColor.DARK_GREEN + "[" + DbValues.getCurrentWorld(event.getFrom())
                         + ", x: " + (int) event.getFrom().getX()
                         + ", y: " + (int) event.getFrom().getY()
                         + ", z: " + (int) event.getFrom().getZ() + "]"
-                        + HexColor.GREEN + ".");
+                        + HexColor.GREEN + ".");*/
             }
         }
 

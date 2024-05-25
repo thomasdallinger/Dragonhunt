@@ -138,13 +138,14 @@ public class PlayerTeleport implements Listener {
                     // The player never had a END TELEPORTER yet
                     if (inventory.getItem(7) != null
                             && inventory.getItem(7).getType().equals(Material.ENDER_EYE)) {
-                        // The Scout item is an additional Ender Eye in the player's inventory
-                        hasEnoughEyes = inventory.contains(Material.ENDER_EYE, getEyesNeeded() + 1);
+                        // The Scout item is an additional (or multiple depending on Scout usages) Ender Eye in the player's inventory
+                        hasEnoughEyes = inventory.contains(Material.ENDER_EYE,
+                                getEyesNeeded() + inventory.getItem(7).getAmount());
                     } else {
                         hasEnoughEyes = inventory.contains(Material.ENDER_EYE, getEyesNeeded());
                     }
 
-                    if (hasEnoughEyes) {
+                    if (hasEnoughEyes && !player.getWorld().getEnvironment().equals(World.Environment.THE_END)) {
                         // Remove all Ender Eyes
                         inventory.remove(Material.ENDER_EYE);
 

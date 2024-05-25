@@ -124,8 +124,12 @@ public class CreatureSpawnListener implements Listener {
                         ItemStack bow = new ItemStack(Material.BOW);
                         bow.addEnchantment(Enchantment.ARROW_DAMAGE, 2);
                         entity.getEquipment().setItemInMainHand(bow);
+                    } else if (entity instanceof Pillager) {
+                        ItemStack crossbow = new ItemStack(Material.CROSSBOW);
+                        crossbow.addEnchantment(Enchantment.MULTISHOT, 1);
+                        entity.getEquipment().setItemInMainHand(crossbow);
                     } else {
-                        entity.getEquipment().setItemInMainHand(new ItemStack(Material.IRON_AXE, 1));
+                        entity.getEquipment().setItemInMainHand(new ItemStack(Material.IRON_SWORD, 1));
                     }
                 }
             }
@@ -136,6 +140,10 @@ public class CreatureSpawnListener implements Listener {
                         ItemStack bow = new ItemStack(Material.BOW);
                         bow.addEnchantment(Enchantment.ARROW_FIRE, 1);
                         entity.getEquipment().setItemInMainHand(bow);
+                    } else if (entity instanceof Pillager) {
+                        ItemStack crossbow = new ItemStack(Material.CROSSBOW);
+                        crossbow.addEnchantment(Enchantment.MULTISHOT, 1);
+                        entity.getEquipment().setItemInMainHand(crossbow);
                     } else {
                         ItemStack sword = new ItemStack(Material.IRON_SWORD);
                         sword.addEnchantment(Enchantment.FIRE_ASPECT, 2);

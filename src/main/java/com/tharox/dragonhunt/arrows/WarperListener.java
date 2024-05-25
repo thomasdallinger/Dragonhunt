@@ -47,13 +47,13 @@ public class WarperListener implements Listener {
                             new FixedMetadataValue(Main.getInstance(), player.getLocation().getYaw()));
                     arrow.setMetadata("teleportPitch",
                             new FixedMetadataValue(Main.getInstance(), player.getLocation().getPitch()));
-                }
-            }
 
-            // Put the Bow on cooldown
-            if ((COOLDOWN - Upgrades.Cooldown.getOrDefault(player, 0)) >= 0) {
-                player.setCooldown(Material.BOW,
-                        (COOLDOWN - Upgrades.Cooldown.getOrDefault(player, 0)));
+                    // Put the Bow on cooldown
+                    if ((COOLDOWN - Upgrades.Cooldown.getOrDefault(player, 0)) >= 0) {
+                        player.setCooldown(Material.BOW,
+                                (COOLDOWN - Upgrades.Cooldown.getOrDefault(player, 0)));
+                    }
+                }
             }
         }
     }

@@ -141,7 +141,10 @@ public class DamageAdjustmentListener implements Listener {
 
         if (KitClass.assassins.contains(player)) {
             if (random.nextDouble() < HEALTH_BACK_CHANCE) {
-                player.setHealth(player.getHealth() + (damage / 2));
+                // Only give health back if possible (player health must be between 0.0 and 20.0)
+                if ((player.getHealth() + (damage / 2)) <= 20.0) {
+                    player.setHealth(player.getHealth() + (damage / 2));
+                }
             }
         }
     }

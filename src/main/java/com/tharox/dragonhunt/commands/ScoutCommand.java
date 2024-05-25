@@ -7,13 +7,14 @@ import com.tharox.dragonhunt.game.GameState;
 import com.tharox.dragonhunt.scout.Scout;
 import com.tharox.dragonhunt.timer.Timer;
 import net.md_5.bungee.api.ChatColor;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 public class ScoutCommand implements CommandExecutor {
 
@@ -34,12 +35,10 @@ public class ScoutCommand implements CommandExecutor {
 
         // Check if the player has an active Scout
         if (Scout.spectateLocation.containsKey(player)) {
-            if (args.length == 0) {
-                // Cancel the currently active scout
-                Scout.scoutCooldown.put(player, timer.getTime() + Scout.COOLDOWN);
-                player.setCooldown(Material.ENDER_EYE, Scout.COOLDOWN * 20);
-                return true;
-            }
+            // Cancel the currently active scout
+            Scout.scoutCooldown.put(player, timer.getTime() + Scout.COOLDOWN);
+            player.setCooldown(Material.ENDER_EYE, Scout.COOLDOWN * 20);
+            return true;
         } else {
             if (player.getGameMode().equals(GameMode.SPECTATOR)) {
                 player.sendMessage(Prefixes.getErrorPrefix() + "You cannot scout while in Spectator Mode.");

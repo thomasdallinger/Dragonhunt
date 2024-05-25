@@ -48,9 +48,6 @@ public class Scout {
                     player.sendMessage(HexColor.RED + "Scout ended.");
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);
 
-                    scoutCooldown.put(player, timer.getTime() + Scout.COOLDOWN);
-                    player.setCooldown(Material.ENDER_EYE, Scout.COOLDOWN * 20);
-
                     // Teleport the player if possible
                     Location location = player.getLocation();
                     if (!location.getWorld().equals(Scout.spectateLocation.get(player).getWorld())) {
@@ -83,6 +80,8 @@ public class Scout {
                                 + ChatColor.GRAY + "applied.");
                     }
 
+                    scoutCooldown.put(player, timer.getTime() + Scout.COOLDOWN);
+                    player.setCooldown(Material.ENDER_EYE, Scout.COOLDOWN * 20);
                     spectateLocation.remove(player);
 
                     cancel();
@@ -95,11 +94,12 @@ public class Scout {
                 player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
                         new ComponentBuilder("DURATION").color(HexColor.YELLOW).bold(true)
                                 .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
-                                .append(timeLeft + " seconds")
-                                .color(ChatColor.GRAY).create());
+                                .append(timeLeft + " seconds").color(ChatColor.GRAY)
+                                .append(" | ").color(ChatColor.DARK_GRAY)
+                                .append("Cancel using ").color(ChatColor.RED)
+                                .append("/scout").color(HexColor.RED).create());
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);
-
             }
 
         }.runTaskTimer(Main.getInstance(), 20, 20);

@@ -30,20 +30,21 @@ public class KitInventory {
                         + KitClass.ASSASSIN + " Assassin" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_SWORD,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.WHITE + "+2 ⛃" + ChatColor.GRAY + " per Level Up"));
+                        + ChatColor.WHITE + "20%" + ChatColor.GRAY + " chance to get" + ChatColor.WHITE + "health\n"
+                        + ChatColor.GRAY + "back when receiving damage"));
 
         inv.setItem(9, Kit.getNotEnchantedDisplayItem(HexColor.TANK.toString() + ChatColor.BOLD
                         + KitClass.TANK + " Tank" + ChatColor.GRAY + " (Class)",
                 Material.NETHERITE_CHESTPLATE,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
                         + ChatColor.WHITE + "+3 ❤" + ChatColor.GRAY + " Total Health\n"
-                        + HexColor.RED + "Slowness I"));
+                        + HexColor.RED + "Slowness 1"));
 
         inv.setItem(18, Kit.getNotEnchantedDisplayItem(HexColor.SUPPORT.toString() + ChatColor.BOLD
                         + KitClass.SUPPORT + " Support" + ChatColor.GRAY + " (Class)",
                 Material.RECOVERY_COMPASS,
                 ChatColor.DARK_GRAY + "ᴘᴀꜱꜱɪᴠᴇ\n"
-                        + ChatColor.GRAY + "Regeneration I\n"
+                        + ChatColor.GRAY + "Regeneration 1\n"
                         + HexColor.RED + "-2 ❤ Total Health"));
 
         inv.setItem(27, Kit.getNotEnchantedDisplayItem(HexColor.FLANKER.toString() + ChatColor.BOLD
@@ -66,7 +67,7 @@ public class KitInventory {
                             if (DbValues.getUnlockedKits(player).contains(
                                     ((String) kitClass.getField("title").get(null)).substring(17))
                                     || DbValues.getFreeKit().contains(
-                                            ((String) kitClass.getField("title").get(null)).substring(17))
+                                    ((String) kitClass.getField("title").get(null)).substring(17))
                                     || DbValues.getRole(player).equals("Premium")
                                     || DbValues.getRole(player).equals("VIP")
                                     || DbValues.getRole(player).equals("Admin")) {

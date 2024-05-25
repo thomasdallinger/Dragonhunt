@@ -1,6 +1,7 @@
 package com.tharox.dragonhunt.players;
 
 import com.tharox.dragonhunt.game.GameState;
+import com.tharox.dragonhunt.kits.classes.KitClass;
 import com.tharox.dragonhunt.kits.classes.Poisoner;
 import com.tharox.dragonhunt.upgrades.Enchantments;
 import com.tharox.dragonhunt.upgrades.Upgrades;
@@ -17,6 +18,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
 
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * The first damage assignment resets the vanilla values.
@@ -24,6 +26,10 @@ import java.util.HashMap;
 public class DamageAdjustmentListener implements Listener {
     public static double mutantDamageBuff = 1.0;
     public static HashMap<Player, Double> absorbedDamage = new HashMap<>();
+
+    // Assassin passive
+    private static final double HEALTH_BACK_CHANCE = 0.20;  // 20% chance to release a smoke bomb
+    private Random random = new Random();
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
@@ -130,6 +136,12 @@ public class DamageAdjustmentListener implements Listener {
                 damage = damage * Upgrades.Effectiveness.getOrDefault(player, 1);
 
                 absorbedDamage.put(player, absorbedDamage.getOrDefault(player, 0.0) + damage);
+            }
+        }
+
+        if (KitClass.assassins.contains(player)) {
+            if (random.nextDouble() < HEALTH_BACK_CHANCE) {
+                player.setHealth(player.getHealth() + (damage / 2));
             }
         }
     }

@@ -21,8 +21,8 @@ public class Poisoner extends Kit {
     public static final String title = HexColor.ASSASSIN + KitClass.ASSASSIN + " Poisoner";
     public static final String lore = ""
             + ChatColor.DARK_GRAY + "ᴀʙɪʟɪᴛʏ\n"
-            + ChatColor.GRAY + "Damage enemies to apply " + ChatColor.WHITE + "Poison " + EFFECTAMPLIFIER
-            + ChatColor.GRAY + "\nand " + ChatColor.WHITE + "Blindness"
+            + ChatColor.GRAY + "Damage enemies to apply " + ChatColor.WHITE + "Poison " + EFFECTAMPLIFIER + "\n"
+            + ChatColor.GRAY + "and " + ChatColor.WHITE + "Blindness"
             + ChatColor.GRAY + " for " + ChatColor.WHITE + EFFECTDURATION + ChatColor.GRAY + " seconds.\n\n"
             + ChatColor.DARK_GRAY + "ᴅᴜʀᴀᴛɪᴏɴ\n"
             + ChatColor.GRAY + ChatColor.WHITE + duration + ChatColor.GRAY + " seconds\n\n"

@@ -26,14 +26,13 @@ public class PlayerRespawnListener implements Listener {
     public void onRespawn(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
 
-        respawnLocation.put(player, event.getRespawnLocation());
-
         // Void infinite deaths protection
         if (PlayerDeathListener.deathLocation.get(player).getY() > -62) {
             event.setRespawnLocation(PlayerDeathListener.deathLocation.get(player));
         }
 
         // else: uses actual respawn location
+        respawnLocation.put(player, event.getRespawnLocation());
 
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), task -> {
             player.setGameMode(GameMode.SPECTATOR);
@@ -76,7 +75,7 @@ public class PlayerRespawnListener implements Listener {
                     player.setWalkSpeed(0.2f);
                     GameState.flySpeedZero.put(player, false);
                     player.setFreezeTicks(0);
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 140, 9));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 12 * 20, 9));
 
                     player.resetTitle();
                     player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_PLING, 1, 1);

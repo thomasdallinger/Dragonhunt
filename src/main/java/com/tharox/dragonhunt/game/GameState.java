@@ -204,7 +204,8 @@ public class GameState {
                 ChatColor.GRAY + "location in Spectator Mode after",
                 ChatColor.GRAY + "the Scout ends.",
                 "",
-                ChatColor.RED + "Cancel using " + HexColor.RED + "/scout" + ChatColor.RED + " while in a Scout."));
+                ChatColor.GRAY + "End the Scout early using " + ChatColor.WHITE + "/scout",
+                ChatColor.GRAY + "while in a Scout."));
 
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);

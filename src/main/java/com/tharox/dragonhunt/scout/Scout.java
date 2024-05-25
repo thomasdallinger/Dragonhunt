@@ -96,7 +96,7 @@ public class Scout {
                                 .append(" » ").color(ChatColor.DARK_GRAY).bold(false)
                                 .append(timeLeft + " seconds").color(ChatColor.GRAY)
                                 .append(" | ").color(ChatColor.DARK_GRAY)
-                                .append("Cancel using ").color(ChatColor.RED)
+                                .append("End early using ").color(ChatColor.RED)
                                 .append("/scout").color(HexColor.RED).create());
 
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BASS, 1, 1);

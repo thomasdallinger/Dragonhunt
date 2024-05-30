@@ -28,6 +28,11 @@ public class CreatureSpawnListener implements Listener {
         World world = entity.getWorld();
         Random random = new Random();
 
+        if ((entity instanceof Ghast || entity instanceof PiglinBrute)) {
+            event.setCancelled(true);
+            return;
+        }
+
         // High-Value Targets
         int levelMob = random.nextInt(15);
         if (levelMob == 0 && entity instanceof Monster) {
@@ -40,11 +45,6 @@ public class CreatureSpawnListener implements Listener {
 
         /* return; statements are mostly avoided so it can be assured that every active modifier is in use */
         if (entity instanceof Mob) {
-            if ((entity instanceof Ghast || entity instanceof PiglinBrute)) {
-                event.setCancelled(true);
-                return;
-            }
-
             if (world.getName().equals("world_the_end") && !NoPillagers.active) {
                 int spawnEnderman = random.nextInt(9) + 1;
 

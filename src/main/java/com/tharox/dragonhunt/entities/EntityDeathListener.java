@@ -32,7 +32,7 @@ public class EntityDeathListener implements Listener {
                 if (mob.getCustomName() != null && mob.getCustomName().contains("High-Value Target")) {
                     killer.setLevel(killer.getLevel() + 1);
                 } else {
-                    XPManager.addExpProgress(killer, 3.0f);
+                    XPManager.addExpProgress(killer, 2.0f);
                 }
 
                 if (RevivedMobs.active) {
@@ -71,7 +71,7 @@ public class EntityDeathListener implements Listener {
                     killer.setLevel(killer.getLevel() + 1);
                 }
 
-                XPManager.addExpProgress(killer, 5.0f);
+                XPManager.addExpProgress(killer, 4.0f);
                 //XPManager.addXP(killer, XPManager.animalXP + bonusXP);
             }
         }

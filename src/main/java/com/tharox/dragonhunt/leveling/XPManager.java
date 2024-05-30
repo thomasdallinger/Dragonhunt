@@ -21,4 +21,40 @@ public class XPManager {
                         + ChatColor.DARK_GRAY + "[" + currentXPPoints + "/" + player.getExpToLevel() + "]",
                 0, 30, 10);
     }
+
+    public static void addExpProgress(Player player, float divider) {
+        int currentLevel = player.getLevel();
+        float currentExp = player.getExp();
+        int expToNextLevel = getExpToNextLevel(currentLevel);
+        float expToAdd = expToNextLevel / divider;
+
+        // Convert current exp progress to absolute experience points
+        float absoluteCurrentExp = currentExp * expToNextLevel;
+
+        // Add the experience
+        float newAbsoluteExp = absoluteCurrentExp + expToAdd;
+
+        // Convert back to exp progress
+        float newExpProgress = newAbsoluteExp / expToNextLevel;
+
+        // Ensure the experience progress does not exceed 1.0
+        if (newExpProgress >= 1.0f) {
+            newExpProgress = newExpProgress - 1.0f;
+            player.setLevel(currentLevel + 1);
+        }
+
+        // Set the new experience progress
+        player.setExp(newExpProgress);
+        player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1, 1);
+    }
+
+    private static int getExpToNextLevel(int currentLevel) {
+        if (currentLevel <= 15) {
+            return 2 * currentLevel + 7;
+        } else if (currentLevel <= 30) {
+            return 5 * currentLevel - 38;
+        } else {
+            return 9 * currentLevel - 158;
+        }
+    }
 }

@@ -29,12 +29,11 @@ public class CreatureSpawnListener implements Listener {
         Random random = new Random();
 
         // High-Value Targets
-        int levelMob = random.nextInt(10);
+        int levelMob = random.nextInt(15);
         if (levelMob == 0) {
             Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
                     .setBaseValue(entity.getHealth() * 2);
             entity.setHealth(entity.getHealth() * 2);
-            entity.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, Integer.MAX_VALUE, 0));
             entity.setCustomName(ChatColor.WHITE.toString() + ChatColor.BOLD + "High-Value Target");
             entity.setCustomNameVisible(true);
         }

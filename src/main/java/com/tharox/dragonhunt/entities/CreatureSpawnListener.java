@@ -30,7 +30,7 @@ public class CreatureSpawnListener implements Listener {
 
         // High-Value Targets
         int levelMob = random.nextInt(15);
-        if (levelMob == 0) {
+        if (levelMob == 0 && entity instanceof Monster) {
             Objects.requireNonNull(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH))
                     .setBaseValue(entity.getHealth() * 2);
             entity.setHealth(entity.getHealth() * 2);

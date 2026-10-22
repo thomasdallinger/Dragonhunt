@@ -111,3 +111,6 @@ buildNumber.properties
 
 # Common working directory
 run/
+
+# Database credentials (jdbc url, user, password - one per line)
+src/main/resources/db.txt
